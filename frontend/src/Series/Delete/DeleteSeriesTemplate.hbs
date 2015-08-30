@@ -1,0 +1,50 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h1>Delete {{title}}</h1>
+    </div>
+    <div class="modal-body delete-series-modal">
+        <div class="row path">
+            <div class="col-xs-12">
+                <i class="icon-sonarr-folder"></i>
+                {{path}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="hidden-xs col-sm-4">
+                {{posterHelper 250}}
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="row">
+                    <div class="path"></div>
+                    <div class="col-xs-12">
+                        {{#if episodeFileCount}}
+                            <span class="delete-label">Delete {{Number episodeFileCount}} episode files</span>
+                        {{else}}
+                            <span class="delete-label">Delete folder</span>
+                        {{/if}}
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input type="checkbox" class="x-delete-files">
+                                <span class="check fa fa-check"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 delete-files-info x-delete-files-info">
+                        Number of files that will be deleted: {{Number episodeFileCount}}
+                        <br>
+                        Total size: {{Bytes sizeOnDisk}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
+        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger x-confirm-delete">
+            Delete {{title}}</button>
+    </div>
+</div>

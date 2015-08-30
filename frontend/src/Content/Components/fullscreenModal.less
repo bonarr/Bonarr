@@ -1,0 +1,47 @@
+@import "../colors";
+
+#fullscreen-modal-region {
+  background-color: rgba(0,0,0, 0);
+  position: absolute;
+  top: -100%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: background-color 1s,top 500ms;
+  pointer-events: none;
+
+  &.shown {
+    top: 0;
+    pointer-events: auto;
+    background-color: fade(black, 50);
+  }
+
+  .fullscreen-modal-body {
+    padding: 20px 0;
+  }
+
+  .fullscreen-modal {
+    padding: 0;
+    background-color: white;
+  }
+
+  .fullscreen-modal-header {
+    padding: 1px 20px;
+    background-color: lighten(@sidebar-background, 65%);
+
+    .close {
+      font-size: 42px;
+      padding-top: 12px;
+    }
+  }
+
+  .fullscreen-modal-body {
+    padding: 20px;
+  }
+
+  .fullscreen-modal-footer {
+    background-color: lighten(@sidebar-background, 65%);
+    text-align: right;
+    padding: 20px;
+  }
+}

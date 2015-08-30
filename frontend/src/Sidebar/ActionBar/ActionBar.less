@@ -1,0 +1,232 @@
+@import "../../Content/variables";
+@import "../../Content/Layout/layout-variables";
+
+// Right sidebar
+.wrapper {
+  > .aside-right {
+    visibility: hidden;
+    position: absolute;
+    width: @aside-wd-collapsed;
+    top: 0;
+    left: @aside-wd;
+    bottom: 0;
+    z-index: @z-index-main-section + 4;
+    .backface-visibility(hidden);
+    background-color: @aside-right-bg;
+    cursor: default;
+
+    .aside-inner {
+      padding-top: @navbar-hg * 2;
+      height: 100%;
+      width: @aside-wd-collapsed;
+      overflow: hidden;
+    }
+
+    .standard {
+      float            : left;
+      width            : @aside-wd-collapsed;
+      height           : 100%;
+      background-color : #4f566f;
+    }
+
+    .extended {
+      float      : left;
+      width      : @aside-wd;
+      height     : 100%;
+      visibility : hidden;
+    }
+  }
+}
+
+.actionbar-visible {
+  .wrapper {
+    > .aside-right {
+      visibility: visible;
+    }
+  }
+}
+
+.actionbar-extended {
+  .wrapper {
+    > .aside-right {
+      width: @aside-wd-collapsed + @aside-wd;
+
+      .aside-inner {
+        width: @aside-wd-collapsed + @aside-wd;
+      }
+
+      .extended {
+        visibility : visible;
+      }
+    }
+  }
+}
+
+.sidebar-right {
+  color : #e1e2e3;
+
+  .sidebar-right-section-title {
+    height      : 65px;
+    font-size   : 22px;
+    padding-top : 15px;
+
+    i {
+      width      : 70px;
+      text-align : center;
+    }
+
+    .title {
+      margin-left: -25px;
+    }
+  }
+
+  .sidebar-right-list {
+    padding       : 0;
+    margin-bottom : 0;
+
+    .sidebar-right-list-item {
+      .clickable();
+      list-style-type : none;
+      padding         : 20px 0;
+
+      i {
+        .clickable();
+        display     : block;
+        font-size   : 22px;
+        line-height : 25px;
+        text-align  : center;
+
+        &:hover {
+
+        }
+      }
+
+      &:hover {
+        color : @sonarr-blue;
+      }
+    }
+  }
+
+  .views {
+    .sidebar-right-radio-list {
+      width         : 100%;
+      border-bottom : 1px solid #4f566f;
+
+      .sidebar-right-radio-list-item {
+        display    : inline-block;
+        padding    : 20px;
+        width      : 70px;
+        height     : 65px;
+        text-align : center;
+
+        i {
+          display : inline-block;
+        }
+
+        &:hover {
+          background-color : #3a3f51;
+          color            : @sonarr-blue;
+          border-right     : 1px solid #454b60;
+          border-left      : 1px solid #454b60;
+        }
+      }
+
+      .sidebar-right-radio-list-item.active {
+        color         : @sonarr-blue;
+        border-bottom : 2px solid @sonarr-blue;
+      }
+    }
+  }
+
+  .filtering {
+    border-bottom  : 1px solid #4f566f;
+  }
+
+  .sorting, .filtering {
+    padding-bottom : 15px;
+
+    .sidebar-right-sorting-list,
+    .sidebar-right-filtering-list {
+      margin-top : -10px;
+
+      .sidebar-right-sorting-list-item,
+      .sidebar-right-filtering-list-item {
+        display    : inline-block;
+        padding    : 0 35px;
+        width      : 100%;
+        font-size  : 14px;
+
+        i {
+          display     : inline-block;
+          font-size   : 14px;
+          line-height : 14px;
+        }
+
+        &:hover {
+          color : @sonarr-blue;
+        }
+      }
+
+      .sidebar-right-sorting-list-item.active,
+      .sidebar-right-filtering-list-item.active {
+          color : @sonarr-blue;
+      }
+    }
+  }
+}
+
+&.actionbar-extended {
+  .sidebar-right {
+    .options-item {
+      background-color : #454b60;
+    }
+  }
+}
+
+@media @tablet {
+  .wrapper {
+    > .aside-right {
+      .aside-inner {
+        padding-top: @navbar-hg;
+      }
+    }
+  }
+
+  .aside-collapsed {
+    .wrapper {
+      > .aside-right{
+        left: @aside-wd-collapsed;
+      }
+    }
+  }
+}
+
+@media @upto-tablet {
+  .wrapper {
+    > .aside-right {
+      left: -@aside-wd - @aside-wd-collapsed;
+    }
+  }
+
+  .actionbar-visible {
+    > .aside-right {
+      left: 0;
+    }
+  }
+
+  .aside-toggled.actionbar-visible {
+    .wrapper {
+      > .aside-right {
+        left: @aside-wd;
+      }
+    }
+  }
+
+  .aside-collapsed.aside-toggled.actionbar-visible {
+    .wrapper {
+      > .aside-right {
+        left: @aside-wd-collapsed;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<nav class="sidebar">
+    <ul class="nav">
+        {{#each .}}
+            <li class="x-nav-root">
+                <a href="{{UrlBase}}{{href}}">
+                    <em class="icon-sonarr-navbar-icon icon-sonarr-navbar-{{icon}}"></em>
+                    <span>{{title}}</span>
+                </a>
+                {{#if items}}
+                    <ul class="x-nav-sub nav sidebar-subnav collapse">
+                        {{#each items}}
+                            <li class="x-nav-child">
+                                <a href="{{UrlBase}}{{href}}">
+                                    <span>{{title}}</span>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+</nav>

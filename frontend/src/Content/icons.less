@@ -1,0 +1,530 @@
+@import "FontAwesome/font-awesome";
+@import "FontAwesome/font-awesome";
+@import "Bootstrap/variables";
+@import "variables";
+
+/* Icon rotations and mirroring */
+.fa-rotate-90() {
+  transform : rotate(90deg);
+  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+
+.fa-rotate-180() {
+  transform : rotate(180deg);
+  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+.fa-rotate-270() {
+  transform : rotate(270deg);
+  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.fa-flip-horizontal() {
+  transform : scale(-1, 1);
+}
+
+.fa-flip-vertical() {
+  transform : scale(1, -1);
+}
+
+.fa-icon-content(@fa-icon) {
+  .fa-icon();
+  &:before {
+    content : @fa-icon;
+  }
+}
+
+.fa-icon-color(@color) {
+  &:before {
+    color : @color;
+  }
+}
+
+.icon-sonarr-warning {
+  .fa-icon-content(@fa-var-exclamation-triangle);
+}
+
+.icon-sonarr-edit {
+  .fa-icon-content(@fa-var-wrench);
+}
+
+.icon-sonarr-blacklist {
+  .fa-icon-content(@fa-var-ban);
+  .fa-icon-color(@brand-danger);
+
+}
+
+.icon-sonarr-spinner {
+  .fa-icon-content(@fa-var-spinner);
+  margin : 0px -0.14em;
+}
+
+.icon-sonarr-rename {
+  .fa-icon-content(@fa-var-sitemap)
+}
+
+.icon-sonarr-add {
+  .fa-icon-content(@fa-var-plus);
+}
+
+.icon-sonarr-form-info {
+  .fa-icon-content(@fa-var-question-circle);
+}
+
+.icon-sonarr-actions {
+  .fa-icon-content(@fa-var-ellipsis-h);
+}
+
+.icon-sonarr-form-warning {
+  .fa-icon-content(@fa-var-exclamation-triangle);
+  .fa-icon-color(@brand-warning);
+}
+
+.icon-sonarr-form-danger {
+  .fa-icon-content(@fa-var-exclamation-circle);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-form-info-link {
+  .fa-icon-content(@fa-var-info-circle);
+  .fa-icon-color(@brand-primary)
+}
+
+.icon-sonarr-form-external-link {
+  .fa-icon-content(@fa-var-external-link);
+}
+
+.icon-sonarr-update {
+  .fa-icon-content(@fa-var-download);
+}
+
+.icon-sonarr-download {
+  .fa-icon-content(@fa-var-download);
+}
+
+.icon-sonarr-downloading {
+  .fa-icon-content(@fa-var-cloud-download);
+}
+
+.icon-sonarr-downloaded {
+  .fa-icon-content(@fa-var-inbox);
+}
+
+.icon-sonarr-pending {
+  .fa-icon-content(@fa-var-clock-o);
+}
+
+.icon-sonarr-queued {
+  .fa-icon-content(@fa-var-cloud);
+}
+
+.icon-sonarr-paused {
+  .fa-icon-content(@fa-var-pause);
+}
+
+.icon-sonarr-active {
+  .fa-icon-content(@fa-var-play);
+}
+
+.icon-sonarr-tba {
+  .fa-icon-content(@fa-var-question-circle);
+}
+
+.icon-sonarr-missing {
+  .fa-icon-content(@fa-var-exclamation-triangle);
+}
+
+.icon-sonarr-not-aired {
+  .fa-icon-content(@fa-var-clock-o);
+}
+
+.icon-sonarr-import {
+  .fa-icon-content(@fa-var-inbox);
+}
+
+.icon-sonarr-import-manual {
+  .fa-icon-content(@fa-var-user);
+}
+
+.icon-sonarr-imported {
+  .fa-icon-content(@fa-var-download);
+}
+
+.icon-sonarr-status {
+  .fa-icon-content(@fa-var-circle);
+}
+
+.icon-sonarr-monitored {
+  .fa-icon-content(@fa-var-bookmark);
+}
+
+.icon-sonarr-unmonitored {
+  .fa-icon-content(@fa-var-bookmark-o);
+}
+
+.icon-sonarr-log-info {
+  .fa-icon-content(@fa-var-info-circle);
+  .fa-icon-color(dodgerblue);
+}
+
+.icon-sonarr-log-debug {
+  .fa-icon-content(@fa-var-info-circle);
+  .fa-icon-color(gray);
+}
+
+.icon-sonarr-log-trace {
+  .fa-icon-content(@fa-var-info-circle);
+  .fa-icon-color(lightgrey);
+}
+
+.icon-sonarr-log-warn {
+  .fa-icon-content(@fa-var-exclamation-circle);
+  .fa-icon-color(@brand-warning);
+}
+
+.icon-sonarr-log-error {
+  .fa-icon-content(@fa-var-bug);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-log-fatal {
+  .fa-icon-content(@fa-var-times-circle);
+  .fa-icon-color(purple);
+}
+
+.icon-sonarr-import-failed {
+  .fa-icon-content(@fa-var-download);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-download-failed {
+  .fa-icon-content(@fa-var-cloud-download);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-download-warning {
+  .fa-icon-content(@fa-var-cloud-download);
+  .fa-icon-color(@brand-warning);
+}
+
+.icon-sonarr-shutdown {
+  .fa-icon-content(@fa-var-power-off);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-restart {
+  .fa-icon-content(@fa-var-repeat);
+}
+
+.icon-sonarr-health-warning {
+  .fa-icon-content(@fa-var-exclamation-circle);
+  .fa-icon-color(@brand-warning);
+}
+
+.icon-sonarr-health-error {
+  .fa-icon-content(@fa-var-exclamation-circle);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-search {
+  .fa-icon-content(@fa-var-search);
+}
+
+.icon-sonarr-search-manual {
+  .fa-icon-content(@fa-var-user);
+}
+
+.icon-sonarr-search-automatic {
+  .fa-icon-content(@fa-var-rocket);
+}
+
+.icon-sonarr-delete-row {
+  .fa-icon-content(@fa-var-remove);
+}
+
+.icon-sonarr-delete-item {
+  .fa-icon-content(@fa-var-trash);
+}
+
+.icon-sonarr-deleted {
+  .fa-icon-content(@fa-var-trash);
+}
+
+.icon-sonarr-clear {
+  .fa-icon-content(@fa-var-trash);
+}
+
+.icon-sonarr-existing {
+  .fa-icon-content(@fa-var-minus);
+  .fa-icon-color(@brand-danger);
+}
+
+.icon-sonarr-suggested {
+  .fa-icon-content(@fa-var-plus);
+  .fa-icon-color(@brand-success);
+}
+
+.icon-sonarr-info {
+  .fa-icon-content(@fa-var-info-circle);
+}
+
+.icon-sonarr-all {
+  .fa-icon-content(@fa-var-circle-o);
+}
+
+//Navbar
+.icon-sonarr-navbar-collapse {
+  .fa-icon-content(@fa-var-bars);
+}
+
+.icon-sonarr-navbar-series {
+  .fa-icon-content(@fa-var-play);
+}
+
+.icon-sonarr-navbar-calendar {
+  .fa-icon-content(@fa-var-calendar);
+}
+
+.icon-sonarr-navbar-activity {
+  .fa-icon-content(@fa-var-clock-o);
+}
+
+.icon-sonarr-navbar-wanted {
+  .fa-icon-content(@fa-var-exclamation-triangle);
+}
+
+.icon-sonarr-navbar-settings {
+  .fa-icon-content(@fa-var-cogs);
+}
+
+.icon-sonarr-navbar-system {
+  .fa-icon-content(@fa-var-laptop);
+}
+
+.icon-sonarr-navbar-donate {
+  .fa-icon-content(@fa-var-heart);
+}
+
+.icon-sonarr-back-to-top {
+  .fa-icon-content(@fa-var-arrow-circle-up);
+}
+
+.icon-sonarr-hdd {
+  .fa-icon-content(@fa-var-hdd-o);
+}
+
+.icon-sonarr-copy {
+  .fa-icon-content(@fa-var-clipboard);
+}
+
+.icon-sonarr-unknown {
+  .fa-icon-content(@fa-var-question);
+}
+
+.icon-sonarr-load-more {
+  .fa-icon-content(@fa-var-angle-down);
+}
+
+.icon-sonarr-ok {
+  .fa-icon-content(@fa-var-check);
+}
+
+.icon-sonarr-calendar {
+  .fa-icon-content(@fa-var-calendar);
+}
+
+.icon-sonarr-folder-open {
+  .fa-icon-content(@fa-var-folder-open);
+}
+
+.icon-sonarr-folder {
+  .fa-icon-content(@fa-var-folder);
+}
+
+.icon-sonarr-refresh {
+  .fa-icon-content(@fa-var-refresh);
+}
+
+.icon-sonarr-series-ended {
+  .fa-icon-content(@fa-var-stop);
+}
+
+.icon-sonarr-series-continuing {
+  .fa-icon-content(@fa-var-play);
+}
+
+.icon-sonarr-series-unmonitored {
+  .fa-icon-content(@fa-var-pause);
+}
+
+.icon-sonarr-checked {
+  .fa-icon-content(@fa-var-check-square);
+}
+
+.icon-sonarr-unchecked {
+  .fa-icon-content(@fa-var-square-o);
+}
+
+.icon-sonarr-expand {
+  .fa-icon-content(@fa-var-chevron-right);
+}
+
+.icon-sonarr-expanded {
+  .fa-icon-content(@fa-var-chevron-down);
+}
+
+.icon-sonarr-panel-show {
+  .fa-icon-content(@fa-var-chevron-circle-down);
+}
+
+.icon-sonarr-panel-hide {
+  .fa-icon-content(@fa-var-chevron-circle-up);
+}
+
+.icon-sonarr-comment {
+  .fa-icon-content(@fa-var-comment)
+}
+
+.icon-sonarr-rss {
+  .fa-icon-content(@fa-var-rss)
+}
+
+.icon-sonarr-view-poster {
+  .fa-icon-content(@fa-var-th-large)
+}
+
+.icon-sonarr-view-list {
+  .fa-icon-content(@fa-var-th-list)
+}
+
+.icon-sonarr-view-table {
+  .fa-icon-content(@fa-var-table)
+}
+
+.icon-sonarr-reorder {
+  .fa-icon-content(@fa-var-bars);
+}
+
+.icon-sonarr-browser-computer {
+  .fa-icon-content(@fa-var-desktop);
+}
+
+.icon-sonarr-browser-up {
+  .fa-icon-content(@fa-var-level-up);
+}
+
+.icon-sonarr-browser-folder {
+  .fa-icon-content(@fa-var-folder-o);
+}
+
+.icon-sonarr-browser-file {
+  .fa-icon-content(@fa-var-file-o);
+}
+
+.icon-sonarr-sort-asc {
+  .fa-icon-content(@fa-var-sort-asc);
+}
+
+.icon-sonarr-sort-desc {
+  .fa-icon-content(@fa-var-sort-desc);
+}
+
+.icon-sonarr-sort-by {
+  .fa-icon-content(@fa-var-sort)
+}
+
+.icon-sonarr-caret-asc {
+  .fa-icon-content(@fa-var-caret-up);
+}
+
+.icon-sonarr-caret-desc {
+  .fa-icon-content(@fa-var-caret-down);
+}
+
+.icon-sonarr-filter {
+  .fa-icon-content(@fa-var-filter)
+}
+
+.icon-sonarr-pager-first {
+  .fa-icon-content(@fa-var-fast-backward);
+}
+
+.icon-sonarr-pager-previous {
+  .fa-icon-content(@fa-var-backward);
+}
+
+.icon-sonarr-pager-next {
+  .fa-icon-content(@fa-var-forward);
+}
+
+.icon-sonarr-pager-last {
+  .fa-icon-content(@fa-var-fast-forward);
+}
+
+.icon-sonarr-logout {
+  .fa-icon-content(@fa-var-sign-out);
+}
+
+.icon-sonarr-file-text {
+  .fa-icon-content(@fa-var-file-text);
+}
+
+.icon-sonarr-backup-scheduled {
+  .fa-icon-content(@fa-var-clock-o);
+}
+
+.icon-sonarr-backup-manual {
+  .fa-icon-content(@fa-var-book);
+}
+
+.icon-sonarr-backup-update {
+  .fa-icon-content(@fa-var-retweet);
+}
+
+.icon-sonarr-episode-file {
+  .fa-icon-content(@fa-var-file-video-o);
+}
+
+.icon-sonarr-header-rejections {
+  .fa-icon-content(@fa-var-exclamation-circle);
+}
+
+.icon-sonarr-options {
+  .fa-icon-content(@fa-var-bars);
+}
+
+.icon-sonarr-save {
+  .fa-icon-content(@fa-var-floppy-o);
+}
+
+.icon-sonarr-profile {
+  .fa-icon-content(@fa-var-user);
+}
+
+.icon-sonarr-tag {
+  .fa-icon-content(@fa-var-tag);
+}
+
+.icon-sonarr-advanced-settings {
+  .fa-icon-content(@fa-var-cog);
+}
+
+.icon-sonarr-new-series {
+  .fa-icon-content(@fa-var-plus-square);
+}
+
+.icon-sonarr-user {
+  .fa-icon-content(@fa-var-user);
+}
+
+.icon-sonarr-lock {
+  .fa-icon-content(@fa-var-lock);
+}
+
+.icon-sonarr-close-modal {
+  .fa-icon-content(@fa-var-times);
+}
+
+.icon-sonarr-heart {
+  .fa-icon-content(@fa-var-heart);
+}

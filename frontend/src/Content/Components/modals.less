@@ -1,0 +1,64 @@
+@import "../Layout/media-queries";
+@import "../Layout/layout-variables";
+
+@media @tablet {
+  .modal.modal-fullscreen {
+    top: @navbar-height;
+
+    .modal-content {
+      .modal-body {
+        margin-bottom: @navbar-height;
+      }
+
+      .modal-footer {
+        bottom: @navbar-height;
+      }
+    }
+  }
+
+  .wrapper {
+    .modal-fullscreen {
+      left: @sidebar-wd;
+    }
+  }
+
+  .aside-collapsed {
+    .wrapper {
+      .modal-fullscreen {
+        left: @sidebar-collapsed-wd;
+      }
+    }
+  }
+
+  .actionbar-visible {
+    .wrapper {
+      .modal-fullscreen {
+        left: @sidebar-actionbar-wd;
+      }
+    }
+  }
+
+  .actionbar-visible.actionbar-extended {
+    .wrapper {
+      .modal-fullscreen {
+        left: @sidebar-actionbar-extended-wd;
+      }
+    }
+  }
+
+  .aside-collapsed.actionbar-visible {
+    .wrapper {
+      .modal-fullscreen {
+        left: @sidebar-collapsed-actionbar-wd;
+      }
+    }
+  }
+
+  .aside-collapsed.actionbar-visible.actionbar-extended {
+    .wrapper {
+      .modal-fullscreen {
+        left: @sidebar-collapsed-actionbar-extended-wd;
+      }
+    }
+  }
+}

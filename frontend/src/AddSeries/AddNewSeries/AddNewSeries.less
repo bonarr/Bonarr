@@ -1,0 +1,94 @@
+@import "../../Content/Bootstrap/mixins/text-overflow";
+@import "../../Content/Bootstrap/variables";
+
+#add-new-series {
+  .search-error {
+    .note {
+      font-size      : 15px;
+      font-style     : italic;
+      padding-bottom : 20px;
+    }
+    .code {
+      text-transform : uppercase;
+      font-family    : @font-family-monospace;
+    }
+  }
+  .fade {
+    transition : opacity 0.2s;
+    opacity    : 1;
+  }
+
+  .fade-out {
+    opacity : 0;
+  }
+
+  .panel {
+    transition : background 500ms;
+
+    &:hover {
+      background : #eaf2ff;
+      cursor     : pointer;
+    }
+  }
+
+  .search-bar {
+    margin-bottom : 20px;
+  }
+
+  .search-item {
+    clear   : both;
+    display : block;
+  }
+
+
+  .labels {
+    //display    : inline-block;
+    // float      : right;
+    font-size : 18px;
+  }
+
+  .already-exists {
+    display   : none;
+    font-size : 26px;
+  }
+
+  .existing {
+    .already-exists {
+      display : inherit;
+    }
+  }
+
+  .series-title {
+    margin-top  : 3px;
+    font-size   : 36px;
+    font-weight : lighter;
+  }
+
+  .overview {
+    padding-top : 10px;
+    overflow    : hidden;
+  }
+
+  .fields {
+    display : none;
+  }
+
+  .series-poster {
+    display      : inline;
+    height       : 250px;
+    width        : 170px;
+    float        : left;
+    margin-right : 15px;
+  }
+
+  .spinner-container {
+    display      : none;
+    position     : absolute;
+    padding      : 50px;
+    margin-left  : auto;
+    margin-right : auto;
+    left         : 0;
+    right        : 0;
+  }
+
+}

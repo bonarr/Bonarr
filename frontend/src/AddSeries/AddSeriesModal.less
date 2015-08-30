@@ -1,0 +1,23 @@
+@import "../Content/Bootstrap/mixins/grid";
+@import "../Content/Bootstrap/mixins/image";
+
+.add-series-modal {
+
+  img {
+    .img-responsive();
+  }
+
+  .control-label {
+    .make-xs-column(3);
+    .make-lg-column(2);
+  }
+
+  .control-input {
+    .make-xs-column(9);
+    .make-lg-column(5);
+  }
+
+  form {
+    padding-top : 20px;
+  }
+}

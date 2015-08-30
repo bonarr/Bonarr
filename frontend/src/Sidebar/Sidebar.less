@@ -1,0 +1,112 @@
+@import "./ActionBar/ActionBar";
+@import "../Content/Bootstrap/mixins/vendor-prefixes";
+@import "../Content/Layout/layout-variables";
+@import "../Content/Layout/media-queries";
+
+
+.wrapper {
+  > .aside {
+    // visibility: hidden;
+    position: absolute;
+    width: @aside-wd;
+    cursor: default;
+
+    top: 0; left: 0;
+    bottom: 0;
+    z-index: @z-index-main-section + 5;
+    // .transition(visibility 0s linear .3s);
+    .backface-visibility(hidden);
+    background-color: @aside-bg;
+
+    .aside-inner {
+      padding-top: @navbar-hg * 2;
+      height: 100%;
+      width: @aside-wd;
+      overflow: hidden;
+    }
+
+    > .nav-floating {
+
+      // position: handled from directive
+      left: inherit;
+      margin-left: @aside-wd;
+      z-index: @z-index-main-section * 10;
+
+      min-width: 190px;
+      overflow: auto;
+    }
+  }
+}
+
+@media @tablet {
+  .wrapper {
+    > .aside {
+      .aside-inner {
+        padding-top: @navbar-hg;
+      }
+    }
+  }
+}
+
+@media @upto-tablet {
+  .wrapper {
+    > .aside {
+      left: -@aside-wd;
+    }
+  }
+
+  .aside-toggled {
+    .wrapper {
+      > .aside {
+        left: 0;
+      }
+    }
+  }
+
+  .csstransforms3d {
+    .wrapper {
+      > .aside {
+        left: 0;
+        .translate3d(-@aside-wd,0,0);
+        .transition-transform(.3s ease);
+      }
+    }
+
+    .aside-toggled {
+      .wrapper {
+        > .aside {
+          .translate3d(0,0,0);
+        }
+      }
+    }
+  }
+}
+
+// Aside status toggled via JS
+.aside-collapsed {
+  overflow-y: auto;
+  .wrapper {
+    > .aside {
+      &, > .aside-inner {
+        width: @sidebar-collapsed-wd;
+      }
+      > .nav-floating {
+        margin-left: @sidebar-collapsed-wd;
+      }
+    }
+  }
+}
+
+.layout-fixed {
+  .wrapper {
+    > aside {
+      position: fixed;
+    }
+    /* only applied to sidebar */
+    > .aside {
+      /* safari fix */
+      height: 1px;
+      min-height: 100%;
+    }
+  }
+}

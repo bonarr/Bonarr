@@ -1,0 +1,64 @@
+<fieldset>
+    <legend>Completed Download Handling</legend>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Enable</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="enableCompletedDownloadHandling" class="x-completed-download-handling"/>
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Automatically import completed downloads from download client</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="x-completed-download-options advanced-setting">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Remove</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="checkbox c-checkbox">
+                    <label>
+                        <input type="checkbox" name="removeCompletedDownloads">
+                        <span class="check fa fa-check"></span>
+                        <span class="help-block">Remove imported downloads from download client history</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>Failed Download Handling</legend>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Redownload</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="autoRedownloadFailed" class="x-failed-auto-redownload"/>
+
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Automatically search for and attempt to download a different release</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="x-failed-download-options advanced-setting">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Remove</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <div class="checkbox c-checkbox">
+                    <label>
+                        <input type="checkbox" name="removeFailedDownloads">
+                        <span class="check fa fa-check"></span>
+                        <span class="help-block">Remove failed downloads from download client history</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

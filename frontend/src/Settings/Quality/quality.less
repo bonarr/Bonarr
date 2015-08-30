@@ -1,0 +1,67 @@
+@import "../../Content/Bootstrap/mixins";
+@import "../../Content/icons";
+
+.qualities-controls {
+  .help-inline {
+    vertical-align: top;
+    margin-top: 5px;
+  }
+}
+
+#quality-definition-list {
+
+  .quality-header .row {
+    font-weight: bold;
+    line-height: 40px;
+  }
+
+  .rows .row {
+    line-height: 30px;
+    border-top: 1px solid #ddd;
+    vertical-align: middle;
+    padding: 5px;
+
+    input {
+      margin-bottom: 0px;
+    }
+
+    .size-label-wrapper {
+      line-height: 20px;
+    }
+
+    .label {
+      min-width: 70px;
+      text-align: center;
+      margin: 0px 1px;
+      padding: 1px 4px;
+    }
+
+    .ui-slider {
+      position: relative;
+      text-align: left;
+      background-color: #f5f5f5;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      height: 8px;
+
+      .ui-slider-range {
+        position: absolute;
+        display: block;
+        background-color: #ddd;
+        height: 100%;
+      }
+
+      .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 6px;
+        height: 12px;
+        cursor: default;
+        background-color: #ccc;
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        top: -3px;
+      }
+    }
+  }
+}

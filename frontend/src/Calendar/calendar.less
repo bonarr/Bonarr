@@ -1,0 +1,202 @@
+@import "../Content/Bootstrap/mixins";
+@import "../Content/Bootstrap/variables";
+@import "../Content/Bootstrap/buttons";
+@import "../Content/variables";
+@import "../Content/mixins";
+
+.calendar-layout {
+
+  .upcoming .event .status, .calendar .fc-event, .calendar-legend .legend-label {
+    &.primary {
+      border-left-color: @btn-primary-bg;
+
+      .color-impaired-background-gradient(90deg, @btn-primary-bg);
+    }
+
+    &.info {
+      border-left-color: @btn-info-bg;
+    }
+
+    &.inverse {
+      border-left-color: @btn-link-disabled-color;
+      //background-color : @btn-link-disabled-color;
+    }
+
+    &.warning {
+      border-left-color: @btn-warning-bg;
+
+      .color-impaired-background-gradient(90deg, @btn-warning-bg);
+    }
+
+    &.danger {
+      border-left-color: @btn-danger-bg;
+
+      .color-impaired-background-gradient(90deg, @btn-danger-bg);
+    }
+
+    &.success {
+      border-left-color: @btn-success-bg;
+    }
+
+    &.purple {
+      border-left-color: @nzbdronePurple;
+    }
+
+    &.pink {
+      border-left-color: @nzbdronePink;
+    }
+
+    &.premiere {
+      border-left-color: @sonarr-blue;
+
+      .color-impaired-background-gradient(90deg, @sonarr-blue);
+    }
+
+    &.unmonitored {
+      border-color: grey;
+
+      .color-impaired-background-gradient(45deg, grey);
+    }
+  }
+
+  .calendar {
+    width: 100%;
+
+    th, td {
+      border-color: #eeeeee;
+    }
+
+    .fc-event-skin {
+      background-color: #007ccd;
+      border: 1px solid #007ccd;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .fc-event {
+      .clickable;
+
+      color: #777;
+      background-color: #f5f5f5;
+
+      .status {
+        margin-right: 4px;
+      }
+    }
+
+    th {
+      background-color: #eeeeee;
+    }
+
+    h2 {
+      font-size: 17.5px;
+    }
+
+    // Highlight today
+    .fc-state-highlight {
+      background : #e8e8e8;
+    }
+
+    //.past {
+    //  opacity : 0.8;
+    //}
+
+    .chart {
+      margin-top: 2px;
+      margin-right: 2px;
+      line-height: 12px;
+    }
+  }
+
+  .upcoming {
+    .event {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 10px;
+
+      h4 {
+        font-weight: 500;
+        color: #008dcd;
+        margin: 5px 0;
+      }
+
+      p {
+        color: #999999;
+        margin: 0;
+      }
+
+      .status {
+        text-align    : center;
+        display       : inline-block;
+        border-left   : 4px solid #eeeeee;
+        padding-right : 10px;
+        float         : left;
+        height        : 75px;
+      }
+
+      .episode-title {
+        .clickable();
+        .btn-link;
+        .text-overflow;
+        color: @link-color;
+        margin-top: 1px;
+        display: inline-block;
+
+        @media (max-width: @screen-xs-min) {
+          width: 140px;
+        }
+
+        @media (min-width: @screen-md-min) {
+          width: 135px;
+        }
+      }
+    }
+
+    .upcoming-hr {
+      margin: 10px 0;
+    }
+  }
+
+  .calendar-legend {
+    .legend-labels {
+      width: 600px;
+      padding: 3px 0;
+      list-style: none;
+
+      @media (max-width: @screen-xs-min) {
+        width: 400px;
+      }
+    }
+
+    .legend-label {
+      display: inline-block;
+      width: 150px;
+      border-left: 4px solid #eeeeee;
+      margin: 3px 0;
+      padding-left: 5px;
+      cursor: default;
+    }
+  }
+
+  .ical {
+    color: @btn-link-disabled-color;
+    cursor: pointer;
+  }
+
+  .ical-url {
+    input, input[readonly] {
+      cursor: text;
+    }
+  }
+
+  .calendar-title {
+    text-align: center;
+
+    h2 {
+      margin-top: 0px;
+      margin-bottom: 5px;
+    }
+  }
+}

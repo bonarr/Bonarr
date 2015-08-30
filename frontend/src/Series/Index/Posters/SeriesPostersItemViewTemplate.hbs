@@ -1,0 +1,36 @@
+<div class="series-poster-container">
+  <div class="series-controls">
+    <div class="badge actions" type="button" data-toggle="dropdown">
+      <i class="icon-sonarr-actions x-actions" title="Series Action"/>
+    </div>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{{route}}">Edit</a>
+      </li>
+      <li>
+        <a href="{{route}}">Update</a>
+      </li>
+    </ul>
+  </div>
+  {{#if_eq status compare="ended"}}
+    <span class="badge ended-badge">Ended</span>
+  {{/if_eq}}
+  <div class="title">{{title}}</div>
+  <a href="{{route}}">
+    {{posterHelper 250}}
+  </a>
+</div>
+<div class="center">
+  <div class="labels">
+    <div class="progress progress-xs episode-progress">
+      <div class="progress-bar {{EpisodeProgressClass}} episode-progress" style="width:{{percentOfEpisodes}}%"/>
+    </div>
+          <!--{{#if nextAiring}}-->
+    <!--<span class="label label-default">{{RelativeDate nextAiring}}</span>-->
+          <!--{{/if}}-->
+  </div>
+</div>
+
+
+
+

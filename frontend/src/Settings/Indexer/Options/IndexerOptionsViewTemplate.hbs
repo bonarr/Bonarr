@@ -1,0 +1,28 @@
+<fieldset>
+    <legend>Options</legend>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Minimum Age</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="number" min="0" name="minimumAge" class="form-control"/>
+            <span class="help-block">Usenet only: Minimum age in minutes of NZBs before they are grabbed. Use this to give new releases time to propagate to your usenet provider.</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Retention</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="number" min="0" name="retention" class="form-control"/>
+            <span class="help-block">Usenet only: Set to zero to set to unlimited</span>
+        </div>
+    </div>
+
+    <div class="form-group advanced-setting">
+        <label class="col-sm-2 control-label">RSS Sync Interval</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="number" name="rssSyncInterval" class="form-control"/>
+            <span class="help-block">Interval in minutes. Set to zero to disable (this will stop all automatic release grabbing)</span>
+            <span class="help-block help-block-warning">This will apply to all indexers, please follow the rules set forth by them</span>
+        </div>
+    </div>
+</fieldset>

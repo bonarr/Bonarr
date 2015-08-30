@@ -1,0 +1,49 @@
+<fieldset class="advanced-setting">
+    <legend>Permissions</legend>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Set Permissions</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="setPermissionsLinux">
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Should chmod/chown be run when files are imported/renamed?</span>
+                    <span class="help-block help-block-warning">If you're unsure what these settings do, do not alter them.</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">File chmod mask</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="text" name="fileChmod" class="form-control"/>
+            <span class="help-block">Octal, applied to media files when imported/renamed by Sonarr</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Folder chmod mask</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="text" name="folderChmod" class="form-control"/>
+            <span class="help-block">Octal, applied to series/season folders created by Sonarr</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">chown User</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="text" name="chownUser" class="form-control"/>
+            <span class="help-block">Username or uid. Use uid for remote file systems.</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">chown Group</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="text" name="chownGroup" class="form-control"/>
+            <span class="help-block">Group name or gid. Use gid for remote file systems.</span>
+        </div>
+    </div>
+</fieldset>

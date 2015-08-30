@@ -1,0 +1,110 @@
+@import "../../Content/Bootstrap/mixins";
+@import "../../Content/FontAwesome/font-awesome";
+
+.profile-item {
+  .clickable;
+
+  width: 300px;
+  height: 158px;
+  padding: 10px 15px;
+
+  &.add-card {
+    .center {
+      margin-top: 30px;
+    }
+  }
+
+  .allowed-qualities {
+
+    padding-left: 0px;
+
+    li {
+      list-style-type : none;
+      margin: 1px;
+    }
+  }
+
+  .language {
+    margin-bottom: 3px;
+  }
+}
+
+.delay-profile-region {
+  margin-top : 30px;
+}
+
+.delay-profiles {
+  padding-left : 0px;
+
+  li {
+    list-style-type : none;
+  }
+}
+
+ul.qualities {
+  .user-select(none);
+
+  min-height: 100px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  outline: none;
+  width: 100%;
+  display: inline-block;
+
+  li {
+    margin: 2px;
+    padding: 2px 4px;
+    line-height: 20px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;   /* may need vendor varients */
+    background: #fafafa;
+    cursor: pointer;
+
+    &.selected {
+      .select-handle {
+        opacity: 1.0;
+        cursor: pointer;
+      }
+
+      .quality-label {
+        color: #444444;
+      }
+
+      .select-handle {
+        .fa-icon-content(@fa-var-check-square-o);
+      }
+    }
+
+    &:hover {
+      border-color: #888888;
+      background: #eeeeee;
+
+      .drag-handle {
+        opacity: 1.0;
+        cursor: move;
+      }
+    }
+
+    .quality-label {
+      color: #c6c6c6;
+      padding-left: 5px;
+    }
+
+    .drag-handle, .select-handle {
+      opacity: 0.2;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    .select-handle {
+      .fa-icon-content(@fa-var-square-o);
+
+      &:before {
+        display    : inline-block;
+        width      : 14px;
+        margin-top : 3px;
+      }
+    }
+  }
+}

@@ -1,0 +1,322 @@
+@import "./layout-variables";
+
+/* ========================================================================
+   Component: layout.less
+ ========================================================================== */
+//
+// Main layout
+// This file controls the presentation of all components
+//  .wrapper
+//    > section
+//      > .content-wrapper
+//    > .aside
+//
+// If modified or removed make sure to check the variable
+// shared with other components
+// -------------------------------------------------------------
+
+html {
+  /* @replace rtl */
+  direction: ltr;
+  height: 100%;
+
+  // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+// Main wrapper
+// -----------------------------
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow: hidden;
+
+  &.ng-leave {
+    display: none;
+  }
+
+  .dropdown-backdrop {
+    z-index: @z-index-main-section - 2;
+  }
+
+  // Contains the main content
+  > section {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: @z-index-main-section;
+    background-color: @content-bg;
+
+    // margin-bottom: @footer-hg !important; // ensure a space for the footer
+  }
+
+  // Page Footer
+  > footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: @footer-hg;
+    border-top: 1px solid @gray-light;
+    padding: @content-padding;
+    z-index: @z-index-main-section - 2;
+
+    > p {
+      margin: 0;
+    }
+  }
+}
+
+.modal-open .wrapper {
+  z-index: 0;
+}
+
+// Page main content
+// -----------------------------
+
+.content-wrapper {
+  padding: 15px;
+  width: 100%;
+
+  // styling to visually wrap the component
+  border-top: 1px solid rgba(0,0,0,.15);
+  margin-top: -1px;
+  overflow-y: auto;
+  height: 100%;
+
+  > .unwrap {
+    margin: -15px; // expand over wrapper padding
+
+    @media @tablet {
+      margin: -20px; // expand over wrapper padding
+    }
+  }
+
+  > h3,
+  > .content-heading {
+    font-size: @font-size-h3;
+    line-height: @headings-line-height;
+    color: #929292;
+    margin: -15px -15px 20px;
+    padding: 15px;
+    font-weight: normal;
+    background-color: @content-heading-bg;
+    border-bottom: 1px solid @content-heading-border;
+
+    > small {
+      display: block;
+      font-size: 12px;
+      color: @text-muted;
+    }
+  }
+
+  > button,
+  > .btn {
+    margin: 10px 10px 0 0;
+  }
+
+  .container,
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @media @tablet {
+    padding: @content-padding;
+
+    //overflow: auto; // required for portlets
+    > h3,
+    > .content-heading {
+      margin: -@content-padding -@content-padding @content-padding;
+      padding: @content-padding;
+    }
+
+    > button,
+    > .btn {
+      margin: 0;
+    }
+  }
+
+  .fill-region {
+    margin: -20px -5px 0 -35px;
+
+    .fill-row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+// Desktop layout
+// -----------------------------
+
+@media @tablet {
+  body {
+    min-height: 100%;
+  }
+
+  .wrapper {
+    > section,
+    > footer {
+      left: @sidebar-wd;
+    }
+  }
+
+  .aside-collapsed {
+    .wrapper {
+      > section,
+      > footer {
+        left: @sidebar-collapsed-wd;
+      }
+    }
+  }
+
+  .actionbar-visible {
+    .wrapper {
+      > section,
+      > footer {
+        left: @sidebar-actionbar-wd;
+      }
+    }
+  }
+
+  .actionbar-visible.actionbar-extended {
+    .wrapper {
+      > section,
+      > footer {
+        left: @sidebar-actionbar-extended-wd;
+      }
+    }
+  }
+
+  .aside-collapsed.actionbar-visible {
+    .wrapper {
+      > section,
+      > footer {
+        left: @sidebar-collapsed-actionbar-wd;
+      }
+    }
+  }
+
+  .aside-collapsed.actionbar-visible.actionbar-extended {
+    .wrapper {
+      > section,
+      > footer {
+        left: @sidebar-collapsed-actionbar-extended-wd;
+      }
+    }
+  }
+}
+
+// Aside toggled layout
+// On mobile acts like offcanvas
+// -----------------------------
+
+@media @upto-tablet {
+  .csstransforms3d {
+    .wrapper {
+      .backface-visibility(hidden);
+
+      > section,
+      > footer {
+        left: 0;
+        .translate3d(0,0,0);
+        .transition-transform(.3s ease);
+      }
+    }
+
+    .aside-toggled {
+      .wrapper {
+        > section,
+        > footer {
+          .translate3d(@aside-wd,0,0);
+        }
+      }
+    }
+  }
+}
+
+// Toggle and collapsed behavior overrides
+@media @upto-tablet {
+  .csstransforms3d {
+    .aside-collapsed .wrapper {
+      .backface-visibility(hidden);
+
+      > section,
+      > footer {
+        left: 0;
+        .translate3d(0,0,0);
+        .transition-transform(.3s ease);
+      }
+
+      > .aside {
+        left: 0;
+        .translate3d(-@aside-wd-collapsed,0,0);
+        .transition-transform(.3s ease);
+      }
+    }
+
+    .aside-collapsed.aside-toggled {
+      .wrapper {
+        > section,
+        > footer {
+          .translate3d(@aside-wd-collapsed,0,0);
+        }
+
+        > .aside {
+          .translate3d(0,0,0);
+        }
+      }
+    }
+  }
+}
+
+// mixin to remove transformations
+.disable-transform () {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -opera-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+// Fixed layout
+// -----------------------------
+
+.layout-fixed {
+  .wrapper {
+    .topnavbar-wrapper {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: @z-index-main-section + 10;
+    }
+
+    > section {
+      top: (@navbar-hg + 2.5) * 2;
+
+      @media @tablet {
+        top: @navbar-hg;
+      }
+    }
+  }
+}
+
+/* IE10+ hack: safari fix breaks ie so we need to target ie only to restore */
+_:-ms-lang(x),
+.layout-fixed .wrapper > .aside > .aside-inner {
+  position: static !important;
+}

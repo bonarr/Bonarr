@@ -1,0 +1,62 @@
+<fieldset>
+    <legend>File Management</legend>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Ignore Deleted Episodes</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="autoUnmonitorPreviouslyDownloadedEpisodes">
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Episodes deleted from disk are automatically unmonitored in Sonarr</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group advanced-setting">
+        <label class="col-sm-2 control-label">Download Propers</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="autoDownloadPropers">
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Should Sonarr automatically upgrade to propers when available?</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group advanced-setting">
+        <label class="col-sm-2 control-label">Analyse video files</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <div class="checkbox c-checkbox">
+                <label>
+                    <input type="checkbox" name="enableMediaInfo">
+                    <span class="check fa fa-check"></span>
+                    <span class="help-block">Extract video information such as resolution, runtime and codec information from files. This requires Sonarr to read parts of the file which may cause high disk or network activity during scans.</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group advanced-setting">
+        <label class="col-sm-2 control-label">Change File Date</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <select name="fileDate" class="form-control">
+                <option value="none">None</option>
+                <option value="localAirDate">Local Air Date</option>
+                <option value="utcAirDate">UTC Air Date</option>
+            </select>
+            <span class="help-block">Change file date on import/rescan</span>
+        </div>
+    </div>
+
+    <div class="form-group advanced-setting">
+        <label class="col-sm-2 control-label">Change File Date</label>
+        <div class="col-sm-6 col-md-4 col-lg-2">
+            <input type="text" name="recycleBin" class="form-control x-path"/>
+            <span class="help-block">Episode files will go here when deleted instead of being permanently deleted</span>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,37 @@
+<div class="series-season" id="season-{{seasonNumber}}">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default x-panel">
+                <div class="panel-heading x-heading">
+                    <i class="x-season-monitored season-monitored clickable" title="Toggle season monitored status"/>
+                    {{#if seasonNumber}}
+                        Season {{seasonNumber}}
+                    {{else}}
+                        Specials
+                    {{/if}}
+                    <ul class="season-actions pull-right">
+                        <li class="x-season-episode-file-editor">
+                            <i class="icon-sonarr-episode-file" title="Modify episode files for season"/>
+                        </li>
+                        <li class="x-season-rename">
+                            <i class="icon-sonarr-rename" title="Preview rename for season {{seasonNumber}}"/>
+                        </li>
+                        <li class="x-season-search">
+                            <i class="icon-sonarr-search" title="Search for all episodes in season {{seasonNumber}}"/>
+                        </li>
+                        <li class="x-toggle">
+                            <i class="icon-sonarr-panel-hide"/>
+                            <i class="icon-sonarr-panel-show"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="x-episode-grid table-responsive"></div>
+                </div>
+                <div class="panel-footer x-toggle">
+                    <i class="icon-sonarr-panel-hide"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

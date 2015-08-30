@@ -1,0 +1,59 @@
+@import "../../Content/Bootstrap/variables";
+
+#series-seasons-region {
+  padding : 20px;
+
+  .season-actions {
+    display : inline;
+    li {
+      display : inline;
+    }
+  }
+
+  .panel-heading {
+    user-select : none;
+  }
+
+  .panel-body,
+  .panel-footer,
+  .icon-sonarr-panel-hide {
+    display : none;
+  }
+
+  .expanded {
+    .panel-body,
+    .panel-footer,
+    .icon-sonarr-panel-hide {
+      display : inherit;
+    }
+
+    .icon-sonarr-panel-show {
+      display : none;
+    }
+  }
+
+  .panel-heading {
+    font-size      : 24px;
+    padding-top    : 15px;
+    padding-bottom : 15px;
+  }
+
+  .panel-footer {
+    text-align : center;
+    width      : 100%;
+    font-size  : 20px;
+  }
+
+  .season-grid {
+    .episode-monitored {
+      width : 20px;
+    }
+
+    .episode-number-cell {
+      width : 30px;
+    }
+  }
+
+}
+
+
