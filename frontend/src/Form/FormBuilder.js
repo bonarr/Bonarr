@@ -45,6 +45,9 @@ var _fieldBuilder = function(field) {
         return _templateRenderer.call(field, 'Form/ActionTemplate');
     }
 
+    if (field.type === 'url') {
+        return _templateRenderer.call(field, 'Form/UrlTemplate');
+    }
 
     return _templateRenderer.call(field, 'Form/TextboxTemplate');
 };
