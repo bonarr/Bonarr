@@ -2,59 +2,61 @@
 <html lang="en">
 
 <head>
-    <title>Sonarr (Phantom)</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Sonarr (Phantom)">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Sonarr (Phantom)</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Sonarr (Phantom)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link href="/Content/bootstrap.css" rel='stylesheet' type='text/css'/>
-    <link href="/Content/vendor.css" rel='stylesheet' type='text/css'/>
-    <link href="/Content/sonarr.css" rel='stylesheet' type='text/css'/>
+  <link href="/Content/bootstrap.css" rel='stylesheet' type='text/css' />
+  <link href="/Content/vendor.css" rel='stylesheet' type='text/css' />
+  <link href="/Content/sonarr.css" rel='stylesheet' type='text/css' />
 
-    <link rel="apple-touch-icon" href="/Content/Images/touch/60.png"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="/Content/Images/touch/76.png"/>
-    <link rel="apple-touch-icon" sizes="120x120" href="/Content/Images/touch/120.png"/>
-    <link rel="apple-touch-icon" sizes="152x152" href="/Content/Images/touch/152.png"/>
-    <link rel="icon" type="image/ico" href="/favicon.ico" data-no-hash/>
+  <link rel="apple-touch-icon" href="/Content/Images/touch/60.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/Content/Images/touch/76.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/Content/Images/touch/120.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/Content/Images/touch/152.png" />
+  <link rel="icon" type="image/ico" href="/favicon.ico" data-no-hash/>
 </head>
 
-<body class="layout-fixed">
-<div class="wrapper">
+<body>
+  <div class="wrapper">
     <header id="navbar-region" class="topnavbar-wrapper"></header>
     <aside id="sidebar-region" class="aside"></aside>
     <aside id="actionbar-region" class="aside-right"></aside>
-    <!-- Main section-->
     <section>
-        <!-- Page content-->
-        <div class="content-wrapper">
-          <div id="main-region"  ></div>
-          <div id="fullscreen-modal-region"></div>
-        </div>
+      <div class="content-wrapper">
+        <div id="main-region"></div>
+        <div id="fullscreen-modal-region"></div>
+      </div>
     </section>
     <!-- Page footer-->
     <!--<footer>-->
-        <!--<span>&copy; 2015 - Sonarr</span>-->
+    <!--<span>&copy; 2015 - Sonarr</span>-->
     <!--</footer>-->
-</div>
+  </div>
 </body>
+
 <div id="notification-region"></div>
 <div id="modal-region"></div>
+
 <script type="text/javascript">
-    window.Sonarr = {
-        ApiRoot    : 'API_ROOT',
-        ApiKey     : 'API_KEY',
-        Version    : 'APP_VERSION',
-        Branch     : 'APP_BRANCH',
-        Analytics  : APP_ANALYTICS,
-        UrlBase    : 'URL_BASE',
-        Production : PRODUCTION
-    };
+  window.Sonarr = {
+    ApiRoot: 'API_ROOT',
+    ApiKey: 'API_KEY',
+    Version: 'APP_VERSION',
+    Branch: 'APP_BRANCH',
+    Analytics: APP_ANALYTICS,
+    UrlBase: 'URL_BASE',
+    Production: PRODUCTION
+  };
 </script>
+
 <script src="/polyfills.js"></script>
 <script src="/handlebars.runtime.js"></script>
 <script src="/templates.js"></script>
 <script src="/vendor.js"></script>
 <script src="/main.js"></script>
+
 </html>

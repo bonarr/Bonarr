@@ -1,29 +1,30 @@
 <div class="search-item panel clickable {{#if existing}}existing{{/if}}">
-    <div class="panel-body">
-        <a href="{{tvdbUrl}}" class="poster-link" target="_blank">
+  <div class="panel-body">
+    <a href="{{tvdbUrl}}" class="poster-link" target="_blank">
             {{lazyPosterHelper}}
         </a>
-        <div class="header">
-            <span class="series-title">
-                {{titleWithYear}}
-            </span>
-            <div class="already-exists">
-                <span class="label label-purple">Already in your library</span>
-            </div>
-            <div class="labels">
-                {{#if ratings.votes}}
-                    <span class="label label-default">{{ratingHeartHelper ratings}}</span>
-                {{/if}}
-                <span class="label label-default">{{network}}</span>
-                {{#unless_eq status compare="continuing"}}
-                    <span class="label label-danger">Ended</span>
-                {{/unless_eq}}
-            </div>
-        </div>
-        <div class="overview x-overview">
-            <p>
-                {{overview}}
-            </p>
-        </div>
+    <div class="header">
+      <span class="series-title">
+        {{titleWithYear}}
+      </span>
+      <div class="already-exists">
+        <span class="label label-purple">Already in your library</span>
+      </div>
+      <div class="labels">
+        {{#if ratings.votes}}
+          <span class="label label-default">{{ratingHeartHelper ratings}}</span>
+        {{/if}}
+        <span class="label label-default">{{network}}</span>
+        {{#unless_eq status compare="continuing" }}
+          <span class="label label-danger">Ended</span>
+        {{/unless_eq}}
+      </div>
     </div>
+    <div class="overview x-overview">
+      <p>
+        {{overview}}
+      </p>
+    </div>
+  </div>
 </div>
+{{debug}}

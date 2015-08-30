@@ -1,27 +1,9 @@
 @import "./layout-variables";
 
-/* ========================================================================
-   Component: layout.less
- ========================================================================== */
-//
-// Main layout
-// This file controls the presentation of all components
-//  .wrapper
-//    > section
-//      > .content-wrapper
-//    > .aside
-//
-// If modified or removed make sure to check the variable
-// shared with other components
-// -------------------------------------------------------------
-
 html {
-  /* @replace rtl */
-  direction: ltr;
   height: 100%;
 
   // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
-  -ms-touch-action: manipulation;
   touch-action: manipulation;
 }
 
@@ -41,6 +23,13 @@ body {
   min-height: 100%;
   overflow: hidden;
 
+  .topnavbar-wrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: @z-index-main-section + 10;
+  }
+
   &.ng-leave {
     display: none;
   }
@@ -59,6 +48,11 @@ body {
     overflow-y: auto;
     z-index: @z-index-main-section;
     background-color: @content-bg;
+    top: (@navbar-hg + 2.5) * 2;
+
+    @media @tablet {
+      top: @navbar-hg;
+    }
 
     // margin-bottom: @footer-hg !important; // ensure a space for the footer
   }
@@ -286,37 +280,13 @@ body {
 
 // mixin to remove transformations
 .disable-transform () {
-  -webkit-transform: none;
-  -moz-transform: none;
-  -opera-transform: none;
-  -ms-transform: none;
   transform: none;
 }
 
 // Fixed layout
 // -----------------------------
-
-.layout-fixed {
-  .wrapper {
-    .topnavbar-wrapper {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: @z-index-main-section + 10;
-    }
-
-    > section {
-      top: (@navbar-hg + 2.5) * 2;
-
-      @media @tablet {
-        top: @navbar-hg;
-      }
-    }
-  }
-}
-
 /* IE10+ hack: safari fix breaks ie so we need to target ie only to restore */
 _:-ms-lang(x),
-.layout-fixed .wrapper > .aside > .aside-inner {
+.wrapper > .aside > .aside-inner {
   position: static !important;
 }
