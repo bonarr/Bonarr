@@ -1,82 +1,82 @@
 <div class="fullscreen-modal edit-series-modal">
-    <div class="fullscreen-modal-header">
-        <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
-        <h1>{{title}}</h1>
-    </div>
-    <div class="fullscreen-modal-body">
-        <div class="row">
-            <div class="col-sm-4 col-lg-2 hidden-xs">
-                {{posterHelper 500}}
+  <div class="fullscreen-modal-header">
+    <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
+    <h1>{{title}}</h1>
+  </div>
+  <div class="fullscreen-modal-body">
+    <div class="row">
+      <div class="col-sm-4 col-lg-2 hidden-xs">
+        {{posterHelper 500}}
+      </div>
+      <div class="col-sm-8 col-lg-10">
+        <div class="form-horizontal">
+
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Monitored</label>
+            <div class="col-sm-6">
+              <div class="checkbox c-checkbox">
+                <label>
+                  <input type="checkbox" name="monitored">
+                  <span class="check fa fa-check"></span>
+                  <span class="help-block">Download monitored episodes in this series</span>
+                </label>
+              </div>
             </div>
-            <div class="col-sm-8 col-lg-10">
-                <div class="form-horizontal">
+          </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Monitored</label>
-                        <div class="col-sm-6">
-                            <div class="checkbox c-checkbox">
-                                <label>
-                                    <input type="checkbox" name="monitored">
-                                    <span class="check fa fa-check"></span>
-                                    <span class="help-block">Download monitored episodes in this series</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Use Season Folder</label>
-                        <div class="col-sm-6">
-                            <div class="checkbox c-checkbox">
-                                <label>
-                                    <input type="checkbox" name="seasonFolder">
-                                    <span class="check fa fa-check"></span>
-                                    <span class="help-block">Sort episodes into season folders</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Profile</label>
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <select class="form-control x-profile" id="inputProfile" name="profileId">
-                                {{#each profiles}}
-                                <option value="{{id}}">{{name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Series Type</label>
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            {{> SeriesTypeSelectionPartial}}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Path</label>
-                        <div class="col-sm-6 col-md-4">
-                            <input type="text" class="form-control x-path" placeholder="Path" name="path">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 col-lg-2 control-label">Tags</label>
-                        <div class="col-sm-6 col-md-4 col-lg-2">
-                            <input type="text" class="form-control x-tags">
-                        </div>
-                    </div>
-                </div>
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Use Season Folder</label>
+            <div class="col-sm-6">
+              <div class="checkbox c-checkbox">
+                <label>
+                  <input type="checkbox" name="seasonFolder">
+                  <span class="check fa fa-check"></span>
+                  <span class="help-block">Sort episodes into season folders</span>
+                </label>
+              </div>
             </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Profile</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <select class="form-control x-profile" id="inputProfile" name="profileId">
+                {{#each profiles}}
+                  <option value="{{id}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Series Type</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              {{> SeriesTypeSelectionPartial}}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Path</label>
+            <div class="col-sm-6 col-md-4">
+              <input type="text" class="form-control x-path" placeholder="Path" name="path">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 col-lg-2 control-label">Tags</label>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <input type="text" class="form-control x-tags">
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="fullscreen-modal-footer">
-        <button class="btn btn-danger pull-left x-remove">Delete</button>
+  </div>
+  <div class="fullscreen-modal-footer">
+    <button class="btn btn-danger pull-left x-remove">Delete</button>
 
-        <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
-        <button class="btn" data-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary x-save">Save</button>
-    </div>
+    <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
+    <button class="btn" data-dismiss="modal">Cancel</button>
+    <button class="btn btn-primary x-save">Save</button>
+  </div>
 </div>
