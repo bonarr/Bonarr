@@ -34,16 +34,7 @@
     bottom: 0;
     right: 0;
     width: 1px;
-    -webkit-transform: translateZ(0px);
-  }
-
-  .nav-heading {
-    padding: 12px 15px;
-    color: @sidebar-heading-color;
-    font-size: 13px;
-    letter-spacing: 0.035em;
-    pointer-events: none;
-    cursor: default;
+    transform: translateZ(0px);
   }
 
   // Items
@@ -51,11 +42,6 @@
 
   > .nav {
     position: relative;
-
-    // Only the first item in sidebar
-    > .nav-heading:first-child {
-      padding-top: 20px;
-    }
 
     > li {
       border-left: @sidebar-item-border-wd solid transparent;
@@ -238,7 +224,6 @@
     // Applies to first level items
     > .nav {
       .nav,
-      > .nav-heading,
       > li > a > span {
         display: none !important;
       }

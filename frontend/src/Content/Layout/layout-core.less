@@ -30,10 +30,6 @@ body {
     z-index: @z-index-main-section + 10;
   }
 
-  &.ng-leave {
-    display: none;
-  }
-
   .dropdown-backdrop {
     z-index: @z-index-main-section - 2;
   }
@@ -90,14 +86,6 @@ body {
   margin-top: -1px;
   overflow-y: auto;
   height: 100%;
-
-  > .unwrap {
-    margin: -15px; // expand over wrapper padding
-
-    @media @tablet {
-      margin: -20px; // expand over wrapper padding
-    }
-  }
 
   > h3,
   > .content-heading {
@@ -210,69 +198,6 @@ body {
       > section,
       > footer {
         left: @sidebar-collapsed-actionbar-extended-wd;
-      }
-    }
-  }
-}
-
-// Aside toggled layout
-// On mobile acts like offcanvas
-// -----------------------------
-
-@media @upto-tablet {
-  .csstransforms3d {
-    .wrapper {
-      .backface-visibility(hidden);
-
-      > section,
-      > footer {
-        left: 0;
-        .translate3d(0,0,0);
-        .transition-transform(.3s ease);
-      }
-    }
-
-    .aside-toggled {
-      .wrapper {
-        > section,
-        > footer {
-          .translate3d(@aside-wd,0,0);
-        }
-      }
-    }
-  }
-}
-
-// Toggle and collapsed behavior overrides
-@media @upto-tablet {
-  .csstransforms3d {
-    .aside-collapsed .wrapper {
-      .backface-visibility(hidden);
-
-      > section,
-      > footer {
-        left: 0;
-        .translate3d(0,0,0);
-        .transition-transform(.3s ease);
-      }
-
-      > .aside {
-        left: 0;
-        .translate3d(-@aside-wd-collapsed,0,0);
-        .transition-transform(.3s ease);
-      }
-    }
-
-    .aside-collapsed.aside-toggled {
-      .wrapper {
-        > section,
-        > footer {
-          .translate3d(@aside-wd-collapsed,0,0);
-        }
-
-        > .aside {
-          .translate3d(0,0,0);
-        }
       }
     }
   }
