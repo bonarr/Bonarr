@@ -1,8 +1,4 @@
-
-var root = '../src/';
-
-console.log('ROOT2', __dirname);
-
+var root = './frontend/src/';
 
 var paths = {
     src: {
