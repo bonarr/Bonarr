@@ -13,119 +13,119 @@ var GridPager = require('../../Shared/Grid/Pager');
 var LoadingView = require('../../Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
-    template : 'Activity/History/HistoryLayoutTemplate',
+  template: 'Activity/History/HistoryLayoutTemplate',
 
-    regions : {
-        history : '#x-history',
-        pager   : '#x-history-pager'
+  regions: {
+    history: '#x-history',
+    pager: '#x-history-pager'
+  },
+
+  columns: [
+    {
+      name: 'eventType',
+      label: '',
+      cell: EventTypeCell,
+      cellValue: 'this'
     },
-
-    columns : [
-        {
-            name      : 'eventType',
-            label     : '',
-            cell      : EventTypeCell,
-            cellValue : 'this'
-        },
-        {
-            name  : 'series',
-            label : 'Series',
-            cell  : SeriesTitleCell
-        },
-        {
-            name     : 'episode',
-            label    : 'Episode',
-            cell     : EpisodeNumberCell,
-            sortable : false
-        },
-        {
-            name     : 'episode',
-            label    : 'Episode Title',
-            cell     : EpisodeTitleCell,
-            sortable : false
-        },
-        {
-            name     : 'this',
-            label    : 'Quality',
-            cell     : HistoryQualityCell,
-            sortable : false
-        },
-        {
-            name  : 'date',
-            label : 'Date',
-            cell  : RelativeDateCell
-        },
-        {
-            name     : 'this',
-            label    : '',
-            cell     : HistoryDetailsCell,
-            sortable : false
-        }
-    ],
-
-    initialize : function() {
-        this.collection = new HistoryCollection({ tableName : 'history' });
-        this.listenTo(this.collection, 'sync', this._showTable);
-
-        this._showActionBar();
+    {
+      name: 'series',
+      label: 'Series',
+      cell: SeriesTitleCell
     },
-
-    onShow : function() {
-        this.history.show(new LoadingView());
+    {
+      name: 'episode',
+      label: 'Episode',
+      cell: EpisodeNumberCell,
+      sortable: false
     },
-
-    _showTable : function(collection) {
-        this.history.show(new Backgrid.Grid({
-            columns    : this.columns,
-            collection : collection,
-            className  : 'table table-hover'
-        }));
-
-        this.pager.show(new GridPager({
-            columns    : this.columns,
-            collection : collection
-        }));
+    {
+      name: 'episode',
+      label: 'Episode Title',
+      cell: EpisodeTitleCell,
+      sortable: false
     },
-
-    _showActionBar : function() {
-        var filteringOptions = {
-            type          : 'radio',
-            storeState    : true,
-            menuKey       : 'history.filterMode',
-            defaultAction : 'all',
-            items         : [
-                {
-                    key      : 'all',
-                    title    : 'All',
-                    icon     : 'icon-sonarr-all'
-                },
-                {
-                    key      : 'grabbed',
-                    title    : 'Grabbed',
-                    icon     : 'icon-sonarr-downloading'
-                },
-                {
-                    key      : 'imported',
-                    title    : 'Imported',
-                    icon     : 'icon-sonarr-imported'
-                },
-                {
-                    key      : 'failed',
-                    title    : 'Failed',
-                    icon     : 'icon-sonarr-download-failed'
-                },
-                {
-                    key      : 'deleted',
-                    title    : 'Deleted',
-                    icon     : 'icon-sonarr-deleted'
-                }
-            ]
-        };
-
-        vent.trigger(vent.Commands.OpenActionBarCommand, {
-            parentView : this,
-            collection : this.collection,
-            filtering  : filteringOptions
-        });
+    {
+      name: 'this',
+      label: 'Quality',
+      cell: HistoryQualityCell,
+      sortable: false
+    },
+    {
+      name: 'date',
+      label: 'Date',
+      cell: RelativeDateCell
+    },
+    {
+      name: 'this',
+      label: '',
+      cell: HistoryDetailsCell,
+      sortable: false
     }
+  ],
+
+  initialize: function() {
+    this.collection = new HistoryCollection({tableName: 'history'});
+    this.listenTo(this.collection, 'sync', this._showTable);
+
+    this._showActionBar();
+  },
+
+  onShow: function() {
+    this.history.show(new LoadingView());
+  },
+
+  _showTable: function(collection) {
+    this.history.show(new Backgrid.Grid({
+      columns: this.columns,
+      collection: collection,
+      className: 'table table-hover'
+    }));
+
+    this.pager.show(new GridPager({
+      columns: this.columns,
+      collection: collection
+    }));
+  },
+
+  _showActionBar: function() {
+    var filteringOptions = {
+      type: 'radio',
+      storeState: true,
+      menuKey: 'history.filterMode',
+      defaultAction: 'all',
+      items: [
+        {
+          key: 'all',
+          title: 'All',
+          icon: 'icon-sonarr-all'
+        },
+        {
+          key: 'grabbed',
+          title: 'Grabbed',
+          icon: 'icon-sonarr-downloading'
+        },
+        {
+          key: 'imported',
+          title: 'Imported',
+          icon: 'icon-sonarr-imported'
+        },
+        {
+          key: 'failed',
+          title: 'Failed',
+          icon: 'icon-sonarr-download-failed'
+        },
+        {
+          key: 'deleted',
+          title: 'Deleted',
+          icon: 'icon-sonarr-deleted'
+        }
+      ]
+    };
+
+    vent.trigger(vent.Commands.OpenActionBarCommand, {
+      parentView: this,
+      collection: this.collection,
+      filtering: filteringOptions
+    });
+  }
 });

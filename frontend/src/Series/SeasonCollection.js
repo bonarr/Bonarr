@@ -2,9 +2,9 @@ var Backbone = require('backbone');
 var SeasonModel = require('./SeasonModel');
 
 module.exports = Backbone.Collection.extend({
-    model : SeasonModel,
+  model: SeasonModel,
 
-    comparator : function(season) {
-        return -season.get('seasonNumber');
-    }
+  comparator: function(season) {
+    return -season.get('seasonNumber');
+  }
 });

@@ -1,22 +1,22 @@
 var Backgrid = require('backgrid');
 
 module.exports = Backgrid.Cell.extend({
-    className : 'disk-space-path-cell',
+  className: 'disk-space-path-cell',
 
-    render : function() {
-        this.$el.empty();
+  render: function() {
+    this.$el.empty();
 
-        var path = this.model.get('path');
-        var label = this.model.get('label');
+    var path = this.model.get('path');
+    var label = this.model.get('label');
 
-        var contents = path;
+    var contents = path;
 
-        if (label) {
-            contents += ' ({0})'.format(label);
-        }
-
-        this.$el.html(contents);
-
-        return this;
+    if (label) {
+      contents += ' ({0})'.format(label);
     }
+
+    this.$el.html(contents);
+
+    return this;
+  }
 });

@@ -5,11 +5,11 @@ var AsValidatedView = require('../../Mixins/AsValidatedView');
 var AsEditModalView = require('../../Mixins/AsEditModalView');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/Metadata/MetadataEditViewTemplate',
+  template: 'Settings/Metadata/MetadataEditViewTemplate',
 
-    _onAfterSave : function() {
-        vent.trigger(vent.Commands.CloseFullscreenModal);
-    }
+  _onAfterSave: function() {
+    vent.trigger(vent.Commands.CloseFullscreenModal);
+  }
 });
 
 AsModelBoundView.call(view);

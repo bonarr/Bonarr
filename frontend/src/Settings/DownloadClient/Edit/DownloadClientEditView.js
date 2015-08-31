@@ -9,44 +9,44 @@ require('../../../Mixins/FileBrowser');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/DownloadClient/Edit/DownloadClientEditViewTemplate',
+  template: 'Settings/DownloadClient/Edit/DownloadClientEditViewTemplate',
 
-    ui : {
-        path      : '.x-path',
-        modalBody : '.modal-body'
-    },
+  ui: {
+    path: '.x-path',
+    modalBody: '.modal-body'
+  },
 
-    events : {
-        'click .x-back' : '_back'
-    },
+  events: {
+    'click .x-back': '_back'
+  },
 
-    _deleteView : DeleteView,
+  _deleteView: DeleteView,
 
-    initialize : function(options) {
-        this.targetCollection = options.targetCollection;
-    },
+  initialize: function(options) {
+    this.targetCollection = options.targetCollection;
+  },
 
-    onShow : function() {
-        if (this.ui.path.length > 0) {
-            this.ui.modalBody.addClass('modal-overflow');
-        }
-
-        this.ui.path.fileBrowser();
-    },
-
-    _onAfterSave : function() {
-        this.targetCollection.add(this.model, { merge : true });
-        vent.trigger(vent.Commands.CloseFullscreenModal);
-    },
-
-    _onAfterSaveAndAdd : function() {
-        this.targetCollection.add(this.model, { merge : true });
-
-        require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
-    },
-    _back              : function() {
-        require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
+  onShow: function() {
+    if (this.ui.path.length > 0) {
+      this.ui.modalBody.addClass('modal-overflow');
     }
+
+    this.ui.path.fileBrowser();
+  },
+
+  _onAfterSave: function() {
+    this.targetCollection.add(this.model, {merge: true});
+    vent.trigger(vent.Commands.CloseFullscreenModal);
+  },
+
+  _onAfterSaveAndAdd: function() {
+    this.targetCollection.add(this.model, {merge: true});
+
+    require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
+  },
+  _back: function() {
+    require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
+  }
 });
 
 AsModelBoundView.call(view);

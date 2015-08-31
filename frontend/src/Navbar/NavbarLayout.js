@@ -10,31 +10,31 @@ module.exports = Marionette.Layout.extend({
   template: 'Navbar/NavbarLayout',
 
   ui: {
-    searchInput  : '.x-navbar-search-input',
-    search       : '.x-navbar-search'
+    searchInput: '.x-navbar-search-input',
+    search: '.x-navbar-search'
   },
 
   events: {
-    'click .x-navbar-search'   : '_onSearchClick',
-    'click .x-navbar-restart'  : '_onRestartClick',
-    'click .x-navbar-shutdown' : '_onShutdownClick'
+    'click .x-navbar-search': '_onSearchClick',
+    'click .x-navbar-restart': '_onRestartClick',
+    'click .x-navbar-shutdown': '_onShutdownClick'
   },
 
-  initialize: function () {
+  initialize: function() {
     vent.on(vent.Hotkeys.NavbarSearch, function() {
       this.ui.searchInput.focus();
     });
 
     this.templateHelpers = {
-      authentication : StatusModel.get('authentication')
+      authentication: StatusModel.get('authentication')
     };
   },
 
-  onShow: function () {
+  onShow: function() {
     this.ui.searchInput.bindSearch();
   },
 
-  _onSearchClick: function (e) {
+  _onSearchClick: function(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -42,31 +42,31 @@ module.exports = Marionette.Layout.extend({
     this.ui.searchInput.focus();
   },
 
-  _onRestartClick: function (e) {
+  _onRestartClick: function(e) {
     e.preventDefault();
 
     $.ajax({
-      url  : window.Sonarr.ApiRoot + '/system/restart',
-      type : 'POST'
+      url: window.Sonarr.ApiRoot + '/system/restart',
+      type: 'POST'
     });
 
     Messenger.show({
-      message : 'Sonarr will restart shortly',
-      type    : 'info'
+      message: 'Sonarr will restart shortly',
+      type: 'info'
     });
   },
 
-  _onShutdownClick: function (e) {
+  _onShutdownClick: function(e) {
     e.preventDefault();
 
     $.ajax({
-      url  : window.Sonarr.ApiRoot + '/system/shutdown',
-      type : 'POST'
+      url: window.Sonarr.ApiRoot + '/system/shutdown',
+      type: 'POST'
     });
 
     Messenger.show({
-      message : 'Sonarr will shutdown shortly',
-      type    : 'info'
+      message: 'Sonarr will shutdown shortly',
+      type: 'info'
     });
   }
 });

@@ -4,21 +4,21 @@ var UiSettingsModel = require('./UiSettingsModel');
 
 var Controller = {
 
-    appInitializer : function() {
+  appInitializer: function() {
 
-        UiSettingsModel.on('sync', this._updateUiSettings);
+    UiSettingsModel.on('sync', this._updateUiSettings);
 
-        this._updateUiSettings();
-    },
+    this._updateUiSettings();
+  },
 
-    _updateUiSettings: function() {
+  _updateUiSettings: function() {
 
-        if (UiSettingsModel.get('enableColorImpairedMode')) {
-            $('body').addClass('color-impaired-mode');
-        } else {
-            $('body').removeClass('color-impaired-mode');
-        }
+    if (UiSettingsModel.get('enableColorImpairedMode')) {
+      $('body').addClass('color-impaired-mode');
+    } else {
+      $('body').removeClass('color-impaired-mode');
     }
+  }
 };
 
 _.bindAll(Controller, 'appInitializer');

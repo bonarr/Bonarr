@@ -2,11 +2,11 @@ var Backbone = require('backbone');
 var LogFileModel = require('./LogFileModel');
 
 module.exports = Backbone.Collection.extend({
-    url   : window.Sonarr.ApiRoot + '/log/file',
-    model : LogFileModel,
+  url: window.Sonarr.ApiRoot + '/log/file',
+  model: LogFileModel,
 
-    state : {
-        sortKey : 'lastWriteTime',
-        order   : 1
-    }
+  state: {
+    sortKey: 'lastWriteTime',
+    order: 1
+  }
 });

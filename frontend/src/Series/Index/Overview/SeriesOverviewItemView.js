@@ -3,5 +3,5 @@ var Marionette = require('marionette');
 var SeriesIndexItemView = require('../SeriesIndexItemView');
 
 module.exports = SeriesIndexItemView.extend({
-    template : 'Series/Index/Overview/SeriesOverviewItemViewTemplate'
+  template: 'Series/Index/Overview/SeriesOverviewItemViewTemplate'
 });

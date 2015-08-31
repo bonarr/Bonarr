@@ -1,12 +1,12 @@
 var NzbDroneCell = require('../../../Cells/NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({
-    className : 'log-filename-cell',
+  className: 'log-filename-cell',
 
-    render : function() {
-        var filename = this._getValue();
-        this.$el.html(filename);
+  render: function() {
+    var filename = this._getValue();
+    this.$el.html(filename);
 
-        return this;
-    }
+    return this;
+  }
 });

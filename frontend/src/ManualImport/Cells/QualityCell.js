@@ -3,21 +3,21 @@ var QualityCell = require('../../Cells/QualityCell');
 var SelectQualityLayout = require('../Quality/SelectQualityLayout');
 
 module.exports = QualityCell.extend({
-    className : 'quality-cell editable',
+  className: 'quality-cell editable',
 
-    events : {
-        'click' : '_onClick'
-    },
+  events: {
+    'click': '_onClick'
+  },
 
-    _onClick : function () {
-        var view =  new SelectQualityLayout();
+  _onClick: function() {
+    var view = new SelectQualityLayout();
 
-        this.listenTo(view, 'manualimport:selected:quality', this._setQuality);
+    this.listenTo(view, 'manualimport:selected:quality', this._setQuality);
 
-        vent.trigger(vent.Commands.OpenModal, view);
-    },
+    vent.trigger(vent.Commands.OpenModal, view);
+  },
 
-    _setQuality : function (e) {
-        this.model.set('quality', e.quality);
-    }
+  _setQuality: function(e) {
+    this.model.set('quality', e.quality);
+  }
 });

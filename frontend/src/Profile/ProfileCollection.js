@@ -2,8 +2,8 @@ var Backbone = require('backbone');
 var ProfileModel = require('./ProfileModel');
 
 var ProfileCollection = Backbone.Collection.extend({
-    model : ProfileModel,
-    url   : window.Sonarr.ApiRoot + '/profile'
+  model: ProfileModel,
+  url: window.Sonarr.ApiRoot + '/profile'
 });
 
 var profiles = new ProfileCollection();

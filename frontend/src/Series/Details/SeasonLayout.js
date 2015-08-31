@@ -15,294 +15,294 @@ var _ = require('underscore');
 var Messenger = require('../../Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
-    template : 'Series/Details/SeasonLayoutTemplate',
+  template: 'Series/Details/SeasonLayoutTemplate',
 
-    ui : {
-        seasonSearch    : '.x-season-search',
-        seasonMonitored : '.x-season-monitored',
-        seasonRename    : '.x-season-rename',
-        panel           : '.x-panel'
+  ui: {
+    seasonSearch: '.x-season-search',
+    seasonMonitored: '.x-season-monitored',
+    seasonRename: '.x-season-rename',
+    panel: '.x-panel'
+  },
+
+  events: {
+    'click .x-season-episode-file-editor': '_openEpisodeFileEditor',
+    'click .x-season-monitored': '_seasonMonitored',
+    'click .x-season-search': '_seasonSearch',
+    'click .x-season-rename': '_seasonRename',
+    'click .x-toggle': '_showHideEpisodes',
+    'dblclick .x-heading': '_showHideEpisodes'
+  },
+
+  regions: {
+    episodeGrid: '.x-episode-grid'
+  },
+
+  columns: [
+    {
+      name: 'monitored',
+      label: '',
+      cell: ToggleCell,
+      trueClass: 'icon-sonarr-monitored',
+      falseClass: 'icon-sonarr-unmonitored',
+      tooltip: 'Toggle monitored status',
+      sortable: false
     },
-
-    events : {
-        'click .x-season-episode-file-editor' : '_openEpisodeFileEditor',
-        'click .x-season-monitored'           : '_seasonMonitored',
-        'click .x-season-search'              : '_seasonSearch',
-        'click .x-season-rename'              : '_seasonRename',
-        'click .x-toggle'                     : '_showHideEpisodes',
-        'dblclick .x-heading'                 : '_showHideEpisodes'
+    {
+      name: 'episodeNumber',
+      label: '#',
+      cell: EpisodeNumberCell
     },
-
-    regions : {
-        episodeGrid : '.x-episode-grid'
+    {
+      name: 'this',
+      label: '',
+      cell: EpisodeWarningCell,
+      sortable: false,
+      className: 'episode-warning-cell'
     },
-
-    columns : [
-        {
-            name       : 'monitored',
-            label      : '',
-            cell       : ToggleCell,
-            trueClass  : 'icon-sonarr-monitored',
-            falseClass : 'icon-sonarr-unmonitored',
-            tooltip    : 'Toggle monitored status',
-            sortable   : false
-        },
-        {
-            name  : 'episodeNumber',
-            label : '#',
-            cell  : EpisodeNumberCell
-        },
-        {
-            name      : 'this',
-            label     : '',
-            cell      : EpisodeWarningCell,
-            sortable  : false,
-            className : 'episode-warning-cell'
-        },
-        {
-            name           : 'this',
-            label          : 'Title',
-            hideSeriesLink : true,
-            cell           : EpisodeTitleCell,
-            sortable       : false
-        },
-        {
-            name  : 'airDateUtc',
-            label : 'Air Date',
-            cell  : RelativeDateCell
-        },
-        {
-            name     : 'status',
-            label    : 'Status',
-            cell     : EpisodeStatusCell,
-            sortable : false
-        },
-        {
-            name     : 'this',
-            label    : '',
-            cell     : EpisodeActionsCell,
-            sortable : false
-        }
-    ],
-
-    templateHelpers : function() {
-        var episodeCount = this.episodeCollection.filter(function(episode) {
-            return episode.get('hasFile') || episode.get('monitored') && moment(episode.get('airDateUtc')).isBefore(moment());
-        }).length;
-
-        var episodeFileCount = this.episodeCollection.where({ hasFile : true }).length;
-        var percentOfEpisodes = 100;
-
-        if (episodeCount > 0) {
-            percentOfEpisodes = episodeFileCount / episodeCount * 100;
-        }
-
-        return {
-            episodeCount      : episodeCount,
-            episodeFileCount  : episodeFileCount,
-            percentOfEpisodes : percentOfEpisodes
-        };
+    {
+      name: 'this',
+      label: 'Title',
+      hideSeriesLink: true,
+      cell: EpisodeTitleCell,
+      sortable: false
     },
-
-    initialize : function(options) {
-        if (!options.episodeCollection) {
-            throw 'episodeCollection is required';
-        }
-
-        this.series = options.series;
-        this.fullEpisodeCollection = options.episodeCollection;
-        this.episodeCollection = this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber'));
-        this._updateEpisodeCollection();
-
-        this.showingEpisodes = this._shouldShowEpisodes();
-
-        this.listenTo(this.model, 'sync', this._afterSeasonMonitored);
-        this.listenTo(this.episodeCollection, 'sync', this.render);
-
-        this.listenTo(this.fullEpisodeCollection, 'sync', this._refreshEpisodes);
+    {
+      name: 'airDateUtc',
+      label: 'Air Date',
+      cell: RelativeDateCell
     },
-
-    onRender : function() {
-        if (this.showingEpisodes) {
-            this._showEpisodes();
-        }
-
-        this._setSeasonMonitoredState();
-
-        CommandController.bindToCommand({
-            element : this.ui.seasonSearch,
-            command : {
-                name         : 'seasonSearch',
-                seriesId     : this.series.id,
-                seasonNumber : this.model.get('seasonNumber')
-            }
-        });
-
-        CommandController.bindToCommand({
-            element : this.ui.seasonRename,
-            command : {
-                name         : 'renameFiles',
-                seriesId     : this.series.id,
-                seasonNumber : this.model.get('seasonNumber')
-            }
-        });
-        this.ui.panel.toggleClass('expanded', this.showingEpisodes);
-
+    {
+      name: 'status',
+      label: 'Status',
+      cell: EpisodeStatusCell,
+      sortable: false
     },
-
-    _seasonSearch : function() {
-        CommandController.Execute('seasonSearch', {
-            name         : 'seasonSearch',
-            seriesId     : this.series.id,
-            seasonNumber : this.model.get('seasonNumber')
-        });
-    },
-
-    _seasonRename : function() {
-        vent.trigger(vent.Commands.ShowRenamePreview, {
-            series       : this.series,
-            seasonNumber : this.model.get('seasonNumber')
-        });
-    },
-
-    _seasonMonitored : function() {
-        if (!this.series.get('monitored')) {
-
-            Messenger.show({
-                message : 'Unable to change monitored state when series is not monitored',
-                type    : 'error'
-            });
-
-            return;
-        }
-
-        var name = 'monitored';
-        this.model.set(name, !this.model.get(name));
-        this.series.setSeasonMonitored(this.model.get('seasonNumber'));
-
-        var savePromise = this.series.save().always(this._afterSeasonMonitored.bind(this));
-
-        this.ui.seasonMonitored.spinForPromise(savePromise);
-    },
-
-    _afterSeasonMonitored : function() {
-        var self = this;
-
-        _.each(this.episodeCollection.models, function(episode) {
-            episode.set({ monitored : self.model.get('monitored') });
-        });
-
-        this.render();
-    },
-
-    _setSeasonMonitoredState : function() {
-        this.ui.seasonMonitored.removeClass('icon-sonarr-spinner fa-spin');
-
-        if (this.model.get('monitored')) {
-            this.ui.seasonMonitored.addClass('icon-sonarr-monitored');
-            this.ui.seasonMonitored.removeClass('icon-sonarr-unmonitored');
-        } else {
-            this.ui.seasonMonitored.addClass('icon-sonarr-unmonitored');
-            this.ui.seasonMonitored.removeClass('icon-sonarr-monitored');
-        }
-    },
-
-    _showEpisodes : function() {
-        this.showingEpisodes = true;
-        if (!this.$el.hasClass('loaded')) {
-            this.$el.addClass('loaded');
-            this.episodeGrid.show(new Backgrid.Grid({
-                columns    : this.columns,
-                collection : this.episodeCollection,
-                className  : 'table table-hover season-grid'
-            }));
-        }
-    },
-
-    _shouldShowEpisodes : function() {
-        if (this.episodeCollection.length > 50) {
-            return false;
-        }
-
-        var startDate = moment().add('month', -1);
-        var endDate = moment().add('year', 1);
-
-        return this.episodeCollection.some(function(episode) {
-            var airDate = episode.get('airDateUtc');
-
-            if (airDate) {
-                var airDateMoment = moment(airDate);
-
-                if (airDateMoment.isAfter(startDate) && airDateMoment.isBefore(endDate)) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
-    },
-
-    _showHideEpisodes : function(e) {
-        if (this.showingEpisodes) {
-            this.showingEpisodes = false;
-        } else {
-            this._showEpisodes();
-        }
-
-        this.ui.panel.toggleClass('expanded', this.showingEpisodes);
-    },
-
-    _episodeMonitoredToggled : function(options) {
-        var model = options.model;
-        var shiftKey = options.shiftKey;
-
-        if (!this.episodeCollection.get(model.get('id'))) {
-            return;
-        }
-
-        if (!shiftKey) {
-            return;
-        }
-
-        var lastToggled = this.episodeCollection.lastToggled;
-
-        if (!lastToggled) {
-            return;
-        }
-
-        var currentIndex = this.episodeCollection.indexOf(model);
-        var lastIndex = this.episodeCollection.indexOf(lastToggled);
-
-        var low = Math.min(currentIndex, lastIndex);
-        var high = Math.max(currentIndex, lastIndex);
-        var range = _.range(low + 1, high);
-
-        this.episodeCollection.lastToggled = model;
-    },
-
-    _updateEpisodeCollection : function() {
-        var self = this;
-
-        this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge : true });
-
-        this.episodeCollection.each(function(model) {
-            model.episodeCollection = self.episodeCollection;
-        });
-    },
-
-    _refreshEpisodes : function() {
-        this._updateEpisodeCollection();
-        this.episodeCollection.fullCollection.sort();
-        this.render();
-    },
-
-    _openEpisodeFileEditor : function() {
-        var view = new EpisodeFileEditorLayout({
-            model             : this.model,
-            series            : this.series,
-            episodeCollection : this.episodeCollection
-        });
-
-        vent.trigger(vent.Commands.OpenFullscreenModal, view);
+    {
+      name: 'this',
+      label: '',
+      cell: EpisodeActionsCell,
+      sortable: false
     }
+  ],
+
+  templateHelpers: function() {
+    var episodeCount = this.episodeCollection.filter(function(episode) {
+      return episode.get('hasFile') || episode.get('monitored') && moment(episode.get('airDateUtc')).isBefore(moment());
+    }).length;
+
+    var episodeFileCount = this.episodeCollection.where({hasFile: true}).length;
+    var percentOfEpisodes = 100;
+
+    if (episodeCount > 0) {
+      percentOfEpisodes = episodeFileCount / episodeCount * 100;
+    }
+
+    return {
+      episodeCount: episodeCount,
+      episodeFileCount: episodeFileCount,
+      percentOfEpisodes: percentOfEpisodes
+    };
+  },
+
+  initialize: function(options) {
+    if (!options.episodeCollection) {
+      throw 'episodeCollection is required';
+    }
+
+    this.series = options.series;
+    this.fullEpisodeCollection = options.episodeCollection;
+    this.episodeCollection = this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber'));
+    this._updateEpisodeCollection();
+
+    this.showingEpisodes = this._shouldShowEpisodes();
+
+    this.listenTo(this.model, 'sync', this._afterSeasonMonitored);
+    this.listenTo(this.episodeCollection, 'sync', this.render);
+
+    this.listenTo(this.fullEpisodeCollection, 'sync', this._refreshEpisodes);
+  },
+
+  onRender: function() {
+    if (this.showingEpisodes) {
+      this._showEpisodes();
+    }
+
+    this._setSeasonMonitoredState();
+
+    CommandController.bindToCommand({
+      element: this.ui.seasonSearch,
+      command: {
+        name: 'seasonSearch',
+        seriesId: this.series.id,
+        seasonNumber: this.model.get('seasonNumber')
+      }
+    });
+
+    CommandController.bindToCommand({
+      element: this.ui.seasonRename,
+      command: {
+        name: 'renameFiles',
+        seriesId: this.series.id,
+        seasonNumber: this.model.get('seasonNumber')
+      }
+    });
+    this.ui.panel.toggleClass('expanded', this.showingEpisodes);
+
+  },
+
+  _seasonSearch: function() {
+    CommandController.Execute('seasonSearch', {
+      name: 'seasonSearch',
+      seriesId: this.series.id,
+      seasonNumber: this.model.get('seasonNumber')
+    });
+  },
+
+  _seasonRename: function() {
+    vent.trigger(vent.Commands.ShowRenamePreview, {
+      series: this.series,
+      seasonNumber: this.model.get('seasonNumber')
+    });
+  },
+
+  _seasonMonitored: function() {
+    if (!this.series.get('monitored')) {
+
+      Messenger.show({
+        message: 'Unable to change monitored state when series is not monitored',
+        type: 'error'
+      });
+
+      return;
+    }
+
+    var name = 'monitored';
+    this.model.set(name, !this.model.get(name));
+    this.series.setSeasonMonitored(this.model.get('seasonNumber'));
+
+    var savePromise = this.series.save().always(this._afterSeasonMonitored.bind(this));
+
+    this.ui.seasonMonitored.spinForPromise(savePromise);
+  },
+
+  _afterSeasonMonitored: function() {
+    var self = this;
+
+    _.each(this.episodeCollection.models, function(episode) {
+      episode.set({monitored: self.model.get('monitored')});
+    });
+
+    this.render();
+  },
+
+  _setSeasonMonitoredState: function() {
+    this.ui.seasonMonitored.removeClass('icon-sonarr-spinner fa-spin');
+
+    if (this.model.get('monitored')) {
+      this.ui.seasonMonitored.addClass('icon-sonarr-monitored');
+      this.ui.seasonMonitored.removeClass('icon-sonarr-unmonitored');
+    } else {
+      this.ui.seasonMonitored.addClass('icon-sonarr-unmonitored');
+      this.ui.seasonMonitored.removeClass('icon-sonarr-monitored');
+    }
+  },
+
+  _showEpisodes: function() {
+    this.showingEpisodes = true;
+    if (!this.$el.hasClass('loaded')) {
+      this.$el.addClass('loaded');
+      this.episodeGrid.show(new Backgrid.Grid({
+        columns: this.columns,
+        collection: this.episodeCollection,
+        className: 'table table-hover season-grid'
+      }));
+    }
+  },
+
+  _shouldShowEpisodes: function() {
+    if (this.episodeCollection.length > 50) {
+      return false;
+    }
+
+    var startDate = moment().add('month', -1);
+    var endDate = moment().add('year', 1);
+
+    return this.episodeCollection.some(function(episode) {
+      var airDate = episode.get('airDateUtc');
+
+      if (airDate) {
+        var airDateMoment = moment(airDate);
+
+        if (airDateMoment.isAfter(startDate) && airDateMoment.isBefore(endDate)) {
+          return true;
+        }
+      }
+
+      return false;
+    });
+  },
+
+  _showHideEpisodes: function(e) {
+    if (this.showingEpisodes) {
+      this.showingEpisodes = false;
+    } else {
+      this._showEpisodes();
+    }
+
+    this.ui.panel.toggleClass('expanded', this.showingEpisodes);
+  },
+
+  _episodeMonitoredToggled: function(options) {
+    var model = options.model;
+    var shiftKey = options.shiftKey;
+
+    if (!this.episodeCollection.get(model.get('id'))) {
+      return;
+    }
+
+    if (!shiftKey) {
+      return;
+    }
+
+    var lastToggled = this.episodeCollection.lastToggled;
+
+    if (!lastToggled) {
+      return;
+    }
+
+    var currentIndex = this.episodeCollection.indexOf(model);
+    var lastIndex = this.episodeCollection.indexOf(lastToggled);
+
+    var low = Math.min(currentIndex, lastIndex);
+    var high = Math.max(currentIndex, lastIndex);
+    var range = _.range(low + 1, high);
+
+    this.episodeCollection.lastToggled = model;
+  },
+
+  _updateEpisodeCollection: function() {
+    var self = this;
+
+    this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, {merge: true});
+
+    this.episodeCollection.each(function(model) {
+      model.episodeCollection = self.episodeCollection;
+    });
+  },
+
+  _refreshEpisodes: function() {
+    this._updateEpisodeCollection();
+    this.episodeCollection.fullCollection.sort();
+    this.render();
+  },
+
+  _openEpisodeFileEditor: function() {
+    var view = new EpisodeFileEditorLayout({
+      model: this.model,
+      series: this.series,
+      episodeCollection: this.episodeCollection
+    });
+
+    vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  }
 });

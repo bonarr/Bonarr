@@ -3,7 +3,7 @@ var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
 var AsValidatedView = require('../../../Mixins/AsValidatedView');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/MediaManagement/Sorting/SortingViewTemplate'
+  template: 'Settings/MediaManagement/Sorting/SortingViewTemplate'
 });
 
 AsModelBoundView.call(view);

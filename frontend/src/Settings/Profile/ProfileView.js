@@ -7,29 +7,29 @@ require('./LanguageLabel');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/Profile/ProfileViewTemplate',
-    tagName  : 'li',
+  template: 'Settings/Profile/ProfileViewTemplate',
+  tagName: 'li',
 
-    ui : {
-        "progressbar"  : '.progress .bar',
-        "deleteButton" : '.x-delete'
-    },
+  ui: {
+    "progressbar": '.progress .bar',
+    "deleteButton": '.x-delete'
+  },
 
-    events : {
-        'click' : '_editProfile'
-    },
+  events: {
+    'click': '_editProfile'
+  },
 
-    initialize : function() {
-        this.listenTo(this.model, 'sync', this.render);
-    },
+  initialize: function() {
+    this.listenTo(this.model, 'sync', this.render);
+  },
 
-    _editProfile : function() {
-        var view = new EditProfileView({
-            model             : this.model,
-            profileCollection : this.model.collection
-        });
-        vent.trigger(vent.Commands.OpenFullscreenModal, view);
-    }
+  _editProfile: function() {
+    var view = new EditProfileView({
+      model: this.model,
+      profileCollection: this.model.collection
+    });
+    vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  }
 });
 
 module.exports = AsModelBoundView.call(view);

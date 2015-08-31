@@ -6,23 +6,23 @@ var RemotePathMappingModel = require('./RemotePathMappingModel');
 require('bootstrap');
 
 module.exports = Marionette.CompositeView.extend({
-    template          : 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingCollectionViewTemplate',
-    itemViewContainer : '.x-rows',
-    itemView          : RemotePathMappingItemView,
+  template: 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingCollectionViewTemplate',
+  itemViewContainer: '.x-rows',
+  itemView: RemotePathMappingItemView,
 
-    events : {
-        'click .x-add' : '_addMapping'
-    },
+  events: {
+    'click .x-add': '_addMapping'
+  },
 
-    _addMapping : function() {
-        var model = new RemotePathMappingModel();
-        model.collection = this.collection;
+  _addMapping: function() {
+    var model = new RemotePathMappingModel();
+    model.collection = this.collection;
 
-        var view = new EditView({
-            model            : model,
-            targetCollection : this.collection
-        });
+    var view = new EditView({
+      model: model,
+      targetCollection: this.collection
+    });
 
-        vent.trigger(vent.Commands.OpenFullscreenModal, view);
-    }
+    vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  }
 });

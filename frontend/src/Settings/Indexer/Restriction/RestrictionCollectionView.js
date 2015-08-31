@@ -6,21 +6,21 @@ require('../../../Tags/TagHelpers');
 require('bootstrap');
 
 module.exports = Marionette.CompositeView.extend({
-    template          : 'Settings/Indexer/Restriction/RestrictionCollectionViewTemplate',
-    itemViewContainer : '.x-rows',
-    itemView          : RestrictionItemView,
+  template: 'Settings/Indexer/Restriction/RestrictionCollectionViewTemplate',
+  itemViewContainer: '.x-rows',
+  itemView: RestrictionItemView,
 
-    events : {
-        'click .x-add' : '_addMapping'
-    },
+  events: {
+    'click .x-add': '_addMapping'
+  },
 
-    _addMapping : function() {
-        var model = this.collection.create({ tags : [] });
-        var view = new EditView({
-            model            : model,
-            targetCollection : this.collection
-        });
+  _addMapping: function() {
+    var model = this.collection.create({tags: []});
+    var view = new EditView({
+      model: model,
+      targetCollection: this.collection
+    });
 
-        vent.trigger(vent.Commands.OpenFullscreenModal, view);
-    }
+    vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  }
 });

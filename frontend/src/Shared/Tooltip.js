@@ -5,25 +5,25 @@ var Tooltip = $.fn.tooltip.Constructor;
 
 var origGetOptions = Tooltip.prototype.getOptions;
 Tooltip.prototype.getOptions = function(options) {
-    var result = origGetOptions.call(this, options);
+  var result = origGetOptions.call(this, options);
 
-    if (result.container === false) {
+  if (result.container === false) {
 
-        var container = this.$element.closest('.btn-group,.input-group').parent();
+    var container = this.$element.closest('.btn-group,.input-group').parent();
 
-        if (container.length) {
-            result.container = container;
-        }
+    if (container.length) {
+      result.container = container;
     }
+  }
 
-    return result;
+  return result;
 };
 
 module.exports = {
-    appInitializer : function() {
+  appInitializer: function() {
 
-        $('body').tooltip({ selector : '[title]' });
+    $('body').tooltip({selector: '[title]'});
 
-        return this;
-    }
+    return this;
+  }
 };

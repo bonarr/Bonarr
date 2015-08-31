@@ -1,60 +1,60 @@
 module.exports = function() {
-    'use strict';
+  'use strict';
 
-    var $ = this;
+  var $ = this;
 
-    $.fn.spinForPromise = function(promise) {
-        var self = this;
+  $.fn.spinForPromise = function(promise) {
+    var self = this;
 
-        if (!promise || promise.state() !== 'pending') {
-            return this;
-        }
-        promise.always(function() {
-            self.stopSpin();
-        });
+    if (!promise || promise.state() !== 'pending') {
+      return this;
+    }
+    promise.always(function() {
+      self.stopSpin();
+    });
 
-        return this.startSpin();
-    };
+    return this.startSpin();
+  };
 
-    $.fn.startSpin = function() {
-        var icon = this.find('i').andSelf('i');
+  $.fn.startSpin = function() {
+    var icon = this.find('i').andSelf('i');
 
-        if (!icon || !icon.attr('class')) {
-            return this;
-        }
+    if (!icon || !icon.attr('class')) {
+      return this;
+    }
 
-        var iconClasses = icon.attr('class').match(/(?:^|\s)icon\-.+?(?:$|\s)/);
+    var iconClasses = icon.attr('class').match(/(?:^|\s)icon\-.+?(?:$|\s)/);
 
-        if (iconClasses.length === 0) {
-            return this;
-        }
+    if (iconClasses.length === 0) {
+      return this;
+    }
 
-        var iconClass = $.trim(iconClasses[0]);
+    var iconClass = $.trim(iconClasses[0]);
 
-        this.addClass('disabled');
+    this.addClass('disabled');
 
-        if (icon.hasClass('icon-can-spin')) {
-            icon.addClass('fa-spin');
-        } else {
-            icon.attr('data-idle-icon', iconClass);
-            icon.removeClass(iconClass);
-            icon.addClass('fa-spin icon-sonarr-spinner');
-        }
+    if (icon.hasClass('icon-can-spin')) {
+      icon.addClass('fa-spin');
+    } else {
+      icon.attr('data-idle-icon', iconClass);
+      icon.removeClass(iconClass);
+      icon.addClass('fa-spin icon-sonarr-spinner');
+    }
 
-        return this;
-    };
+    return this;
+  };
 
-    $.fn.stopSpin = function() {
-        var icon = this.find('i').andSelf('i');
+  $.fn.stopSpin = function() {
+    var icon = this.find('i').andSelf('i');
 
-        this.removeClass('disabled');
-        icon.removeClass('fa-spin icon-sonarr-spinner');
-        var idleIcon = icon.attr('data-idle-icon');
+    this.removeClass('disabled');
+    icon.removeClass('fa-spin icon-sonarr-spinner');
+    var idleIcon = icon.attr('data-idle-icon');
 
-        if (idleIcon) {
-            icon.addClass(idleIcon);
-        }
+    if (idleIcon) {
+      icon.addClass(idleIcon);
+    }
 
-        return this;
-    };
+    return this;
+  };
 };

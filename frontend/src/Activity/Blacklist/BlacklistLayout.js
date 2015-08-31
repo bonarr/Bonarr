@@ -10,99 +10,99 @@ var GridPager = require('../../Shared/Grid/Pager');
 var LoadingView = require('../../Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
-    template : 'Activity/Blacklist/BlacklistLayoutTemplate',
+  template: 'Activity/Blacklist/BlacklistLayoutTemplate',
 
-    regions : {
-        blacklist : '#x-blacklist',
-        pager     : '#x-pager'
+  regions: {
+    blacklist: '#x-blacklist',
+    pager: '#x-pager'
+  },
+
+  columns: [
+    {
+      name: 'series',
+      label: 'Series',
+      cell: SeriesTitleCell
     },
-
-    columns : [
-        {
-            name  : 'series',
-            label : 'Series',
-            cell  : SeriesTitleCell
-        },
-        {
-            name  : 'sourceTitle',
-            label : 'Source Title',
-            cell  : 'string'
-        },
-        {
-            name     : 'quality',
-            label    : 'Quality',
-            cell     : QualityCell,
-            sortable : false
-        },
-        {
-            name  : 'date',
-            label : 'Date',
-            cell  : RelativeDateCell
-        },
-        {
-            name     : 'this',
-            label    : '',
-            cell     : BlacklistActionsCell,
-            sortable : false
-        }
-    ],
-
-    initialize : function() {
-        this.collection = new BlacklistCollection({ tableName : 'blacklist' });
-
-        this.listenTo(this.collection, 'sync', this._showTable);
-        this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
-
-        this._showActionBar();
+    {
+      name: 'sourceTitle',
+      label: 'Source Title',
+      cell: 'string'
     },
-
-    onShow : function() {
-        this.blacklist.show(new LoadingView());
-        this.collection.fetch();
+    {
+      name: 'quality',
+      label: 'Quality',
+      cell: QualityCell,
+      sortable: false
     },
-
-    _showTable : function(collection) {
-        this.blacklist.show(new Backgrid.Grid({
-            columns    : this.columns,
-            collection : collection,
-            className  : 'table table-hover'
-        }));
-
-        this.pager.show(new GridPager({
-            columns    : this.columns,
-            collection : collection
-        }));
+    {
+      name: 'date',
+      label: 'Date',
+      cell: RelativeDateCell
     },
-
-    _showActionBar : function() {
-        var actions = {
-            items      : [
-                {
-                    tooltip : 'Clear Blacklist',
-                    icon    : 'icon-sonarr-clear',
-                    command : 'clearBlacklist'
-                }
-            ]
-        };
-
-        vent.trigger(vent.Commands.OpenActionBarCommand, {
-            parentView : this,
-            actions    : actions
-        });
-    },
-
-    _refreshTable : function(buttonContext) {
-        this.collection.state.currentPage = 1;
-        var promise = this.collection.fetch({ reset : true });
-
-        if (buttonContext) {
-            buttonContext.ui.icon.spinForPromise(promise);
-        }
-    },
-
-    _commandComplete : function(options) {
-        if (options.command.get('name') === 'clearblacklist') {
-            this._refreshTable();
-        }
+    {
+      name: 'this',
+      label: '',
+      cell: BlacklistActionsCell,
+      sortable: false
     }
+  ],
+
+  initialize: function() {
+    this.collection = new BlacklistCollection({tableName: 'blacklist'});
+
+    this.listenTo(this.collection, 'sync', this._showTable);
+    this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
+
+    this._showActionBar();
+  },
+
+  onShow: function() {
+    this.blacklist.show(new LoadingView());
+    this.collection.fetch();
+  },
+
+  _showTable: function(collection) {
+    this.blacklist.show(new Backgrid.Grid({
+      columns: this.columns,
+      collection: collection,
+      className: 'table table-hover'
+    }));
+
+    this.pager.show(new GridPager({
+      columns: this.columns,
+      collection: collection
+    }));
+  },
+
+  _showActionBar: function() {
+    var actions = {
+      items: [
+        {
+          tooltip: 'Clear Blacklist',
+          icon: 'icon-sonarr-clear',
+          command: 'clearBlacklist'
+        }
+      ]
+    };
+
+    vent.trigger(vent.Commands.OpenActionBarCommand, {
+      parentView: this,
+      actions: actions
+    });
+  },
+
+  _refreshTable: function(buttonContext) {
+    this.collection.state.currentPage = 1;
+    var promise = this.collection.fetch({reset: true});
+
+    if (buttonContext) {
+      buttonContext.ui.icon.spinForPromise(promise);
+    }
+  },
+
+  _commandComplete: function(options) {
+    if (options.command.get('name') === 'clearblacklist') {
+      this._refreshTable();
+    }
+  }
 });

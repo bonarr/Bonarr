@@ -3,23 +3,23 @@ var Marionette = require('marionette');
 var EditView = require('./RemotePathMappingEditView');
 
 module.exports = Marionette.ItemView.extend({
-    template  : 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingItemViewTemplate',
-    className : 'row',
+  template: 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingItemViewTemplate',
+  className: 'row',
 
-    events : {
-        'click .x-edit' : '_editMapping'
-    },
+  events: {
+    'click .x-edit': '_editMapping'
+  },
 
-    initialize : function() {
-        this.listenTo(this.model, 'sync', this.render);
-    },
+  initialize: function() {
+    this.listenTo(this.model, 'sync', this.render);
+  },
 
-    _editMapping : function() {
-        var view = new EditView({
-            model            : this.model,
-            targetCollection : this.model.collection
-        });
+  _editMapping: function() {
+    var view = new EditView({
+      model: this.model,
+      targetCollection: this.model.collection
+    });
 
-        vent.trigger(vent.Commands.OpenFullscreenModal, view);
-    }
+    vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  }
 });

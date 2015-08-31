@@ -9,3 +9,4 @@ require('./stripBom.js');
 require('./imageMin.js');
 require('./webpack.js');
 require('./start.js');
+require('./pretty.js');

@@ -6,19 +6,19 @@ var HealthLayout = require('./Health/HealthLayout');
 var MoreInfoView = require('./MoreInfo/MoreInfoView');
 
 module.exports = Marionette.Layout.extend({
-    template : 'System/Status/StatusLayoutTemplate',
+  template: 'System/Status/StatusLayoutTemplate',
 
-    regions : {
-        about     : '#about',
-        diskSpace : '#diskspace',
-        health    : '#health',
-        moreInfo  : '#more-info'
-    },
+  regions: {
+    about: '#about',
+    diskSpace: '#diskspace',
+    health: '#health',
+    moreInfo: '#more-info'
+  },
 
-    onRender : function() {
-        this.health.show(new HealthLayout());
-        this.diskSpace.show(new DiskSpaceLayout());
-        this.about.show(new AboutView());
-        this.moreInfo.show(new MoreInfoView());
-    }
+  onRender: function() {
+    this.health.show(new HealthLayout());
+    this.diskSpace.show(new DiskSpaceLayout());
+    this.about.show(new AboutView());
+    this.moreInfo.show(new MoreInfoView());
+  }
 });

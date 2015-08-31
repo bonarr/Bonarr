@@ -9,34 +9,34 @@ var MediaManagementSettingsModel = require('./MediaManagementSettingsModel');
 var NamingModel = require('./Naming/NamingModel');
 
 module.exports = SettingsLayoutBase.extend({
-    template : 'Settings/MediaManagement/MediaManagementLayoutTemplate',
+  template: 'Settings/MediaManagement/MediaManagementLayoutTemplate',
 
-    regions : {
-        loading        : '#loading-region',
-        episodeNaming  : '#episode-naming',
-        sorting        : '#sorting',
-        fileManagement : '#file-management',
-        permissions    : '#permissions'
-    },
+  regions: {
+    loading: '#loading-region',
+    episodeNaming: '#episode-naming',
+    sorting: '#sorting',
+    fileManagement: '#file-management',
+    permissions: '#permissions'
+  },
 
-    initialize : function() {
-        this.model = new MediaManagementSettingsModel();
-        this.namingModel = new NamingModel();
-        SettingsLayoutBase.prototype.initialize.apply(this, arguments);
-    },
+  initialize: function() {
+    this.model = new MediaManagementSettingsModel();
+    this.namingModel = new NamingModel();
+    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  },
 
-    onRender : function() {
-        var promise = Marionette.$.when(this.model.fetch(), this.namingModel.fetch());
+  onRender: function() {
+    var promise = Marionette.$.when(this.model.fetch(), this.namingModel.fetch());
 
-        promise.done(_.bind(function () {
-            if (this.isClosed) {
-                return;
-            }
+    promise.done(_.bind(function() {
+      if (this.isClosed) {
+        return;
+      }
 
-            this.episodeNaming.show(new NamingView({ model : this.namingModel }));
-            this.sorting.show(new SortingView({ model : this.model }));
-            this.fileManagement.show(new FileManagementView({ model : this.model }));
-            this.permissions.show(new PermissionsView({ model : this.model }));
-        }, this));
-    }
+      this.episodeNaming.show(new NamingView({model: this.namingModel}));
+      this.sorting.show(new SortingView({model: this.model}));
+      this.fileManagement.show(new FileManagementView({model: this.model}));
+      this.permissions.show(new PermissionsView({model: this.model}));
+    }, this));
+  }
 });

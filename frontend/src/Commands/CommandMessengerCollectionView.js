@@ -3,9 +3,9 @@ var commandCollection = require('./CommandCollection');
 var CommandMessengerItemView = require('./CommandMessengerItemView');
 
 var CollectionView = Marionette.CollectionView.extend({
-    itemView : CommandMessengerItemView
+  itemView: CommandMessengerItemView
 });
 
 module.exports = new CollectionView({
-    collection : commandCollection
+  collection: commandCollection
 });

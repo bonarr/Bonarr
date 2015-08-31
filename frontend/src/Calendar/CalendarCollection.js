@@ -2,13 +2,13 @@ var Backbone = require('backbone');
 var EpisodeModel = require('../Series/EpisodeModel');
 
 module.exports = Backbone.Collection.extend({
-    url       : window.Sonarr.ApiRoot + '/calendar',
-    model     : EpisodeModel,
-    tableName : 'calendar',
+  url: window.Sonarr.ApiRoot + '/calendar',
+  model: EpisodeModel,
+  tableName: 'calendar',
 
-    comparator : function(model) {
-        var date = new Date(model.get('airDateUtc'));
-        var time = date.getTime();
-        return time;
-    }
+  comparator: function(model) {
+    var date = new Date(model.get('airDateUtc'));
+    var time = date.getTime();
+    return time;
+  }
 });

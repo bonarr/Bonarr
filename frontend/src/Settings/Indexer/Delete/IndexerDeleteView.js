@@ -2,18 +2,18 @@ var vent = require('vent');
 var Marionette = require('marionette');
 
 module.exports = Marionette.ItemView.extend({
-    template : 'Settings/Indexer/Delete/IndexerDeleteViewTemplate',
+  template: 'Settings/Indexer/Delete/IndexerDeleteViewTemplate',
 
-    events : {
-        'click .x-confirm-delete' : '_delete'
-    },
+  events: {
+    'click .x-confirm-delete': '_delete'
+  },
 
-    _delete : function() {
-        this.model.destroy({
-            wait    : true,
-            success : function() {
-                vent.trigger(vent.Commands.CloseFullscreenModal);
-            }
-        });
-    }
+  _delete: function() {
+    this.model.destroy({
+      wait: true,
+      success: function() {
+        vent.trigger(vent.Commands.CloseFullscreenModal);
+      }
+    });
+  }
 });

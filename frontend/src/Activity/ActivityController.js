@@ -5,27 +5,27 @@ var HistoryLayout = require('./History/HistoryLayout');
 var BlacklistLayout = require('./Blacklist/BlacklistLayout');
 
 module.exports = NzbDroneController.extend({
-    initialize : function() {
-        this.route('activity', this.queue);
-        this.route('activity/queue', this.queue);
-        this.route('activity/history', this.history);
-        this.route('activity/blacklist', this.blacklist);
+  initialize: function() {
+    this.route('activity', this.queue);
+    this.route('activity/queue', this.queue);
+    this.route('activity/history', this.history);
+    this.route('activity/blacklist', this.blacklist);
 
-        NzbDroneController.prototype.initialize.apply(this, arguments);
-    },
+    NzbDroneController.prototype.initialize.apply(this, arguments);
+  },
 
-    queue : function() {
-        this.setTitle('Queue');
-        this.showMainRegion(new QueueLayout());
-    },
+  queue: function() {
+    this.setTitle('Queue');
+    this.showMainRegion(new QueueLayout());
+  },
 
-    history : function() {
-        this.setTitle('History');
-        this.showMainRegion(new HistoryLayout());
-    },
+  history: function() {
+    this.setTitle('History');
+    this.showMainRegion(new HistoryLayout());
+  },
 
-    blacklist : function() {
-        this.setTitle('Blacklist');
-        this.showMainRegion(new BlacklistLayout());
-    }
+  blacklist: function() {
+    this.setTitle('Blacklist');
+    this.showMainRegion(new BlacklistLayout());
+  }
 });

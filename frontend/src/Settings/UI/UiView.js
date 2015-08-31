@@ -5,15 +5,15 @@ var AsModelBoundView = require('../../Mixins/AsModelBoundView');
 var AsValidatedView = require('../../Mixins/AsValidatedView');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/UI/UiView',
+  template: 'Settings/UI/UiView',
 
-    initialize : function() {
-        this.listenTo(this.model, 'sync', this._reloadUiSettings);
-    },
+  initialize: function() {
+    this.listenTo(this.model, 'sync', this._reloadUiSettings);
+  },
 
-    _reloadUiSettings : function() {
-        UiSettingsModel.fetch();
-    }
+  _reloadUiSettings: function() {
+    UiSettingsModel.fetch();
+  }
 });
 
 AsModelBoundView.call(view);

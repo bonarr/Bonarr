@@ -6,15 +6,15 @@ require('../../../Mixins/DirectoryAutoComplete');
 require('../../../Mixins/FileBrowser');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/MediaManagement/FileManagement/FileManagementViewTemplate',
+  template: 'Settings/MediaManagement/FileManagement/FileManagementViewTemplate',
 
-    ui : {
-        recyclingBin : '.x-path'
-    },
+  ui: {
+    recyclingBin: '.x-path'
+  },
 
-    onShow : function() {
-        this.ui.recyclingBin.fileBrowser();
-    }
+  onShow: function() {
+    this.ui.recyclingBin.fileBrowser();
+  }
 });
 
 AsModelBoundView.call(view);

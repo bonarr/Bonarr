@@ -1,0 +1,22 @@
+{
+  "indent": {
+    "value": "  ",
+    "FunctionExpression": 1,
+    "ArrayExpression": 1,
+    "ObjectExpression": 1
+  },
+  "lineBreak": {
+    "before": {
+      "ObjectExpressionOpeningBrace": -1,
+      "ObjectExpressionClosingBrace": -1,
+      "PropertyValue": -1,
+      "Property": -1
+    },
+    "after": {
+      "ObjectExpressionClosingBrace": -1,
+      "ObjectExpressionOpeningBrace": -1,
+      "PropertyValue": -1,
+      "Property": -1
+    }
+  }
+}

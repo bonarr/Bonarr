@@ -4,15 +4,15 @@ var AsValidatedView = require('../../../Mixins/AsValidatedView');
 require('../../../Mixins/FileBrowser');
 
 var view = Marionette.ItemView.extend({
-    template : 'Settings/DownloadClient/DroneFactory/DroneFactoryViewTemplate',
+  template: 'Settings/DownloadClient/DroneFactory/DroneFactoryViewTemplate',
 
-    ui : {
-        droneFactory : '.x-path'
-    },
+  ui: {
+    droneFactory: '.x-path'
+  },
 
-    onShow : function() {
-        this.ui.droneFactory.fileBrowser();
-    }
+  onShow: function() {
+    this.ui.droneFactory.fileBrowser();
+  }
 });
 
 AsModelBoundView.call(view);

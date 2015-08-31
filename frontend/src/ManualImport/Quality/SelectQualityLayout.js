@@ -6,38 +6,38 @@ var ProfileSchemaCollection = require('../../Settings/Profile/ProfileSchemaColle
 var SelectQualityView = require('./SelectQualityView');
 
 module.exports = Marionette.Layout.extend({
-    template  : 'ManualImport/Quality/SelectQualityLayoutTemplate',
+  template: 'ManualImport/Quality/SelectQualityLayoutTemplate',
 
-    regions : {
-        quality : '.x-quality'
-    },
+  regions: {
+    quality: '.x-quality'
+  },
 
-    events : {
-        'click .x-select' : '_selectQuality'
-    },
+  events: {
+    'click .x-select': '_selectQuality'
+  },
 
-    initialize : function() {
-        this.profileSchemaCollection = new ProfileSchemaCollection();
-        this.profileSchemaCollection.fetch();
+  initialize: function() {
+    this.profileSchemaCollection = new ProfileSchemaCollection();
+    this.profileSchemaCollection.fetch();
 
-        this.listenTo(this.profileSchemaCollection, 'sync', this._showQuality);
-    },
+    this.listenTo(this.profileSchemaCollection, 'sync', this._showQuality);
+  },
 
-    onRender : function() {
-        this.quality.show(new LoadingView());
-    },
+  onRender: function() {
+    this.quality.show(new LoadingView());
+  },
 
-    _showQuality : function () {
-        var qualities = _.map(this.profileSchemaCollection.first().get('items'), function (quality) {
-            return quality.quality;
-        });
+  _showQuality: function() {
+    var qualities = _.map(this.profileSchemaCollection.first().get('items'), function(quality) {
+      return quality.quality;
+    });
 
-        this.selectQualityView = new SelectQualityView({ qualities: qualities });
-        this.quality.show(this.selectQualityView);
-    },
+    this.selectQualityView = new SelectQualityView({qualities: qualities});
+    this.quality.show(this.selectQualityView);
+  },
 
-    _selectQuality : function () {
-        this.trigger('manualimport:selected:quality', { quality: this.selectQualityView.selectedQuality() });
-        vent.trigger(vent.Commands.CloseModal);
-    }
+  _selectQuality: function() {
+    this.trigger('manualimport:selected:quality', {quality: this.selectQualityView.selectedQuality()});
+    vent.trigger(vent.Commands.CloseModal);
+  }
 });

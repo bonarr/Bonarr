@@ -9,69 +9,69 @@ var ApprovalStatusCell = require('../Cells/ApprovalStatusCell');
 var LoadingView = require('../Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
-    template : 'Release/ReleaseLayoutTemplate',
+  template: 'Release/ReleaseLayoutTemplate',
 
-    regions : {
-        grid    : '#x-grid'
+  regions: {
+    grid: '#x-grid'
+  },
+
+  columns: [
+    {
+      name: 'indexer',
+      label: 'Indexer',
+      sortable: true,
+      cell: IndexerCell
     },
-
-    columns : [
-        {
-            name     : 'indexer',
-            label    : 'Indexer',
-            sortable : true,
-            cell     : IndexerCell
-        },
-        {
-            name     : 'title',
-            label    : 'Title',
-            sortable : true,
-            cell     : Backgrid.StringCell
-        },
-        {
-            name     : 'episodeNumbers',
-            episodes : 'episodeNumbers',
-            label    : 'season',
-            cell     : EpisodeNumberCell
-        },
-        {
-            name     : 'size',
-            label    : 'Size',
-            sortable : true,
-            cell     : FileSizeCell
-        },
-        {
-            name     : 'quality',
-            label    : 'Quality',
-            sortable : true,
-            cell     : QualityCell
-        },
-        {
-            name  : 'rejections',
-            label : '',
-            cell  : ApprovalStatusCell,
-            title : 'Release Rejected'
-        }
-    ],
-
-    initialize : function() {
-        this.collection = new ReleaseCollection();
-        this.listenTo(this.collection, 'sync', this._showTable);
+    {
+      name: 'title',
+      label: 'Title',
+      sortable: true,
+      cell: Backgrid.StringCell
     },
-
-    onRender : function() {
-        this.grid.show(new LoadingView());
-        this.collection.fetch();
+    {
+      name: 'episodeNumbers',
+      episodes: 'episodeNumbers',
+      label: 'season',
+      cell: EpisodeNumberCell
     },
-
-    _showTable : function() {
-        if (!this.isClosed) {
-            this.grid.show(new Backgrid.Grid({
-                row        : Backgrid.Row,
-                columns    : this.columns,
-                collection : this.collection,
-                className  : 'table table-hover'
-            }));
-        }
+    {
+      name: 'size',
+      label: 'Size',
+      sortable: true,
+      cell: FileSizeCell
+    },
+    {
+      name: 'quality',
+      label: 'Quality',
+      sortable: true,
+      cell: QualityCell
+    },
+    {
+      name: 'rejections',
+      label: '',
+      cell: ApprovalStatusCell,
+      title: 'Release Rejected'
     }
+  ],
+
+  initialize: function() {
+    this.collection = new ReleaseCollection();
+    this.listenTo(this.collection, 'sync', this._showTable);
+  },
+
+  onRender: function() {
+    this.grid.show(new LoadingView());
+    this.collection.fetch();
+  },
+
+  _showTable: function() {
+    if (!this.isClosed) {
+      this.grid.show(new Backgrid.Grid({
+        row: Backgrid.Row,
+        columns: this.columns,
+        collection: this.collection,
+        className: 'table table-hover'
+      }));
+    }
+  }
 });

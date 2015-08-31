@@ -9,34 +9,34 @@ var RestrictionCollectionView = require('./Restriction/RestrictionCollectionView
 var IndexerSettingsModel = require('./IndexerSettingsModel');
 
 module.exports = SettingsLayoutBase.extend({
-    template : 'Settings/Indexer/IndexerLayoutTemplate',
+  template: 'Settings/Indexer/IndexerLayoutTemplate',
 
-    regions : {
-        indexers       : '#x-indexers-region',
-        indexerOptions : '#x-indexer-options-region',
-        restriction    : '#x-restriction-region'
-    },
+  regions: {
+    indexers: '#x-indexers-region',
+    indexerOptions: '#x-indexer-options-region',
+    restriction: '#x-restriction-region'
+  },
 
-    initialize : function() {
-        this.model = new IndexerSettingsModel();
-        this.indexersCollection = new IndexerCollection();
-        this.restrictionCollection = new RestrictionCollection();
-        SettingsLayoutBase.prototype.initialize.apply(this, arguments);
-    },
+  initialize: function() {
+    this.model = new IndexerSettingsModel();
+    this.indexersCollection = new IndexerCollection();
+    this.restrictionCollection = new RestrictionCollection();
+    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  },
 
-    onRender : function() {
-        var promise = Marionette.$.when(this.model.fetch(),
-                                        this.indexersCollection.fetch(),
-                                        this.restrictionCollection.fetch());
+  onRender: function() {
+    var promise = Marionette.$.when(this.model.fetch(),
+      this.indexersCollection.fetch(),
+      this.restrictionCollection.fetch());
 
-        promise.done(_.bind(function () {
-            if (this.isClosed) {
-                return;
-            }
+    promise.done(_.bind(function() {
+      if (this.isClosed) {
+        return;
+      }
 
-            this.indexers.show(new CollectionView({ collection : this.indexersCollection }));
-            this.indexerOptions.show(new OptionsView({ model : this.model }));
-            this.restriction.show(new RestrictionCollectionView({ collection : this.restrictionCollection }));
-        }, this));
-    }
+      this.indexers.show(new CollectionView({collection: this.indexersCollection}));
+      this.indexerOptions.show(new OptionsView({model: this.model}));
+      this.restriction.show(new RestrictionCollectionView({collection: this.restrictionCollection}));
+    }, this));
+  }
 });

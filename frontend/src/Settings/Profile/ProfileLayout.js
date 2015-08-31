@@ -8,29 +8,29 @@ var DelayProfileCollection = require('./Delay/DelayProfileCollection');
 require('./Language/LanguageCollection');
 
 module.exports = SettingsLayoutBase.extend({
-    template : 'Settings/Profile/ProfileLayoutTemplate',
+  template: 'Settings/Profile/ProfileLayoutTemplate',
 
-    regions : {
-        profile      : '#profile',
-        delayProfile : '#delay-profile'
-    },
+  regions: {
+    profile: '#profile',
+    delayProfile: '#delay-profile'
+  },
 
-    initialize : function() {
-        this.delayProfileCollection = new DelayProfileCollection();
-        SettingsLayoutBase.prototype.initialize.apply(this, arguments);
-    },
+  initialize: function() {
+    this.delayProfileCollection = new DelayProfileCollection();
+    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  },
 
-    onRender : function() {
-        var promise = Marionette.$.when(ProfileCollection.fetch(),
-                                        this.delayProfileCollection.fetch());
+  onRender: function() {
+    var promise = Marionette.$.when(ProfileCollection.fetch(),
+      this.delayProfileCollection.fetch());
 
-        promise.done(_.bind(function () {
-            if (this.isClosed) {
-                return;
-            }
+    promise.done(_.bind(function() {
+      if (this.isClosed) {
+        return;
+      }
 
-            this.profile.show(new ProfileCollectionView({ collection : ProfileCollection }));
-            this.delayProfile.show(new DelayProfileLayout({ collection : this.delayProfileCollection }));
-        }, this));
-    }
+      this.profile.show(new ProfileCollectionView({collection: ProfileCollection}));
+      this.delayProfile.show(new DelayProfileLayout({collection: this.delayProfileCollection}));
+    }, this));
+  }
 });

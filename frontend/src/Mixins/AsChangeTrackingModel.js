@@ -1,22 +1,22 @@
 module.exports = function() {
-    var originalInit = this.prototype.initialize;
+  var originalInit = this.prototype.initialize;
 
-    this.prototype.initialize = function() {
+  this.prototype.initialize = function() {
 
-        this.isSaved = true;
+    this.isSaved = true;
 
-        this.on('change', function() {
-            this.isSaved = false;
-        }, this);
+    this.on('change', function() {
+      this.isSaved = false;
+    }, this);
 
-        this.on('sync', function() {
-            this.isSaved = true;
-        }, this);
+    this.on('sync', function() {
+      this.isSaved = true;
+    }, this);
 
-        if (originalInit) {
-            originalInit.call(this);
-        }
-    };
+    if (originalInit) {
+      originalInit.call(this);
+    }
+  };
 
-    return this;
+  return this;
 };

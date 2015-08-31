@@ -14,105 +14,105 @@ var ProtocolCell = require('../../Release/ProtocolCell');
 var GridPager = require('../../Shared/Grid/Pager');
 
 module.exports = Marionette.Layout.extend({
-    template : 'Activity/Queue/QueueLayoutTemplate',
+  template: 'Activity/Queue/QueueLayoutTemplate',
 
-    regions : {
-        table : '#x-queue',
-        pager : '#x-queue-pager'
+  regions: {
+    table: '#x-queue',
+    pager: '#x-queue-pager'
+  },
+
+  columns: [
+    {
+      name: 'status',
+      label: '',
+      cell: QueueStatusCell,
+      cellValue: 'this'
     },
+    {
+      name: 'series',
+      label: 'Series',
+      cell: SeriesTitleCell
+    },
+    {
+      name: 'episode',
+      label: 'Episode',
+      cell: EpisodeNumberCell
+    },
+    {
+      name: 'episodeTitle',
+      label: 'Episode Title',
+      cell: EpisodeTitleCell,
+      cellValue: 'episode'
+    },
+    {
+      name: 'quality',
+      label: 'Quality',
+      cell: QualityCell,
+      sortable: false
+    },
+    {
+      name: 'protocol',
+      label: 'Protocol',
+      cell: ProtocolCell
+    },
+    {
+      name: 'timeleft',
+      label: 'Timeleft',
+      cell: TimeleftCell,
+      cellValue: 'this'
+    },
+    {
+      name: 'episode',
+      label: 'Progress',
+      cell: ProgressCell,
+      cellValue: 'this'
+    },
+    {
+      name: 'status',
+      label: '',
+      cell: QueueActionsCell,
+      cellValue: 'this'
+    }
+  ],
 
-    columns : [
+  initialize: function() {
+    this.listenTo(QueueCollection, 'sync', this._showTable);
+
+    this._showActionBar();
+  },
+
+  onShow: function() {
+    this._showTable();
+  },
+
+  _showTable: function() {
+    this.table.show(new Backgrid.Grid({
+      columns: this.columns,
+      collection: QueueCollection,
+      className: 'table table-hover'
+    }));
+
+    this.pager.show(new GridPager({
+      columns: this.columns,
+      collection: QueueCollection
+    }));
+  },
+
+  _showActionBar: function() {
+    var actions = {
+      items: [
         {
-            name      : 'status',
-            label     : '',
-            cell      : QueueStatusCell,
-            cellValue : 'this'
-        },
-        {
-            name     : 'series',
-            label    : 'Series',
-            cell     : SeriesTitleCell
-        },
-        {
-            name     : 'episode',
-            label    : 'Episode',
-            cell     : EpisodeNumberCell
-        },
-        {
-            name      : 'episodeTitle',
-            label     : 'Episode Title',
-            cell      : EpisodeTitleCell,
-            cellValue : 'episode'
-        },
-        {
-            name     : 'quality',
-            label    : 'Quality',
-            cell     : QualityCell,
-            sortable : false
-        },
-        {
-            name  : 'protocol',
-            label : 'Protocol',
-            cell  : ProtocolCell
-        },
-        {
-            name      : 'timeleft',
-            label     : 'Timeleft',
-            cell      : TimeleftCell,
-            cellValue : 'this'
-        },
-        {
-            name      : 'episode',
-            label     : 'Progress',
-            cell      : ProgressCell,
-            cellValue : 'this'
-        },
-        {
-            name      : 'status',
-            label     : '',
-            cell      : QueueActionsCell,
-            cellValue : 'this'
+          tooltip: 'Refresh Queue',
+          icon: 'icon-sonarr-refresh',
+          command: 'checkForFinishedDownload',
+          properties: {sendUpdates: true}
         }
-    ],
+      ]
+    };
 
-    initialize : function() {
-        this.listenTo(QueueCollection, 'sync', this._showTable);
-
-        this._showActionBar();
-    },
-
-    onShow : function() {
-        this._showTable();
-    },
-
-    _showTable : function() {
-        this.table.show(new Backgrid.Grid({
-            columns    : this.columns,
-            collection : QueueCollection,
-            className  : 'table table-hover'
-        }));
-
-        this.pager.show(new GridPager({
-            columns    : this.columns,
-            collection : QueueCollection
-        }));
-    },
-
-    _showActionBar : function() {
-        var actions = {
-            items      : [
-                {
-                    tooltip    : 'Refresh Queue',
-                    icon       : 'icon-sonarr-refresh',
-                    command    : 'checkForFinishedDownload',
-                    properties : { sendUpdates : true }
-                }
-            ]
-        };
-
-        vent.trigger(vent.Commands.OpenActionBarCommand, {
-            parentView : this,
-            actions    : actions
-        });
-    },
+    vent.trigger(vent.Commands.OpenActionBarCommand, {
+      parentView: this,
+      actions: actions
+    });
+  },
 });

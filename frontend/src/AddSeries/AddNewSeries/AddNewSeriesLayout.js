@@ -31,9 +31,9 @@ module.exports = Marionette.Layout.extend({
   //        id : 'add-series-screen'
   //    },
 
-  initialize: function () {
+  initialize: function() {
     ProfileCollection.fetch();
-    RootFolderCollection.fetch().done(function () {
+    RootFolderCollection.fetch().done(function() {
       RootFolderCollection.synced = true;
     });
 
@@ -49,10 +49,10 @@ module.exports = Marionette.Layout.extend({
 
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
 
-    //this._showActionBar();
+  //this._showActionBar();
   },
 
-  search: function (options) {
+  search: function(options) {
     if (!options.term || options.term === this.collection.term) {
       return Marionette.$.Deferred().resolve();
     }
@@ -74,7 +74,7 @@ module.exports = Marionette.Layout.extend({
     });
 
     this.currentSearchPromise.fail(_.bind(this.onError, this));
-    this.currentSearchPromise.always(_.bind(function () {
+    this.currentSearchPromise.always(_.bind(function() {
       this.ui.spinner.hide();
       this.searchResult.$el.removeClass('fade-out');
     }, this));
@@ -82,21 +82,21 @@ module.exports = Marionette.Layout.extend({
     return this.currentSearchPromise;
   },
 
-  _abortExistingSearch: function () {
+  _abortExistingSearch: function() {
     if (this.currentSearchPromise && this.currentSearchPromise.readyState > 0 && this.currentSearchPromise.readyState < 4) {
       console.log('aborting previous pending search request.');
       this.currentSearchPromise.abort();
     }
   },
 
-  onShow: function () {
+  onShow: function() {
     this.searchResult.show(new EmptyView());
     this.ui.seriesSearch.focus();
 
     this.search({term: 'wire'});
   },
 
-  onSearchKeyUp: function () {
+  onSearchKeyUp: function() {
     this._abortExistingSearch();
     var term = this.ui.seriesSearch.val();
     this.debouncedSearch({
@@ -104,7 +104,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  onCollectionSync: function () {
+  onCollectionSync: function() {
     if (this.collection.length) {
       this.searchResult.show(this.resultCollectionView);
     } else {
@@ -114,7 +114,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  onError: function (xhr, status) {
+  onError: function(xhr, status) {
     if (this.isClosed) {
       return;
     }

@@ -3,14 +3,14 @@ var CommandModel = require('./CommandModel');
 require('../Mixins/backbone.signalr.mixin');
 
 var CommandCollection = Backbone.Collection.extend({
-    url   : window.Sonarr.ApiRoot + '/command',
-    model : CommandModel,
+  url: window.Sonarr.ApiRoot + '/command',
+  model: CommandModel,
 
-    findCommand : function(command) {
-        return this.find(function(model) {
-            return model.isSameCommand(command);
-        });
-    }
+  findCommand: function(command) {
+    return this.find(function(model) {
+      return model.isSameCommand(command);
+    });
+  }
 });
 
 var collection = new CommandCollection().bindSignalR();

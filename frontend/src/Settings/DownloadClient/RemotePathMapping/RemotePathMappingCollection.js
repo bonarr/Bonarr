@@ -2,6 +2,6 @@ var Backbone = require('backbone');
 var RemotePathMappingModel = require('./RemotePathMappingModel');
 
 module.exports = Backbone.Collection.extend({
-    model : RemotePathMappingModel,
-    url   : window.Sonarr.ApiRoot + '/remotePathMapping'
+  model: RemotePathMappingModel,
+  url: window.Sonarr.ApiRoot + '/remotePathMapping'
 });
