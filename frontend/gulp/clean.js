@@ -4,5 +4,5 @@ var del = require('del');
 var paths = require('./paths');
 
 gulp.task('clean', function(cb) {
-    del([paths.dest.root], cb);
+  del([paths.dest.root], cb);
 });

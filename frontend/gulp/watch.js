@@ -15,12 +15,12 @@ function watchTask(glob, task) {
     //ignoreInitial: false,
     verbose: true
   }
-  return watch(glob, options, function (events, done) {
+  return watch(glob, options, function(events, done) {
     gulp.start(task);
   });
 }
 
-gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], function () {
+gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], function() {
   livereload.listen();
 
   gulp.start('webpackWatch');

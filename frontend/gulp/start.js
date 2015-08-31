@@ -13,9 +13,9 @@ var spawn = require('child_process').spawn;
 function download(url, dest, cb) {
   console.log('Downloading ' + url + ' to ' + dest);
   var file = fs.createWriteStream(dest);
-  var request = http.get(url, function (response) {
+  var request = http.get(url, function(response) {
     response.pipe(file);
-    file.on('finish', function () {
+    file.on('finish', function() {
       console.log('Download completed');
       file.close(cb);
     });
@@ -24,7 +24,7 @@ function download(url, dest, cb) {
 
 function getLatest(cb) {
   var branch = 'develop';
-  process.argv.forEach(function (val) {
+  process.argv.forEach(function(val) {
     var branchMatch = /branch=([\S]*)/.exec(val);
     if (branchMatch && branchMatch.length > 1) {
       branch = branchMatch[1];
@@ -35,26 +35,26 @@ function getLatest(cb) {
 
   console.log('Checking for latest version:', url);
 
-  http.get(url, function (res) {
+  http.get(url, function(res) {
     var data = '';
 
-    res.on('data', function (chunk) {
+    res.on('data', function(chunk) {
       data += chunk;
     });
 
-    res.on('end', function () {
+    res.on('end', function() {
       var updatePackage = JSON.parse(data).updatePackage;
       console.log('Latest version available: ' + updatePackage.version + ' Release Date: ' + updatePackage.releaseDate);
       cb(updatePackage);
     });
-  }).on('error', function (e) {
+  }).on('error', function(e) {
     console.log('problem with request: ' + e.message);
   });
 }
 
 function extract(source, dest, cb) {
   console.log('extracting download page to ' + dest);
-  new targz().extract(source, dest, function (err) {
+  new targz().extract(source, dest, function(err) {
     if (err) {
       console.log(err);
     }
@@ -63,8 +63,7 @@ function extract(source, dest, cb) {
   });
 }
 
-gulp.task('getSonarr', function () {
-
+gulp.task('getSonarr', function() {
   //gulp.src('/Users/kayone/git/Sonarr/_start/2.0.0.3288/NzbDrone/*.*')
   //  .pipe(print())
   //  .pipe(gulp.dest('./_output
@@ -78,11 +77,11 @@ gulp.task('getSonarr', function () {
     }
   }
 
-  getLatest(function (package) {
-    var packagePath = "./_start/" + package.filename;
-    var dirName = "./_start/" + package.version;
-    download(package.url, packagePath, function () {
-      extract(packagePath, dirName, function () {
+  getLatest(function(updatePackage) {
+    var packagePath = "./_start/" + updatePackage.filename;
+    var dirName = "./_start/" + updatePackage.version;
+    download(updatePackage.url, packagePath, function() {
+      extract(packagePath, dirName, function() {
         // clean old binaries
         console.log('Cleaning old binaries');
         del.sync(['./_output/*', '!./_output/UI/']);
@@ -94,19 +93,18 @@ gulp.task('getSonarr', function () {
   });
 });
 
-gulp.task('startSonarr', function () {
-
+gulp.task('startSonarr', function() {
   var ls = spawn('mono', ['--debug', './_output/NzbDrone.exe']);
 
-  ls.stdout.on('data', function (data) {
+  ls.stdout.on('data', function(data) {
     process.stdout.write('' + data);
   });
 
-  ls.stderr.on('data', function (data) {
+  ls.stderr.on('data', function(data) {
     process.stdout.write('' + data);
   });
 
-  ls.on('close', function (code) {
+  ls.on('close', function(code) {
     console.log('child process exited with code ' + code);
   });
 });

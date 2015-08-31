@@ -5,7 +5,7 @@ var livereload = require('gulp-livereload');
 
 var paths = require('./paths.js');
 
-gulp.task('copyJs', function () {
+gulp.task('copyJs', function() {
   return gulp.src(
     [
       paths.src.root + 'polyfills.js',
@@ -17,14 +17,14 @@ gulp.task('copyJs', function () {
     .pipe(livereload());
 });
 
-gulp.task('copyHtml', function () {
+gulp.task('copyHtml', function() {
   return gulp.src(paths.src.html)
     .pipe(cache('copyHtml'))
     .pipe(gulp.dest(paths.dest.root))
     .pipe(livereload());
 });
 
-gulp.task('copyContent', function () {
+gulp.task('copyContent', function() {
   return gulp.src([paths.src.content + '**/*.*', '!**/*.less'])
     .pipe(gulp.dest(paths.dest.content))
     .pipe(livereload());

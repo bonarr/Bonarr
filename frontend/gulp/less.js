@@ -11,7 +11,7 @@ var print = require('gulp-print');
 var paths = require('./paths');
 var errorHandler = require('./errorHandler');
 
-gulp.task('less', function () {
+gulp.task('less', function() {
   var src = [
     paths.src.content + 'Bootstrap/bootstrap.less',
     paths.src.content + 'Vendor/vendor.less',

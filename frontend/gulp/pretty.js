@@ -12,10 +12,10 @@ var paths = require('./paths.js');
 //     .pipe(jshint.reporter(stylish));
 // });
 
-gulp.task('pretty-hbs', function () {
+gulp.task('pretty-hbs', function() {
   gulp.src([
-      paths.src.scripts
-    ])
+    paths.src.scripts
+  ])
     .pipe(jsbeautifier({
       config: './frontend/.jsbeautifyrc'
     }))
