@@ -39,32 +39,32 @@ new Router();
 var app = new Marionette.Application();
 
 app.addInitializer(function() {
-    console.log('starting application');
+  console.log('starting application');
 });
 
-app.addInitializer(SignalRBroadcaster.appInitializer, { app : app });
+app.addInitializer(SignalRBroadcaster.appInitializer, {app: app});
 
-app.addInitializer(Tooltip.appInitializer, { app : app });
+app.addInitializer(Tooltip.appInitializer, {app: app});
 
 app.addInitializer(function() {
-    Backbone.history.start({
-        pushState : true,
-        root      : serverStatusModel.get('urlBase')
-    });
-    RouteBinder.bind();
-    AppLayout.navbarRegion.show(new NavbarLayout());
-    AppLayout.sidebarRegion.show(new SidebarLayout());
-    $('body').addClass('started');
+  Backbone.history.start({
+    pushState: true,
+    root: serverStatusModel.get('urlBase')
+  });
+  RouteBinder.bind();
+  AppLayout.navbarRegion.show(new NavbarLayout());
+  AppLayout.sidebarRegion.show(new SidebarLayout());
+  $('body').addClass('started');
 });
 
 app.addInitializer(UiSettingsController.appInitializer);
 
 app.addInitializer(function() {
-    var footerText = serverStatusModel.get('version');
-    if (serverStatusModel.get('branch') !== 'master') {
-        footerText += '</br>' + serverStatusModel.get('branch');
-    }
-    $('#footer-region .version').html(footerText);
+  var footerText = serverStatusModel.get('version');
+  if (serverStatusModel.get('branch') !== 'master') {
+    footerText += '</br>' + serverStatusModel.get('branch');
+  }
+  $('#footer-region .version').html(footerText);
 });
 
 app.start();

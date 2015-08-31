@@ -1,3 +1,3 @@
 window.onbeforeunload = function() {
-    window.Sonarr.unloading = true;
+  window.Sonarr.unloading = true;
 };
