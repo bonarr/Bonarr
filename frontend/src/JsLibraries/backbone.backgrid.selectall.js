@@ -5,7 +5,7 @@
   Copyright (c) 2013 Jimmy Yuen Ho Wong and contributors
   Licensed under the MIT @license.
 */
-(function (root, factory) {
+( function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define(["backbone", "backgrid", "underscore"], factory);
@@ -15,9 +15,7 @@
   }
   // Browser
   else factory(root.Backbone, root.Backgrid, root._);
-
-}(this, function (Backbone, Backgrid, _) {
-
+}(this, function(Backbone, Backgrid, _) {
   "use strict";
 
   /**
@@ -27,7 +25,6 @@
      @extends Backbone.View
   */
   var SelectRowCell = Backgrid.Extension.SelectRowCell = Backbone.View.extend({
-
     /** @property */
     className: "select-row-cell",
 
@@ -49,21 +46,22 @@
        @param {Backgrid.Column} options.column
        @param {Backbone.Model} options.model
     */
-    initialize: function (options) {
-
+    initialize: function(options) {
       this.column = options.column;
       if (!(this.column instanceof Backgrid.Column)) {
         this.column = new Backgrid.Column(this.column);
       }
 
-      var column = this.column, model = this.model, $el = this.$el;
-      this.listenTo(column, "change:renderable", function (column, renderable) {
+      var column = this.column,
+        model = this.model,
+        $el = this.$el;
+      this.listenTo(column, "change:renderable", function(column, renderable) {
         $el.toggleClass("renderable", renderable);
       });
 
-      if (Backgrid.callByNeed(column.renderable(), column, model)) $el.addClass("renderable");
+      if (Backgrid.callByNeed(column.renderable(), column, model))$el.addClass("renderable");
 
-      this.listenTo(model, "backgrid:select", function (model, selected) {
+      this.listenTo(model, "backgrid:select", function(model, selected) {
         this.checkbox().prop("checked", selected).change();
       });
     },
@@ -71,36 +69,35 @@
     /**
        Returns the checkbox.
      */
-    checkbox: function () {
+    checkbox: function() {
       return this.$el.find("input[type=checkbox]");
     },
 
     /**
        Focuses the checkbox.
     */
-    enterEditMode: function () {
+    enterEditMode: function() {
       this.checkbox().focus();
     },
 
     /**
        Unfocuses the checkbox.
     */
-    exitEditMode: function () {
+    exitEditMode: function() {
       this.checkbox().blur();
     },
 
     /**
        Process keyboard navigation.
     */
-    onKeydown: function (e) {
+    onKeydown: function(e) {
       var command = new Backgrid.Command(e);
-      if (command.passThru()) return true; // skip ahead to `change`
+      if (command.passThru())return true; // skip ahead to `change`
       if (command.cancel()) {
         e.stopPropagation();
         this.checkbox().blur();
-      }
-      else if (command.save() || command.moveLeft() || command.moveRight() ||
-               command.moveUp() || command.moveDown()) {
+      } else if (command.save() || command.moveLeft() || command.moveRight() ||
+        command.moveUp() || command.moveDown()) {
         e.preventDefault();
         e.stopPropagation();
         this.model.trigger("backgrid:edited", this.model, this.column, command);
@@ -112,7 +109,7 @@
        `backgrid:selected` event with a reference of the model and the
        checkbox's `checked` value.
     */
-    onChange: function () {
+    onChange: function() {
       var checked = this.checkbox().prop("checked");
       this.$el.parent().toggleClass("selected", checked);
       this.model.trigger("backgrid:selected", this.model, checked);
@@ -121,12 +118,11 @@
     /**
        Renders a checkbox in a table cell.
     */
-    render: function () {
+    render: function() {
       this.$el.empty().append('<input tabindex="-1" type="checkbox" />');
       this.delegateEvents();
       return this;
     }
-
   });
 
   /**
@@ -136,7 +132,6 @@
      @extends Backgrid.Extension.SelectRowCell
   */
   var SelectAllHeaderCell = Backgrid.Extension.SelectAllHeaderCell = SelectRowCell.extend({
-
     /** @property */
     className: "select-all-header-cell",
 
@@ -161,8 +156,7 @@
        @param {Backgrid.Column} options.column
        @param {Backbone.Collection} options.collection
     */
-    initialize: function (options) {
-
+    initialize: function(options) {
       this.column = options.column;
       if (!(this.column instanceof Backgrid.Column)) {
         this.column = new Backgrid.Column(this.column);
@@ -171,29 +165,30 @@
       var collection = this.collection;
       var selectedModels = this.selectedModels = {};
       this.listenTo(collection.fullCollection || collection,
-                    "backgrid:selected", function (model, selected) {
-        if (selected) selectedModels[model.id || model.cid] = 1;
-        else {
-          delete selectedModels[model.id || model.cid];
-          this.checkbox().prop("checked", false);
-        }
-        if (_.keys(selectedModels).length === (collection.fullCollection|| collection).length) {
-          this.checkbox().prop("checked", true);
-        }
-      });
+        "backgrid:selected", function(model, selected) {
+          if (selected)
+            selectedModels[model.id || model.cid] = 1; else {
+            delete selectedModels[model.id || model.cid]
+            ;
+            this.checkbox().prop("checked", false);
+          }
+          if (_.keys(selectedModels).length === (collection.fullCollection || collection).length) {
+            this.checkbox().prop("checked", true);
+          }
+        });
 
-      this.listenTo(collection.fullCollection || collection, "remove", function (model) {
-        delete selectedModels[model.id || model.cid];
+      this.listenTo(collection.fullCollection || collection, "remove", function(model) {
+        delete selectedModels[model.id || model.cid]
+        ;
         if ((collection.fullCollection || collection).length === 0) {
           this.checkbox().prop("checked", false);
         }
       });
 
-      this.listenTo(collection, "backgrid:refresh", function () {
+      this.listenTo(collection, "backgrid:refresh", function() {
         if ((collection.fullCollection || collection).length === 0) {
           this.checkbox().prop("checked", false);
-        }
-        else {
+        } else {
           var checked = this.checkbox().prop("checked");
           for (var i = 0; i < collection.length; i++) {
             var model = collection.at(i);
@@ -204,12 +199,13 @@
         }
       });
 
-      var column = this.column, $el = this.$el;
-      this.listenTo(column, "change:renderable", function (column, renderable) {
+      var column = this.column,
+        $el = this.$el;
+      this.listenTo(column, "change:renderable", function(column, renderable) {
         $el.toggleClass("renderable", renderable);
       });
 
-      if (Backgrid.callByNeed(column.renderable(), column, collection)) $el.addClass("renderable");
+      if (Backgrid.callByNeed(column.renderable(), column, collection))$el.addClass("renderable");
     },
 
     /**
@@ -225,16 +221,16 @@
        This method triggers a 'backgrid:select-all' event on the collection
        afterwards.
     */
-    onChange: function () {
+    onChange: function() {
       var checked = this.checkbox().prop("checked");
 
       var collection = this.collection;
-      collection.each(function (model) {
+      collection.each(function(model) {
         model.trigger("backgrid:select", model, checked);
       });
 
       if (collection.fullCollection) {
-        collection.fullCollection.each(function (model) {
+        collection.fullCollection.each(function(model) {
           if (!collection.get(model.cid)) {
             model.trigger("backgrid:selected", model, checked);
           }
@@ -243,7 +239,6 @@
 
       this.collection.trigger("backgrid:select-all", this.collection, checked);
     }
-
   });
 
   /**
@@ -254,7 +249,7 @@
      @member Backgrid.Grid
      @return {Array.<Backbone.Model>}
   */
-  Backgrid.Grid.prototype.getSelectedModels = function () {
+  Backgrid.Grid.prototype.getSelectedModels = function() {
     var selectAllHeaderCell;
     var headerCells = this.header.row.cells;
     for (var i = 0, l = headerCells.length; i < l; i++) {
@@ -283,12 +278,11 @@
 
      @member Backgrid.Grid
    */
-  Backgrid.Grid.prototype.clearSelectedModels = function () {
+  Backgrid.Grid.prototype.clearSelectedModels = function() {
     var selectedModels = this.getSelectedModels();
     for (var i = 0, l = selectedModels.length; i < l; i++) {
       var model = selectedModels[i];
       model.trigger("backgrid:select", model, false);
     }
   };
-
 }));

@@ -8,7 +8,6 @@ module.exports = Backgrid.Cell.extend({
   },
 
   _onClick: function() {
-
     var self = this;
 
     this.$el.tooltip('hide');

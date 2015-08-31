@@ -58,7 +58,6 @@ module.exports = function() {
   $.fn.processClientError = function(error) {};
 
   $.fn.addFormError = function(error) {
-
     var errorMessage = this.formatErrorMessage(error);
 
     var target = this.find('.modal-body');
@@ -82,7 +81,6 @@ module.exports = function() {
   };
 
   $.fn.formatErrorMessage = function(error) {
-
     var errorMessage = error.errorMessage;
 
     if (error.infoLink) {

@@ -70,7 +70,7 @@ module.exports = Marionette.Layout.extend({
     if (this.releaseCollection.length === 0) {
       this.mainView = new NoResultsView();
     } else {
-      this.mainView = new ManualSearchLayout({collection: this.releaseCollection});
+      this.mainView = new ManualSearchLayout({ collection: this.releaseCollection });
     }
 
     this._showMainView();

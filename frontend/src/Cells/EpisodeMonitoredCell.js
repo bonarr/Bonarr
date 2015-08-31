@@ -9,7 +9,6 @@ module.exports = ToggleCell.extend({
   _originalOnClick: ToggleCell.prototype._onClick,
 
   _onClick: function(e) {
-
     var series = SeriesCollection.get(this.model.get('seriesId'));
 
     if (!series.get('monitored')) {

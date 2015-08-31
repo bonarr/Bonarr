@@ -135,7 +135,7 @@ module.exports = Marionette.Layout.extend({
 
   _refreshTable: function(buttonContext) {
     this.collection.state.currentPage = 1;
-    var promise = this.collection.fetch({reset: true});
+    var promise = this.collection.fetch({ reset: true });
 
     if (buttonContext) {
       buttonContext.ui.icon.spinForPromise(promise);

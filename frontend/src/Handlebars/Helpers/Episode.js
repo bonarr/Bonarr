@@ -4,7 +4,6 @@ var moment = require('moment');
 require('../../Activity/Queue/QueueCollection');
 
 Handlebars.registerHelper('EpisodeNumber', function() {
-
   if (this.series.seriesType === 'daily') {
     return moment(this.airDate).format('L');
   } else if (this.series.seriesType === 'anime' && this.absoluteEpisodeNumber !== undefined) {

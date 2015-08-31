@@ -11,7 +11,7 @@ module.exports = Marionette.CollectionView.extend({
 
   initialize: function() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
-    this.collection = new UpcomingCollection().bindSignalR({updateOnly: true});
+    this.collection = new UpcomingCollection().bindSignalR({ updateOnly: true });
     this._fetchCollection();
 
     this._fetchCollection = _.bind(this._fetchCollection, this);
@@ -30,6 +30,6 @@ module.exports = Marionette.CollectionView.extend({
   },
 
   _fetchCollection: function() {
-    this.collection.fetch({data: {unmonitored: this.showUnmonitored}});
+    this.collection.fetch({ data: { unmonitored: this.showUnmonitored } });
   }
 });

@@ -8,7 +8,6 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   templateHelpers: function() {
-
     var xhr = this.xhr;
 
     var data = {

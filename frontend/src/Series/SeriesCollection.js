@@ -39,7 +39,7 @@ var Collection = PageableCollection.extend({
     });
 
     this.listenTo(proxy, 'sync', function(proxyModel, models) {
-      this.add(models, {merge: true});
+      this.add(models, { merge: true });
       this.trigger('save', this);
     });
 
@@ -108,4 +108,4 @@ Collection = AsPersistedStateCollection.call(Collection);
 
 var data = ApiData.get('series');
 
-module.exports = new Collection(data, {full: true});
+module.exports = new Collection(data, { full: true });

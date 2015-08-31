@@ -32,7 +32,7 @@ module.exports = Marionette.CompositeView.extend({
       var currentIndex = index;
       var folderName = model.get('folder').name;
       this.addItemView(model, this.getItemView(), index);
-      this.children.findByModel(model).search({term: folderName}).always(function() {
+      this.children.findByModel(model).search({ term: folderName }).always(function() {
         if (!self.isClosed) {
           self._showAndSearch(currentIndex + 1);
         }
@@ -45,5 +45,4 @@ module.exports = Marionette.CompositeView.extend({
   itemViewOptions: {
     isExisting: true
   }
-
 });

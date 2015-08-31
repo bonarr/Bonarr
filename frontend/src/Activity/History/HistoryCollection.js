@@ -47,7 +47,7 @@ var Collection = PageableCollection.extend({
   },
 
   sortMappings: {
-    'series': {sortKey: 'series.sortTitle'}
+    'series': { sortKey: 'series.sortTitle' }
   },
 
   initialize: function(options) {
@@ -61,7 +61,7 @@ var Collection = PageableCollection.extend({
   },
 
   parseState: function(resp) {
-    return {totalRecords: resp.totalRecords};
+    return { totalRecords: resp.totalRecords };
   },
 
   parseRecords: function(resp) {

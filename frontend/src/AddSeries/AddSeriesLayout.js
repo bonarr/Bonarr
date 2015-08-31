@@ -62,7 +62,7 @@ module.exports = Marionette.Layout.extend({
   _folderSelected: function(options) {
     vent.trigger(vent.Commands.CloseFullscreenModal);
 
-    this.workspace.show(new ExistingSeriesCollectionView({model: options.model}));
+    this.workspace.show(new ExistingSeriesCollectionView({ model: options.model }));
   },
 
   _importSeries: function() {

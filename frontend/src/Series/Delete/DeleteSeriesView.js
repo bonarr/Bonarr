@@ -15,20 +15,16 @@ module.exports = Marionette.ItemView.extend({
     indicator: '.x-indicator'
   },
 
-
-
-
-
   removeSeries: function() {
     var self = this;
     var deleteFiles = this.ui.deleteFiles.prop('checked');
     this.ui.indicator.show();
 
     this.model.destroy({
-      data: {'deleteFiles': deleteFiles},
+      data: { 'deleteFiles': deleteFiles },
       wait: true
     }).done(function() {
-      vent.trigger(vent.Events.SeriesDeleted, {series: self.model});
+      vent.trigger(vent.Events.SeriesDeleted, { series: self.model });
       vent.trigger(vent.Commands.CloseModal, this);
     });
   },

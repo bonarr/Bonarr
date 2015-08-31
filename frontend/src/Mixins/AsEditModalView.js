@@ -98,7 +98,7 @@ module.exports = function() {
   };
 
   this.prototype._delete = function() {
-    var view = new this._deleteView({model: this.model});
+    var view = new this._deleteView({ model: this.model });
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
   };
 

@@ -96,7 +96,7 @@ module.exports = Marionette.Layout.extend({
     }
 
     var model = this.collection.first();
-    this._fetchLogFileContents({model: model});
+    this._fetchLogFileContents({ model: model });
   },
 
   _fetchLogFileContents: function(options) {
@@ -107,11 +107,11 @@ module.exports = Marionette.Layout.extend({
 
     this.listenToOnce(contentsModel, 'sync', this._showDetails);
 
-    contentsModel.fetch({dataType: 'text'});
+    contentsModel.fetch({ dataType: 'text' });
   },
 
   _showDetails: function(model) {
-    this.contents.show(new ContentsView({model: model}));
+    this.contents.show(new ContentsView({ model: model }));
   },
 
   _refreshTable: function(buttonContext) {

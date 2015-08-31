@@ -16,7 +16,6 @@ require('jquery.dotdotdot');
 require('jquery.lazyload');
 
 var SearchResultItemView = Marionette.ItemView.extend({
-
   template: 'AddSeries/AddNewSeries/SearchResultItemView',
 
   ui: {
@@ -52,7 +51,7 @@ var SearchResultItemView = Marionette.ItemView.extend({
   templateHelpers: function() {
     var helpers = {};
 
-    var existingSeries = SeriesCollection.findWhere({tvdbId: this.model.get('tvdbId')});
+    var existingSeries = SeriesCollection.findWhere({ tvdbId: this.model.get('tvdbId') });
 
     if (existingSeries) {
       helpers.existing = existingSeries.toJSON();
@@ -184,7 +183,7 @@ var SearchResultItemView = Marionette.ItemView.extend({
       seasonFolder: seasonFolder,
       seriesType: seriesType,
       addOptions: options
-    }, {silent: true});
+    }, { silent: true });
 
     var self = this;
     var promise = this.model.save();
@@ -211,7 +210,7 @@ var SearchResultItemView = Marionette.ItemView.extend({
           goToSeries: {
             label: 'Go to Series',
             action: function() {
-              Backbone.history.navigate('/series/' + self.model.get('titleSlug'), {trigger: true});
+              Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
             }
           }
         },
@@ -219,14 +218,14 @@ var SearchResultItemView = Marionette.ItemView.extend({
         hideOnNavigate: true
       });
 
-      vent.trigger(vent.Events.SeriesAdded, {series: self.model});
+      vent.trigger(vent.Events.SeriesAdded, { series: self.model });
     });
   },
 
   _getAddSeriesOptions: function() {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
-    var firstSeason = _.min(_.reject(this.model.get('seasons'), {seasonNumber: 0}), 'seasonNumber');
+    var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');
 
     this.model.setSeasonPass(firstSeason.seasonNumber);
 
@@ -257,12 +256,12 @@ var SearchResultItemView = Marionette.ItemView.extend({
   },
 
   onClick: function() {
-    var existingSeries = SeriesCollection.findWhere({tvdbId: this.model.get('tvdbId')});
+    var existingSeries = SeriesCollection.findWhere({ tvdbId: this.model.get('tvdbId') });
 
     if (existingSeries) {
 
     } else {
-      vent.trigger(vent.Commands.OpenFullscreenModal, new AddSeriesModal({model: this.model}));
+      vent.trigger(vent.Commands.OpenFullscreenModal, new AddSeriesModal({ model: this.model }));
     }
   }
 });

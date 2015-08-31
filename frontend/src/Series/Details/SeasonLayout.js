@@ -90,7 +90,7 @@ module.exports = Marionette.Layout.extend({
       return episode.get('hasFile') || episode.get('monitored') && moment(episode.get('airDateUtc')).isBefore(moment());
     }).length;
 
-    var episodeFileCount = this.episodeCollection.where({hasFile: true}).length;
+    var episodeFileCount = this.episodeCollection.where({ hasFile: true }).length;
     var percentOfEpisodes = 100;
 
     if (episodeCount > 0) {
@@ -147,7 +147,6 @@ module.exports = Marionette.Layout.extend({
       }
     });
     this.ui.panel.toggleClass('expanded', this.showingEpisodes);
-
   },
 
   _seasonSearch: function() {
@@ -189,7 +188,7 @@ module.exports = Marionette.Layout.extend({
     var self = this;
 
     _.each(this.episodeCollection.models, function(episode) {
-      episode.set({monitored: self.model.get('monitored')});
+      episode.set({ monitored: self.model.get('monitored') });
     });
 
     this.render();
@@ -283,7 +282,7 @@ module.exports = Marionette.Layout.extend({
   _updateEpisodeCollection: function() {
     var self = this;
 
-    this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, {merge: true});
+    this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge: true });
 
     this.episodeCollection.each(function(model) {
       model.episodeCollection = self.episodeCollection;

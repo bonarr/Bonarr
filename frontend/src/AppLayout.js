@@ -21,4 +21,4 @@ var AppLayout = Marionette.Layout.extend({
   }
 });
 
-module.exports = new AppLayout({el: 'body'});
+module.exports = new AppLayout({ el: 'body' });

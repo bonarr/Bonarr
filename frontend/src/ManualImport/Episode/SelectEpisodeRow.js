@@ -8,7 +8,6 @@ module.exports = Backgrid.Row.extend({
   },
 
   _toggle: function(e) {
-
     if (e.target.type === 'checkbox') {
       return;
     }

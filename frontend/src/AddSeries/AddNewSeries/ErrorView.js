@@ -1,7 +1,6 @@
 var Marionette = require('marionette');
 
 module.exports = Marionette.CompositeView.extend({
-
   template: 'AddSeries/AddNewSeries/ErrorView',
 
   initialize: function(options) {

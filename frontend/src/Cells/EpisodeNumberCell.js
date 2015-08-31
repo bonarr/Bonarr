@@ -6,7 +6,6 @@ module.exports = NzbDroneCell.extend({
   className: 'episode-number-cell',
 
   render: function() {
-
     this.$el.empty();
 
     var airDateField = this.column.get('airDateUtc') || 'airDateUtc';

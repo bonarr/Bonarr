@@ -58,7 +58,6 @@ var view = Marionette.ItemView.extend({
   },
 
   _setAuthOptionsVisibility: function() {
-
     var showAuthOptions = this.ui.authToggle.val() !== 'none';
 
     if (showAuthOptions) {
@@ -69,7 +68,6 @@ var view = Marionette.ItemView.extend({
   },
 
   _setSslOptionsVisibility: function() {
-
     var showSslOptions = this.ui.sslToggle.prop('checked');
 
     if (showSslOptions) {
@@ -94,7 +92,6 @@ var view = Marionette.ItemView.extend({
   },
 
   _setScriptGroupVisibility: function() {
-
     if (this._showScriptGroup()) {
       this.ui.scriptGroup.slideDown();
     } else {

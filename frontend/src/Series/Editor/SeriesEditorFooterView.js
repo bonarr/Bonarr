@@ -118,7 +118,7 @@ module.exports = Marionette.ItemView.extend({
 
   _organizeFiles: function() {
     var selected = this.editorGrid.getSelectedModels();
-    var updateFilesSeriesView = new UpdateFilesSeriesView({series: selected});
+    var updateFilesSeriesView = new UpdateFilesSeriesView({ series: selected });
     this.listenToOnce(updateFilesSeriesView, 'updatingFiles', this._afterSave);
 
     vent.trigger(vent.Commands.OpenFullscreenModal, updateFilesSeriesView);

@@ -2,10 +2,8 @@ var _ = require('underscore');
 var Config = require('../Config');
 
 module.exports = function() {
-
   var originalInit = this.prototype.initialize;
   this.prototype.initialize = function(options) {
-
     options = options || {};
 
     if (options.tableName) {

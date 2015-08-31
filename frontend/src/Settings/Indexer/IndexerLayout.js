@@ -34,9 +34,9 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.indexers.show(new CollectionView({collection: this.indexersCollection}));
-      this.indexerOptions.show(new OptionsView({model: this.model}));
-      this.restriction.show(new RestrictionCollectionView({collection: this.restrictionCollection}));
+      this.indexers.show(new CollectionView({ collection: this.indexersCollection }));
+      this.indexerOptions.show(new OptionsView({ model: this.model }));
+      this.restriction.show(new RestrictionCollectionView({ collection: this.restrictionCollection }));
     }, this));
   }
 });

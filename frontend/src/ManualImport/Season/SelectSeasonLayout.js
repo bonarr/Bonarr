@@ -9,7 +9,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   initialize: function(options) {
-
     this.templateHelpers = {
       seasons: options.seasons
     };
@@ -22,7 +21,7 @@ module.exports = Marionette.Layout.extend({
       return;
     }
 
-    this.trigger('manualimport:selected:season', {seasonNumber: seasonNumber});
+    this.trigger('manualimport:selected:season', { seasonNumber: seasonNumber });
     vent.trigger(vent.Commands.CloseModal);
   }
 });

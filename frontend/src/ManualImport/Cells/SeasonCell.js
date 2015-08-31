@@ -27,7 +27,7 @@ module.exports = NzbDroneCell.extend({
       return;
     }
 
-    var view = new SelectSeasonLayout({seasons: series.seasons});
+    var view = new SelectSeasonLayout({ seasons: series.seasons });
 
     this.listenTo(view, 'manualimport:selected:season', this._setSeason);
 

@@ -32,7 +32,7 @@ module.exports = NzbDroneCell.extend({
       return;
     }
 
-    var view = new SelectEpisodeLayout({series: series, seasonNumber: seasonNumber});
+    var view = new SelectEpisodeLayout({ series: series, seasonNumber: seasonNumber });
 
     this.listenTo(view, 'manualimport:selected:episodes', this._setEpisodes);
 

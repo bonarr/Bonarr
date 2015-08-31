@@ -15,7 +15,7 @@ function defaultImage(url, size) {
 }
 
 function getPosterUrl(images, size) {
-  var poster = _.findWhere(images, {coverType: 'poster'});
+  var poster = _.findWhere(images, { coverType: 'poster' });
   if (poster) {
     var url = poster.url;
 

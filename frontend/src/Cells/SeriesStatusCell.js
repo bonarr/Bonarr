@@ -23,6 +23,6 @@ module.exports = NzbDroneCell.extend({
   },
 
   _setStatusWeight: function(weight) {
-    this.model.set('statusWeight', weight, {silent: true});
+    this.model.set('statusWeight', weight, { silent: true });
   }
 });

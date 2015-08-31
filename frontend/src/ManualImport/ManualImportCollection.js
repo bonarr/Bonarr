@@ -30,7 +30,7 @@ var Collection = PageableCollection.extend({
   fetch: function(options) {
     options = options || {};
 
-    options.data = {folder: this.folder, downloadId: this.downloadId};
+    options.data = { folder: this.folder, downloadId: this.downloadId };
 
     return this.originalFetch.call(this, options);
   },

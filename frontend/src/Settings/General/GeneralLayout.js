@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.general.show(new GeneralView({model: this.model}));
+      this.general.show(new GeneralView({ model: this.model }));
     }, this));
   }
 });

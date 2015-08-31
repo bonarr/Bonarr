@@ -43,7 +43,6 @@ module.exports = {
   },
 
   setValue: function(key, value) {
-
     console.log('Config: [{0}] => [{1}]'.format(key, value));
 
     if (this.getValue(key) === value.toString()) {

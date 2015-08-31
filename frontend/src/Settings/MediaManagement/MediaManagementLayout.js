@@ -33,10 +33,10 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.episodeNaming.show(new NamingView({model: this.namingModel}));
-      this.sorting.show(new SortingView({model: this.model}));
-      this.fileManagement.show(new FileManagementView({model: this.model}));
-      this.permissions.show(new PermissionsView({model: this.model}));
+      this.episodeNaming.show(new NamingView({ model: this.namingModel }));
+      this.sorting.show(new SortingView({ model: this.model }));
+      this.fileManagement.show(new FileManagementView({ model: this.model }));
+      this.permissions.show(new PermissionsView({ model: this.model }));
     }, this));
   }
 });

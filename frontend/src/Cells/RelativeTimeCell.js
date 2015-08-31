@@ -7,7 +7,6 @@ module.exports = NzbDroneCell.extend({
   className: 'relative-time-cell',
 
   render: function() {
-
     var dateStr = this.model.get(this.column.get('name'));
 
     if (dateStr) {

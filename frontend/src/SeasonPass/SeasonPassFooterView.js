@@ -84,7 +84,7 @@ module.exports = Marionette.ItemView.extend({
   _getMonitoringOptions: function(model) {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(model.get('seasons'), 'seasonNumber');
-    var firstSeason = _.min(_.reject(model.get('seasons'), {seasonNumber: 0}), 'seasonNumber');
+    var firstSeason = _.min(_.reject(model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');
 
     model.setSeasonPass(firstSeason.seasonNumber);
 

@@ -6,7 +6,6 @@ module.exports = Backbone.Collection.extend({
   model: UnmappedFolderModel,
 
   importItems: function(rootFolderModel) {
-
     this.reset();
     var rootFolder = rootFolderModel;
 

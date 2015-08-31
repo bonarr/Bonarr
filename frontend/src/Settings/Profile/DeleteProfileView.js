@@ -9,7 +9,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _removeProfile: function() {
-    this.model.destroy({wait: true}).done(function() {
+    this.model.destroy({ wait: true }).done(function() {
       vent.trigger(vent.Commands.CloseFullscreenModal);
     });
   }

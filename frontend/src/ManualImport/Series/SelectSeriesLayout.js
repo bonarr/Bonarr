@@ -82,11 +82,11 @@ module.exports = Marionette.Layout.extend({
   },
 
   _filter: function(term) {
-    this.seriesCollection.setFilter({key: 'title', value: term, type: 'contains'});
+    this.seriesCollection.setFilter({ key: 'title', value: term, type: 'contains' });
   },
 
   _onSelected: function(e) {
-    this.trigger('manualimport:selected:series', {model: e.model});
+    this.trigger('manualimport:selected:series', { model: e.model });
 
     vent.trigger(vent.Commands.CloseModal);
   },

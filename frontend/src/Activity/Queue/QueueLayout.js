@@ -105,7 +105,7 @@ module.exports = Marionette.Layout.extend({
           tooltip: 'Refresh Queue',
           icon: 'icon-sonarr-refresh',
           command: 'checkForFinishedDownload',
-          properties: {sendUpdates: true}
+          properties: { sendUpdates: true }
         }
       ]
     };

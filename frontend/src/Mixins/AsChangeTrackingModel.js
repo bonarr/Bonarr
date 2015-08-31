@@ -2,7 +2,6 @@ module.exports = function() {
   var originalInit = this.prototype.initialize;
 
   this.prototype.initialize = function() {
-
     this.isSaved = true;
 
     this.on('change', function() {

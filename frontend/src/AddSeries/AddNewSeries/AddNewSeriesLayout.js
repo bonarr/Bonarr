@@ -9,7 +9,6 @@ var ErrorView = require('./ErrorView');
 var EmptyView = require('./EmptyView');
 
 module.exports = Marionette.Layout.extend({
-
   id: 'add-new-series',
 
   template: 'AddSeries/AddNewSeries/AddNewSeriesLayout',
@@ -93,7 +92,7 @@ module.exports = Marionette.Layout.extend({
     this.searchResult.show(new EmptyView());
     this.ui.seriesSearch.focus();
 
-    this.search({term: 'wire'});
+    this.search({ term: 'wire' });
   },
 
   onSearchKeyUp: function() {

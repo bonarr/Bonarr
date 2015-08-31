@@ -54,7 +54,7 @@ var view = Marionette.ItemView.extend({
       numberStyle: numberStyle,
       replaceSpaces: replaceSpaces,
       separator: separator
-    }, {silent: true});
+    }, { silent: true });
   },
 
   _buildFormat: function() {

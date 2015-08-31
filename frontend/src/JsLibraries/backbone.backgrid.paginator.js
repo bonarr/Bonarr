@@ -5,14 +5,13 @@
   Copyright (c) 2013 Jimmy Yuen Ho Wong and contributors
   Licensed under the MIT @license.
 */
-(function (root, factory) {
-
+( function(root, factory) {
   // CommonJS
   if (typeof exports == "object") {
     module.exports = factory(require("underscore"),
-                             require("backbone"),
-                             require("backgrid"),
-                             require("backbone.paginator"));
+      require("backbone"),
+      require("backgrid"),
+      require("backbone.paginator"));
   }
   // AMD. Register as an anonymous module.
   else if (typeof define === 'function' && define.amd) {
@@ -22,9 +21,7 @@
   else {
     factory(root._, root.Backbone, root.Backgrid);
   }
-
-}(this, function (_, Backbone, Backgrid) {
-
+}(this, function(_, Backbone, Backgrid) {
   "use strict";
 
   /**
@@ -68,7 +65,6 @@
      @class Backgrid.Extension.PageHandle
   */
   var PageHandle = Backgrid.Extension.PageHandle = Backbone.View.extend({
-
     /** @property */
     tagName: "li",
 
@@ -84,7 +80,7 @@
        parameter, which contains a mandatory `label` key which provides the
        label value to be displayed.
     */
-    title: function (data) {
+    title: function(data) {
       return 'Page ' + data.label;
     },
 
@@ -129,7 +125,7 @@
        @param {boolean} [options.isForward=false]
        @param {boolean} [options.isFastForward=false]
     */
-    initialize: function (options) {
+    initialize: function(options) {
       var collection = this.collection;
       var state = collection.state;
       var currentPage = state.currentPage;
@@ -137,14 +133,14 @@
       var lastPage = state.lastPage;
 
       _.extend(this, _.pick(options,
-                            ["isRewind", "isBack", "isForward", "isFastForward"]));
+        ["isRewind", "isBack", "isForward", "isFastForward"]));
 
       var pageIndex;
-      if (this.isRewind) pageIndex = firstPage;
-      else if (this.isBack) pageIndex = Math.max(firstPage, currentPage - 1);
-      else if (this.isForward) pageIndex = Math.min(lastPage, currentPage + 1);
-      else if (this.isFastForward) pageIndex = lastPage;
-      else {
+      if (this.isRewind)
+        pageIndex = firstPage;else if (this.isBack)
+        pageIndex = Math.max(firstPage, currentPage - 1);else if (this.isForward)
+        pageIndex = Math.min(lastPage, currentPage + 1);else if (this.isFastForward)
+        pageIndex = lastPage; else {
         pageIndex = +options.pageIndex;
         pageIndex = (firstPage ? pageIndex + 1 : pageIndex);
       }
@@ -152,17 +148,18 @@
 
       this.label = (options.label || (firstPage ? pageIndex : pageIndex + 1)) + '';
       var title = options.title || this.title;
-      this.title = _.isFunction(title) ? title({label: this.label}) : title;
+      this.title = _.isFunction(title) ? title({ label: this.label }) : title;
     },
 
     /**
        Renders a clickable anchor element under a list item.
     */
-    render: function () {
+    render: function() {
       this.$el.empty();
       var anchor = document.createElement("a");
       anchor.href = '#';
-      if (this.title) anchor.title = this.title;
+      if (this.title)
+        anchor.title = this.title;
       anchor.innerHTML = this.label;
       this.el.appendChild(anchor);
 
@@ -172,16 +169,15 @@
       var pageIndex = this.pageIndex;
 
       if (this.isRewind && currentPage == state.firstPage ||
-         this.isBack && !collection.hasPreviousPage() ||
-         this.isForward && !collection.hasNextPage() ||
-         this.isFastForward && (currentPage == state.lastPage || state.totalPages < 1)) {
+        this.isBack && !collection.hasPreviousPage() ||
+        this.isForward && !collection.hasNextPage() ||
+        this.isFastForward && (currentPage == state.lastPage || state.totalPages < 1)) {
         this.$el.addClass("disabled");
-      }
-      else if (!(this.isRewind ||
-                 this.isBack ||
-                 this.isForward ||
-                 this.isFastForward) &&
-               state.currentPage == pageIndex) {
+      } else if (!(this.isRewind ||
+        this.isBack ||
+        this.isForward ||
+        this.isFastForward) &&
+        state.currentPage == pageIndex) {
         this.$el.addClass("active");
       }
 
@@ -193,19 +189,16 @@
        jQuery click event handler. Goes to the page this PageHandle instance
        represents. No-op if this page handle is currently active or disabled.
     */
-    changePage: function (e) {
+    changePage: function(e) {
       e.preventDefault();
-      var $el = this.$el, col = this.collection;
+      var $el = this.$el,
+        col = this.collection;
       if (!$el.hasClass("active") && !$el.hasClass("disabled")) {
-        if (this.isRewind) col.getFirstPage();
-        else if (this.isBack) col.getPreviousPage();
-        else if (this.isForward) col.getNextPage();
-        else if (this.isFastForward) col.getLastPage();
-        else col.getPage(this.pageIndex, {reset: true});
+        if (this.isRewind)col.getFirstPage();else if (this.isBack)col.getPreviousPage();else if (this.isForward)col.getNextPage();else if (this.isFastForward)col.getLastPage();
+        else col.getPage(this.pageIndex, { reset: true });
       }
       return this;
     }
-
   });
 
   /**
@@ -219,7 +212,6 @@
      @class Backgrid.Extension.Paginator
   */
   var Paginator = Backgrid.Extension.Paginator = Backbone.View.extend({
-
     /** @property */
     className: "backgrid-paginator",
 
@@ -286,21 +278,21 @@
        @param {boolean} [options.pageHandle=Backgrid.Extension.PageHandle]
        @param {boolean} [options.goBackFirstOnSort=true]
     */
-    initialize: function (options) {
+    initialize: function(options) {
       var self = this;
       self.controls = _.defaults(options.controls || {}, self.controls,
-                                 Paginator.prototype.controls);
+        Paginator.prototype.controls);
 
       _.extend(self, _.pick(options || {}, "windowSize", "pageHandle",
-                            "slideScale", "goBackFirstOnSort",
-                            "renderIndexedPageHandles"));
+        "slideScale", "goBackFirstOnSort",
+        "renderIndexedPageHandles"));
 
       var col = self.collection;
       self.listenTo(col, "add", self.render);
       self.listenTo(col, "remove", self.render);
       self.listenTo(col, "reset", self.render);
-      self.listenTo(col, "backgrid:sorted", function () {
-        if (self.goBackFirstOnSort) col.getFirstPage({reset: true});
+      self.listenTo(col, "backgrid:sorted", function() {
+        if (self.goBackFirstOnSort)col.getFirstPage({ reset: true });
       });
     },
 
@@ -319,7 +311,7 @@
 
       @return {0|1}
      */
-    slideMaybe: function (firstPage, lastPage, currentPage, windowSize, slideScale) {
+    slideMaybe: function(firstPage, lastPage, currentPage, windowSize, slideScale) {
       return Math.round(currentPage % windowSize / windowSize);
     },
 
@@ -338,11 +330,11 @@
 
       @return {number}
      */
-    slideThisMuch: function (firstPage, lastPage, currentPage, windowSize, slideScale) {
+    slideThisMuch: function(firstPage, lastPage, currentPage, windowSize, slideScale) {
       return ~~(windowSize * slideScale);
     },
 
-    _calculateWindow: function () {
+    _calculateWindow: function() {
       var collection = this.collection;
       var state = collection.state;
 
@@ -357,7 +349,7 @@
       var windowStart = Math.floor(currentPage / windowSize) * windowSize;
       if (currentPage <= lastPage - this.slideThisMuch()) {
         windowStart += (this.slideMaybe(firstPage, lastPage, currentPage, windowSize, slideScale) *
-                        this.slideThisMuch(firstPage, lastPage, currentPage, windowSize, slideScale));
+          this.slideThisMuch(firstPage, lastPage, currentPage, windowSize, slideScale));
       }
       var windowEnd = Math.min(lastPage + 1, windowStart + windowSize);
       return [windowStart, windowEnd];
@@ -368,13 +360,13 @@
 
        @return {Array.<Object>} an array of page handle objects hashes
     */
-    makeHandles: function () {
-
+    makeHandles: function() {
       var handles = [];
       var collection = this.collection;
 
       var window = this._calculateWindow();
-      var winStart = window[0], winEnd = window[1];
+      var winStart = window[0],
+        winEnd = window[1];
 
       if (this.renderIndexedPageHandles) {
         for (var i = winStart; i < winEnd; i++) {
@@ -386,7 +378,7 @@
       }
 
       var controls = this.controls;
-      _.each(["back", "rewind", "forward", "fastForward"], function (key) {
+      _.each(["back", "rewind", "forward", "fastForward"], function(key) {
         var value = controls[key];
         if (value) {
           var handleCtorOpts = {
@@ -396,7 +388,7 @@
           };
           handleCtorOpts["is" + key.slice(0, 1).toUpperCase() + key.slice(1)] = true;
           var handle = new this.pageHandle(handleCtorOpts);
-          if (key == "rewind" || key == "back") handles.unshift(handle);
+          if (key == "rewind" || key == "back")handles.unshift(handle);
           else handles.push(handle);
         }
       }, this);
@@ -407,7 +399,7 @@
     /**
        Render the paginator handles inside an unordered list.
     */
-    render: function () {
+    render: function() {
       this.$el.empty();
 
       if (this.handles) {
@@ -427,7 +419,5 @@
 
       return this;
     }
-
   });
-
 }));

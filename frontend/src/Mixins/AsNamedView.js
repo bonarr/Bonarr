@@ -4,7 +4,6 @@ module.exports = function() {
   var originalRender = this.render;
 
   this.render = function() {
-
     var renderResult = originalRender.apply(this, arguments);
 
     if (window.Sonarr.NameViews) {

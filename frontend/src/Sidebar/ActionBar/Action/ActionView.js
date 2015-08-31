@@ -37,7 +37,7 @@ module.exports = Marionette.ItemView.extend({
     var command = this.model.get('command');
 
     if (command) {
-      var properties = _.extend({name: command}, this.model.get('properties'));
+      var properties = _.extend({ name: command }, this.model.get('properties'));
 
       CommandController.bindToCommand({
         command: properties,
@@ -66,7 +66,7 @@ module.exports = Marionette.ItemView.extend({
   invokeRoute: function() {
     var route = this.model.get('route');
     if (route) {
-      Backbone.history.navigate(route, {trigger: true});
+      Backbone.history.navigate(route, { trigger: true });
     }
   },
 

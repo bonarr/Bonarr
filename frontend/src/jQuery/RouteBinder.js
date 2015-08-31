@@ -6,7 +6,6 @@ var StatusModel = require('../System/StatusModel');
 //causing links to reload pages.
 
 var routeBinder = {
-
   bind: function() {
     var self = this;
     $(document).on('click', 'a[href]', function(event) {
@@ -51,7 +50,7 @@ var routeBinder = {
       } else {
         var relativeHref = href.replace(StatusModel.get('urlBase'), '');
 
-        Backbone.history.navigate(relativeHref, {trigger: true});
+        Backbone.history.navigate(relativeHref, { trigger: true });
       }
     } else if (href.contains('#')) {
       //Open in new tab without dereferer (since it doesn't support fragments)

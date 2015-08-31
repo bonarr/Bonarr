@@ -15,7 +15,6 @@ module.exports = {
     var groupedSchemaCollection = new Backbone.Collection();
 
     schemaCollection.on('sync', function() {
-
       var groups = schemaCollection.groupBy(function(model, iterator) {
         return model.get('protocol');
       });

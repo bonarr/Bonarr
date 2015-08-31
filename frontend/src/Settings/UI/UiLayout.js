@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.uiRegion.show(new UiView({model: this.model}));
+      this.uiRegion.show(new UiView({ model: this.model }));
     }, this));
   }
 });

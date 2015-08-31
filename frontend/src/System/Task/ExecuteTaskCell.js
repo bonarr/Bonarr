@@ -18,13 +18,13 @@ module.exports = NzbDroneCell.extend({
 
     CommandController.bindToCommand({
       element: this.$el.find('.x-execute'),
-      command: {name: task}
+      command: { name: task }
     });
 
     return this;
   },
 
   _executeTask: function() {
-    CommandController.Execute(this.model.get('taskName'), {name: this.model.get('taskName')});
+    CommandController.Execute(this.model.get('taskName'), { name: this.model.get('taskName') });
   }
 });

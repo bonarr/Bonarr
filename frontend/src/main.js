@@ -42,9 +42,9 @@ app.addInitializer(function() {
   console.log('starting application');
 });
 
-app.addInitializer(SignalRBroadcaster.appInitializer, {app: app});
+app.addInitializer(SignalRBroadcaster.appInitializer, { app: app });
 
-app.addInitializer(Tooltip.appInitializer, {app: app});
+app.addInitializer(Tooltip.appInitializer, { app: app });
 
 app.addInitializer(function() {
   Backbone.history.start({
@@ -61,6 +61,7 @@ app.addInitializer(UiSettingsController.appInitializer);
 
 app.addInitializer(function() {
   var footerText = serverStatusModel.get('version');
+
   if (serverStatusModel.get('branch') !== 'master') {
     footerText += '</br>' + serverStatusModel.get('branch');
   }

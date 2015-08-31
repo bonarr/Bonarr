@@ -9,6 +9,6 @@ module.exports = Marionette.ItemView.extend({
   },
 
   serializeData: function() {
-    return {term: this.term};
+    return { term: this.term };
   }
 });

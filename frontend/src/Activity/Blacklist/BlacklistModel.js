@@ -2,7 +2,6 @@ var Backbone = require('backbone');
 var SeriesCollection = require('../../Series/SeriesCollection');
 
 module.exports = Backbone.Model.extend({
-
   //Hack to deal with Backbone 1.0's bug
   initialize: function() {
     this.url = function() {

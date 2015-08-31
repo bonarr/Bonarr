@@ -32,7 +32,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   onRender: function() {
-
     this.sortableListView = new DelayProfileCollectionView({
       sortable: true,
       collection: this.orderedCollection,

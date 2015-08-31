@@ -36,7 +36,7 @@ var view = Marionette.Layout.extend({
   },
 
   onShow: function() {
-    this.fieldsView = new EditProfileView({model: this.model});
+    this.fieldsView = new EditProfileView({ model: this.model });
     this._showFieldsView();
     var advancedShown = Config.getValueBoolean(Config.Keys.AdvancedSettings, false);
 
@@ -74,7 +74,7 @@ var view = Marionette.Layout.extend({
   },
 
   _onAfterSave: function() {
-    this.profileCollection.add(this.model, {merge: true});
+    this.profileCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
@@ -111,7 +111,7 @@ var view = Marionette.Layout.extend({
   },
 
   _isQualityInUse: function() {
-    return SeriesCollection.where({'profileId': this.model.id}).length !== 0;
+    return SeriesCollection.where({ 'profileId': this.model.id }).length !== 0;
   }
 });
 module.exports = AsEditModalView.call(view);

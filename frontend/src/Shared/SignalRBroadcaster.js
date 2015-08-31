@@ -69,7 +69,7 @@ module.exports = {
       }
     });
 
-    this.signalRconnection.start({transport: ['longPolling']});
+    this.signalRconnection.start({ transport: ['longPolling'] });
 
     return this;
   }

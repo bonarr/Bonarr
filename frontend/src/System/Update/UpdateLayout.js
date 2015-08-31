@@ -24,6 +24,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showUpdates: function() {
-    this.updates.show(new UpdateCollectionView({collection: this.updateCollection}));
+    this.updates.show(new UpdateCollectionView({ collection: this.updateCollection }));
   }
 });

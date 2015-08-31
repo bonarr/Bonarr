@@ -4,7 +4,6 @@ module.exports = NzbDroneCell.extend({
   className: 'history-quality-cell',
 
   render: function() {
-
     var title = '';
     var quality = this.model.get('quality');
     var revision = quality.revision;

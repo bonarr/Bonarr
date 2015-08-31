@@ -54,11 +54,10 @@ module.exports = Marionette.Layout.extend({
   onRender: function() {
     this.episodes.show(new LoadingView());
 
-    this.episodeCollection = new EpisodeCollection({seriesId: this.series.id});
+    this.episodeCollection = new EpisodeCollection({ seriesId: this.series.id });
     this.episodeCollection.fetch();
 
     this.listenToOnce(this.episodeCollection, 'sync', function() {
-
       this.episodeView = new Backgrid.Grid({
         columns: this.columns,
         collection: this.episodeCollection.bySeason(this.seasonNumber),
@@ -75,7 +74,7 @@ module.exports = Marionette.Layout.extend({
       return episode.toJSON();
     });
 
-    this.trigger('manualimport:selected:episodes', {episodes: episodes});
+    this.trigger('manualimport:selected:episodes', { episodes: episodes });
     vent.trigger(vent.Commands.CloseModal);
   }
 });

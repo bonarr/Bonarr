@@ -67,7 +67,7 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize: function() {
-    this.collection = new CutoffUnmetCollection().bindSignalR({updateOnly: true});
+    this.collection = new CutoffUnmetCollection().bindSignalR({ updateOnly: true });
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this._showActionBar();

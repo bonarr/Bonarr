@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.metadata.show(new MetadataCollectionView({collection: this.metadataCollection}));
+      this.metadata.show(new MetadataCollectionView({ collection: this.metadataCollection }));
     }, this));
   }
 });

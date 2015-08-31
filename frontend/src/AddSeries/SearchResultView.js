@@ -14,7 +14,6 @@ var AsValidatedView = require('../Mixins/AsValidatedView');
 require('jquery.dotdotdot');
 
 var view = Marionette.ItemView.extend({
-
   template: 'AddSeries/SearchResultViewTemplate',
 
   ui: {
@@ -40,7 +39,6 @@ var view = Marionette.ItemView.extend({
   },
 
   initialize: function() {
-
     if (!this.model) {
       throw 'model is required';
     }
@@ -54,7 +52,6 @@ var view = Marionette.ItemView.extend({
   },
 
   onRender: function() {
-
     var defaultProfile = Config.getValue(Config.Keys.DefaultProfileId);
     var defaultRoot = Config.getValue(Config.Keys.DefaultRootFolderId);
     var useSeasonFolder = Config.getValueBoolean(Config.Keys.UseSeasonFolder, true);
@@ -93,7 +90,7 @@ var view = Marionette.ItemView.extend({
   },
 
   _configureTemplateHelpers: function() {
-    var existingSeries = SeriesCollection.where({tvdbId: this.model.get('tvdbId')});
+    var existingSeries = SeriesCollection.where({ tvdbId: this.model.get('tvdbId') });
 
     if (existingSeries.length > 0) {
       this.templateHelpers.existing = existingSeries[0].toJSON();
@@ -182,7 +179,7 @@ var view = Marionette.ItemView.extend({
       seasonFolder: seasonFolder,
       seriesType: seriesType,
       addOptions: options
-    }, {silent: true});
+    }, { silent: true });
 
     var self = this;
     var promise = this.model.save();
@@ -209,7 +206,7 @@ var view = Marionette.ItemView.extend({
           goToSeries: {
             label: 'Go to Series',
             action: function() {
-              Backbone.history.navigate('/series/' + self.model.get('titleSlug'), {trigger: true});
+              Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
             }
           }
         },
@@ -217,7 +214,7 @@ var view = Marionette.ItemView.extend({
         hideOnNavigate: true
       });
 
-      vent.trigger(vent.Events.SeriesAdded, {series: self.model});
+      vent.trigger(vent.Events.SeriesAdded, { series: self.model });
     });
   },
 
@@ -229,7 +226,7 @@ var view = Marionette.ItemView.extend({
   _getAddSeriesOptions: function() {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
-    var firstSeason = _.min(_.reject(this.model.get('seasons'), {seasonNumber: 0}), 'seasonNumber');
+    var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');
 
     this.model.setSeasonPass(firstSeason.seasonNumber);
 

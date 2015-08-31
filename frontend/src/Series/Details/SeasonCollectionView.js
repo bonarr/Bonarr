@@ -4,7 +4,6 @@ var SeasonLayout = require('./SeasonLayout');
 var AsSortedCollectionView = require('../../Mixins/AsSortedCollectionView');
 
 var view = Marionette.CollectionView.extend({
-
   itemView: SeasonLayout,
 
   initialize: function(options) {

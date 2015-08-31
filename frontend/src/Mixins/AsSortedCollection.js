@@ -2,13 +2,12 @@ var _ = require('underscore');
 var Config = require('../Config');
 
 module.exports = function() {
-
   var originalSetSorting = this.prototype.setSorting;
 
   this.prototype.setSorting = function(sortKey, order, options) {
     var sortMapping = this._getSortMapping(sortKey);
 
-    options = _.defaults({sortValue: sortMapping.sortValue}, options || {});
+    options = _.defaults({ sortValue: sortMapping.sortValue }, options || {});
 
     return originalSetSorting.call(this, sortMapping.sortKey, order, options);
   };

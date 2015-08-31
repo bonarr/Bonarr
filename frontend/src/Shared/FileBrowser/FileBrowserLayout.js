@@ -84,11 +84,11 @@ module.exports = Marionette.Layout.extend({
 
   _fetchCollection: function(path) {
     this.ui.indicator.show();
-    var data = {includeFiles: this.collection.showFiles};
+    var data = { includeFiles: this.collection.showFiles };
     if (path) {
       data.path = path;
     }
-    this.collection.fetch({data: data});
+    this.collection.fetch({ data: data });
   },
 
   _showGrid: function() {

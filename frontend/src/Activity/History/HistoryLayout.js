@@ -64,7 +64,7 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize: function() {
-    this.collection = new HistoryCollection({tableName: 'history'});
+    this.collection = new HistoryCollection({ tableName: 'history' });
     this.listenTo(this.collection, 'sync', this._showTable);
 
     this._showActionBar();

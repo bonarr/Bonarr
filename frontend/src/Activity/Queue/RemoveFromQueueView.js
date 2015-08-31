@@ -25,7 +25,7 @@ module.exports = Marionette.ItemView.extend({
     this.ui.indicator.show();
 
     this.model.destroy({
-      data: {'blacklist': blacklist},
+      data: { 'blacklist': blacklist },
       wait: true
     }).done(function() {
       vent.trigger(vent.Commands.CloseFullscreenModal);

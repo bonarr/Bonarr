@@ -48,7 +48,7 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize: function() {
-    this.collection = new BlacklistCollection({tableName: 'blacklist'});
+    this.collection = new BlacklistCollection({ tableName: 'blacklist' });
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
@@ -93,7 +93,7 @@ module.exports = Marionette.Layout.extend({
 
   _refreshTable: function(buttonContext) {
     this.collection.state.currentPage = 1;
-    var promise = this.collection.fetch({reset: true});
+    var promise = this.collection.fetch({ reset: true });
 
     if (buttonContext) {
       buttonContext.ui.icon.spinForPromise(promise);

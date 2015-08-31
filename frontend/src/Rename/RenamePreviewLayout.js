@@ -45,7 +45,7 @@ module.exports = Marionette.Layout.extend({
 
   onRender: function() {
     this.renamePreviews.show(new LoadingView());
-    this.formatRegion.show(new RenamePreviewFormatView({model: this.model}));
+    this.formatRegion.show(new RenamePreviewFormatView({ model: this.model }));
   },
 
   _showPreviews: function() {
@@ -56,8 +56,8 @@ module.exports = Marionette.Layout.extend({
     }
 
     this.ui.pathInfo.show();
-    this.collection.invoke('set', {rename: true});
-    this.renamePreviews.show(new RenamePreviewCollectionView({collection: this.collection}));
+    this.collection.invoke('set', { rename: true });
+    this.renamePreviews.show(new RenamePreviewCollectionView({ collection: this.collection }));
   },
 
   _organizeFiles: function() {
@@ -65,7 +65,7 @@ module.exports = Marionette.Layout.extend({
       vent.trigger(vent.Commands.CloseFullscreenModal);
     }
 
-    var files = _.map(this.collection.where({rename: true}), function(model) {
+    var files = _.map(this.collection.where({ rename: true }), function(model) {
       return model.get('episodeFileId');
     });
 

@@ -41,7 +41,7 @@ module.exports = Marionette.ItemView.extend({
 
     if (path) {
       this._setRecentFolders(path);
-      this.trigger('manualImport', {folder: path});
+      this.trigger('manualImport', { folder: path });
     }
   },
 
@@ -50,7 +50,7 @@ module.exports = Marionette.ItemView.extend({
 
     if (path) {
       this._setRecentFolders(path);
-      this.trigger('automaticImport', {folder: path});
+      this.trigger('automaticImport', { folder: path });
     }
   },
 
@@ -75,7 +75,7 @@ module.exports = Marionette.ItemView.extend({
       return folder.path.toLowerCase() !== path.toLowerCase();
     });
 
-    recentFolders.unshift({path: path, lastUsed: moment.utc().toISOString()});
+    recentFolders.unshift({ path: path, lastUsed: moment.utc().toISOString() });
 
     Config.setValueJson('manualimport.recentfolders', _.take(recentFolders, 5));
   }

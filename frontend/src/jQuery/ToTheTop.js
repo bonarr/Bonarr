@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   $(window).scroll(_.throttle(_scrollHandler, 500));
   _scrollButton.click(function() {
-    $('html, body').animate({scrollTop: 0}, 600);
+    $('html, body').animate({ scrollTop: 0 }, 600);
     return false;
   });
 });

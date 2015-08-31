@@ -7,7 +7,6 @@ module.exports = Backgrid.Cell.extend({
   template: 'Cells/ApprovalStatusCellTemplate',
 
   render: function() {
-
     var rejections = this.model.get(this.column.get('name'));
 
     if (rejections.length === 0) {

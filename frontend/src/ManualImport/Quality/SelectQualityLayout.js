@@ -32,12 +32,12 @@ module.exports = Marionette.Layout.extend({
       return quality.quality;
     });
 
-    this.selectQualityView = new SelectQualityView({qualities: qualities});
+    this.selectQualityView = new SelectQualityView({ qualities: qualities });
     this.quality.show(this.selectQualityView);
   },
 
   _selectQuality: function() {
-    this.trigger('manualimport:selected:quality', {quality: this.selectQualityView.selectedQuality()});
+    this.trigger('manualimport:selected:quality', { quality: this.selectQualityView.selectedQuality() });
     vent.trigger(vent.Commands.CloseModal);
   }
 });

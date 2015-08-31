@@ -27,12 +27,12 @@ module.exports = (function() {
       "click .x-naming-token-helper a": '_addToken',
       "change .x-multi-episode-style": '_multiEpisodeFomatChanged'
     },
-    regions: {basicNamingRegion: '.x-basic-naming'},
+    regions: { basicNamingRegion: '.x-basic-naming' },
     onRender: function() {
       if (!this.model.get('renameEpisodes')) {
         this.ui.namingOptions.hide();
       }
-      var basicNamingView = new BasicNamingView({model: this.model});
+      var basicNamingView = new BasicNamingView({ model: this.model });
       this.basicNamingRegion.show(basicNamingView);
       this.namingSampleModel = new NamingSampleModel();
       this.listenTo(this.model, 'change', this._updateSamples);
@@ -48,7 +48,7 @@ module.exports = (function() {
       }
     },
     _updateSamples: function() {
-      this.namingSampleModel.fetch({data: this.model.toJSON()});
+      this.namingSampleModel.fetch({ data: this.model.toJSON() });
     },
     _showSamples: function() {
       this.ui.singleEpisodeExample.html(this.namingSampleModel.get('singleEpisodeExample'));

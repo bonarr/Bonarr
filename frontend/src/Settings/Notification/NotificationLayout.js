@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.notification.show(new NotificationCollectionView({collection: this.collection}));
+      this.notification.show(new NotificationCollectionView({ collection: this.collection }));
     }, this));
   }
 });

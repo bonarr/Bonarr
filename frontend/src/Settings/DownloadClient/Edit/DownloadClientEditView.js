@@ -35,12 +35,12 @@ var view = Marionette.ItemView.extend({
   },
 
   _onAfterSave: function() {
-    this.targetCollection.add(this.model, {merge: true});
+    this.targetCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
   _onAfterSaveAndAdd: function() {
-    this.targetCollection.add(this.model, {merge: true});
+    this.targetCollection.add(this.model, { merge: true });
 
     require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
   },

@@ -38,10 +38,10 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.downloadClients.show(new DownloadClientCollectionView({collection: this.downloadClientsCollection}));
-      this.downloadHandling.show(new DownloadHandlingView({model: this.model}));
-      this.droneFactory.show(new DroneFactoryView({model: this.model}));
-      this.remotePathMappings.show(new RemotePathMappingCollectionView({collection: this.remotePathMappingCollection}));
+      this.downloadClients.show(new DownloadClientCollectionView({ collection: this.downloadClientsCollection }));
+      this.downloadHandling.show(new DownloadHandlingView({ model: this.model }));
+      this.droneFactory.show(new DroneFactoryView({ model: this.model }));
+      this.remotePathMappings.show(new RemotePathMappingCollectionView({ collection: this.remotePathMappingCollection }));
     }, this));
   }
 });

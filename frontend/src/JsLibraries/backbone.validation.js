@@ -5,7 +5,7 @@
 //
 // Documentation and full license available at:
 // http://thedersen.com/projects/backbone-validation
-Backbone.Validation = (function(_){
+Backbone.Validation = ( function(_) {
   'use strict';
 
   // Default options
@@ -35,7 +35,7 @@ Backbone.Validation = (function(_){
     // passed to the function
     format: function() {
       var args = Array.prototype.slice.call(arguments),
-          text = args.shift();
+        text = args.shift();
       return text.replace(/\{(\d+)\}/g, function(match, number) {
         return typeof args[number] !== 'undefined' ? args[number] : match;
       });
@@ -75,12 +75,12 @@ Backbone.Validation = (function(_){
   //     };
   // This may seem redundant, but it allows for maximum flexibility
   // in validation rules.
-  var flatten = function (obj, into, prefix) {
+  var flatten = function(obj, into, prefix) {
     into = into || {};
     prefix = prefix || '';
 
     _.each(obj, function(val, key) {
-      if(obj.hasOwnProperty(key)) {
+      if (obj.hasOwnProperty(key)) {
         if (!!val && _.isArray(val)) {
           _.forEach(val, function(v, k) {
             flatten(v, into, prefix + key + '.' + k + '.');
@@ -101,8 +101,7 @@ Backbone.Validation = (function(_){
   // Validation
   // ----------
 
-  var Validation = (function(){
-
+  var Validation = ( function() {
     // Returns an object with undefined properties for all
     // attributes on the model that has defined one or more
     // validation rules.
@@ -119,7 +118,7 @@ Backbone.Validation = (function(_){
       var attrs = options.attributes;
       if (_.isFunction(attrs)) {
         attrs = attrs(view);
-      } else if (_.isString(attrs) && (_.isFunction(defaultAttributeLoaders[attrs]))) {
+      } else if (_.isString(attrs) && ( _.isFunction(defaultAttributeLoaders[attrs]))) {
         attrs = defaultAttributeLoaders[attrs](view);
       }
       if (_.isArray(attrs)) {
@@ -142,7 +141,7 @@ Backbone.Validation = (function(_){
       }
 
       // Stick the validator object into an array
-      if(!_.isArray(attrValidationSet)) {
+      if (!_.isArray(attrValidationSet)) {
         attrValidationSet = [attrValidationSet];
       }
 
@@ -169,13 +168,13 @@ Backbone.Validation = (function(_){
       // Reduces the array of validators to an error message by
       // applying all the validators and returning the first error
       // message, if any.
-      return _.reduce(getValidators(model, attr), function(memo, validator){
+      return _.reduce(getValidators(model, attr), function(memo, validator) {
         // Pass the format functions plus the default
         // validators as the context to the validator
         var ctx = _.extend({}, formatFunctions, defaultValidators),
-            result = validator.fn.call(ctx, value, attr, validator.val, model, computed);
+          result = validator.fn.call(ctx, value, attr, validator.val, model, computed);
 
-        if(result === false || memo === false) {
+        if (result === false || memo === false) {
           return false;
         }
         if (result && !memo) {
@@ -190,9 +189,9 @@ Backbone.Validation = (function(_){
     // as well as error messages.
     var validateModel = function(model, attrs, validatedAttrs) {
       var error,
-          invalidAttrs = {},
-          isValid = true,
-          computed = _.clone(attrs);
+        invalidAttrs = {},
+        isValid = true,
+        computed = _.clone(attrs);
 
       _.each(validatedAttrs, function(val, attr) {
         error = validateAttr(model, attr, val, computed);
@@ -211,25 +210,23 @@ Backbone.Validation = (function(_){
     // Contains the methods that are mixed in on the model when binding
     var mixin = function(view, options) {
       return {
-
         // Check whether or not a value, or a hash of values
         // passes validation without updating the model
         preValidate: function(attr, value) {
           var self = this,
-              result = {},
-              error;
+            result = {},
+            error;
 
-          if(_.isObject(attr)){
+          if (_.isObject(attr)) {
             _.each(attr, function(value, key) {
               error = self.preValidate(key, value);
-              if(error){
+              if (error) {
                 result[key] = error;
               }
             });
 
             return _.isEmpty(result) ? undefined : result;
-          }
-          else {
+          } else {
             return validateAttr(this, attr, value, _.extend({}, this.attributes));
           }
         },
@@ -242,16 +239,16 @@ Backbone.Validation = (function(_){
 
           option = option || getOptionsAttrs(options, view);
 
-          if(_.isString(option)){
+          if (_.isString(option)) {
             attrs = [option];
-          } else if(_.isArray(option)) {
+          } else if (_.isArray(option)) {
             attrs = option;
           }
           if (attrs) {
             flattened = flatten(this.attributes);
             //Loop through all associated views
             _.each(this.associatedViews, function(view) {
-              _.each(attrs, function (attr) {
+              _.each(attrs, function(attr) {
                 error = validateAttr(this, attr, flattened[attr], _.extend({}, this.attributes));
                 if (error) {
                   options.invalid(view, attr, error, options.selector);
@@ -264,11 +261,11 @@ Backbone.Validation = (function(_){
             }, this);
           }
 
-          if(option === true) {
+          if (option === true) {
             invalidAttrs = this.validate();
           }
           if (invalidAttrs) {
-            this.trigger('invalid', this, invalidAttrs, {validationError: invalidAttrs});
+            this.trigger('invalid', this, invalidAttrs, { validationError: invalidAttrs });
           }
           return attrs ? !invalidAttrs : this.validation ? this._isValid : true;
         },
@@ -276,33 +273,32 @@ Backbone.Validation = (function(_){
         // This is called by Backbone when it needs to perform validation.
         // You can call it manually without any parameters to validate the
         // entire model.
-        validate: function(attrs, setOptions){
+        validate: function(attrs, setOptions) {
           var model = this,
-              validateAll = !attrs,
-              opt = _.extend({}, options, setOptions),
-              validatedAttrs = getValidatedAttrs(model, getOptionsAttrs(options, view)),
-              allAttrs = _.extend({}, validatedAttrs, model.attributes, attrs),
-              flattened = flatten(allAttrs),
-              changedAttrs = attrs ? flatten(attrs) : flattened,
-              result = validateModel(model, allAttrs, _.pick(flattened, _.keys(validatedAttrs)));
+            validateAll = !attrs,
+            opt = _.extend({}, options, setOptions),
+            validatedAttrs = getValidatedAttrs(model, getOptionsAttrs(options, view)),
+            allAttrs = _.extend({}, validatedAttrs, model.attributes, attrs),
+            flattened = flatten(allAttrs),
+            changedAttrs = attrs ? flatten(attrs) : flattened,
+            result = validateModel(model, allAttrs, _.pick(flattened, _.keys(validatedAttrs)));
 
           model._isValid = result.isValid;
 
           //After validation is performed, loop through all associated views
-          _.each(model.associatedViews, function(view){
-
+          _.each(model.associatedViews, function(view) {
             // After validation is performed, loop through all validated and changed attributes
             // and call the valid and invalid callbacks so the view is updated.
-            _.each(validatedAttrs, function(val, attr){
-                var invalid = result.invalidAttrs.hasOwnProperty(attr),
-                  changed = changedAttrs.hasOwnProperty(attr);
+            _.each(validatedAttrs, function(val, attr) {
+              var invalid = result.invalidAttrs.hasOwnProperty(attr),
+                changed = changedAttrs.hasOwnProperty(attr);
 
-                if(!invalid){
-                  opt.valid(view, attr, opt.selector);
-                }
-                if(invalid && (changed || validateAll)){
-                  opt.invalid(view, attr, result.invalidAttrs[attr], opt.selector);
-                }
+              if (!invalid) {
+                opt.valid(view, attr, opt.selector);
+              }
+              if (invalid && (changed || validateAll)) {
+                opt.invalid(view, attr, result.invalidAttrs[attr], opt.selector);
+              }
             });
           });
 
@@ -337,7 +333,7 @@ Backbone.Validation = (function(_){
     // Removes view from associated views of the model or the methods
     // added to a model if no view or single view provided
     var unbindModel = function(model, view) {
-      if (view && model.associatedViews.length > 1){
+      if (view && model.associatedViews.length > 1) {
         model.associatedViews = _.without(model.associatedViews, view);
       } else {
         delete model.validate;
@@ -361,7 +357,6 @@ Backbone.Validation = (function(_){
 
     // Returns the public methods on Backbone.Validation
     return {
-
       // Current version of the library
       version: '0.11.3',
 
@@ -376,21 +371,20 @@ Backbone.Validation = (function(_){
         options = _.extend({}, defaultOptions, defaultCallbacks, options);
 
         var model = options.model || view.model,
-            collection = options.collection || view.collection;
+          collection = options.collection || view.collection;
 
-        if(typeof model === 'undefined' && typeof collection === 'undefined'){
+        if (typeof model === 'undefined' && typeof collection === 'undefined') {
           throw 'Before you execute the binding your view must have a model or a collection.\n' +
-                'See http://thedersen.com/projects/backbone-validation/#using-form-model-validation for more information.';
+          'See http://thedersen.com/projects/backbone-validation/#using-form-model-validation for more information.';
         }
 
-        if(model) {
+        if (model) {
           bindModel(view, model, options);
-        }
-        else if(collection) {
-          collection.each(function(model){
+        } else if (collection) {
+          collection.each(function(model) {
             bindModel(view, model, options);
           });
-          collection.bind('add', collectionAdd, {view: view, options: options});
+          collection.bind('add', collectionAdd, { view: view, options: options });
           collection.bind('remove', collectionRemove);
         }
       },
@@ -400,13 +394,12 @@ Backbone.Validation = (function(_){
       unbind: function(view, options) {
         options = _.extend({}, options);
         var model = options.model || view.model,
-            collection = options.collection || view.collection;
+          collection = options.collection || view.collection;
 
-        if(model) {
+        if (model) {
           unbindModel(model, view);
-        }
-        else if(collection) {
-          collection.each(function(model){
+        } else if (collection) {
+          collection.each(function(model) {
             unbindModel(model, view);
           });
           collection.unbind('add', collectionAdd);
@@ -425,14 +418,13 @@ Backbone.Validation = (function(_){
   // ---------
 
   var defaultCallbacks = Validation.callbacks = {
-
     // Gets called when a previously invalid field in the
     // view becomes valid. Removes any error message.
     // Should be overridden with custom functionality.
     valid: function(view, attr, selector) {
       view.$('[' + selector + '~="' + attr + '"]')
-          .removeClass('invalid')
-          .removeAttr('data-error');
+        .removeClass('invalid')
+        .removeAttr('data-error');
     },
 
     // Gets called when a field in the view becomes invalid.
@@ -440,8 +432,8 @@ Backbone.Validation = (function(_){
     // Should be overridden with custom functionality.
     invalid: function(view, attr, error, selector) {
       view.$('[' + selector + '~="' + attr + '"]')
-          .addClass('invalid')
-          .attr('data-error', error);
+        .addClass('invalid')
+        .attr('data-error', error);
     }
   };
 
@@ -500,7 +492,6 @@ Backbone.Validation = (function(_){
   //       labelFormatter: 'label'
   //     });
   var defaultLabelFormatters = Validation.labelFormatters = {
-
     // Returns the attribute name with applying any formatting
     none: function(attrName) {
       return attrName;
@@ -534,10 +525,10 @@ Backbone.Validation = (function(_){
   // AttributeLoaders
 
   var defaultAttributeLoaders = Validation.attributeLoaders = {
-    inputNames: function (view) {
+    inputNames: function(view) {
       var attrs = [];
       if (view) {
-        view.$('form [name]').each(function () {
+        view.$('form [name]').each(function() {
           if (/^(?:input|select|textarea)$/i.test(this.nodeName) && this.name &&
             this.type !== 'submit' && attrs.indexOf(this.name) === -1) {
             attrs.push(this.name);
@@ -552,21 +543,19 @@ Backbone.Validation = (function(_){
   // Built in validators
   // -------------------
 
-  var defaultValidators = Validation.validators = (function(){
+  var defaultValidators = Validation.validators = ( function() {
     // Use native trim when defined
-    var trim = String.prototype.trim ?
-      function(text) {
-        return text === null ? '' : String.prototype.trim.call(text);
-      } :
-      function(text) {
-        var trimLeft = /^\s+/,
-            trimRight = /\s+$/;
+    var trim = String.prototype.trim ? function(text) {
+      return text === null ? '' : String.prototype.trim.call(text);
+    } : function(text) {
+      var trimLeft = /^\s+/,
+        trimRight = /\s+$/;
 
-        return text === null ? '' : text.toString().replace(trimLeft, '').replace(trimRight, '');
-      };
+      return text === null ? '' : text.toString().replace(trimLeft, '').replace(trimRight, '');
+    };
 
     // Determines whether or not a value is a number
-    var isNumber = function(value){
+    var isNumber = function(value) {
       return _.isNumber(value) || (_.isString(value) && value.match(defaultPatterns.number));
     };
 
@@ -579,7 +568,7 @@ Backbone.Validation = (function(_){
       // Function validator
       // Lets you implement a custom function used for validation
       fn: function(value, attr, fn, model, computed) {
-        if(_.isString(fn)){
+        if (_.isString(fn)) {
           fn = model[fn];
         }
         return fn.call(model, value, attr, computed);
@@ -590,7 +579,7 @@ Backbone.Validation = (function(_){
       // This can be specified as either a boolean value or a function that returns a boolean value
       required: function(value, attr, required, model, computed) {
         var isRequired = _.isFunction(required) ? required.call(model, value, attr, computed) : required;
-        if(!isRequired && !hasValue(value)) {
+        if (!isRequired && !hasValue(value)) {
           return false; // overrides all other validators
         }
         if (isRequired && !hasValue(value)) {
@@ -602,7 +591,7 @@ Backbone.Validation = (function(_){
       // Validates that something has to be accepted, e.g. terms of use
       // `true` or 'true' are valid
       acceptance: function(value, attr, accept, model) {
-        if(value !== 'true' && (!_.isBoolean(value) || value === false)) {
+        if (value !== 'true' && (!_.isBoolean(value) || value === false)) {
           return this.format(defaultMessages.acceptance, this.formatLabel(attr, model));
         }
       },
@@ -629,7 +618,7 @@ Backbone.Validation = (function(_){
       // Validates that the value has to be a number and equal to or between
       // the two numbers specified
       range: function(value, attr, range, model) {
-        if(!isNumber(value) || value < range[0] || value > range[1]) {
+        if (!isNumber(value) || value < range[0] || value > range[1]) {
           return this.format(defaultMessages.range, this.formatLabel(attr, model), range[0], range[1]);
         }
       },
@@ -674,7 +663,7 @@ Backbone.Validation = (function(_){
       // Validates that the value has to be equal to one of the elements in
       // the specified array. Case sensitive matching
       oneOf: function(value, attr, values, model) {
-        if(!_.include(values, value)){
+        if (!_.include(values, value)) {
           return this.format(defaultMessages.oneOf, this.formatLabel(attr, model), values.join(', '));
         }
       },
@@ -683,7 +672,7 @@ Backbone.Validation = (function(_){
       // Validates that the value has to be equal to the value of the attribute
       // with the name specified
       equalTo: function(value, attr, equalTo, model, computed) {
-        if(value !== computed[equalTo]) {
+        if (value !== computed[equalTo]) {
           return this.format(defaultMessages.equalTo, this.formatLabel(attr, model), this.formatLabel(equalTo, model));
         }
       },
@@ -701,7 +690,7 @@ Backbone.Validation = (function(_){
 
   // Set the correct context for all validators
   // when used from within a method validator
-  _.each(defaultValidators, function(validator, key){
+  _.each(defaultValidators, function(validator, key) {
     defaultValidators[key] = _.bind(defaultValidators[key], _.extend({}, formatFunctions, defaultValidators));
   });
 

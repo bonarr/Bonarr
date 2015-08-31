@@ -6,7 +6,6 @@ require('signalR');
 
 module.exports = _.extend(Backbone.Collection.prototype, {
   bindSignalR: function(bindOptions) {
-
     var collection = this;
     bindOptions = bindOptions || {};
 
@@ -19,12 +18,12 @@ module.exports = _.extend(Backbone.Collection.prototype, {
       }
 
       if (options.action === 'deleted') {
-        collection.remove(new collection.model(options.resource, {parse: true}));
+        collection.remove(new collection.model(options.resource, { parse: true }));
 
         return;
       }
 
-      var model = new collection.model(options.resource, {parse: true});
+      var model = new collection.model(options.resource, { parse: true });
 
       //updateOnly will prevent the collection from adding a new item
       if (bindOptions.updateOnly && !collection.get(model.get('id'))) {

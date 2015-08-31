@@ -43,7 +43,7 @@ var collection = PagableCollection.extend({
   },
 
   parseState: function(resp, queryParams, state) {
-    return {totalRecords: resp.totalRecords};
+    return { totalRecords: resp.totalRecords };
   },
 
   parseRecords: function(resp) {

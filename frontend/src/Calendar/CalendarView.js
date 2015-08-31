@@ -16,7 +16,7 @@ module.exports = Marionette.ItemView.extend({
 
   initialize: function() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
-    this.collection = new CalendarCollection().bindSignalR({updateOnly: true});
+    this.collection = new CalendarCollection().bindSignalR({ updateOnly: true });
     this.listenTo(this.collection, 'change', this._reloadCalendarEvents);
     this.listenTo(QueueCollection, 'sync', this._reloadCalendarEvents);
   },
@@ -202,7 +202,7 @@ module.exports = Marionette.ItemView.extend({
       eventAfterAllRender: this._eventAfterAllRender.bind(this),
       windowResize: this._windowResize.bind(this),
       eventClick: function(event) {
-        vent.trigger(vent.Commands.ShowEpisodeDetails, {episode: event.model});
+        vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: event.model });
       }
     };
 

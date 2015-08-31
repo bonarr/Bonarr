@@ -20,7 +20,7 @@ module.exports = Marionette.ItemView.extend({
 
   _addPreset: function(e) {
     var presetName = $(e.target).closest('.x-preset').attr('data-id');
-    var presetData = _.where(this.model.get('presets'), {name: presetName})[0];
+    var presetData = _.where(this.model.get('presets'), { name: presetName })[0];
 
     this.model.set(presetData);
 

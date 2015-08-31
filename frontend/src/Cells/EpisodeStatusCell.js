@@ -17,7 +17,6 @@ module.exports = NzbDroneCell.extend({
   },
 
   _renderCell: function() {
-
     if (this.episodeFile) {
       this.stopListening(this.episodeFile, 'change', this._refresh);
     }

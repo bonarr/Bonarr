@@ -9,6 +9,6 @@ module.exports = Backgrid.Row.extend({
   },
 
   _showDetails: function() {
-    vent.trigger(vent.Commands.ShowLogFile, {model: this.model});
+    vent.trigger(vent.Commands.ShowLogFile, { model: this.model });
   }
 });

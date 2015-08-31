@@ -167,11 +167,11 @@ module.exports = Paginator.extend({
           current: true
         });
       } else {
-        pages.push({page: i + 1});
+        pages.push({ page: i + 1 });
       }
     }
 
-    this.$el.find('.x-page-number').html(templateFunction({pages: pages}));
+    this.$el.find('.x-page-number').html(templateFunction({ pages: pages }));
   },
 
   _jumpToPage: function() {

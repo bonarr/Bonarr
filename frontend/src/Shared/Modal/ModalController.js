@@ -44,12 +44,12 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _editSeries: function(options) {
-    var view = new EditSeriesView({model: options.series});
+    var view = new EditSeriesView({ model: options.series });
     AppLayout.fullscreenModalRegion.show(view);
   },
 
   _deleteSeries: function(options) {
-    var view = new DeleteSeriesView({model: options.series});
+    var view = new DeleteSeriesView({ model: options.series });
     AppLayout.modalRegion.show(view);
   },
 
@@ -63,12 +63,12 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _showHistory: function(options) {
-    var view = new HistoryDetailsLayout({model: options.model});
+    var view = new HistoryDetailsLayout({ model: options.model });
     AppLayout.fullscreenModalRegion.show(view);
   },
 
   _showLogDetails: function(options) {
-    var view = new LogDetailsView({model: options.model});
+    var view = new LogDetailsView({ model: options.model });
     AppLayout.fullscreenModalRegion.show(view);
   },
 

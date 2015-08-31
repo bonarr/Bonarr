@@ -2,7 +2,6 @@ var Handlebars = require('handlebars');
 var FormatHelpers = require('../../../Shared/FormatHelpers');
 
 Handlebars.registerHelper('historyAge', function() {
-
   var age = this.age;
   var unit = FormatHelpers.plural(Math.round(age), 'day');
   var ageHours = parseFloat(this.ageHours);

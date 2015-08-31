@@ -2,7 +2,6 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 
 module.exports = function() {
-
   var originalMakeFullCollection = this.prototype._makeFullCollection;
 
   _.extend(this.prototype.state, {
@@ -20,7 +19,7 @@ module.exports = function() {
   };
 
   this.prototype.setFilter = function(filter, options) {
-    options = _.extend({reset: true}, options || {});
+    options = _.extend({ reset: true }, options || {});
 
     this.state.filterKey = filter.key;
     this.state.filterValue = filter.value;

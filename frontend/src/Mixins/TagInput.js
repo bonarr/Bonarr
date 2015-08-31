@@ -40,13 +40,13 @@ $.fn.tagsinput.Constructor.prototype.add = function(item, dontPushVal) {
       return;
     }
 
-    var existing = _.find(TagCollection.toJSON(), {label: item});
+    var existing = _.find(TagCollection.toJSON(), { label: item });
 
     if (existing) {
       originalAdd.call(this, existing, dontPushVal);
     } else {
       var newTag = new TagModel();
-      newTag.set({label: item.toLowerCase()});
+      newTag.set({ label: item.toLowerCase() });
       TagCollection.add(newTag);
 
       newTag.save().done(function() {

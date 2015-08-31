@@ -122,7 +122,7 @@ module.exports = Marionette.Layout.extend({
 
   _setInitialSort: function() {
     if (!this.model) {
-      this.filteredEpisodes.setSorting('seasonEpisode', 1, {sortValue: this._seasonEpisodeSorter});
+      this.filteredEpisodes.setSorting('seasonEpisode', 1, { sortValue: this._seasonEpisodeSorter });
       this.filteredEpisodes.fullCollection.sort();
     }
   },
@@ -136,7 +136,7 @@ module.exports = Marionette.Layout.extend({
     promise.done(function() {
       var profile = profileSchemaCollection.first();
 
-      self.qualitySelectView = new QualitySelectView({qualities: _.map(profile.get('items'), 'quality')});
+      self.qualitySelectView = new QualitySelectView({ qualities: _.map(profile.get('items'), 'quality') });
       self.listenTo(self.qualitySelectView, 'seasonedit:quality', self._changeQuality);
 
       self.quality.show(self.qualitySelectView);

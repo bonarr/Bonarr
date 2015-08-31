@@ -21,7 +21,6 @@ var Keys = {
 };
 
 view = Marionette.ItemView.extend({
-
   template: 'AddSeries/AddSeriesModal',
 
   ui: {
@@ -151,7 +150,7 @@ view = Marionette.ItemView.extend({
       seasonFolder: seasonFolder,
       seriesType: seriesType,
       addOptions: options
-    }, {silent: true});
+    }, { silent: true });
 
     var promise = this.model.save();
 
@@ -174,7 +173,7 @@ view = Marionette.ItemView.extend({
         goToSeries: {
           label: 'Go to Series',
           action: function() {
-            Backbone.history.navigate('/series/' + self.model.get('titleSlug'), {trigger: true});
+            Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
           }
         }
       },
@@ -182,14 +181,14 @@ view = Marionette.ItemView.extend({
       hideOnNavigate: true
     });
 
-    vent.trigger(vent.Events.SeriesAdded, {series: self.model});
+    vent.trigger(vent.Events.SeriesAdded, { series: self.model });
   },
 
   _getAddSeriesOptions: function() {
     var monitor = this.ui.monitor.val();
     var startSearch = this.ui.startSearch.prop('checked');
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
-    var firstSeason = _.min(_.reject(this.model.get('seasons'), {seasonNumber: 0}), 'seasonNumber');
+    var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');
 
     this.model.setSeasonPass(firstSeason.seasonNumber);
 

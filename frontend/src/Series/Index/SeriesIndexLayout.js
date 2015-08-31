@@ -78,8 +78,6 @@ module.exports = Marionette.Layout.extend({
     this.seriesCollection.fetch();
 
     this._showActionBar();
-
-
   },
 
   onShow: function() {
@@ -279,6 +277,6 @@ module.exports = Marionette.Layout.extend({
       episodeFiles: episodeFiles
     });
 
-    this.footer.show(new FooterView({model: footerModel}));
+    this.footer.show(new FooterView({ model: footerModel }));
   }
 });

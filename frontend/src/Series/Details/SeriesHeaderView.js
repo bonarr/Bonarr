@@ -16,8 +16,8 @@ module.exports = Marionette.ItemView.extend({
   },
 
   onRender: function() {
-    var fanArt = _.findWhere(this.model.get('images'), {coverType: 'fanart'});
-    this.ui.backdrop.css({'background-image': 'url("' + fanArt.url + '")'});
+    var fanArt = _.findWhere(this.model.get('images'), { coverType: 'fanart' });
+    this.ui.backdrop.css({ 'background-image': 'url("' + fanArt.url + '")' });
   },
 
   templateHelpers: function() {

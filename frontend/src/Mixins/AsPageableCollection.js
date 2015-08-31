@@ -33,7 +33,7 @@ module.exports = function() {
           var pageEnd = pageStart + pageSize;
 
           this.pageCollection.reset(this.fullCollection.models.slice(pageStart, pageEnd),
-            _.extend({}, options, {parse: false}));
+            _.extend({}, options, { parse: false }));
         }
       }
     } else {

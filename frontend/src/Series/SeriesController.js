@@ -19,12 +19,12 @@ module.exports = NzbDroneController.extend({
   },
 
   seriesDetails: function(query) {
-    var series = SeriesCollection.where({titleSlug: query});
+    var series = SeriesCollection.where({ titleSlug: query });
 
     if (series.length !== 0) {
       var targetSeries = series[0];
       this.setTitle(targetSeries.get('title'));
-      this.showMainRegion(new SeriesDetailsLayout({model: targetSeries}));
+      this.showMainRegion(new SeriesDetailsLayout({ model: targetSeries }));
     } else {
       this.showNotFound();
     }

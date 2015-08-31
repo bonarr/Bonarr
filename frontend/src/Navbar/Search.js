@@ -27,6 +27,6 @@ $.fn.bindSearch = function() {
   $(this).on('typeahead:selected typeahead:autocompleted', function(e, series) {
     this.blur();
     $(this).val('');
-    Backbone.history.navigate('/series/{0}'.format(series.titleSlug), {trigger: true});
+    Backbone.history.navigate('/series/{0}'.format(series.titleSlug), { trigger: true });
   });
 };

@@ -16,7 +16,7 @@ var view = Marionette.ItemView.extend({
   },
 
   _edit: function() {
-    var view = new EditView({model: this.model});
+    var view = new EditView({ model: this.model });
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
   }
 });

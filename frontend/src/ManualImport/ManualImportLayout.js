@@ -70,7 +70,6 @@ module.exports = Marionette.Layout.extend({
       label: 'Quality',
       cell: QualityCell,
       sortable: true
-
     },
     {
       name: 'size',
@@ -101,7 +100,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   onRender: function() {
-
     if (this.folder || this.downloadId) {
       this._showLoading();
       this._loadCollection();
@@ -116,7 +114,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _loadCollection: function() {
-    this.manualImportCollection = new ManualImportCollection({folder: this.folder, downloadId: this.downloadId});
+    this.manualImportCollection = new ManualImportCollection({ folder: this.folder, downloadId: this.downloadId });
     this.manualImportCollection.fetch();
 
     this.listenTo(this.manualImportCollection, 'sync', this._showTable);
@@ -224,9 +222,9 @@ module.exports = Marionette.Layout.extend({
     var selectedCount = 0;
 
     if (selected) {
-      selectedCount = _.any(selectedModels, {id: model.id}) ? selectedModels.length : selectedModels.length + 1;
+      selectedCount = _.any(selectedModels, { id: model.id }) ? selectedModels.length : selectedModels.length + 1;
     } else {
-      selectedCount = _.any(selectedModels, {id: model.id}) ? selectedModels.length - 1 : selectedModels.length;
+      selectedCount = _.any(selectedModels, { id: model.id }) ? selectedModels.length - 1 : selectedModels.length;
     }
 
     if (selectedCount === 0) {

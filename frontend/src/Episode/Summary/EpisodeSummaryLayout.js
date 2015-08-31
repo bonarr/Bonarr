@@ -59,7 +59,7 @@ module.exports = Marionette.Layout.extend({
 
       if (reqres.hasHandler(reqres.Requests.GetEpisodeFileById)) {
         var episodeFile = reqres.request(reqres.Requests.GetEpisodeFileById, episodeFileId);
-        this.episodeFileCollection = new EpisodeFileCollection(episodeFile, {seriesId: this.model.get('seriesId')});
+        this.episodeFileCollection = new EpisodeFileCollection(episodeFile, { seriesId: this.model.get('seriesId') });
         this.listenTo(episodeFile, 'destroy', this._episodeFileDeleted);
 
         this._showTable();
@@ -67,8 +67,8 @@ module.exports = Marionette.Layout.extend({
         this.activity.show(new LoadingView());
 
         var self = this;
-        var newEpisodeFile = new EpisodeFileModel({id: episodeFileId});
-        this.episodeFileCollection = new EpisodeFileCollection(newEpisodeFile, {seriesId: this.model.get('seriesId')});
+        var newEpisodeFile = new EpisodeFileModel({ id: episodeFileId });
+        this.episodeFileCollection = new EpisodeFileCollection(newEpisodeFile, { seriesId: this.model.get('seriesId') });
         var promise = newEpisodeFile.fetch();
         this.listenTo(newEpisodeFile, 'destroy', this._episodeFileDeleted);
 

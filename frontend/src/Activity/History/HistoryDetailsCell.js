@@ -16,6 +16,6 @@ module.exports = NzbDroneCell.extend({
   },
 
   _showDetails: function() {
-    vent.trigger(vent.Commands.ShowHistoryDetails, {model: this.model});
+    vent.trigger(vent.Commands.ShowHistoryDetails, { model: this.model });
   }
 });

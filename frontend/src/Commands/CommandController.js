@@ -10,14 +10,11 @@ require('../jQuery/jquery.spin');
 CommandMessengerCollectionView.render();
 
 var singleton = function() {
-
   return {
-
     _lastCommand: {},
 
     Execute: function(name, properties) {
-
-      var attr = _.extend({name: name.toLocaleLowerCase()}, properties);
+      var attr = _.extend({ name: name.toLocaleLowerCase() }, properties);
       var commandModel = new CommandModel(attr);
 
       if (this._lastCommand.command && this._lastCommand.command.isSameCommand(attr) && moment().add('seconds', -5).isBefore(this._lastCommand.time)) {
@@ -45,7 +42,6 @@ var singleton = function() {
     },
 
     bindToCommand: function(options) {
-
       var self = this;
       var existingCommand = CommandCollection.findCommand(options.command);
 
@@ -68,7 +64,6 @@ var singleton = function() {
     },
 
     _bindToCommandModel: function bindToCommand(model, options) {
-
       if (!model.isActive()) {
         options.element.stopSpin();
         return;

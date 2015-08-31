@@ -29,8 +29,8 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.profile.show(new ProfileCollectionView({collection: ProfileCollection}));
-      this.delayProfile.show(new DelayProfileLayout({collection: this.delayProfileCollection}));
+      this.profile.show(new ProfileCollectionView({ collection: ProfileCollection }));
+      this.delayProfile.show(new DelayProfileLayout({ collection: this.delayProfileCollection }));
     }, this));
   }
 });

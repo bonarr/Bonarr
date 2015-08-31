@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.qualityDefinition.show(new QualityDefinitionCollectionView({collection: this.qualityDefinitionCollection}));
+      this.qualityDefinition.show(new QualityDefinitionCollectionView({ collection: this.qualityDefinitionCollection }));
     }, this));
   }
 });

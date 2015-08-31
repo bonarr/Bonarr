@@ -10,7 +10,6 @@ var addError = function(message) {
 };
 
 window.onerror = function(msg, url, line) {
-
   try {
 
     var a = document.createElement('a');
@@ -45,7 +44,6 @@ window.onerror = function(msg, url, line) {
 };
 
 $(document).ajaxError(function(event, xmlHttpRequest, ajaxOptions) {
-
   //don't report 200 error codes
   if (xmlHttpRequest.status >= 200 && xmlHttpRequest.status <= 300) {
     return undefined;

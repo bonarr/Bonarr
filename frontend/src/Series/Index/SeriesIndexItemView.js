@@ -23,7 +23,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _editSeries: function() {
-    vent.trigger(vent.Commands.EditSeries, {series: this.model});
+    vent.trigger(vent.Commands.EditSeries, { series: this.model });
   },
 
   _refreshSeries: function() {

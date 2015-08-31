@@ -23,7 +23,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   events: {
-
     'click .x-episode-summary': '_showSummary',
     'click .x-episode-history': '_showHistory',
     'click .x-episode-search': '_showSearch',
@@ -43,7 +42,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow: function() {
-    this.searchLayout = new SearchLayout({model: this.model});
+    this.searchLayout = new SearchLayout({ model: this.model });
 
     if (this.openingTab === 'search') {
       this.searchLayout.startManualSearch = true;
@@ -106,7 +105,7 @@ module.exports = Marionette.Layout.extend({
     }
 
     var name = 'monitored';
-    this.model.set(name, !this.model.get(name), {silent: true});
+    this.model.set(name, !this.model.get(name), { silent: true });
 
     this.ui.monitored.addClass('icon-sonarr-spinner fa-spin');
     this.model.save();

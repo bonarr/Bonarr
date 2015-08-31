@@ -4,7 +4,6 @@ var _ = require('underscore');
 module.exports = (function() {
   'use strict';
   return function() {
-
     var originalInitialize = this.prototype.initialize;
     var originalOnRender = this.prototype.onRender;
     var originalBeforeClose = this.prototype.onBeforeClose;

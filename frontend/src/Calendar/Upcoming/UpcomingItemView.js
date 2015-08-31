@@ -23,6 +23,6 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _showEpisodeDetails: function() {
-    vent.trigger(vent.Commands.ShowEpisodeDetails, {episode: this.model});
+    vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
   }
 });

@@ -8,6 +8,6 @@ module.exports = Backgrid.Row.extend({
   },
 
   _onClick: function() {
-    this.model.collection.trigger('row:selected', {model: this.model});
+    this.model.collection.trigger('row:selected', { model: this.model });
   }
 });

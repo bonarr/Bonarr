@@ -19,7 +19,7 @@ module.exports = NzbDroneCell.extend({
   },
 
   _details: function() {
-    vent.trigger(vent.Commands.OpenFullscreenModal, new BlacklistDetailsLayout({model: this.model}));
+    vent.trigger(vent.Commands.OpenFullscreenModal, new BlacklistDetailsLayout({ model: this.model }));
   },
 
   _delete: function() {

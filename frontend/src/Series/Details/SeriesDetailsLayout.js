@@ -90,7 +90,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onMonitoredClick: function() {
-    var savePromise = this.model.save('monitored', !this.model.get('monitored'), {wait: true});
+    var savePromise = this.model.save('monitored', !this.model.get('monitored'), { wait: true });
     this.ui.monitored.spinForPromise(savePromise);
   },
 
@@ -112,7 +112,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onSeriesRemoved: function() {
-    Backbone.history.navigate('/', {trigger: true});
+    Backbone.history.navigate('/', { trigger: true });
   },
 
   _showSeasons: function() {
@@ -121,8 +121,8 @@ module.exports = Marionette.Layout.extend({
     this.seasons.show(new LoadingView());
 
     this.seasonCollection = new SeasonCollection(this.model.get('seasons'));
-    this.episodeCollection = new EpisodeCollection({seriesId: this.model.id}).bindSignalR();
-    this.episodeFileCollection = new EpisodeFileCollection({seriesId: this.model.id}).bindSignalR();
+    this.episodeCollection = new EpisodeCollection({ seriesId: this.model.id }).bindSignalR();
+    this.episodeFileCollection = new EpisodeFileCollection({ seriesId: this.model.id }).bindSignalR();
 
     reqres.setHandler(reqres.Requests.GetEpisodeFileById, function(episodeFileId) {
       return self.episodeFileCollection.get(episodeFileId);
@@ -133,7 +133,7 @@ module.exports = Marionette.Layout.extend({
         return [];
       }
 
-      return _.where(self.model.get('alternateTitles'), {seasonNumber: seasonNumber});
+      return _.where(self.model.get('alternateTitles'), { seasonNumber: seasonNumber });
     });
 
     $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(function() {
@@ -165,7 +165,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _refresh: function() {
-    this.seasonCollection.add(this.model.get('seasons'), {merge: true});
+    this.seasonCollection.add(this.model.get('seasons'), { merge: true });
     this.episodeCollection.fetch();
     this.episodeFileCollection.fetch();
 
@@ -174,15 +174,15 @@ module.exports = Marionette.Layout.extend({
   },
 
   onEditClick: function() {
-    vent.trigger(vent.Commands.EditSeries, {series: this.model});
+    vent.trigger(vent.Commands.EditSeries, { series: this.model });
   },
 
   onDeleteClick: function() {
-    vent.trigger(vent.Commands.DeleteSeries, {series: this.model});
+    vent.trigger(vent.Commands.DeleteSeries, { series: this.model });
   },
 
   onRenameClick: function() {
-    vent.trigger(vent.Commands.ShowRenamePreview, {series: this.model});
+    vent.trigger(vent.Commands.ShowRenamePreview, { series: this.model });
   },
 
   onEditFileClick: function() {

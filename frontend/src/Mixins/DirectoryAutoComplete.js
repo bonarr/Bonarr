@@ -12,7 +12,7 @@ $.fn.directoryAutoComplete = function() {
 
       $.each(response.directories, function(i, d) {
         if (d[query] && d[query].startsWith(filter)) {
-          matches.push({value: d[query]});
+          matches.push({ value: d[query] });
         }
       });
 

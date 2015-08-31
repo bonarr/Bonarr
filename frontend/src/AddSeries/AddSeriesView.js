@@ -47,7 +47,7 @@ module.exports = Marionette.Layout.extend({
       isExisting: this.isExisting
     });
 
-    this.throttledSearch = _.debounce(this.search, 1000, {trailing: true}).bind(this);
+    this.throttledSearch = _.debounce(this.search, 1000, { trailing: true }).bind(this);
   },
 
   onRender: function() {
@@ -56,7 +56,6 @@ module.exports = Marionette.Layout.extend({
     this.$el.addClass(this.className);
 
     this.ui.seriesSearch.keyup(function(e) {
-
       if (_.contains([
           9,
           16,
@@ -108,7 +107,7 @@ module.exports = Marionette.Layout.extend({
     this.searchResult.show(new LoadingView());
     this.collection.term = options.term;
     this.currentSearchPromise = this.collection.fetch({
-      data: {term: options.term}
+      data: { term: options.term }
     });
 
     this.currentSearchPromise.fail(function() {
@@ -151,7 +150,7 @@ module.exports = Marionette.Layout.extend({
     if (!this.isClosed) {
       if (this.collection.length === 0) {
         this.ui.searchBar.show();
-        this.searchResult.show(new NotFoundView({term: this.collection.term}));
+        this.searchResult.show(new NotFoundView({ term: this.collection.term }));
       } else {
         this.searchResult.show(this.resultCollectionView);
         if (!this.showingAll && this.isExisting) {
@@ -173,7 +172,7 @@ module.exports = Marionette.Layout.extend({
   _showError: function() {
     if (!this.isClosed) {
       this.ui.searchBar.show();
-      this.searchResult.show(new ErrorView({term: this.collection.term}));
+      this.searchResult.show(new ErrorView({ term: this.collection.term }));
       this.collection.term = '';
     }
   }

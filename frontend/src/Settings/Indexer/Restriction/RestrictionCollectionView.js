@@ -15,7 +15,7 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   _addMapping: function() {
-    var model = this.collection.create({tags: []});
+    var model = this.collection.create({ tags: [] });
     var view = new EditView({
       model: model,
       targetCollection: this.collection

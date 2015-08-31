@@ -1,5 +1,4 @@
 module.exports = function() {
-
   var $ = this;
 
   var original = $.ajax;

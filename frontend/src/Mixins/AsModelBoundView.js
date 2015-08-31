@@ -1,12 +1,10 @@
 var ModelBinder = require('backbone.modelbinder');
 
 module.exports = function() {
-
   var originalOnRender = this.prototype.onRender;
   var originalBeforeClose = this.prototype.onBeforeClose;
 
   this.prototype.onRender = function() {
-
     if (!this.model) {
       throw 'View has no model for binding';
     }
@@ -31,7 +29,6 @@ module.exports = function() {
   };
 
   this.prototype.onBeforeClose = function() {
-
     if (this._modelBinder) {
       this._modelBinder.unbind();
       delete this._modelBinder;

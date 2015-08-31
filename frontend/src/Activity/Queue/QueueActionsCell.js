@@ -6,7 +6,6 @@ var TemplatedCell = require('../../Cells/TemplatedCell');
 var RemoveFromQueueView = require('./RemoveFromQueueView');
 
 module.exports = TemplatedCell.extend({
-
   template: 'Activity/Queue/QueueActionsCellTemplate',
   className: 'queue-actions-cell',
 

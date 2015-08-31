@@ -9,6 +9,6 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow: function() {
-    this.bodyRegion.show(new BlacklistDetailsView({model: this.model}));
+    this.bodyRegion.show(new BlacklistDetailsView({ model: this.model }));
   }
 });

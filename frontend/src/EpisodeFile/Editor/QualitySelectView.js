@@ -27,9 +27,9 @@ module.exports = Marionette.ItemView.extend({
       return;
     }
 
-    var quality = _.find(this.qualities, {'id': parseInt(value)});
+    var quality = _.find(this.qualities, { 'id': parseInt(value) });
 
-    this.trigger('seasonedit:quality', {selected: quality});
+    this.trigger('seasonedit:quality', { selected: quality });
     this.ui.select.val('choose');
   }
 });

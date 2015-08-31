@@ -18,7 +18,6 @@ module.exports = Backbone.Model.extend({
   },
 
   isSameCommand: function(command) {
-
     if (command.name.toLocaleLowerCase() !== this.get('name').toLocaleLowerCase()) {
       return false;
     }

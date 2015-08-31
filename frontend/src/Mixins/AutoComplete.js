@@ -38,7 +38,7 @@ $.fn.autoComplete = function(options) {
 
             $.each(response, function(i, d) {
               if (d[options.query] && d[options.property].startsWith(filter)) {
-                matches.push({value: d[options.property]});
+                matches.push({ value: d[options.property] });
               }
             });
 

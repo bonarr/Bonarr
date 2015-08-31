@@ -15,7 +15,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow: function() {
-    this.bodyRegion.show(new HistoryDetailsView({model: this.model}));
+    this.bodyRegion.show(new HistoryDetailsView({ model: this.model }));
   },
 
   _markAsFailed: function() {

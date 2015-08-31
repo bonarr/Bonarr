@@ -51,7 +51,7 @@ module.exports = {
     var self = this;
 
     options.promise.done(function() {
-      self.show({message: options.successMessage});
+      self.show({ message: options.successMessage });
     });
 
     options.promise.fail(function() {
