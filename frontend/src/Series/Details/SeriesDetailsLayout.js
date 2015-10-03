@@ -206,7 +206,7 @@ module.exports = Marionette.Layout.extend({
           }
         },
         {
-          tooltip: 'Search for all episodes in this series',
+          tooltip: 'Search for monitored episodes in this series',
           icon: 'icon-sonarr-search',
           command: 'seriesSearch',
           properties: {
