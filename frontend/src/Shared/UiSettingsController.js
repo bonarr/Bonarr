@@ -2,7 +2,7 @@ var $ = require('jquery');
 var _ = require('underscore');
 var UiSettingsModel = require('./UiSettingsModel');
 
-var Controller = {
+var UiSettingsController = {
   appInitializer: function() {
     UiSettingsModel.on('sync', this._updateUiSettings);
 
@@ -18,6 +18,6 @@ var Controller = {
   }
 };
 
-_.bindAll(Controller, 'appInitializer');
+_.bindAll(UiSettingsController, 'appInitializer');
 
-module.exports = Controller;
+module.exports = UiSettingsController;

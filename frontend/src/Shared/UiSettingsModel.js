@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var ApiData = require('./ApiData');
 
 var UiSettings = Backbone.Model.extend({
   url: window.Sonarr.ApiRoot + '/config/ui',
@@ -24,6 +23,4 @@ var UiSettings = Backbone.Model.extend({
   }
 });
 
-var instance = new UiSettings(ApiData.get('config/ui'));
-
-module.exports = instance;
+module.exports = new UiSettings();

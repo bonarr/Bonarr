@@ -2,13 +2,12 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
 var SeriesModel = require('./SeriesModel');
-var ApiData = require('../Shared/ApiData');
 var AsFilteredCollection = require('../Mixins/AsFilteredCollection');
 var AsSortedCollection = require('../Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('../Mixins/AsPersistedStateCollection');
 var moment = require('moment');
 
-var Collection = PageableCollection.extend({
+var SeriesCollection = PageableCollection.extend({
   url: window.Sonarr.ApiRoot + '/series',
   model: SeriesModel,
   tableName: 'series',
@@ -102,10 +101,8 @@ var Collection = PageableCollection.extend({
   }
 });
 
-Collection = AsFilteredCollection.call(Collection);
-Collection = AsSortedCollection.call(Collection);
-Collection = AsPersistedStateCollection.call(Collection);
+SeriesCollection = AsFilteredCollection.call(SeriesCollection);
+SeriesCollection = AsSortedCollection.call(SeriesCollection);
+SeriesCollection = AsPersistedStateCollection.call(SeriesCollection);
 
-var data = ApiData.get('series');
-
-module.exports = new Collection(data, { full: true });
+module.exports = new SeriesCollection([]).bindSignalR();

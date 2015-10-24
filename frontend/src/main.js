@@ -15,9 +15,12 @@ var Router = require('./Router');
 var ModalController = require('./Shared/Modal/ModalController');
 var ControlPanelController = require('./Shared/ControlPanel/ControlPanelController');
 var ActionBarController = require('./Sidebar/ActionBar/ActionBarController');
-var serverStatusModel = require('./System/StatusModel');
 var Tooltip = require('./Shared/Tooltip');
 var UiSettingsController = require('./Shared/UiSettingsController');
+var StatusModel = require('./System/StatusModel');
+var TagCollection = require('./Tags/TagCollection');
+var UiSettingsModel = require('./Shared/UiSettingsModel');
+var SeriesCollection = require('./Series/SeriesCollection');
 
 require('./jQuery/ToTheTop');
 require('./Instrumentation/StringFormat');
@@ -42,32 +45,45 @@ app.addInitializer(function() {
   console.log('starting application');
 });
 
-app.addInitializer(SignalRBroadcaster.appInitializer, { app: app });
+// Preload data
+var preloadPromise = $.when(
+  StatusModel.fetch(),
+  TagCollection.fetch(),
+  UiSettingsModel.fetch(),
+  SeriesCollection.fetch()
+);
 
-app.addInitializer(Tooltip.appInitializer, { app: app });
+preloadPromise.done(function () {
+  app.addInitializer(SignalRBroadcaster.appInitializer, { app: app });
 
-app.addInitializer(function() {
-  Backbone.history.start({
-    pushState: true,
-    root: serverStatusModel.get('urlBase')
+  app.addInitializer(Tooltip.appInitializer, { app: app });
+
+  app.addInitializer(function() {
+    Backbone.history.start({
+      pushState: true,
+      root: StatusModel.get('urlBase')
+    });
+
+    RouteBinder.bind();
+    AppLayout.navbarRegion.show(new NavbarLayout());
+    AppLayout.sidebarRegion.show(new SidebarLayout());
+    $('body').addClass('started');
   });
-  RouteBinder.bind();
-  AppLayout.navbarRegion.show(new NavbarLayout());
-  AppLayout.sidebarRegion.show(new SidebarLayout());
-  $('body').addClass('started');
+
+  app.addInitializer(UiSettingsController.appInitializer);
+
+  app.addInitializer(function() {
+    var footerText = StatusModel.get('version');
+
+    if (StatusModel.get('branch') !== 'master') {
+      footerText += '</br>' + StatusModel.get('branch');
+    }
+    $('#footer-region .version').html(footerText);
+  });
+
+  app.start();
 });
 
-app.addInitializer(UiSettingsController.appInitializer);
 
-app.addInitializer(function() {
-  var footerText = serverStatusModel.get('version');
-
-  if (serverStatusModel.get('branch') !== 'master') {
-    footerText += '</br>' + serverStatusModel.get('branch');
-  }
-  $('#footer-region .version').html(footerText);
-});
-
-app.start();
 
 module.exports = app;

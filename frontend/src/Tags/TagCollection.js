@@ -1,6 +1,5 @@
 var Backbone = require('backbone');
 var TagModel = require('./TagModel');
-var ApiData = require('../Shared/ApiData');
 
 var Collection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/tag',
@@ -11,4 +10,4 @@ var Collection = Backbone.Collection.extend({
   }
 });
 
-module.exports = new Collection(ApiData.get('tag'));
+module.exports = new Collection();

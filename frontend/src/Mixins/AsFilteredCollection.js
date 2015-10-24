@@ -59,9 +59,12 @@ module.exports = function() {
       Backbone.Collection.prototype.reset.call(this, self.shadowCollection.filtered(), options);
     };
 
-    fullCollection.reset = function() {
+    fullCollection.reset = function(models, options) {
       self.shadowCollection.reset.apply(self, arguments);
-      self.fullCollection.resetFiltered();
+
+      // This causes the series collection to be empty when we don't use ApiData to preload.
+      // I'm not seeing any side effects with this commented out.
+      // self.fullCollection.resetFiltered();
     };
 
     return fullCollection;
