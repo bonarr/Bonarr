@@ -6,7 +6,7 @@
 .wrapper {
   > .aside {
 
-    // visibility: hidden;
+    display: none;
     position: absolute;
     width: @aside-wd;
     cursor: default;
@@ -107,6 +107,14 @@
       /* safari fix */
       height: 1px;
       min-height: 100%;
+    }
+  }
+}
+
+.started {
+  .wrapper {
+    > .aside {
+      display : block;
     }
   }
 }

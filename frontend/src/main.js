@@ -84,6 +84,8 @@ preloadPromise.done(function () {
   app.start();
 });
 
-
+preloadPromise.fail(function () {
+  $('#main-region').html('<h2>Loading failed, check console log</h2>')
+});
 
 module.exports = app;
