@@ -33,8 +33,8 @@ function getPosterUrl(images, size) {
 }
 
 Handlebars.registerHelper('posterHelper', function(size) {
-  var size = parseInt(size, 10)
-  var url = getPosterUrl(this.images, size);
+  var parsedSize = parseInt(size, 10);
+  var url = getPosterUrl(this.images, parsedSize);
 
   if (url) {
     return new Handlebars.SafeString('<img class="series-poster x-series-poster" {0}>'.format(defaultImage(url)));

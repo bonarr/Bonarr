@@ -58,8 +58,6 @@ module.exports = Marionette.Layout.extend({
     this._showSeasons();
     this._setMonitoredState();
     this._showHeader();
-
-    this.onEditClick();
   },
 
   onRender: function() {
@@ -240,5 +238,5 @@ module.exports = Marionette.Layout.extend({
       parentView: this,
       actions: actions
     });
-  },
+  }
 });
