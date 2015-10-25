@@ -22,10 +22,6 @@
                 <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
                     <em class="icon-sonarr-navbar-collapse"></em>
                 </a>
-                <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
-                <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
-                    <em class="icon-sonarr-navbar-collapse"></em>
-                </a>
             </li>
             <li>
                 <a href="#" class="navbar-search x-navbar-search">
@@ -62,6 +58,13 @@
                     </li>
                     {{/if_eq}}
                 </ul>
+            </li>
+
+            <li class="navbar-collapse-button-right">
+                <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                    <em class="icon-sonarr-navbar-collapse"></em>
+                </a>
             </li>
         </ul>
     </div>

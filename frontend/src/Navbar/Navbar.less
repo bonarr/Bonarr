@@ -18,9 +18,13 @@
       height           : 22px;
       transition       : border .3s ease-out;
       box-shadow       : none;
+      color            : white;
+      .placeholder(white);
 
       &:focus {
         border-bottom : solid 1px transparent;
+        color         : white;
+        .placeholder(transparent);
       }
     }
 
@@ -43,18 +47,6 @@
   }
 
   @media @tablet {
-    .navbar-search {
-      .navbar-search-input {
-        .placeholder(white);
-        color : white;
-      }
-
-      &:focus {
-        color         : white;
-        .placeholder(transparent);
-      }
-    }
-
     .navbar-collapse-button {
       width: 70px;
       text-align: center;
