@@ -146,7 +146,6 @@ module.exports = Marionette.Layout.extend({
         seasonNumber: this.model.get('seasonNumber')
       }
     });
-    this.ui.panel.toggleClass('expanded', this.showingEpisodes);
   },
 
   _seasonSearch: function() {
@@ -208,6 +207,8 @@ module.exports = Marionette.Layout.extend({
 
   _showEpisodes: function() {
     this.showingEpisodes = true;
+    this.ui.panel.addClass('expanded');
+
     if (!this.$el.hasClass('loaded')) {
       this.$el.addClass('loaded');
       this.episodeGrid.show(new Backgrid.Grid({
@@ -216,6 +217,11 @@ module.exports = Marionette.Layout.extend({
         className: 'table table-hover season-grid'
       }));
     }
+  },
+
+  _hideEpisodes: function() {
+    this.showingEpisodes = false;
+    this.ui.panel.removeClass('expanded');
   },
 
   _shouldShowEpisodes: function() {
@@ -243,7 +249,7 @@ module.exports = Marionette.Layout.extend({
 
   _showHideEpisodes: function(e) {
     if (this.showingEpisodes) {
-      this.showingEpisodes = false;
+      this._hideEpisodes();
     } else {
       this._showEpisodes();
     }

@@ -13,6 +13,8 @@ var view = Marionette.CollectionView.extend({
 
     this.episodeCollection = options.episodeCollection;
     this.series = options.series;
+
+    this.listenTo(this.series, 'seasons:expand', this._showHideEpisodes);
   },
 
   itemViewOptions: function() {
@@ -35,6 +37,18 @@ var view = Marionette.CollectionView.extend({
     });
 
     this.render();
+  },
+
+  _showHideEpisodes: function () {
+    var allShowingEpisodes = _.every(this.children._views, 'showingEpisodes');
+
+    _.each(this.children._views, function (view) {
+      if (allShowingEpisodes) {
+        view._hideEpisodes();
+      } else {
+        view._showEpisodes();
+      }
+    });
   }
 });
 

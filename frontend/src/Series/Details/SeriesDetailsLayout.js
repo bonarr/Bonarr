@@ -135,7 +135,7 @@ module.exports = Marionette.Layout.extend({
     });
 
     $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(function() {
-      var seasonCollectionView = new SeasonCollectionView({
+      seasonCollectionView = new SeasonCollectionView({
         collection: self.seasonCollection,
         episodeCollection: self.episodeCollection,
         series: self.model
@@ -169,6 +169,10 @@ module.exports = Marionette.Layout.extend({
 
     this._setMonitoredState();
     this._showHeader();
+  },
+
+  onExpandClick: function () {
+    this.model.trigger('seasons:expand');
   },
 
   onEditClick: function() {
@@ -210,6 +214,11 @@ module.exports = Marionette.Layout.extend({
           properties: {
             seriesId: this.model.id
           }
+        },
+        {
+          tooltip: 'Expand/Collapse all seasons',
+          icon: 'icon-sonarr-expand',
+          callback: this.onExpandClick
         },
         {
           tooltip: 'Preview rename for series',
