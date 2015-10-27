@@ -3,7 +3,7 @@ var Config = require('../../../Config');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'li',
-  className: 'sidebar-right-list-item sidebar-right-radio-list-item',
+  className: 'actionbar-list-item actionbar-radio-list-item',
   template: 'Sidebar/ActionBar/Radio/RadioViewTemplate',
 
   ui: {

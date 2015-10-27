@@ -3,6 +3,6 @@ var ActionView = require('./ActionView');
 
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',
-  className: 'sidebar-right-list',
+  className: 'actionbar-list',
   itemView: ActionView
 });

@@ -4,7 +4,7 @@ var _ = require('underscore');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Sidebar/ActionBar/Sorting/SortingViewTemplate',
-  className: 'sidebar-right-list-item sidebar-right-sorting-list-item',
+  className: 'actionbar-list-item actionbar-sorting-list-item',
   tagName: 'li',
 
   ui: {

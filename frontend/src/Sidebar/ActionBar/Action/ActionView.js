@@ -6,7 +6,7 @@ var CommandController = require('../../../Commands/CommandController');
 module.exports = Marionette.ItemView.extend({
   template: 'Sidebar/ActionBar/Action/ActionViewTemplate',
   tagName: 'li',
-  className: 'sidebar-right-list-item',
+  className: 'actionbar-list-item',
 
   ui: {
     icon: 'i'

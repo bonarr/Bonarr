@@ -11,7 +11,7 @@ var ResolutionUtility = require('../../Utilities/ResolutionUtility');
 
 module.exports = Marionette.Layout.extend({
   template: 'Sidebar/ActionBar/ActionBarLayoutTemplate',
-  className: 'aside-inner sidebar-right',
+  className: 'aside-inner actionbar',
 
   regions: {
     actionsRegion: '.x-actions',

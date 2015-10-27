@@ -4,7 +4,7 @@ var Config = require('../../../Config');
 
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',
-  className: 'sidebar-right-list sidebar-right-radio-list',
+  className: 'actionbar-list actionbar-radio-list',
   itemView: RadioView,
 
   attributes: {

@@ -4,7 +4,7 @@ var _ = require('underscore');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Sidebar/ActionBar/Filtering/FilteringViewTemplate',
-  className: 'sidebar-right-list-item sidebar-right-filtering-list-item',
+  className: 'actionbar-list-item actionbar-filtering-list-item',
   tagName: 'li',
 
   ui: {
