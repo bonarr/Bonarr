@@ -9,7 +9,7 @@ var substringMatcher = function() {
     var matches = _.select(SeriesCollection.toJSON(), function(series) {
       return series.title.toLowerCase().indexOf(q.toLowerCase()) > -1;
     });
-    cb(matches);
+    cb(_.take(matches, 10));
   };
 };
 
