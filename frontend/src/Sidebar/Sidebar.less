@@ -10,17 +10,15 @@
     position: absolute;
     width: @aside-wd;
     cursor: default;
-    top: 0;
+    top: @navbar-hg;
     left: 0;
     bottom: 0;
-    z-index: @z-index-main-section + 5;
 
     // .transition(visibility 0s linear .3s);
     .backface-visibility(hidden);
     background-color: @aside-bg;
 
     .aside-inner {
-      padding-top: @navbar-hg * 2;
       height: 100%;
       width: @aside-wd;
       overflow: hidden;
@@ -38,20 +36,11 @@
   }
 }
 
-@media @tablet {
-  .wrapper {
-    > .aside {
-      .aside-inner {
-        padding-top: @navbar-hg;
-      }
-    }
-  }
-}
-
 @media @upto-tablet {
   .wrapper {
     > .aside {
       left: -@aside-wd;
+      z-index: @z-index-main-section + 5;
     }
   }
 
