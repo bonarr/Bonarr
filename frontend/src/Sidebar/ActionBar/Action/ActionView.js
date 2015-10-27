@@ -32,6 +32,7 @@ module.exports = Marionette.ItemView.extend({
 
     if (this.model.get('tooltip')) {
       this.$el.attr('title', this.model.get('tooltip'));
+      this.$el.data('container', 'body');
     }
 
     var command = this.model.get('command');
