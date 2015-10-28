@@ -41,6 +41,21 @@ module.exports = {
         return;
       }
 
+      Messenger.show({
+        id: messengerId,
+        type: 'error',
+        hideAfter: 0,
+        message: 'Connection to backend lost',
+        actions: {
+          cancel: {
+            label: 'Reload',
+            action: function() {
+              window.location.reload();
+            }
+          }
+        }
+      });
+
       tryingToReconnect = true;
     });
 
