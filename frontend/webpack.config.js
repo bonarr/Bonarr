@@ -1,8 +1,5 @@
 var path = require('path');
-var stylish = require('jshint-stylish');
 var webpack = require('webpack');
-
-var uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin();
 
 var uiFolder = 'UI.Phantom';
 var root = path.join(__dirname, 'src');
@@ -12,11 +9,11 @@ console.log('ROOT:', root);
 module.exports = {
   devtool: '#source-map',
   watchOptions: {
-    poll: true,
+    poll: true
   },
   entry: {
     vendor: 'vendor.js',
-    main: 'main.js',
+    main: 'main.js'
   },
   resolve: {
     root: root,
@@ -51,39 +48,33 @@ module.exports = {
       typeahead: 'JsLibraries/typeahead',
       underscore: 'Shims/underscore',
       vent: 'vent',
-      'zero.clipboard': 'JsLibraries/zero.clipboard',
-    },
+      'zero.clipboard': 'JsLibraries/zero.clipboard'
+    }
   },
   output: {
     filename: '_output/' + uiFolder + '/[name].js',
-    sourceMapFilename: '_output/' + uiFolder + '/[name].map',
+    sourceMapFilename: '_output/' + uiFolder + '/[name].map'
   },
   plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-          name: 'vendor',
-        }),
-    ],
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor'
+    })
+  ],
   module: {
     loaders: [
-    {
-      test: /\.js?$/,
-      exclude: /(node_modules|JsLibraries)/,
-      loader: 'babel',
-      query: {
-        optional: ['runtime'],
-        stage: 1,
-      },
-    },
-  ]
-
-    //this doesn't work yet. waiting for https://github.com/spenceralger/rcloader/issues/5
-    /*preLoaders: [
-        {
-            test: /\.js$/, // include .js files
-            loader: "jshint-loader",
-            exclude: [/JsLibraries/,/node_modules/]
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|JsLibraries)/,
+        loader: 'babel',
+        query: {
+          optional: ['runtime'],
+          stage: 1
         }
+      },
+      {
+        test: /\.hbs?$/,
+        loader: 'handlebars-loader'
+      }
     ]
-    */
-  },
+  }
 };
