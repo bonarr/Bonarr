@@ -5,7 +5,6 @@ var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('autoprefixer-core');
 var livereload = require('gulp-livereload');
-var wait = require('gulp-wait');
 
 var print = require('gulp-print');
 var paths = require('./paths');
@@ -32,8 +31,11 @@ gulp.task('less', function() {
       browsers: ['last 2 versions']
     })]))
     .on('error', errorHandler.onError)
-    .pipe(sourcemaps.write(paths.dest.content))
+    // not providing a path will cause the source map
+    // to be embeded. which makes livereload much happier
+    // since it doesn't reload the whole page to load the map.
+    // this should be switched to sourcemaps.write('./') for production builds
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest.content))
-    .pipe(wait(1000))
     .pipe(livereload());
 });
