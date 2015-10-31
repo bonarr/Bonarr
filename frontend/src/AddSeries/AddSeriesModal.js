@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('../AppLayout');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
 var Profiles = require('../Profile/ProfileCollection');
@@ -20,7 +19,7 @@ var Keys = {
   StartSearch: 'AddSeries.StartSearch'
 };
 
-view = Marionette.ItemView.extend({
+var view = Marionette.ItemView.extend({
   template: 'AddSeries/AddSeriesModal',
 
   ui: {
@@ -157,7 +156,7 @@ view = Marionette.ItemView.extend({
     this.ui.addButton.spinForPromise(promise);
 
     promise.always(function() {
-      addButton.removeClass('disabled')
+      addButton.removeClass('disabled');
     });
 
     promise.done(_.bind(this.onSeriesAdded, this));
@@ -199,35 +198,35 @@ view = Marionette.ItemView.extend({
     };
 
     switch (monitor) {
-      case 'all':{
+      case 'all': {
         break;
-        }
-      case 'future':{
+      }
+      case 'future': {
         options.ignoreEpisodesWithFiles = true;
         options.ignoreEpisodesWithoutFiles = true;
         break;
-        }
-      case 'latest':{
+      }
+      case 'latest': {
         this.model.setSeasonPass(lastSeason.seasonNumber);
         break;
-        }
-      case 'first':{
+      }
+      case 'first': {
         this.model.setSeasonPass(lastSeason.seasonNumber + 1);
         this.model.setSeasonMonitored(firstSeason.seasonNumber);
-        break
-        }
-      case 'missing':{
+        break;
+      }
+      case 'missing': {
         options.ignoreEpisodesWithFiles = true;
-        break
-        }
-      case 'existing':{
+        break;
+      }
+      case 'existing': {
         options.ignoreEpisodesWithoutFiles = true;
         break;
-        }
-      case 'none':{
+      }
+      case 'none': {
         this.model.setSeasonPass(lastSeason.seasonNumber + 1);
         break;
-        }
+      }
     }
 
     return options;
