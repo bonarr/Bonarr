@@ -53,7 +53,7 @@ var preloadPromise = $.when(
   SeriesCollection.fetch()
 );
 
-preloadPromise.done(function () {
+preloadPromise.done(function() {
   app.addInitializer(SignalRBroadcaster.appInitializer, { app: app });
 
   app.addInitializer(Tooltip.appInitializer, { app: app });
@@ -84,7 +84,7 @@ preloadPromise.done(function () {
   app.start();
 });
 
-preloadPromise.fail(function () {
+preloadPromise.fail(function() {
   $('#main-region').html('<h2>Loading failed, check console log</h2>');
 });
 

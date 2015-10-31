@@ -1,5 +1,6 @@
 {
   "esnext": true,
+  "fix": true,
   "requireSpaceBeforeObjectValues": true,
   "disallowSpaceAfterObjectKeys": true,
   "requireSpaceBeforeKeywords": ["else", "while", "catch"],
