@@ -60,7 +60,18 @@ module.exports = {
       name: 'vendor'
     })
   ],
+  resolveLoader: {
+    modulesDirectories: [
+      'node_modules',
+      'gulp/webpack/'
+    ]
+  },
   module: {
+    preLoaders: [
+      {
+        test: /\.hbs$/,
+        loader: 'html-annotate-loader'
+      }],
     loaders: [
       {
         test: /\.js?$/,
