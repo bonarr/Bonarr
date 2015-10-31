@@ -44,7 +44,9 @@
     "run-sequence": "1.1.1",
     "streamqueue": "1.1.0",
     "tar.gz": "0.1.1",
-    "webpack": "1.12.0",
-    "webpack-stream": "2.1.0"
+    "webpack": "1.12.2",
+    "webpack-stream": "2.1.0",
+    "babel-core": "5.8.33",
+    "babel-loader": "5.3.3"
   }
 }

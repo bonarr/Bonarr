@@ -57,24 +57,24 @@ module.exports = Marionette.Layout.extend({
 
     this.ui.seriesSearch.keyup(function(e) {
       if (_.contains([
-          9,
-          16,
-          17,
-          18,
-          19,
-          20,
-          33,
-          34,
-          35,
-          36,
-          37,
-          38,
-          39,
-          40,
-          91,
-          92,
-          93
-        ], e.keyCode)) {
+        9,
+        16,
+        17,
+        18,
+        19,
+        20,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        91,
+        92,
+        93
+      ], e.keyCode)) {
         return;
       }
 

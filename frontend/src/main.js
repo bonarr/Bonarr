@@ -41,7 +41,7 @@ new Router();
 
 var app = new Marionette.Application();
 
-app.addInitializer(function() {
+app.addInitializer(() => {
   console.log('starting application');
 });
 
