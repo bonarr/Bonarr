@@ -14,13 +14,22 @@ module.exports = Backgrid.Cell.extend({
 
     var self = this;
 
-    this.$el.html('<i class="icon-sonarr-spinner fa-spin" />');
+    this.$el.html('<i class="icon-sonarr-spinner fa-spin" title="Adding to download queue" />');
 
     //Using success callback instead of promise so it
     //gets called before the sync event is triggered
-    this.model.save(null, {
+    const promise = this.model.save(null, {
       success: function() {
         self.model.set('queued', true);
+      }
+    });
+
+    promise.fail(function (xhr) {
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        var message = xhr.responseJSON.message;
+        self.$el.html('<i class="icon-sonarr-download-failed" title="${message}" />');
+      } else {
+        self.$el.html('<i class="icon-sonarr-download-failed" title="Failed to add to download queue" />');
       }
     });
   },
