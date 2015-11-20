@@ -6,7 +6,7 @@
 
 .calendar-layout {
 
-  .upcoming .event .status, .calendar .fc-event, .calendar-legend .legend-label {
+  .upcoming .event .status, .calendar .calendar-day .calendar-events .calendar-event, .calendar-legend .legend-label {
     &.primary {
       border-left-color: @btn-primary-bg;
 
@@ -60,6 +60,80 @@
   }
 
   .calendar {
+    margin-bottom: 10px;
+
+    .calendar-header {
+      display: flex;
+
+      .calendar-header-title {
+        font-size: 18px;
+      }
+
+      .calendar-header-group {
+        width: 33.33%;
+      }
+
+      .calendar-header-center {
+        text-align: center;
+      }
+
+      .calendar-header-right {
+        text-align: right;
+      }
+    }
+
+    .calendar-day-headers {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      background-color: @gray-light;
+
+      .calendar-day-header {
+        min-width: 14.28%;
+        text-align: center;
+        font-weight: bold;
+
+        &.calendar-current-day-header {
+          background-color: #999999;
+        }
+      }
+    }
+
+    .calendar-days {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      border-right: 1px solid @gray-light;
+
+      .calendar-day {
+        min-width: 14.28%;
+        padding-bottom: 2px;
+        border-bottom: 1px solid @gray-light;
+        border-left: 1px solid @gray-light;
+
+        .calendar-day-date {
+          padding-right: 5px;
+          text-align: right;
+
+          &.calendar-day-current-date {
+            background-color: #dddddd;
+          }
+        }
+
+        .calendar-event {
+          margin: 2px;
+          padding: 5px;
+          border: 1px solid @gray;
+          border-left: 4px solid @gray;
+          border-radius: 4px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    //Old
+
     width: 100%;
 
     th, td {

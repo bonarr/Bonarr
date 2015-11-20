@@ -1,0 +1,6 @@
+{{#if_eq view compare="month"}}
+  <div class="calendar-day-date {{#if_today date}}calendar-day-current-date{{/if_today}}">
+    {{FormatDate date format="D"}}
+  </div>
+{{/if_eq}}
+<div class="x-calendar-day-events"></div>

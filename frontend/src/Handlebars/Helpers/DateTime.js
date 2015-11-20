@@ -67,6 +67,14 @@ Handlebars.registerHelper('LTS', function(input) {
   return moment(input).format(UiSettings.time(true, true));
 });
 
+Handlebars.registerHelper('FormatDate', function(input, options) {
+  if (!input || !options.hash.format) {
+    return '';
+  }
+
+  return moment(input).format(options.hash.format);
+});
+
 Handlebars.registerHelper('if_today', function(context, options) {
   var date = moment(context).startOf('day');
   var today = moment().startOf('day');

@@ -2,7 +2,7 @@ var vent = require('vent');
 var AppLayout = require('../AppLayout');
 var Marionette = require('marionette');
 var UpcomingLayout = require('./Upcoming/UpcomingLayout');
-var CalendarView = require('./CalendarView');
+var CalendarView = require('./Calendar/CalendarView');
 var CalendarFeedView = require('./CalendarFeedView');
 
 module.exports = Marionette.Layout.extend({

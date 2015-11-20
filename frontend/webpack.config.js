@@ -44,6 +44,7 @@ module.exports = {
       marionette: 'Shims/backbone.marionette',
       messenger: 'Shims/messenger',
       moment: 'JsLibraries/moment',
+      momentRange: 'JsLibraries/moment-range',
       signalR: 'Shims/jquery.signalR',
       typeahead: 'JsLibraries/typeahead',
       underscore: 'Shims/underscore',
