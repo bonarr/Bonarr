@@ -151,6 +151,30 @@
       height: 25px;
     }
 
+    .calendar-header-mobile {
+      display: none;
+    }
+
+    @media @upto-tablet {
+      .calendar-header-mobile {
+        display: block;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      .calendar-header {
+        .calendar-header-group {
+          &.calendar-header-left {
+            width: 60%;
+          }
+
+          &.calendar-header-right {
+            width: 40%;
+          }
+        }
+      }
+    }
+
     //Old
 
     width: 100%;
