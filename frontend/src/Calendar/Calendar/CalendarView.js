@@ -25,11 +25,13 @@ module.exports = Marionette.Layout.extend({
   },
 
   events: {
-    'click .x-view-select' : '_onViewClick'
+    'click .x-view-select' : '_onViewClick',
+    'click .x-navigate'    : '_onNavigateClick'
   },
 
   ui: {
     calendar: '.x-calendar',
+    title: '.x-calendar-header-title',
     viewSelectButtons: '.x-view-select',
     previous: '.x-previous',
     next: '.x-next',
@@ -45,22 +47,25 @@ module.exports = Marionette.Layout.extend({
     this.collection = new CalendarCollection().bindSignalR({ updateOnly: true });
     this.dayCollection = new CalendarDayCollection();
 
-    // TODO: This should update existing events instead of redrawing the entire calendar
+    // TODO: Make sure this doesn't re-render the entire calendar when one event is updated
     this.listenTo(this.collection, 'sync', this._showCalendar);
 
     this.time = moment();
   },
 
-  onShow: function () {
+  onBeforeRender: function () {
     this.firstDayOfWeek = UiSettings.get('firstDayOfWeek');
     this.isMobile = $(window).width() < 768;
+    this.view = this._getViewName();
+    this.dates = this._getDates();
+  },
 
-    this._changeView(this.view = this._getViewName());
+  onShow: function () {
+    this._reloadEvents();
   },
 
   serializeData: function () {
     return {
-      title: this.time.format(this._getTitleFormat()),
       showMonth: $(window).width() >= 768
     };
   },
@@ -150,18 +155,32 @@ module.exports = Marionette.Layout.extend({
     this.ui.calendar.addClass(this.view);
     this.ui.viewSelectButtons.removeClass('active');
     this.ui[this.view].addClass('active');
-    this.ui.loading.addClass('hidden')
+    this.ui.loading.addClass('hidden');
+    this.ui.title.html(this._getTitle());
   },
 
-  _getTitleFormat: function () {
-    switch (this.view) {
-      case 'week':
-        return UiSettings.get('shortDateFormat');
-      case 'month':
-        return 'MMMM YYYY';
-      default:
-        return UiSettings.get('longDateFormat');
+  _getTitle: function () {
+    if (this.view === 'day') {
+      return this.time.format(UiSettings.get('longDateFormat'));
+    } else if (this.view === 'month') {
+      return this.time.format('MMMM YYYY');
     }
+
+    var startDate = this.dates.start;
+    var endDate = this.dates.end;
+
+    var start = 'MMM D YYYY';
+    var end = 'MMM D YYYY';
+
+    if (startDate.isSame(endDate, 'month')) {
+      start = 'MMM D';
+      end = 'D YYYY';
+    } else if (startDate.isSame(endDate, 'year')) {
+      start = 'MMM D';
+      end = 'MMM D YYYY';
+  }
+
+    return startDate.format(start) + ' &mdash; ' + endDate.format(end);
   },
 
   _getHeaderFormat: function () {
@@ -184,12 +203,34 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
+  _onNavigateClick: function (event) {
+    var $target = $(event.target).closest('.x-navigate');
+    var navigate = $target.data('navigate');
+
+    if ($target.hasClass('disabled')) {
+      return;
+    }
+
+    if (navigate === 'previous') {
+      this.time = this.time.subtract(1, this.view + 's');
+    } else if (navigate === 'next') {
+      this.time = this.time.add(1, this.view + 's');
+    } else {
+      this.time = moment();
+    }
+
+    this._reloadEvents();
+  },
+
   _changeView: function (view) {
     Config.setValue(this.storageKey, view);
-
-    this.ui.loading.removeClass('hidden');
-    this.time = moment();
     this.view = view;
+
+    this._reloadEvents();
+  },
+
+  _reloadEvents: function () {
+    this.ui.loading.removeClass('hidden');
     this.dates = this._getDates();
     this._getEvents();
   }

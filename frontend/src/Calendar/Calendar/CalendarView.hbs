@@ -1,17 +1,17 @@
 <div class="calendar x-calendar">
   <div class="calendar-header">
-    <div class="calendar-header-title visible-xs">{{title}}</div>
+    <div class="calendar-header-title x-calendar-header-title visible-xs">{{{title}}}</div>
 
     <div class="calendar-header-group calendar-header-left">
       <div class="btn-group">
-        <button class="btn btn-default previous x-previous"><i class="icon-sonarr-pager-previous"></i></button>
-        <button class="btn btn-default next x-next"><i class="icon-sonarr-pager-next"></i></button>
+        <button class="btn btn-default x-navigate previous x-previous" data-navigate="previous"><i class="icon-sonarr-pager-previous"></i></button>
+        <button class="btn btn-default x-navigate next x-next" data-navigate="next"><i class="icon-sonarr-pager-next"></i></button>
       </div>
-      <button class="btn btn-default today x-today">Today</button>
+      <button class="btn btn-default x-navigate today x-today" data-navigate="today">Today</button>
     </div>
 
     <div class="calendar-header-group calendar-header-center">
-      <div class="calendar-header-title hidden-xs">{{title}}</div>
+      <div class="calendar-header-title x-calendar-header-title hidden-xs">{{title}}</div>
     </div>
 
     <div class="calendar-header-group calendar-header-right">
