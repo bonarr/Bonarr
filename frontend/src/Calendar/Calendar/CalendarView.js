@@ -25,7 +25,19 @@ module.exports = Marionette.Layout.extend({
   },
 
   events: {
-    'click .x-view' : '_changeView'
+    'click .x-view-select' : '_onViewClick'
+  },
+
+  ui: {
+    calendar: '.x-calendar',
+    viewSelectButtons: '.x-view-select',
+    previous: '.x-previous',
+    next: '.x-next',
+    today: '.x-today',
+    loading: '.x-loading-indicator',
+    month: '.x-month',
+    week: '.x-week',
+    day: '.x-day'
   },
 
   initialize: function() {
@@ -34,7 +46,7 @@ module.exports = Marionette.Layout.extend({
     this.dayCollection = new CalendarDayCollection();
 
     // TODO: This should update existing events instead of redrawing the entire calendar
-    this.listenTo(this.collection, 'sync', this._reloadCalendarEvents);
+    this.listenTo(this.collection, 'sync', this._showCalendar);
 
     this.time = moment();
   },
@@ -42,10 +54,8 @@ module.exports = Marionette.Layout.extend({
   onShow: function () {
     this.firstDayOfWeek = UiSettings.get('firstDayOfWeek');
     this.isMobile = $(window).width() < 768;
-    this.view = this._getViewName();
-    this.dates = this._getDates();
 
-    this._getEvents();
+    this._changeView(this.view = this._getViewName());
   },
 
   serializeData: function () {
@@ -107,7 +117,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _reloadCalendarEvents: function() {
+  _showCalendar: function() {
     var dayFormat = 'YYYY-MM-DD';
 
     var groupedEvents = this.collection.groupBy(function (model) {
@@ -135,6 +145,12 @@ module.exports = Marionette.Layout.extend({
     this.daysRegion.show(new CalendarDayCollectionView({
       collection: this.dayCollection
     }));
+
+    this.ui.calendar.removeClass('day week month');
+    this.ui.calendar.addClass(this.view);
+    this.ui.viewSelectButtons.removeClass('active');
+    this.ui[this.view].addClass('active');
+    this.ui.loading.addClass('hidden')
   },
 
   _getTitleFormat: function () {
@@ -159,14 +175,21 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _changeView: function (event) {
+  _onViewClick: function (event) {
     var $target = $(event.target);
     var view = $target.data('view');
 
+    if (view != this.view) {
+      this._changeView(view);
+    }
+  },
+
+  _changeView: function (view) {
     Config.setValue(this.storageKey, view);
 
+    this.ui.loading.removeClass('hidden');
     this.time = moment();
-    this.view = this._getViewName();
+    this.view = view;
     this.dates = this._getDates();
     this._getEvents();
   }

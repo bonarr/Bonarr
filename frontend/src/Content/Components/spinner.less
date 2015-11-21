@@ -11,7 +11,20 @@
 }
 
 .spinner-container {
-  margin-top : 10px;
+  margin-top : 20px;
   height     : @size;
   text-align : center;
+}
+
+.spinner-small {
+  .spinner {
+    .spinner-item {
+      height       : @size / 2;
+      width        : @size / 2;
+    }
+  }
+
+  .spinner-container {
+    height     : @size / 2;
+  }
 }

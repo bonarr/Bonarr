@@ -90,7 +90,7 @@
       background-color: @gray-light;
 
       .calendar-day-header {
-        min-width: 14.28%;
+        width: 14.28%;
         text-align: center;
         font-weight: bold;
 
@@ -107,7 +107,7 @@
       border-right: 1px solid @gray-light;
 
       .calendar-day {
-        min-width: 14.28%;
+        width: 14.28%;
         padding-bottom: 2px;
         border-bottom: 1px solid @gray-light;
         border-left: 1px solid @gray-light;
@@ -130,6 +130,25 @@
           font-size: 12px;
         }
       }
+    }
+
+    &.day {
+      .calendar-days .calendar-day {
+        width: 100%;
+      }
+
+      .calendar-day-headers .calendar-day-header {
+        width: 100%;
+      }
+    }
+
+    .loading-indicator {
+      display: inline-block;
+      margin-top: -14px;
+      position: relative;
+      top: 10px;
+      right: 10px;
+      height: 25px;
     }
 
     //Old
