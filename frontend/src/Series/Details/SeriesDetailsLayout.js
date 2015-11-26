@@ -135,7 +135,7 @@ module.exports = Marionette.Layout.extend({
     });
 
     $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(function() {
-      seasonCollectionView = new SeasonCollectionView({
+      var seasonCollectionView = new SeasonCollectionView({
         collection: self.seasonCollection,
         episodeCollection: self.episodeCollection,
         series: self.model

@@ -32,7 +32,6 @@ module.exports = {
       bootstrap: 'JsLibraries/bootstrap',
       'bootstrap.tagsinput': 'JsLibraries/bootstrap.tagsinput',
       filesize: 'JsLibraries/filesize',
-      fullcalendar: 'JsLibraries/fullcalendar',
       handlebars: 'Shims/handlebars',
       'handlebars.helpers': 'JsLibraries/handlebars.helpers',
       jquery: 'Shims/jquery',

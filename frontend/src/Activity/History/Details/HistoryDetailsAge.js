@@ -17,5 +17,5 @@ Handlebars.registerHelper('historyAge', function() {
     unit = FormatHelpers.plural(Math.round(ageMinutes), 'minute');
   }
 
-  return new Handlebars.SafeString('<dt>Age (when grabbed):</dt><dd>{0} {1}</dd>'.format(age, unit));
+  return new Handlebars.SafeString(`<dt>Age (when grabbed):</dt><dd>${age} ${unit}</dd>`);
 });

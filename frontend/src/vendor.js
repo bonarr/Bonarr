@@ -3,7 +3,6 @@ require('jquery');
 require('underscore');
 require('messenger');
 require('moment');
-require('fullcalendar');
 require('signalR');
 require('jquery-ui');
 require('jquery.knob');
