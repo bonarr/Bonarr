@@ -7,8 +7,12 @@ var livereload = require('gulp-livereload');
 var path = require('path');
 var streamqueue = require('streamqueue');
 var stripbom = require('gulp-stripbom');
+var compliler = require('handlebars');
 
 var paths = require('./paths.js');
+
+console.log('Handlebars (gulp) Version: ', compliler.VERSION);
+console.log('Handlebars (gulp) Compiler: ', compliler.COMPILER_REVISION);
 
 gulp.task('handlebars', function() {
   var coreStream = gulp.src([
@@ -16,7 +20,7 @@ gulp.task('handlebars', function() {
     '!*/**/*Partial.*'
   ])
     .pipe(stripbom({ showLog: false }))
-    .pipe(handlebars())
+    .pipe(handlebars({ handlebars: compliler }))
     .pipe(declare({
       namespace: 'T',
       noRedeclare: true,
@@ -32,7 +36,7 @@ gulp.task('handlebars', function() {
 
   var partialStream = gulp.src([paths.src.partials])
     .pipe(stripbom({ showLog: false }))
-    .pipe(handlebars())
+    .pipe(handlebars({ handlebars: compliler }))
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, <%= contents %>)', {}, {
       imports: {

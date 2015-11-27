@@ -84,7 +84,11 @@ module.exports = {
       },
       {
         test: /\.hbs?$/,
-        loader: 'handlebars-loader'
+        loader: 'handlebars-loader',
+        query: {
+          runtime: 'handlebars',
+          knownHelpers: ['if_eq']
+        }
       }
     ]
   }
