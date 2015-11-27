@@ -1,8 +1,7 @@
 var $ = require('jquery');
 var Handlebars = require('handlebars');
-var StatusModel = require('../../System/StatusModel');
 
-var placeholder = StatusModel.get('urlBase') + '/Content/Images/poster-dark.png';
+var placeholder = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
 
 window.Sonarr.imageError = function(img) {
   if (!img.src.contains(placeholder)) {
@@ -22,9 +21,9 @@ Handlebars.registerHelper('defaultImg', function(src, size) {
     src = src.replace(/\.jpg($|\?)/g, '-' + size + '.jpg$1');
   }
 
-  return new Handlebars.SafeString('src="{0}" onerror="window.Sonarr.imageError(this);"'.format(src));
+  return new Handlebars.SafeString(`src="${src}" onerror="window.Sonarr.imageError(this);`);
 });
 
 Handlebars.registerHelper('UrlBase', function() {
-  return new Handlebars.SafeString(StatusModel.get('urlBase'));
+  return new Handlebars.SafeString(window.Sonarr.UrlBase);
 });

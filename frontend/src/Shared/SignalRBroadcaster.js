@@ -1,7 +1,7 @@
 var vent = require('vent');
 var $ = require('jquery');
 var Messenger = require('./Messenger');
-var StatusModel = require('../System/StatusModel');
+
 require('signalR');
 
 module.exports = {
@@ -26,10 +26,10 @@ module.exports = {
     var tryingToReconnect = false;
     var messengerId = 'signalR';
 
-    this.signalRconnection = $.connection(StatusModel.get('urlBase') + '/signalr');
+    this.signalRconnection = $.connection(`${window.Sonarr.UrlBase}/signalr`);
 
     this.signalRconnection.stateChanged(function(change) {
-      console.debug('SignalR: [{0}]'.format(getStatus(change.newState)));
+      console.debug(`SignalR: [${getStatus(change.newState)}]`);
     });
 
     this.signalRconnection.received(function(message) {

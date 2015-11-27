@@ -1,8 +1,7 @@
 var Handlebars = require('handlebars');
-var StatusModel = require('../../System/StatusModel');
 var _ = require('underscore');
 
-var placeholderUrl = StatusModel.get('urlBase') + '/Content/Images/poster-dark.png';
+var placeholderUrl = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
 
 function defaultImage(url, size) {
   if (!url) {
@@ -19,7 +18,7 @@ function getPosterUrl(images, size) {
   if (poster) {
     var url = poster.url;
 
-    //remove protocol.
+    // remove protocol.
     if (poster.url.match(/^https?:\/\//)) {
       url = poster.url.replace(/^https?\:/, '');
     }
@@ -74,7 +73,7 @@ Handlebars.registerHelper('tvMazeUrl', function() {
 });
 
 Handlebars.registerHelper('route', function() {
-  return StatusModel.get('urlBase') + '/series/' + this.titleSlug;
+  return window.Sonarr.urlBase + '/series/' + this.titleSlug;
 });
 
 Handlebars.registerHelper('percentOfEpisodes', function() {

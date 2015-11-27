@@ -61,7 +61,7 @@ preloadPromise.done(function() {
   app.addInitializer(function() {
     Backbone.history.start({
       pushState: true,
-      root: StatusModel.get('urlBase')
+      root: window.Sonarr.UrlBase
     });
 
     RouteBinder.bind();

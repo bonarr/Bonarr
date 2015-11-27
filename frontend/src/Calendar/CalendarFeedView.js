@@ -1,9 +1,9 @@
 var Marionette = require('marionette');
-var StatusModel = require('../System/StatusModel');
 require('../Mixins/CopyToClipboard');
+var tpl = require('./CalendarFeedView.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Calendar/CalendarFeedView',
+  template: tpl,
 
   ui: {
     icalUrl: '.x-ical-url',
@@ -11,8 +11,8 @@ module.exports = Marionette.Layout.extend({
   },
 
   templateHelpers: {
-    icalHttpUrl: window.location.protocol + '//' + window.location.host + StatusModel.get('urlBase') + '/feed/calendar/NzbDrone.ics?apikey=' + window.Sonarr.ApiKey,
-    icalWebCalUrl: 'webcal://' + window.location.host + StatusModel.get('urlBase') + '/feed/calendar/NzbDrone.ics?apikey=' + window.Sonarr.ApiKey
+    icalHttpUrl: `${window.location.origin}${window.Sonarr.UrlBase}/feed/calendar/NzbDrone.ics?apikey=${window.Sonarr.ApiKey}`,
+    icalWebCalUrl:  `webcal://${window.location.host}${window.Sonarr.UrlBase}/feed/calendar/NzbDrone.ics?apikey=${window.Sonarr.ApiKey}`
   },
 
   onShow: function() {
