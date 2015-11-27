@@ -1,14 +1,10 @@
 var SeriesIndexItemView = require('../SeriesIndexItemView');
+var tpl = require('./SeriesPostersItemView.hbs');
 
 module.exports = SeriesIndexItemView.extend({
   tagName: 'li',
   className: 'series-poster-item',
-  template: 'Series/Index/Posters/SeriesPostersItemViewTemplate',
+  template: tpl,
 
-  initialize: function() {},
-
-  posterHoverAction: function() {
-    //this.ui.controls.slideToggle();
-    //this.ui.title.slideToggle();
-  }
+  initialize: function() {}
 });
