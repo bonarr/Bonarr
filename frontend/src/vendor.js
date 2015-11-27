@@ -1,4 +1,4 @@
-/*Base*/
+/* Base */
 require('jquery');
 require('underscore');
 require('messenger');
@@ -11,11 +11,11 @@ require('jquery.dotdotdot');
 require('typeahead');
 require('zero.clipboard');
 
-/*Bootstrap*/
+/* Bootstrap */
 require('bootstrap');
 require('bootstrap.tagsinput');
 
-/*Backbone*/
+/* Backbone */
 require('backbone');
 require('backbone.deepmodel');
 require('backbone.paginator');
@@ -27,5 +27,5 @@ require('backgrid');
 require('backgrid.paginator');
 require('backgrid.selectall');
 
-require('marionette'); //this brings in a bunch of our code into this chunk because of template helpers.
+require('marionette'); // this brings in a bunch of our code into this chunk because of template helpers.
 require('vent');

@@ -76,11 +76,7 @@ module.exports = {
       {
         test: /\.js?$/,
         exclude: /(node_modules|JsLibraries)/,
-        loader: 'babel',
-        query: {
-          optional: ['runtime'],
-          stage: 1
-        }
+        loader: 'babel'
       },
       {
         test: /\.hbs?$/,
