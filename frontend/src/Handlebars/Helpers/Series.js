@@ -73,7 +73,7 @@ Handlebars.registerHelper('tvMazeUrl', function() {
 });
 
 Handlebars.registerHelper('route', function() {
-  return window.Sonarr.urlBase + '/series/' + this.titleSlug;
+  return window.Sonarr.UrlBase + '/series/' + this.titleSlug;
 });
 
 Handlebars.registerHelper('percentOfEpisodes', function() {
