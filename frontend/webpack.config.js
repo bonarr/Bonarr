@@ -83,6 +83,9 @@ module.exports = {
         loader: 'handlebars-loader',
         query: {
           runtime: 'handlebars',
+          helperDirs: [
+            root + '/Handlebars/Helpers/Series'
+          ],
           knownHelpers: ['if_eq']
         }
       }

@@ -9,6 +9,7 @@ var SeriesCollection = require('../Series/SeriesCollection');
 var Config = require('../Config');
 var Messenger = require('../Shared/Messenger');
 var AsValidatedView = require('../Mixins/AsValidatedView');
+var tpl = require('./AddSeriesModal.hbs');
 
 var Keys = {
   DefaultProfileId: 'AddSeries.DefaultProfileId',
@@ -20,7 +21,7 @@ var Keys = {
 };
 
 var view = Marionette.ItemView.extend({
-  template: 'AddSeries/AddSeriesModal',
+  template: tpl,
 
   ui: {
     profile: '.x-profile',

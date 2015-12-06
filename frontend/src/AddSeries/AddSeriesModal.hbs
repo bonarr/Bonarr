@@ -1,7 +1,7 @@
 <div class="fullscreen-modal">
   <div class="fullscreen-modal-header">
     <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
-    <h1>{{titleWithYear}}</h1>
+    <h1>{{titleWithYear .}}</ h1>
   </div>
   <div class="fullscreen-modal-body add-series-modal">
     <div class="row">
@@ -27,7 +27,7 @@
               <div class="form-group">
                 <label class="control-label">Path</label>
                 <div class="control-input">
-                  {{> RootFolderSelectionPartial rootFolders}}
+                  {{> RootFolders/RootFolderSelectionPartial rootFolders}}
                 </div>
               </div>
               <div class="form-group">
@@ -49,13 +49,13 @@
               <div class="form-group">
                 <label class="control-label">Profile</label>
                 <div class="control-input">
-                  {{> ProfileSelectionPartial profiles}}
+                  {{> ../Profile/ProfileSelectionPartial profiles}}
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label">Series Type</label>
                 <div class="control-input">
-                  {{> SeriesTypeSelectionPartial}}
+                  {{> ./SeriesTypeSelectionPartial}}
                 </div>
               </div>
               <div class="form-group">

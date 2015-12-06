@@ -1,5 +1,6 @@
 var Handlebars = require('handlebars');
 var _ = require('underscore');
+var titleWithYear = require('./Series/titleWithYear');
 
 var placeholderUrl = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
 
@@ -98,20 +99,10 @@ Handlebars.registerHelper('seasonCountHelper', function() {
   }
 
   if (seasonCount === 1) {
-    return new Handlebars.SafeString('<span class="label label-info">{0} Season</span>'.format(seasonCount));
+    return new Handlebars.SafeString('<span class="label label-info">1 Season</span>');
   }
 
   return new Handlebars.SafeString('<span class="label label-info">{0} Seasons</span>'.format(seasonCount));
 });
 
-Handlebars.registerHelper('titleWithYear', function() {
-  if (this.title.endsWith(' ({0})'.format(this.year))) {
-    return this.title;
-  }
-
-  if (!this.year) {
-    return this.title;
-  }
-
-  return new Handlebars.SafeString('{0} <span class="year">({1})</span>'.format(this.title, this.year));
-});
+Handlebars.registerHelper('titleWithYear', titleWithYear);
