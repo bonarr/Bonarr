@@ -14,8 +14,10 @@ module.exports = Marionette.AppRouter.extend({
   initialize: function() {
     vent.on(vent.Commands.OpenFullscreenModal, this._openFullscreenModal, this);
     vent.on(vent.Commands.CloseFullscreenModal, this._closeFullscreenModal, this);
+
     vent.on(vent.Commands.OpenModal, this._openModal, this);
     vent.on(vent.Commands.CloseModal, this._closeModal, this);
+
     vent.on(vent.Commands.EditSeries, this._editSeries, this);
     vent.on(vent.Commands.DeleteSeries, this._deleteSeries, this);
     vent.on(vent.Commands.ShowEpisodeDetails, this._showEpisode, this);
@@ -23,6 +25,7 @@ module.exports = Marionette.AppRouter.extend({
     vent.on(vent.Commands.ShowLogDetails, this._showLogDetails, this);
     vent.on(vent.Commands.ShowRenamePreview, this._showRenamePreview, this);
     vent.on(vent.Commands.ShowManualImport, this._showManualImport, this);
+
     vent.on(vent.Commands.ShowFileBrowser, this._showFileBrowser, this);
     vent.on(vent.Commands.CloseFileBrowser, this._closeFileBrowser, this);
   },
@@ -40,7 +43,7 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _closeModal: function() {
-    AppLayout.modalRegion.closeModal();
+    AppLayout.modalRegion.close();
   },
 
   _editSeries: function(options) {
@@ -88,6 +91,6 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _closeFileBrowser: function() {
-    AppLayout.modalRegion.closeModal();
+    AppLayout.modalRegion.close();
   }
 });

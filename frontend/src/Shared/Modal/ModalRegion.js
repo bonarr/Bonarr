@@ -1,23 +1,48 @@
+var _ = require('underscore');
 var $ = require('jquery');
-var ModalRegionBase = require('./ModalRegionBase');
+var Backbone = require('backbone');
+var Marionette = require('marionette');
+require('bootstrap');
 
-var region = ModalRegionBase.extend({
+const ModalRegion = Marionette.Region.extend({
   el: '#modal-region',
   backdrop: true,
 
-  initialize: function() {
-    this.listenTo(this, 'modal:beforeShow', this.onBeforeShow);
+  getEl: function(selector) {
+    var $el = $(selector);
+    $el.on('hide.bs.modal', _.bind(this.onBootstrapHide, this));
+    $el.on('show.bs.modal', _.bind(this.onBootstrapShow, this));
+    return $el;
   },
 
-  onBeforeShow: function() {
-    this.$el.addClass('modal fade');
-    this.$el.attr('tabindex', '-1');
+  onShow: function() {
     this.$el.css('z-index', '1060');
 
-    this.$el.on('shown.bs.modal', function() {
-      $('.modal-backdrop:last').css('z-index', 1059);
+    this.currentView.$el.addClass('modal-dialog');
+
+    this.bootstrapModal = this.$el.modal({
+      show: true,
+      keyboard: true,
+      backdrop: this.backdrop
     });
+  },
+
+  onClose() {
+    this.$el.modal('hide');
+  },
+
+  onBootstrapShow() {
+    $('.modal-backdrop:last').css('z-index', 1059);
+    this.trigger('modal:afterShow');
+    this.currentView.trigger('modal:afterShow');
+  },
+
+  onBootstrapHide: function() {
+    this.reset();
+    if(!this.isClosed) {
+      this.close();
+    }
   }
 });
 
-module.exports = region;
+module.exports = ModalRegion;
