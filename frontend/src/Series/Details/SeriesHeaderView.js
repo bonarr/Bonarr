@@ -8,21 +8,23 @@ module.exports = Marionette.ItemView.extend({
     backdrop: '.backdrop'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.episodeFileCollection = options.episodeFileCollection;
 
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.episodeFileCollection, 'sync', this.render);
   },
 
-  onRender: function() {
-    var fanArt = _.findWhere(this.model.get('images'), { coverType: 'fanart' });
-    this.ui.backdrop.css({ 'background-image': 'url("' + fanArt.url + '")' });
-  },
-
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       fileCount: this.episodeFileCollection.length
     };
+  },
+
+  onRender() {
+    const fanArt = _.findWhere(this.model.get('images'), { coverType: 'fanart' });
+    if (fanArt) {
+      this.ui.backdrop.css({ 'background-image': 'url("' + fanArt.url + '")' });
+    }
   }
 });
