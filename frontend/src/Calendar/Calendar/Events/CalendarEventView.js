@@ -3,7 +3,6 @@ var vent = require('vent');
 var moment = require('moment');
 var Marionette = require('marionette');
 var QueueCollection = require('../../../Activity/Queue/QueueCollection');
-//var Config = require('../Config');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Calendar/Calendar/Events/CalendarEventView',
@@ -24,9 +23,6 @@ module.exports = Marionette.ItemView.extend({
     var end = this._getEndTime();
     var statusLevel = this._getStatusLevel();
 
-    //      statusLevel: self._getStatusLevel(model, end),
-    //      downloading: QueueCollection.findEpisode(model.get('id')),
-
     return {
       seriesTitle: seriesTitle,
       start: start,
@@ -40,7 +36,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _showEpisodeDetails: function () {
-    // TODO: Open episode details modal
+    vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
   },
 
   _eventRender: function(event, element) {
