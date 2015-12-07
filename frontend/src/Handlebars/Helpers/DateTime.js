@@ -56,7 +56,10 @@ Handlebars.registerHelper('StartTime', function(input) {
     return '';
   }
 
-  return moment(input).format(UiSettings.time(false, false));
+  var time = moment(input);
+  var includeMinutes = time.get('minutes') !== 0;
+
+  return time.format(UiSettings.time(includeMinutes, false));
 });
 
 Handlebars.registerHelper('LTS', function(input) {
