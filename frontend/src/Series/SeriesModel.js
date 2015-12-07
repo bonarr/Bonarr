@@ -11,6 +11,11 @@ module.exports = Backbone.Model.extend({
     status: ''
   },
 
+  getRoute() {
+    const slug = this.get('titleSlug');
+    return `${window.Sonarr.UrlBase}series/${slug}`;
+  },
+
   setSeasonMonitored: function(seasonNumber) {
     _.each(this.get('seasons'), function(season) {
       if (season.seasonNumber === seasonNumber) {

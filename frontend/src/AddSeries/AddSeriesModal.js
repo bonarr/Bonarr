@@ -133,7 +133,9 @@ var view = Marionette.ItemView.extend({
     Config.setValue(Keys.DefaultRootFolderId, options.model.id);
   },
 
-  onAdd: function() {
+  onAdd: function(event) {
+    event.preventDefault();
+
     var addButton = this.ui.addButton;
     addButton.addClass('disabled');
 
@@ -168,12 +170,12 @@ var view = Marionette.ItemView.extend({
     this.close();
 
     Messenger.show({
-      message: 'Added: ' + self.model.get('title'),
+      message: 'Added: ' + this.model.get('title'),
       actions: {
         goToSeries: {
           label: 'Go to Series',
-          action: function() {
-            Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
+          action: () => {
+            Backbone.history.navigate(this.model.getRoute(), { trigger: true });
           }
         }
       },
