@@ -2,7 +2,9 @@ var _ = require('underscore');
 var Marionette = require('marionette');
 var $ = require('jquery');
 
-var FullScreenModalRegion = Marionette.Region.extend({
+const EscKeyCode = 27;
+
+const FullScreenModalRegion = Marionette.Region.extend({
   el: '#fullscreen-modal-region',
 
   initialize: function() {
@@ -11,9 +13,13 @@ var FullScreenModalRegion = Marionette.Region.extend({
   },
 
   onShow: function() {
+    clearTimeout(this.closeTimeout);
+
     this.$el.addClass('shown');
     this.closeButtons = this.$el.find('.x-close');
     this.closeButtons.on('click', this.close);
+
+    this.listenToOnce(this.currentView, 'close', this.onViewClose);
   },
 
   onKeypress: function(event) {
@@ -21,8 +27,8 @@ var FullScreenModalRegion = Marionette.Region.extend({
     if (!view || view.isClosed) {
       return;
     }
-    var esc = 27;
-    if (event.keyCode === esc) {
+
+    if (event.keyCode === EscKeyCode) {
       this.close();
       event.stopPropagation();
       event.preventDefault();
@@ -38,13 +44,18 @@ var FullScreenModalRegion = Marionette.Region.extend({
       return;
     }
     // give animation time to finish before killing the html
-    window.setTimeout(_.bind(function() {
+    this.closeTimeout = window.setTimeout(() => {
       // make sure we close the view were were intended to not some future modal.
       if (this.currentView === view) {
         Marionette.Region.prototype.close.apply(this, arguments);
       }
-    }, this), 1000);
+    }, 1000);
   },
+
+  onViewClose: function() {
+    this.close();
+    this.stopListening(this.currentView);
+  }
 });
 
 module.exports = FullScreenModalRegion;

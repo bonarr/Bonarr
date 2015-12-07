@@ -1,12 +1,23 @@
 var vent = require('vent');
+var _ = require('underscore');
 
 module.exports = function() {
-  var originalInitialize = this.prototype.initialize;
-  var originalOnBeforeClose = this.prototype.onBeforeClose;
 
-  var saveInternal = function() {
-    var self = this;
+  const proto = this.prototype;
 
+  const events = {
+    'click .x-save': '_save',
+    'click .x-save-and-add': '_saveAndAdd',
+    'click .x-test': '_test',
+    'click .x-delete': '_delete'
+  };
+
+  proto.events = _.extend({}, proto.events, events);
+
+  var originalInitialize = proto.initialize;
+  var originalOnBeforeClose = proto.onBeforeClose;
+
+  const saveInternal = function() {
     if (this.saving) {
       return this.savePromise;
     }
@@ -15,21 +26,21 @@ module.exports = function() {
     this.ui.indicator.show();
 
     if (this._onBeforeSave) {
-      this._onBeforeSave.call(this);
+      this._onBeforeSave();
     }
 
     this.savePromise = this.model.save();
 
-    this.savePromise.always(function() {
-      self.saving = false;
+    this.savePromise.always(() => {
+      this.saving = false;
 
-      if (!self.isClosed) {
-        self.ui.indicator.hide();
+      if (!this.isClosed) {
+        this.ui.indicator.hide();
       }
     });
 
-    this.savePromise.done(function() {
-      self.originalModelData = JSON.stringify(self.model.toJSON());
+    this.savePromise.done(() => {
+      this.originalModelData = JSON.stringify(this.model.toJSON());
     });
 
     return this.savePromise;
@@ -45,12 +56,6 @@ module.exports = function() {
 
     this.originalModelData = JSON.stringify(this.model.toJSON());
 
-    this.events = this.events || {};
-    this.events['click .x-save'] = '_save';
-    this.events['click .x-save-and-add'] = '_saveAndAdd';
-    this.events['click .x-test'] = '_test';
-    this.events['click .x-delete'] = '_delete';
-
     this.ui = this.ui || {};
     this.ui.indicator = '.x-indicator';
 
@@ -60,30 +65,26 @@ module.exports = function() {
   };
 
   this.prototype._save = function() {
-    var self = this;
     var promise = saveInternal.call(this);
 
-    promise.done(function() {
-      if (self._onAfterSave) {
-        self._onAfterSave.call(self);
+    promise.done(() => {
+      if (this._onAfterSave) {
+        this._onAfterSave();
       }
     });
   };
 
   this.prototype._saveAndAdd = function() {
-    var self = this;
     var promise = saveInternal.call(this);
 
-    promise.done(function() {
-      if (self._onAfterSaveAndAdd) {
-        self._onAfterSaveAndAdd.call(self);
+    promise.done(() => {
+      if (this._onAfterSaveAndAdd) {
+        this._onAfterSaveAndAdd();
       }
     });
   };
 
   this.prototype._test = function() {
-    var self = this;
-
     if (this.testing) {
       return;
     }
@@ -91,9 +92,9 @@ module.exports = function() {
     this.testing = true;
     this.ui.indicator.show();
 
-    this.model.test().always(function() {
-      self.testing = false;
-      self.ui.indicator.hide();
+    this.model.test().always(() => {
+      this.testing = false;
+      this.ui.indicator.hide();
     });
   };
 
