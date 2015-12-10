@@ -20,7 +20,7 @@
     "babel-core": "6.2.1",
     "babel-eslint": "5.0.0-beta1",
     "babel-loader": "6.2.0",
-    "del": "2.1.0",
+    "del": "2.2.0",
     "esformatter": "0.8.1",
     "eslint": "1.10.1",
     "gulp": "3.9.0",
