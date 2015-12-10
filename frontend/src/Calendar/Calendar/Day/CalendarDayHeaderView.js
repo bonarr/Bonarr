@@ -19,7 +19,7 @@ module.exports = Marionette.ItemView.extend({
         return {
           title: day.format(this.headerFormat),
           today: this.view === 'week' && day.isSame(moment(), 'day')
-        }
+        };
       })
     };
   }

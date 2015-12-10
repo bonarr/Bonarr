@@ -198,7 +198,7 @@ module.exports = Marionette.Layout.extend({
     var $target = $(event.target);
     var view = $target.data('view');
 
-    if (view != this.view) {
+    if (view !== this.view) {
       this._changeView(view);
     }
   },

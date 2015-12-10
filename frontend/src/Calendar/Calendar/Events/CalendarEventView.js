@@ -28,11 +28,11 @@ module.exports = Marionette.ItemView.extend({
       start: start,
       end: end,
       statusLevel: statusLevel
-    }
+    };
   },
 
   onRender: function () {
-    this.$el.addClass(this._getStatusLevel())
+    this.$el.addClass(this._getStatusLevel());
   },
 
   _showEpisodeDetails: function () {

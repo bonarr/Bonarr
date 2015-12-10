@@ -13,7 +13,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
   },
 
   onShow: function() {
-    clearTimeout(this.closeTimeout);
+    window.clearTimeout(this.closeTimeout);
 
     this.$el.addClass('shown');
     this.closeButtons = this.$el.find('.x-close');
