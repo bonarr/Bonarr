@@ -1,14 +1,16 @@
 var Marionette = require('marionette');
+var tpl = require('./ErrorView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
-  template: 'AddSeries/AddNewSeries/ErrorView',
+  template: tpl,
 
-  initialize: function(options) {
-    this.options = options;
+  initialize(options) {
+    this.term = options.term;
+    this.xhr = options.xhr;
   },
 
-  templateHelpers: function() {
-    var xhr = this.options.xhr;
+  templateHelpers() {
+    var xhr = this.xhr;
 
     var data = {
       status: xhr.status,
@@ -25,7 +27,7 @@ module.exports = Marionette.CompositeView.extend({
     }
 
     if (!data.message) {
-      data.message = 'An error occurred while searching for \'' + this.options.term + '\'';
+      data.message = 'An error occurred while searching for \'' + this.term + '\'';
     }
 
     return data;

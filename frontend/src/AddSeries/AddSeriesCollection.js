@@ -1,6 +1,6 @@
+var _ = require('underscore');
 var Backbone = require('backbone');
 var SeriesModel = require('../Series/SeriesModel');
-var _ = require('underscore');
 
 module.exports = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/series/lookup',

@@ -1,14 +1,15 @@
 var Marionette = require('marionette');
+var tpl = require('./EmptyView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'AddSeries/AddNewSeries/EmptyView',
+  template: tpl,
 
-  initialize: function(options) {
+  initialize(options) {
     options = options || {};
     this.term = options.term;
   },
 
-  serializeData: function() {
+  serializeData() {
     return { term: this.term };
   }
 });

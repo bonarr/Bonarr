@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var vent = require('vent');
+var $ = require('jquery');
 var Marionette = require('marionette');
 var AddSeriesCollection = require('../AddSeriesCollection');
 var SearchResultCollectionView = require('./SearchResultCollectionView');
@@ -26,34 +26,20 @@ module.exports = Marionette.Layout.extend({
     searchResult: '#search-result'
   },
 
-  //    attributes : {
-  //        id : 'add-series-screen'
-  //    },
-
-  initialize: function() {
+  initialize() {
     ProfileCollection.fetch();
-    RootFolderCollection.fetch().done(function() {
+    RootFolderCollection.fetch().done(() => {
       RootFolderCollection.synced = true;
     });
 
     this.collection = new AddSeriesCollection();
-
-    this.listenTo(vent, vent.Events.SeriesAdded, this._onSeriesAdded);
-    this.listenTo(this.collection, 'sync', this.onCollectionSync);
-
-    this.resultCollectionView = new SearchResultCollectionView({
-      collection: this.collection,
-      isExisting: false
-    });
-
+    this.listenTo(this.collection, 'sync reset', this.onCollectionSync);
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
-
-  //this._showActionBar();
   },
 
-  search: function(options) {
-    if (!options.term || options.term === this.collection.term) {
-      return Marionette.$.Deferred().resolve();
+  search(options) {
+    if (this.closed || !options.term || options.term === this.collection.term) {
+      return $.Deferred().resolve();
     }
 
     console.log('searching for', options);
@@ -62,9 +48,9 @@ module.exports = Marionette.Layout.extend({
 
     this.ui.spinner.show();
 
-    //this.collection.reset();
+    // this.collection.reset();
 
-    //this.searchResult.show(new LoadingView());
+    // this.searchResult.show(new LoadingView());
     this.collection.term = options.term;
     this.currentSearchPromise = this.collection.fetch({
       data: {
@@ -73,39 +59,58 @@ module.exports = Marionette.Layout.extend({
     });
 
     this.currentSearchPromise.fail(_.bind(this.onError, this));
-    this.currentSearchPromise.always(_.bind(function() {
+    this.currentSearchPromise.always(() => {
       this.ui.spinner.hide();
       this.searchResult.$el.removeClass('fade-out');
-    }, this));
+    });
 
     return this.currentSearchPromise;
   },
 
-  _abortExistingSearch: function() {
-    if (this.currentSearchPromise && this.currentSearchPromise.readyState > 0 && this.currentSearchPromise.readyState < 4) {
+  _abortExistingSearch() {
+    if (this.currentSearchPromise) {
       console.log('aborting previous pending search request.');
       this.currentSearchPromise.abort();
+      this.currentSearchPromise = undefined;
     }
   },
 
-  onShow: function() {
+  onShow() {
     this.searchResult.show(new EmptyView());
     this.ui.seriesSearch.focus();
 
     this.search({ term: 'wire' });
   },
 
-  onSearchKeyUp: function() {
+  onClose() {
     this._abortExistingSearch();
-    var term = this.ui.seriesSearch.val();
-    this.debouncedSearch({
-      term: term
-    });
   },
 
-  onCollectionSync: function() {
+  onSearchKeyUp() {
+    this._abortExistingSearch();
+    var term = this.ui.seriesSearch.val();
+
+    if (term) {
+      this.debouncedSearch({
+        term: term
+      });
+    } else {
+      this.collection.term = '';
+      this.collection.reset();
+    }
+  },
+
+  onCollectionSync() {
+    if (this.isClosed) {
+      return;
+    }
+
     if (this.collection.length) {
-      this.searchResult.show(this.resultCollectionView);
+      var resultCollectionView = new SearchResultCollectionView({
+        collection: this.collection,
+        isExisting: false
+      });
+      this.searchResult.show(resultCollectionView);
     } else {
       this.searchResult.show(new EmptyView({
         term: this.collection.term
@@ -113,7 +118,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  onError: function(xhr, status) {
+  onError(xhr, status) {
     if (this.isClosed) {
       return;
     }
