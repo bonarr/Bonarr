@@ -1,7 +1,7 @@
 <div class="search-item panel clickable">
   <div class="panel-body">
     <a href="{{tvdbUrl}}" class="poster-link" target="_blank">
-            {{lazyPosterHelper .}}
+            {{poster lazy=true}}
         </a>
     <div class="header">
       <span class="series-title">
@@ -12,7 +12,7 @@
             <span class="label label-primary already-exists">Already in your library</span>
         {{/if}}
         {{#if ratings.votes}}
-          <span class="label label-default">{{ratingHeartHelper ratings}}</span>
+          <span class="label label-default">{{heartRating ratings}}</span>
         {{/if}}
         <span class="label label-default">{{network}}</span>
         {{#unless_eq status compare="continuing" }}

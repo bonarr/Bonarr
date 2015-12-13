@@ -87,9 +87,10 @@ module.exports = {
         query: {
           runtime: 'handlebars',
           helperDirs: [
-            root + '/Handlebars/Helpers/Series'
+            root + '/Handlebars/Helpers/Series',
+            root + '/Handlebars/Helpers/Rating'
           ],
-          knownHelpers: ['if_eq']
+          knownHelpers: ['if_eq', 'unless_eq']
         }
       }
     ]

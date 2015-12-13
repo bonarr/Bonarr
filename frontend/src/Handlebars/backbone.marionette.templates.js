@@ -10,7 +10,6 @@ require('./Helpers/System');
 require('./Helpers/EachReverse');
 require('./Helpers/String');
 require('./Helpers/StarRating');
-require('./Helpers/ratingHeartHelper');
 require('./Handlebars.Debug');
 
 module.exports = function() {
@@ -25,7 +24,7 @@ module.exports = function() {
 
     return function(data) {
       try {
-        var wrappedTemplate = Handlebars.template.call(Handlebars, templateFunction);
+        var wrappedTemplate = Handlebars.template(templateFunction);
         return wrappedTemplate(data);
       } catch (error) {
         console.error('template render failed for ' + templateKey + ' ' + error);

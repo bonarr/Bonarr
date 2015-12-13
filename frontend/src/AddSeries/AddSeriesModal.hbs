@@ -1,16 +1,16 @@
 <div class="fullscreen-modal">
   <div class="fullscreen-modal-header">
     <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
-    <h1>{{titleWithYear .}}</ h1>
+    <h1>{{titleWithYear }}</h1>
   </div>
   <div class="fullscreen-modal-body add-series-modal">
     <div class="row">
-      <div class="hidden-xs col-sm-3 col-md-2 ">
+      <div class="hidden-sm col-md-3 ">
         <a href="{{tvdbUrl}}" target="_blank">
-                    {{posterHelper}}
+                    {{poster }}
                 </a>
       </div>
-      <div class="col-xs-12 col-sm-9 col-md-10">
+      <div class="col-sm-12 col-md-9">
         <div class="row">
           <div class="col-xs-12 overview">
             {{overview}}

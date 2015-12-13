@@ -4,28 +4,16 @@ var titleWithYear = require('./Series/titleWithYear');
 
 var placeholderUrl = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
 
-function defaultImage(url, size) {
-  if (!url) {
-    return new Handlebars.SafeString('onerror="window.Sonarr.imageError(this);"');
-  }
-  if (size) {
-    url = url.replace(/\.jpg($|\?)/g, '-' + size + '.jpg$1');
-  }
-  return new Handlebars.SafeString('src="{0}" onerror="window.Sonarr.imageError(this);"'.format(url));
-}
-
 function getPosterUrl(images, size) {
   var poster = _.findWhere(images, { coverType: 'poster' });
   if (poster) {
     var url = poster.url;
 
     // remove protocol.
-    if (poster.url.match(/^https?:\/\//)) {
-      url = poster.url.replace(/^https?\:/, '');
-    }
+    url = poster.url.replace(/^https?\:/, '');
 
     if (size) {
-      url = url.replace('poster.jpg', 'poster-' + size + '.jpg');
+      url = url.replace('poster.jpg', `poster-${size}.jpg`);
     }
 
     return url;
@@ -37,7 +25,8 @@ Handlebars.registerHelper('posterHelper', function(size) {
   var url = getPosterUrl(this.images, parsedSize);
 
   if (url) {
-    return new Handlebars.SafeString('<img class="series-poster x-series-poster" {0}>'.format(defaultImage(url)));
+    const  onError = `src="${url}" onerror="window.Sonarr.imageError(this);"`;
+    return new Handlebars.SafeString(`<img class="series-poster x-series-poster" ${onError}>`);
   }
 
   return new Handlebars.SafeString('<img class="series-poster placeholder-image" src="{0}">'.format(placeholderUrl));
@@ -63,10 +52,6 @@ Handlebars.registerHelper('imdbUrl', function() {
 
 Handlebars.registerHelper('tvdbUrl', function() {
   return 'http://www.thetvdb.com/?tab=series&id=' + this.tvdbId;
-});
-
-Handlebars.registerHelper('tvRageUrl', function() {
-  return 'http://www.tvrage.com/shows/id-' + this.tvRageId;
 });
 
 Handlebars.registerHelper('tvMazeUrl', function() {
