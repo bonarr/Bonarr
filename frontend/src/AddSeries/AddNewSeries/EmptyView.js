@@ -4,8 +4,7 @@ var tpl = require('./EmptyView.hbs');
 module.exports = Marionette.ItemView.extend({
   template: tpl,
 
-  initialize(options) {
-    options = options || {};
+  initialize(options = {}) {
     this.term = options.term;
   },
 
