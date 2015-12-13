@@ -6,7 +6,7 @@ module.exports = [
     items: [
       {
         title: 'Add New',
-        href: '/addseries'
+        href: '/add/new'
       },
       {
         title: 'Editor',
@@ -15,6 +15,10 @@ module.exports = [
       {
         title: 'Season Pass',
         href: '/seasonpass'
+      },
+      {
+        title: 'Import',
+        href: '/add/import'
       }
     ]
   },

@@ -259,15 +259,12 @@ const SearchResultItemView = Marionette.ItemView.extend({
   onClick: function() {
     var existingSeries = SeriesCollection.findWhere({ tvdbId: this.model.get('tvdbId') });
 
-    if (existingSeries) {
-
-    } else {
+    if (!existingSeries) {
       vent.trigger(vent.Commands.OpenFullscreenModal, new AddSeriesModal({ model: this.model }));
     }
   }
 });
 
 AsValidatedView.apply(SearchResultItemView);
-
 
 module.exports = SearchResultItemView;

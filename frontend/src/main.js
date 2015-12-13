@@ -7,6 +7,7 @@ var NavbarLayout = require('./Navbar/NavbarLayout');
 var SidebarLayout = require('./Sidebar/SidebarLayout');
 var AppLayout = require('./AppLayout');
 var SeriesController = require('./Series/SeriesController');
+var AddSeriesController = require('./AddSeries/AddSeriesController');
 var ActivityController = require('./Activity/ActivityController');
 var WantedController = require('./Wanted/WantedController');
 var SettingsController = require('./Settings/SettingsController');
@@ -30,6 +31,7 @@ require('./Shared/piwikCheck');
 require('./Shared/VersionChangeMonitor');
 
 new SeriesController();
+new AddSeriesController();
 new ActivityController();
 new WantedController();
 new SettingsController();

@@ -5,13 +5,14 @@ var AddSeriesCollection = require('../AddSeriesCollection');
 var SearchResultCollectionView = require('./SearchResultCollectionView');
 var ProfileCollection = require('../../Profile/ProfileCollection');
 var RootFolderCollection = require('../RootFolders/RootFolderCollection');
+var tpl = require('./AddNewSeriesLayout.hbs');
 var ErrorView = require('./ErrorView');
 var EmptyView = require('./EmptyView');
 
 module.exports = Marionette.Layout.extend({
   id: 'add-new-series',
 
-  template: 'AddSeries/AddNewSeries/AddNewSeriesLayout',
+  template: tpl,
 
   ui: {
     seriesSearch: '.x-search-box'
