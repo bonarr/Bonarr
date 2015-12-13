@@ -1,4 +1,3 @@
-var vent = require('vent');
 var NzbDroneCell = require('../../Cells/NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({

@@ -1,24 +1,38 @@
-.file-browser-row {
-  cursor : pointer;
+.file-browser {
 
-  .file-size-cell {
-    white-space : nowrap;
+  .file-list {
+    max-height: 400px;
+    min-height: 200px;
+    overflow: auto;
   }
 
-  .relative-date-cell {
-    width : 120px;
-    white-space : nowrap;
+  .file-browser-row {
+    cursor: pointer;
+
+
+    .file-size-cell {
+      white-space: nowrap;
+    }
+
+
+    .relative-date-cell {
+      width: 120px;
+      white-space: nowrap;
+    }
   }
-}
 
-.file-browser-type-cell {
-  width : 16px;
-}
 
-.file-browser-name-cell {
-  word-break : break-all;
-}
+  .file-browser-type-cell {
+    width: 16px;
+  }
 
-.file-browser-empty {
-  margin-top : 20px;
+
+  .file-browser-name-cell {
+    word-break: break-all;
+  }
+
+
+  .file-browser-empty {
+    margin-top: 20px;
+  }
 }

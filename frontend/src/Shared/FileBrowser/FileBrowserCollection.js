@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var _ = require('underscore');
 var Backbone = require('backbone');
 var FileBrowserModel = require('./FileBrowserModel');
 
@@ -21,8 +21,7 @@ module.exports = Backbone.Collection.extend({
         path: response.parent
       });
     }
-    $.merge(contents, response.directories);
-    $.merge(contents, response.files);
-    return contents;
+
+    return _.union(contents, response.directories, response.files);
   }
 });

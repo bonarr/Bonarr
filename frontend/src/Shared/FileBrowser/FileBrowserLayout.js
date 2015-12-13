@@ -1,19 +1,19 @@
-var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var FileBrowserCollection = require('./FileBrowserCollection');
-var EmptyView = require('./EmptyView');
+var EmptyView = require('./EmptyFolderView');
 var FileBrowserRow = require('./FileBrowserRow');
 var FileBrowserTypeCell = require('./FileBrowserTypeCell');
 var FileBrowserNameCell = require('./FileBrowserNameCell');
 var RelativeDateCell = require('../../Cells/RelativeDateCell');
 var FileSizeCell = require('../../Cells/FileSizeCell');
 var LoadingView = require('../LoadingView');
+var tpl = require('./FileBrowserLayout.hbs');
 require('../../Mixins/DirectoryAutoComplete');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Shared/FileBrowser/FileBrowserLayoutTemplate',
+  template: tpl,
 
   regions: {
     browser: '#x-browser'
@@ -35,7 +35,7 @@ module.exports = Marionette.Layout.extend({
     this.collection = new FileBrowserCollection();
     this.collection.showFiles = options.showFiles || false;
     this.collection.showLastModified = options.showLastModified || false;
-    this.input = options.input;
+    this.path = options.path;
     this._setColumns();
     this.listenTo(this.collection, 'sync', this._showGrid);
     this.listenTo(this.collection, 'filebrowser:row:folderselected', this._rowSelected);
@@ -45,8 +45,8 @@ module.exports = Marionette.Layout.extend({
   onRender: function() {
     this.browser.show(new LoadingView());
     this.ui.path.directoryAutoComplete();
-    this._fetchCollection(this.input.val());
-    this._updatePath(this.input.val());
+    this._fetchCollection(this.path);
+    this._updatePath(this.path);
   },
 
   _setColumns: function() {
@@ -147,15 +147,15 @@ module.exports = Marionette.Layout.extend({
   },
 
   _selectPath: function() {
-    var path = this.ui.path.val();
+    // var path = this.ui.path.val();
 
-    this.input.val(path);
-    this.input.trigger('change');
+    // this.input.val(path);
+    // this.input.trigger('change');
 
-    this.input.trigger('filebrowser:folderselected', {
-      type: 'folder',
-      path: path
-    });
+    // this.input.trigger('filebrowser:folderselected', {
+    //   type: 'folder',
+    //   path: path
+    // });
 
     vent.trigger(vent.Commands.CloseFileBrowser);
   }

@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var Backgrid = require('backgrid');
 
 module.exports = Backgrid.Row.extend({
