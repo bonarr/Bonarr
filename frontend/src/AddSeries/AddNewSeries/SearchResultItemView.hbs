@@ -1,16 +1,16 @@
-<div class="search-item panel clickable {{#if existing}}existing{{/if}}">
+<div class="search-item panel clickable">
   <div class="panel-body">
     <a href="{{tvdbUrl}}" class="poster-link" target="_blank">
-            {{lazyPosterHelper}}
+            {{lazyPosterHelper .}}
         </a>
     <div class="header">
       <span class="series-title">
-        {{titleWithYear}}
+        {{titleWithYear .}}
       </span>
-      <div class="already-exists">
-        <span class="label label-purple">Already in your library</span>
-      </div>
       <div class="labels">
+        {{#if existing}}
+            <span class="label label-primary already-exists">Already in your library</span>
+        {{/if}}
         {{#if ratings.votes}}
           <span class="label label-default">{{ratingHeartHelper ratings}}</span>
         {{/if}}

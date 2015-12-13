@@ -14,8 +14,7 @@ module.exports = Marionette.Layout.extend({
   template: 'AddSeries/AddNewSeries/AddNewSeriesLayout',
 
   ui: {
-    seriesSearch: '.x-search-box',
-    spinner: '.x-spinner'
+    seriesSearch: '.x-search-box'
   },
 
   events: {
@@ -23,7 +22,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   regions: {
-    searchResult: '#search-result'
+    searchResult: '#result-region'
   },
 
   initialize() {
@@ -37,31 +36,33 @@ module.exports = Marionette.Layout.extend({
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
   },
 
-  search(options) {
-    if (this.closed || !options.term || options.term === this.collection.term) {
+  search() {
+    if (this.closed) {
+      return;
+    }
+
+    const term = this.ui.seriesSearch.val();
+    if (!term || term === this.collection.term) {
       return $.Deferred().resolve();
     }
 
-    console.log('searching for', options);
+    console.log('searching for', term);
 
-    this.searchResult.$el.addClass('fade-out');
-
-    this.ui.spinner.show();
+    this.$el.addClass('loading');
 
     // this.collection.reset();
 
     // this.searchResult.show(new LoadingView());
-    this.collection.term = options.term;
+    this.collection.term = term;
     this.currentSearchPromise = this.collection.fetch({
       data: {
-        term: options.term
+        term: term
       }
     });
 
     this.currentSearchPromise.fail(_.bind(this.onError, this));
     this.currentSearchPromise.always(() => {
-      this.ui.spinner.hide();
-      this.searchResult.$el.removeClass('fade-out');
+      this.$el.removeClass('loading');
     });
 
     return this.currentSearchPromise;
@@ -78,8 +79,8 @@ module.exports = Marionette.Layout.extend({
   onShow() {
     this.searchResult.show(new EmptyView());
     this.ui.seriesSearch.focus();
-
-    this.search({ term: 'wire' });
+    this.ui.seriesSearch.text('wire');
+    this.search();
   },
 
   onClose() {
@@ -91,9 +92,7 @@ module.exports = Marionette.Layout.extend({
     var term = this.ui.seriesSearch.val();
 
     if (term) {
-      this.debouncedSearch({
-        term: term
-      });
+      this.debouncedSearch();
     } else {
       this.collection.term = '';
       this.collection.reset();

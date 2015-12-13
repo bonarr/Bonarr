@@ -4,7 +4,7 @@ var tpl = require('./ErrorView.hbs');
 module.exports = Marionette.CompositeView.extend({
   template: tpl,
 
-  initialize(options) {
+  initialize(options = {}) {
     this.term = options.term;
     this.xhr = options.xhr;
   },
@@ -23,7 +23,9 @@ module.exports = Marionette.CompositeView.extend({
         if (messageJson && messageJson.message) {
           data.message = messageJson.message;
         }
-      } catch (e) {}
+      } catch (e) {
+        // don't do anything
+      }
     }
 
     if (!data.message) {
