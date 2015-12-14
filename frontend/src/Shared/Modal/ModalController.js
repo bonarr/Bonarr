@@ -1,4 +1,6 @@
 var vent = require('vent');
+var reqres = require('reqres');
+
 var AppLayout = require('../../AppLayout');
 var Marionette = require('marionette');
 var EditSeriesView = require('../../Series/Edit/EditSeriesView');
@@ -27,7 +29,8 @@ module.exports = Marionette.AppRouter.extend({
     vent.on(vent.Commands.ShowManualImport, this._showManualImport, this);
 
     vent.on(vent.Commands.ShowFileBrowser, this._showFileBrowser, this);
-    vent.on(vent.Commands.CloseFileBrowser, this._closeFileBrowser, this);
+
+    reqres.setHandler(reqres.selectPath, this._selectPath, this);
   },
 
   _openFullscreenModal: function(view) {
@@ -90,7 +93,10 @@ module.exports = Marionette.AppRouter.extend({
     AppLayout.modalRegion.show(view);
   },
 
-  _closeFileBrowser: function() {
-    AppLayout.modalRegion.close();
+  _selectPath(options) {
+    var view = new FileBrowserLayout(options);
+    AppLayout.modalRegion.show(view);
+    return view.promise;
   }
+
 });

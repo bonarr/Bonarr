@@ -1,14 +1,10 @@
-var vent = require('vent');
+var $ = require('jquery');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
 var FileBrowserCollection = require('./FileBrowserCollection');
 var EmptyView = require('./EmptyFolderView');
 var FileBrowserRow = require('./FileBrowserRow');
-var FileBrowserTypeCell = require('./FileBrowserTypeCell');
-var FileBrowserNameCell = require('./FileBrowserNameCell');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
-var FileSizeCell = require('../../Cells/FileSizeCell');
 var LoadingView = require('../LoadingView');
+var TableView = require('../../Table/TableView');
 var tpl = require('./FileBrowserLayout.hbs');
 require('../../Mixins/DirectoryAutoComplete');
 
@@ -28,18 +24,20 @@ module.exports = Marionette.Layout.extend({
     'typeahead:selected .x-path': '_pathChanged',
     'typeahead:autocompleted .x-path': '_pathChanged',
     'keyup .x-path': '_inputChanged',
-    'click .x-ok': '_selectPath'
+    'click .x-ok': 'onOkClick'
   },
 
   initialize: function(options) {
+    this._deferred = $.Deferred();
+    this.promise = this._deferred.promise();
+
     this.collection = new FileBrowserCollection();
     this.collection.showFiles = options.showFiles || false;
     this.collection.showLastModified = options.showLastModified || false;
     this.path = options.path;
     this._setColumns();
     this.listenTo(this.collection, 'sync', this._showGrid);
-    this.listenTo(this.collection, 'filebrowser:row:folderselected', this._rowSelected);
-    this.listenTo(this.collection, 'filebrowser:row:fileselected', this._fileSelected);
+    this.listenTo(this.collection, 'modelselected', this._rowSelected);
   },
 
   onRender: function() {
@@ -50,34 +48,26 @@ module.exports = Marionette.Layout.extend({
   },
 
   _setColumns: function() {
-    this.columns = [
+    this.headers = [
       {
         name: 'type',
-        label: '',
-        sortable: false,
-        cell: FileBrowserTypeCell
+        label: ''
       },
       {
         name: 'name',
-        label: 'Name',
-        sortable: false,
-        cell: FileBrowserNameCell
+        label: 'Name'
       }
     ];
     if (this.collection.showLastModified) {
-      this.columns.push({
+      this.headers.push({
         name: 'lastModified',
-        label: 'Last Modified',
-        sortable: false,
-        cell: RelativeDateCell
+        label: 'Last Modified'
       });
     }
     if (this.collection.showFiles) {
-      this.columns.push({
+      this.headers.push({
         name: 'size',
-        label: 'Size',
-        sortable: false,
-        cell: FileSizeCell
+        label: 'Size'
       });
     }
   },
@@ -97,39 +87,28 @@ module.exports = Marionette.Layout.extend({
       this.browser.show(new EmptyView());
       return;
     }
-    var grid = new Backgrid.Grid({
-      row: FileBrowserRow,
+
+    var tableView = new TableView({
       collection: this.collection,
-      columns: this.columns,
-      className: 'table table-hover'
+      itemView: FileBrowserRow,
+      headers: this.headers
     });
-    this.browser.show(grid);
+
+    this.browser.show(tableView);
   },
 
   _rowSelected: function(model) {
     var path = model.get('path');
-
-    this._updatePath(path);
-    this._fetchCollection(path);
-  },
-
-  _fileSelected: function(model) {
-    var path = model.get('path');
     var type = model.get('type');
 
-    this.input.val(path);
-    this.input.trigger('change');
+    if (type === 'file') {
+      this.onOkClick();
+    }
 
-    this.input.trigger('filebrowser:fileselected', {
-      type: type,
-      path: path
-    });
-
-    vent.trigger(vent.Commands.CloseFileBrowser);
+    this._updatePath(path);
   },
 
   _pathChanged: function(e, path) {
-    this._fetchCollection(path.value);
     this._updatePath(path.value);
   },
 
@@ -143,20 +122,17 @@ module.exports = Marionette.Layout.extend({
   _updatePath: function(path) {
     if (path !== undefined || path !== null) {
       this.ui.path.val(path);
+      this._fetchCollection(path);
     }
   },
 
-  _selectPath: function() {
-    // var path = this.ui.path.val();
+  onOkClick: function() {
+    var path = this.ui.path.val();
 
-    // this.input.val(path);
-    // this.input.trigger('change');
+    this._deferred.resolve({
+      path: path
+    });
 
-    // this.input.trigger('filebrowser:folderselected', {
-    //   type: 'folder',
-    //   path: path
-    // });
-
-    vent.trigger(vent.Commands.CloseFileBrowser);
+    this.close();
   }
 });

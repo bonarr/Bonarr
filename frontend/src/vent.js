@@ -25,7 +25,6 @@ vent.Commands = {
   ShowRenamePreview: 'showRenamePreview',
   ShowManualImport: 'showManualImport',
   ShowFileBrowser: 'showFileBrowser',
-  CloseFileBrowser: 'closeFileBrowser',
   OpenControlPanel: 'OpenControlPanel',
   CloseControlPanel: 'CloseControlPanel',
   OpenActionBarCommand: 'OpenActionBarCommand',

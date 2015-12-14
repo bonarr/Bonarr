@@ -25,6 +25,7 @@ module.exports = {
       'backbone.modelbinder': 'JsLibraries/backbone.modelbinder',
       'backbone.pageable': 'JsLibraries/backbone.pageable',
       'backbone.paginator': 'JsLibraries/backbone.paginator',
+      'radio': 'JsLibraries/backbone.radio',
       'backbone.validation': 'Shims/backbone.validation',
       backgrid: 'Shims/backgrid',
       'backgrid.paginator': 'Shims/backgrid.paginator',

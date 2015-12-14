@@ -1,23 +1,37 @@
-var Backgrid = require('backgrid');
+var Marionette = require('marionette');
+var tpl = require('./FileBrowserRow.hbs');
 
-module.exports = Backgrid.Row.extend({
+module.exports = Marionette.ItemView.extend({
+  template: tpl,
+
   className: 'file-browser-row',
+  tagName: 'tr',
 
   events: {
-    'click': '_selectRow'
+    'click': 'onClick'
   },
 
-  _originalInit: Backgrid.Row.prototype.initialize,
+  serializeData() {
+    const type = this.model.get('type');
 
-  initialize: function() {
-    this._originalInit.apply(this, arguments);
-  },
-
-  _selectRow: function() {
-    if (this.model.get('type') === 'file') {
-      this.model.collection.trigger('filebrowser:row:fileselected', this.model);
-    } else {
-      this.model.collection.trigger('filebrowser:row:folderselected', this.model);
+    var icon = '';
+    if (type === 'computer') {
+      icon = 'icon-sonarr-browser-computer';
+    } else if (type === 'parent') {
+      icon = 'icon-sonarr-browser-up';
+    } else if (type === 'folder') {
+      icon = 'icon-sonarr-browser-folder';
+    } else if (type === 'file') {
+      icon = 'icon-sonarr-browser-file';
     }
+
+    return {
+      icon: icon,
+      name:this.model.get('name')
+    };
+  },
+
+  onClick() {
+    this.model.collection.trigger('modelselected', this.model);
   }
 });
