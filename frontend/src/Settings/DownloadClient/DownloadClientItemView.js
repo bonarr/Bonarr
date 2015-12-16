@@ -3,8 +3,8 @@ var Marionette = require('marionette');
 var EditView = require('./Edit/DownloadClientEditView');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Settings/DownloadClient/DownloadClientItemViewTemplate',
-  tagName: 'li',
+  template: 'Settings/DownloadClient/DownloadClientItemView',
+  className: 'download-client-item thingy',
 
   events: {
     'click': '_edit'

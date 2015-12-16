@@ -8,7 +8,7 @@ var ProfileCollection = require('./ProfileSchemaCollection');
 module.exports = Marionette.CompositeView.extend({
   itemView: ProfileView,
   itemViewContainer: '.profiles',
-  template: 'Settings/Profile/ProfileCollectionTemplate',
+  template: 'Settings/Profile/ProfileCollectionView',
 
   ui: {
     'addCard': '.x-add-card'
@@ -19,7 +19,7 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   appendHtml: function(collectionView, itemView, index) {
-    collectionView.ui.addCard.parent('li').before(itemView.el);
+    collectionView.ui.addCard.before(itemView.el);
   },
 
   _addProfile: function() {

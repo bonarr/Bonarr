@@ -5,5 +5,5 @@ var MetadataItemView = require('./MetadataItemView');
 module.exports = Marionette.CompositeView.extend({
   itemView: MetadataItemView,
   itemViewContainer: '#x-metadata',
-  template: 'Settings/Metadata/MetadataCollectionViewTemplate'
+  template: 'Settings/Metadata/MetadataCollectionView'
 });

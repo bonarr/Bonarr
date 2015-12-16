@@ -5,7 +5,7 @@ var AsModelBoundView = require('../../Mixins/AsModelBoundView');
 
 var view = Marionette.ItemView.extend({
   template: 'Settings/Metadata/MetadataItemViewTemplate',
-  tagName: 'li',
+  className: 'thingy metadata-item',
 
   events: {
     'click': '_edit'

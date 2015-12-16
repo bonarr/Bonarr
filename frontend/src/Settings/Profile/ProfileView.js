@@ -7,8 +7,8 @@ require('./LanguageLabel');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Profile/ProfileViewTemplate',
-  tagName: 'li',
+  template: 'Settings/Profile/ProfileView',
+  className: 'profile-item thingy',
 
   ui: {
     "progressbar": '.progress .bar',

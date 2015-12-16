@@ -3,8 +3,8 @@ var Marionette = require('marionette');
 var EditView = require('./Edit/NotificationEditView');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Settings/Notification/NotificationItemViewTemplate',
-  tagName: 'li',
+  template: 'Settings/Notification/NotificationItemView',
+  className: 'notification-item thingy',
 
   events: {
     'click': '_edit'

@@ -5,7 +5,7 @@ var SchemaModal = require('./Add/NotificationSchemaModal');
 module.exports = Marionette.CompositeView.extend({
   itemView: ItemView,
   itemViewContainer: '.notification-list',
-  template: 'Settings/Notification/NotificationCollectionViewTemplate',
+  template: 'Settings/Notification/NotificationCollectionView',
 
   ui: {
     'addCard': '.x-add-card'
@@ -16,7 +16,7 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   appendHtml: function(collectionView, itemView, index) {
-    collectionView.ui.addCard.parent('li').before(itemView.el);
+    collectionView.ui.addCard.before(itemView.el);
   },
 
   _openSchemaModal: function() {

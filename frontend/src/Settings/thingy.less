@@ -1,10 +1,4 @@
-.add-thingy {
-  cursor: pointer;
-  font-size: 24px;
-  font-weight: lighter;
-  text-align: center;
-  height: 85px;
-}
+@import "../Content/mixins";
 
 .add-thingies {
   text-align: center;
@@ -16,43 +10,73 @@
 
   ul.items {
     list-style-type: none;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 
     li.add-thingy-item {
       display: inline-block;
       vertical-align: top;
     }
   }
-}
 
-.thingy {
-  h3 {
-    margin-top: 0px;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    line-height: 30px;
-    text-overflow: ellipsis;
-    text-transform: none;
-  }
+  .add-thingy {
+    .card();
 
-  .btn-group {
-    margin-top: 8px;
-  }
-
-  .settings {
-    margin-top: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: lighter;
+    text-align: center;
+    height: 85px;
   }
 }
 
 .thingies {
-  li {
-    display: inline-block;
+  display : flex;
+  flex-flow: row wrap;
+
+  .thingy {
+    .card();
+
     vertical-align: top;
+
+    h3 {
+      margin-top: 0;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 30px;
+      text-overflow: ellipsis;
+      text-transform: none;
+    }
+
+    .btn-group {
+      margin-top: 8px;
+    }
+
+    .settings {
+      margin-top: 5px;
+    }
+  }
+
+  .add-card {
+    .clickable;
+    color: #adadad;
+    font-size: 45px;
+    text-align: center;
+    background-color: #f5f5f5;
+
+    .center {
+      display: inline-block;
+      padding: 5px 20px 0px;
+      background-color: white;
+    }
+
+    i {
+      .clickable;
+    }
   }
 
   @media (max-width: @screen-xs-max) {
-    padding-left: 0px;
+    padding-left: 0;
   }
 }

@@ -3,8 +3,8 @@ var Marionette = require('marionette');
 var EditView = require('./Edit/IndexerEditView');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Settings/Indexer/IndexerItemViewTemplate',
-  tagName: 'li',
+  template: 'Settings/Indexer/IndexerItemView',
+  className: 'indexer-item thingy',
 
   events: {
     'click': '_edit'

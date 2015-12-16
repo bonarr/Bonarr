@@ -5,7 +5,7 @@ var SchemaModal = require('./Add/IndexerSchemaModal');
 module.exports = Marionette.CompositeView.extend({
   itemView: ItemView,
   itemViewContainer: '.indexer-list',
-  template: 'Settings/Indexer/IndexerCollectionViewTemplate',
+  template: 'Settings/Indexer/IndexerCollectionView',
 
   ui: {
     'addCard': '.x-add-card'
@@ -16,7 +16,7 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   appendHtml: function(collectionView, itemView, index) {
-    collectionView.ui.addCard.parent('li').before(itemView.el);
+    collectionView.ui.addCard.before(itemView.el);
   },
 
   _openSchemaModal: function() {
