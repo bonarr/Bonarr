@@ -28,8 +28,6 @@ module.exports = Marionette.AppRouter.extend({
     vent.on(vent.Commands.ShowRenamePreview, this._showRenamePreview, this);
     vent.on(vent.Commands.ShowManualImport, this._showManualImport, this);
 
-    vent.on(vent.Commands.ShowFileBrowser, this._showFileBrowser, this);
-
     reqres.setHandler(reqres.selectPath, this._selectPath, this);
   },
 
@@ -86,11 +84,6 @@ module.exports = Marionette.AppRouter.extend({
   _showManualImport: function(options) {
     var view = new ManualImportLayout(options);
     AppLayout.fullscreenModalRegion.show(view);
-  },
-
-  _showFileBrowser: function(options) {
-    var view = new FileBrowserLayout(options);
-    AppLayout.modalRegion.show(view);
   },
 
   _selectPath(options) {

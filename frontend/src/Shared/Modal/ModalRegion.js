@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var $ = require('jquery');
-var Backbone = require('backbone');
 var Marionette = require('marionette');
 require('bootstrap');
 
@@ -20,6 +19,8 @@ const ModalRegion = Marionette.Region.extend({
 
     this.currentView.$el.addClass('modal-dialog');
 
+    this.listenToOnce(this.currentView, 'close', this.onViewClose);
+
     this.bootstrapModal = this.$el.modal({
       show: true,
       keyboard: true,
@@ -29,6 +30,7 @@ const ModalRegion = Marionette.Region.extend({
 
   onClose() {
     this.$el.modal('hide');
+    this.stopListening(this.currentView);
   },
 
   onBootstrapShow() {
@@ -38,10 +40,11 @@ const ModalRegion = Marionette.Region.extend({
   },
 
   onBootstrapHide: function() {
-    this.reset();
-    if(!this.isClosed) {
-      this.close();
-    }
+    this.close();
+  },
+
+  onViewClose: function() {
+    this.close();
   }
 });
 
