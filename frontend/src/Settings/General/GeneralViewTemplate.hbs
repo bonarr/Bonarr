@@ -3,8 +3,8 @@
         <legend>Start-Up</legend>
 
         <div class="form-group advanced-setting">
-            <label class="col-sm-2 control-label">Bind Address</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Bind Address</label>
+            <div class="settings-control">
                 <input type="text" name="bindAddress" class="form-control" />
                 <span class="help-block">Valid IP4 address or '*' for all interfaces</span>
                 <span class="help-block help-block-warning">Requires restart to take effect</span>
@@ -12,16 +12,16 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Port Number</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Port Number</label>
+            <div class="settings-control">
                 <input type="number" placeholder="8989" name="port" class="form-control"/>
                 <span class="help-block">Requires restart to take effect</span>
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">URL Base</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">URL Base</label>
+            <div class="settings-control">
                 <input type="text" name="urlBase" class="form-control"/>
                 <span class="help-block">For reverse proxy support, default is empty</span>
                 <span class="help-block help-block-warning">Requires restart to take effect</span>
@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group advanced-setting">
-            <label class="col-sm-2 control-label">Enable SSL</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Enable SSL</label>
+            <div class="settings-control">
                 <div class="checkbox c-checkbox">
                     <label>
                         <input type="checkbox" name="enableSsl">
@@ -43,16 +43,16 @@
 
         <div class="x-ssl-options">
             <div class="form-group advanced-setting">
-                <label class="col-sm-2 control-label">SSL Port Number</label>
-                <div class="col-sm-6 col-md-4 col-lg-2">
+                <label class="settings-label control-label">SSL Port Number</label>
+                <div class="settings-control">
                     <input type="number" placeholder="8989" name="sslPort" class="form-control"/>
                 </div>
             </div>
 
             {{#if_windows}}
             <div class="form-group advanced-setting">
-                <label class="col-sm-2 control-label">SSL Cert Hash</label>
-                <div class="col-sm-6 col-md-4 col-lg-2">
+                <label class="settings-label control-label">SSL Cert Hash</label>
+                <div class="settings-control">
                     <input type="text" name="sslCertHash" class="form-control"/>
                 </div>
             </div>
@@ -60,8 +60,8 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Open browser on start</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Open browser on start</label>
+            <div class="settings-control">
                 <div class="checkbox c-checkbox">
                     <label>
                         <input type="checkbox" name="launchBrowser">
@@ -76,8 +76,8 @@
     <fieldset>
         <legend>Security</legend>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Authentication</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Authentication</label>
+            <div class="settings-control">
                 <select name="authenticationMethod" class="form-control x-auth">
                     <option value="none">None</option>
                     <option value="basic">Basic (Browser popup)</option>
@@ -90,23 +90,23 @@
 
         <div class="x-auth-options">
             <div class="form-group">
-                <label class="col-sm-2 control-label">Username</label>
-                <div class="col-sm-6 col-md-4 col-lg-2">
+                <label class="settings-label control-label">Username</label>
+                <div class="settings-control">
                     <input type="text" placeholder="Username" name="username" class="form-control"/>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-6 col-md-4 col-lg-2">
+                <label class="settings-label control-label">Password</label>
+                <div class="settings-control">
                     <input type="password" name="password" class="form-control"/>
                 </div>
             </div>
         </div>
 
         <div class="form-group api-key">
-            <label class="col-sm-2 control-label">API Key</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">API Key</label>
+            <div class="settings-control">
                 <div class="input-group">
                     <input type="text" name="apiKey" readonly="readonly" class="form-control x-api-key"/>
                     <div class="input-group-btn">
@@ -123,8 +123,8 @@
         <legend>Logging</legend>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Log Level</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Log Level</label>
+            <div class="settings-control">
                 <select name="logLevel" class="form-control">
                     <option value="Trace">Trace</option>
                     <option value="Debug">Debug</option>
@@ -138,8 +138,8 @@
         <legend>Analytics</legend>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Enable</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Enable</label>
+            <div class="settings-control">
                 <div class="checkbox c-checkbox">
                     <label>
                         <input type="checkbox" name="analyticsEnabled">
@@ -156,8 +156,8 @@
         <legend>Updates</legend>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Branch</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Branch</label>
+            <div class="settings-control">
                 <input type="text" placeholder="master" name="branch" class="form-control"/>
             </div>
         </div>
@@ -166,8 +166,8 @@
         <div class="alert alert-warning">Please see: <a href="https://github.com/NzbDrone/NzbDrone/wiki/Updating">the wiki</a> for more information</div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Automatic</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Automatic</label>
+            <div class="settings-control">
                 <div class="checkbox c-checkbox">
                     <label>
                         <input type="checkbox" name="updateAutomatically">
@@ -179,8 +179,8 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">Mechanism</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Mechanism</label>
+            <div class="settings-control">
                 <select name="updateMechanism" class="form-control x-update-mechanism">
                     <option value="builtIn">Built-in</option>
                     <option value="script">Script</option>
@@ -190,8 +190,8 @@
         </div>
 
         <div class="form-group x-script-group">
-            <label class="col-sm-2 control-label">Script Path</label>
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <label class="settings-label control-label">Script Path</label>
+            <div class="settings-control">
                 <input type="text" name="updateScriptPath" class="form-control"/>
                 <span class="help-block">Path to a custom script that take an extracted update package and handle the remainder of the update process</span>
             </div>
