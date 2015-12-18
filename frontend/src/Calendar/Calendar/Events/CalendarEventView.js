@@ -4,12 +4,18 @@ var moment = require('moment');
 var Marionette = require('marionette');
 var QueueCollection = require('../../../Activity/Queue/QueueCollection');
 
+require('jquery.easypiechart');
+
 module.exports = Marionette.ItemView.extend({
   template: 'Calendar/Calendar/Events/CalendarEventView',
   className: 'calendar-event',
 
   events: {
     'click': '_showEpisodeDetails'
+  },
+
+  ui: {
+    downloadProgress: '.download-progress'
   },
 
   initialize: function () {
@@ -22,66 +28,85 @@ module.exports = Marionette.ItemView.extend({
     var start = this.model.get('airDateUtc');
     var end = this._getEndTime();
     var statusLevel = this._getStatusLevel();
+    var queueDetails = this._getQueueDetails();
+    var downloading = queueDetails || this.model.get('grabbed');
+    var missingAbsoluteNumber = this.model.get('series').seriesType === 'anime' && this.model.get('seasonNumber') > 0 && !this.model.has('absoluteEpisodeNumber');
 
     return {
-      seriesTitle: seriesTitle,
-      start: start,
-      end: end,
-      statusLevel: statusLevel
+      seriesTitle,
+      start,
+      end,
+      statusLevel,
+      queueDetails,
+      downloading,
+      missingAbsoluteNumber
     };
   },
 
   onRender: function () {
     this.$el.addClass(this._getStatusLevel());
+
+    this.ui.downloadProgress.easyPieChart({
+      barColor   : '#7932ea',
+      trackColor : false,
+      scaleColor : false,
+      lineWidth  : 2,
+      size       : 14,
+      animate    : false
+    });
+  },
+
+  _getQueueDetails: function () {
+    var queueItem = QueueCollection.findEpisode(this.model.get('id'));
+
+    if (queueItem) {
+      var progress = (100 - queueItem.get('sizeleft') / queueItem.get('size') * 100).toFixed(1);
+      var releaseTitle = queueItem.get('title');
+      var estimatedCompletionTime = moment(queueItem.get('estimatedCompletionTime')).fromNow();
+      var status = queueItem.get('status').toLocaleLowerCase();
+      var errorMessage = queueItem.get('errorMessage');
+      var message = errorMessage;
+      var downloading = false;
+      var pending = status === 'pending';
+      var completed = status === 'completed';
+      var failed = status === 'failed';
+      var warning = status === 'warning';
+
+      if (pending) {
+        message = `Release will be processed ${estimatedCompletionTime}`;
+      } else if (errorMessage) {
+        if (completed) {
+          failed = true;
+          message = `Import failed: ${errorMessage}`;
+        } else {
+          failed = true;
+          message = `Download failed: ${errorMessage}`;
+        }
+      } else if (failed) {
+        message = 'Download failed: check download client for more details';
+      } else if (warning) {
+        message = 'Download warning: check download client for more details';
+      } else {
+        downloading = true;
+      }
+
+      return {
+        progress,
+        releaseTitle,
+        estimatedCompletionTime,
+        status,
+        message,
+        pending,
+        completed,
+        failed,
+        warning,
+        downloading
+      }
+    }
   },
 
   _showEpisodeDetails: function () {
     vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
-  },
-
-  _eventRender: function(event, element) {
-    element.addClass(event.statusLevel);
-    element.children('.fc-content').addClass(event.statusLevel);
-
-    if (event.downloading) {
-      var progress = 100 - event.downloading.get('sizeleft') / event.downloading.get('size') * 100;
-      var releaseTitle = event.downloading.get('title');
-      var estimatedCompletionTime = moment(event.downloading.get('estimatedCompletionTime')).fromNow();
-      var status = event.downloading.get('status').toLocaleLowerCase();
-      var errorMessage = event.downloading.get('errorMessage');
-
-      if (status === 'pending') {
-        this._addStatusIcon(element, 'icon-sonarr-pending', 'Release will be processed {0}'.format(estimatedCompletionTime));
-      } else if (errorMessage) {
-        if (status === 'completed') {
-          this._addStatusIcon(element, 'icon-sonarr-import-failed', 'Import failed: {0}'.format(errorMessage));
-        } else {
-          this._addStatusIcon(element, 'icon-sonarr-download-failed', 'Download failed: {0}'.format(errorMessage));
-        }
-      } else if (status === 'failed') {
-        this._addStatusIcon(element, 'icon-sonarr-download-failed', 'Download failed: check download client for more details');
-      } else if (status === 'warning') {
-        this._addStatusIcon(element, 'icon-sonarr-download-warning', 'Download warning: check download client for more details');
-      } else {
-        element.find('.fc-time').after('<span class="chart pull-right" data-percent="{0}"></span>'.format(progress));
-
-        element.find('.chart').easyPieChart({
-          barColor: '#ffffff',
-          trackColor: false,
-          scaleColor: false,
-          lineWidth: 2,
-          size: 14,
-          animate: false
-        });
-
-        element.find('.chart').tooltip({
-          title: 'Episode is downloading - {0}% {1}'.format(progress.toFixed(1), releaseTitle),
-          container: '.fc-content-skeleton'
-        });
-      }
-    } else if (event.model.get('series').seriesType === 'anime' && event.model.get('seasonNumber') > 0 && !event.model.has('absoluteEpisodeNumber')) {
-      this._addStatusIcon(element, 'icon-sonarr-form-warning', 'Episode does not have an absolute episode number');
-    }
   },
 
   _getEndTime: function () {
@@ -124,6 +149,7 @@ module.exports = Marionette.ItemView.extend({
 
   _onQueueUpdated: function () {
     // TODO: Also handle when item is removed from the queue?
+    // TODO: If the progress is changing just update the progress bar and tool tip
     if (QueueCollection.findEpisode(this.model.get('id'))) {
       this.render();
     }
