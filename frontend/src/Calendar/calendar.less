@@ -288,12 +288,18 @@
 
   .calendar-legend {
     .legend-labels {
-      width: 600px;
+      display: flex;
+      flex-flow: column wrap;
+      height: 60px;
       padding: 3px 0;
       list-style: none;
 
+      @media (max-width: @screen-sm-max) {
+        height: 90px;
+      }
+
       @media (max-width: @screen-xs-min) {
-        width: 100%;
+        height: 120px;
       }
     }
 
