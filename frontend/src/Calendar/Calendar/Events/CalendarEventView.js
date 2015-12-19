@@ -101,7 +101,7 @@ module.exports = Marionette.ItemView.extend({
         failed,
         warning,
         downloading
-      }
+      };
     }
   },
 

@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var moment = require('moment');
 var Marionette = require('marionette');
 var UpcomingCollection = require('./UpcomingCollection');
 var UpcomingItemView = require('./UpcomingItemView');
@@ -30,6 +31,16 @@ module.exports = Marionette.CollectionView.extend({
   },
 
   _fetchCollection: function() {
-    this.collection.fetch({ data: { unmonitored: this.showUnmonitored } });
+    var time = moment();
+    var start = time.clone().startOf('day').toISOString();
+    var end = time.clone().endOf('day').toISOString();
+
+    this.collection.fetch({
+      data: {
+        start,
+        end,
+        unmonitored: this.showUnmonitored
+      }
+    });
   }
 });
