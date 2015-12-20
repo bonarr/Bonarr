@@ -20,7 +20,7 @@
     <div class="form-group advanced-setting">
         <label class="settings-label control-label">RSS Sync Interval</label>
         <div class="settings-control">
-            <input type="number" name="rssSyncInterval" class="form-control"/>
+            <input type="number" name="rssSyncInterval" class="form-control" min="0" max="120"/>
             <span class="help-block">Interval in minutes. Set to zero to disable (this will stop all automatic release grabbing)</span>
             <span class="help-block help-block-warning">This will apply to all indexers, please follow the rules set forth by them</span>
         </div>
