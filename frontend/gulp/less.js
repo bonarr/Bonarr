@@ -7,8 +7,8 @@ var autoprefixer = require('autoprefixer');
 var livereload = require('gulp-livereload');
 
 var print = require('gulp-print');
-var paths = require('./paths');
-var errorHandler = require('./errorHandler');
+var paths = require('./helpers/paths');
+var errorHandler = require('./helpers/errorHandler');
 
 gulp.task('less', function() {
   var src = [

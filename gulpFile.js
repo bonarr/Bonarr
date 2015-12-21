@@ -1,4 +1,4 @@
-var phantom = require('./frontend/gulp/phantom');
+var phantom = require('./frontend/gulp/helpers/phantom');
 
 if (phantom) {
     require('./frontend/gulp/gulpFile.js');

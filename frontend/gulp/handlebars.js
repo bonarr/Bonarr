@@ -2,14 +2,14 @@ var gulp = require('gulp');
 var handlebars = require('gulp-handlebars');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
-var wrap = require("gulp-wrap");
+var wrap = require('gulp-wrap');
 var livereload = require('gulp-livereload');
 var path = require('path');
 var streamqueue = require('streamqueue');
 var stripbom = require('gulp-stripbom');
 var compliler = require('handlebars');
 
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 
 console.log('Handlebars (gulp) Version: ', compliler.VERSION);
 console.log('Handlebars (gulp) Compiler: ', compliler.COMPILER_REVISION);

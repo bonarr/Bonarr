@@ -3,7 +3,7 @@ var print = require('gulp-print');
 var cache = require('gulp-cached');
 var livereload = require('gulp-livereload');
 
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 
 gulp.task('copyJs', function() {
   return gulp.src(

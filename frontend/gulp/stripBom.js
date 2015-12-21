@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 var stripbom = require('gulp-stripbom');
 
 var stripBom = function(dest) {

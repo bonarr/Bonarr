@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 var watch = require('gulp-watch');
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 
 require('./jshint.js');
 require('./handlebars.js');
@@ -12,7 +12,6 @@ require('./webpack.js');
 function watchTask(glob, task) {
   var options = {
     name: ' watch:' + task,
-    //ignoreInitial: false,
     verbose: true
   }
   return watch(glob, options, function(events, done) {

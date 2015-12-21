@@ -7,13 +7,12 @@ var gulp = require('gulp');
 var fs = require('fs');
 var targz = require('tar.gz');
 var del = require('del');
-var print = require('gulp-print');
 var spawn = require('child_process').spawn;
 
 function download(url, dest, cb) {
   console.log('Downloading ' + url + ' to ' + dest);
   var file = fs.createWriteStream(dest);
-  var request = http.get(url, function(response) {
+  http.get(url, function(response) {
     response.pipe(file);
     file.on('finish', function() {
       console.log('Download completed');
@@ -64,22 +63,17 @@ function extract(source, dest, cb) {
 }
 
 gulp.task('getSonarr', function() {
-  //gulp.src('/Users/kayone/git/Sonarr/_start/2.0.0.3288/NzbDrone/*.*')
-  //  .pipe(print())
-  //  .pipe(gulp.dest('./_output
-
-  //return;
   try {
     fs.mkdirSync('./_start/');
   } catch (e) {
-    if (e.code != 'EEXIST') {
+    if (e.code !== 'EEXIST') {
       throw e;
     }
   }
 
   getLatest(function(updatePackage) {
-    var packagePath = "./_start/" + updatePackage.filename;
-    var dirName = "./_start/" + updatePackage.version;
+    var packagePath = './_start/' + updatePackage.filename;
+    var dirName = './_start/' + updatePackage.version;
     download(updatePackage.url, packagePath, function() {
       extract(packagePath, dirName, function() {
         // clean old binaries
@@ -97,11 +91,11 @@ gulp.task('startSonarr', function() {
   var ls = spawn('mono', ['--debug', './_output/NzbDrone.exe']);
 
   ls.stdout.on('data', function(data) {
-    process.stdout.write('' + data);
+    process.stdout.write(data);
   });
 
   ls.stderr.on('data', function(data) {
-    process.stdout.write('' + data);
+    process.stdout.write(data);
   });
 
   ls.on('close', function(code) {

@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var cache = require('gulp-cached');
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 
 gulp.task('jshint', function() {
   return gulp.src([

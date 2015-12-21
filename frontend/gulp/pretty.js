@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var jsbeautifier = require('gulp-jsbeautifier');
-var paths = require('./paths.js');
+var paths = require('./helpers/paths.js');
 
 // gulp.task('pretty', function () {
 //   return gulp.src([
