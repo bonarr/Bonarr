@@ -1,7 +1,7 @@
 var Handlebars = require('handlebars');
 var moment = require('moment');
-var FormatHelpers = require('../../Shared/FormatHelpers');
 var UiSettings = require('../../Shared/UiSettingsModel');
+var relativeHelepr = require('./DateTime/relativeDate');
 
 Handlebars.registerHelper('ShortDate', function(input) {
   if (!input) {
@@ -14,26 +14,7 @@ Handlebars.registerHelper('ShortDate', function(input) {
   return new Handlebars.SafeString(result);
 });
 
-Handlebars.registerHelper('RelativeDate', function(input) {
-  if (!input) {
-    return '';
-  }
-
-  var date = moment(input);
-  var result = '<span title="{0}">{1}</span>';
-  var tooltip = date.format(UiSettings.longDateTime());
-  var text;
-
-  if (UiSettings.get('showRelativeDates')) {
-    text = FormatHelpers.relativeDate(input);
-  } else {
-    text = date.format(UiSettings.get('shortDateFormat'));
-  }
-
-  result = result.format(tooltip, text);
-
-  return new Handlebars.SafeString(result);
-});
+Handlebars.registerHelper('RelativeDate', relativeHelepr);
 
 Handlebars.registerHelper('Day', function(input) {
   if (!input) {

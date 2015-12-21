@@ -1,7 +1,6 @@
-var vent = require('vent');
-var Marionette = require('marionette');
 var SeriesIndexItemView = require('../SeriesIndexItemView');
+var tpl = require('./SeriesOverviewItemView.hbs');
 
 module.exports = SeriesIndexItemView.extend({
-  template: 'Series/Index/Overview/SeriesOverviewItemViewTemplate'
+  template: tpl
 });

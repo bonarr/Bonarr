@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-2 col-xs-3">
             <a href="{{route}}">
-                {{posterHelper}}
+                {{poster lazy=true size=250}}
             </a>
         </div>
         <div class="col-md-10 col-xs-9">
@@ -40,15 +40,15 @@
                     {{/if_eq}}
 
                     {{#if nextAiring}}
-                        <span class="label label-default">{{RelativeDate nextAiring}}</span>
+                        <span class="label label-default">{{relativeDate nextAiring}}</span>
                     {{/if}}
 
                     {{seasonCountHelper}}
 
-                    {{profile profileId}}
+                    {{profileName profileId}}
                 </div>
                 <div class="col-md-2 col-xs-4">
-                    {{> EpisodeProgressPartial }}
+                    {{> ../EpisodeProgressPartial }}
                 </div>
             </div>
         </div>

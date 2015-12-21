@@ -9,9 +9,9 @@ var SeriesCollection = require('../../Series/SeriesCollection');
 var Config = require('../../Config');
 var Messenger = require('../../Shared/Messenger');
 var AsValidatedView = require('../../Mixins/AsValidatedView');
-var AppLayout = require('../../AppLayout');
 var AddSeriesModal = require('../AddSeriesModal');
 var tpl = require('./SearchResultItemView.hbs');
+var $ = require('jquery');
 
 require('jquery.dotdotdot');
 require('jquery.lazyload');
@@ -104,7 +104,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
 
     this.ui.lazyImage.lazyload({
       threshold: 200,
-      container: AppLayout.mainRegion.$el
+      container: $('.content-wrapper')
     });
   },
 

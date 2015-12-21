@@ -16,8 +16,9 @@ function getPosterUrl(images, size) {
 }
 
 const poster = function(options) {
-  var url = getPosterUrl(this.images);
   const lazy = options.hash.lazy;
+  const size = options.hash.size;
+  const url = getPosterUrl(this.images, size);
 
   if (url) {
     if (lazy) {

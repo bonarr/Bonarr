@@ -95,7 +95,8 @@ var config = {
           runtime: 'handlebars',
           helperDirs: [
             root + '/Handlebars/Helpers/Series',
-            root + '/Handlebars/Helpers/Rating'
+            root + '/Handlebars/Helpers/Rating',
+            root + '/Handlebars/Helpers/DateTime'
           ],
           knownHelpers: ['if_eq', 'unless_eq']
         }

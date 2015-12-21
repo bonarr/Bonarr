@@ -1,25 +1,27 @@
-var Backbone = require('backbone');
+const Backbone = require('backbone');
 
-var UiSettings = Backbone.Model.extend({
+const UiSettings = Backbone.Model.extend({
   url: window.Sonarr.ApiRoot + '/config/ui',
 
-  shortDateTime: function(includeSeconds) {
+  shortDateTime(includeSeconds) {
     return this.get('shortDateFormat') + ' ' + this.time(true, includeSeconds);
   },
 
-  longDateTime: function(includeSeconds) {
+  longDateTime(includeSeconds) {
     return this.get('longDateFormat') + ' ' + this.time(true, includeSeconds);
   },
 
-  time: function(includeMinuteZero, includeSeconds) {
+  time(includeMinuteZero, includeSeconds) {
+    const timeFormat = this.get('timeFormat');
     if (includeSeconds) {
-      return this.get('timeFormat').replace(/\(?\:mm\)?/, ':mm:ss');
-    }
-    if (includeMinuteZero) {
-      return this.get('timeFormat').replace('(', '').replace(')', '');
+      return timeFormat.replace(/\(?\:mm\)?/, ':mm:ss');
     }
 
-    return this.get('timeFormat').replace(/\(\:mm\)/, '');
+    if (includeMinuteZero) {
+      return timeFormat.replace('(', '').replace(')', '');
+    }
+
+    return timeFormat.replace(/\(\:mm\)/, '');
   }
 });
 
