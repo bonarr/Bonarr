@@ -2,7 +2,7 @@ var $ = require('jquery');
 var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
-var Config = require('../Config');
+var Config = require('Config');
 
 module.exports = Marionette.Layout.extend({
   initialize: function(options) {

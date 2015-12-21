@@ -1,13 +1,13 @@
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
-var HistoryCollection = require('../../Activity/History/HistoryCollection');
-var EventTypeCell = require('../../Cells/EventTypeCell');
-var QualityCell = require('../../Cells/QualityCell');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
+var HistoryCollection = require('Activity/History/HistoryCollection');
+var EventTypeCell = require('Cells/EventTypeCell');
+var QualityCell = require('Cells/QualityCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
 var EpisodeHistoryActionsCell = require('./EpisodeHistoryActionsCell');
 var EpisodeHistoryDetailsCell = require('./EpisodeHistoryDetailsCell');
 var NoHistoryView = require('./NoHistoryView');
-var LoadingView = require('../../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'Episode/History/EpisodeHistoryLayoutTemplate',

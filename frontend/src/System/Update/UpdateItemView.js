@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var CommandController = require('../../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.ItemView.extend({
   template: 'System/Update/UpdateItemViewTemplate',

@@ -2,16 +2,16 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var QueueCollection = require('./QueueCollection');
-var SeriesTitleCell = require('../../Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('../../Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('../../Cells/EpisodeTitleCell');
-var QualityCell = require('../../Cells/QualityCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
+var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
+var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
+var QualityCell = require('Cells/QualityCell');
 var QueueStatusCell = require('./QueueStatusCell');
 var QueueActionsCell = require('./QueueActionsCell');
 var TimeleftCell = require('./TimeleftCell');
 var ProgressCell = require('./ProgressCell');
-var ProtocolCell = require('../../Release/ProtocolCell');
-var GridPager = require('../../Shared/Grid/Pager');
+var ProtocolCell = require('Release/ProtocolCell');
+var GridPager = require('Shared/Grid/Pager');
 
 module.exports = Marionette.Layout.extend({
   template: 'Activity/Queue/QueueLayoutTemplate',

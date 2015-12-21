@@ -1,4 +1,4 @@
-var reqres = require('../reqres');
+var reqres = require('reqres');
 var NzbDroneCell = require('./NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({

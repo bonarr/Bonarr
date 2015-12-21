@@ -2,9 +2,9 @@ var Marionette = require('marionette');
 var RootFolderCollectionView = require('./RootFolderCollectionView');
 var RootFolderCollection = require('./RootFolderCollection');
 var RootFolderModel = require('./RootFolderModel');
-var LoadingView = require('../../Shared/LoadingView');
-var AsValidatedView = require('../../Mixins/AsValidatedView');
-require('../../Mixins/FileBrowser');
+var LoadingView = require('Shared/LoadingView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+require('Mixins/FileBrowser');
 
 var Layout = Marionette.Layout.extend({
   template: 'AddSeries/RootFolders/RootFolderLayoutTemplate',

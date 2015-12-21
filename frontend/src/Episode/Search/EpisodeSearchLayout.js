@@ -2,9 +2,9 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var ButtonsView = require('./ButtonsView');
 var ManualSearchLayout = require('./ManualLayout');
-var ReleaseCollection = require('../../Release/ReleaseCollection');
-var CommandController = require('../../Commands/CommandController');
-var LoadingView = require('../../Shared/LoadingView');
+var ReleaseCollection = require('Release/ReleaseCollection');
+var CommandController = require('Commands/CommandController');
+var LoadingView = require('Shared/LoadingView');
 var NoResultsView = require('./NoResultsView');
 
 module.exports = Marionette.Layout.extend({

@@ -1,4 +1,4 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var moment = require('moment');
 
 module.exports = NzbDroneCell.extend({

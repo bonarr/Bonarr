@@ -1,7 +1,7 @@
 var PageableCollection = require('backbone.paginator');
 var Marionette = require('marionette');
 var FilteringView = require('./FilteringView');
-var Config = require('../../../Config');
+var Config = require('Config');
 
 module.exports = Marionette.CompositeView.extend({
   itemView: FilteringView,

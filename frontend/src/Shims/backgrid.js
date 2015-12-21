@@ -1,7 +1,7 @@
 require('backbone');
 
-var backgrid = require('../JsLibraries/backbone.backgrid');
-var header = require('../Shared/Grid/HeaderCell');
+var backgrid = require('JsLibraries/backbone.backgrid');
+var header = require('Shared/Grid/HeaderCell');
 
 header.call(backgrid);
 

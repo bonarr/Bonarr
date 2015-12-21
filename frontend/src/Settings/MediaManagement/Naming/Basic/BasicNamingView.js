@@ -1,9 +1,9 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
-var Config = require('../../../../Config');
+var Config = require('Config');
 var NamingSampleModel = require('../NamingSampleModel');
 var BasicNamingModel = require('./BasicNamingModel');
-var AsModelBoundView = require('../../../../Mixins/AsModelBoundView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
 
 var view = Marionette.ItemView.extend({
   template: 'Settings/MediaManagement/Naming/Basic/BasicNamingViewTemplate',

@@ -1,4 +1,4 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var SeriesCollection = require('../SeriesCollection');
 
 module.exports = NzbDroneCell.extend({

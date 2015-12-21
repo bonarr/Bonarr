@@ -1,8 +1,8 @@
 var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
-var HistoryDetailsView = require('../../Activity/History/Details/HistoryDetailsView');
+var NzbDroneCell = require('Cells/NzbDroneCell');
+var HistoryDetailsView = require('Activity/History/Details/HistoryDetailsView');
 require('bootstrap');
 
 module.exports = NzbDroneCell.extend({

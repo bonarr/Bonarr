@@ -1,12 +1,12 @@
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var BackupCollection = require('./TaskCollection');
-var RelativeTimeCell = require('../../Cells/RelativeTimeCell');
+var RelativeTimeCell = require('Cells/RelativeTimeCell');
 var TaskIntervalCell = require('./TaskIntervalCell');
 var ExecuteTaskCell = require('./ExecuteTaskCell');
 var NextExecutionCell = require('./NextExecutionCell');
-var LoadingView = require('../../Shared/LoadingView');
-require('../../Mixins/backbone.signalr.mixin');
+var LoadingView = require('Shared/LoadingView');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Task/TaskLayoutTemplate',

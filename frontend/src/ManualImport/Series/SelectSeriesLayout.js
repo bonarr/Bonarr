@@ -2,7 +2,7 @@ var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
-var SeriesCollection = require('../../Series/SeriesCollection');
+var SeriesCollection = require('Series/SeriesCollection');
 var SelectRow = require('./SelectSeriesRow');
 
 module.exports = Marionette.Layout.extend({

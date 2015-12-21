@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var UpdateCollection = require('./UpdateCollection');
 var UpdateCollectionView = require('./UpdateCollectionView');
-var LoadingView = require('../../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Update/UpdateLayoutTemplate',

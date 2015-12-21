@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var moment = require('moment');
-var EpisodeModel = require('../../Series/EpisodeModel');
+var EpisodeModel = require('Series/EpisodeModel');
 
 module.exports = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/calendar',

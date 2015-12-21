@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 var vent = require('vent');
-var reqres = require('../../reqres');
+var reqres = require('reqres');
 var Marionette = require('marionette');
 var Backbone = require('backbone');
 var SeriesCollection = require('../SeriesCollection');
@@ -10,10 +10,10 @@ var EpisodeFileCollection = require('../EpisodeFileCollection');
 var SeasonCollection = require('../SeasonCollection');
 var SeasonCollectionView = require('./SeasonCollectionView');
 var SeriesHeaderView = require('./SeriesHeaderView');
-var CommandController = require('../../Commands/CommandController');
-var LoadingView = require('../../Shared/LoadingView');
+var CommandController = require('Commands/CommandController');
+var LoadingView = require('Shared/LoadingView');
 var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
   itemViewContainer: '.x-series-seasons',

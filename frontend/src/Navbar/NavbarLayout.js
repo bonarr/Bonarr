@@ -1,8 +1,8 @@
 var $ = require('jquery');
 var Marionette = require('marionette');
 var vent = require('vent');
-var StatusModel = require('../System/StatusModel');
-var Messenger = require('../Shared/Messenger');
+var StatusModel = require('System/StatusModel');
+var Messenger = require('Shared/Messenger');
 
 require('./Search');
 

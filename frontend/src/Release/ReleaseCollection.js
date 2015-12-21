@@ -1,6 +1,6 @@
 var PagableCollection = require('backbone.paginator');
 var ReleaseModel = require('./ReleaseModel');
-var AsSortedCollection = require('../Mixins/AsSortedCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
 
 var Collection = PagableCollection.extend({
   url: window.Sonarr.ApiRoot + '/release',

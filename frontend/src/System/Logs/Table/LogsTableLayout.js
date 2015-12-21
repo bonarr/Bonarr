@@ -4,10 +4,10 @@ var Backgrid = require('backgrid');
 var LogTimeCell = require('./LogTimeCell');
 var LogLevelCell = require('./LogLevelCell');
 var LogRow = require('./LogRow');
-var GridPager = require('../../../Shared/Grid/Pager');
+var GridPager = require('Shared/Grid/Pager');
 var LogCollection = require('../LogsCollection');
-var LoadingView = require('../../../Shared/LoadingView');
-require('../../../jQuery/jquery.spin');
+var LoadingView = require('Shared/LoadingView');
+require('jQuery/jquery.spin');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Logs/Table/LogsTableLayoutTemplate',

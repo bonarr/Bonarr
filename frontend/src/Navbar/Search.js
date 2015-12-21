@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var SeriesCollection = require('../Series/SeriesCollection');
+var SeriesCollection = require('Series/SeriesCollection');
 require('typeahead');
 
 var substringMatcher = function() {

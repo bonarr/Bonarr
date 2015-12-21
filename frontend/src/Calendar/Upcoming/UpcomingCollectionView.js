@@ -3,9 +3,9 @@ var moment = require('moment');
 var Marionette = require('marionette');
 var UpcomingCollection = require('./UpcomingCollection');
 var UpcomingItemView = require('./UpcomingItemView');
-var Config = require('../../Config');
+var Config = require('Config');
 
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.CollectionView.extend({
   itemView: UpcomingItemView,

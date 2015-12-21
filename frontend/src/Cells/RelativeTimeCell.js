@@ -1,7 +1,7 @@
 var NzbDroneCell = require('./NzbDroneCell');
 var moment = require('moment');
-var FormatHelpers = require('../Shared/FormatHelpers');
-var UiSettings = require('../Shared/UiSettingsModel');
+var FormatHelpers = require('Shared/FormatHelpers');
+var UiSettings = require('Shared/UiSettingsModel');
 
 module.exports = NzbDroneCell.extend({
   className: 'relative-time-cell',

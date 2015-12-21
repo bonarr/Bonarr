@@ -2,7 +2,7 @@ var $ = require('jquery');
 var vent = require('vent');
 var moment = require('moment');
 var Marionette = require('marionette');
-var QueueCollection = require('../../../Activity/Queue/QueueCollection');
+var QueueCollection = require('Activity/Queue/QueueCollection');
 
 require('jquery.easypiechart');
 

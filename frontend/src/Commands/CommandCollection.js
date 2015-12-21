@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var CommandModel = require('./CommandModel');
-require('../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 var CommandCollection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/command',

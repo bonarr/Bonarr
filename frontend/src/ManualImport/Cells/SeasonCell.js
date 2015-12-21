@@ -1,5 +1,5 @@
-var vent = require('../../vent');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var vent = require('vent');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var SelectSeasonLayout = require('../Season/SelectSeasonLayout');
 
 module.exports = NzbDroneCell.extend({

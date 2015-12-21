@@ -1,6 +1,6 @@
 var $ = require('jquery');
 var ZeroClipboard = require('zero.clipboard');
-var Messenger = require('../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 
 $.fn.copyToClipboard = function(input) {
   ZeroClipboard.config({

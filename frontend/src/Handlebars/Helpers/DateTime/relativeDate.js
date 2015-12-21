@@ -1,7 +1,7 @@
 const handlebars = require('handlebars');
 const moment = require('moment');
-const UiSettings = require('../../../Shared/UiSettingsModel');
-const FormatHelpers = require('../../../Shared/FormatHelpers');
+const UiSettings = require('Shared/UiSettingsModel');
+const FormatHelpers = require('Shared/FormatHelpers');
 
 const relativeDate = function(input) {
   if (!input) {
@@ -22,6 +22,4 @@ const relativeDate = function(input) {
 
   return new handlebars.SafeString(result);
 };
-
-
 module.exports = relativeDate;

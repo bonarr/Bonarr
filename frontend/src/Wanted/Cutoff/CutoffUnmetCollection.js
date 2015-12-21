@@ -1,9 +1,9 @@
 var _ = require('underscore');
-var EpisodeModel = require('../../Series/EpisodeModel');
+var EpisodeModel = require('Series/EpisodeModel');
 var PagableCollection = require('backbone.paginator');
-var AsFilteredCollection = require('../../Mixins/AsFilteredCollection');
-var AsSortedCollection = require('../../Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('../../Mixins/AsPersistedStateCollection');
+var AsFilteredCollection = require('Mixins/AsFilteredCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
+var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PagableCollection.extend({
   url: window.Sonarr.ApiRoot + '/wanted/cutoff',

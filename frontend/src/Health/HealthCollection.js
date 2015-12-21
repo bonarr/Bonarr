@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var HealthModel = require('./HealthModel');
-require('../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 var Collection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/health',

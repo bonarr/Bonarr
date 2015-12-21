@@ -1,5 +1,5 @@
 var Backgrid = require('backgrid');
-var FormatHelpers = require('../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 module.exports = Backgrid.Cell.extend({
   className: 'file-size-cell',

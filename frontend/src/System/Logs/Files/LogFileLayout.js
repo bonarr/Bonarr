@@ -2,13 +2,13 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var FilenameCell = require('./FilenameCell');
-var RelativeDateCell = require('../../../Cells/RelativeDateCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
 var DownloadLogCell = require('./DownloadLogCell');
 var LogFileRow = require('./Row');
 var ContentsView = require('./ContentsView');
 var ContentsModel = require('./ContentsModel');
-var LoadingView = require('../../../Shared/LoadingView');
-require('../../../jQuery/jquery.spin');
+var LoadingView = require('Shared/LoadingView');
+require('jQuery/jquery.spin');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Logs/Files/LogFileLayoutTemplate',

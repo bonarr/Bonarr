@@ -2,8 +2,8 @@
 
 var $ = require('jquery');
 var _ = require('underscore')
-var vent = require('../../vent');
-var TemplatedCell = require('../../Cells/TemplatedCell');
+var vent = require('vent');
+var TemplatedCell = require('Cells/TemplatedCell');
 var RemoveFromQueueView = require('./RemoveFromQueueView');
 
 module.exports = TemplatedCell.extend({

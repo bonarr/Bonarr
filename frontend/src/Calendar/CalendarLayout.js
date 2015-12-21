@@ -1,5 +1,5 @@
 var vent = require('vent');
-var AppLayout = require('../AppLayout');
+var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var UpcomingLayout = require('./Upcoming/UpcomingLayout');
 var CalendarView = require('./Calendar/CalendarView');

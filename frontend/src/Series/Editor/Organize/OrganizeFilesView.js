@@ -2,7 +2,7 @@ var _ = require('underscore');
 var vent = require('vent');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
-var CommandController = require('../../../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Series/Editor/Organize/OrganizeFilesViewTemplate',

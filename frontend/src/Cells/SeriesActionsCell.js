@@ -1,6 +1,6 @@
 var vent = require('vent');
 var NzbDroneCell = require('./NzbDroneCell');
-var CommandController = require('../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 
 module.exports = NzbDroneCell.extend({
   className: 'series-actions-cell',

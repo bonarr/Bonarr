@@ -6,7 +6,7 @@ var SearchResultCollectionView = require('./SearchResultCollectionView');
 var EmptyView = require('./EmptyView');
 var NotFoundView = require('./NotFoundView');
 var ErrorView = require('./ErrorView');
-var LoadingView = require('../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'AddSeries/AddSeriesViewTemplate',

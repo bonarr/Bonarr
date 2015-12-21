@@ -4,9 +4,9 @@ var FileBrowserCollection = require('./FileBrowserCollection');
 var EmptyView = require('./EmptyFolderView');
 var FileBrowserRow = require('./FileBrowserRow');
 var LoadingView = require('../LoadingView');
-var TableView = require('../../Table/TableView');
+var TableView = require('Table/TableView');
 var tpl = require('./FileBrowserLayout.hbs');
-require('../../Mixins/DirectoryAutoComplete');
+require('Mixins/DirectoryAutoComplete');
 
 module.exports = Marionette.Layout.extend({
   template: tpl,

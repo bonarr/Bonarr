@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var Config = require('../../../Config');
+var Config = require('Config');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'li',

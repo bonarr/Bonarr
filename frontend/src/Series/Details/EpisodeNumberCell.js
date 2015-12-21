@@ -1,6 +1,6 @@
 var Marionette = require('marionette');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
-var reqres = require('../../reqres');
+var NzbDroneCell = require('Cells/NzbDroneCell');
+var reqres = require('reqres');
 var SeriesCollection = require('../SeriesCollection');
 
 module.exports = NzbDroneCell.extend({

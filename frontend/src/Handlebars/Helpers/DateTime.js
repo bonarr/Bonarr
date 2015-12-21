@@ -1,6 +1,6 @@
 var Handlebars = require('handlebars');
 var moment = require('moment');
-var UiSettings = require('../../Shared/UiSettingsModel');
+var UiSettings = require('Shared/UiSettingsModel');
 var relativeHelepr = require('./DateTime/relativeDate');
 
 Handlebars.registerHelper('ShortDate', function(input) {

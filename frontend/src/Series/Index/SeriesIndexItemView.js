@@ -1,6 +1,6 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var CommandController = require('../../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.ItemView.extend({
   ui: {

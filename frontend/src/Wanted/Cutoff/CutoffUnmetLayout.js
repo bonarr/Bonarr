@@ -3,18 +3,18 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var CutoffUnmetCollection = require('./CutoffUnmetCollection');
-var SelectAllCell = require('../../Cells/SelectAllCell');
-var SeriesTitleCell = require('../../Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('../../Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('../../Cells/EpisodeTitleCell');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
-var EpisodeStatusCell = require('../../Cells/EpisodeStatusCell');
-var GridPager = require('../../Shared/Grid/Pager');
-var LoadingView = require('../../Shared/LoadingView');
-var Messenger = require('../../Shared/Messenger');
-var CommandController = require('../../Commands/CommandController');
+var SelectAllCell = require('Cells/SelectAllCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
+var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
+var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
+var EpisodeStatusCell = require('Cells/EpisodeStatusCell');
+var GridPager = require('Shared/Grid/Pager');
+var LoadingView = require('Shared/LoadingView');
+var Messenger = require('Shared/Messenger');
+var CommandController = require('Commands/CommandController');
 require('backgrid.selectall');
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
   template: 'Wanted/Cutoff/CutoffUnmetLayoutTemplate',

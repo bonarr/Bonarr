@@ -1,4 +1,4 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({
   className: 'progress-cell',

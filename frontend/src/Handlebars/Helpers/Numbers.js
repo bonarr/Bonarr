@@ -1,5 +1,5 @@
 var Handlebars = require('handlebars');
-var FormatHelpers = require('../../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 Handlebars.registerHelper('Bytes', function(size) {
   return new Handlebars.SafeString(FormatHelpers.bytes(size));

@@ -1,7 +1,7 @@
 var _ = require('underscore');
-var vent = require('../../vent');
+var vent = require('vent');
 var Marionette = require('marionette');
-var LoadingView = require('../../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 var ProfileSchemaCollection = require('../../Settings/Profile/ProfileSchemaCollection');
 var SelectQualityView = require('./SelectQualityView');
 

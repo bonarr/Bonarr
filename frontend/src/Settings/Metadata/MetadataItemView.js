@@ -1,7 +1,7 @@
 var vent = require('vent');
 var Marionette = require('marionette');
 var EditView = require('./MetadataEditView');
-var AsModelBoundView = require('../../Mixins/AsModelBoundView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
 
 var view = Marionette.ItemView.extend({
   template: 'Settings/Metadata/MetadataItemViewTemplate',

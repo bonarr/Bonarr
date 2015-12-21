@@ -2,11 +2,11 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var BackupCollection = require('./BackupCollection');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
 var BackupFilenameCell = require('./BackupFilenameCell');
 var BackupTypeCell = require('./BackupTypeCell');
 var EmptyView = require('./BackupEmptyView');
-var LoadingView = require('../../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Backup/BackupLayoutTemplate',

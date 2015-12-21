@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var SettingsLayoutBase = require('../SettingsLayoutBase');
-var QualityDefinitionCollection = require('../../Quality/QualityDefinitionCollection');
+var QualityDefinitionCollection = require('Quality/QualityDefinitionCollection');
 var QualityDefinitionCollectionView = require('./Definition/QualityDefinitionCollectionView');
 
 module.exports = SettingsLayoutBase.extend({

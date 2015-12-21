@@ -2,20 +2,22 @@ var _ = require('underscore');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var vent = require('vent');
+var $ = require('jquery');
 var PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
 var ListCollectionView = require('./Overview/SeriesOverviewCollectionView');
 var EmptyView = require('./EmptyView');
 var SeriesCollection = require('../SeriesCollection');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
-var SeriesTitleCell = require('../../Cells/SeriesTitleCell');
-var ProfileCell = require('../../Cells/ProfileCell');
-var EpisodeProgressCell = require('../../Cells/EpisodeProgressCell');
-var SeriesActionsCell = require('../../Cells/SeriesActionsCell');
-var SeriesStatusCell = require('../../Cells/SeriesStatusCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
+var ProfileCell = require('Cells/ProfileCell');
+var EpisodeProgressCell = require('Cells/EpisodeProgressCell');
+var SeriesActionsCell = require('Cells/SeriesActionsCell');
+var SeriesStatusCell = require('Cells/SeriesStatusCell');
 var FooterView = require('./FooterView');
 var FooterModel = require('./FooterModel');
-require('../../Mixins/backbone.signalr.mixin');
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
+require('jquery.lazyload');
 
 module.exports = Marionette.Layout.extend({
   template: 'Series/Index/SeriesIndexLayoutTemplate',
@@ -23,6 +25,10 @@ module.exports = Marionette.Layout.extend({
   regions: {
     seriesRegion: '#x-series',
     footer: '#x-series-footer'
+  },
+
+  ui: {
+    lazyImage: 'img.lazy'
   },
 
   columns: [
@@ -83,6 +89,11 @@ module.exports = Marionette.Layout.extend({
   onShow: function() {
     this._showActionBar();
     this.listenTo(this.seriesCollection.shadowCollection, 'sync add remove', this.onCollectionChange);
+
+    this.$('img.lazy').lazyload({
+      threshold: 200,
+      container: $('.content-wrapper')
+    });
   },
 
   onCollectionChange: function() {

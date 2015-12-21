@@ -2,12 +2,12 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var BlacklistCollection = require('./BlacklistCollection');
-var SeriesTitleCell = require('../../Cells/SeriesTitleCell');
-var QualityCell = require('../../Cells/QualityCell');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
+var QualityCell = require('Cells/QualityCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
 var BlacklistActionsCell = require('./BlacklistActionsCell');
-var GridPager = require('../../Shared/Grid/Pager');
-var LoadingView = require('../../Shared/LoadingView');
+var GridPager = require('Shared/Grid/Pager');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'Activity/Blacklist/BlacklistLayoutTemplate',

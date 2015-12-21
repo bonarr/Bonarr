@@ -1,7 +1,7 @@
 var vent = require('vent');
 var Marionette = require('marionette');
 var EditProfileView = require('./Edit/EditProfileLayout');
-var AsModelBoundView = require('../../Mixins/AsModelBoundView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
 require('./AllowedLabeler');
 require('./LanguageLabel');
 require('bootstrap');

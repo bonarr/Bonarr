@@ -1,12 +1,12 @@
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var ReleaseCollection = require('./ReleaseCollection');
-var IndexerCell = require('../Cells/IndexerCell');
-var EpisodeNumberCell = require('../Cells/EpisodeNumberCell');
-var FileSizeCell = require('../Cells/FileSizeCell');
-var QualityCell = require('../Cells/QualityCell');
-var ApprovalStatusCell = require('../Cells/ApprovalStatusCell');
-var LoadingView = require('../Shared/LoadingView');
+var IndexerCell = require('Cells/IndexerCell');
+var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
+var FileSizeCell = require('Cells/FileSizeCell');
+var QualityCell = require('Cells/QualityCell');
+var ApprovalStatusCell = require('Cells/ApprovalStatusCell');
+var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.Layout.extend({
   template: 'Release/ReleaseLayoutTemplate',

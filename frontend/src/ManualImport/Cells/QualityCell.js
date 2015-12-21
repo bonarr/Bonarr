@@ -1,5 +1,5 @@
-var vent = require('../../vent');
-var QualityCell = require('../../Cells/QualityCell');
+var vent = require('vent');
+var QualityCell = require('Cells/QualityCell');
 var SelectQualityLayout = require('../Quality/SelectQualityLayout');
 
 module.exports = QualityCell.extend({

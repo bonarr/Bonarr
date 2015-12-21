@@ -1,5 +1,5 @@
 var Backgrid = require('backgrid');
-var ProfileCollection = require('../Profile/ProfileCollection');
+var ProfileCollection = require('Profile/ProfileCollection');
 var _ = require('underscore');
 
 module.exports = Backgrid.Cell.extend({

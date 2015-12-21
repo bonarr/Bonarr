@@ -1,5 +1,5 @@
 var Handlebars = require('handlebars');
-var FormatHelpers = require('../../../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 Handlebars.registerHelper('historyAge', function() {
   var age = this.age;

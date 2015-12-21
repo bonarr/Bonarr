@@ -2,9 +2,9 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var DiskSpaceCollection = require('./DiskSpaceCollection');
-var LoadingView = require('../../../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 var DiskSpacePathCell = require('./DiskSpacePathCell');
-var FileSizeCell = require('../../../Cells/FileSizeCell');
+var FileSizeCell = require('Cells/FileSizeCell');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Status/DiskSpace/DiskSpaceLayoutTemplate',

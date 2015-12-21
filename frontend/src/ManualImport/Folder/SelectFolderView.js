@@ -1,9 +1,9 @@
 var _ = require('underscore');
 var $ = require('jquery');
-var Config = require('../../Config');
+var Config = require('Config');
 var Marionette = require('marionette');
 var moment = require('moment');
-require('../../Mixins/FileBrowser');
+require('Mixins/FileBrowser');
 
 module.exports = Marionette.ItemView.extend({
   template: 'ManualImport/Folder/SelectFolderViewTemplate',

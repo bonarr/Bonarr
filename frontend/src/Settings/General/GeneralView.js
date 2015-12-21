@@ -1,10 +1,10 @@
-var vent = require('../../vent');
+var vent = require('vent');
 var Marionette = require('marionette');
-var CommandController = require('../../Commands/CommandController');
-var AsModelBoundView = require('../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../Mixins/AsValidatedView');
+var CommandController = require('Commands/CommandController');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
 
-require('../../Mixins/CopyToClipboard');
+require('Mixins/CopyToClipboard');
 
 var view = Marionette.ItemView.extend({
   template: 'Settings/General/GeneralViewTemplate',

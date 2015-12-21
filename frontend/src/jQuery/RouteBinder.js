@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var StatusModel = require('../System/StatusModel');
+var StatusModel = require('System/StatusModel');
 
 //This module will automatically route all relative links through backbone router rather than
 //causing links to reload pages.

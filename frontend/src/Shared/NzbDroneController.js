@@ -1,5 +1,5 @@
 var vent = require('vent');
-var AppLayout = require('../AppLayout');
+var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var NotFoundView = require('./NotFoundView');
 var Messenger = require('./Messenger');

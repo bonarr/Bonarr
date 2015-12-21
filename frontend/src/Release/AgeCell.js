@@ -1,7 +1,7 @@
 var moment = require('moment');
 var Backgrid = require('backgrid');
-var UiSettings = require('../Shared/UiSettingsModel');
-var FormatHelpers = require('../Shared/FormatHelpers');
+var UiSettings = require('Shared/UiSettingsModel');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 module.exports = Backgrid.Cell.extend({
   className: 'age-cell',

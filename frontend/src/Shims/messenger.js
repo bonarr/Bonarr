@@ -1,5 +1,5 @@
 require('jquery');
-var m = require('../JsLibraries/messenger');
+var m = require('JsLibraries/messenger');
 
 window.Messenger.options = { theme: 'flat' };
 

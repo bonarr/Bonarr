@@ -1,12 +1,12 @@
 var vent = require('vent');
 var Marionette = require('marionette');
 var DeleteView = require('../Delete/NotificationDeleteView');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../../Mixins/AsValidatedView');
-var AsEditModalView = require('../../../Mixins/AsEditModalView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+var AsEditModalView = require('Mixins/AsEditModalView');
 require('../../../Form/FormBuilder');
-require('../../../Mixins/TagInput');
-require('../../../Mixins/FileBrowser');
+require('Mixins/TagInput');
+require('Mixins/FileBrowser');
 require('bootstrap.tagsinput');
 
 var view = Marionette.ItemView.extend({

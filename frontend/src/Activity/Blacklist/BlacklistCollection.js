@@ -1,7 +1,7 @@
 var BlacklistModel = require('./BlacklistModel');
 var PageableCollection = require('backbone.paginator');
-var AsSortedCollection = require('../../Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('../../Mixins/AsPersistedStateCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
+var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PageableCollection.extend({
   url: window.Sonarr.ApiRoot + '/blacklist',

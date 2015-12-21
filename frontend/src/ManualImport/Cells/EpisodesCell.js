@@ -1,6 +1,6 @@
 var _ = require('underscore');
-var vent = require('../../vent');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var vent = require('vent');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var SelectEpisodeLayout = require('../Episode/SelectEpisodeLayout');
 
 module.exports = NzbDroneCell.extend({

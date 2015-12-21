@@ -1,5 +1,5 @@
-var NzbDroneController = require('../Shared/NzbDroneController');
-var AppLayout = require('../AppLayout');
+var NzbDroneController = require('Shared/NzbDroneController');
+var AppLayout = require('AppLayout');
 var MissingLayout = require('./Missing/MissingLayout');
 var CutoffUnmetLayout = require('./Cutoff/CutoffUnmetLayout');
 

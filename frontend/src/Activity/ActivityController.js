@@ -1,5 +1,5 @@
-var NzbDroneController = require('../Shared/NzbDroneController');
-var AppLayout = require('../AppLayout');
+var NzbDroneController = require('Shared/NzbDroneController');
+var AppLayout = require('AppLayout');
 var QueueLayout = require('./Queue/QueueLayout');
 var HistoryLayout = require('./History/HistoryLayout');
 var BlacklistLayout = require('./Blacklist/BlacklistLayout');

@@ -1,6 +1,6 @@
 var PageableCollection = require('backbone.paginator');
 var ManualImportModel = require('./ManualImportModel');
-var AsSortedCollection = require('../Mixins/AsSortedCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
 
 var Collection = PageableCollection.extend({
   model: ManualImportModel,

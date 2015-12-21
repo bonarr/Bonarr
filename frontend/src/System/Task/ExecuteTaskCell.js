@@ -1,5 +1,5 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
-var CommandController = require('../../Commands/CommandController');
+var NzbDroneCell = require('Cells/NzbDroneCell');
+var CommandController = require('Commands/CommandController');
 
 module.exports = NzbDroneCell.extend({
   className: 'execute-task-cell',

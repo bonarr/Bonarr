@@ -1,13 +1,13 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('../../../AppLayout');
+var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var DeleteView = require('./RestrictionDeleteView');
-var CommandController = require('../../../Commands/CommandController');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../../Mixins/AsValidatedView');
-var AsEditModalView = require('../../../Mixins/AsEditModalView');
-require('../../../Mixins/TagInput');
+var CommandController = require('Commands/CommandController');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+var AsEditModalView = require('Mixins/AsEditModalView');
+require('Mixins/TagInput');
 require('bootstrap');
 require('bootstrap.tagsinput');
 

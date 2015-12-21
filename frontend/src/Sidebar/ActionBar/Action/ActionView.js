@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 var Marionette = require('marionette');
 var _ = require('underscore');
-var CommandController = require('../../../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Sidebar/ActionBar/Action/ActionViewTemplate',

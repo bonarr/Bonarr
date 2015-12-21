@@ -5,8 +5,8 @@ var RenamePreviewCollection = require('./RenamePreviewCollection');
 var RenamePreviewCollectionView = require('./RenamePreviewCollectionView');
 var EmptyCollectionView = require('./RenamePreviewEmptyCollectionView');
 var RenamePreviewFormatView = require('./RenamePreviewFormatView');
-var LoadingView = require('../Shared/LoadingView');
-var CommandController = require('../Commands/CommandController');
+var LoadingView = require('Shared/LoadingView');
+var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.Layout.extend({
   className: 'modal-lg',

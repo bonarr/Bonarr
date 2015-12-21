@@ -1,8 +1,8 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var fileSize = require('filesize');
 var moment = require('moment');
-var UiSettingsModel = require('../../Shared/UiSettingsModel');
-var FormatHelpers = require('../../Shared/FormatHelpers');
+var UiSettingsModel = require('Shared/UiSettingsModel');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 module.exports = NzbDroneCell.extend({
   className: 'timeleft-cell',

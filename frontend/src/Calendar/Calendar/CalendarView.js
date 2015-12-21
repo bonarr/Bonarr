@@ -4,15 +4,15 @@ var Marionette = require('marionette');
 var moment = require('moment');
 var momentRange = require('momentRange');
 var CalendarCollection = require('../CalendarCollection');
-var UiSettings = require('../../Shared/UiSettingsModel');
-var Config = require('../../Config');
+var UiSettings = require('Shared/UiSettingsModel');
+var Config = require('Config');
 var CalendarDayCollectionView = require('./Day/CalendarDayCollectionView');
 var CalendarDayEventCollection = require('./Day/CalendarDayEventCollection');
 var CalendarDayCollection = require('./Day/CalendarDayCollection');
 var CalendarDayModel = require('./Day/CalendarDayModel');
 var CalendarDayHeaderView = require('./Day/CalendarDayHeaderView');
 
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 require('jquery.easypiechart');
 
 module.exports = Marionette.Layout.extend({

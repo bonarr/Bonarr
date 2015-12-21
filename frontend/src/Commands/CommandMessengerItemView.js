@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var Messenger = require('../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.ItemView.extend({
   initialize: function() {

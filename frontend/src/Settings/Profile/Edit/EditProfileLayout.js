@@ -1,15 +1,15 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('../../../AppLayout');
+var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var Backbone = require('backbone');
 var EditProfileItemView = require('./EditProfileItemView');
 var QualitySortableCollectionView = require('./QualitySortableCollectionView');
 var EditProfileView = require('./EditProfileView');
 var DeleteView = require('../DeleteProfileView');
-var SeriesCollection = require('../../../Series/SeriesCollection');
-var Config = require('../../../Config');
-var AsEditModalView = require('../../../Mixins/AsEditModalView');
+var SeriesCollection = require('Series/SeriesCollection');
+var Config = require('Config');
+var AsEditModalView = require('Mixins/AsEditModalView');
 
 var view = Marionette.Layout.extend({
   template: 'Settings/Profile/Edit/EditProfileLayoutTemplate',

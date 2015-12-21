@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var Config = require('../Config');
+var Config = require('Config');
 
 module.exports = function() {
   var originalSetSorting = this.prototype.setSorting;

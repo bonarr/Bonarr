@@ -4,8 +4,8 @@ var CommandCollection = require('./CommandCollection');
 var CommandMessengerCollectionView = require('./CommandMessengerCollectionView');
 var _ = require('underscore');
 var moment = require('moment');
-var Messenger = require('../Shared/Messenger');
-require('../jQuery/jquery.spin');
+var Messenger = require('Shared/Messenger');
+require('jQuery/jquery.spin');
 
 CommandMessengerCollectionView.render();
 

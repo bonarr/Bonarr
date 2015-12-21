@@ -1,5 +1,5 @@
 var vent = require('vent');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var BlacklistDetailsLayout = require('./Details/BlacklistDetailsLayout');
 
 module.exports = NzbDroneCell.extend({

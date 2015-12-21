@@ -1,13 +1,13 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('../../../AppLayout');
+var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var DeleteView = require('./RemotePathMappingDeleteView');
-var CommandController = require('../../../Commands/CommandController');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../../Mixins/AsValidatedView');
-var AsEditModalView = require('../../../Mixins/AsEditModalView');
-require('../../../Mixins/FileBrowser');
+var CommandController = require('Commands/CommandController');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+var AsEditModalView = require('Mixins/AsEditModalView');
+require('Mixins/FileBrowser');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({

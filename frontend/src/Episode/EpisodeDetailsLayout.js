@@ -2,8 +2,8 @@ var Marionette = require('marionette');
 var SummaryLayout = require('./Summary/EpisodeSummaryLayout');
 var SearchLayout = require('./Search/EpisodeSearchLayout');
 var EpisodeHistoryLayout = require('./History/EpisodeHistoryLayout');
-var SeriesCollection = require('../Series/SeriesCollection');
-var Messenger = require('../Shared/Messenger');
+var SeriesCollection = require('Series/SeriesCollection');
+var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
   className: 'modal-lg',

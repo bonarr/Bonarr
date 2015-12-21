@@ -2,21 +2,21 @@ var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
-var CommandController = require('../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 var EmptyView = require('./EmptyView');
 var SelectFolderView = require('./Folder/SelectFolderView');
-var LoadingView = require('../Shared/LoadingView');
+var LoadingView = require('Shared/LoadingView');
 var ManualImportRow = require('./ManualImportRow');
-var SelectAllCell = require('../Cells/SelectAllCell');
+var SelectAllCell = require('Cells/SelectAllCell');
 var PathCell = require('./Cells/PathCell');
 var SeriesCell = require('./Cells/SeriesCell');
 var SeasonCell = require('./Cells/SeasonCell');
 var EpisodesCell = require('./Cells/EpisodesCell');
 var QualityCell = require('./Cells/QualityCell');
-var FileSizeCell = require('../Cells/FileSizeCell');
-var ApprovalStatusCell = require('../Cells/ApprovalStatusCell');
+var FileSizeCell = require('Cells/FileSizeCell');
+var ApprovalStatusCell = require('Cells/ApprovalStatusCell');
 var ManualImportCollection = require('./ManualImportCollection');
-var Messenger = require('../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
   className: 'modal-lg',

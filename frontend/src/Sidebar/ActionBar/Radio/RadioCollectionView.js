@@ -1,6 +1,6 @@
 var Marionette = require('marionette');
 var RadioView = require('./RadioView');
-var Config = require('../../../Config');
+var Config = require('Config');
 
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',

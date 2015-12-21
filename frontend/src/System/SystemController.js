@@ -1,5 +1,5 @@
-var NzbDroneController = require('../Shared/NzbDroneController');
-var AppLayout = require('../AppLayout');
+var NzbDroneController = require('Shared/NzbDroneController');
+var AppLayout = require('AppLayout');
 var StatusLayout = require('./Status/StatusLayout');
 var UpdateLayout = require('./Update/UpdateLayout');
 var TaskLayout = require('./Task/TaskLayout');

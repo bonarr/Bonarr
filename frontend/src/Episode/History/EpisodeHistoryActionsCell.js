@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({
   className: 'episode-actions-cell',

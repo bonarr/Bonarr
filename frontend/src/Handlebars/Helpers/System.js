@@ -1,5 +1,5 @@
 var Handlebars = require('handlebars');
-var StatusModel = require('../../System/StatusModel');
+var StatusModel = require('System/StatusModel');
 
 Handlebars.registerHelper('if_windows', function(options) {
   if (StatusModel.get('isWindows')) {

@@ -1,5 +1,5 @@
 var NzbDroneCell = require('./NzbDroneCell');
-var FormatHelpers = require('../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 var _ = require('underscore');
 
 module.exports = NzbDroneCell.extend({

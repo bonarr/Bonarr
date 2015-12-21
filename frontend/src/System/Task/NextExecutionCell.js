@@ -1,6 +1,6 @@
-var NzbDroneCell = require('../../Cells/NzbDroneCell');
+var NzbDroneCell = require('Cells/NzbDroneCell');
 var moment = require('moment');
-var UiSettings = require('../../Shared/UiSettingsModel');
+var UiSettings = require('Shared/UiSettingsModel');
 
 module.exports = NzbDroneCell.extend({
   className: 'next-execution-cell',

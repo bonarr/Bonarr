@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var EpisodeModel = require('../../../Series/EpisodeModel');
+var EpisodeModel = require('Series/EpisodeModel');
 
 module.exports = Backbone.Collection.extend({
   model: EpisodeModel,

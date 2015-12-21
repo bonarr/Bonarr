@@ -1,18 +1,18 @@
 var vent = require('vent');
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
-var ToggleCell = require('../../Cells/EpisodeMonitoredCell');
-var EpisodeTitleCell = require('../../Cells/EpisodeTitleCell');
-var RelativeDateCell = require('../../Cells/RelativeDateCell');
-var EpisodeStatusCell = require('../../Cells/EpisodeStatusCell');
-var EpisodeActionsCell = require('../../Cells/EpisodeActionsCell');
+var ToggleCell = require('Cells/EpisodeMonitoredCell');
+var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
+var RelativeDateCell = require('Cells/RelativeDateCell');
+var EpisodeStatusCell = require('Cells/EpisodeStatusCell');
+var EpisodeActionsCell = require('Cells/EpisodeActionsCell');
 var EpisodeNumberCell = require('./EpisodeNumberCell');
 var EpisodeWarningCell = require('./EpisodeWarningCell');
-var CommandController = require('../../Commands/CommandController');
+var CommandController = require('Commands/CommandController');
 var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
 var moment = require('moment');
 var _ = require('underscore');
-var Messenger = require('../../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
   template: 'Series/Details/SeasonLayoutTemplate',

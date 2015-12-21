@@ -6,7 +6,7 @@ var LogsLayout = require('./Logs/LogsLayout');
 var UpdateLayout = require('./Update/UpdateLayout');
 var BackupLayout = require('./Backup/BackupLayout');
 var TaskLayout = require('./Task/TaskLayout');
-var Messenger = require('../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 var StatusModel = require('./StatusModel');
 
 module.exports = Marionette.Layout.extend({

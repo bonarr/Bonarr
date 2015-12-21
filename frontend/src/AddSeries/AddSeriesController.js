@@ -1,4 +1,4 @@
-var NzbDroneController = require('../Shared/NzbDroneController');
+var NzbDroneController = require('Shared/NzbDroneController');
 var AddNewSeriesLayout = require('./AddNewSeries/AddNewSeriesLayout');
 var ImportSeriesLayout = require('./ImportSeries/ImportSeriesLayout');
 

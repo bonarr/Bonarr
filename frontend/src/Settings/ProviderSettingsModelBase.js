@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 var DeepModel = require('backbone.deepmodel');
-var Messenger = require('../Shared/Messenger');
+var Messenger = require('Shared/Messenger');
 
 module.exports = DeepModel.extend({
   connectData: function(action, initialQueryString) {

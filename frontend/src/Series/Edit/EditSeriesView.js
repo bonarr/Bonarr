@@ -1,11 +1,11 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var Profiles = require('../../Profile/ProfileCollection');
-var AsModelBoundView = require('../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../Mixins/AsValidatedView');
-var AsEditModalView = require('../../Mixins/AsEditModalView');
-require('../../Mixins/TagInput');
-require('../../Mixins/FileBrowser');
+var Profiles = require('Profile/ProfileCollection');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+var AsEditModalView = require('Mixins/AsEditModalView');
+require('Mixins/TagInput');
+require('Mixins/FileBrowser');
 
 var view = Marionette.ItemView.extend({
   template: 'Series/Edit/EditSeriesView',

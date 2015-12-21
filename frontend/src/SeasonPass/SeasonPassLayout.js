@@ -2,14 +2,14 @@ var _ = require('underscore');
 var vent = require('vent');
 var Backgrid = require('backgrid');
 var Marionette = require('marionette');
-var EmptyView = require('../Series/Index/EmptyView');
-var SeriesCollection = require('../Series/SeriesCollection');
+var EmptyView = require('Series/Index/EmptyView');
+var SeriesCollection = require('Series/SeriesCollection');
 var FooterView = require('./SeasonPassFooterView');
-var SelectAllCell = require('../Cells/SelectAllCell');
-var SeriesStatusCell = require('../Cells/SeriesStatusCell');
-var SeriesTitleCell = require('../Cells/SeriesTitleCell');
+var SelectAllCell = require('Cells/SelectAllCell');
+var SeriesStatusCell = require('Cells/SeriesStatusCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
 var SeasonsCell = require('./SeasonsCell');
-require('../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
   template: 'SeasonPass/SeasonPassLayoutTemplate',

@@ -1,11 +1,11 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
 var vent = require('vent');
-var Profiles = require('../../Profile/ProfileCollection');
-var RootFolders = require('../../AddSeries/RootFolders/RootFolderCollection');
-var RootFolderLayout = require('../../AddSeries/RootFolders/RootFolderLayout');
+var Profiles = require('Profile/ProfileCollection');
+var RootFolders = require('AddSeries/RootFolders/RootFolderCollection');
+var RootFolderLayout = require('AddSeries/RootFolders/RootFolderLayout');
 var UpdateFilesSeriesView = require('./Organize/OrganizeFilesView');
-var Config = require('../../Config');
+var Config = require('Config');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Series/Editor/SeriesEditorFooterViewTemplate',

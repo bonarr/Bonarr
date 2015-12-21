@@ -1,9 +1,9 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../../Mixins/AsValidatedView');
-require('../../../Mixins/DirectoryAutoComplete');
-require('../../../Mixins/FileBrowser');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
+require('Mixins/DirectoryAutoComplete');
+require('Mixins/FileBrowser');
 
 var view = Marionette.ItemView.extend({
   template: 'Settings/MediaManagement/FileManagement/FileManagementViewTemplate',

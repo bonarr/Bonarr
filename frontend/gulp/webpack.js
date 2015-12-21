@@ -51,7 +51,6 @@ var config = {
       signalR: 'Shims/jquery.signalR',
       typeahead: 'JsLibraries/typeahead',
       underscore: 'Shims/underscore',
-      vent: 'vent',
       'zero.clipboard': 'JsLibraries/zero.clipboard'
     }
   },

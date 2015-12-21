@@ -2,8 +2,8 @@ var _ = require('underscore');
 var Marionette = require('marionette');
 var NamingSampleModel = require('./NamingSampleModel');
 var BasicNamingView = require('./Basic/BasicNamingView');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
-var AsValidatedView = require('../../../Mixins/AsValidatedView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
+var AsValidatedView = require('Mixins/AsValidatedView');
 
 module.exports = (function() {
   var view = Marionette.Layout.extend({

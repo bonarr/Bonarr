@@ -2,9 +2,9 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
 var SeriesModel = require('./SeriesModel');
-var AsFilteredCollection = require('../Mixins/AsFilteredCollection');
-var AsSortedCollection = require('../Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('../Mixins/AsPersistedStateCollection');
+var AsFilteredCollection = require('Mixins/AsFilteredCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
+var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 var moment = require('moment');
 
 var SeriesCollection = PageableCollection.extend({

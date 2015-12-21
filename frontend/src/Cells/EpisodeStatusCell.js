@@ -1,9 +1,9 @@
-var reqres = require('../reqres');
+var reqres = require('reqres');
 var Backbone = require('backbone');
 var NzbDroneCell = require('./NzbDroneCell');
-var QueueCollection = require('../Activity/Queue/QueueCollection');
+var QueueCollection = require('Activity/Queue/QueueCollection');
 var moment = require('moment');
-var FormatHelpers = require('../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 
 module.exports = NzbDroneCell.extend({
   className: 'episode-status-cell',

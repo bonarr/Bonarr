@@ -1,13 +1,13 @@
 var Marionette = require('marionette');
 var Backgrid = require('backgrid');
-var ReleaseTitleCell = require('../../Cells/ReleaseTitleCell');
-var FileSizeCell = require('../../Cells/FileSizeCell');
-var QualityCell = require('../../Cells/QualityCell');
-var ApprovalStatusCell = require('../../Cells/ApprovalStatusCell');
-var DownloadReportCell = require('../../Release/DownloadReportCell');
-var AgeCell = require('../../Release/AgeCell');
-var ProtocolCell = require('../../Release/ProtocolCell');
-var PeersCell = require('../../Release/PeersCell');
+var ReleaseTitleCell = require('Cells/ReleaseTitleCell');
+var FileSizeCell = require('Cells/FileSizeCell');
+var QualityCell = require('Cells/QualityCell');
+var ApprovalStatusCell = require('Cells/ApprovalStatusCell');
+var DownloadReportCell = require('Release/DownloadReportCell');
+var AgeCell = require('Release/AgeCell');
+var ProtocolCell = require('Release/ProtocolCell');
+var PeersCell = require('Release/PeersCell');
 
 module.exports = Marionette.Layout.extend({
   template: 'Episode/Search/ManualLayoutTemplate',

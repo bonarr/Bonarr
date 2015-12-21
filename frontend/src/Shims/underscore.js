@@ -1,3 +1,3 @@
-window._ = require('../JsLibraries/lodash.underscore');
+window._ = require('JsLibraries/lodash.underscore');
 
 module.exports = window._;

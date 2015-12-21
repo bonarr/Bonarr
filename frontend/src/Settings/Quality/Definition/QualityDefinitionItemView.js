@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var AsModelBoundView = require('../../../Mixins/AsModelBoundView');
+var AsModelBoundView = require('Mixins/AsModelBoundView');
 var fileSize = require('filesize');
 require('jquery-ui');
 

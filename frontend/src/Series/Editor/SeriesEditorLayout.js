@@ -3,13 +3,13 @@ var Marionette = require('marionette');
 var Backgrid = require('backgrid');
 var EmptyView = require('../Index/EmptyView');
 var SeriesCollection = require('../SeriesCollection');
-var SeriesTitleCell = require('../../Cells/SeriesTitleCell');
-var ProfileCell = require('../../Cells/ProfileCell');
-var SeriesStatusCell = require('../../Cells/SeriesStatusCell');
-var SeasonFolderCell = require('../../Cells/SeasonFolderCell');
-var SelectAllCell = require('../../Cells/SelectAllCell');
+var SeriesTitleCell = require('Cells/SeriesTitleCell');
+var ProfileCell = require('Cells/ProfileCell');
+var SeriesStatusCell = require('Cells/SeriesStatusCell');
+var SeasonFolderCell = require('Cells/SeasonFolderCell');
+var SelectAllCell = require('Cells/SelectAllCell');
 var FooterView = require('./SeriesEditorFooterView');
-require('../../Mixins/backbone.signalr.mixin');
+require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
   template: 'Series/Editor/SeriesEditorLayoutTemplate',

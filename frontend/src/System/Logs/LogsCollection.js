@@ -1,7 +1,7 @@
 var PagableCollection = require('backbone.paginator');
 var LogsModel = require('./LogsModel');
-var AsFilteredCollection = require('../../Mixins/AsFilteredCollection');
-var AsPersistedStateCollection = require('../../Mixins/AsPersistedStateCollection');
+var AsFilteredCollection = require('Mixins/AsFilteredCollection');
+var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var collection = PagableCollection.extend({
   url: window.Sonarr.ApiRoot + '/log',

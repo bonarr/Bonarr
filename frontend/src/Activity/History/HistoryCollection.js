@@ -1,8 +1,8 @@
 var HistoryModel = require('./HistoryModel');
 var PageableCollection = require('backbone.paginator');
-var AsFilteredCollection = require('../../Mixins/AsFilteredCollection');
-var AsSortedCollection = require('../../Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('../../Mixins/AsPersistedStateCollection');
+var AsFilteredCollection = require('Mixins/AsFilteredCollection');
+var AsSortedCollection = require('Mixins/AsSortedCollection');
+var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PageableCollection.extend({
   url: window.Sonarr.ApiRoot + '/history',

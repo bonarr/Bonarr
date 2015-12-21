@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var $ = require('jquery');
 var _ = require('underscore');
 var HealthView = require('../Health/HealthView');
-var QueueView = require('../Activity/Queue/QueueView');
+var QueueView = require('Activity/Queue/QueueView');
 var ResolutionUtility = require('../Utilities/ResolutionUtility');
 var items = require('./MenuItems');
 

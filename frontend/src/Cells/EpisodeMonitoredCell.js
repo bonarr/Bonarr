@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var ToggleCell = require('./ToggleCell');
-var SeriesCollection = require('../Series/SeriesCollection');
-var Messenger = require('../Shared/Messenger');
+var SeriesCollection = require('Series/SeriesCollection');
+var Messenger = require('Shared/Messenger');
 
 module.exports = ToggleCell.extend({
   className: 'toggle-cell episode-monitored',

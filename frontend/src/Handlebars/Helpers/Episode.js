@@ -1,7 +1,7 @@
 var Handlebars = require('handlebars');
-var FormatHelpers = require('../../Shared/FormatHelpers');
+var FormatHelpers = require('Shared/FormatHelpers');
 var moment = require('moment');
-require('../../Activity/Queue/QueueCollection');
+require('Activity/Queue/QueueCollection');
 
 Handlebars.registerHelper('EpisodeNumber', function() {
   if (this.series.seriesType === 'daily') {
@@ -15,7 +15,7 @@ Handlebars.registerHelper('EpisodeNumber', function() {
 
 Handlebars.registerHelper('StatusLevel', function() {
   var hasFile = this.hasFile;
-  var downloading = require('../../Activity/Queue/QueueCollection').findEpisode(this.id) || this.downloading;
+  var downloading = require('Activity/Queue/QueueCollection').findEpisode(this.id) || this.downloading;
   var currentTime = moment();
   var start = moment(this.airDateUtc);
   var end = moment(this.end);
