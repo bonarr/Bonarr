@@ -1,0 +1,39 @@
+<div class="fullscreen-modal episode-detail-modal">
+  <div class="fullscreen-modal-header">
+    <span class="hidden x-series-title">{{series.title}}</span>
+    <button type="button" class="close x-close" aria-hidden="true">&times;</button>
+
+    <h3>
+      <i class="icon-sonarr-monitored x-episode-monitored episode-monitored" title="Toggle monitored status"/>
+      {{series.title}} - {{EpisodeNumber}} - {{title}}
+    </h3>
+
+  </div>
+  <div class="fullscreen-modal-body">
+    <ul class="nav nav-tabs" id="myTab">
+      <li>
+        <a href="#episode-summary" class="x-episode-summary">Summary</a>
+      </li>
+      <li>
+        <a href="#episode-history" class="x-episode-history">History</a>
+      </li>
+      <li>
+        <a href="#episode-search" class="x-episode-search">Search</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane" id="episode-summary"/>
+      <div class="tab-pane" id="episode-history"/>
+      <div class="tab-pane" id="episode-search"/>
+    </div>
+  </div>
+  <div class="modal-footer">
+    {{#unless hideSeriesLink}}
+      {{#with series}}
+        <a href="{{route}}" class="btn btn-default pull-left x-close">Go to Series</a>
+      {{/with}}
+    {{/unless}}
+
+    <button class="btn btn-default x-close">Close</button>
+  </div>
+</div>

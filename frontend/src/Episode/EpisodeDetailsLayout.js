@@ -6,8 +6,7 @@ var SeriesCollection = require('Series/SeriesCollection');
 var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
-  className: 'modal-lg',
-  template: 'Episode/EpisodeDetailsLayoutTemplate',
+  template: 'Episode/EpisodeDetailsLayout',
 
   regions: {
     summary: '#episode-summary',
