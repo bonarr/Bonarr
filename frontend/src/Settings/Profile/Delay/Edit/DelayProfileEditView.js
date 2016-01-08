@@ -9,7 +9,7 @@ require('Mixins/TagInput');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Profile/Delay/Edit/DelayProfileEditViewTemplate',
+  template: 'Settings/Profile/Delay/Edit/DelayProfileEditView',
 
   _deleteView: DeleteView,
 

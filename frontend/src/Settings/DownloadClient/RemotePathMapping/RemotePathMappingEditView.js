@@ -11,7 +11,7 @@ require('Mixins/FileBrowser');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingEditViewTemplate',
+  template: 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingEditView',
 
   ui: {
     path: '.x-path',

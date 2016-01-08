@@ -2,7 +2,7 @@ var vent = require('vent');
 var Marionette = require('marionette');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Settings/Profile/DeleteProfileViewTemplate',
+  template: 'Settings/Profile/DeleteProfileView',
 
   events: {
     'click .x-confirm-delete': '_removeProfile'
