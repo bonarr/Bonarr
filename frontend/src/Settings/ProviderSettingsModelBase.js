@@ -4,14 +4,18 @@ var DeepModel = require('backbone.deepmodel');
 var Messenger = require('Shared/Messenger');
 
 module.exports = DeepModel.extend({
-  connectData: function(action, initialQueryString) {
+  connectData: function(action, initialQueryParams) {
     var self = this;
 
     this.trigger('connect:sync');
 
     var promise = $.Deferred();
 
-    var callAction = function(action) {
+    var callAction = function(action, queryParams) {
+      if (queryParams) {
+        action = action + '?' + $.param(queryParams, true);
+      }
+
       var params = {
         url: self.collection.url + '/connectData/' + action,
         contentType: 'application/json',
@@ -32,7 +36,15 @@ module.exports = DeepModel.extend({
               delete selfWindow.onCompleteOauth;
 
               if (response.nextStep) {
-                callAction(response.nextStep + query);
+                var queryParams = {};
+                var splitQuery = query.substring(1).split('&');
+
+                _.each(splitQuery, function (param) {
+                  var paramSplit = param.split('=');
+                  queryParams[paramSplit[0]] = paramSplit[1];
+                });
+
+                callAction(response.nextStep, _.extend(initialQueryParams, queryParams));
               } else {
                 promise.resolve(response);
               }
@@ -54,14 +66,14 @@ module.exports = DeepModel.extend({
           }
         }
         if (response.nextStep) {
-          callAction(response.nextStep);
+          callAction(response.nextStep, initialQueryParams);
         } else {
           promise.resolve(response);
         }
       });
     };
 
-    callAction(action, initialQueryString);
+    callAction(action, initialQueryParams);
 
     Messenger.monitor({
       promise: promise,
