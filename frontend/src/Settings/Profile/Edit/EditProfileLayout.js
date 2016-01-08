@@ -12,7 +12,7 @@ var Config = require('Config');
 var AsEditModalView = require('Mixins/AsEditModalView');
 
 var view = Marionette.Layout.extend({
-  template: 'Settings/Profile/Edit/EditProfileLayoutTemplate',
+  template: 'Settings/Profile/Edit/EditProfileLayout',
 
   regions: {
     fields: '#x-fields',

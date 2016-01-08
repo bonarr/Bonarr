@@ -6,7 +6,7 @@ var AsModelBoundView = require('Mixins/AsModelBoundView');
 var AsValidatedView = require('Mixins/AsValidatedView');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Profile/Edit/EditProfileViewTemplate',
+  template: 'Settings/Profile/Edit/EditProfileView',
 
   ui: { cutoff: '.x-cutoff' },
 
