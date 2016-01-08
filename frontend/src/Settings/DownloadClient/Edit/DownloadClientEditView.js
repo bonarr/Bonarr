@@ -9,7 +9,7 @@ require('Mixins/FileBrowser');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/DownloadClient/Edit/DownloadClientEditViewTemplate',
+  template: 'Settings/DownloadClient/Edit/DownloadClientEditView',
 
   ui: {
     path: '.x-path',

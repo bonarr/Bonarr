@@ -10,7 +10,7 @@ require('Mixins/FileBrowser');
 require('bootstrap.tagsinput');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Notification/Edit/NotificationEditViewTemplate',
+  template: 'Settings/Notification/Edit/NotificationEditView',
 
   ui: {
     onDownloadToggle: '.x-on-download',
