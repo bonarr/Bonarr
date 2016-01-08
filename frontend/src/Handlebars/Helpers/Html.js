@@ -13,15 +13,25 @@ window.Sonarr.imageError = function(img) {
 };
 
 Handlebars.registerHelper('defaultImg', function(src, size) {
+  var endOfPath = /\.jpg($|\?)/g;
+  var errorAttr = 'onerror="window.NzbDrone.imageError(this);"';
+  var srcsetAttr = '';
+  var oneX = src
+  var twoX;
+
   if (!src) {
-    return new Handlebars.SafeString('onerror="window.Sonarr.imageError(this);"');
+    return new Handlebars.SafeString(errorAttr);
   }
 
   if (size) {
-    src = src.replace(/\.jpg($|\?)/g, '-' + size + '.jpg$1');
+    oneX = src.replace(endOfPath, '-' + size + '.jpg$1');
+    twoX = src.replace(endOfPath, '-' + size * 2 + '.jpg$1');
+    srcsetAttr = 'srcset="{0} 1x, {1} 2x"'.format(oneX, twoX);
   }
 
-  return new Handlebars.SafeString(`src="${src}" onerror="window.Sonarr.imageError(this);`);
+  return new Handlebars.SafeString(
+    'src="{0}" {1} {2}'.format(oneX, srcsetAttr, errorAttr)
+  );
 });
 
 Handlebars.registerHelper('UrlBase', function() {
