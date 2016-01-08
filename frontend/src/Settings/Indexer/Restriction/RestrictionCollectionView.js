@@ -6,7 +6,7 @@ require('../../../Tags/TagHelpers');
 require('bootstrap');
 
 module.exports = Marionette.CompositeView.extend({
-  template: 'Settings/Indexer/Restriction/RestrictionCollectionViewTemplate',
+  template: 'Settings/Indexer/Restriction/RestrictionCollectionView',
   itemViewContainer: '.x-rows',
   itemView: RestrictionItemView,
 

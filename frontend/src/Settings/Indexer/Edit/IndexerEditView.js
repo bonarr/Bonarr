@@ -9,7 +9,7 @@ require('Mixins/AutoComplete');
 require('bootstrap');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Indexer/Edit/IndexerEditViewTemplate',
+  template: 'Settings/Indexer/Edit/IndexerEditView',
 
   events: {
     'click .x-back': '_back'

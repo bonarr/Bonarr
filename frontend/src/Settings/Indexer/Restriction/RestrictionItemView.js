@@ -3,7 +3,7 @@ var Marionette = require('marionette');
 var EditView = require('./RestrictionEditView');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Settings/Indexer/Restriction/RestrictionItemViewTemplate',
+  template: 'Settings/Indexer/Restriction/RestrictionItemView',
   className: 'row',
 
   ui: {

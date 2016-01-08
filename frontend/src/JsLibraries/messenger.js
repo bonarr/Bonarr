@@ -438,7 +438,7 @@ window.Messenger.Events = (function() {
     _Message.prototype.defaults = {
       hideAfter: 10,
       scroll: true,
-      closeButtonText: "&times;"
+      closeButtonText: "<i class="icon-sonarr-close-modal"></i>"
     };
 
     _Message.prototype.initialize = function(opts) {

@@ -1,13 +1,13 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<div class="fullscreen-modal">
+    <div class="fullscreen-modal-header">
+        <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
         {{#if id}}
             <h3>Edit Restriction</h3>
         {{else}}
             <h3>Add Restriction</h3>
         {{/if}}
     </div>
-    <div class="modal-body remotepath-mapping-modal">
+    <div class="fullscreen-modal-body remotepath-mapping-modal">
         <div class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-3 control-label">Must contain</label>
@@ -39,7 +39,7 @@
             <button class="btn btn-danger pull-left x-delete">Delete</button>
         {{/if}}
 
-        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn x-close">Cancel</button>
 
         <div class="btn-group">
             <button class="btn btn-primary x-save">Save</button>

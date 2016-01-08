@@ -12,7 +12,7 @@ require('bootstrap');
 require('bootstrap.tagsinput');
 
 var view = Marionette.ItemView.extend({
-  template: 'Settings/Indexer/Restriction/RestrictionEditViewTemplate',
+  template: 'Settings/Indexer/Restriction/RestrictionEditView',
 
   ui: {
     required: '.x-required',

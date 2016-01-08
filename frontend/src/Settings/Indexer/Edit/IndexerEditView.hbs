@@ -1,6 +1,6 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+<div class="fullscreen-modal">
+    <div class="fullscreen-modal-header">
+        <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
         {{#if id}}
             <h3>Edit - {{implementationName}}</h3>
         {{else}}
@@ -59,8 +59,8 @@
             <button class="btn pull-left x-back">Back</button>
         {{/if}}
         <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
-        <button class="btn x-test">test <i class="x-test-icon icon-sonarr-test"/></button>
-        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn x-test">Test <i class="x-test-icon icon-sonarr-test"/></button>
+        <button class="btn x-close" data-dismiss="modal">Cancel</button>
 
         <div class="btn-group">
             <button class="btn btn-primary x-save">Save</button>
