@@ -16,7 +16,7 @@ Handlebars.registerHelper('defaultImg', function(src, size) {
   var endOfPath = /\.jpg($|\?)/g;
   var errorAttr = 'onerror="window.NzbDrone.imageError(this);"';
   var srcsetAttr = '';
-  var oneX = src
+  var oneX = src;
   var twoX;
 
   if (!src) {
