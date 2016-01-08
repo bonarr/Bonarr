@@ -1,0 +1,40 @@
+<div class="fullscreen-modal">
+    <div class="fullscreen-modal-header">
+        <button type="button" class="close x-close"><i class="icon-sonarr-close-modal"></i></button>
+        <h3>{{title}}</h3>
+    </div>
+    <div class="fullscreen-modal-body remove-from-queue-modal">
+
+        <div class="row">
+            <div class="col-sm-12">
+                Are you sure you want to remove '{{title}}'?
+            </div>
+        </div>
+
+        {{#if showBlacklist}}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="settings-label control-label">Blacklist Release</label>
+                    <div class="settings-control">
+                      <div class="checkbox c-checkbox">
+                        <label>
+                          <input type="checkbox" class="x-blacklist">
+                          <span class="check fa fa-check"></span>
+                          <span class="help-block">Do you want to blacklist this release?</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    <div class="modal-footer">
+        <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
+        <button class="btn x-close">Cancel</button>
+        <button class="btn btn-danger x-confirm-remove">Remove</button>
+    </div>
+</div>
