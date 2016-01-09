@@ -1,6 +1,10 @@
 @screen-tn-max: @screen-xs-min - 1;
+@screen-xl-min: 1600px;
+@screen-lg-max: @screen-xl-min - 1;
+
 @tn: ~'(max-width: @{screen-tn-max})';
 @xs: ~'(min-width: @{screen-xs-max}) and (max-width: @{screen-xs-max})';
 @sm: ~'(min-width: @{screen-sm-min}) and (max-width: @{screen-sm-max})';
 @md: ~'(min-width: @{screen-md-min}) and (max-width: @{screen-md-max})';
-@lg: ~'(min-width: @{screen-lg-min})';
+@lg: ~'(min-width: @{screen-lg-min}) and (max-width: @{screen-lg-max})';
+@xl: ~'(min-width: @{screen-xl-min})';

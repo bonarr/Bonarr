@@ -6,7 +6,25 @@
 
 .calendar-layout {
 
-  .upcoming .event .status, .calendar .calendar-day .calendar-events .calendar-event, .calendar-legend .legend-label {
+  display : flex;
+
+  .calendar-container {
+    flex-grow : 1;
+  }
+
+  .upcoming-container {
+    flex-basis   : auto;
+    padding-left : 20px;
+    width        : 350px;
+    display      : none;
+
+    @media (min-width: @screen-xl-min) {
+      display : block;
+    }
+  }
+
+  .upcoming .event .status,
+  .calendar .calendar-day .calendar-events .calendar-event, .calendar-legend .legend-label {
     &.primary {
       border-left-color: @btn-primary-bg;
 
@@ -130,10 +148,14 @@
           border-left: 4px solid @gray;
           border-radius: 4px;
           font-size: 12px;
+          overflow-x: hidden;
 
           .calendar-event-series-title {
             color: @gray-dark;
             font-size: 14px;
+            overflow-x: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
 
           .calendar-event-time {
@@ -276,7 +298,7 @@
         }
 
         @media (min-width: @screen-md-min) {
-          width: 135px;
+          width: 310px;
         }
       }
     }
@@ -293,6 +315,7 @@
       height: 60px;
       padding: 3px 0;
       list-style: none;
+      max-width: 600px;
 
       @media (max-width: @screen-sm-max) {
         height: 90px;
