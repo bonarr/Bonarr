@@ -1,12 +1,12 @@
 var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('Table/TableView');
 var SeriesCollection = require('Series/SeriesCollection');
-var SelectRow = require('./SelectSeriesRow');
+var SelectSeriesRow = require('./SelectSeriesRow');
 
 module.exports = Marionette.Layout.extend({
-  template: 'ManualImport/Series/SelectSeriesLayoutTemplate',
+  template: 'ManualImport/Series/SelectSeriesLayout',
 
   regions: {
     series: '.x-series'
@@ -15,6 +15,13 @@ module.exports = Marionette.Layout.extend({
   ui: {
     filter: '.x-filter'
   },
+
+  headers: [
+    {
+      name: 'title',
+      label: 'Title'
+    }
+  ],
 
   columns: [
     {
@@ -26,27 +33,21 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize: function() {
-    var self = this;
-
     this.seriesCollection = SeriesCollection.clone();
+    this._setModelCollection();
 
-    _.each(this.seriesCollection.models, function(model) {
-      model.collection = self.seriesCollection;
-    });
-
-    this.listenTo(this.seriesCollection, 'row:selected', this._onSelected);
+    this.listenTo(this.seriesCollection, 'modelselected', this._onSelected);
     this.listenTo(this, 'modal:afterShow', this._setFocus);
   },
 
   onRender: function() {
-    this.seriesView = new Backgrid.Grid({
-      columns: this.columns,
+    var tableView = new TableView({
       collection: this.seriesCollection,
-      className: 'table table-hover season-grid',
-      row: SelectRow
+      itemView: SelectSeriesRow,
+      headers: this.headers
     });
 
-    this.series.show(this.seriesView);
+    this.series.show(tableView);
     this._setupFilter();
   },
 
@@ -83,15 +84,25 @@ module.exports = Marionette.Layout.extend({
 
   _filter: function(term) {
     this.seriesCollection.setFilter({ key: 'title', value: term, type: 'contains' });
+
+    this._setModelCollection();
   },
 
-  _onSelected: function(e) {
-    this.trigger('manualimport:selected:series', { model: e.model });
+  _onSelected: function(model) {
+    this.trigger('manualimport:selected:series', { model: model });
 
     vent.trigger(vent.Commands.CloseModal);
   },
 
   _setFocus: function() {
     this.ui.filter.focus();
+  },
+
+  _setModelCollection: function () {
+    // TODO: Remove this work around because the model's collection is reset due to the filtering
+
+    _.each(this.seriesCollection.models, (model) => {
+      model.collection = this.seriesCollection;
+    });
   }
 });

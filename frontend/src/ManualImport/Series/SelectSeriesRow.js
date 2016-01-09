@@ -1,13 +1,17 @@
-var Backgrid = require('backgrid');
+var Marionette = require('marionette');
+var tpl = require('./SelectSeriesRow.hbs');
 
-module.exports = Backgrid.Row.extend({
+module.exports = Marionette.ItemView.extend({
+  template: tpl,
+
   className: 'select-row select-series-row',
+  tagName: 'tr',
 
   events: {
-    'click': '_onClick'
+    'click': 'onClick'
   },
 
-  _onClick: function() {
-    this.model.collection.trigger('row:selected', { model: this.model });
+  onClick() {
+    this.model.collection.trigger('modelselected', this.model);
   }
 });
