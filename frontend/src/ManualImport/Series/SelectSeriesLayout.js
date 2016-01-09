@@ -23,15 +23,6 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  columns: [
-    {
-      name: 'title',
-      label: 'Title',
-      cell: 'String',
-      sortValue: 'sortTitle'
-    }
-  ],
-
   initialize: function() {
     this.seriesCollection = SeriesCollection.clone();
     this._setModelCollection();
