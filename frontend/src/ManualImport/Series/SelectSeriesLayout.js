@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var vent = require('vent');
 var Marionette = require('marionette');
 var TableView = require('Table/TableView');
 var SeriesCollection = require('Series/SeriesCollection');
@@ -81,8 +80,7 @@ module.exports = Marionette.Layout.extend({
 
   _onSelected: function(model) {
     this.trigger('manualimport:selected:series', { model: model });
-
-    vent.trigger(vent.Commands.CloseModal);
+    this.close();
   },
 
   _setFocus: function() {
