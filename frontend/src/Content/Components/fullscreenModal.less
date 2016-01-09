@@ -27,8 +27,13 @@
     background-color: lighten(@sidebar-background, 65%);
 
     .close {
+      .clickable();
       font-size: 42px;
       padding-top: 12px;
+
+      i {
+        .clickable();
+      }
     }
   }
 

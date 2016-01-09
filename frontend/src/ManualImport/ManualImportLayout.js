@@ -19,8 +19,7 @@ var ManualImportCollection = require('./ManualImportCollection');
 var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.Layout.extend({
-  className: 'modal-lg',
-  template: 'ManualImport/ManualImportLayoutTemplate',
+  template: 'ManualImport/ManualImportLayout',
 
   regions: {
     workspace: '.x-workspace'
