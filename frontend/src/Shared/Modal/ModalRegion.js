@@ -44,6 +44,8 @@ const ModalRegion = Marionette.Region.extend({
   },
 
   onViewClose: function() {
+    this.$el.modal('hide');
+    this.stopListening(this.currentView);
     this.close();
   }
 });
