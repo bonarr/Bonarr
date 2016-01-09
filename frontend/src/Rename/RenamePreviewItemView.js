@@ -3,7 +3,7 @@ var Marionette = require('marionette');
 var AsModelBoundView = require('Mixins/AsModelBoundView');
 
 var view = Marionette.ItemView.extend({
-  template: 'Rename/RenamePreviewItemViewTemplate',
+  template: 'Rename/RenamePreviewItemView',
 
   ui: {
     itemDiv: '.rename-preview-item',

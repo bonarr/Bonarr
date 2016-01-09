@@ -9,8 +9,7 @@ var LoadingView = require('Shared/LoadingView');
 var CommandController = require('Commands/CommandController');
 
 module.exports = Marionette.Layout.extend({
-  className: 'modal-lg',
-  template: 'Rename/RenamePreviewLayoutTemplate',
+  template: 'Rename/RenamePreviewLayout',
 
   regions: {
     renamePreviews: '#rename-previews',

@@ -16,8 +16,7 @@ var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEdito
 require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
-  itemViewContainer: '.x-series-seasons',
-  template: 'Series/Details/SeriesDetailsTemplate',
+  template: 'Series/Details/SeriesDetails',
 
   regions: {
     header: '#series-header-region',

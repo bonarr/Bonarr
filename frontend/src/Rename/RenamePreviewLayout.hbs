@@ -1,0 +1,35 @@
+<div class="fullscreen-modal rename-preview-modal">
+  <div class="fullscreen-modal-header">
+    <button type="button" class="close x-close">
+      <i class="icon-sonarr-close-modal"></i>
+    </button>
+    <h3>
+      <i class="icon-sonarr-rename"></i>
+      Organize & Rename
+    </h3>
+
+  </div>
+  <div class="fullscreen-modal-body">
+    <div class="alert alert-info">
+      <div class="path-info x-path-info">All paths are relative to:
+        <strong>{{path}}</strong>
+      </div>
+      <div class="x-format-region"></div>
+    </div>
+
+    <div id="rename-previews"></div>
+
+  </div>
+  <div class="modal-footer">
+    <div class="rename-all-button x-rename-all-button pull-left">
+      <div class="checkbox c-checkbox">
+        <label>
+          <input type="checkbox" checked="checked" class="x-rename-all">
+          <span class="check fa fa-check"></span>
+        </label>
+      </div>
+    </div>
+    <button class="btn x-close">Close</button>
+    <button class="btn btn-primary x-organize">Organize</button>
+  </div>
+</div>

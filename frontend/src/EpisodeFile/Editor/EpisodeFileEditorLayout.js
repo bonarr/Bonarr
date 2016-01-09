@@ -15,8 +15,7 @@ var QualitySelectView = require('./QualitySelectView');
 var EmptyView = require('./EmptyView');
 
 module.exports = Marionette.Layout.extend({
-  className: 'modal-lg',
-  template: 'EpisodeFile/Editor/EpisodeFileEditorLayoutTemplate',
+  template: 'EpisodeFile/Editor/EpisodeFileEditorLayout',
 
   regions: {
     episodeGrid: '.x-episode-list',

@@ -3,7 +3,7 @@ var Marionette = require('marionette');
 var NamingModel = require('../Settings/MediaManagement/Naming/NamingModel');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Rename/RenamePreviewFormatViewTemplate',
+  template: 'Rename/RenamePreviewFormatView',
 
   templateHelpers: function() {
     var type = this.model.get('seriesType');

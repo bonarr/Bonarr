@@ -5,7 +5,7 @@ var SeriesCollection = require('../SeriesCollection');
 
 module.exports = NzbDroneCell.extend({
   className: 'episode-number-cell',
-  template: 'Series/Details/EpisodeNumberCellTemplate',
+  template: 'Series/Details/EpisodeNumberCell',
 
   render: function() {
     this.$el.empty();
