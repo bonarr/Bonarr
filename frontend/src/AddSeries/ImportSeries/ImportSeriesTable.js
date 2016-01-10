@@ -1,29 +1,21 @@
 var Marionette = require('marionette');
 var reqres = require('reqres');
-var TableView = require('Table/TableView');
 var tpl = require('./ImportSeriesLayout.hbs');
+var TableView = require('Table/TableView');
 
-const headers = [
-  {
-    name: 'type',
-    label: ''
-  },
-  {
-    name: 'name',
-    label: 'Name'
-  }
-];
-
-const EmptyView = Marionette.Layout.extend({
+const EmptyView = TableView.extend({
   template: tpl,
 
-  regions: {
-    result: '.import-region'
-  },
-
-  events: {
-    'click .x-start': 'onStart'
-  },
+  headrs: [
+    {
+      name: 'type',
+      label: ''
+    },
+    {
+      name: 'name',
+      label: 'Name'
+    }
+  ],
 
   initialize(options = {}) {
     this.term = options.term;
