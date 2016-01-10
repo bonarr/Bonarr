@@ -44,6 +44,7 @@
     "gulp-wrap": "0.11.0",
     "handlebars": "4.0.5",
     "handlebars-loader": "1.1.4",
+    "jshint": "^2.8.0",
     "jshint-loader": "0.8.3",
     "jshint-stylish": "2.1.0",
     "run-sequence": "1.1.5",
