@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var _ = require('underscore');
 var Marionette = require('marionette');
 var FileBrowserCollection = require('./FileBrowserCollection');
 var EmptyView = require('./EmptyFolderView');
@@ -95,6 +96,10 @@ module.exports = Marionette.Layout.extend({
     });
 
     this.browser.show(tableView);
+
+    _.defer(() => {
+      this.browser.$el.scrollTop(0);
+    });
   },
 
   _rowSelected: function(model) {
