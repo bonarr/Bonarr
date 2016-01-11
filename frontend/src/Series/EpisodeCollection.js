@@ -1,9 +1,10 @@
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
 var EpisodeModel = require('./EpisodeModel');
+var AsSelectableCollection = require('../Mixins/Collection/AsSelectableCollection');
 require('./EpisodeCollection');
 
-module.exports = PageableCollection.extend({
+var episodeCollection = PageableCollection.extend({
   url: window.Sonarr.ApiRoot + '/episode',
   model: EpisodeModel,
 
@@ -60,3 +61,6 @@ module.exports = PageableCollection.extend({
     return this.originalFetch.call(this, options);
   }
 });
+
+episodeCollection = AsSelectableCollection.call(episodeCollection);
+module.exports = episodeCollection;

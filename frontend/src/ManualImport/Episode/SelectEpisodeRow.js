@@ -1,19 +1,31 @@
-var Backgrid = require('backgrid');
+const _ = require('underscore');
+const TableRow = require('../../Table/TableRow');
+const tpl = require('./SelectEpisodeRow.hbs');
 
-module.exports = Backgrid.Row.extend({
+const SelectTableRow = TableRow.extend({
+  tagName: 'tr',
   className: 'select-episode-row',
+  template: tpl,
 
-  events: {
-    'click': '_toggle'
+  ui: {
+    selectCheckbox: '.select-checkbox'
   },
+
+  events: _.extend(TableRow.prototype.events, {
+    'click': '_toggle'
+  }),
 
   _toggle: function(e) {
     if (e.target.type === 'checkbox') {
       return;
     }
 
-    var checked = this.$el.find('.select-row-cell :checkbox').prop('checked');
+    e.preventDefault();
 
-    this.model.trigger('backgrid:select', this.model, !checked);
+    var checked = this.ui.selectCheckbox.prop('checked');
+    this.ui.selectCheckbox.prop('checked', !checked);
+    this.ui.selectCheckbox.trigger('change');
   }
 });
+
+module.exports = SelectTableRow;

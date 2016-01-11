@@ -1,16 +1,17 @@
 var _ = require('underscore');
 var vent = require('vent');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('../../Table/TableView');
 var EpisodeCollection = require('Series/EpisodeCollection');
 var LoadingView = require('Shared/LoadingView');
 var SelectAllCell = require('Cells/SelectAllCell');
 var EpisodeNumberCell = require('Series/Details/EpisodeNumberCell');
 var RelativeDateCell = require('Cells/RelativeDateCell');
 var SelectEpisodeRow = require('./SelectEpisodeRow');
+var tpl = require('./SelectEpisodeLayoutTemplate.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'ManualImport/Episode/SelectEpisodeLayoutTemplate',
+  template: tpl,
 
   regions: {
     episodes: '.x-episodes'
@@ -20,29 +21,18 @@ module.exports = Marionette.Layout.extend({
     'click .x-select': '_selectEpisodes'
   },
 
-  columns: [
-    {
-      name: '',
-      cell: SelectAllCell,
-      headerCell: 'select-all',
-      sortable: false
-    },
+  headers: [
     {
       name: 'episodeNumber',
-      label: '#',
-      cell: EpisodeNumberCell
+      label: '#'
     },
     {
       name: 'title',
-      label: 'Title',
-      hideSeriesLink: true,
-      cell: 'string',
-      sortable: false
+      label: 'Title'
     },
     {
       name: 'airDateUtc',
-      label: 'Air Date',
-      cell: RelativeDateCell
+      label: 'Air Date'
     }
   ],
 
@@ -58,14 +48,13 @@ module.exports = Marionette.Layout.extend({
     this.episodeCollection.fetch();
 
     this.listenToOnce(this.episodeCollection, 'sync', function() {
-      this.episodeView = new Backgrid.Grid({
-        columns: this.columns,
+      this.episodes.show(new TableView({
         collection: this.episodeCollection.bySeason(this.seasonNumber),
-        className: 'table table-hover season-grid',
-        row: SelectEpisodeRow
-      });
-
-      this.episodes.show(this.episodeView);
+        itemView: SelectEpisodeRow,
+        headers: this.headers,
+        selectable: true,
+        className: 'table table-hover season-grid'
+      }));
     });
   },
 

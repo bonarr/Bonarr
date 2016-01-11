@@ -1,4 +1,3 @@
-
 module.exports = function() {
 
   this.prototype.isFiltered = false;

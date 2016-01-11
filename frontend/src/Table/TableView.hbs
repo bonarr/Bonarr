@@ -1,7 +1,11 @@
   <thead>
     <tr>
+      {{#if selectable}}
+        <th><input type="checkbox" class="select-checkbox select-all-checkbox"></th>
+      {{/if}}
+
       {{#each headers}}
-        <th date-field="{{./name}}">{{label}}</th>
+        <th data-field="{{./name}}">{{label}}</th>
       {{/each}}
     </tr>
   </thead>
