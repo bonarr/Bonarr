@@ -1,5 +1,4 @@
-﻿using System;
-using NzbDrone.Api.REST;
+﻿using Sonarr.Http.REST;
 
 namespace NzbDrone.Api.DiskSpace
 {

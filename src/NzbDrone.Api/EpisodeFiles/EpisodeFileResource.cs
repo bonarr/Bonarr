@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using NzbDrone.Api.REST;
+using Sonarr.Http.REST;
 using NzbDrone.Core.Qualities;
 
 namespace NzbDrone.Api.EpisodeFiles

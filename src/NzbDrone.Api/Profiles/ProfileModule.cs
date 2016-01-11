@@ -3,10 +3,12 @@ using FluentValidation;
 using NzbDrone.Core.Profiles;
 using NzbDrone.Core.Qualities;
 using NzbDrone.Core.Validation;
+using Sonarr.Http;
+using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.Profiles
 {
-    public class ProfileModule : NzbDroneRestModule<ProfileResource>
+    public class ProfileModule : SonarrRestModule<ProfileResource>
     {
         private readonly IProfileService _profileService;
 

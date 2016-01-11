@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentValidation.Results;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Restrictions;
+using Sonarr.Http;
+using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.Restrictions
 {
-    public class RestrictionModule : NzbDroneRestModule<RestrictionResource>
+    public class RestrictionModule : SonarrRestModule<RestrictionResource>
     {
         private readonly IRestrictionService _restrictionService;
 

@@ -1,6 +1,5 @@
-﻿using System;
-using Newtonsoft.Json;
-using NzbDrone.Api.REST;
+﻿using Newtonsoft.Json;
+using Sonarr.Http.REST;
 
 namespace NzbDrone.Api.Profiles.Languages
 {

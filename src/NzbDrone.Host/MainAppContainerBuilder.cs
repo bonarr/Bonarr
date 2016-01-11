@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nancy.Bootstrapper;
 using NzbDrone.Api;
 using NzbDrone.Common.Composition;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Http.Dispatchers;
-using NzbDrone.Core.Datastore;
-using NzbDrone.Core.Organizer;
 using NzbDrone.SignalR;
+using Sonarr.Http;
 
 namespace NzbDrone.Host
 {
@@ -21,28 +19,21 @@ namespace NzbDrone.Host
                                  "NzbDrone.Common",
                                  "NzbDrone.Core",
                                  "NzbDrone.Api",
-                                 "NzbDrone.SignalR"
+                                 "NzbDrone.SignalR",
+                                 "Sonarr.Api.V3"
                              };
 
-            if (OsInfo.IsWindows)
-            {
-                assemblies.Add("NzbDrone.Windows");
-            }
-
-            else
-            {
-                assemblies.Add("NzbDrone.Mono");
-            }
+            assemblies.Add(OsInfo.IsWindows ? "NzbDrone.Windows" : "NzbDrone.Mono");
 
             return new MainAppContainerBuilder(args, assemblies.ToArray()).Container;
         }
 
-        private MainAppContainerBuilder(StartupContext args, string[] assemblies)
+        private MainAppContainerBuilder(IStartupContext args, string[] assemblies)
             : base(args, assemblies)
         {
             AutoRegisterImplementations<NzbDronePersistentConnection>();
 
-            Container.Register<INancyBootstrapper, NancyBootstrapper>();
+            Container.Register<INancyBootstrapper, SonarrBootstrapper>();
             Container.Register<IHttpDispatcher, FallbackHttpDispatcher>();
         }
     }

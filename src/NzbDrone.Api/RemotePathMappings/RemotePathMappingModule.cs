@@ -2,10 +2,12 @@
 using FluentValidation;
 using NzbDrone.Core.RemotePathMappings;
 using NzbDrone.Core.Validation.Paths;
+using Sonarr.Http;
+using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.RemotePathMappings
 {
-    public class RemotePathMappingModule : NzbDroneRestModule<RemotePathMappingResource>
+    public class RemotePathMappingModule : SonarrRestModule<RemotePathMappingResource>
     {
         private readonly IRemotePathMappingService _remotePathMappingService;
 
