@@ -9,7 +9,7 @@ using Sonarr.Http.Extensions;
 
 namespace Sonarr.Api.V3.System
 {
-    public class SystemModule : SonarrApiModule
+    public class SystemModule : SonarrV3Module
     {
         private readonly IAppFolderInfo _appFolderInfo;
         private readonly IRuntimeInfo _runtimeInfo;

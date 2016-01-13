@@ -9,7 +9,7 @@ using Sonarr.Http.Extensions;
 
 namespace Sonarr.Api.V3.FileSystem
 {
-    public class FileSystemModule : SonarrApiModule
+    public class FileSystemModule : SonarrV3Module
     {
         private readonly IFileSystemLookupService _fileSystemLookupService;
         private readonly IDiskProvider _diskProvider;

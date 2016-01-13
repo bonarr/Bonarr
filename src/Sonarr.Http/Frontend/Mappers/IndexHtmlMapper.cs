@@ -100,7 +100,7 @@ namespace Sonarr.Http.Frontend.Mappers
                 return string.Format("{0}=\"{1}{2}\"", match.Groups["attribute"].Value, URL_BASE, url);
             });
 
-            text = text.Replace("API_ROOT", URL_BASE + "/api");
+            text = text.Replace("API_ROOT", URL_BASE + "/api/v3");
             text = text.Replace("API_KEY", API_KEY);
             text = text.Replace("APP_VERSION", BuildInfo.Version.ToString());
             text = text.Replace("APP_BRANCH", _configFileProvider.Branch.ToLower());

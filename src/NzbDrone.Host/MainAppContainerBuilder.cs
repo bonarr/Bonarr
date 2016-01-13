@@ -20,7 +20,8 @@ namespace NzbDrone.Host
                                  "NzbDrone.Core",
                                  "NzbDrone.Api",
                                  "NzbDrone.SignalR",
-                                 "Sonarr.Api.V3"
+                                 "Sonarr.Api.V3",
+                                 "Sonarr.Http"
                              };
 
             assemblies.Add(OsInfo.IsWindows ? "NzbDrone.Windows" : "NzbDrone.Mono");

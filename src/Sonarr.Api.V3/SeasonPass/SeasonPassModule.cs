@@ -4,7 +4,7 @@ using Sonarr.Http.Extensions;
 
 namespace Sonarr.Api.V3.SeasonPass
 {
-    public class SeasonPassModule : SonarrApiModule
+    public class SeasonPassModule : SonarrV3Module
     {
         private readonly IEpisodeMonitoredService _episodeMonitoredService;
 

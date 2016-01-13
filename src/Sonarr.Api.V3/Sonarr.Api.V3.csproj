@@ -139,8 +139,7 @@
     <Compile Include="Metadata\MetadataResource.cs" />
     <Compile Include="Notifications\NotificationModule.cs" />
     <Compile Include="Notifications\NotificationResource.cs" />
-    <Compile Include="SonarrApiModule.cs" />
-    <Compile Include="SonarrFeedModule.cs" />
+    <Compile Include="SonarrV3Module.cs" />
     <Compile Include="Profiles\Languages\LanguageModule.cs" />
     <Compile Include="Profiles\Languages\LanguageResource.cs" />
     <Compile Include="Profiles\ProfileModule.cs" />

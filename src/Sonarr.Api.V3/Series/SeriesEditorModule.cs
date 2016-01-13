@@ -6,7 +6,7 @@ using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Series
 {
-    public class SeriesEditorModule : SonarrApiModule
+    public class SeriesEditorModule : SonarrV3Module
     {
         private readonly ISeriesService _seriesService;
 

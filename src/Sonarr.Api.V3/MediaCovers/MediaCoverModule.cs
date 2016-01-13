@@ -8,7 +8,7 @@ using NzbDrone.Common.Extensions;
 
 namespace Sonarr.Api.V3.MediaCovers
 {
-    public class MediaCoverModule : SonarrApiModule
+    public class MediaCoverModule : SonarrV3Module
     {
         private static readonly Regex RegexResizedImage = new Regex(@"-\d+\.jpg$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 

@@ -10,13 +10,13 @@ using NzbDrone.Common.Extensions;
 
 namespace NzbDrone.Api.Calendar
 {
-    public class CalendarFeedModule : NzbDroneFeedModule
+    public class CalendarFeedModule : NzbDroneApiModule
     {
         private readonly IEpisodeService _episodeService;
         private readonly ITagService _tagService;
 
         public CalendarFeedModule(IEpisodeService episodeService, ITagService tagService)
-            : base("calendar")
+            : base("feed/calendar")
         {
             _episodeService = episodeService;
             _tagService = tagService;

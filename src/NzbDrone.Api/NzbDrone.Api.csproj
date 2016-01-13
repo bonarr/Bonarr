@@ -176,7 +176,6 @@
     <Compile Include="Notifications\NotificationModule.cs" />
     <Compile Include="Notifications\NotificationResource.cs" />
     <Compile Include="NzbDroneApiModule.cs" />
-    <Compile Include="NzbDroneFeedModule.cs" />
     <Compile Include="Profiles\Languages\LanguageModule.cs" />
     <Compile Include="Profiles\Languages\LanguageResource.cs" />
     <Compile Include="Profiles\LegacyProfileModule.cs" />
