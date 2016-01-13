@@ -60,7 +60,8 @@ namespace Sonarr.Api.V3.System
                     Authentication = _configFileProvider.AuthenticationMethod,
                     SqliteVersion = _database.Version,
                     UrlBase = _configFileProvider.UrlBase,
-                    RuntimeVersion = _runtimeInfo.RuntimeVersion
+                    RuntimeVersion = _runtimeInfo.RuntimeVersion,
+                    StartTime = _runtimeInfo.StartTime
                 }.AsResponse();
         }
 
