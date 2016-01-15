@@ -27,14 +27,8 @@ namespace Sonarr.Api.V3.Calendar
             var start = DateTime.Today.AddDays(-pastDays);
             var end = DateTime.Today.AddDays(futureDays);
 
-            // TODO: Remove start/end parameters in v3, they don't work well for iCal
-            var queryStart = Request.Query.Start;
-            var queryEnd = Request.Query.End;
             var queryPastDays = Request.Query.PastDays;
             var queryFutureDays = Request.Query.FutureDays;
-
-            if (queryStart.HasValue) start = DateTime.Parse(queryStart.Value);
-            if (queryEnd.HasValue) end = DateTime.Parse(queryEnd.Value);
 
             if (queryPastDays.HasValue)
             {
