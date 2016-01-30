@@ -4,12 +4,12 @@ var AsChangeTrackingModel = require('Mixins/AsChangeTrackingModel');
 var Messenger = require('Shared/Messenger');
 
 var model = DeepModel.extend({
-  initialize: function() {
+  initialize() {
     this.listenTo(vent, vent.Commands.SaveSettings, this.saveSettings);
     this.listenTo(this, 'destroy', this._stopListening);
   },
 
-  saveSettings: function() {
+  saveSettings() {
     if (!this.isSaved) {
       var savePromise = this.save();
 
@@ -25,7 +25,7 @@ var model = DeepModel.extend({
     return undefined;
   },
 
-  _stopListening: function() {
+  _stopListening() {
     this.stopListening(vent, vent.Commands.SaveSettings);
   }
 });

@@ -9,15 +9,15 @@ module.exports = Marionette.Layout.extend({
     datePicker: '.x-date-picker'
   },
 
-  onShow: function() {
+  onShow() {
     this._showToday();
   },
 
-  setShowUnmonitored: function(showUnmonitored) {
+  setShowUnmonitored(showUnmonitored) {
     this.upcomingView.setShowUnmonitored(showUnmonitored);
   },
 
-  _showToday: function() {
+  _showToday() {
     this.upcomingView = new UpcomingCollectionView();
     this.today.show(this.upcomingView);
   }

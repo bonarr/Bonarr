@@ -8,7 +8,7 @@ module.exports = Marionette.Layout.extend({
     bodyRegion: '.modal-body'
   },
 
-  onShow: function() {
+  onShow() {
     this.bodyRegion.show(new BlacklistDetailsView({ model: this.model }));
   }
 });

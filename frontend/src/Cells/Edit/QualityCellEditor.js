@@ -14,7 +14,7 @@ module.exports = Backgrid.CellEditor.extend({
     'keydown': 'close'
   },
 
-  render: function() {
+  render() {
     var self = this;
 
     var profileSchemaCollection = new ProfileSchemaCollection();
@@ -41,7 +41,7 @@ module.exports = Backgrid.CellEditor.extend({
     return this;
   },
 
-  save: function(e) {
+  save(e) {
     var model = this.model;
     var column = this.column;
     var selected = parseInt(this.$el.val(), 10);
@@ -64,7 +64,7 @@ module.exports = Backgrid.CellEditor.extend({
     model.trigger('backgrid:edited', model, column, new Backgrid.Command(e));
   },
 
-  close: function(e) {
+  close(e) {
     var model = this.model;
     var column = this.column;
     var command = new Backgrid.Command(e);

@@ -21,7 +21,7 @@ module.exports = TemplatedCell.extend({
     grab: '.x-grab'
   },
 
-  _remove: function() {
+  _remove() {
     var showBlacklist = this.model.get('status') !== 'Pending';
 
     vent.trigger(vent.Commands.OpenFullscreenModal, new RemoveFromQueueView({
@@ -30,7 +30,7 @@ module.exports = TemplatedCell.extend({
     }));
   },
 
-  _manualImport: function() {
+  _manualImport() {
     vent.trigger(vent.Commands.ShowManualImport,
       {
         downloadId: this.model.get('downloadId'),
@@ -38,7 +38,7 @@ module.exports = TemplatedCell.extend({
       });
   },
 
-  _grab: function() {
+  _grab() {
     var self = this;
     var data = _.omit(this.model.toJSON(), 'series', 'episode');
 

@@ -5,16 +5,16 @@ var NotFoundView = require('./NotFoundView');
 var Messenger = require('./Messenger');
 
 module.exports = Marionette.AppRouter.extend({
-  initialize: function() {
+  initialize() {
     this.listenTo(vent, vent.Events.ServerUpdated, this._onServerUpdated);
   },
 
-  showNotFound: function() {
+  showNotFound() {
     this.setTitle('Not Found');
     this.showMainRegion(new NotFoundView(this));
   },
 
-  setTitle: function(title) {
+  setTitle(title) {
     title = title;
     if (title === 'Sonarr') {
       document.title = 'Sonarr';
@@ -36,7 +36,7 @@ module.exports = Marionette.AppRouter.extend({
     }
   },
 
-  _onServerUpdated: function() {
+  _onServerUpdated() {
     var label = window.location.pathname === window.Sonarr.UrlBase + '/system/updates' ? 'Reload' : 'View Changes';
 
     Messenger.show({
@@ -46,7 +46,7 @@ module.exports = Marionette.AppRouter.extend({
       actions: {
         viewChanges: {
           label: label,
-          action: function() {
+          action() {
             window.location = window.Sonarr.UrlBase + '/system/updates';
           }
         }
@@ -56,7 +56,7 @@ module.exports = Marionette.AppRouter.extend({
     this.pendingUpdate = true;
   },
 
-  showMainRegion: function(view) {
+  showMainRegion(view) {
     if (this.pendingUpdate) {
       window.location.reload();
     } else {

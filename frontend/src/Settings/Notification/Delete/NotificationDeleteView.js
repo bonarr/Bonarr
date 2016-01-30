@@ -7,10 +7,10 @@ module.exports = Marionette.ItemView.extend({
   events: {
     'click .x-confirm-delete': '_delete'
   },
-  _delete: function() {
+  _delete() {
     this.model.destroy({
       wait: true,
-      success: function() {
+      success() {
         vent.trigger(vent.Commands.CloseFullscreenModal);
       }
     });

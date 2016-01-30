@@ -11,20 +11,20 @@ module.exports = Marionette.CompositeView.extend({
     loadingFolders: '.x-loading-folders'
   },
 
-  initialize: function() {
+  initialize() {
     this.collection = new UnmappedFolderCollection();
     this.collection.importItems(this.model);
   },
 
-  showCollection: function() {
+  showCollection() {
     this._showAndSearch(0);
   },
 
-  appendHtml: function(collectionView, itemView, index) {
+  appendHtml(collectionView, itemView, index) {
     collectionView.ui.loadingFolders.before(itemView.el);
   },
 
-  _showAndSearch: function(index) {
+  _showAndSearch(index) {
     var self = this;
     var model = this.collection.at(index);
 

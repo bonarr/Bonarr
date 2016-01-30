@@ -20,7 +20,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-update': '_update'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.seriesCollection = options.collection;
 
     RootFolders.fetch().done(function() {
@@ -31,11 +31,11 @@ module.exports = Marionette.ItemView.extend({
     this.listenTo(this.seriesCollection, 'backgrid:selected', this._updateInfo);
   },
 
-  onRender: function() {
+  onRender() {
     this._updateInfo();
   },
 
-  _update: function() {
+  _update() {
     var self = this;
     var selected = this.editorGrid.getSelectedModels();
     var monitoringOptions;
@@ -68,7 +68,7 @@ module.exports = Marionette.ItemView.extend({
     });
   },
 
-  _updateInfo: function() {
+  _updateInfo() {
     var selected = this.editorGrid.getSelectedModels();
     var selectedCount = selected.length;
 
@@ -81,7 +81,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _getMonitoringOptions: function(model) {
+  _getMonitoringOptions(model) {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(model.get('seasons'), 'seasonNumber');
     var firstSeason = _.min(_.reject(model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');

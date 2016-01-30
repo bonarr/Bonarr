@@ -7,7 +7,7 @@ module.exports = Backgrid.Cell.extend({
     'click': '_onClick'
   },
 
-  _onClick: function() {
+  _onClick() {
     if (!this.model.get('downloadAllowed')) {
       return;
     }
@@ -19,7 +19,7 @@ module.exports = Backgrid.Cell.extend({
     //Using success callback instead of promise so it
     //gets called before the sync event is triggered
     const promise = this.model.save(null, {
-      success: function() {
+      success() {
         self.model.set('queued', true);
       }
     });
@@ -34,7 +34,7 @@ module.exports = Backgrid.Cell.extend({
     });
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.model.get('queued')) {

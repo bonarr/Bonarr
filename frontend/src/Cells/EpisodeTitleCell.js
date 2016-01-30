@@ -8,7 +8,7 @@ module.exports = NzbDroneCell.extend({
     'click': '_showDetails'
   },
 
-  render: function() {
+  render() {
     var title = this.cellValue.get('title');
 
     if (!title || title === '') {
@@ -19,7 +19,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _showDetails: function() {
+  _showDetails() {
     var hideSeriesLink = this.column.get('hideSeriesLink');
     vent.trigger(vent.Commands.ShowEpisodeDetails, {
       episode: this.cellValue,

@@ -2,11 +2,11 @@ var Marionette = require('marionette');
 var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.ItemView.extend({
-  initialize: function() {
+  initialize() {
     this.listenTo(this.model, 'change', this.render);
   },
 
-  render: function() {
+  render() {
     if (!this.model.get('message') || !this.model.get('sendUpdatesToClient')) {
       return;
     }

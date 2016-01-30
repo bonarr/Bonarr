@@ -14,7 +14,7 @@ module.exports = Marionette.CompositeView.extend({
     'click .x-add': '_addMapping'
   },
 
-  _addMapping: function() {
+  _addMapping() {
     var model = new RemotePathMappingModel();
     model.collection = this.collection;
 

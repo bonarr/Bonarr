@@ -25,11 +25,11 @@ module.exports = Marionette.Layout.extend({
     'click .x-update-files-tab': '_showUpdateFiles'
   },
 
-  onShow: function() {
+  onShow() {
     this._showTable();
   },
 
-  _showTable: function(e) {
+  _showTable(e) {
     if (e) {
       e.preventDefault();
     }
@@ -38,7 +38,7 @@ module.exports = Marionette.Layout.extend({
     this.table.show(new LogsTableLayout());
   },
 
-  _showFiles: function(e) {
+  _showFiles(e) {
     if (e) {
       e.preventDefault();
     }
@@ -50,7 +50,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showUpdateFiles: function(e) {
+  _showUpdateFiles(e) {
     if (e) {
       e.preventDefault();
     }

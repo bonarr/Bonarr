@@ -6,7 +6,7 @@ module.exports = Backbone.Collection.extend({
   model: FileBrowserModel,
   url: window.Sonarr.ApiRoot + '/filesystem',
 
-  parse: function(response) {
+  parse(response) {
     var contents = [];
     if (response.parent || response.parent === '') {
       var type = 'parent';

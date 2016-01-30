@@ -13,7 +13,7 @@ var singleton = function() {
   return {
     _lastCommand: {},
 
-    Execute: function(name, properties) {
+    Execute(name, properties) {
       var attr = _.extend({ name: name.toLocaleLowerCase() }, properties);
       var commandModel = new CommandModel(attr);
 
@@ -41,7 +41,7 @@ var singleton = function() {
       return promise;
     },
 
-    bindToCommand: function(options) {
+    bindToCommand(options) {
       var self = this;
       var existingCommand = CommandCollection.findCommand(options.command);
 

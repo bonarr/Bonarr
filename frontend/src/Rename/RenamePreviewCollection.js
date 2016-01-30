@@ -7,7 +7,7 @@ module.exports = Backbone.Collection.extend({
 
   originalFetch: Backbone.Collection.prototype.fetch,
 
-  initialize: function(options) {
+  initialize(options) {
     if (!options.seriesId) {
       throw 'seriesId is required';
     }
@@ -16,7 +16,7 @@ module.exports = Backbone.Collection.extend({
     this.seasonNumber = options.seasonNumber;
   },
 
-  fetch: function(options) {
+  fetch(options) {
     if (!this.seriesId) {
       throw 'seriesId is required';
     }

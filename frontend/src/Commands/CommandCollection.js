@@ -6,7 +6,7 @@ var CommandCollection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/command',
   model: CommandModel,
 
-  findCommand: function(command) {
+  findCommand(command) {
     return this.find(function(model) {
       return model.isSameCommand(command);
     });

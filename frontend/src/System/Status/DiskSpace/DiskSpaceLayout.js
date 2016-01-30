@@ -34,20 +34,20 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new DiskSpaceCollection();
     this.listenTo(this.collection, 'sync', this._showTable);
   },
 
-  onRender: function() {
+  onRender() {
     this.grid.show(new LoadingView());
   },
 
-  onShow: function() {
+  onShow() {
     this.collection.fetch();
   },
 
-  _showTable: function() {
+  _showTable() {
     this.grid.show(new Backgrid.Grid({
       row: Backgrid.Row,
       columns: this.columns,

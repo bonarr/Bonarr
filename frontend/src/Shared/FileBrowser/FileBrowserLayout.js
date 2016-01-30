@@ -28,7 +28,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-ok': 'onOkClick'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this._deferred = $.Deferred();
     this.promise = this._deferred.promise();
 
@@ -41,14 +41,14 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.collection, 'modelselected', this._rowSelected);
   },
 
-  onRender: function() {
+  onRender() {
     this.browser.show(new LoadingView());
     this.ui.path.directoryAutoComplete();
     this._fetchCollection(this.path);
     this._updatePath(this.path);
   },
 
-  _setColumns: function() {
+  _setColumns() {
     this.headers = [
       {
         name: 'type',
@@ -73,7 +73,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _fetchCollection: function(path) {
+  _fetchCollection(path) {
     this.ui.indicator.show();
     var data = { includeFiles: this.collection.showFiles };
     if (path) {
@@ -82,7 +82,7 @@ module.exports = Marionette.Layout.extend({
     this.collection.fetch({ data: data });
   },
 
-  _showGrid: function() {
+  _showGrid() {
     this.ui.indicator.hide();
     if (this.collection.models.length === 0) {
       this.browser.show(new EmptyView());
@@ -102,7 +102,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _rowSelected: function(model) {
+  _rowSelected(model) {
     var path = model.get('path');
     var type = model.get('type');
 
@@ -113,25 +113,25 @@ module.exports = Marionette.Layout.extend({
     this._updatePath(path);
   },
 
-  _pathChanged: function(e, path) {
+  _pathChanged(e, path) {
     this._updatePath(path.value);
   },
 
-  _inputChanged: function() {
+  _inputChanged() {
     var path = this.ui.path.val();
     if (path === '' || path.endsWith('\\') || path.endsWith('/')) {
       this._fetchCollection(path);
     }
   },
 
-  _updatePath: function(path) {
+  _updatePath(path) {
     if (path !== undefined || path !== null) {
       this.ui.path.val(path);
       this._fetchCollection(path);
     }
   },
 
-  onOkClick: function() {
+  onOkClick() {
     var path = this.ui.path.val();
 
     this._deferred.resolve({

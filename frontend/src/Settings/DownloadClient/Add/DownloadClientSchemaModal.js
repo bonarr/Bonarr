@@ -5,7 +5,7 @@ var SchemaCollection = require('../DownloadClientCollection');
 var AddCollectionView = require('./DownloadClientAddCollectionView');
 
 module.exports = {
-  open: function(collection) {
+  open(collection) {
     var schemaCollection = new SchemaCollection();
     var originalUrl = schemaCollection.url;
     schemaCollection.url = schemaCollection.url + '/schema';

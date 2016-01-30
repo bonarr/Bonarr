@@ -36,7 +36,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-monitored': 'onMonitoredClick'
   },
 
-  initialize: function() {
+  initialize() {
     this.seriesCollection = SeriesCollection.clone();
     this.seriesCollection.shadowCollection.bindSignalR();
 
@@ -53,13 +53,13 @@ module.exports = Marionette.Layout.extend({
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this._showSeasons();
     this._setMonitoredState();
     this._showHeader();
   },
 
-  onRender: function() {
+  onRender() {
     CommandController.bindToCommand({
       element: this.ui.refresh,
       command: {
@@ -82,16 +82,16 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  onClose: function() {
+  onClose() {
     reqres.removeHandler(reqres.Requests.GetEpisodeFileById);
   },
 
-  onMonitoredClick: function() {
+  onMonitoredClick() {
     var savePromise = this.model.save('monitored', !this.model.get('monitored'), { wait: true });
     this.ui.monitored.spinForPromise(savePromise);
   },
 
-  _setMonitoredState: function() {
+  _setMonitoredState() {
     var monitored = this.model.get('monitored');
 
     this.ui.monitored.removeAttr('data-idle-icon');
@@ -108,11 +108,11 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  onSeriesRemoved: function() {
+  onSeriesRemoved() {
     Backbone.history.navigate('/', { trigger: true });
   },
 
-  _showSeasons: function() {
+  _showSeasons() {
     var self = this;
 
     this.seasons.show(new LoadingView());
@@ -146,14 +146,14 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showHeader: function() {
+  _showHeader() {
     this.header.show(new SeriesHeaderView({
       model: this.model,
       episodeFileCollection: this.episodeFileCollection
     }));
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === 'renamefiles') {
       if (options.command.get('seriesId') === this.model.get('id')) {
         this._refresh();
@@ -161,7 +161,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _refresh: function() {
+  _refresh() {
     this.seasonCollection.add(this.model.get('seasons'), { merge: true });
     this.episodeCollection.fetch();
     this.episodeFileCollection.fetch();
@@ -174,19 +174,19 @@ module.exports = Marionette.Layout.extend({
     this.model.trigger('seasons:expand');
   },
 
-  onEditClick: function() {
+  onEditClick() {
     vent.trigger(vent.Commands.EditSeries, { series: this.model });
   },
 
-  onDeleteClick: function() {
+  onDeleteClick() {
     vent.trigger(vent.Commands.DeleteSeries, { series: this.model });
   },
 
-  onRenameClick: function() {
+  onRenameClick() {
     vent.trigger(vent.Commands.ShowRenamePreview, { series: this.model });
   },
 
-  onEditFileClick: function() {
+  onEditFileClick() {
     var view = new EpisodeFileEditorLayout({
       series: this.model,
       episodeCollection: this.episodeCollection
@@ -195,7 +195,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {

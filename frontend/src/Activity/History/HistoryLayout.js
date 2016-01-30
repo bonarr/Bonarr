@@ -63,18 +63,18 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new HistoryCollection({ tableName: 'history' });
     this.listenTo(this.collection, 'sync', this._showTable);
 
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this.history.show(new LoadingView());
   },
 
-  _showTable: function(collection) {
+  _showTable(collection) {
     this.history.show(new Backgrid.Grid({
       columns: this.columns,
       collection: collection,
@@ -87,7 +87,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var filteringOptions = {
       type: 'radio',
       storeState: true,

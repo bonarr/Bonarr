@@ -7,7 +7,7 @@ var FormatHelpers = require('Shared/FormatHelpers');
 module.exports = NzbDroneCell.extend({
   className: 'timeleft-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.cellValue) {

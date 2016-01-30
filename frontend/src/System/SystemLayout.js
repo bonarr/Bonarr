@@ -36,7 +36,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-tasks-tab': '_showTasks'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     if (options.action) {
       this.action = options.action.toLowerCase();
     }
@@ -46,7 +46,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onShow: function() {
+  onShow() {
     switch (this.action) {
       case 'logs':
         this._showLogs();
@@ -65,14 +65,14 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _navigate: function(route) {
+  _navigate(route) {
     Backbone.history.navigate(route, {
       trigger: true,
       replace: true
     });
   },
 
-  _showStatus: function(e) {
+  _showStatus(e) {
     if (e) {
       e.preventDefault();
     }
@@ -82,7 +82,7 @@ module.exports = Marionette.Layout.extend({
     this._navigate('system/status');
   },
 
-  _showLogs: function(e) {
+  _showLogs(e) {
     if (e) {
       e.preventDefault();
     }
@@ -92,7 +92,7 @@ module.exports = Marionette.Layout.extend({
     this._navigate('system/logs');
   },
 
-  _showUpdates: function(e) {
+  _showUpdates(e) {
     if (e) {
       e.preventDefault();
     }
@@ -102,7 +102,7 @@ module.exports = Marionette.Layout.extend({
     this._navigate('system/updates');
   },
 
-  _showBackup: function(e) {
+  _showBackup(e) {
     if (e) {
       e.preventDefault();
     }
@@ -112,7 +112,7 @@ module.exports = Marionette.Layout.extend({
     this._navigate('system/backup');
   },
 
-  _showTasks: function(e) {
+  _showTasks(e) {
     if (e) {
       e.preventDefault();
     }

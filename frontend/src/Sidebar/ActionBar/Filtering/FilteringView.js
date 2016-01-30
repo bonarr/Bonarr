@@ -15,18 +15,18 @@ module.exports = Marionette.ItemView.extend({
     'click': '_onClick'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.viewCollection = options.viewCollection;
     this.listenTo(this.viewCollection, 'sonarr:filter', this._toggleFilterStatus);
   },
 
-  onRender: function() {
+  onRender() {
     if (this.model.get('active')) {
       this._setFilterStatus();
     }
   },
 
-  _onClick: function(e) {
+  _onClick(e) {
     e.preventDefault();
 
     if (this.viewCollection) {
@@ -34,7 +34,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _toggleFilterStatus: function(model) {
+  _toggleFilterStatus(model) {
     if (model.get('key') === this.model.get('key')) {
       this._setFilterStatus();
     } else {
@@ -42,11 +42,11 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _setFilterStatus: function() {
+  _setFilterStatus() {
     this.$el.addClass('active');
   },
 
-  _removeFilterStatus: function() {
+  _removeFilterStatus() {
     this.$el.removeClass('active');
   }
 });

@@ -46,7 +46,7 @@ var view = Marionette.ItemView.extend({
     'change .x-start-search': 'onStartSearchChanged'
   },
 
-  initialize: function() {
+  initialize() {
     if (!this.model) {
       throw 'model is required';
     }
@@ -56,14 +56,14 @@ var view = Marionette.ItemView.extend({
     this.listenTo(Profiles, 'all', this.render);
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       profiles: Profiles.toJSON(),
       rootFolders: RootFolders.toJSON()
     };
   },
 
-  onRender: function() {
+  onRender() {
     var profileId = Config.getValue(Keys.DefaultProfileId);
     var rootFolderId = Config.getValue(Keys.DefaultRootFolderId);
     var seriesType = Config.getValue(Keys.DefaultSeriesType, 'standard');
@@ -96,15 +96,15 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  onSeasonFolderChanged: function() {
+  onSeasonFolderChanged() {
     Config.setValue(Keys.UseSeasonFolder, this.ui.seasonFolder.prop('checked'));
   },
 
-  onStartSearchChanged: function() {
+  onStartSearchChanged() {
     Config.setValue(Keys.StartSearch, this.ui.startSearch.prop('checked'));
   },
 
-  onRootFolderChanged: function() {
+  onRootFolderChanged() {
     var rootFolderValue = this.ui.rootFolder.val();
     if (rootFolderValue === 'addNew') {
       var rootFolderLayout = new RootFolderLayout();
@@ -115,25 +115,25 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  onProfileChanged: function() {
+  onProfileChanged() {
     Config.setValue(Keys.DefaultProfileId, this.ui.profile.val());
   },
 
-  onSeriesTypeChanged: function() {
+  onSeriesTypeChanged() {
     Config.setValue(Keys.DefaultSeriesType, this.ui.seriesType.val());
   },
 
-  onMonitorChanged: function() {
+  onMonitorChanged() {
     Config.setValue(Keys.MonitorEpisodes, this.ui.monitor.val());
   },
 
-  onRootFolderAdded: function(options) {
+  onRootFolderAdded(options) {
     vent.trigger(vent.Commands.CloseFullscreenModal);
     this.ui.rootFolder.val(options.model.id);
     Config.setValue(Keys.DefaultRootFolderId, options.model.id);
   },
 
-  onAdd: function(event) {
+  onAdd(event) {
     event.preventDefault();
 
     var addButton = this.ui.addButton;
@@ -165,7 +165,7 @@ var view = Marionette.ItemView.extend({
     promise.done(_.bind(this.onSeriesAdded, this));
   },
 
-  onSeriesAdded: function() {
+  onSeriesAdded() {
     SeriesCollection.add(this.model);
     this.close();
 
@@ -186,7 +186,7 @@ var view = Marionette.ItemView.extend({
     vent.trigger(vent.Events.SeriesAdded, { series: self.model });
   },
 
-  _getAddSeriesOptions: function() {
+  _getAddSeriesOptions() {
     var monitor = this.ui.monitor.val();
     var startSearch = this.ui.startSearch.prop('checked');
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');

@@ -25,17 +25,17 @@ var view = Marionette.Layout.extend({
 
   _deleteView: DeleteView,
 
-  initialize: function(options) {
+  initialize(options) {
     this.profileCollection = options.profileCollection;
     this.itemsCollection = new Backbone.Collection(_.toArray(this.model.get('items')).reverse());
     this.listenTo(SeriesCollection, 'all', this._updateDisableStatus);
   },
 
-  onRender: function() {
+  onRender() {
     this._updateDisableStatus();
   },
 
-  onShow: function() {
+  onShow() {
     this.fieldsView = new EditProfileView({ model: this.model });
     this._showFieldsView();
     var advancedShown = Config.getValueBoolean(Config.Keys.AdvancedSettings, false);
@@ -51,7 +51,7 @@ var view = Marionette.Layout.extend({
         handle: '.x-drag-handle'
       },
 
-      visibleModelsFilter: function(model) {
+      visibleModelsFilter(model) {
         return model.get('quality').id !== 0 || advancedShown;
       },
 
@@ -68,17 +68,17 @@ var view = Marionette.Layout.extend({
     this.listenTo(this.sortableListView, 'sortStop', this._updateModel);
   },
 
-  _onBeforeSave: function() {
+  _onBeforeSave() {
     var cutoff = this.fieldsView.getCutoff();
     this.model.set('cutoff', cutoff);
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.profileCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _selectionChanged: function(newSelectedModels, oldSelectedModels) {
+  _selectionChanged(newSelectedModels, oldSelectedModels) {
     var addedModels = _.difference(newSelectedModels, oldSelectedModels);
     var removeModels = _.difference(oldSelectedModels, newSelectedModels);
 
@@ -91,17 +91,17 @@ var view = Marionette.Layout.extend({
     this._updateModel();
   },
 
-  _updateModel: function() {
+  _updateModel() {
     this.model.set('items', this.itemsCollection.toJSON().reverse());
 
     this._showFieldsView();
   },
 
-  _showFieldsView: function() {
+  _showFieldsView() {
     this.fields.show(this.fieldsView);
   },
 
-  _updateDisableStatus: function() {
+  _updateDisableStatus() {
     if (this._isQualityInUse()) {
       this.ui.deleteButton.addClass('disabled');
       this.ui.deleteButton.attr('title', 'Can\'t delete a profile that is attached to a series.');
@@ -110,7 +110,7 @@ var view = Marionette.Layout.extend({
     }
   },
 
-  _isQualityInUse: function() {
+  _isQualityInUse() {
     return SeriesCollection.where({ 'profileId': this.model.id }).length !== 0;
   }
 });

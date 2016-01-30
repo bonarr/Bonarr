@@ -6,7 +6,7 @@ module.exports = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/calendar',
   model: EpisodeModel,
 
-  comparator: function(model1, model2) {
+  comparator(model1, model2) {
     var airDate1 = model1.get('airDateUtc');
     var date1 = moment(airDate1);
     var time1 = date1.unix();

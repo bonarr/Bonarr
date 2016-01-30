@@ -28,11 +28,11 @@ var view = Marionette.ItemView.extend({
     scriptGroup: '.x-script-group'
   },
 
-  initialize: function() {
+  initialize() {
     this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
   },
 
-  onRender: function() {
+  onRender() {
     if (this.ui.authToggle.val() === 'none') {
       this.ui.authOptions.hide();
     }
@@ -53,11 +53,11 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.copyApiKey.copyToClipboard(this.ui.apiKeyInput);
   },
 
-  _setAuthOptionsVisibility: function() {
+  _setAuthOptionsVisibility() {
     var showAuthOptions = this.ui.authToggle.val() !== 'none';
 
     if (showAuthOptions) {
@@ -67,7 +67,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _setSslOptionsVisibility: function() {
+  _setSslOptionsVisibility() {
     var showSslOptions = this.ui.sslToggle.prop('checked');
 
     if (showSslOptions) {
@@ -77,7 +77,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _resetApiKey: function() {
+  _resetApiKey() {
     if (window.confirm('Reset API Key?')) {
       CommandController.Execute('resetApiKey', {
         name: 'resetApiKey'
@@ -85,13 +85,13 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === 'resetapikey') {
       this.model.fetch();
     }
   },
 
-  _setScriptGroupVisibility: function() {
+  _setScriptGroupVisibility() {
     if (this._showScriptGroup()) {
       this.ui.scriptGroup.slideDown();
     } else {
@@ -99,7 +99,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _showScriptGroup: function() {
+  _showScriptGroup() {
     return this.ui.updateMechanism.val() === 'script';
   }
 });

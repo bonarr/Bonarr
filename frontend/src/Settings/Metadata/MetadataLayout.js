@@ -10,12 +10,12 @@ module.exports = SettingsLayoutBase.extend({
     metadata: '#x-metadata-providers'
   },
 
-  initialize: function() {
+  initialize() {
     this.metadataCollection = new MetadataCollection();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = this.metadataCollection.fetch();
 
     promise.done(_.bind(function() {

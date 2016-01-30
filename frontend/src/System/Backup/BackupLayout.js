@@ -52,7 +52,7 @@ module.exports = Marionette.Layout.extend({
     ]
   },
 
-  initialize: function() {
+  initialize() {
     this.backupCollection = new BackupCollection();
 
     this.listenTo(this.backupCollection, 'sync', this._showBackups);
@@ -60,13 +60,13 @@ module.exports = Marionette.Layout.extend({
     this._showActionBar();
   },
 
-  onRender: function() {
+  onRender() {
     this.backups.show(new LoadingView());
 
     this.backupCollection.fetch();
   },
 
-  _showBackups: function() {
+  _showBackups() {
     if (this.backupCollection.length === 0) {
       this.backups.show(new EmptyView());
     } else {
@@ -78,7 +78,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {
@@ -98,7 +98,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === 'backup') {
       this.backupCollection.fetch();
     }

@@ -19,7 +19,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-add': '_add'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.collection = options.collection;
 
     this._updateOrderedCollection();
@@ -31,7 +31,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  onRender: function() {
+  onRender() {
     this.sortableListView = new DelayProfileCollectionView({
       sortable: true,
       collection: this.orderedCollection,
@@ -40,7 +40,7 @@ module.exports = Marionette.Layout.extend({
         handle: '.x-drag-handle'
       },
 
-      sortableModelsFilter: function(model) {
+      sortableModelsFilter(model) {
         return model.get('id') !== 1;
       }
     });
@@ -50,7 +50,7 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.sortableListView, 'sortStop', this._updateOrder);
   },
 
-  _updateOrder: function() {
+  _updateOrder() {
     var self = this;
 
     this.collection.forEach(function(model) {
@@ -68,7 +68,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _add: function() {
+  _add() {
     var model = new Model({
       enableUsenet: true,
       enableTorrent: true,
@@ -88,7 +88,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
   },
 
-  _updateOrderedCollection: function() {
+  _updateOrderedCollection() {
     if (!this.orderedCollection) {
       this.orderedCollection = new Backbone.Collection();
     }

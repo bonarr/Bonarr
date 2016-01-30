@@ -20,7 +20,7 @@ Tooltip.prototype.getOptions = function(options) {
 };
 
 module.exports = {
-  appInitializer: function() {
+  appInitializer() {
     $('body').tooltip({ selector: '[title]' });
 
     return this;

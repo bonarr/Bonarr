@@ -4,7 +4,7 @@ var DeepModel = require('backbone.deepmodel');
 var Messenger = require('Shared/Messenger');
 
 module.exports = DeepModel.extend({
-  connectData: function(action, initialQueryParams) {
+  connectData(action, initialQueryParams) {
     var self = this;
 
     this.trigger('connect:sync');
@@ -88,7 +88,7 @@ module.exports = DeepModel.extend({
     return promise;
   },
 
-  test: function() {
+  test() {
     var self = this;
 
     this.trigger('validation:sync');

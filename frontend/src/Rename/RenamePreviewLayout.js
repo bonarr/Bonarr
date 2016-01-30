@@ -27,7 +27,7 @@ module.exports = Marionette.Layout.extend({
     'change .x-rename-all': '_toggleAll'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.model = options.series;
     this.seasonNumber = options.seasonNumber;
 
@@ -42,12 +42,12 @@ module.exports = Marionette.Layout.extend({
     this.collection.fetch();
   },
 
-  onRender: function() {
+  onRender() {
     this.renamePreviews.show(new LoadingView());
     this.formatRegion.show(new RenamePreviewFormatView({ model: this.model }));
   },
 
-  _showPreviews: function() {
+  _showPreviews() {
     if (this.collection.length === 0) {
       this.ui.pathInfo.hide();
       this.renamePreviews.show(new EmptyCollectionView());
@@ -59,7 +59,7 @@ module.exports = Marionette.Layout.extend({
     this.renamePreviews.show(new RenamePreviewCollectionView({ collection: this.collection }));
   },
 
-  _organizeFiles: function() {
+  _organizeFiles() {
     if (this.collection.length === 0) {
       vent.trigger(vent.Commands.CloseFullscreenModal);
     }
@@ -92,7 +92,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _setCheckedState: function(checked) {
+  _setCheckedState(checked) {
     if (checked) {
       this.ui.checkboxIcon.addClass('icon-sonarr-checked');
       this.ui.checkboxIcon.removeClass('icon-sonarr-unchecked');
@@ -102,7 +102,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _toggleAll: function() {
+  _toggleAll() {
     var checked = this.ui.renameAll.prop('checked');
     this._setCheckedState(checked);
 
@@ -111,7 +111,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _itemRenameChanged: function(model, checked) {
+  _itemRenameChanged(model, checked) {
     var allChecked = this.collection.all(function(m) {
       return m.get('rename');
     });

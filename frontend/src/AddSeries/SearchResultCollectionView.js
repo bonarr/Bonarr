@@ -4,24 +4,24 @@ var SearchResultView = require('./SearchResultView');
 module.exports = Marionette.CollectionView.extend({
   itemView: SearchResultView,
 
-  initialize: function(options) {
+  initialize(options) {
     this.isExisting = options.isExisting;
     this.showing = 1;
   },
 
-  showAll: function() {
+  showAll() {
     this.showingAll = true;
     this.render();
   },
 
-  showMore: function() {
+  showMore() {
     this.showing += 5;
     this.render();
 
     return this.showing >= this.collection.length;
   },
 
-  appendHtml: function(collectionView, itemView, index) {
+  appendHtml(collectionView, itemView, index) {
     if (!this.isExisting || index < this.showing || index === 0) {
       collectionView.$el.append(itemView.el);
     }

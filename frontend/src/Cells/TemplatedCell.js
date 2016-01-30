@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var NzbDroneCell = require('./NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({
-  render: function() {
+  render() {
     var templateName = this.column.get('template') || this.template;
 
     this.templateFunction = Marionette.TemplateCache.get(templateName);

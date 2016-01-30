@@ -5,7 +5,7 @@ module.exports = Marionette.ItemView.extend({
   className: 'recent-folder',
   tagName: 'tr',
 
-  initialize: function() {
+  initialize() {
     this.listenTo(this.model, 'change', this.render);
   },
 
@@ -14,7 +14,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-folder': 'folderSelected'
   },
 
-  removeFolder: function() {
+  removeFolder() {
     var self = this;
 
     this.model.destroy().success(function() {
@@ -22,7 +22,7 @@ module.exports = Marionette.ItemView.extend({
     });
   },
 
-  folderSelected: function() {
+  folderSelected() {
     this.trigger('folderSelected', this.model);
   }
 });

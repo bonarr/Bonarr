@@ -7,7 +7,7 @@ module.exports = NzbDroneCell.extend({
   className: 'episode-number-cell',
   template: 'Series/Details/EpisodeNumberCell',
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html(this.model.get('episodeNumber'));
 

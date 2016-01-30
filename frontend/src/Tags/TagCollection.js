@@ -5,7 +5,7 @@ var Collection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/tag',
   model: TagModel,
 
-  comparator: function(model) {
+  comparator(model) {
     return model.get('label');
   }
 });

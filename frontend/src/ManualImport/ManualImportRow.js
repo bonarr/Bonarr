@@ -6,14 +6,14 @@ module.exports = Backgrid.Row.extend({
   _originalInit: Backgrid.Row.prototype.initialize,
   _originalRender: Backgrid.Row.prototype.render,
 
-  initialize: function() {
+  initialize() {
     this._originalInit.apply(this, arguments);
 
     this.listenTo(this.model, 'change', this._setError);
     this.listenTo(this.model, 'change', this._setClasses);
   },
 
-  render: function() {
+  render() {
     this._originalRender.apply(this, arguments);
     this._setError();
     this._setClasses();
@@ -21,7 +21,7 @@ module.exports = Backgrid.Row.extend({
     return this;
   },
 
-  _setError: function() {
+  _setError() {
     if (this.model.has('series') &&
       this.model.has('seasonNumber') &&
       (this.model.has('episodes') && this.model.get('episodes').length > 0) &&
@@ -32,7 +32,7 @@ module.exports = Backgrid.Row.extend({
     }
   },
 
-  _setClasses: function() {
+  _setClasses() {
     this.$el.toggleClass('has-series', this.model.has('series'));
     this.$el.toggleClass('has-season', this.model.has('seasonNumber'));
   }

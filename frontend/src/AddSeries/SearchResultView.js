@@ -38,7 +38,7 @@ var view = Marionette.ItemView.extend({
     'change .x-monitor': '_monitorChanged'
   },
 
-  initialize: function() {
+  initialize() {
     if (!this.model) {
       throw 'model is required';
     }
@@ -51,7 +51,7 @@ var view = Marionette.ItemView.extend({
     this.listenTo(RootFolders, 'all', this._rootFoldersUpdated);
   },
 
-  onRender: function() {
+  onRender() {
     var defaultProfile = Config.getValue(Config.Keys.DefaultProfileId);
     var defaultRoot = Config.getValue(Config.Keys.DefaultRootFolderId);
     var useSeasonFolder = Config.getValueBoolean(Config.Keys.UseSeasonFolder, true);
@@ -89,7 +89,7 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  _configureTemplateHelpers: function() {
+  _configureTemplateHelpers() {
     var existingSeries = SeriesCollection.where({ tvdbId: this.model.get('tvdbId') });
 
     if (existingSeries.length > 0) {
@@ -103,7 +103,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _onConfigUpdated: function(options) {
+  _onConfigUpdated(options) {
     if (options.key === Config.Keys.DefaultProfileId) {
       this.ui.profile.val(options.value);
     } else if (options.key === Config.Keys.DefaultRootFolderId) {
@@ -117,15 +117,15 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _profileChanged: function() {
+  _profileChanged() {
     Config.setValue(Config.Keys.DefaultProfileId, this.ui.profile.val());
   },
 
-  _seasonFolderChanged: function() {
+  _seasonFolderChanged() {
     Config.setValue(Config.Keys.UseSeasonFolder, this.ui.seasonFolder.prop('checked'));
   },
 
-  _rootFolderChanged: function() {
+  _rootFolderChanged() {
     var rootFolderValue = this.ui.rootFolder.val();
     if (rootFolderValue === 'addNew') {
       var rootFolderLayout = new RootFolderLayout();
@@ -136,29 +136,29 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _seriesTypeChanged: function() {
+  _seriesTypeChanged() {
     Config.setValue(Config.Keys.DefaultSeriesType, this.ui.seriesType.val());
   },
 
-  _monitorChanged: function() {
+  _monitorChanged() {
     Config.setValue(Config.Keys.MonitorEpisodes, this.ui.monitor.val());
   },
 
-  onRootFolderAdded: function(options) {
+  onRootFolderAdded(options) {
     vent.trigger(vent.Commands.CloseFullscreenModal);
     this.ui.rootFolder.val(options.model.id);
     this._rootFolderChanged();
   },
 
-  _addWithoutSearch: function() {
+  _addWithoutSearch() {
     this._addSeries(false);
   },
 
-  _addAndSearch: function() {
+  _addAndSearch() {
     this._addSeries(true);
   },
 
-  _addSeries: function(searchForMissingEpisodes) {
+  _addSeries(searchForMissingEpisodes) {
     var addButton = this.ui.addButton;
     var addSearchButton = this.ui.addSearchButton;
 
@@ -205,7 +205,7 @@ var view = Marionette.ItemView.extend({
         actions: {
           goToSeries: {
             label: 'Go to Series',
-            action: function() {
+            action() {
               Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
             }
           }
@@ -218,12 +218,12 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  _rootFoldersUpdated: function() {
+  _rootFoldersUpdated() {
     this._configureTemplateHelpers();
     this.render();
   },
 
-  _getAddSeriesOptions: function() {
+  _getAddSeriesOptions() {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
     var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');

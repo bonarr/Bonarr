@@ -14,11 +14,11 @@ module.exports = Marionette.ItemView.extend({
     'click': '_add'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   },
 
-  _addPreset: function(e) {
+  _addPreset(e) {
     var presetName = $(e.target).closest('.x-preset').attr('data-id');
     var presetData = _.where(this.model.get('presets'), { name: presetName })[0];
 
@@ -27,7 +27,7 @@ module.exports = Marionette.ItemView.extend({
     this._openEdit();
   },
 
-  _add: function(e) {
+  _add(e) {
     if ($(e.target).closest('.btn,.btn-group').length !== 0 && $(e.target).closest('.x-custom').length === 0) {
       return;
     }
@@ -35,7 +35,7 @@ module.exports = Marionette.ItemView.extend({
     this._openEdit();
   },
 
-  _openEdit: function() {
+  _openEdit() {
     this.model.set({
       id: undefined,
       enableRss: this.model.get('supportsRss'),

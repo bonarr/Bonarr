@@ -52,7 +52,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function(options) {
+  initialize(options) {
     this.model = options.model;
     this.series = options.series;
 
@@ -64,11 +64,11 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.collection, 'sync', this._showTable);
   },
 
-  onRender: function() {
+  onRender() {
     this.historyTable.show(new LoadingView());
   },
 
-  _showTable: function() {
+  _showTable() {
     if (this.collection.any()) {
       this.historyTable.show(new Backgrid.Grid({
         collection: this.collection,

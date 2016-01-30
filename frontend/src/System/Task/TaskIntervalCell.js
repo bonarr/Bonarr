@@ -4,7 +4,7 @@ var moment = require('moment');
 module.exports = NzbDroneCell.extend({
   className: 'task-interval-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var interval = this.model.get('interval');

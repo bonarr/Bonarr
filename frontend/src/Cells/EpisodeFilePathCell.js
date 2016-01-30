@@ -4,7 +4,7 @@ var NzbDroneCell = require('./NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'episode-file-path-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (reqres.hasHandler(reqres.Requests.GetEpisodeFileById)) {

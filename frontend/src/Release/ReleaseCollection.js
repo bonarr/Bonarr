@@ -19,7 +19,7 @@ var Collection = PagableCollection.extend({
       sortKey: 'qualityWeight'
     },
     'rejections': {
-      sortValue: function(model) {
+      sortValue(model) {
         var rejections = model.get('rejections');
         var releaseWeight = model.get('releaseWeight');
 
@@ -34,7 +34,7 @@ var Collection = PagableCollection.extend({
       sortKey: 'releaseWeight'
     },
     'seeders': {
-      sortValue: function(model) {
+      sortValue(model) {
         var seeders = model.get('seeders') || 0;
         var leechers = model.get('leechers') || 0;
 
@@ -46,7 +46,7 @@ var Collection = PagableCollection.extend({
     }
   },
 
-  fetchEpisodeReleases: function(episodeId) {
+  fetchEpisodeReleases(episodeId) {
     return this.fetch({ data: { episodeId: episodeId } });
   }
 });

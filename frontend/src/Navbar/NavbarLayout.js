@@ -20,7 +20,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-navbar-shutdown': '_onShutdownClick'
   },
 
-  initialize: function() {
+  initialize() {
     vent.on(vent.Hotkeys.NavbarSearch, function() {
       this.ui.searchInput.focus();
     });
@@ -30,11 +30,11 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.searchInput.bindSearch();
   },
 
-  _onSearchClick: function(e) {
+  _onSearchClick(e) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -42,7 +42,7 @@ module.exports = Marionette.Layout.extend({
     this.ui.searchInput.focus();
   },
 
-  _onRestartClick: function(e) {
+  _onRestartClick(e) {
     e.preventDefault();
 
     $.ajax({
@@ -56,7 +56,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _onShutdownClick: function(e) {
+  _onShutdownClick(e) {
     e.preventDefault();
 
     $.ajax({

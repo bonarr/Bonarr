@@ -28,7 +28,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-options': '_toggleOptions'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     if (!options) {
       throw 'options needs to be passed';
     }
@@ -49,7 +49,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  onShow: function() {
+  onShow() {
     if (!this.views && !this.filtering && !this.sorting) {
       this.ui.options.hide();
     }
@@ -89,7 +89,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _buildCollection: function(buttonGroup) {
+  _buildCollection(buttonGroup) {
     var collection = new ButtonCollection();
 
     _.each(buttonGroup.items, function(button) {
@@ -106,7 +106,7 @@ module.exports = Marionette.Layout.extend({
     return collection;
   },
 
-  _toggleOptions: function() {
+  _toggleOptions() {
     Marionette.$('body').toggleClass('actionbar-extended');
 
     if (ResolutionUtility.isMobile()) {

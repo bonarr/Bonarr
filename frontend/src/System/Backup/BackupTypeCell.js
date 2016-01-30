@@ -3,7 +3,7 @@ var NzbDroneCell = require('Cells/NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'backup-type-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var icon = 'icon-sonarr-backup-scheduled';

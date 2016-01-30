@@ -51,7 +51,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new LogCollection();
 
     this.listenTo(this.collection, 'sync', this._showTable);
@@ -60,11 +60,11 @@ module.exports = Marionette.Layout.extend({
     this._showActionBar();
   },
 
-  onRender: function() {
+  onRender() {
     this.grid.show(new LoadingView());
   },
 
-  _showTable: function() {
+  _showTable() {
     this.grid.show(new Backgrid.Grid({
       row: LogRow,
       columns: this.columns,
@@ -78,7 +78,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       type: 'default',
       storeState: false,
@@ -133,7 +133,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _refreshTable: function(buttonContext) {
+  _refreshTable(buttonContext) {
     this.collection.state.currentPage = 1;
     var promise = this.collection.fetch({ reset: true });
 
@@ -142,7 +142,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === 'clearlog') {
       this._refreshTable();
     }

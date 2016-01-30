@@ -22,7 +22,7 @@ var Layout = Marionette.Layout.extend({
     'keydown .x-path input': '_keydown'
   },
 
-  initialize: function() {
+  initialize() {
     this.collection = RootFolderCollection;
     this.rootfolderListView = new RootFolderCollectionView({ collection: RootFolderCollection });
 
@@ -30,7 +30,7 @@ var Layout = Marionette.Layout.extend({
     this.listenTo(RootFolderCollection, 'sync', this._showCurrentDirs);
   },
 
-  onRender: function() {
+  onRender() {
     this.currentDirs.show(new LoadingView());
 
     if (RootFolderCollection.synced) {
@@ -40,11 +40,11 @@ var Layout = Marionette.Layout.extend({
     this.ui.pathInput.fileBrowser();
   },
 
-  _onFolderSelected: function(options) {
+  _onFolderSelected(options) {
     this.trigger('folderSelected', options);
   },
 
-  _addFolder: function() {
+  _addFolder() {
     var self = this;
 
     var newDir = new RootFolderModel({
@@ -59,11 +59,11 @@ var Layout = Marionette.Layout.extend({
     });
   },
 
-  _showCurrentDirs: function() {
+  _showCurrentDirs() {
     this.currentDirs.show(this.rootfolderListView);
   },
 
-  _keydown: function(e) {
+  _keydown(e) {
     if (e.keyCode !== 13) {
       return;
     }

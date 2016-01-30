@@ -20,13 +20,13 @@ var view = Marionette.ItemView.extend({
     'click .x-remove': '_removeSeries'
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       profiles: Profiles.toJSON()
     };
   },
 
-  onRender: function() {
+  onRender() {
     this.ui.path.fileBrowser();
     this.ui.tags.tagInput({
       model: this.model,
@@ -34,19 +34,19 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  _onBeforeSave: function() {
+  _onBeforeSave() {
     var profileId = this.ui.profile.val();
     this.model.set({
       profileId: profileId
     });
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.trigger('saved');
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _removeSeries: function() {
+  _removeSeries() {
     vent.trigger(vent.Commands.DeleteSeries, {
       series: this.model
     });

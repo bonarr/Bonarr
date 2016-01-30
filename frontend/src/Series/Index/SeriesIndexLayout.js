@@ -79,12 +79,12 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.seriesCollection =  SeriesCollection.viewCollection;
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this._showActionBar();
 
     this.$('img.lazy').lazyload({
@@ -93,7 +93,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showTable: function() {
+  _showTable() {
     this.currentView = new Backgrid.Grid({
       collection: this.seriesCollection,
       columns: this.columns,
@@ -103,7 +103,7 @@ module.exports = Marionette.Layout.extend({
     this._renderView();
   },
 
-  _showList: function() {
+  _showList() {
     this.currentView = new ListCollectionView({
       collection: this.seriesCollection
     });
@@ -111,7 +111,7 @@ module.exports = Marionette.Layout.extend({
     this._renderView();
   },
 
-  _showPosters: function() {
+  _showPosters() {
     this.currentView = new PosterCollectionView({
       collection: this.seriesCollection
     });
@@ -119,7 +119,7 @@ module.exports = Marionette.Layout.extend({
     this._renderView();
   },
 
-  _renderView: function() {
+  _renderView() {
     if (SeriesCollection.length === 0) {
       this.seriesRegion.show(new EmptyView());
     } else {
@@ -128,9 +128,9 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _fetchCollection: function() {},
+  _fetchCollection() {},
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {
@@ -247,7 +247,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showFooter: function() {
+  _showFooter() {
     var footerModel = new FooterModel();
     var series = SeriesCollection.models.length;
     var episodes = 0;

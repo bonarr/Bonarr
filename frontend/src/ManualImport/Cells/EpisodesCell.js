@@ -10,7 +10,7 @@ module.exports = NzbDroneCell.extend({
     'click': '_onClick'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var episodes = this.model.get('episodes');
@@ -24,7 +24,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _onClick: function() {
+  _onClick() {
     var series = this.model.get('series');
     var seasonNumber = this.model.get('seasonNumber');
 
@@ -39,7 +39,7 @@ module.exports = NzbDroneCell.extend({
     vent.trigger(vent.Commands.OpenModal, view);
   },
 
-  _setEpisodes: function(e) {
+  _setEpisodes(e) {
     this.model.set('episodes', e.episodes);
   }
 });

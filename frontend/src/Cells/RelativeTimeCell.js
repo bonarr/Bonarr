@@ -6,7 +6,7 @@ var UiSettings = require('Shared/UiSettingsModel');
 module.exports = NzbDroneCell.extend({
   className: 'relative-time-cell',
 
-  render: function() {
+  render() {
     var dateStr = this.model.get(this.column.get('name'));
 
     if (dateStr) {

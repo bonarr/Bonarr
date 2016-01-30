@@ -15,7 +15,7 @@ module.exports = Marionette.Layout.extend({
     moreInfo: '#more-info'
   },
 
-  onRender: function() {
+  onRender() {
     this.health.show(new HealthLayout());
     this.diskSpace.show(new DiskSpaceLayout());
     this.about.show(new AboutView());

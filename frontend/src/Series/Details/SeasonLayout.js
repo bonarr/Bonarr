@@ -85,7 +85,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  templateHelpers: function() {
+  templateHelpers() {
     var episodeCount = this.episodeCollection.filter(function(episode) {
       return episode.get('hasFile') || episode.get('monitored') && moment(episode.get('airDateUtc')).isBefore(moment());
     }).length;
@@ -104,7 +104,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  initialize: function(options) {
+  initialize(options) {
     if (!options.episodeCollection) {
       throw 'episodeCollection is required';
     }
@@ -122,7 +122,7 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.fullEpisodeCollection, 'sync', this._refreshEpisodes);
   },
 
-  onRender: function() {
+  onRender() {
     if (this.showingEpisodes) {
       this._showEpisodes();
     }
@@ -148,7 +148,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _seasonSearch: function() {
+  _seasonSearch() {
     CommandController.Execute('seasonSearch', {
       name: 'seasonSearch',
       seriesId: this.series.id,
@@ -156,14 +156,14 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _seasonRename: function() {
+  _seasonRename() {
     vent.trigger(vent.Commands.ShowRenamePreview, {
       series: this.series,
       seasonNumber: this.model.get('seasonNumber')
     });
   },
 
-  _seasonMonitored: function() {
+  _seasonMonitored() {
     if (!this.series.get('monitored')) {
 
       Messenger.show({
@@ -183,7 +183,7 @@ module.exports = Marionette.Layout.extend({
     this.ui.seasonMonitored.spinForPromise(savePromise);
   },
 
-  _afterSeasonMonitored: function() {
+  _afterSeasonMonitored() {
     var self = this;
 
     _.each(this.episodeCollection.models, function(episode) {
@@ -193,7 +193,7 @@ module.exports = Marionette.Layout.extend({
     this.render();
   },
 
-  _setSeasonMonitoredState: function() {
+  _setSeasonMonitoredState() {
     this.ui.seasonMonitored.removeClass('icon-sonarr-spinner fa-spin');
 
     if (this.model.get('monitored')) {
@@ -205,7 +205,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showEpisodes: function() {
+  _showEpisodes() {
     this.showingEpisodes = true;
     this.ui.panel.addClass('expanded');
 
@@ -219,12 +219,12 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _hideEpisodes: function() {
+  _hideEpisodes() {
     this.showingEpisodes = false;
     this.ui.panel.removeClass('expanded');
   },
 
-  _shouldShowEpisodes: function() {
+  _shouldShowEpisodes() {
     if (this.episodeCollection.length > 50) {
       return false;
     }
@@ -247,7 +247,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showHideEpisodes: function(e) {
+  _showHideEpisodes(e) {
     if (this.showingEpisodes) {
       this._hideEpisodes();
     } else {
@@ -257,7 +257,7 @@ module.exports = Marionette.Layout.extend({
     this.ui.panel.toggleClass('expanded', this.showingEpisodes);
   },
 
-  _episodeMonitoredToggled: function(options) {
+  _episodeMonitoredToggled(options) {
     var model = options.model;
     var shiftKey = options.shiftKey;
 
@@ -285,7 +285,7 @@ module.exports = Marionette.Layout.extend({
     this.episodeCollection.lastToggled = model;
   },
 
-  _updateEpisodeCollection: function() {
+  _updateEpisodeCollection() {
     var self = this;
 
     this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge: true });
@@ -295,13 +295,13 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _refreshEpisodes: function() {
+  _refreshEpisodes() {
     this._updateEpisodeCollection();
     this.episodeCollection.fullCollection.sort();
     this.render();
   },
 
-  _openEpisodeFileEditor: function() {
+  _openEpisodeFileEditor() {
     var view = new EpisodeFileEditorLayout({
       model: this.model,
       series: this.series,

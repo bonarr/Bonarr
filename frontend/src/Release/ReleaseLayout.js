@@ -54,17 +54,17 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new ReleaseCollection();
     this.listenTo(this.collection, 'sync', this._showTable);
   },
 
-  onRender: function() {
+  onRender() {
     this.grid.show(new LoadingView());
     this.collection.fetch();
   },
 
-  _showTable: function() {
+  _showTable() {
     if (!this.isClosed) {
       this.grid.show(new Backgrid.Grid({
         row: Backgrid.Row,

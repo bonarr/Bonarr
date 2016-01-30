@@ -16,7 +16,7 @@ var Collection = PageableCollection.extend({
 
   originalFetch: PageableCollection.prototype.fetch,
 
-  initialize: function(options) {
+  initialize(options) {
     options = options || {};
 
     if (!options.folder && !options.downloadId) {
@@ -27,7 +27,7 @@ var Collection = PageableCollection.extend({
     this.downloadId = options.downloadId;
   },
 
-  fetch: function(options) {
+  fetch(options) {
     options = options || {};
 
     options.data = { folder: this.folder, downloadId: this.downloadId };
@@ -37,7 +37,7 @@ var Collection = PageableCollection.extend({
 
   sortMappings: {
     series: {
-      sortValue: function(model, attr, order) {
+      sortValue(model, attr, order) {
         var series = model.get(attr);
 
         if (series) {
@@ -53,7 +53,7 @@ var Collection = PageableCollection.extend({
     }
   },
 
-  comparator: function(model1, model2) {
+  comparator(model1, model2) {
     var quality1 = model1.get('quality');
     var quality2 = model2.get('quality');
 

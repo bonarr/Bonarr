@@ -10,7 +10,7 @@ var view = Marionette.ItemView.extend({
     droneFactory: '.x-path'
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.droneFactory.fileBrowser();
   }
 });

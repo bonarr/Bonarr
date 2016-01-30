@@ -75,17 +75,17 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.listenTo(QueueCollection, 'sync', this._showTable);
 
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this._showTable();
   },
 
-  _showTable: function() {
+  _showTable() {
     this.table.show(new Backgrid.Grid({
       columns: this.columns,
       collection: QueueCollection,
@@ -98,7 +98,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {

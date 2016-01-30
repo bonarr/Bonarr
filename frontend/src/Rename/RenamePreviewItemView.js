@@ -10,13 +10,13 @@ var view = Marionette.ItemView.extend({
     checkboxIcon: '.rename-checkbox i'
   },
 
-  onRender: function() {
+  onRender() {
     this._setItemState();
     this.listenTo(this.model, 'change', this._setItemState);
     this.listenTo(this.model, 'rename:select', this._onRenameAll);
   },
 
-  _setItemState: function() {
+  _setItemState() {
     var checked = this.model.get('rename');
     this.model.trigger('rename:select', this.model, checked);
 
@@ -31,7 +31,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _onRenameAll: function(model, checked) {
+  _onRenameAll(model, checked) {
     this.model.set('rename', checked);
   }
 });

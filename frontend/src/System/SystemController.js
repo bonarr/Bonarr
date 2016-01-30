@@ -7,7 +7,7 @@ var BackupLayout = require('./Backup/BackupLayout');
 var LogLayout = require('./Logs/LogsLayout');
 
 module.exports = NzbDroneController.extend({
-  initialize: function() {
+  initialize() {
     this.route('system', this.status);
     this.route('system/status', this.status);
     this.route('system/updates', this.updates);
@@ -18,27 +18,27 @@ module.exports = NzbDroneController.extend({
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
 
-  status: function() {
+  status() {
     this.setTitle('Status');
     this.showMainRegion(new StatusLayout());
   },
 
-  updates: function() {
+  updates() {
     this.setTitle('Updates');
     this.showMainRegion(new UpdateLayout());
   },
 
-  tasks: function() {
+  tasks() {
     this.setTitle('Tasks');
     this.showMainRegion(new TaskLayout());
   },
 
-  backup: function() {
+  backup() {
     this.setTitle('Backup');
     this.showMainRegion(new BackupLayout());
   },
 
-  logs: function() {
+  logs() {
     this.setTitle('Logs');
     this.showMainRegion(new LogLayout());
   }

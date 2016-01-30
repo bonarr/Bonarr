@@ -13,7 +13,7 @@ var ManualImportLayout = require('../../ManualImport/ManualImportLayout');
 var FileBrowserLayout = require('../FileBrowser/FileBrowserLayout');
 
 module.exports = Marionette.AppRouter.extend({
-  initialize: function() {
+  initialize() {
     vent.on(vent.Commands.OpenFullscreenModal, this._openFullscreenModal, this);
     vent.on(vent.Commands.CloseFullscreenModal, this._closeFullscreenModal, this);
 
@@ -31,33 +31,33 @@ module.exports = Marionette.AppRouter.extend({
     reqres.setHandler(reqres.selectPath, this._selectPath, this);
   },
 
-  _openFullscreenModal: function(view) {
+  _openFullscreenModal(view) {
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _closeFullscreenModal: function() {
+  _closeFullscreenModal() {
     AppLayout.fullscreenModalRegion.close();
   },
 
-  _openModal: function(view) {
+  _openModal(view) {
     AppLayout.modalRegion.show(view);
   },
 
-  _closeModal: function() {
+  _closeModal() {
     AppLayout.modalRegion.close();
   },
 
-  _editSeries: function(options) {
+  _editSeries(options) {
     var view = new EditSeriesView({ model: options.series });
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _deleteSeries: function(options) {
+  _deleteSeries(options) {
     var view = new DeleteSeriesView({ model: options.series });
     AppLayout.modalRegion.show(view);
   },
 
-  _showEpisode: function(options) {
+  _showEpisode(options) {
     var view = new EpisodeDetailsLayout({
       model: options.episode,
       hideSeriesLink: options.hideSeriesLink,
@@ -66,22 +66,22 @@ module.exports = Marionette.AppRouter.extend({
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _showHistory: function(options) {
+  _showHistory(options) {
     var view = new HistoryDetailsLayout({ model: options.model });
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _showLogDetails: function(options) {
+  _showLogDetails(options) {
     var view = new LogDetailsView({ model: options.model });
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _showRenamePreview: function(options) {
+  _showRenamePreview(options) {
     var view = new RenamePreviewLayout(options);
     AppLayout.fullscreenModalRegion.show(view);
   },
 
-  _showManualImport: function(options) {
+  _showManualImport(options) {
     var view = new ManualImportLayout(options);
     AppLayout.fullscreenModalRegion.show(view);
   },

@@ -42,7 +42,7 @@ module.exports = Marionette.Layout.extend({
     day: '.x-day'
   },
 
-  initialize: function() {
+  initialize() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
     this.collection = new CalendarCollection().bindSignalR({ updateOnly: true });
     this.dayCollection = new CalendarDayCollection();
@@ -70,7 +70,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  setShowUnmonitored: function(showUnmonitored) {
+  setShowUnmonitored(showUnmonitored) {
     if (this.showUnmonitored !== showUnmonitored) {
       this.showUnmonitored = showUnmonitored;
     }
@@ -112,7 +112,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  _getEvents: function() {
+  _getEvents() {
     this.collection.fetch({
       data: {
         start: this.dates.start.toISOString(),
@@ -122,7 +122,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showCalendar: function() {
+  _showCalendar() {
     var dayFormat = 'YYYY-MM-DD';
 
     var groupedEvents = this.collection.groupBy(function (model) {

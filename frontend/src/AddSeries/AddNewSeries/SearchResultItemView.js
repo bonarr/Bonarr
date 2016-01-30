@@ -43,13 +43,13 @@ const SearchResultItemView = Marionette.ItemView.extend({
     'change .x-monitor': '_monitorChanged'
   },
 
-  initialize: function() {
+  initialize() {
     this.listenTo(vent, Config.Events.ConfigUpdatedEvent, this._onConfigUpdated);
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(RootFolders, 'all', this.render);
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     var helpers = {};
 
     var existingSeries = SeriesCollection.findWhere({ tvdbId: this.model.get('tvdbId') });
@@ -64,7 +64,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     return helpers;
   },
 
-  onRender: function() {
+  onRender() {
     var defaultProfile = Config.getValue(Config.Keys.DefaultProfileId);
     var defaultRoot = Config.getValue(Config.Keys.DefaultRootFolderId);
     var useSeasonFolder = Config.getValueBoolean(Config.Keys.UseSeasonFolder, true);
@@ -96,7 +96,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     });
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.overview.dotdotdot({
       height: 100,
       wrap: 'letter'
@@ -108,7 +108,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     });
   },
 
-  _onConfigUpdated: function(options) {
+  _onConfigUpdated(options) {
     if (options.key === Config.Keys.DefaultProfileId) {
       this.ui.profile.val(options.value);
     } else if (options.key === Config.Keys.DefaultRootFolderId) {
@@ -122,15 +122,15 @@ const SearchResultItemView = Marionette.ItemView.extend({
     }
   },
 
-  _profileChanged: function() {
+  _profileChanged() {
     Config.setValue(Config.Keys.DefaultProfileId, this.ui.profile.val());
   },
 
-  _seasonFolderChanged: function() {
+  _seasonFolderChanged() {
     Config.setValue(Config.Keys.UseSeasonFolder, this.ui.seasonFolder.prop('checked'));
   },
 
-  _rootFolderChanged: function() {
+  _rootFolderChanged() {
     var rootFolderValue = this.ui.rootFolder.val();
     if (rootFolderValue === 'addNew') {
       var rootFolderLayout = new RootFolderLayout();
@@ -141,29 +141,29 @@ const SearchResultItemView = Marionette.ItemView.extend({
     }
   },
 
-  _seriesTypeChanged: function() {
+  _seriesTypeChanged() {
     Config.setValue(Config.Keys.DefaultSeriesType, this.ui.seriesType.val());
   },
 
-  _monitorChanged: function() {
+  _monitorChanged() {
     Config.setValue(Config.Keys.MonitorEpisodes, this.ui.monitor.val());
   },
 
-  _setRootFolder: function(options) {
+  _setRootFolder(options) {
     vent.trigger(vent.Commands.CloseFullscreenModal);
     this.ui.rootFolder.val(options.model.id);
     this._rootFolderChanged();
   },
 
-  _addWithoutSearch: function() {
+  _addWithoutSearch() {
     this._addSeries(false);
   },
 
-  _addAndSearch: function() {
+  _addAndSearch() {
     this._addSeries(true);
   },
 
-  _addSeries: function(searchForMissingEpisodes) {
+  _addSeries(searchForMissingEpisodes) {
     var addButton = this.ui.addButton;
     var addSearchButton = this.ui.addSearchButton;
 
@@ -210,7 +210,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
         actions: {
           goToSeries: {
             label: 'Go to Series',
-            action: function() {
+            action() {
               Backbone.history.navigate('/series/' + self.model.get('titleSlug'), { trigger: true });
             }
           }
@@ -223,7 +223,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     });
   },
 
-  _getAddSeriesOptions: function() {
+  _getAddSeriesOptions() {
     var monitor = this.ui.monitor.val();
     var lastSeason = _.max(this.model.get('seasons'), 'seasonNumber');
     var firstSeason = _.min(_.reject(this.model.get('seasons'), { seasonNumber: 0 }), 'seasonNumber');
@@ -256,7 +256,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     return options;
   },
 
-  onClick: function() {
+  onClick() {
     var existingSeries = SeriesCollection.findWhere({ tvdbId: this.model.get('tvdbId') });
 
     if (!existingSeries) {

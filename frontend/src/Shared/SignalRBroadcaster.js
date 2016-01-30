@@ -5,7 +5,7 @@ var Messenger = require('./Messenger');
 require('signalR');
 
 module.exports = {
-  appInitializer: function() {
+  appInitializer() {
     console.log('starting signalR');
 
     var getStatus = function(status) {
@@ -60,7 +60,7 @@ module.exports = {
           actions: {
             cancel: {
               label: 'Reload',
-              action: function() {
+              action() {
                 window.location.reload();
               }
             }

@@ -7,7 +7,7 @@ module.exports = Backgrid.Cell.extend({
     'click': '_onClick'
   },
 
-  _onClick: function() {
+  _onClick() {
     var self = this;
 
     this.$el.tooltip('hide');
@@ -24,7 +24,7 @@ module.exports = Backgrid.Cell.extend({
     });
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html('<i />');
 

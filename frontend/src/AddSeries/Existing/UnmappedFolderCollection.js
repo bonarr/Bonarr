@@ -5,7 +5,7 @@ var _ = require('underscore');
 module.exports = Backbone.Collection.extend({
   model: UnmappedFolderModel,
 
-  importItems: function(rootFolderModel) {
+  importItems(rootFolderModel) {
     this.reset();
     var rootFolder = rootFolderModel;
 

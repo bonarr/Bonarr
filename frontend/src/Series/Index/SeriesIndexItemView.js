@@ -12,7 +12,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-refresh': '_refreshSeries'
   },
 
-  onRender: function() {
+  onRender() {
     CommandController.bindToCommand({
       element: this.ui.refresh,
       command: {
@@ -22,11 +22,11 @@ module.exports = Marionette.ItemView.extend({
     });
   },
 
-  _editSeries: function() {
+  _editSeries() {
     vent.trigger(vent.Commands.EditSeries, { series: this.model });
   },
 
-  _refreshSeries: function() {
+  _refreshSeries() {
     CommandController.Execute('refreshSeries', {
       name: 'refreshSeries',
       seriesId: this.model.id

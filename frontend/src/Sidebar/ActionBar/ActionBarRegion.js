@@ -3,11 +3,11 @@ var Marionette = require('marionette');
 var region = Marionette.Region.extend({
   el: '#actionbar-region',
 
-  onShow: function() {
+  onShow() {
     Marionette.$('body').addClass('actionbar-visible');
   },
 
-  onClose: function() {
+  onClose() {
     Marionette.$('body').removeClass('actionbar-visible actionbar-extended');
   }
 });

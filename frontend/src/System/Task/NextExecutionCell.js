@@ -5,7 +5,7 @@ var UiSettings = require('Shared/UiSettingsModel');
 module.exports = NzbDroneCell.extend({
   className: 'next-execution-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var interval = this.model.get('interval');

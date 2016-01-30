@@ -16,18 +16,18 @@ module.exports = Marionette.Layout.extend({
     'click .x-select': '_selectQuality'
   },
 
-  initialize: function() {
+  initialize() {
     this.profileSchemaCollection = new ProfileSchemaCollection();
     this.profileSchemaCollection.fetch();
 
     this.listenTo(this.profileSchemaCollection, 'sync', this._showQuality);
   },
 
-  onRender: function() {
+  onRender() {
     this.quality.show(new LoadingView());
   },
 
-  _showQuality: function() {
+  _showQuality() {
     var qualities = _.map(this.profileSchemaCollection.first().get('items'), function(quality) {
       return quality.quality;
     });
@@ -36,7 +36,7 @@ module.exports = Marionette.Layout.extend({
     this.quality.show(this.selectQualityView);
   },
 
-  _selectQuality: function() {
+  _selectQuality() {
     this.trigger('manualimport:selected:quality', { quality: this.selectQualityView.selectedQuality() });
     vent.trigger(vent.Commands.CloseModal);
   }

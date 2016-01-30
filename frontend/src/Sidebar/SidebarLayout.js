@@ -28,7 +28,7 @@ module.exports = Marionette.Layout.extend({
     'mouseenter .x-nav-root': '_onRootHover'
   },
 
-  initialize: function() {
+  initialize() {
     var self = this;
     $('[data-toggle-state]').on('click', function(e) {
       e.preventDefault();
@@ -45,11 +45,11 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  serializeData: function() {
+  serializeData() {
     return items;
   },
 
-  onShow: function() {
+  onShow() {
     this.health.show(new HealthView());
     this.queue.show(new QueueView());
 
@@ -60,7 +60,7 @@ module.exports = Marionette.Layout.extend({
     this.$asideInner = this.$el;
   },
 
-  _onClick: function(event) {
+  _onClick(event) {
     event.preventDefault();
     var $target = $(event.target);
     var $li = $target.closest('li');
@@ -68,7 +68,7 @@ module.exports = Marionette.Layout.extend({
     this._closeSidebar($li);
   },
 
-  _onRootHover: function(event) {
+  _onRootHover(event) {
     this._removeFloatingNav();
 
     if (!this.$body.hasClass('aside-collapsed')) {
@@ -97,14 +97,14 @@ module.exports = Marionette.Layout.extend({
     }, this));
   },
 
-  _setActiveBasedOnUri: function() {
+  _setActiveBasedOnUri() {
     var location = window.location.pathname;
     var $href = this.$('a[href="' + location + '"]');
     var $li = $href.closest('li');
     this._setActive($li);
   },
 
-  _setActive: function(element) {
+  _setActive(element) {
     var $root = element.closest('.x-nav-root');
     var $subnav = $root.find('.sidebar-subnav');
 
@@ -118,12 +118,12 @@ module.exports = Marionette.Layout.extend({
     $root.addClass('active');
   },
 
-  _removeFloatingNav: function() {
+  _removeFloatingNav() {
     $('.sidebar-subnav.nav-floating').remove();
     this.ui.listItems.find('.open').removeClass('open');
   },
 
-  _closeSidebar: function(element) {
+  _closeSidebar(element) {
     if (element.hasClass('x-nav-root') && element.children('.x-nav-sub').length > 0) {
       return;
     }

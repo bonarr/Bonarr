@@ -10,7 +10,7 @@ module.exports = NzbDroneCell.extend({
     'click .x-delete': '_delete'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html('<i class="icon-sonarr-info x-details"></i>' +
       '<i class="icon-sonarr-delete x-delete"></i>');
@@ -18,11 +18,11 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _details: function() {
+  _details() {
     vent.trigger(vent.Commands.OpenFullscreenModal, new BlacklistDetailsLayout({ model: this.model }));
   },
 
-  _delete: function() {
+  _delete() {
     this.model.destroy();
   }
 });

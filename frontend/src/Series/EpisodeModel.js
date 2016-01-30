@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
     'update': window.Sonarr.ApiRoot + '/episode'
   },
 
-  sync: function(method, model, options) {
+  sync(method, model, options) {
     if (model.methodUrls && model.methodUrls[method.toLowerCase()]) {
       options = options || {};
       options.url = model.methodUrls[method.toLowerCase()];

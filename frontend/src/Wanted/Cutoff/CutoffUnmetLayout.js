@@ -66,19 +66,19 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new CutoffUnmetCollection().bindSignalR({ updateOnly: true });
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this.cutoff.show(new LoadingView());
     this.collection.fetch();
   },
 
-  _showTable: function() {
+  _showTable() {
     this.cutoffGrid = new Backgrid.Grid({
       columns: this.columns,
       collection: this.collection,
@@ -93,7 +93,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {
@@ -131,7 +131,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _setFilter: function(buttonContext) {
+  _setFilter(buttonContext) {
     var mode = buttonContext.model.get('key');
 
     this.collection.state.currentPage = 1;
@@ -142,7 +142,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _searchSelected: function() {
+  _searchSelected() {
     var selected = this.cutoffGrid.getSelectedModels();
 
     if (selected.length === 0) {

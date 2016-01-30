@@ -4,7 +4,7 @@ var Marionette = require('marionette');
 module.exports = Marionette.ItemView.extend({
   template: 'ManualImport/Summary/ManualImportSummaryViewTemplate',
 
-  initialize: function(options) {
+  initialize(options) {
     var episodes = _.map(options.episodes, function(episode) {
       return episode.toJSON();
     });

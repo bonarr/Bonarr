@@ -5,7 +5,7 @@ module.exports = Backbone.Collection.extend({
   model: IndexerModel,
   url: window.Sonarr.ApiRoot + '/indexer',
 
-  comparator: function(left, right, collection) {
+  comparator(left, right, collection) {
     var result = 0;
 
     if (left.get('protocol')) {

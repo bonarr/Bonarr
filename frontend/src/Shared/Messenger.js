@@ -2,7 +2,7 @@ require('messenger');
 
 var messenger = require('messenger');
 module.exports = {
-  show: function(options) {
+  show(options) {
     if (!options.type) {
       options.type = 'info';
     }
@@ -35,7 +35,7 @@ module.exports = {
     });
   },
 
-  monitor: function(options) {
+  monitor(options) {
     if (!options.promise) {
       throw 'promise is required';
     }

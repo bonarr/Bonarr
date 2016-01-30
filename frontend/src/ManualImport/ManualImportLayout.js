@@ -88,7 +88,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function(options) {
+  initialize(options) {
     this.folder = options.folder;
     this.downloadId = options.downloadId;
     this.title = options.title;
@@ -98,7 +98,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onRender: function() {
+  onRender() {
     if (this.folder || this.downloadId) {
       this._showLoading();
       this._loadCollection();
@@ -108,11 +108,11 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showLoading: function() {
+  _showLoading() {
     this.workspace.show(new LoadingView());
   },
 
-  _loadCollection: function() {
+  _loadCollection() {
     this.manualImportCollection = new ManualImportCollection({ folder: this.folder, downloadId: this.downloadId });
     this.manualImportCollection.fetch();
 
@@ -120,7 +120,7 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.manualImportCollection, 'backgrid:selected', this._updateButtons);
   },
 
-  _showTable: function() {
+  _showTable() {
     if (this.manualImportCollection.length === 0) {
       this.workspace.show(new EmptyView());
       return;
@@ -137,7 +137,7 @@ module.exports = Marionette.Layout.extend({
     this._updateButtons();
   },
 
-  _showSelectFolder: function() {
+  _showSelectFolder() {
     this.selectFolderView = new SelectFolderView();
     this.workspace.show(this.selectFolderView);
 
@@ -145,13 +145,13 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.selectFolderView, 'automaticImport', this._automaticImport);
   },
 
-  _manualImport: function(e) {
+  _manualImport(e) {
     this.folder = e.folder;
     this.templateHelpers.title = this.folder;
     this.render();
   },
 
-  _automaticImport: function(e) {
+  _automaticImport(e) {
     CommandController.Execute('downloadedEpisodesScan', {
       name: 'downloadedEpisodesScan',
       path: e.folder
@@ -160,7 +160,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _import: function() {
+  _import() {
     var selected = this.fileView.getSelectedModels();
 
     if (selected.length === 0) {
@@ -207,7 +207,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _updateButtons: function(model, selected) {
+  _updateButtons(model, selected) {
     if (!this.fileView) {
       this.ui.importButton.attr('disabled', 'disabled');
       return;
@@ -233,7 +233,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showErrorMessage: function(message) {
+  _showErrorMessage(message) {
     Messenger.show({
       message: message,
       type: 'error',

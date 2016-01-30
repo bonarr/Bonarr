@@ -6,7 +6,7 @@ module.exports = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/series/lookup',
   model: SeriesModel,
 
-  parse: function(response) {
+  parse(response) {
     var self = this;
 
     _.each(response, function(model) {

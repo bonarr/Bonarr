@@ -7,11 +7,11 @@ var AsValidatedView = require('Mixins/AsValidatedView');
 var view = Marionette.ItemView.extend({
   template: 'Settings/UI/UiView',
 
-  initialize: function() {
+  initialize() {
     this.listenTo(this.model, 'sync', this._reloadUiSettings);
   },
 
-  _reloadUiSettings: function() {
+  _reloadUiSettings() {
     UiSettingsModel.fetch();
   }
 });

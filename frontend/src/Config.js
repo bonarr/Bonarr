@@ -10,7 +10,7 @@ module.exports = {
     AdvancedSettings: 'advancedSettings'
   },
 
-  getValueJson: function(key, defaultValue) {
+  getValueJson(key, defaultValue) {
     defaultValue = defaultValue || {};
 
     var storeValue = window.localStorage.getItem(key);
@@ -22,13 +22,13 @@ module.exports = {
     return $.parseJSON(storeValue);
   },
 
-  getValueBoolean: function(key, defaultValue) {
+  getValueBoolean(key, defaultValue) {
     defaultValue = defaultValue || false;
 
     return this.getValue(key, defaultValue.toString()) === 'true';
   },
 
-  getValue: function(key, defaultValue) {
+  getValue(key, defaultValue) {
     var storeValue = window.localStorage.getItem(key);
 
     if (!storeValue) {
@@ -38,11 +38,11 @@ module.exports = {
     return storeValue.toString();
   },
 
-  setValueJson: function(key, value) {
+  setValueJson(key, value) {
     return this.setValue(key, JSON.stringify(value));
   },
 
-  setValue: function(key, value) {
+  setValue(key, value) {
     console.log('Config: [{0}] => [{1}]'.format(key, value));
 
     if (this.getValue(key) === value.toString()) {

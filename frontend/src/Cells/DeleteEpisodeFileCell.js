@@ -8,14 +8,14 @@ module.exports = Backgrid.Cell.extend({
     'click': '_onClick'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html('<i class="icon-sonarr-delete" title="Delete episode file from disk"></i>');
 
     return this;
   },
 
-  _onClick: function() {
+  _onClick() {
     var self = this;
 
     if (window.confirm('Are you sure you want to delete \'{0}\' from disk?'.format(this.model.get('path')))) {

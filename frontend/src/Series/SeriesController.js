@@ -4,7 +4,7 @@ var SeriesIndexLayout = require('./Index/SeriesIndexLayout');
 var SeriesDetailsLayout = require('./Details/SeriesDetailsLayout');
 
 module.exports = NzbDroneController.extend({
-  initialize: function() {
+  initialize() {
     this.route('', this.series);
     this.route('series', this.series);
     this.route('series/:query', this.seriesDetails);
@@ -12,12 +12,12 @@ module.exports = NzbDroneController.extend({
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
 
-  series: function() {
+  series() {
     this.setTitle('Sonarr');
     this.showMainRegion(new SeriesIndexLayout());
   },
 
-  seriesDetails: function(query) {
+  seriesDetails(query) {
     var series = SeriesCollection.where({ titleSlug: query });
 
     if (series.length) {

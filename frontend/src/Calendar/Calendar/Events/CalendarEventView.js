@@ -116,7 +116,7 @@ module.exports = Marionette.ItemView.extend({
     return moment(start).add('minutes', runtime).toISOString();
   },
 
-  _getStatusLevel: function() {
+  _getStatusLevel() {
     var hasFile = this.model.get('hasFile');
     var downloading = QueueCollection.findEpisode(this.model.get('id')) || this.model.get('grabbed');
     var currentTime = moment();

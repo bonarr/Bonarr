@@ -4,7 +4,7 @@ var SeriesCollection = require('../SeriesCollection');
 module.exports = NzbDroneCell.extend({
   className: 'episode-warning-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (SeriesCollection.get(this.model.get('seriesId')).get('seriesType') === 'anime') {

@@ -8,7 +8,7 @@ require('bootstrap');
 module.exports = NzbDroneCell.extend({
   className: 'episode-history-details-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html('<i class="icon-sonarr-form-info"></i>');
 

@@ -3,7 +3,7 @@ var NzbDroneCell = require('./NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'release-title-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var title = this.model.get('title');

@@ -22,7 +22,7 @@ $.fn.autoComplete = function(options) {
   }, {
     name: options.resource.replace('/'),
     displayKey: '',
-    source: function(filter, callback) {
+    source(filter, callback) {
       var data = {};
       data[options.query] = filter;
       $.ajax({
@@ -30,7 +30,7 @@ $.fn.autoComplete = function(options) {
         dataType: 'json',
         type: 'GET',
         data: data,
-        success: function(response) {
+        success(response) {
           if (options.filter) {
             options.filter.call(this, filter, response, callback);
           } else {

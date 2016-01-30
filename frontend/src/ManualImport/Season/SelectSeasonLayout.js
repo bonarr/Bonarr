@@ -8,13 +8,13 @@ module.exports = Marionette.Layout.extend({
     'change .x-select-season': '_selectSeason'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.templateHelpers = {
       seasons: options.seasons
     };
   },
 
-  _selectSeason: function(e) {
+  _selectSeason(e) {
     var seasonNumber = parseInt(e.target.value, 10);
 
     if (seasonNumber === -1) {

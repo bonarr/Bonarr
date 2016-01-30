@@ -12,7 +12,7 @@ var view = Marionette.ItemView.extend({
     recyclingBin: '.x-path'
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.recyclingBin.fileBrowser();
   }
 });

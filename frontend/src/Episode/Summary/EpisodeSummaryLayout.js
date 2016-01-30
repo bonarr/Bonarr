@@ -47,13 +47,13 @@ module.exports = Marionette.Layout.extend({
 
   templateHelpers: {},
 
-  initialize: function(options) {
+  initialize(options) {
     if (!this.model.series) {
       this.templateHelpers.series = options.series.toJSON();
     }
   },
 
-  onShow: function() {
+  onShow() {
     if (this.model.get('hasFile')) {
       var episodeFileId = this.model.get('episodeFileId');
 
@@ -83,7 +83,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showTable: function() {
+  _showTable() {
     this.activity.show(new Backgrid.Grid({
       collection: this.episodeFileCollection,
       columns: this.columns,
@@ -92,11 +92,11 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showNoFileView: function() {
+  _showNoFileView() {
     this.activity.show(new NoFileView());
   },
 
-  _collectionChanged: function() {
+  _collectionChanged() {
     if (!this.episodeFileCollection.any()) {
       this._showNoFileView();
     } else {
@@ -104,7 +104,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _episodeFileDeleted: function() {
+  _episodeFileDeleted() {
     this.model.set({
       episodeFileId: 0,
       hasFile: false

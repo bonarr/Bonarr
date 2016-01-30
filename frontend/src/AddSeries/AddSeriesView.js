@@ -25,7 +25,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-load-more': '_onLoadMore'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.isExisting = options.isExisting;
     this.collection = new AddSeriesCollection();
 
@@ -50,7 +50,7 @@ module.exports = Marionette.Layout.extend({
     this.throttledSearch = _.debounce(this.search, 1000, { trailing: true }).bind(this);
   },
 
-  onRender: function() {
+  onRender() {
     var self = this;
 
     this.$el.addClass(this.className);
@@ -91,11 +91,11 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.seriesSearch.focus();
   },
 
-  search: function(options) {
+  search(options) {
     var self = this;
 
     this.collection.reset();
@@ -117,7 +117,7 @@ module.exports = Marionette.Layout.extend({
     return this.currentSearchPromise;
   },
 
-  _onSeriesAdded: function(options) {
+  _onSeriesAdded(options) {
     if (this.isExisting && options.series.get('path') === this.model.get('folder').path) {
       this.close();
     } else if (!this.isExisting) {
@@ -129,7 +129,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _onLoadMore: function() {
+  _onLoadMore() {
     var showingAll = this.resultCollectionView.showMore();
     this.ui.searchBar.show();
 
@@ -138,7 +138,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _clearResults: function() {
+  _clearResults() {
     if (!this.isExisting) {
       this.searchResult.show(new EmptyView());
     } else {
@@ -146,7 +146,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showResults: function() {
+  _showResults() {
     if (!this.isClosed) {
       if (this.collection.length === 0) {
         this.ui.searchBar.show();
@@ -160,7 +160,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _abortExistingSearch: function() {
+  _abortExistingSearch() {
     if (this.currentSearchPromise && this.currentSearchPromise.readyState > 0 && this.currentSearchPromise.readyState < 4) {
       console.log('aborting previous pending search request.');
       this.currentSearchPromise.abort();
@@ -169,7 +169,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showError: function() {
+  _showError() {
     if (!this.isClosed) {
       this.ui.searchBar.show();
       this.searchResult.show(new ErrorView({ term: this.collection.term }));

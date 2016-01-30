@@ -3,11 +3,11 @@ var Marionette = require('marionette');
 module.exports = Marionette.CompositeView.extend({
   template: 'AddSeries/NotFoundViewTemplate',
 
-  initialize: function(options) {
+  initialize(options) {
     this.options = options;
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return this.options;
   }
 });

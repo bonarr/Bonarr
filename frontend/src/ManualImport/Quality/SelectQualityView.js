@@ -9,7 +9,7 @@ module.exports = Marionette.ItemView.extend({
     proper: 'x-proper'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.qualities = options.qualities;
 
     this.templateHelpers = {
@@ -17,7 +17,7 @@ module.exports = Marionette.ItemView.extend({
     };
   },
 
-  selectedQuality: function() {
+  selectedQuality() {
     var selected = parseInt(this.ui.select.val(), 10);
     var proper = this.ui.proper.prop('checked');
 

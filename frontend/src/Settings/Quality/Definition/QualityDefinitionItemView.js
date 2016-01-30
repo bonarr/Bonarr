@@ -25,12 +25,12 @@ var view = Marionette.ItemView.extend({
     'slide .x-slider': '_updateSize'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.profileCollection = options.profiles;
     this.filesize = fileSize;
   },
 
-  onRender: function() {
+  onRender() {
     if (this.model.get('quality').id === 0) {
       this.$el.addClass('row advanced-setting');
     }
@@ -49,7 +49,7 @@ var view = Marionette.ItemView.extend({
     this._changeSize();
   },
 
-  _updateSize: function(event, ui) {
+  _updateSize(event, ui) {
     var minSize = ui.values[0];
     var maxSize = ui.values[1];
 
@@ -63,7 +63,7 @@ var view = Marionette.ItemView.extend({
     this._changeSize();
   },
 
-  _changeSize: function() {
+  _changeSize() {
     var minSize = this.model.get('minSize') || this.slider.min;
     var maxSize = this.model.get('maxSize') || null;{
     var minBytes = minSize * 1024 * 1024;

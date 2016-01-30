@@ -8,7 +8,7 @@ var FormatHelpers = require('Shared/FormatHelpers');
 module.exports = NzbDroneCell.extend({
   className: 'episode-status-cell',
 
-  render: function() {
+  render() {
     this.listenTo(QueueCollection, 'sync', this._renderCell);
 
     this._renderCell();
@@ -16,7 +16,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _renderCell: function() {
+  _renderCell() {
     if (this.episodeFile) {
       this.stopListening(this.episodeFile, 'change', this._refresh);
     }
@@ -92,7 +92,7 @@ module.exports = NzbDroneCell.extend({
     }
   },
 
-  _getFile: function() {
+  _getFile() {
     var hasFile = this.model.get('hasFile');
 
     if (hasFile) {

@@ -7,7 +7,7 @@ var AsEditModalView = require('Mixins/AsEditModalView');
 var view = Marionette.ItemView.extend({
   template: 'Settings/Metadata/MetadataEditView',
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     vent.trigger(vent.Commands.CloseFullscreenModal);
   }
 });

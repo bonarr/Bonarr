@@ -4,7 +4,7 @@ var Backbone = require('backbone');
 module.exports = Backgrid.Cell.extend({
   _originalInit: Backgrid.Cell.prototype.initialize,
 
-  initialize: function() {
+  initialize() {
     this._originalInit.apply(this, arguments);
     this.cellValue = this._getValue();
 
@@ -19,12 +19,12 @@ module.exports = Backgrid.Cell.extend({
     }
   },
 
-  _refresh: function() {
+  _refresh() {
     this.cellValue = this._getValue();
     this.render();
   },
 
-  _getValue: function() {
+  _getValue() {
     var cellValue = this.column.get('cellValue');
 
     if (cellValue) {

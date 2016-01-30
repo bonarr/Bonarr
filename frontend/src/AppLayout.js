@@ -11,7 +11,7 @@ var AppLayout = Marionette.Layout.extend({
     mainRegion: '#main-region'
   },
 
-  initialize: function() {
+  initialize() {
     this.addRegions({
       actionBarRegion: ActionBarRegion,
       fullscreenModalRegion: FullscreenModalRegion,

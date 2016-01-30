@@ -18,11 +18,11 @@ var episodeCollection = PageableCollection.extend({
 
   originalFetch: Backbone.Collection.prototype.fetch,
 
-  initialize: function(options) {
+  initialize(options) {
     this.seriesId = options.seriesId;
   },
 
-  bySeason: function(season) {
+  bySeason(season) {
     var filtered = this.filter(function(episode) {
       return episode.get('seasonNumber') === season;
     });
@@ -32,7 +32,7 @@ var episodeCollection = PageableCollection.extend({
     return new EpisodeCollection(filtered);
   },
 
-  comparator: function(model1, model2) {
+  comparator(model1, model2) {
     var episode1 = model1.get('episodeNumber');
     var episode2 = model2.get('episodeNumber');
 
@@ -47,7 +47,7 @@ var episodeCollection = PageableCollection.extend({
     return 0;
   },
 
-  fetch: function(options) {
+  fetch(options) {
     if (!this.seriesId) {
       throw 'seriesId is required';
     }

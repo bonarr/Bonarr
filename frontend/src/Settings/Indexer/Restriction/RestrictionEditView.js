@@ -22,11 +22,11 @@ var view = Marionette.ItemView.extend({
 
   _deleteView: DeleteView,
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   },
 
-  onRender: function() {
+  onRender() {
     this.ui.required.tagsinput({
       trimValue: true,
       tagClass: 'label label-success'
@@ -43,7 +43,7 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.targetCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   }

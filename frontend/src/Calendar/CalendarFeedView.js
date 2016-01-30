@@ -15,7 +15,7 @@ module.exports = Marionette.Layout.extend({
     icalWebCalUrl:  `webcal://${window.location.host}${window.Sonarr.UrlBase}/feed/calendar/NzbDrone.ics?apikey=${window.Sonarr.ApiKey}`
   },
 
-  onShow: function() {
+  onShow() {
     this.ui.icalCopy.copyToClipboard(this.ui.icalUrl);
   }
 });

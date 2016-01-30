@@ -3,7 +3,7 @@ var NzbDroneCell = require('Cells/NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'progress-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.cellValue) {

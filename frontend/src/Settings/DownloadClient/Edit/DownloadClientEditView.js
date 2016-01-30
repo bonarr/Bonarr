@@ -22,11 +22,11 @@ var view = Marionette.ItemView.extend({
 
   _deleteView: DeleteView,
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   },
 
-  onShow: function() {
+  onShow() {
     if (this.ui.path.length > 0) {
       this.ui.modalBody.addClass('modal-overflow');
     }
@@ -34,17 +34,17 @@ var view = Marionette.ItemView.extend({
     this.ui.path.fileBrowser();
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.targetCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _onAfterSaveAndAdd: function() {
+  _onAfterSaveAndAdd() {
     this.targetCollection.add(this.model, { merge: true });
 
     require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
   },
-  _back: function() {
+  _back() {
     require('../Add/DownloadClientSchemaModal').open(this.targetCollection);
   }
 });

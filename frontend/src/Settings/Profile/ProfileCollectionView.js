@@ -18,15 +18,15 @@ module.exports = Marionette.CompositeView.extend({
     'click .x-add-card': '_addProfile'
   },
 
-  appendHtml: function(collectionView, itemView, index) {
+  appendHtml(collectionView, itemView, index) {
     collectionView.ui.addCard.before(itemView.el);
   },
 
-  _addProfile: function() {
+  _addProfile() {
     var self = this;
     var schemaCollection = new ProfileCollection();
     schemaCollection.fetch({
-      success: function(collection) {
+      success(collection) {
         var model = _.first(collection.models);
         model.set('id', undefined);
         model.set('name', '');

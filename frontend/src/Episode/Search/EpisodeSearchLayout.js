@@ -20,14 +20,14 @@ module.exports = Marionette.Layout.extend({
     'click .x-search-back': '_showButtons'
   },
 
-  initialize: function() {
+  initialize() {
     this.mainView = new ButtonsView();
     this.releaseCollection = new ReleaseCollection();
 
     this.listenTo(this.releaseCollection, 'sync', this._showSearchResults);
   },
 
-  onShow: function() {
+  onShow() {
     if (this.startManualSearch) {
       this._searchManual();
     } else {
@@ -35,7 +35,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _searchAuto: function(e) {
+  _searchAuto(e) {
     if (e) {
       e.preventDefault();
     }
@@ -47,7 +47,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _searchManual: function(e) {
+  _searchManual(e) {
     if (e) {
       e.preventDefault();
     }
@@ -57,16 +57,16 @@ module.exports = Marionette.Layout.extend({
     this.releaseCollection.fetchEpisodeReleases(this.model.id);
   },
 
-  _showMainView: function() {
+  _showMainView() {
     this.main.show(this.mainView);
   },
 
-  _showButtons: function() {
+  _showButtons() {
     this.mainView = new ButtonsView();
     this._showMainView();
   },
 
-  _showSearchResults: function() {
+  _showSearchResults() {
     if (this.releaseCollection.length === 0) {
       this.mainView = new NoResultsView();
     } else {

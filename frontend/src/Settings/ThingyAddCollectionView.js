@@ -1,13 +1,13 @@
 var Marionette = require('marionette');
 
 module.exports = Marionette.CompositeView.extend({
-  itemViewOptions: function() {
+  itemViewOptions() {
     return {
       targetCollection: this.targetCollection
     };
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   }
 });

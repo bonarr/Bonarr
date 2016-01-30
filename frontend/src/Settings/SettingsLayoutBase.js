@@ -5,7 +5,7 @@ var Marionette = require('marionette');
 var Config = require('Config');
 
 module.exports = Marionette.Layout.extend({
-  initialize: function(options) {
+  initialize(options) {
     if (options.action) {
       this.action = options.action.toLowerCase();
     }
@@ -15,11 +15,11 @@ module.exports = Marionette.Layout.extend({
     this._setAdvancedSettingsState();
   },
 
-  _save: function() {
+  _save() {
     vent.trigger(vent.Commands.SaveSettings);
   },
 
-  _setAdvancedSettingsState: function() {
+  _setAdvancedSettingsState() {
     var advanced = Config.getValueBoolean(Config.Keys.AdvancedSettings);
 
     if (advanced) {
@@ -27,7 +27,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _toggleAdvancedSettings: function() {
+  _toggleAdvancedSettings() {
     var advanced = Config.getValueBoolean(Config.Keys.AdvancedSettings);
     Config.setValue(Config.Keys.AdvancedSettings, !advanced);
 
@@ -38,7 +38,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {

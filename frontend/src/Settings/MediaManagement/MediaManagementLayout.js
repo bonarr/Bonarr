@@ -19,13 +19,13 @@ module.exports = SettingsLayoutBase.extend({
     permissions: '#permissions'
   },
 
-  initialize: function() {
+  initialize() {
     this.model = new MediaManagementSettingsModel();
     this.namingModel = new NamingModel();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = Marionette.$.when(this.model.fetch(), this.namingModel.fetch());
 
     promise.done(_.bind(function() {

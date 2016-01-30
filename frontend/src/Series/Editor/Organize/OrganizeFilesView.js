@@ -11,7 +11,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-confirm-organize': '_organize'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.series = options.series;
     this.templateHelpers = {
       numberOfSeries: this.series.length,
@@ -19,7 +19,7 @@ module.exports = Marionette.ItemView.extend({
     };
   },
 
-  _organize: function() {
+  _organize() {
     var seriesIds = _.pluck(this.series, 'id');
 
     CommandController.Execute('renameSeries', {

@@ -5,7 +5,7 @@ var HistoryLayout = require('./History/HistoryLayout');
 var BlacklistLayout = require('./Blacklist/BlacklistLayout');
 
 module.exports = NzbDroneController.extend({
-  initialize: function() {
+  initialize() {
     this.route('activity', this.queue);
     this.route('activity/queue', this.queue);
     this.route('activity/history', this.history);
@@ -14,17 +14,17 @@ module.exports = NzbDroneController.extend({
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
 
-  queue: function() {
+  queue() {
     this.setTitle('Queue');
     this.showMainRegion(new QueueLayout());
   },
 
-  history: function() {
+  history() {
     this.setTitle('History');
     this.showMainRegion(new HistoryLayout());
   },
 
-  blacklist: function() {
+  blacklist() {
     this.setTitle('Blacklist');
     this.showMainRegion(new BlacklistLayout());
   }

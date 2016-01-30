@@ -21,22 +21,22 @@ module.exports = Marionette.ItemView.extend({
     'click .x-recent-folder': '_selectRecentFolder'
   },
 
-  initialize: function() {
+  initialize() {
     this.templateHelpers = {
       recentFolders: Config.getValueJson('manualimport.recentfolders', [])
     };
   },
 
-  onRender: function() {
+  onRender() {
     this.ui.path.fileBrowser();
     this._updateButtons();
   },
 
-  path: function() {
+  path() {
     return this.ui.path.val();
   },
 
-  _manualImport: function() {
+  _manualImport() {
     var path = this.ui.path.val();
 
     if (path) {
@@ -45,7 +45,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _automaticImport: function() {
+  _automaticImport() {
     var path = this.ui.path.val();
 
     if (path) {
@@ -54,7 +54,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _updateButtons: function() {
+  _updateButtons() {
     if (this.ui.path.val()) {
       this.ui.buttons.removeAttr('disabled');
     } else {
@@ -62,13 +62,13 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _selectRecentFolder: function(e) {
+  _selectRecentFolder(e) {
     var path = $(e.target).closest('tr').data('path');
     this.ui.path.val(path);
     this.ui.path.trigger('change');
   },
 
-  _setRecentFolders: function(path) {
+  _setRecentFolders(path) {
     var recentFolders = Config.getValueJson('manualimport.recentfolders', []);
 
     recentFolders = _.filter(recentFolders, function(folder) {

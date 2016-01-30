@@ -36,12 +36,12 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function(options) {
+  initialize(options) {
     this.series = options.series;
     this.seasonNumber = options.seasonNumber;
   },
 
-  onRender: function() {
+  onRender() {
     this.episodes.show(new LoadingView());
 
     this.episodeCollection = new EpisodeCollection({ seriesId: this.series.id });
@@ -58,7 +58,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _selectEpisodes: function() {
+  _selectEpisodes() {
     var episodes = _.map(this.episodeView.getSelectedModels(), function(episode) {
       return episode.toJSON();
     });

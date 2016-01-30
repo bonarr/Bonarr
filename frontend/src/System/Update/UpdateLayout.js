@@ -11,19 +11,19 @@ module.exports = Marionette.Layout.extend({
     updates: '#x-updates'
   },
 
-  initialize: function() {
+  initialize() {
     this.updateCollection = new UpdateCollection();
 
     this.listenTo(this.updateCollection, 'sync', this._showUpdates);
   },
 
-  onRender: function() {
+  onRender() {
     this.updates.show(new LoadingView());
 
     this.updateCollection.fetch();
   },
 
-  _showUpdates: function() {
+  _showUpdates() {
     this.updates.show(new UpdateCollectionView({ collection: this.updateCollection }));
   }
 });

@@ -12,7 +12,7 @@ var GeneralLayout = require('./General/GeneralLayout');
 var UiLayout = require('./Ui/UiLayout');
 
 module.exports = NzbDroneController.extend({
-  initialize: function() {
+  initialize() {
     this.route('settings', this.mediamanagement);
     this.route('settings/mediamanagement', this.mediamanagement);
     this.route('settings/profiles', this.profiles);
@@ -27,54 +27,54 @@ module.exports = NzbDroneController.extend({
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
 
-  mediamanagement: function() {
+  mediamanagement() {
     this.setTitle('Media Management');
     this.showMainRegion(new MediaManagementLayout());
   },
 
-  profiles: function() {
+  profiles() {
     this.setTitle('Profiles');
     this.showMainRegion(new ProfileLayout());
   },
 
-  quality: function() {
+  quality() {
     this.setTitle('Quality');
     this.showMainRegion(new QualityLayout());
   },
 
-  indexers: function() {
+  indexers() {
     this.setTitle('Indexers');
     this.showMainRegion(new IndexerLayout());
   },
 
-  downloadclient: function() {
+  downloadclient() {
     this.setTitle('Download Client');
     this.showMainRegion(new DownloadClientLayout());
   },
 
-  connect: function() {
+  connect() {
     this.setTitle('Connect');
     this.showMainRegion(new NotificationLayout());
   },
 
-  metadata: function() {
+  metadata() {
     this.setTitle('Metadata');
     this.showMainRegion(new MetadataLayout());
   },
 
-  general: function() {
+  general() {
     this.setTitle('General');
     this.showMainRegion(new GeneralLayout());
   },
 
-  ui: function() {
+  ui() {
     this.setTitle('UI');
     this.showMainRegion(new UiLayout());
   },
 
-  setTitle: function(subTitle) {
+  setTitle(subTitle) {
     NzbDroneController.prototype.setTitle('Settings - ' + subTitle);
   },
 
-  _showActionBar: function() {}
+  _showActionBar() {}
 });

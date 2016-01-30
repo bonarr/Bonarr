@@ -10,7 +10,7 @@ module.exports = NzbDroneCell.extend({
     'click .x-failed': '_markAsFailed'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.model.get('eventType') === 'grabbed') {
@@ -20,7 +20,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _markAsFailed: function() {
+  _markAsFailed() {
     var url = window.Sonarr.ApiRoot + '/history/failed';
     var data = {
       id: this.model.get('id')

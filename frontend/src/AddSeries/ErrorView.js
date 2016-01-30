@@ -3,11 +3,11 @@ var Marionette = require('marionette');
 module.exports = Marionette.CompositeView.extend({
   template: 'AddSeries/ErrorViewTemplate',
 
-  initialize: function(options) {
+  initialize(options) {
     this.options = options;
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     var xhr = this.xhr;
 
     var data = {

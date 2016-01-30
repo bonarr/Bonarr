@@ -24,11 +24,11 @@ var view = Marionette.ItemView.extend({
     'change .x-protocol': '_updateModel'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   },
 
-  onRender: function() {
+  onRender() {
     if (this.model.id !== 1) {
       this.ui.tags.tagInput({
         model: this.model,
@@ -39,12 +39,12 @@ var view = Marionette.ItemView.extend({
     this._toggleControls();
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.targetCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _updateModel: function() {
+  _updateModel() {
     var protocol = this.ui.protocol.val();
 
     if (protocol === 'preferUsenet') {
@@ -82,7 +82,7 @@ var view = Marionette.ItemView.extend({
     this._toggleControls();
   },
 
-  _toggleControls: function() {
+  _toggleControls() {
     var enableUsenet = this.model.get('enableUsenet');
     var enableTorrent = this.model.get('enableTorrent');
     var preferred = this.model.get('preferredProtocol');

@@ -8,13 +8,13 @@ module.exports = function() {
 
     _originalInit: Backgrid.HeaderCell.prototype.initialize,
 
-    initialize: function(options) {
+    initialize(options) {
       this._originalInit.call(this, options);
 
       this.listenTo(this.collection, 'drone:sort', this.render);
     },
 
-    render: function() {
+    render() {
       this.$el.empty();
       this.$el.append(this.column.get('label'));
       if (this.column.get('tooltip')) {
@@ -56,7 +56,7 @@ module.exports = function() {
       return this;
     },
 
-    direction: function(dir) {
+    direction(dir) {
       this.$el.children('i.sort-direction-icon').removeClass('icon-sonarr-sort-asc icon-sonarr-sort-desc');
 
       if (arguments.length) {
@@ -81,7 +81,7 @@ module.exports = function() {
       return columnDirection;
     },
 
-    _getSortMapping: function() {
+    _getSortMapping() {
       var sortKey = this.collection.state.sortKey;
 
       if (this.collection._getSortMapping) {
@@ -94,7 +94,7 @@ module.exports = function() {
       };
     },
 
-    onClick: function(e) {
+    onClick(e) {
       e.preventDefault();
 
       var collection = this.collection;
@@ -125,7 +125,7 @@ module.exports = function() {
       }
     },
 
-    _resetCellDirection: function(columnToSort, direction) {
+    _resetCellDirection(columnToSort, direction) {
       if (columnToSort !== this.column) {
         this.direction(null);
       } else {
@@ -133,7 +133,7 @@ module.exports = function() {
       }
     },
 
-    _convertDirectionToIcon: function(dir) {
+    _convertDirectionToIcon(dir) {
       if (dir === 'ascending' || dir === -1) {
         return 'icon-sonarr-sort-asc';
       }
@@ -141,12 +141,12 @@ module.exports = function() {
       return 'icon-sonarr-sort-desc';
     },
 
-    _setSortIcon: function(dir) {
+    _setSortIcon(dir) {
       this._removeSortIcon();
       this.$el.children('i.sort-direction-icon').addClass(this._convertDirectionToIcon(dir));
     },
 
-    _removeSortIcon: function() {
+    _removeSortIcon() {
       this.$el.children('i.sort-direction-icon').removeClass('icon-sonarr-sort-asc icon-sonarr-sort-desc');
     }
   });

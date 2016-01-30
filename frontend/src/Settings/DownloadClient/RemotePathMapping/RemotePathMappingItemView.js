@@ -10,11 +10,11 @@ module.exports = Marionette.ItemView.extend({
     'click .x-edit': '_editMapping'
   },
 
-  initialize: function() {
+  initialize() {
     this.listenTo(this.model, 'sync', this.render);
   },
 
-  _editMapping: function() {
+  _editMapping() {
     var view = new EditView({
       model: this.model,
       targetCollection: this.model.collection

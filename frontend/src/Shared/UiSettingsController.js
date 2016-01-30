@@ -3,13 +3,13 @@ var _ = require('underscore');
 var UiSettingsModel = require('./UiSettingsModel');
 
 var UiSettingsController = {
-  appInitializer: function() {
+  appInitializer() {
     UiSettingsModel.on('sync', this._updateUiSettings);
 
     this._updateUiSettings();
   },
 
-  _updateUiSettings: function() {
+  _updateUiSettings() {
     if (UiSettingsModel.get('enableColorImpairedMode')) {
       $('body').addClass('color-impaired-mode');
     } else {

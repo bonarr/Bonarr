@@ -8,14 +8,14 @@ module.exports = NzbDroneCell.extend({
     'click': '_showDetails'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
     this.$el.html('<i class="icon-sonarr-info"></i>');
 
     return this;
   },
 
-  _showDetails: function() {
+  _showDetails() {
     vent.trigger(vent.Commands.ShowHistoryDetails, { model: this.model });
   }
 });

@@ -4,7 +4,7 @@ var Backbone = require('backbone');
 module.exports = Backbone.Model.extend({
   url: window.Sonarr.ApiRoot + '/command',
 
-  parse: function(response) {
+  parse(response) {
     response.name = response.name.toLocaleLowerCase();
     response.body.name = response.body.name.toLocaleLowerCase();
 
@@ -17,7 +17,7 @@ module.exports = Backbone.Model.extend({
     return response;
   },
 
-  isSameCommand: function(command) {
+  isSameCommand(command) {
     if (command.name.toLocaleLowerCase() !== this.get('name').toLocaleLowerCase()) {
       return false;
     }
@@ -37,11 +37,11 @@ module.exports = Backbone.Model.extend({
     return true;
   },
 
-  isActive: function() {
+  isActive() {
     return this.get('status') !== 'completed' && this.get('status') !== 'failed';
   },
 
-  isComplete: function() {
+  isComplete() {
     return this.get('status') === 'completed';
   }
 });

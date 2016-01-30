@@ -14,11 +14,11 @@ module.exports = Marionette.ItemView.extend({
     'click': 'onClick'
   },
 
-  initialize: function() {
+  initialize() {
     this.storageKey = this.model.get('menuKey') + ':' + this.model.get('key');
   },
 
-  onRender: function() {
+  onRender() {
     if (this.model.get('active')) {
       this.$el.addClass('active');
       this.invokeCallback();
@@ -29,7 +29,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  onClick: function() {
+  onClick() {
     if (this.model.get('active')) {
       return;
     }
@@ -39,7 +39,7 @@ module.exports = Marionette.ItemView.extend({
     this.trigger('click');
   },
 
-  invokeCallback: function() {
+  invokeCallback() {
     if (!this.model.ownerContext) {
       throw 'ownerContext must be set.';
     }

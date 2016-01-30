@@ -7,12 +7,12 @@ module.exports = Backbone.Collection.extend({
 
   originalFetch: Backbone.Collection.prototype.fetch,
 
-  initialize: function(options) {
+  initialize(options) {
     this.seriesId = options.seriesId;
     this.models = [];
   },
 
-  fetch: function(options) {
+  fetch(options) {
     if (!this.seriesId) {
       throw 'seriesId is required';
     }

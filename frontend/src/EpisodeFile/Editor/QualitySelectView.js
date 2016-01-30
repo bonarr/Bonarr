@@ -12,7 +12,7 @@ module.exports = Marionette.ItemView.extend({
     'change .x-select': '_changeSelect'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.qualities = options.qualities;
 
     this.templateHelpers = {
@@ -20,7 +20,7 @@ module.exports = Marionette.ItemView.extend({
     };
   },
 
-  _changeSelect: function() {
+  _changeSelect() {
     var value = this.ui.select.val();
 
     if (value === 'choose') {

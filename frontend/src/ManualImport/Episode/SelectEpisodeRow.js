@@ -15,7 +15,7 @@ const SelectTableRow = TableRow.extend({
     'click': '_toggle'
   }),
 
-  _toggle: function(e) {
+  _toggle(e) {
     if (e.target.type === 'checkbox') {
       return;
     }

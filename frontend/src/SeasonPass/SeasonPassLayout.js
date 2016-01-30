@@ -44,7 +44,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.seriesCollection = SeriesCollection.clone();
     this.seriesCollection.shadowCollection.bindSignalR();
 
@@ -53,16 +53,16 @@ module.exports = Marionette.Layout.extend({
     this._showActionBar();
   },
 
-  onRender: function() {
+  onRender() {
     this._showTable();
     this._showFooter();
   },
 
-  onClose: function() {
+  onClose() {
     vent.trigger(vent.Commands.CloseControlPanel);
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var filteringOptions = {
       type: 'radio',
       storeState: true,
@@ -99,7 +99,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showTable: function() {
+  _showTable() {
     if (this.seriesCollection.shadowCollection.length === 0) {
       this.series.show(new EmptyView());
       return;
@@ -117,14 +117,14 @@ module.exports = Marionette.Layout.extend({
     this._showFooter();
   },
 
-  _showFooter: function() {
+  _showFooter() {
     vent.trigger(vent.Commands.OpenControlPanel, new FooterView({
       editorGrid: this.editorGrid,
       collection: this.seriesCollection
     }));
   },
 
-  _setFilter: function(buttonContext) {
+  _setFilter(buttonContext) {
     var mode = buttonContext.model.get('key');
 
     this.seriesCollection.setFilterMode(mode);

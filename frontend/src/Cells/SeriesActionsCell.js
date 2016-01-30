@@ -14,7 +14,7 @@ module.exports = NzbDroneCell.extend({
     'click .x-refresh': '_refreshSeries'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     this.$el.html('<i class="icon-sonarr-refresh x-refresh hidden-xs" title="" data-original-title="Update series info and scan disk"></i> ' +
@@ -32,11 +32,11 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _editSeries: function() {
+  _editSeries() {
     vent.trigger(vent.Commands.EditSeries, { series: this.model });
   },
 
-  _refreshSeries: function() {
+  _refreshSeries() {
     CommandController.Execute('refreshSeries', {
       name: 'refreshSeries',
       seriesId: this.model.id

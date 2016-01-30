@@ -7,18 +7,18 @@ module.exports = Marionette.CompositeView.extend({
   template: tpl,
   itemViewContainer: '.x-sorting-list',
 
-  initialize: function(options) {
+  initialize(options) {
     this.viewCollection = options.viewCollection;
     this.listenTo(this.viewCollection, 'drone:sort', this.sort);
   },
 
-  itemViewOptions: function() {
+  itemViewOptions() {
     return {
       viewCollection: this.viewCollection
     };
   },
 
-  sort: function(sortModel, sortDirection) {
+  sort(sortModel, sortDirection) {
     var collection = this.viewCollection;
 
     var order;

@@ -50,7 +50,7 @@ var Collection = PageableCollection.extend({
     'series': { sortKey: 'series.sortTitle' }
   },
 
-  initialize: function(options) {
+  initialize(options) {
     delete this.queryParams.episodeId;
 
     if (options) {
@@ -60,11 +60,11 @@ var Collection = PageableCollection.extend({
     }
   },
 
-  parseState: function(resp) {
+  parseState(resp) {
     return { totalRecords: resp.totalRecords };
   },
 
-  parseRecords: function(resp) {
+  parseRecords(resp) {
     if (resp) {
       return resp.records;
     }

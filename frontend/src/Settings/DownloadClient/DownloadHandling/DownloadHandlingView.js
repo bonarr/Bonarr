@@ -17,7 +17,7 @@ var view = Marionette.ItemView.extend({
     'change .x-failed-auto-redownload': '_setFailedDownloadOptionsVisibility'
   },
 
-  onRender: function() {
+  onRender() {
     if (!this.ui.completedDownloadHandlingCheckbox.prop('checked')) {
       this.ui.completedDownloadOptions.hide();
     }
@@ -26,7 +26,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _setCompletedDownloadOptionsVisibility: function() {
+  _setCompletedDownloadOptionsVisibility() {
     var checked = this.ui.completedDownloadHandlingCheckbox.prop('checked');
     if (checked) {
       this.ui.completedDownloadOptions.slideDown();
@@ -35,7 +35,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _setFailedDownloadOptionsVisibility: function() {
+  _setFailedDownloadOptionsVisibility() {
     var checked = this.ui.failedAutoRedownladCheckbox.prop('checked');
     if (checked) {
       this.ui.failedDownloadOptions.slideDown();

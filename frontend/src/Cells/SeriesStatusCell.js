@@ -3,7 +3,7 @@ var NzbDroneCell = require('./NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'series-status-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
     var monitored = this.model.get('monitored');
     var status = this.model.get('status');
@@ -22,7 +22,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _setStatusWeight: function(weight) {
+  _setStatusWeight(weight) {
     this.model.set('statusWeight', weight, { silent: true });
   }
 });

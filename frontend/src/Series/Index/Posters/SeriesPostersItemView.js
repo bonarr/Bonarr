@@ -6,5 +6,5 @@ module.exports = SeriesIndexItemView.extend({
   className: 'series-poster-item',
   template: tpl,
 
-  initialize: function() {}
+  initialize() {}
 });

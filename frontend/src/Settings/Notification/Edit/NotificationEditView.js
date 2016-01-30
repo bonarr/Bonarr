@@ -30,11 +30,11 @@ var view = Marionette.ItemView.extend({
 
   _deleteView: DeleteView,
 
-  initialize: function(options) {
+  initialize(options) {
     this.targetCollection = options.targetCollection;
   },
 
-  onRender: function() {
+  onRender() {
     this._onDownloadChanged();
 
     this.ui.tags.tagInput({
@@ -48,7 +48,7 @@ var view = Marionette.ItemView.extend({
     });
   },
 
-  onShow: function() {
+  onShow() {
     if (this.ui.path.length > 0) {
       this.ui.modalBody.addClass('modal-overflow');
     }
@@ -56,18 +56,18 @@ var view = Marionette.ItemView.extend({
     this.ui.path.fileBrowser();
   },
 
-  _onAfterSave: function() {
+  _onAfterSave() {
     this.targetCollection.add(this.model, { merge: true });
     vent.trigger(vent.Commands.CloseFullscreenModal);
   },
 
-  _onAfterSaveAndAdd: function() {
+  _onAfterSaveAndAdd() {
     this.targetCollection.add(this.model, { merge: true });
 
     require('../Add/NotificationSchemaModal').open(this.targetCollection);
   },
 
-  _back: function() {
+  _back() {
     if (this.model.isNew()) {
       this.model.destroy();
     }
@@ -75,7 +75,7 @@ var view = Marionette.ItemView.extend({
     require('../Add/NotificationSchemaModal').open(this.targetCollection);
   },
 
-  _onDownloadChanged: function() {
+  _onDownloadChanged() {
     var checked = this.ui.onDownloadToggle.prop('checked');
 
     if (checked) {
@@ -85,7 +85,7 @@ var view = Marionette.ItemView.extend({
     }
   },
 
-  _onAuthorizeNotification: function() {
+  _onAuthorizeNotification() {
     this.ui.indicator.show();
 
     var promise = this.model.connectData(this.ui.authorizedNotificationButton.data('value') + '?callbackUrl=' + callbackUrl);

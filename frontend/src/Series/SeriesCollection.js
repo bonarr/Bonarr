@@ -9,7 +9,7 @@ var SeriesCollection = Backbone.Collection.extend({
   model: SeriesModel,
   tableName: 'series',
 
-  save: function() {
+  save() {
     var self = this;
 
     var proxy = _.extend(new Backbone.Model(), {
@@ -17,7 +17,7 @@ var SeriesCollection = Backbone.Collection.extend({
 
       url: self.url + '/editor',
 
-      toJSON: function() {
+      toJSON() {
         return self.filter(function(model) {
           return model.edited;
         });
@@ -59,7 +59,7 @@ var SeriesCollection = Backbone.Collection.extend({
     },
 
     nextAiring: {
-      sortValue: function(model, attr, order) {
+      sortValue(model, attr, order) {
         var nextAiring = model.get(attr);
 
         if (nextAiring) {
@@ -75,7 +75,7 @@ var SeriesCollection = Backbone.Collection.extend({
     },
 
     percentOfEpisodes: {
-      sortValue: function(model, attr) {
+      sortValue(model, attr) {
         var percentOfEpisodes = model.get(attr);
         var episodeCount = model.get('episodeCount');
 
@@ -84,7 +84,7 @@ var SeriesCollection = Backbone.Collection.extend({
     },
 
     path: {
-      sortValue: function(model) {
+      sortValue(model) {
         var path = model.get('path');
 
         return path.toLowerCase();

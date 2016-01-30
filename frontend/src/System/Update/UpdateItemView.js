@@ -8,11 +8,11 @@ module.exports = Marionette.ItemView.extend({
     'click .x-install-update': '_installUpdate'
   },
 
-  initialize: function() {
+  initialize() {
     this.updating = false;
   },
 
-  _installUpdate: function() {
+  _installUpdate() {
     if (this.updating) {
       return;
     }

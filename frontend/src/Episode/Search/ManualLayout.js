@@ -73,7 +73,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  onShow: function() {
+  onShow() {
     if (!this.isClosed) {
       this.grid.show(new Backgrid.Grid({
         row: Backgrid.Row,

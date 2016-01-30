@@ -13,13 +13,13 @@ module.exports = Marionette.ItemView.extend({
     indicator: '.x-indicator'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.templateHelpers = {
       showBlacklist: options.showBlacklist
     };
   },
 
-  removeItem: function() {
+  removeItem() {
     var blacklist = this.ui.blacklist.prop('checked') || false;
 
     this.ui.indicator.show();

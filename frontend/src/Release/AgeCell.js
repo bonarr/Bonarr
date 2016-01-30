@@ -6,7 +6,7 @@ var FormatHelpers = require('Shared/FormatHelpers');
 module.exports = Backgrid.Cell.extend({
   className: 'age-cell',
 
-  render: function() {
+  render() {
     var age = this.model.get('age');
     var ageHours = this.model.get('ageHours');
     var ageMinutes = this.model.get('ageMinutes');

@@ -48,20 +48,20 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.taskCollection = new BackupCollection();
 
     this.listenTo(this.taskCollection, 'sync', this._showTasks);
     this.taskCollection.bindSignalR();
   },
 
-  onRender: function() {
+  onRender() {
     this.tasks.show(new LoadingView());
 
     this.taskCollection.fetch();
   },
 
-  _showTasks: function() {
+  _showTasks() {
     this.tasks.show(new Backgrid.Grid({
       columns: this.columns,
       collection: this.taskCollection,

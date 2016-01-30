@@ -15,7 +15,7 @@ module.exports = Marionette.ItemView.extend({
     indicator: '.x-indicator'
   },
 
-  removeSeries: function() {
+  removeSeries() {
     var self = this;
     var deleteFiles = this.ui.deleteFiles.prop('checked');
     this.ui.indicator.show();
@@ -29,7 +29,7 @@ module.exports = Marionette.ItemView.extend({
     });
   },
 
-  changeDeletedFiles: function() {
+  changeDeletedFiles() {
     var deleteFiles = this.ui.deleteFiles.prop('checked');
 
     if (deleteFiles) {

@@ -8,7 +8,7 @@ module.exports = NzbDroneCell.extend({
   showSeconds : false,
   showSecondsOnTooltip : false,
 
-  render : function() {
+  render () {
 
     var dateStr = this.model.get(this.column.get('name'));
 

@@ -3,7 +3,7 @@ var Backgrid = require('backgrid');
 module.exports = Backgrid.Cell.extend({
   className: 'disk-space-path-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var path = this.model.get('path');

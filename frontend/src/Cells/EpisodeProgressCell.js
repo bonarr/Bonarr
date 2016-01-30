@@ -5,7 +5,7 @@ module.exports = NzbDroneCell.extend({
   className: 'episode-progress-cell',
   template: 'Cells/EpisodeProgressCellTemplate',
 
-  render: function() {
+  render() {
     var episodeCount = this.model.get('episodeCount');
     var episodeFileCount = this.model.get('episodeFileCount');
 

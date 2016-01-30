@@ -8,7 +8,7 @@ module.exports = ToggleCell.extend({
 
   _originalOnClick: ToggleCell.prototype._onClick,
 
-  _onClick: function(e) {
+  _onClick(e) {
     var series = SeriesCollection.get(this.model.get('seriesId'));
 
     if (!series.get('monitored')) {
@@ -31,7 +31,7 @@ module.exports = ToggleCell.extend({
     this.model.episodeCollection.lastToggled = this.model;
   },
 
-  _selectRange: function() {
+  _selectRange() {
     var episodeCollection = this.model.episodeCollection;
     var lastToggled = episodeCollection.lastToggled;
 

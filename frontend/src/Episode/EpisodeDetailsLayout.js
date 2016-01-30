@@ -30,7 +30,7 @@ module.exports = Marionette.Layout.extend({
 
   templateHelpers: {},
 
-  initialize: function(options) {
+  initialize(options) {
     this.templateHelpers.hideSeriesLink = options.hideSeriesLink;
 
     this.series = SeriesCollection.get(this.model.get('seriesId'));
@@ -40,7 +40,7 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this.model, 'sync', this._setMonitoredState);
   },
 
-  onShow: function() {
+  onShow() {
     this.searchLayout = new SearchLayout({ model: this.model });
 
     if (this.openingTab === 'search') {
@@ -59,7 +59,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showSummary: function(e) {
+  _showSummary(e) {
     if (e) {
       e.preventDefault();
     }
@@ -71,7 +71,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showHistory: function(e) {
+  _showHistory(e) {
     if (e) {
       e.preventDefault();
     }
@@ -83,7 +83,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showSearch: function(e) {
+  _showSearch(e) {
     if (e) {
       e.preventDefault();
     }
@@ -92,7 +92,7 @@ module.exports = Marionette.Layout.extend({
     this.search.show(this.searchLayout);
   },
 
-  _toggleMonitored: function() {
+  _toggleMonitored() {
     if (!this.series.get('monitored')) {
 
       Messenger.show({
@@ -110,7 +110,7 @@ module.exports = Marionette.Layout.extend({
     this.model.save();
   },
 
-  _setMonitoredState: function() {
+  _setMonitoredState() {
     this.ui.monitored.removeClass('fa-spin icon-sonarr-spinner');
 
     if (this.model.get('monitored')) {

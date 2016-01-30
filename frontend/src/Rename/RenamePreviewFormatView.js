@@ -5,7 +5,7 @@ var NamingModel = require('../Settings/MediaManagement/Naming/NamingModel');
 module.exports = Marionette.ItemView.extend({
   template: 'Rename/RenamePreviewFormatView',
 
-  templateHelpers: function() {
+  templateHelpers() {
     var type = this.model.get('seriesType');
     return {
       rename: this.naming.get('renameEpisodes'),
@@ -13,7 +13,7 @@ module.exports = Marionette.ItemView.extend({
     };
   },
 
-  initialize: function() {
+  initialize() {
     this.naming = new NamingModel();
     this.naming.fetch();
     this.listenTo(this.naming, 'sync', this.render);

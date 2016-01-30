@@ -8,7 +8,7 @@ module.exports = Marionette.CompositeView.extend({
   template: 'Sidebar/ActionBar/Filtering/FilteringCollectionViewTemplate',
   itemViewContainer: '.x-filtering-list',
 
-  initialize: function(options) {
+  initialize(options) {
     this.menu = options.menu;
     this.viewCollection = options.viewCollection;
     this._setActive();
@@ -16,13 +16,13 @@ module.exports = Marionette.CompositeView.extend({
     this.listenTo(this.viewCollection, 'sonarr:filter', this._filter);
   },
 
-  itemViewOptions: function() {
+  itemViewOptions() {
     return {
       viewCollection: this.viewCollection
     };
   },
 
-  _setActive: function() {
+  _setActive() {
     var storedKey = this.menu.defaultAction;
 
     if (this.menu.storeState) {
@@ -42,7 +42,7 @@ module.exports = Marionette.CompositeView.extend({
     });
   },
 
-  _filter: function(model) {
+  _filter(model) {
     if (this.menu.storeState) {
       Config.setValue(this.menu.menuKey, model.get('key'));
     }
@@ -59,7 +59,7 @@ module.exports = Marionette.CompositeView.extend({
     return this;
   },
 
-  _setInitialFilter: function() {
+  _setInitialFilter() {
     if (this.menu.storeState) {
       var mode = Config.getValue(this.menu.menuKey);
 
@@ -71,7 +71,7 @@ module.exports = Marionette.CompositeView.extend({
     this._filterCollection();
   },
 
-  _filterCollection: function() {
+  _filterCollection() {
     if (this.viewCollection.mode === 'server') {
       this.viewCollection.state.currentPage = 1;
       this.viewCollection.fetch();

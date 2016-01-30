@@ -19,11 +19,11 @@ var view = Marionette.ItemView.extend({
     'click': '_editProfile'
   },
 
-  initialize: function() {
+  initialize() {
     this.listenTo(this.model, 'sync', this.render);
   },
 
-  _editProfile: function() {
+  _editProfile() {
     var view = new EditProfileView({
       model: this.model,
       profileCollection: this.model.collection

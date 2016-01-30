@@ -9,7 +9,7 @@ module.exports = NzbDroneCell.extend({
     'click': '_onClick'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var series = this.model.get('series');
@@ -22,7 +22,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _onClick: function() {
+  _onClick() {
     var view = new SelectSeriesLayout();
 
     this.listenTo(view, 'manualimport:selected:series', this._setSeries);
@@ -30,7 +30,7 @@ module.exports = NzbDroneCell.extend({
     vent.trigger(vent.Commands.OpenModal, view);
   },
 
-  _setSeries: function(e) {
+  _setSeries(e) {
     if (this.model.has('series') && e.model.id === this.model.get('series').id) {
       return;
     }

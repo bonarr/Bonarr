@@ -5,7 +5,7 @@ var SchemaCollection = require('../IndexerCollection');
 var AddCollectionView = require('./IndexerAddCollectionView');
 
 module.exports = {
-  open: function(collection) {
+  open(collection) {
     var schemaCollection = new SchemaCollection();
     var originalUrl = schemaCollection.url;
     schemaCollection.url = schemaCollection.url + '/schema';

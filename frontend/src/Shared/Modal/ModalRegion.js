@@ -7,14 +7,14 @@ const ModalRegion = Marionette.Region.extend({
   el: '#modal-region',
   backdrop: true,
 
-  getEl: function(selector) {
+  getEl(selector) {
     var $el = $(selector);
     $el.on('hide.bs.modal', _.bind(this.onBootstrapHide, this));
     $el.on('show.bs.modal', _.bind(this.onBootstrapShow, this));
     return $el;
   },
 
-  onShow: function() {
+  onShow() {
     this.$el.css('z-index', '1060');
 
     this.currentView.$el.addClass('modal-dialog');
@@ -39,11 +39,11 @@ const ModalRegion = Marionette.Region.extend({
     this.currentView.trigger('modal:afterShow');
   },
 
-  onBootstrapHide: function() {
+  onBootstrapHide() {
     this.close();
   },
 
-  onViewClose: function() {
+  onViewClose() {
     this.$el.modal('hide');
     this.stopListening(this.currentView);
     this.close();

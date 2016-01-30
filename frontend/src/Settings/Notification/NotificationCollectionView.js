@@ -15,11 +15,11 @@ module.exports = Marionette.CompositeView.extend({
     'click .x-add-card': '_openSchemaModal'
   },
 
-  appendHtml: function(collectionView, itemView, index) {
+  appendHtml(collectionView, itemView, index) {
     collectionView.ui.addCard.before(itemView.el);
   },
 
-  _openSchemaModal: function() {
+  _openSchemaModal() {
     SchemaModal.open(this.collection);
   }
 });

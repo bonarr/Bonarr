@@ -10,7 +10,7 @@ module.exports = NzbDroneCell.extend({
     'click .x-manual-search': '_manualSearch'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     this.$el.html('<i class="icon-sonarr-search x-automatic-search" title="Automatic Search"></i>' + '<i class="icon-sonarr-search-manual x-manual-search" title="Manual Search"></i>');
@@ -27,14 +27,14 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _automaticSearch: function() {
+  _automaticSearch() {
     CommandController.Execute('episodeSearch', {
       name: 'episodeSearch',
       episodeIds: [this.model.get('id')]
     });
   },
 
-  _manualSearch: function() {
+  _manualSearch() {
     vent.trigger(vent.Commands.ShowEpisodeDetails, {
       episode: this.cellValue,
       hideSeriesLink: true,

@@ -3,7 +3,7 @@ var _ = require('underscore');
 var BackgridSelectAll = require('backgrid.selectall');
 
 module.exports = BackgridSelectAll.extend({
-  enterEditMode: function(e) {
+  enterEditMode(e) {
     var collection = this.column.get('sortedCollection') || this.model.collection;
 
     if (e.shiftKey && collection.lastToggled) {
@@ -16,13 +16,13 @@ module.exports = BackgridSelectAll.extend({
     collection.checked = checked;
   },
 
-  onChange: function(e) {
+  onChange(e) {
     var checked = $(e.target).prop('checked');
     this.$el.parent().toggleClass('selected', checked);
     this.model.trigger('backgrid:selected', this.model, checked);
   },
 
-  _selectRange: function(collection) {
+  _selectRange(collection) {
     var lastToggled = collection.lastToggled;
     var checked = collection.checked;
 

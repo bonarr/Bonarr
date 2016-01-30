@@ -31,7 +31,7 @@ module.exports = Marionette.Layout.extend({
     'click .x-delete-files': '_deleteFiles'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     if (!options.series) {
       throw 'series is required';
     }
@@ -54,12 +54,12 @@ module.exports = Marionette.Layout.extend({
     this._getColumns();
   },
 
-  onRender: function() {
+  onRender() {
     this._getQualities();
     this._showEpisodes();
   },
 
-  _getColumns: function() {
+  _getColumns() {
     var episodeCell = {};
 
     if (this.model) {
@@ -102,7 +102,7 @@ module.exports = Marionette.Layout.extend({
     ];
   },
 
-  _showEpisodes: function() {
+  _showEpisodes() {
     if (this.filteredEpisodes.length === 0) {
       this.episodeGrid.show(new EmptyView());
       return;
@@ -119,14 +119,14 @@ module.exports = Marionette.Layout.extend({
     this.episodeGrid.show(this.episodeGridView);
   },
 
-  _setInitialSort: function() {
+  _setInitialSort() {
     if (!this.model) {
       this.filteredEpisodes.setSorting('seasonEpisode', 1, { sortValue: this._seasonEpisodeSorter });
       this.filteredEpisodes.fullCollection.sort();
     }
   },
 
-  _getQualities: function() {
+  _getQualities() {
     var self = this;
 
     var profileSchemaCollection = new ProfileSchemaCollection();
@@ -142,7 +142,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _changeQuality: function(options) {
+  _changeQuality(options) {
     var newQuality = {
       quality: options.selected,
       revision: {
@@ -162,7 +162,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _deleteFiles: function() {
+  _deleteFiles() {
     if (!window.confirm('Are you sure you want to delete the episode files for the selected episodes?')) {
       return;
     }
@@ -182,13 +182,13 @@ module.exports = Marionette.Layout.extend({
     }, this);
   },
 
-  _getSelectedEpisodeFileIds: function() {
+  _getSelectedEpisodeFileIds() {
     return _.uniq(_.map(this.episodeGridView.getSelectedModels(), function(episode) {
       return episode.get('episodeFileId');
     }));
   },
 
-  _seasonEpisodeSorter: function(model, attr) {
+  _seasonEpisodeSorter(model, attr) {
     var seasonNumber = FormatHelpers.pad(model.get('seasonNumber'), 4, 0);
     var episodeNumber = FormatHelpers.pad(model.get('episodeNumber'), 4, 0);
 

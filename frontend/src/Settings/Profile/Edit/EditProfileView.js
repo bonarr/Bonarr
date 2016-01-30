@@ -10,13 +10,13 @@ var view = Marionette.ItemView.extend({
 
   ui: { cutoff: '.x-cutoff' },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       languages: LanguageCollection.toJSON()
     };
   },
 
-  getCutoff: function() {
+  getCutoff() {
     var self = this;
 
     return _.findWhere(_.pluck(this.model.get('items'), 'quality'), { id: parseInt(self.ui.cutoff.val(), 10) });

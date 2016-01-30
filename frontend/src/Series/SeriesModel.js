@@ -16,7 +16,7 @@ module.exports = Backbone.Model.extend({
     return `${window.Sonarr.UrlBase}series/${slug}`;
   },
 
-  setSeasonMonitored: function(seasonNumber) {
+  setSeasonMonitored(seasonNumber) {
     _.each(this.get('seasons'), (season) => {
       if (season.seasonNumber === seasonNumber) {
         season.monitored = !season.monitored;
@@ -24,7 +24,7 @@ module.exports = Backbone.Model.extend({
     });
   },
 
-  setSeasonPass: function(seasonNumber) {
+  setSeasonPass(seasonNumber) {
     _.each(this.get('seasons'), (season) => {
       if (season.seasonNumber >= seasonNumber) {
         season.monitored = true;

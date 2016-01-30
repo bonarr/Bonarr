@@ -19,7 +19,7 @@ var QueueCollection = PageableCollection.extend({
 
   mode: 'client',
 
-  findEpisode: function(episodeId) {
+  findEpisode(episodeId) {
     return _.find(this.fullCollection.models, function(queueModel) {
       return queueModel.get('episode').id === episodeId;
     });
@@ -27,7 +27,7 @@ var QueueCollection = PageableCollection.extend({
 
   sortMappings: {
     series: {
-      sortValue: function(model, attr) {
+      sortValue(model, attr) {
         var series = model.get(attr);
 
         return series.get('sortTitle');
@@ -35,7 +35,7 @@ var QueueCollection = PageableCollection.extend({
     },
 
     episode: {
-      sortValue: function(model, attr) {
+      sortValue(model, attr) {
         var episode = model.get('episode');
 
         return FormatHelpers.pad(episode.get('seasonNumber'), 4) + FormatHelpers.pad(episode.get('episodeNumber'), 4);
@@ -43,7 +43,7 @@ var QueueCollection = PageableCollection.extend({
     },
 
     episodeTitle: {
-      sortValue: function(model, attr) {
+      sortValue(model, attr) {
         var episode = model.get('episode');
 
         return episode.get('title');
@@ -51,7 +51,7 @@ var QueueCollection = PageableCollection.extend({
     },
 
     timeleft: {
-      sortValue: function(model, attr) {
+      sortValue(model, attr) {
         var eta = model.get('estimatedCompletionTime');
 
         if (eta) {
@@ -63,7 +63,7 @@ var QueueCollection = PageableCollection.extend({
     },
 
     sizeleft : {
-      sortValue : function(model, attr) {
+      sortValue (model, attr) {
         var size = model.get('size');
         var sizeleft = model.get('sizeleft');
 

@@ -14,11 +14,11 @@ module.exports = Marionette.Layout.extend({
     'click .x-mark-as-failed': '_markAsFailed'
   },
 
-  onShow: function() {
+  onShow() {
     this.bodyRegion.show(new HistoryDetailsView({ model: this.model }));
   },
 
-  _markAsFailed: function() {
+  _markAsFailed() {
     var url = window.Sonarr.ApiRoot + '/history/failed';
     var data = {
       id: this.model.get('id')

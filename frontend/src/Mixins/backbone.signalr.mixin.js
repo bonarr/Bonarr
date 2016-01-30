@@ -5,7 +5,7 @@ var Backbone = require('backbone');
 require('signalR');
 
 module.exports = _.extend(Backbone.Collection.prototype, {
-  bindSignalR: function(bindOptions) {
+  bindSignalR(bindOptions) {
     var collection = this;
     bindOptions = bindOptions || {};
 

@@ -4,18 +4,18 @@ var Marionette = require('marionette');
 var region = Marionette.Region.extend({
   el: '#control-panel-region',
 
-  constructor: function() {
+  constructor() {
     Backbone.Marionette.Region.prototype.constructor.apply(this, arguments);
     this.on('show', this.showPanel, this);
   },
 
-  getEl: function(selector) {
+  getEl(selector) {
     var $el = $(selector);
 
     return $el;
   },
 
-  showPanel: function() {
+  showPanel() {
     $('body').addClass('control-panel-visible');
     this.$el.animate({
       'margin-bottom': 0,
@@ -26,7 +26,7 @@ var region = Marionette.Region.extend({
     });
   },
 
-  closePanel: function() {
+  closePanel() {
     $('body').removeClass('control-panel-visible');
     this.$el.animate({
       'margin-bottom': -100,

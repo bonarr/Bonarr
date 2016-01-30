@@ -7,13 +7,13 @@ module.exports = Backgrid.Cell.extend({
 
   _originalInit: Backgrid.Cell.prototype.initialize,
 
-  initialize: function() {
+  initialize() {
     this._originalInit.apply(this, arguments);
 
     this.listenTo(ProfileCollection, 'sync', this.render);
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
     var profileId = this.model.get(this.column.get('name'));
 

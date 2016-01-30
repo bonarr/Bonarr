@@ -3,7 +3,7 @@ var ModelBase = require('../Settings/SettingsModelBase');
 module.exports = ModelBase.extend({
   baseInitialize: ModelBase.prototype.initialize,
 
-  initialize: function() {
+  initialize() {
     var name = this.get('quality').name;
 
     this.successMessage = 'Saved ' + name + ' quality settings';

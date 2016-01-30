@@ -6,14 +6,14 @@ var StatusModel = require('System/StatusModel');
 //causing links to reload pages.
 
 var routeBinder = {
-  bind: function() {
+  bind() {
     var self = this;
     $(document).on('click', 'a[href]', function(event) {
       self._handleClick(event);
     });
   },
 
-  _handleClick: function(event) {
+  _handleClick(event) {
     var $target = $(event.target);
 
     //check if tab nav
@@ -61,7 +61,7 @@ var routeBinder = {
     }
   },
 
-  _shouldHandle: function($element) {
+  _shouldHandle($element) {
     if ($element.hasClass('no-router') || $element.is('[data-toggle="dropdown"]')) {
       return false;
     }

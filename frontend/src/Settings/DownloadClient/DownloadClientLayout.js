@@ -19,7 +19,7 @@ module.exports = SettingsLayoutBase.extend({
     remotePathMappings: '#x-remotepath-mapping-region'
   },
 
-  initialize: function() {
+  initialize() {
     this.model = new DownloadClientSettingsModel();
     this.downloadClientsCollection = new DownloadClientCollection();
     this.remotePathMappingCollection = new RemotePathMappingCollection();
@@ -27,7 +27,7 @@ module.exports = SettingsLayoutBase.extend({
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = Marionette.$.when(this.model.fetch(),
       this.downloadClientsCollection.fetch(),
       this.remotePathMappingCollection.fetch()

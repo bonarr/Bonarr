@@ -15,7 +15,7 @@ var view = Marionette.ItemView.extend({
     dailyEpisodeExample: '.x-daily-episode-example'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.namingModel = options.model;
     this.model = new BasicNamingModel();
 
@@ -25,7 +25,7 @@ var view = Marionette.ItemView.extend({
     this.listenTo(this.namingModel, 'sync', this._parseNamingModel);
   },
 
-  _parseNamingModel: function() {
+  _parseNamingModel() {
     var standardFormat = this.namingModel.get('standardEpisodeFormat');
 
     var includeSeriesTitle = standardFormat.match(/\{Series[-_. ]Title\}/i);
@@ -57,7 +57,7 @@ var view = Marionette.ItemView.extend({
     }, { silent: true });
   },
 
-  _buildFormat: function() {
+  _buildFormat() {
     if (Config.getValueBoolean(Config.Keys.AdvancedSettings)) {
       return;
     }

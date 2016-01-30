@@ -13,28 +13,28 @@ module.exports = Marionette.Layout.extend({
     calendar: '#x-calendar'
   },
 
-  onShow: function() {
+  onShow() {
     this._showUpcoming();
     this._showCalendar();
     this._showActionBar();
   },
 
-  _showUpcoming: function() {
+  _showUpcoming() {
     this.upcomingLayout = new UpcomingLayout();
     this.upcoming.show(this.upcomingLayout);
   },
 
-  _showCalendar: function() {
+  _showCalendar() {
     this.calendarView = new CalendarView();
     this.calendar.show(this.calendarView);
   },
 
-  _showiCal: function() {
+  _showiCal() {
     var view = new CalendarFeedView();
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {
@@ -72,7 +72,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _setFilter: function(model) {
+  _setFilter(model) {
     var mode = model.get('key');
 
     if (mode === 'all') {

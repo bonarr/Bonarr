@@ -10,12 +10,12 @@ module.exports = SettingsLayoutBase.extend({
     qualityDefinition: '#quality-definition'
   },
 
-  initialize: function() {
+  initialize() {
     this.qualityDefinitionCollection = new QualityDefinitionCollection();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = this.qualityDefinitionCollection.fetch();
 
     promise.done(_.bind(function() {

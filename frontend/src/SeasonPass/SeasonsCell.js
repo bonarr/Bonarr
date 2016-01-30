@@ -10,7 +10,7 @@ module.exports = TemplatedCell.extend({
     'click .x-season-monitored': '_toggleSeasonMonitored'
   },
 
-  _toggleSeasonMonitored: function(e) {
+  _toggleSeasonMonitored(e) {
     var target = this.$(e.target).closest('.x-season-monitored');
     var seasonNumber = parseInt(this.$(target).data('season-number'), 10);
     var icon = this.$(target).children('.x-season-monitored-icon');

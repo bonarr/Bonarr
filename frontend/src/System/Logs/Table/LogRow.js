@@ -8,7 +8,7 @@ module.exports = Backgrid.Row.extend({
     'click': '_showDetails'
   },
 
-  _showDetails: function() {
+  _showDetails() {
     vent.trigger(vent.Commands.ShowLogDetails, { model: this.model });
   }
 });

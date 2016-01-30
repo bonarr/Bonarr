@@ -68,19 +68,19 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new MissingCollection().bindSignalR({ updateOnly: true });
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this.missing.show(new LoadingView());
     this.collection.fetch();
   },
 
-  _showTable: function() {
+  _showTable() {
     this.missingGrid = new Backgrid.Grid({
       columns: this.columns,
       collection: this.collection,
@@ -95,7 +95,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       type: 'default',
       collapse: true,
@@ -156,7 +156,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _setFilter: function(buttonContext) {
+  _setFilter(buttonContext) {
     var mode = buttonContext.model.get('key');
     this.collection.state.currentPage = 1;
     var promise = this.collection.setFilterMode(mode);
@@ -165,7 +165,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _searchSelected: function() {
+  _searchSelected() {
     var selected = this.missingGrid.getSelectedModels();
     if (selected.length === 0) {
       Messenger.show({
@@ -181,14 +181,14 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _searchMissing: function() {
+  _searchMissing() {
     if (window.confirm('Are you sure you want to search for {0} missing episodes? '.format(this.collection.state.totalRecords) +
         'One API request to each indexer will be used for each episode. ' + 'This cannot be stopped once started.')) {
       CommandController.Execute('missingEpisodeSearch', { name: 'missingEpisodeSearch' });
     }
   },
 
-  _toggleMonitoredOfSelected: function() {
+  _toggleMonitoredOfSelected() {
     var selected = this.missingGrid.getSelectedModels();
 
     if (selected.length === 0) {
@@ -212,7 +212,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _manualImport: function() {
+  _manualImport() {
     vent.trigger(vent.Commands.ShowManualImport);
   }
 });

@@ -39,7 +39,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function(options) {
+  initialize(options) {
     this.collection = options.collection;
     this.deleteFilesCommand = options.deleteFilesCommand;
 
@@ -51,11 +51,11 @@ module.exports = Marionette.Layout.extend({
     this.collection.fetch();
   },
 
-  onShow: function() {
+  onShow() {
     this._showTable();
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       type: 'default',
       storeState: false,
@@ -81,7 +81,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _showTable: function() {
+  _showTable() {
     this.grid.show(new Backgrid.Grid({
       row: LogFileRow,
       columns: this.columns,
@@ -90,7 +90,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _collectionSynced: function() {
+  _collectionSynced() {
     if (!this.collection.any()) {
       return;
     }
@@ -99,7 +99,7 @@ module.exports = Marionette.Layout.extend({
     this._fetchLogFileContents({ model: model });
   },
 
-  _fetchLogFileContents: function(options) {
+  _fetchLogFileContents(options) {
     this.contents.show(new LoadingView());
 
     var model = options.model;
@@ -110,11 +110,11 @@ module.exports = Marionette.Layout.extend({
     contentsModel.fetch({ dataType: 'text' });
   },
 
-  _showDetails: function(model) {
+  _showDetails(model) {
     this.contents.show(new ContentsView({ model: model }));
   },
 
-  _refreshTable: function(buttonContext) {
+  _refreshTable(buttonContext) {
     this.contents.close();
     var promise = this.collection.fetch();
 
@@ -124,7 +124,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === this.deleteFilesCommand.toLowerCase()) {
       this._refreshTable();
     }

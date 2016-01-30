@@ -26,14 +26,14 @@ module.exports = Marionette.ItemView.extend({
     'click .x-organize-files': '_organizeFiles'
   },
 
-  templateHelpers: function() {
+  templateHelpers() {
     return {
       profiles: Profiles,
       rootFolders: RootFolders.toJSON()
     };
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.seriesCollection = options.collection;
 
     RootFolders.fetch().done(function() {
@@ -45,11 +45,11 @@ module.exports = Marionette.ItemView.extend({
     this.listenTo(RootFolders, 'all', this.render);
   },
 
-  onRender: function() {
+  onRender() {
     this._updateInfo();
   },
 
-  _updateAndSave: function() {
+  _updateAndSave() {
     var selected = this.editorGrid.getSelectedModels();
 
     var monitored = this.ui.monitored.val();
@@ -86,7 +86,7 @@ module.exports = Marionette.ItemView.extend({
     this.seriesCollection.save();
   },
 
-  _updateInfo: function() {
+  _updateInfo() {
     var selected = this.editorGrid.getSelectedModels();
     var selectedCount = selected.length;
 
@@ -99,7 +99,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _rootFolderChanged: function() {
+  _rootFolderChanged() {
     var rootFolderValue = this.ui.rootFolder.val();
     if (rootFolderValue === 'addNew') {
       var rootFolderLayout = new RootFolderLayout();
@@ -110,13 +110,13 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _setRootFolder: function(options) {
+  _setRootFolder(options) {
     vent.trigger(vent.Commands.CloseFullscreenModal);
     this.ui.rootFolder.val(options.model.id);
     this._rootFolderChanged();
   },
 
-  _organizeFiles: function() {
+  _organizeFiles() {
     var selected = this.editorGrid.getSelectedModels();
     var updateFilesSeriesView = new UpdateFilesSeriesView({ series: selected });
     this.listenToOnce(updateFilesSeriesView, 'updatingFiles', this._afterSave);

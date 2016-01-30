@@ -5,7 +5,7 @@ module.exports = NzbDroneCell.extend({
   className: 'queue-status-cell',
   template: 'Activity/Queue/QueueStatusCellTemplate',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.cellValue) {

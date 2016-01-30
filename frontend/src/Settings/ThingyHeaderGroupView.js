@@ -6,13 +6,13 @@ module.exports = Marionette.CompositeView.extend({
   template: 'Settings/ThingyHeaderGroupView',
   tagName: 'div',
 
-  itemViewOptions: function() {
+  itemViewOptions() {
     return {
       targetCollection: this.targetCollection
     };
   },
 
-  initialize: function(options) {
+  initialize(options) {
     options = options || {};
 
     this.targetCollection = options.targetCollection;

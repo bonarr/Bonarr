@@ -21,7 +21,7 @@ module.exports = Paginator.extend({
     last: 'icon-sonarr-pager-last'
   },
 
-  changePage: function(e) {
+  changePage(e) {
     e.preventDefault();
 
     var target = this.$(e.target);
@@ -68,7 +68,7 @@ module.exports = Paginator.extend({
     collection.getPage(state.firstPage === 0 ? pageIndex - 1 : pageIndex);
   },
 
-  makeHandles: function() {
+  makeHandles() {
     var handles = [];
 
     var collection = this.collection;
@@ -133,7 +133,7 @@ module.exports = Paginator.extend({
     return handles;
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var templateFunction = Marionette.TemplateCache.get(this.template);
@@ -148,7 +148,7 @@ module.exports = Paginator.extend({
     return this;
   },
 
-  _showPageJumper: function(e) {
+  _showPageJumper(e) {
     if ($(e.target).is('select')) {
       return;
     }
@@ -174,7 +174,7 @@ module.exports = Paginator.extend({
     this.$el.find('.x-page-number').html(templateFunction({ pages: pages }));
   },
 
-  _jumpToPage: function() {
+  _jumpToPage() {
     var target = this.$el.find('.x-page-select');
 
     //Remove event handlers so the blur event is not triggered

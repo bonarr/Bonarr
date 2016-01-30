@@ -17,14 +17,14 @@ module.exports = SettingsLayoutBase.extend({
     restriction: '#x-restriction-region'
   },
 
-  initialize: function() {
+  initialize() {
     this.model = new IndexerSettingsModel();
     this.indexersCollection = new IndexerCollection();
     this.restrictionCollection = new RestrictionCollection();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = Marionette.$.when(this.model.fetch(),
       this.indexersCollection.fetch(),
       this.restrictionCollection.fetch());

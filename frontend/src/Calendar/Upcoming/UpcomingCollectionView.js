@@ -10,7 +10,7 @@ require('Mixins/backbone.signalr.mixin');
 module.exports = Marionette.CollectionView.extend({
   itemView: UpcomingItemView,
 
-  initialize: function() {
+  initialize() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
     this.collection = new UpcomingCollection().bindSignalR({ updateOnly: true });
     this._fetchCollection();
@@ -19,18 +19,18 @@ module.exports = Marionette.CollectionView.extend({
     this.timer = window.setInterval(this._fetchCollection, 60 * 60 * 1000);
   },
 
-  onClose: function() {
+  onClose() {
     window.clearInterval(this.timer);
   },
 
-  setShowUnmonitored: function(showUnmonitored) {
+  setShowUnmonitored(showUnmonitored) {
     if (this.showUnmonitored !== showUnmonitored) {
       this.showUnmonitored = showUnmonitored;
       this._fetchCollection();
     }
   },
 
-  _fetchCollection: function() {
+  _fetchCollection() {
     var time = moment();
     var start = time.clone().startOf('day').toISOString();
     var end = time.clone().endOf('day').toISOString();

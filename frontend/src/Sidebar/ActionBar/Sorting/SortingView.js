@@ -14,13 +14,13 @@ module.exports = Marionette.ItemView.extend({
     'click': 'onClick'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.viewCollection = options.viewCollection;
     this.listenTo(this.viewCollection, 'drone:sort', this.render);
     this.listenTo(this.viewCollection, 'backgrid:sort', this.render);
   },
 
-  onRender: function() {
+  onRender() {
     if (this.viewCollection.state) {
       var sortKey = this.viewCollection.state.sortKey;
       var name = this.viewCollection._getSortMapping(sortKey).name;
@@ -34,12 +34,12 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  onClick: function(e) {
+  onClick(e) {
     e.preventDefault();
     this.viewCollection.setSort(this.model.get('name'));
   },
 
-  _convertDirectionToIcon: function(dir) {
+  _convertDirectionToIcon(dir) {
     if (dir === 'ascending' || dir === -1) {
       return 'icon-sonarr-caret-asc';
     }
@@ -47,13 +47,13 @@ module.exports = Marionette.ItemView.extend({
     return 'icon-sonarr-caret-desc';
   },
 
-  _setSortStatus: function(dir) {
+  _setSortStatus(dir) {
     this._removeSortStatus();
     this.ui.icon.addClass(this._convertDirectionToIcon(dir));
     this.$el.addClass('active');
   },
 
-  _removeSortStatus: function() {
+  _removeSortStatus() {
     this.ui.icon.removeClass('icon-sonarr-sort-asc icon-sonarr-sort-desc');
     this.$el.removeClass('active');
   }

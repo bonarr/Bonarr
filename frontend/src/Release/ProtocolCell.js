@@ -3,7 +3,7 @@ var Backgrid = require('backgrid');
 module.exports = Backgrid.Cell.extend({
   className: 'protocol-cell',
 
-  render: function() {
+  render() {
     var protocol = this.model.get('protocol') || 'Unknown';
     var label = '??';
 

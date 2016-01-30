@@ -11,7 +11,7 @@ module.exports = Marionette.CollectionView.extend({
     'data-toggle': 'buttons'
   },
 
-  initialize: function(options) {
+  initialize(options) {
     this.menu = options.menu;
 
     this.setActive();
@@ -19,7 +19,7 @@ module.exports = Marionette.CollectionView.extend({
     this.listenTo(this, 'itemview:click', this.itemViewClicked);
   },
 
-  setActive: function() {
+  setActive() {
     var storedKey = this.menu.defaultAction;
 
     if (this.menu.storeState) {
@@ -38,7 +38,7 @@ module.exports = Marionette.CollectionView.extend({
     });
   },
 
-  itemViewClicked: function(itemView) {
+  itemViewClicked(itemView) {
     this.children.each(function(view) {
       if (view.model.get('key').toLocaleLowerCase() === itemView.model.get('key').toLowerCase()) {
         view.model.set('active', true);

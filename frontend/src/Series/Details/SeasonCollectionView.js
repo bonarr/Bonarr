@@ -6,7 +6,7 @@ var AsSortedCollectionView = require('Mixins/AsSortedCollectionView');
 var view = Marionette.CollectionView.extend({
   itemView: SeasonLayout,
 
-  initialize: function(options) {
+  initialize(options) {
     if (!options.episodeCollection) {
       throw 'episodeCollection is needed';
     }
@@ -17,14 +17,14 @@ var view = Marionette.CollectionView.extend({
     this.listenTo(this.series, 'seasons:expand', this._showHideEpisodes);
   },
 
-  itemViewOptions: function() {
+  itemViewOptions() {
     return {
       episodeCollection: this.episodeCollection,
       series: this.series
     };
   },
 
-  onEpisodeGrabbed: function(message) {
+  onEpisodeGrabbed(message) {
     if (message.episode.series.id !== this.episodeCollection.seriesId) {
       return;
     }

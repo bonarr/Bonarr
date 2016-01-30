@@ -10,7 +10,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-episode-title': '_showEpisodeDetails'
   },
 
-  initialize: function() {
+  initialize() {
     var start = this.model.get('airDateUtc');
     var runtime = this.model.get('series').runtime;
     var end = moment(start).add('minutes', runtime);
@@ -22,7 +22,7 @@ module.exports = Marionette.ItemView.extend({
     this.listenTo(this.model, 'change', this.render);
   },
 
-  _showEpisodeDetails: function() {
+  _showEpisodeDetails() {
     vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
   }
 });

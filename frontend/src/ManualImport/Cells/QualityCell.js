@@ -9,7 +9,7 @@ module.exports = QualityCell.extend({
     'click': '_onClick'
   },
 
-  _onClick: function() {
+  _onClick() {
     var view = new SelectQualityLayout();
 
     this.listenTo(view, 'manualimport:selected:quality', this._setQuality);
@@ -17,7 +17,7 @@ module.exports = QualityCell.extend({
     vent.trigger(vent.Commands.OpenModal, view);
   },
 
-  _setQuality: function(e) {
+  _setQuality(e) {
     this.model.set('quality', e.quality);
   }
 });

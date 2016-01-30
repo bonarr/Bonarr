@@ -15,12 +15,12 @@ module.exports = SettingsLayoutBase.extend({
     delayProfile: '#delay-profile'
   },
 
-  initialize: function() {
+  initialize() {
     this.delayProfileCollection = new DelayProfileCollection();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = Marionette.$.when(ProfileCollection.fetch(),
       this.delayProfileCollection.fetch());
 

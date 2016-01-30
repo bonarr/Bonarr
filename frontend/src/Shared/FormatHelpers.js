@@ -3,7 +3,7 @@ var filesize = require('filesize');
 var UiSettings = require('./UiSettingsModel');
 
 module.exports = {
-  bytes: function(sourceSize) {
+  bytes(sourceSize) {
     var size = Number(sourceSize);
 
     if (isNaN(size)) {
@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  relativeDate: function(sourceDate) {
+  relativeDate(sourceDate) {
     if (!sourceDate) {
       return '';
     }
@@ -42,13 +42,13 @@ module.exports = {
     return date.fromNow();
   },
 
-  pad: function(n, width, z) {
+  pad(n, width, z) {
     z = z || '0';
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   },
 
-  number: function(input) {
+  number(input) {
     if (!input) {
       return '0';
     }
@@ -56,7 +56,7 @@ module.exports = {
     return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   },
 
-  plural: function(input, unit) {
+  plural(input, unit) {
     if (input === 1) {
       return unit;
     }

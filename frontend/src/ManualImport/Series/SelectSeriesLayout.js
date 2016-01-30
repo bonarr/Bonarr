@@ -22,7 +22,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.seriesCollection = SeriesCollection.clone();
     this._setModelCollection();
 
@@ -30,7 +30,7 @@ module.exports = Marionette.Layout.extend({
     this.listenTo(this, 'modal:afterShow', this._setFocus);
   },
 
-  onRender: function() {
+  onRender() {
     var tableView = new TableView({
       collection: this.seriesCollection,
       itemView: SelectSeriesRow,
@@ -41,7 +41,7 @@ module.exports = Marionette.Layout.extend({
     this._setupFilter();
   },
 
-  _setupFilter: function() {
+  _setupFilter() {
     var self = this;
 
     //TODO: This should be a mixin (same as Add Series searching)
@@ -72,18 +72,18 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _filter: function(term) {
+  _filter(term) {
     this.seriesCollection.setFilter({ key: 'title', value: term, type: 'contains' });
 
     this._setModelCollection();
   },
 
-  _onSelected: function(model) {
+  _onSelected(model) {
     this.trigger('manualimport:selected:series', { model: model });
     this.close();
   },
 
-  _setFocus: function() {
+  _setFocus() {
     this.ui.filter.focus();
   },
 

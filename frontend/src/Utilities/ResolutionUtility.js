@@ -8,19 +8,19 @@ module.exports = {
     mobile: 480
   },
 
-  isDesktopLarge: function() {
+  isDesktopLarge() {
     return $(window).width() < this.resolutions.desktopLarge;
   },
 
-  isDesktop: function() {
+  isDesktop() {
     return $(window).width() < this.resolutions.desktop;
   },
 
-  isTablet: function() {
+  isTablet() {
     return $(window).width() < this.resolutions.tablet;
   },
 
-  isMobile: function() {
+  isMobile() {
     return $(window).width() < this.resolutions.mobile;
   }
 };

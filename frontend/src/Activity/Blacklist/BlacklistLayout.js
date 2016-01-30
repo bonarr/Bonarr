@@ -47,7 +47,7 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.collection = new BlacklistCollection({ tableName: 'blacklist' });
 
     this.listenTo(this.collection, 'sync', this._showTable);
@@ -56,12 +56,12 @@ module.exports = Marionette.Layout.extend({
     this._showActionBar();
   },
 
-  onShow: function() {
+  onShow() {
     this.blacklist.show(new LoadingView());
     this.collection.fetch();
   },
 
-  _showTable: function(collection) {
+  _showTable(collection) {
     this.blacklist.show(new Backgrid.Grid({
       columns: this.columns,
       collection: collection,
@@ -74,7 +74,7 @@ module.exports = Marionette.Layout.extend({
     }));
   },
 
-  _showActionBar: function() {
+  _showActionBar() {
     var actions = {
       items: [
         {
@@ -91,7 +91,7 @@ module.exports = Marionette.Layout.extend({
     });
   },
 
-  _refreshTable: function(buttonContext) {
+  _refreshTable(buttonContext) {
     this.collection.state.currentPage = 1;
     var promise = this.collection.fetch({ reset: true });
 
@@ -100,7 +100,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _commandComplete: function(options) {
+  _commandComplete(options) {
     if (options.command.get('name') === 'clearblacklist') {
       this._refreshTable();
     }

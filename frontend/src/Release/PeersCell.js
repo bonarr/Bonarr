@@ -3,7 +3,7 @@ var Backgrid = require('backgrid');
 module.exports = Backgrid.Cell.extend({
   className: 'peers-cell',
 
-  render: function() {
+  render() {
     if (this.model.get('protocol') === 'torrent') {
       var seeders = this.model.get('seeders') || 0;
       var leechers = this.model.get('leechers') || 0;

@@ -8,7 +8,7 @@ module.exports = NzbDroneCell.extend({
     'click .x-execute': '_executeTask'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var name = this.model.get('name');
@@ -24,7 +24,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _executeTask: function() {
+  _executeTask() {
     CommandController.Execute(this.model.get('taskName'), { name: this.model.get('taskName') });
   }
 });

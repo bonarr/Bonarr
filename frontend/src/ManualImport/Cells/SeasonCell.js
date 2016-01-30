@@ -9,7 +9,7 @@ module.exports = NzbDroneCell.extend({
     'click': '_onClick'
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.model.has('seasonNumber')) {
@@ -20,7 +20,7 @@ module.exports = NzbDroneCell.extend({
     return this;
   },
 
-  _onClick: function() {
+  _onClick() {
     var series = this.model.get('series');
 
     if (!series) {
@@ -34,7 +34,7 @@ module.exports = NzbDroneCell.extend({
     vent.trigger(vent.Commands.OpenModal, view);
   },
 
-  _setSeason: function(e) {
+  _setSeason(e) {
     if (this.model.has('seasonNumber') && e.seasonNumber === this.model.get('seasonNumber')) {
       return;
     }

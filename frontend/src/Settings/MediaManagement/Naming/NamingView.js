@@ -28,7 +28,7 @@ module.exports = (function() {
       "change .x-multi-episode-style": '_multiEpisodeFomatChanged'
     },
     regions: { basicNamingRegion: '.x-basic-naming' },
-    onRender: function() {
+    onRender() {
       if (!this.model.get('renameEpisodes')) {
         this.ui.namingOptions.hide();
       }
@@ -39,7 +39,7 @@ module.exports = (function() {
       this.listenTo(this.namingSampleModel, 'sync', this._showSamples);
       this._updateSamples();
     },
-    _setFailedDownloadOptionsVisibility: function() {
+    _setFailedDownloadOptionsVisibility() {
       var checked = this.ui.renameEpisodesCheckbox.prop('checked');
       if (checked) {
         this.ui.namingOptions.slideDown();
@@ -47,10 +47,10 @@ module.exports = (function() {
         this.ui.namingOptions.slideUp();
       }
     },
-    _updateSamples: function() {
+    _updateSamples() {
       this.namingSampleModel.fetch({ data: this.model.toJSON() });
     },
-    _showSamples: function() {
+    _showSamples() {
       this.ui.singleEpisodeExample.html(this.namingSampleModel.get('singleEpisodeExample'));
       this.ui.multiEpisodeExample.html(this.namingSampleModel.get('multiEpisodeExample'));
       this.ui.dailyEpisodeExample.html(this.namingSampleModel.get('dailyEpisodeExample'));
@@ -59,7 +59,7 @@ module.exports = (function() {
       this.ui.seriesFolderExample.html(this.namingSampleModel.get('seriesFolderExample'));
       this.ui.seasonFolderExample.html(this.namingSampleModel.get('seasonFolderExample'));
     },
-    _addToken: function(e) {
+    _addToken(e) {
       e.preventDefault();
       e.stopPropagation();
       var target = e.target;
@@ -75,7 +75,7 @@ module.exports = (function() {
       this.ui.namingTokenHelper.removeClass('open');
       input.focus();
     },
-    multiEpisodeFormatChanged: function() {
+    multiEpisodeFormatChanged() {
       this.model.set('multiEpisodeStyle', this.ui.multiEpisodeStyle.val());
     }
   });

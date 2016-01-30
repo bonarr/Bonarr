@@ -7,7 +7,7 @@ $.fn.directoryAutoComplete = function() {
   $(this).autoComplete({
     resource: '/filesystem',
     query: query,
-    filter: function(filter, response, callback) {
+    filter(filter, response, callback) {
       var matches = [];
 
       $.each(response.directories, function(i, d) {

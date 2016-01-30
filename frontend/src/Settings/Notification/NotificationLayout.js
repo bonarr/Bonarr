@@ -10,12 +10,12 @@ module.exports = SettingsLayoutBase.extend({
     notification: '#notification'
   },
 
-  initialize: function() {
+  initialize() {
     this.collection = new NotificationCollection();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = this.collection.fetch();
 
     promise.done(_.bind(function() {

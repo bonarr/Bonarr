@@ -5,12 +5,12 @@ var QueueCollection = require('./QueueCollection');
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
 
-  initialize: function() {
+  initialize() {
     this.listenTo(QueueCollection, 'sync', this.render);
     QueueCollection.fetch();
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (QueueCollection.length === 0) {

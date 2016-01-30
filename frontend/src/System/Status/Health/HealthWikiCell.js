@@ -8,7 +8,7 @@ module.exports = Backgrid.UriCell.extend({
 
   text: 'Wiki',
 
-  render: function() {
+  render() {
     this.$el.empty();
     var rawValue = this.model.get(this.column.get('name'));
     var formattedValue = this.formatter.fromRaw(rawValue, this.model);

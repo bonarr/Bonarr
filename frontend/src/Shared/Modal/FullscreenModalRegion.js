@@ -7,12 +7,12 @@ const EscKeyCode = 27;
 const FullScreenModalRegion = Marionette.Region.extend({
   el: '#fullscreen-modal-region',
 
-  initialize: function() {
+  initialize() {
     _.bindAll(this, 'close', 'onKeypress');
     $(document).on('keyup', this.onKeypress);
   },
 
-  onShow: function() {
+  onShow() {
     window.clearTimeout(this.closeTimeout);
 
     this.$el.addClass('shown');
@@ -22,7 +22,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
     this.listenToOnce(this.currentView, 'close', this.onViewClose);
   },
 
-  onKeypress: function(event) {
+  onKeypress(event) {
     var view = this.currentView;
     if (!view || view.isClosed) {
       return;
@@ -35,7 +35,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
     }
   },
 
-  close: function() {
+  close() {
     this.$el.removeClass('shown');
     this.closeButtons = null;
 
@@ -52,7 +52,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
     }, 1000);
   },
 
-  onViewClose: function() {
+  onViewClose() {
     this.close();
     this.stopListening(this.currentView);
   }

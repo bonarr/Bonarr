@@ -3,7 +3,7 @@ var NzbDroneCell = require('./NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'history-event-type-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (this.cellValue) {

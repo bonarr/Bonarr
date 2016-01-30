@@ -3,7 +3,7 @@ var NzbDroneCell = require('Cells/NzbDroneCell');
 module.exports = NzbDroneCell.extend({
   className: 'path-cell',
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     var relativePath = this.model.get('relativePath');

@@ -5,12 +5,12 @@ var HealthCollection = require('./HealthCollection');
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
 
-  initialize: function() {
+  initialize() {
     this.listenTo(HealthCollection, 'sync', this._healthSync);
     HealthCollection.fetch();
   },
 
-  render: function() {
+  render() {
     this.$el.empty();
 
     if (HealthCollection.length === 0) {
@@ -31,7 +31,7 @@ module.exports = Marionette.ItemView.extend({
     return this;
   },
 
-  _healthSync: function() {
+  _healthSync() {
     this.render();
   }
 });

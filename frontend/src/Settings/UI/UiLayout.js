@@ -10,12 +10,12 @@ module.exports = SettingsLayoutBase.extend({
     uiRegion: '#ui'
   },
 
-  initialize: function() {
+  initialize() {
     this.model = new UiSettingsModel();
     SettingsLayoutBase.prototype.initialize.apply(this, arguments);
   },
 
-  onRender: function() {
+  onRender() {
     var promise = this.model.fetch();
 
     promise.done(_.bind(function() {

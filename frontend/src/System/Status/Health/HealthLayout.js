@@ -33,12 +33,12 @@ module.exports = Marionette.Layout.extend({
     }
   ],
 
-  initialize: function() {
+  initialize() {
     this.listenTo(HealthCollection, 'sync', this.render);
     HealthCollection.fetch();
   },
 
-  onRender: function() {
+  onRender() {
     if (HealthCollection.length === 0) {
       this.grid.show(new HealthOkView());
     } else {
@@ -46,7 +46,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _showTable: function() {
+  _showTable() {
     this.grid.show(new Backgrid.Grid({
       row: Backgrid.Row,
       columns: this.columns,

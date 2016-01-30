@@ -16,11 +16,11 @@ module.exports = Marionette.ItemView.extend({
     'click': 'onClick'
   },
 
-  initialize: function() {
+  initialize() {
     this.storageKey = this.model.get('menuKey') + ':' + this.model.get('key');
   },
 
-  onRender: function() {
+  onRender() {
     if (this.model.get('active')) {
       this.$el.addClass('active');
       this.invokeCallback();
@@ -47,7 +47,7 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  onClick: function() {
+  onClick() {
     if (this.$el.hasClass('disabled')) {
       return;
     }
@@ -57,21 +57,21 @@ module.exports = Marionette.ItemView.extend({
     this.invokeCommand();
   },
 
-  invokeCommand: function() {
+  invokeCommand() {
     var command = this.model.get('command');
     if (command) {
       CommandController.Execute(command, this.model.get('properties'));
     }
   },
 
-  invokeRoute: function() {
+  invokeRoute() {
     var route = this.model.get('route');
     if (route) {
       Backbone.history.navigate(route, { trigger: true });
     }
   },
 
-  invokeCallback: function() {
+  invokeCallback() {
     var callback = this.model.get('callback');
 
     if (callback) {
