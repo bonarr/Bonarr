@@ -7,10 +7,10 @@
       <span class="series-title">
         {{titleWithYear .}}
       </span>
+      {{#if existing}}
+          <span class="label label-primary already-exists">Already in your library</span>
+      {{/if}}
       <div class="labels">
-        {{#if existing}}
-            <span class="label label-primary already-exists">Already in your library</span>
-        {{/if}}
         {{#if ratings.votes}}
           <span class="label label-default">{{heartRating ratings}}</span>
         {{/if}}
@@ -27,4 +27,3 @@
     </div>
   </div>
 </div>
-{{debug}}
