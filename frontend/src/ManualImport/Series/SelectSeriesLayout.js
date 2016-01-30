@@ -87,7 +87,7 @@ module.exports = Marionette.Layout.extend({
     this.ui.filter.focus();
   },
 
-  _setModelCollection: function () {
+  _setModelCollection() {
     // TODO: Remove this work around because the model's collection is reset due to the filtering
 
     _.each(this.seriesCollection.models, (model) => {

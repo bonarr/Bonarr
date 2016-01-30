@@ -53,18 +53,18 @@ module.exports = Marionette.Layout.extend({
     this.time = moment();
   },
 
-  onBeforeRender: function () {
+  onBeforeRender() {
     this.firstDayOfWeek = UiSettings.get('firstDayOfWeek');
     this.isMobile = $(window).width() < 768;
     this.view = this._getViewName();
     this.dates = this._getDates();
   },
 
-  onShow: function () {
+  onShow() {
     this._reloadEvents();
   },
 
-  serializeData: function () {
+  serializeData() {
     return {
       showMonth: $(window).width() >= 768
     };
@@ -76,13 +76,13 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _getViewName: function () {
+  _getViewName() {
     var defaultView = this._isMobile ? 'day' : 'week';
 
     return Config.getValue(this.storageKey, defaultView);
   },
 
-  _getDates: function () {
+  _getDates() {
     var view = this.view;
     var time = this.time;
     var weekName = this.firstDayOfWeek === 0 ? 'week' : 'isoWeek';
@@ -159,7 +159,7 @@ module.exports = Marionette.Layout.extend({
     this.ui.title.html(this._getTitle());
   },
 
-  _getTitle: function () {
+  _getTitle() {
     if (this.view === 'day') {
       return this.time.format(UiSettings.get('longDateFormat'));
     } else if (this.view === 'month') {
@@ -183,7 +183,7 @@ module.exports = Marionette.Layout.extend({
     return startDate.format(start) + ' &mdash; ' + endDate.format(end);
   },
 
-  _getHeaderFormat: function () {
+  _getHeaderFormat() {
     switch (this.view) {
       case 'week':
         return UiSettings.get('calendarWeekColumnHeader');
@@ -194,7 +194,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _onViewClick: function (event) {
+  _onViewClick(event) {
     var $target = $(event.target);
     var view = $target.data('view');
 
@@ -203,7 +203,7 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _onNavigateClick: function (event) {
+  _onNavigateClick(event) {
     var $target = $(event.target).closest('.x-navigate');
     var navigate = $target.data('navigate');
 
@@ -222,14 +222,14 @@ module.exports = Marionette.Layout.extend({
     this._reloadEvents();
   },
 
-  _changeView: function (view) {
+  _changeView(view) {
     Config.setValue(this.storageKey, view);
     this.view = view;
 
     this._reloadEvents();
   },
 
-  _reloadEvents: function () {
+  _reloadEvents() {
     this.ui.loading.removeClass('hidden');
     this.dates = this._getDates();
     this._getEvents();

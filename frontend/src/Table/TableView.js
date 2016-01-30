@@ -37,7 +37,7 @@ const TableView = Marionette.CompositeView.extend({
     };
   },
 
-  _onSelectChange: function () {
+  _onSelectChange() {
     var checked = this.ui.selectCheckbox.prop('checked');
 
     if (checked) {
@@ -47,7 +47,7 @@ const TableView = Marionette.CompositeView.extend({
     }
   },
 
-  _onModelSelected: function () {
+  _onModelSelected() {
     var allSelected = this.collection.getSelectedModels().length === this.collection.length;
 
     this.ui.selectCheckbox.prop('checked', allSelected);

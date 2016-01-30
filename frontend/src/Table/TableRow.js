@@ -12,21 +12,21 @@ const TableRow = Marionette.ItemView.extend({
     this.listenTo(this.model, 'select', this._onModelSelected);
   },
 
-  templateHelpers: function () {
+  templateHelpers() {
     return {
       selectable: this.selectable
     };
   },
 
-  _onSelectedChange: function (e) {
+  _onSelectedChange(e) {
     e.preventDefault();
-    var checked = this.$el.find('.select-checkbox').prop('checked');
+    var checked = !!this.$el.find('.select-checkbox').prop('checked');
 
     this.model.selected = checked;
     this.model.trigger('selected', this.model, checked);
   },
 
-  _onModelSelected: function (model, selected) {
+  _onModelSelected(model, selected) {
     this.$el.find('.select-checkbox').prop('checked', selected);
   }
 });

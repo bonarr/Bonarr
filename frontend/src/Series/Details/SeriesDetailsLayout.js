@@ -170,7 +170,7 @@ module.exports = Marionette.Layout.extend({
     this._showHeader();
   },
 
-  onExpandClick: function () {
+  onExpandClick() {
     this.model.trigger('seasons:expand');
   },
 

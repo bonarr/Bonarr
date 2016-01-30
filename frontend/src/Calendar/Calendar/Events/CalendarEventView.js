@@ -18,12 +18,12 @@ module.exports = Marionette.ItemView.extend({
     downloadProgress: '.download-progress'
   },
 
-  initialize: function () {
+  initialize() {
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(QueueCollection, 'sync', this._onQueueUpdated);
   },
 
-  serializeData: function () {
+  serializeData() {
     var seriesTitle = this.model.get('series').title;
     var start = this.model.get('airDateUtc');
     var end = this._getEndTime();
@@ -43,7 +43,7 @@ module.exports = Marionette.ItemView.extend({
     };
   },
 
-  onRender: function () {
+  onRender() {
     this.$el.addClass(this._getStatusLevel());
 
     this.ui.downloadProgress.easyPieChart({
@@ -56,7 +56,7 @@ module.exports = Marionette.ItemView.extend({
     });
   },
 
-  _getQueueDetails: function () {
+  _getQueueDetails() {
     var queueItem = QueueCollection.findEpisode(this.model.get('id'));
 
     if (queueItem) {
@@ -105,11 +105,11 @@ module.exports = Marionette.ItemView.extend({
     }
   },
 
-  _showEpisodeDetails: function () {
+  _showEpisodeDetails() {
     vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
   },
 
-  _getEndTime: function () {
+  _getEndTime() {
     var start = this.model.get('airDateUtc');
     var runtime = this.model.get('series').runtime;
 
@@ -147,7 +147,7 @@ module.exports = Marionette.ItemView.extend({
     return statusLevel;
   },
 
-  _onQueueUpdated: function () {
+  _onQueueUpdated() {
     // TODO: Also handle when item is removed from the queue?
     // TODO: If the progress is changing just update the progress bar and tool tip
     if (QueueCollection.findEpisode(this.model.get('id'))) {

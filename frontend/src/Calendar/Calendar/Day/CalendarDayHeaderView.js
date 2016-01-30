@@ -6,13 +6,13 @@ module.exports = Marionette.ItemView.extend({
   template: 'Calendar/Calendar/Day/CalendarDayHeaderView',
   className: 'calendar-day-headers ',
 
-  initialize: function (options) {
+  initialize(options) {
     this.view = options.view;
     this.headerFormat = options.headerFormat;
     this.days = options.days;
   },
 
-  serializeData: function () {
+  serializeData() {
     // TODO: Show the date, format depends on view
     return {
       days: _.map(_.take(this.days, 7), (day) => {

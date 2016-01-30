@@ -9,7 +9,7 @@ module.exports = Marionette.Layout.extend({
     events: '.x-calendar-day-events'
   },
 
-  serializeData: function () {
+  serializeData() {
     // TODO: Show the date, format depends on view
     return {
       date: this.model.get('date'),
@@ -17,7 +17,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onShow : function () {
+  onShow () {
     this.events.show(new CalendarEventCollectionView({ collection: this.model.get('events') }));
   }
 });
