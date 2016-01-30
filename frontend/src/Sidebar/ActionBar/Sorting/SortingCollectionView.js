@@ -1,10 +1,10 @@
-var PageableCollection = require('backbone.paginator');
 var Marionette = require('marionette');
 var SortingView = require('./SortingView');
+var tpl = require('./SortingCollectionView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
   itemView: SortingView,
-  template: 'Sidebar/ActionBar/Sorting/SortingCollectionViewTemplate',
+  template: tpl,
   itemViewContainer: '.x-sorting-list',
 
   initialize: function(options) {

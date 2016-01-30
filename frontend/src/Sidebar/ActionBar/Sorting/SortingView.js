@@ -1,9 +1,8 @@
-var Backbone = require('backbone');
 var Marionette = require('marionette');
-var _ = require('underscore');
+var tpl = require('./SortingView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Sidebar/ActionBar/Sorting/SortingViewTemplate',
+  template: tpl,
   className: 'actionbar-list-item actionbar-sorting-list-item',
   tagName: 'li',
 
@@ -37,19 +36,7 @@ module.exports = Marionette.ItemView.extend({
 
   onClick: function(e) {
     e.preventDefault();
-
-    var collection = this.viewCollection;
-    var event = 'drone:sort';
-
-    var direction = collection.state.order;
-    if (direction === 'ascending' || direction === -1) {
-      direction = 'descending';
-    } else {
-      direction = 'ascending';
-    }
-
-    collection.setSorting(this.model.get('name'), direction);
-    collection.trigger(event, this.model, direction);
+    this.viewCollection.setSort(this.model.get('name'));
   },
 
   _convertDirectionToIcon: function(dir) {

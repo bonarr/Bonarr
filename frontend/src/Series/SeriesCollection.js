@@ -1,26 +1,13 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
-var PageableCollection = require('backbone.paginator');
 var SeriesModel = require('./SeriesModel');
-var AsFilteredCollection = require('Mixins/AsFilteredCollection');
-var AsSortedCollection = require('Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+var BackboneSortedCollection = require('backbone.sorted.collection');
 var moment = require('moment');
 
-var SeriesCollection = PageableCollection.extend({
+var SeriesCollection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/series',
   model: SeriesModel,
   tableName: 'series',
-
-  state: {
-    sortKey: 'sortTitle',
-    order: -1,
-    pageSize: 100000,
-    secondarySortKey: 'sortTitle',
-    secondarySortOrder: -1
-  },
-
-  mode: 'client',
 
   save: function() {
     var self = this;
@@ -59,6 +46,11 @@ var SeriesCollection = PageableCollection.extend({
       key: 'monitored',
       value: true
     }
+  },
+
+  comparators: {
+    title: (series) => series.get('sortTitle'),
+    nextAiring: (series) => moment(series.get('nextAiring')).unix()
   },
 
   sortMappings: {
@@ -101,8 +93,8 @@ var SeriesCollection = PageableCollection.extend({
   }
 });
 
-SeriesCollection = AsFilteredCollection.call(SeriesCollection);
-SeriesCollection = AsSortedCollection.call(SeriesCollection);
-SeriesCollection = AsPersistedStateCollection.call(SeriesCollection);
+const seriesCollection =  new SeriesCollection([]).bindSignalR();
+seriesCollection.fetch();
+seriesCollection.viewCollection = new BackboneSortedCollection(seriesCollection);
 
-module.exports = new SeriesCollection([]).bindSignalR();
+module.exports = seriesCollection;

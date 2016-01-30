@@ -17,7 +17,7 @@ module.exports = Backbone.Model.extend({
   },
 
   setSeasonMonitored: function(seasonNumber) {
-    _.each(this.get('seasons'), function(season) {
+    _.each(this.get('seasons'), (season) => {
       if (season.seasonNumber === seasonNumber) {
         season.monitored = !season.monitored;
       }
@@ -25,7 +25,7 @@ module.exports = Backbone.Model.extend({
   },
 
   setSeasonPass: function(seasonNumber) {
-    _.each(this.get('seasons'), function(season) {
+    _.each(this.get('seasons'), (season) => {
       if (season.seasonNumber >= seasonNumber) {
         season.monitored = true;
       } else {

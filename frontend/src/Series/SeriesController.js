@@ -1,5 +1,4 @@
 var NzbDroneController = require('Shared/NzbDroneController');
-var AppLayout = require('AppLayout');
 var SeriesCollection = require('./SeriesCollection');
 var SeriesIndexLayout = require('./Index/SeriesIndexLayout');
 var SeriesDetailsLayout = require('./Details/SeriesDetailsLayout');
@@ -21,7 +20,7 @@ module.exports = NzbDroneController.extend({
   seriesDetails: function(query) {
     var series = SeriesCollection.where({ titleSlug: query });
 
-    if (series.length !== 0) {
+    if (series.length) {
       var targetSeries = series[0];
       this.setTitle(targetSeries.get('title'));
       this.showMainRegion(new SeriesDetailsLayout({ model: targetSeries }));

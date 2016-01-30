@@ -15,12 +15,13 @@ var SeriesActionsCell = require('Cells/SeriesActionsCell');
 var SeriesStatusCell = require('Cells/SeriesStatusCell');
 var FooterView = require('./FooterView');
 var FooterModel = require('./FooterModel');
+var tpl = require('./SeriesIndexLayout.hbs');
 require('Mixins/backbone.signalr.mixin');
 require('Mixins/backbone.signalr.mixin');
 require('jquery.lazyload');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Series/Index/SeriesIndexLayoutTemplate',
+  template: tpl,
 
   regions: {
     seriesRegion: '#x-series',
@@ -79,25 +80,17 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize: function() {
-    this.seriesCollection = SeriesCollection.clone();
-    this.seriesCollection.shadowCollection.bindSignalR();
-    this.seriesCollection.fetch();
-
+    this.seriesCollection =  SeriesCollection.viewCollection;
     this._showActionBar();
   },
 
   onShow: function() {
     this._showActionBar();
-    this.listenTo(this.seriesCollection.shadowCollection, 'sync add remove', this.onCollectionChange);
 
     this.$('img.lazy').lazyload({
       threshold: 200,
       container: $('.content-wrapper')
     });
-  },
-
-  onCollectionChange: function() {
-    this.seriesCollection.fullCollection.resetFiltered();
   },
 
   _showTable: function() {
