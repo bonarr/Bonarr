@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var _ = require('underscore');
 var titleWithYear = require('./Series/titleWithYear');
+var route = require('./Series/route');
 
 var placeholderUrl = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
 
@@ -58,9 +59,7 @@ Handlebars.registerHelper('tvMazeUrl', function() {
   return 'http://www.tvmaze.com/shows/' + this.tvMazeId + '/_';
 });
 
-Handlebars.registerHelper('route', function() {
-  return window.Sonarr.UrlBase + '/series/' + this.titleSlug;
-});
+Handlebars.registerHelper('route', route);
 
 Handlebars.registerHelper('percentOfEpisodes', function() {
   var episodeCount = this.episodeCount;

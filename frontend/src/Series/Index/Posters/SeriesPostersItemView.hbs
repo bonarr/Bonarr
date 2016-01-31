@@ -5,10 +5,10 @@
     </div>
     <ul class="dropdown-menu">
       <li>
-        <a href="{{route}}">Edit</a>
+        <a href="{{route .}}">Edit</a>
       </li>
       <li>
-        <a href="{{route}}">Update</a>
+        <a href="{{route .}}">Update</a>
       </li>
     </ul>
   </div>
@@ -16,7 +16,7 @@
     <span class="badge ended-badge">Ended</span>
   {{/if_eq}}
   <div class="title">{{title}}</div>
-  <a href="{{route}}">
+  <a href="{{route .}}">
     {{poster lazy=true size=250}}
   </a>
 </div>

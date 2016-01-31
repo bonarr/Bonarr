@@ -1,14 +1,14 @@
 <div class="series-item">
     <div class="row">
         <div class="col-md-2 col-xs-3">
-            <a href="{{route}}">
+            <a href="{{route .}}">
                 {{poster lazy=true size=250}}
             </a>
         </div>
         <div class="col-md-10 col-xs-9">
             <div class="row">
                 <div class="col-md-10 col-xs-10">
-                    <a href="{{route}}" target="_blank">
+                    <a href="{{route .}}" target="_blank">
                         <h2>{{title}}</h2>
                     </a>
                 </div>
@@ -21,7 +21,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 col-xs-12">
-                    <a href="{{route}}">
+                    <a href="{{route .}}">
                         <div>
                             {{overview}}
                         </div>
