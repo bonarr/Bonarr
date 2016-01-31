@@ -37,8 +37,8 @@ module.exports = Marionette.Layout.extend({
   },
 
   initialize() {
-    this.seriesCollection = SeriesCollection.clone();
-    this.seriesCollection.shadowCollection.bindSignalR();
+    this.seriesCollection = SeriesCollection;
+    // this.seriesCollection.shadowCollection.bindSignalR();
 
     this.listenTo(this.model, 'change:monitored', this._setMonitoredState);
     this.listenTo(this.model, 'remove', this.onSeriesRemoved);
