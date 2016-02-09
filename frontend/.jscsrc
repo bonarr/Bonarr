@@ -3,6 +3,8 @@
   "fix": true,
   "requireSpaceBeforeObjectValues": true,
   "disallowSpaceAfterObjectKeys": true,
+  "disallowTrailingComma": true,
+  "requireTrailingComma": false,
   "requireSpaceBeforeKeywords": ["else", "while", "catch"],
   "requireCurlyBraces": [
     "else",

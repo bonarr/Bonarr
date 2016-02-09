@@ -7,16 +7,22 @@ module.exports = Backbone.Collection.extend({
   model: SeriesModel,
 
   parse(response) {
-    var self = this;
-
-    _.each(response, function(model) {
+    _.each(response, (model) => {
       model.id = undefined;
-
       if (self.unmappedFolderModel) {
         model.path = self.unmappedFolderModel.get('folder').path;
       }
     });
 
     return response;
+  },
+
+  search(term) {
+    this.term = term;
+    return this.fetch({
+      data: {
+        term: term
+      }
+    });
   }
 });

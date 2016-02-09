@@ -1,18 +1,9 @@
+var $ = require('jquery');
 var Marionette = require('marionette');
+var Backbone = require('backbone');
 var reqres = require('reqres');
-var TableView = require('Table/TableView');
 var tpl = require('./ImportSeriesLayout.hbs');
-
-const headers = [
-  {
-    name: 'type',
-    label: ''
-  },
-  {
-    name: 'name',
-    label: 'Name'
-  }
-];
+var rootFolderCollection = require('../RootFolders/RootFolderCollection');
 
 const EmptyView = Marionette.Layout.extend({
   template: tpl,
@@ -35,7 +26,30 @@ const EmptyView = Marionette.Layout.extend({
   },
 
   onPathSelected(options) {
+    const path = options.path;
+    console.log('Import series path selected', path);
 
+    const folderPromise = $.Deferred();
+    rootFolderCollection.fetch().
+      done(() => {
+        const rootFolder = rootFolderCollection.findWhere({ path });
+        if (rootFolder) {
+          folderPromise.resolve(rootFolder);
+        } else {
+          rootFolderCollection.create({ path: path },
+            {
+              wait: true,
+              success: folderPromise.resolve
+            }
+          );
+        }
+      });
+
+    folderPromise.done((model) => {
+      const unmapped = model.get('unmappedFolders') || [];
+      console.log(`rootfolder ID ${model.id}. Unmapped: ${unmapped.length}`);
+      Backbone.history.navigate(`add/import/${model.id}`, { trigger: true });
+    });
   }
 });
 

@@ -54,12 +54,7 @@ module.exports = Marionette.Layout.extend({
     // this.collection.reset();
 
     // this.searchResult.show(new LoadingView());
-    this.collection.term = term;
-    this.currentSearchPromise = this.collection.fetch({
-      data: {
-        term: term
-      }
-    });
+    this.currentSearchPromise = this.collection.search(term);
 
     this.currentSearchPromise.fail(_.bind(this.onError, this));
     this.currentSearchPromise.always(() => {
