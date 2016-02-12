@@ -175,7 +175,7 @@ module.exports = Marionette.Layout.extend({
       return;
     }
     var ids = _.pluck(selected, 'id');
-    CommandController.Execute('episodeSearch', {
+    CommandController.execute('episodeSearch', {
       name: 'episodeSearch',
       episodeIds: ids
     });
@@ -184,7 +184,7 @@ module.exports = Marionette.Layout.extend({
   _searchMissing() {
     if (window.confirm('Are you sure you want to search for {0} missing episodes? '.format(this.collection.state.totalRecords) +
         'One API request to each indexer will be used for each episode. ' + 'This cannot be stopped once started.')) {
-      CommandController.Execute('missingEpisodeSearch', { name: 'missingEpisodeSearch' });
+      CommandController.execute('missingEpisodeSearch', { name: 'missingEpisodeSearch' });
     }
   },
 

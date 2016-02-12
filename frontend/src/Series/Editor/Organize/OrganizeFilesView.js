@@ -22,7 +22,7 @@ module.exports = Marionette.ItemView.extend({
   _organize() {
     var seriesIds = _.pluck(this.series, 'id');
 
-    CommandController.Execute('renameSeries', {
+    CommandController.execute('renameSeries', {
       name: 'renameSeries',
       seriesIds: seriesIds
     });

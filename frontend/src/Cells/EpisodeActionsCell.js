@@ -28,7 +28,7 @@ module.exports = NzbDroneCell.extend({
   },
 
   _automaticSearch() {
-    CommandController.Execute('episodeSearch', {
+    CommandController.execute('episodeSearch', {
       name: 'episodeSearch',
       episodeIds: [this.model.get('id')]
     });

@@ -79,7 +79,7 @@ var view = Marionette.ItemView.extend({
 
   _resetApiKey() {
     if (window.confirm('Reset API Key?')) {
-      CommandController.Execute('resetApiKey', {
+      CommandController.execute('resetApiKey', {
         name: 'resetApiKey'
       });
     }

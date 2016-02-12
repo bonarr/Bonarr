@@ -152,7 +152,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _automaticImport(e) {
-    CommandController.Execute('downloadedEpisodesScan', {
+    CommandController.execute('downloadedEpisodesScan', {
       name: 'downloadedEpisodesScan',
       path: e.folder
     });
@@ -191,7 +191,7 @@ module.exports = Marionette.Layout.extend({
       return;
     }
 
-    CommandController.Execute('manualImport', {
+    CommandController.execute('manualImport', {
       name: 'manualImport',
       files: _.map(selected, function(file) {
         return {

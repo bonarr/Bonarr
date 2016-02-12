@@ -60,7 +60,7 @@ module.exports = Marionette.ItemView.extend({
   invokeCommand() {
     var command = this.model.get('command');
     if (command) {
-      CommandController.Execute(command, this.model.get('properties'));
+      CommandController.execute(command, this.model.get('properties'));
     }
   },
 

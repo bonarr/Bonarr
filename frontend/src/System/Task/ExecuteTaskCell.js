@@ -25,6 +25,6 @@ module.exports = NzbDroneCell.extend({
   },
 
   _executeTask() {
-    CommandController.Execute(this.model.get('taskName'), { name: this.model.get('taskName') });
+    CommandController.execute(this.model.get('taskName'), { name: this.model.get('taskName') });
   }
 });

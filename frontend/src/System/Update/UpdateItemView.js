@@ -8,24 +8,7 @@ module.exports = Marionette.ItemView.extend({
     'click .x-install-update': '_installUpdate'
   },
 
-  initialize() {
-    this.updating = false;
-  },
-
   _installUpdate() {
-    if (this.updating) {
-      return;
-    }
-
-    this.updating = true;
-    var self = this;
-
-    var promise = CommandController.Execute('applicationUpdate');
-
-    promise.done(function() {
-      window.setTimeout(function() {
-        self.updating = false;
-      }, 5000);
-    });
+    CommandController.execute('applicationUpdate');
   }
 });

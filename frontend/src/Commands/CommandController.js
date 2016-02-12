@@ -1,19 +1,19 @@
+var _ = require('underscore');
+var $ = require('jquery');
 var vent = require('vent');
 var CommandModel = require('./CommandModel');
 var CommandCollection = require('./CommandCollection');
 var CommandMessengerCollectionView = require('./CommandMessengerCollectionView');
-var _ = require('underscore');
 var moment = require('moment');
 var Messenger = require('Shared/Messenger');
 require('jQuery/jquery.spin');
 
 CommandMessengerCollectionView.render();
 
-var singleton = function() {
-  return {
+const CommandController = {
     _lastCommand: {},
 
-    Execute(name, properties) {
+    execute(name, properties) {
       var attr = _.extend({ name: name.toLocaleLowerCase() }, properties);
       var commandModel = new CommandModel(attr);
 
@@ -25,40 +25,48 @@ var singleton = function() {
           type: 'error'
         });
 
-        return this._lastCommand.promise;
+        return this._lastCommand.command.deferred.promise();
       }
 
-      var promise = commandModel.save().success(function() {
+      commandModel.deferred = $.Deferred();
+
+      commandModel.save().success(() => {
         CommandCollection.add(commandModel);
+
+        commandModel.bind('change:status', (model) => {
+          if (model.isComplete()) {
+            commandModel.deferred.resolve(commandModel);
+          } else if (model.isFailed()) {
+            commandModel.deferred.reject(commandModel);
+          }
+        });
       });
 
       this._lastCommand = {
         command: commandModel,
-        promise: promise,
         time: moment()
       };
 
-      return promise;
+      return commandModel.deferred.promise();
     },
 
     bindToCommand(options) {
-      var self = this;
       var existingCommand = CommandCollection.findCommand(options.command);
 
       if (existingCommand) {
         this._bindToCommandModel.call(this, existingCommand, options);
       }
 
-      CommandCollection.bind('add', function(model) {
+      CommandCollection.bind('add', (model) => {
         if (model.isSameCommand(options.command)) {
-          self._bindToCommandModel.call(self, model, options);
+          this._bindToCommandModel.call(this, model, options);
         }
       });
 
-      CommandCollection.bind('sync', function() {
+      CommandCollection.bind('sync', () => {
         var command = CommandCollection.findCommand(options.command);
         if (command) {
-          self._bindToCommandModel.call(self, command, options);
+          this._bindToCommandModel.call(this, command, options);
         }
       });
     },
@@ -69,8 +77,8 @@ var singleton = function() {
         return;
       }
 
-      model.bind('change:status', function(model) {
-        if (!model.isActive()) {
+      model.bind('change:status', (model) => {
+        if (model.isComplete() || model.isFailed()) {
           options.element.stopSpin();
 
           if (model.isComplete()) {
@@ -85,5 +93,5 @@ var singleton = function() {
       options.element.startSpin();
     }
   };
-};
-module.exports = singleton();
+
+module.exports = CommandController;

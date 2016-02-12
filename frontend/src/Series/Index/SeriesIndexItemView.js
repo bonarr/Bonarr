@@ -27,7 +27,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _refreshSeries() {
-    CommandController.Execute('refreshSeries', {
+    CommandController.execute('refreshSeries', {
       name: 'refreshSeries',
       seriesId: this.model.id
     });

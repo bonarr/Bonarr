@@ -156,7 +156,7 @@ module.exports = Marionette.Layout.extend({
 
     var ids = _.pluck(selected, 'id');
 
-    CommandController.Execute('episodeSearch', {
+    CommandController.execute('episodeSearch', {
       name: 'episodeSearch',
       episodeIds: ids
     });

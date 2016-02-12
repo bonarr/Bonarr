@@ -149,7 +149,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _seasonSearch() {
-    CommandController.Execute('seasonSearch', {
+    CommandController.execute('seasonSearch', {
       name: 'seasonSearch',
       seriesId: this.series.id,
       seasonNumber: this.model.get('seasonNumber')

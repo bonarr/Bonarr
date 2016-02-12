@@ -43,5 +43,9 @@ module.exports = Backbone.Model.extend({
 
   isComplete() {
     return this.get('status') === 'completed';
+  },
+
+  isFailed() {
+    return this.get('status') === 'failed';
   }
 });

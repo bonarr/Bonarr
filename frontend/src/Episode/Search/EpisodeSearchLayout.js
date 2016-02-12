@@ -40,7 +40,7 @@ module.exports = Marionette.Layout.extend({
       e.preventDefault();
     }
 
-    CommandController.Execute('episodeSearch', {
+    CommandController.execute('episodeSearch', {
       episodeIds: [this.model.get('id')]
     });
 

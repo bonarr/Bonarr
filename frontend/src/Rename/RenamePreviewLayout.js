@@ -74,14 +74,14 @@ module.exports = Marionette.Layout.extend({
     }
 
     if (this.seasonNumber) {
-      CommandController.Execute('renameFiles', {
+      CommandController.execute('renameFiles', {
         name: 'renameFiles',
         seriesId: this.model.id,
         seasonNumber: this.seasonNumber,
         files: files
       });
     } else {
-      CommandController.Execute('renameFiles', {
+      CommandController.execute('renameFiles', {
         name: 'renameFiles',
         seriesId: this.model.id,
         seasonNumber: -1,
