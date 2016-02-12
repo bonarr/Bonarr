@@ -38,7 +38,7 @@ module.exports = _.extend(Backbone.Collection.prototype, {
       console.log(options.action + ': {0}}'.format(options.resource));
     };
 
-    collection.listenTo(vent, 'server:' + collection.url.split('/api/')[1], processMessage);
+    collection.listenTo(vent, 'server:' + collection.url.split('/api/v3/')[1], processMessage);
 
     return this;
   }
