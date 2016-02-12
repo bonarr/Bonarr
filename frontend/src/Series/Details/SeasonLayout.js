@@ -117,7 +117,7 @@ module.exports = Marionette.Layout.extend({
     this.showingEpisodes = this._shouldShowEpisodes();
 
     this.listenTo(this.model, 'sync', this._afterSeasonMonitored);
-    this.listenTo(this.episodeCollection, 'sync', this.render);
+    this.listenTo(this.episodeCollection, 'sync', this._refreshEpisodes);
 
     this.listenTo(this.fullEpisodeCollection, 'sync', this._refreshEpisodes);
   },
@@ -189,8 +189,6 @@ module.exports = Marionette.Layout.extend({
     _.each(this.episodeCollection.models, function(episode) {
       episode.set({ monitored: self.model.get('monitored') });
     });
-
-    this.render();
   },
 
   _setSeasonMonitoredState() {
@@ -286,19 +284,16 @@ module.exports = Marionette.Layout.extend({
   },
 
   _updateEpisodeCollection() {
-    var self = this;
-
     this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge: true });
 
-    this.episodeCollection.each(function(model) {
-      model.episodeCollection = self.episodeCollection;
+    this.episodeCollection.each((model) => {
+      model.episodeCollection = this.episodeCollection;
     });
   },
 
   _refreshEpisodes() {
     this._updateEpisodeCollection();
     this.episodeCollection.fullCollection.sort();
-    this.render();
   },
 
   _openEpisodeFileEditor() {
