@@ -1,12 +1,8 @@
 var _ = require('underscore');
-var vent = require('vent');
 var Marionette = require('marionette');
 var TableView = require('../../Table/TableView');
 var EpisodeCollection = require('Series/EpisodeCollection');
 var LoadingView = require('Shared/LoadingView');
-var SelectAllCell = require('Cells/SelectAllCell');
-var EpisodeNumberCell = require('Series/Details/EpisodeNumberCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
 var SelectEpisodeRow = require('./SelectEpisodeRow');
 var tpl = require('./SelectEpisodeLayoutTemplate.hbs');
 
@@ -64,6 +60,6 @@ module.exports = Marionette.Layout.extend({
     });
 
     this.trigger('manualimport:selected:episodes', { episodes: episodes });
-    vent.trigger(vent.Commands.CloseModal);
+    this.close();
   }
 });

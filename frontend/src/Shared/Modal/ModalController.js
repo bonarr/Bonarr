@@ -18,7 +18,6 @@ module.exports = Marionette.AppRouter.extend({
     vent.on(vent.Commands.CloseFullscreenModal, this._closeFullscreenModal, this);
 
     vent.on(vent.Commands.OpenModal, this._openModal, this);
-    vent.on(vent.Commands.CloseModal, this._closeModal, this);
 
     vent.on(vent.Commands.EditSeries, this._editSeries, this);
     vent.on(vent.Commands.DeleteSeries, this._deleteSeries, this);
@@ -41,10 +40,6 @@ module.exports = Marionette.AppRouter.extend({
 
   _openModal(view) {
     AppLayout.modalRegion.show(view);
-  },
-
-  _closeModal() {
-    AppLayout.modalRegion.close();
   },
 
   _editSeries(options) {

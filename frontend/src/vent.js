@@ -16,7 +16,6 @@ vent.Commands = {
   OpenFullscreenModal: 'OpenFullscreenModal',
   CloseFullscreenModal: 'CloseFullscreenModal',
   OpenModal: 'OpenModal',
-  CloseModal: 'CloseModal',
   ShowEpisodeDetails: 'ShowEpisodeDetails',
   ShowHistoryDetails: 'ShowHistoryDetails',
   ShowLogDetails: 'ShowLogDetails',

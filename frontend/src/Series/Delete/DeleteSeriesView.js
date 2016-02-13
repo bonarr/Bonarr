@@ -9,6 +9,10 @@ module.exports = Marionette.ItemView.extend({
     'change .x-delete-files': 'changeDeletedFiles'
   },
 
+  triggers: {
+    'click .x-close': 'close'
+  },
+
   ui: {
     deleteFiles: '.x-delete-files',
     deleteFilesInfo: '.x-delete-files-info',
@@ -23,9 +27,9 @@ module.exports = Marionette.ItemView.extend({
     this.model.destroy({
       data: { 'deleteFiles': deleteFiles },
       wait: true
-    }).done(function() {
+    }).done(() => {
       vent.trigger(vent.Events.SeriesDeleted, { series: self.model });
-      vent.trigger(vent.Commands.CloseModal, this);
+      this.close();
     });
   },
 

@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var vent = require('vent');
 var Marionette = require('marionette');
 var LoadingView = require('Shared/LoadingView');
 var ProfileSchemaCollection = require('../../Settings/Profile/ProfileSchemaCollection');
@@ -38,6 +37,6 @@ module.exports = Marionette.Layout.extend({
 
   _selectQuality() {
     this.trigger('manualimport:selected:quality', { quality: this.selectQualityView.selectedQuality() });
-    vent.trigger(vent.Commands.CloseModal);
+    this.close();
   }
 });
