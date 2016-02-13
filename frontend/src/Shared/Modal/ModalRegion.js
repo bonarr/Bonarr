@@ -28,11 +28,6 @@ const ModalRegion = Marionette.Region.extend({
     });
   },
 
-  onClose() {
-    this.$el.modal('hide');
-    this.stopListening(this.currentView);
-  },
-
   onBootstrapShow() {
     $('.modal-backdrop:last').css('z-index', 1059);
     this.trigger('modal:afterShow');
@@ -46,7 +41,6 @@ const ModalRegion = Marionette.Region.extend({
   onViewClose() {
     this.$el.modal('hide');
     this.stopListening(this.currentView);
-    this.close();
   }
 });
 
