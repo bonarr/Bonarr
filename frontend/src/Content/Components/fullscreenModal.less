@@ -10,6 +10,7 @@
   transition: background-color 1s,top 750ms;
   pointer-events: none;
   z-index: 10;
+  overflow: hidden;
 
   &.shown {
     top: 0;
@@ -20,9 +21,13 @@
   .fullscreen-modal {
     padding: 0;
     background-color: white;
+    overflow: hidden;
   }
 
   .fullscreen-modal-header {
+    position: absolute;
+    width: 100%;
+    z-index: 20;
     padding: 1px 20px;
     background-color: lighten(@sidebar-background, 65%);
 
@@ -38,10 +43,18 @@
   }
 
   .fullscreen-modal-body {
+    margin-top: 60px;
+    bottom: -75px;
     padding: 20px;
+    overflow-y: auto;
+
+    .scrollbar();
   }
 
   .fullscreen-modal-footer {
+    position: absolute;
+    width: 100%;
+    z-index: 20;
     background-color: lighten(@sidebar-background, 65%);
     text-align: right;
     padding: 20px;
