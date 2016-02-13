@@ -1,4 +1,7 @@
-<td>{{name}}</td>
+<td>
+  <i class="icon-sonarr-folder"></i>
+  {{name}}
+</td>
 <td class="series-select-col">
   {{#if loading}}
     <div class="spinner-small">
@@ -10,7 +13,7 @@
         {{#if suggestions}}
           {{suggestions.0.title}}
         {{else}}
-          <i class="fa fa-exclamation-triangle"></i>
+          <i class="icon-sonarr-warning"></i>
           No match found
         {{/if}}
         <span class="caret"></span>
@@ -33,8 +36,12 @@
           </li>
           {{/each}}
         {{else}}
-          <i class="fa fa-exclamation-triangle"></i>
-          No match found
+          <li class="suggestion">
+            <a>
+              <i class="icon-sonarr-warning"></i>
+              No match found
+            </a>
+          </li>
         {{/if}}
       </ul>
     </div>
