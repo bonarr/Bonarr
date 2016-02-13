@@ -14,7 +14,7 @@ const EmptyView = Marionette.Layout.extend({
   headers: [
     {
       name: 'name',
-      label: 'Name'
+      label: 'Folder'
     },
     {
       name: 'series',
