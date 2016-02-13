@@ -16,7 +16,6 @@ var Router = require('./Router');
 var ModalController = require('./Shared/Modal/ModalController');
 var ControlPanelController = require('./Shared/ControlPanel/ControlPanelController');
 var ActionBarController = require('./Sidebar/ActionBar/ActionBarController');
-var Tooltip = require('./Shared/Tooltip');
 var UiSettingsController = require('./Shared/UiSettingsController');
 var StatusModel = require('./System/StatusModel');
 var TagCollection = require('./Tags/TagCollection');
@@ -55,12 +54,9 @@ var preloadPromise = $.when(
   SeriesCollection.fetch()
 );
 
-preloadPromise.done(function() {
+preloadPromise.done(() => {
   app.addInitializer(SignalRBroadcaster.appInitializer, { app: app });
-
-  app.addInitializer(Tooltip.appInitializer, { app: app });
-
-  app.addInitializer(function() {
+  app.addInitializer(() => {
     Backbone.history.start({
       pushState: true,
       root: window.Sonarr.UrlBase
@@ -74,7 +70,7 @@ preloadPromise.done(function() {
 
   app.addInitializer(UiSettingsController.appInitializer);
 
-  app.addInitializer(function() {
+  app.addInitializer(() => {
     var footerText = StatusModel.get('version');
 
     if (StatusModel.get('branch') !== 'master') {
@@ -86,7 +82,7 @@ preloadPromise.done(function() {
   app.start();
 });
 
-preloadPromise.fail(function() {
+preloadPromise.fail(() => {
   $('#main-region').html('<h2>Loading failed, check console log</h2>');
 });
 
