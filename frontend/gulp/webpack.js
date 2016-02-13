@@ -30,7 +30,7 @@ var config = {
       'backbone.sorted.collection': 'JsLibraries/backbone-sorted-collection',
       'radio': 'JsLibraries/backbone.radio',
       'backgrid.selectall': 'Shims/backbone.backgrid.selectall',
-      'marionette' : 'Shims/backbone.marionette',
+      'marionette': 'Shims/backbone.marionette',
       'momentRange': 'JsLibraries/moment-range',
       'signalR': 'Shims/jquery.signalR'
     }

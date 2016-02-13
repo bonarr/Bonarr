@@ -23,7 +23,7 @@ const EmptyView = Marionette.Layout.extend({
   ],
 
   regions: {
-    table: '#table-region'
+    table: '#import-series-table-region'
   },
 
   initialize(options = {}) {

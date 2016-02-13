@@ -19,11 +19,16 @@ module.exports = TableRow.extend({
       return this.results.search(name);
     });
 
-    this.listenTo(this.results, 'sync', this.render);
+    this.promise.always(() => {
+      if (!this.isClosed) {
+        this.render();
+      }
+    });
   },
 
   templateHelpers() {
     return {
+      loading: this.promise.state() === 'pending',
       suggestions: this.results.toJSON()
     };
   }

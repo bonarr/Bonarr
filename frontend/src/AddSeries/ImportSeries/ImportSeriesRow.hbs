@@ -1,6 +1,44 @@
 <td>{{name}}</td>
 <td class="series-select-col">
-  <div class="spinner-small">
-    {{> ../../Shared/LoadingPartial}}
-  </div>
+  {{#if loading}}
+    <div class="spinner-small">
+      {{> ../../Shared/LoadingPartial}}
+    </div>
+  {{else}}
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdown-{{name}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{#if suggestions}}
+          {{suggestions.0.title}}
+        {{else}}
+          <i class="fa fa-exclamation-triangle"></i>
+          No match found
+        {{/if}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdown-{{name}}">
+        <li class="import-search">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="icon-sonarr-search"></i></div>
+              <input type="text" class="import-search-input form-control" placeholder="{{name}}" value="{{name}}">
+          </div>
+        </li>
+        {{#if suggestions}}
+          {{#each suggestions}}
+          <li class="suggestion">
+            <a>
+              {{title}}
+              {{#if year}}<span class="label label-default">{{year}}</span>{{/if}}
+              {{#if network}}<span class="label label-default">{{network}}</span>{{/if}}
+            </a>
+          </li>
+          {{/each}}
+        {{else}}
+          <i class="fa fa-exclamation-triangle"></i>
+          No match found
+        {{/if}}
+      </ul>
+    </div>
+  {{/if}}
 </td>
+
+{{debug .}}
