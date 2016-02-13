@@ -1,9 +1,8 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
-var StatusModel = require('System/StatusModel');
 
-//This module will automatically route all relative links through backbone router rather than
-//causing links to reload pages.
+// This module will automatically route all relative links through backbone router rather than
+// causing links to reload pages.
 
 var routeBinder = {
   bind() {
@@ -16,7 +15,7 @@ var routeBinder = {
   _handleClick(event) {
     var $target = $(event.target);
 
-    //check if tab nav
+    // check if tab nav
     if ($target.parents('.nav-tabs').length) {
       return;
     }
@@ -53,11 +52,11 @@ var routeBinder = {
         Backbone.history.navigate(relativeHref, { trigger: true });
       }
     } else if (href.contains('#')) {
-      //Open in new tab without dereferer (since it doesn't support fragments)
+      // Open in new tab without dereferer (since it doesn't support fragments)
       window.open(href, '_blank');
     } else {
-      //Open in new tab
-      window.open('http://www.dereferer.org/?' + encodeURI(href), '_blank');
+      // Open in new tab
+      window.open(`https://services.sonarr.tv/derefer/?url=${encodeURI(href)}`, '_blank');
     }
   },
 
