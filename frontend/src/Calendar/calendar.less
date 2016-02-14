@@ -24,7 +24,8 @@
   }
 
   .upcoming .event .status,
-  .calendar .calendar-day .calendar-events .calendar-event, .calendar-legend .legend-label {
+  .calendar .calendar-day .calendar-events .calendar-event,
+  .calendar-legend .legend-label {
     &.primary {
       border-left-color: @btn-primary-bg;
 
@@ -159,6 +160,39 @@
           }
 
           .calendar-event-time {
+          }
+        }
+      }
+    }
+
+    .calendar-agenda {
+      padding-top: 10px;
+
+      .calendar-day {
+        display: flex;
+        padding: 10px 0 5px 0;
+        border-bottom: 1px solid @gray;
+
+        .date {
+          width: 120px;
+          font-weight: bold;
+        }
+
+        .calendar-event {
+          display: flex;
+          height: 18px;
+          margin: 4px 0;
+          border-left: 4px solid @gray;
+
+          &:hover, &:focus {
+            text-decoration: underline;
+          }
+
+          .clickable();
+
+          .calendar-event-time {
+            width: 150px;
+            padding-left: 5px;
           }
         }
       }

@@ -3,11 +3,12 @@ var vent = require('vent');
 var moment = require('moment');
 var Marionette = require('marionette');
 var QueueCollection = require('Activity/Queue/QueueCollection');
+var agendaTemplate = require('./CalendarAgendaEventView.hbs');
+var standardTemplate = require('./CalendarEventView.hbs');
 
 require('jquery.easypiechart');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Calendar/Calendar/Events/CalendarEventView',
   className: 'calendar-event',
 
   events: {
@@ -18,7 +19,9 @@ module.exports = Marionette.ItemView.extend({
     downloadProgress: '.download-progress'
   },
 
-  initialize() {
+  initialize(options) {
+    this.template = options.style === 'agenda' ? agendaTemplate : standardTemplate;
+
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(QueueCollection, 'sync', this._onQueueUpdated);
   },

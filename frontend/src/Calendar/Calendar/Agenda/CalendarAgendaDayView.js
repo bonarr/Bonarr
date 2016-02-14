@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var CalendarEventCollectionView = require('../Events/CalendarEventCollectionView');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Calendar/Calendar/Day/CalendarDayView',
+  template: 'Calendar/Calendar/Agenda/CalendarAgendaDayView',
   className: 'calendar-day',
 
   regions : {
@@ -10,16 +10,16 @@ module.exports = Marionette.Layout.extend({
   },
 
   serializeData() {
+    // TODO: Show the date, format depends on view
     return {
-      date: this.model.get('date'),
-      view: this.model.get('view')
+      date: this.model.get('date')
     };
   },
 
   onShow () {
     this.events.show(new CalendarEventCollectionView({
       collection: this.model.get('events'),
-      style: 'standard'
-    }));
+      style: 'agenda'
+  }));
   }
 });

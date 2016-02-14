@@ -6,6 +6,7 @@ var momentRange = require('momentRange');
 var CalendarCollection = require('../CalendarCollection');
 var UiSettings = require('Shared/UiSettingsModel');
 var Config = require('Config');
+var CalendarAgendaCollectionView = require('./Agenda/CalendarAgendaCollectionView');
 var CalendarDayCollectionView = require('./Day/CalendarDayCollectionView');
 var CalendarDayEventCollection = require('./Day/CalendarDayEventCollection');
 var CalendarDayCollection = require('./Day/CalendarDayCollection');
@@ -40,7 +41,8 @@ module.exports = Marionette.Layout.extend({
     month: '.x-month',
     week: '.x-week',
     forecast: '.x-forecast',
-    day: '.x-day'
+    day: '.x-day',
+    agenda: '.x-agenda'
   },
 
   initialize() {
@@ -100,6 +102,9 @@ module.exports = Marionette.Layout.extend({
     } else if (view === 'month') {
       start = time.clone().startOf('month').startOf(weekName);
       end = time.clone().endOf('month').endOf(weekName);
+    } else if (view === 'agenda') {
+      start = time.clone().startOf('day');
+      end = time.clone().endOf('month');
     }
 
     var range = moment.range(start, end);
@@ -137,23 +142,37 @@ module.exports = Marionette.Layout.extend({
     this.dayCollection.reset();
 
    this.dates.days.forEach((day) => {
+     const events = groupedEvents[day.format(dayFormat)];
+
+     if (this.view === 'agenda' && !events || !events.length) {
+       return;
+     }
+
       const calendarDayModel = new CalendarDayModel({
         view   : this.view,
         date   : day.toISOString(),
-        events : new CalendarDayEventCollection(groupedEvents[day.format(dayFormat)])
+        events : new CalendarDayEventCollection(events)
       });
 
-      this.dayCollection.add(calendarDayModel);
+     this.dayCollection.add(calendarDayModel);
     });
 
-    this.headersRegion.show(new CalendarDayHeaderView({
-      view: this.view,
-      days: this.dates.days
-    }));
+    if (this.view === 'agenda') {
+      this.headersRegion.close();
 
-    this.daysRegion.show(new CalendarDayCollectionView({
-      collection: this.dayCollection
-    }));
+      this.daysRegion.show(new CalendarAgendaCollectionView({
+        collection: this.dayCollection
+      }));
+    } else {
+      this.headersRegion.show(new CalendarDayHeaderView({
+        view: this.view,
+        days: this.dates.days
+      }));
+
+      this.daysRegion.show(new CalendarDayCollectionView({
+        collection: this.dayCollection
+      }));
+    }
 
     this.ui.calendar.removeClass('day week month');
     this.ui.calendar.addClass(this.view);
@@ -168,6 +187,8 @@ module.exports = Marionette.Layout.extend({
       return this.time.format(UiSettings.get('longDateFormat'));
     } else if (this.view === 'month') {
       return this.time.format('MMMM YYYY');
+    } else if (this.view === 'agenda') {
+      return 'Agenda';
     }
 
     var startDate = this.dates.start;

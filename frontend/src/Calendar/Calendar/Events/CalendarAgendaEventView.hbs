@@ -1,0 +1,36 @@
+<div class="calendar-event-time">
+  {{StartTime start}} - {{StartTime end}}
+</div>
+
+<div class="calendar-event-series-title">
+  {{seriesTitle}}
+</div>
+
+<div class="calendar-event-status pull-right">
+  {{#with queueDetails}}
+    {{#if pending}}
+      <i class="icon-sonarr-pending" title="{{message}}"></i>
+    {{/if}}
+
+    {{#if downloading}}
+      <div class="download-progress" title="Episode is downloading - {{progress}}% {{releaseTitle}}" data-percent="{{progress}}"></div>
+    {{/if}}
+
+    {{#if failed}}
+      {{#if completed}}
+        <i class="icon-sonarr-import-failed" title="{{message}}"></i>
+      {{else}}
+        <i class="icon-sonarr-download-failed" title="{{message}}"></i>
+      {{/if}}
+    {{/if}}
+
+    {{#if warning}}
+      <i class="Download warning: check download client for more details" title="{{message}}"></i>
+    {{/if}}
+  {{/with}}
+
+  {{#if missingAbsoluteNumber}}
+    <i class="icon-sonarr-form-warning" title="Episode does not have an absolute episode number"></i>
+  {{/if}}
+
+</div>
