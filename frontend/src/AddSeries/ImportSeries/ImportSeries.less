@@ -1,4 +1,5 @@
 @import "../../Content/Bootstrap/variables";
+@import "../../Content/colors";
 
 
 #import-series {
@@ -26,7 +27,24 @@
 
 #import-series-table-region {
   table {
+
+    tr {
+      height: 54px;
+    }
+
     table-layout: fixed;
+
+    .folder-name-col {
+      padding-top: 17px;
+    }
+  }
+
+  .icon-sonarr-warning {
+    color: @brand-warning;
+  }
+
+  .spinner-container {
+    height: 0;
   }
 
   i {
