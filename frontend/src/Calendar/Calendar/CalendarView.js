@@ -62,6 +62,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow() {
+    this._disableButtons();
     this._reloadEvents();
   },
 
@@ -218,6 +219,7 @@ module.exports = Marionette.Layout.extend({
     Config.setValue(this.storageKey, view);
     this.view = view;
 
+    this._disableButtons();
     this._reloadEvents();
   },
 
@@ -225,5 +227,12 @@ module.exports = Marionette.Layout.extend({
     this.ui.loading.removeClass('hidden');
     this.dates = this._getDates();
     this._getEvents();
+  },
+
+  _disableButtons() {
+    var showingForecastView = this.view === 'forecast';
+
+    this.ui.previous.toggleClass('disabled', showingForecastView);
+    this.ui.next.toggleClass('disabled', showingForecastView);
   }
 });
