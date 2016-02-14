@@ -1,13 +1,14 @@
-  <thead>
-    <tr>
-      {{#if selectable}}
-        <th><input type="checkbox" class="select-checkbox select-all-checkbox"></th>
-      {{/if}}
-
-      {{#each headers}}
-        <th data-field="{{./name}}">{{label}}</th>
-      {{/each}}
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
+<thead>
+  <tr>
+    {{#if selectable}}
+      <th class="select-all">
+        <input type="checkbox" class="select-checkbox select-all-checkbox">
+      </th>
+    {{/if}}
+    {{#each headers}}
+      <th data-field="{{./name}}">{{label}}</th>
+    {{/each}}
+  </tr>
+</thead>
+<tbody>
+</tbody>

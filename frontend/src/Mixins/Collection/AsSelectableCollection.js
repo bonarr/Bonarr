@@ -1,24 +1,39 @@
 var _ = require('underscore');
 
-module.exports = function() {
+function AsSelectableCollection() {
 
-  this.prototype.getSelectedModels = function () {
+  this.prototype.allSelected = function () {
+    return _.every(this.models, (model) => model.selected);
+  };
+
+  this.prototype.anySelected = function () {
+    return _.some(this.models, (model) => model.selected);
+  };
+
+  this.prototype.getSelected = function () {
     return _.where(this.models, { selected: true });
   };
 
-  this.prototype.selectAllModels = function () {
-    this.models.forEach((model) => {
-      model.selected = true;
-      model.trigger('select', model, true);
-    });
+  this.prototype.getNotSelected = function () {
+    return _.where(this.models, { selected: false });
   };
 
-  this.prototype.unselectAllModels = function () {
+  this.prototype.selectAll = function () {
+    this.toggleAll(true);
+  };
+
+  this.prototype.unselectAll = function () {
+    this.toggleAll(false);
+  };
+
+  this.prototype.toggleAll = function (selected) {
     this.models.forEach((model) => {
-      model.selected = false;
-      model.trigger('select', model, false);
+      model.selected = !!selected;
+      model.trigger('selected', model, model.selected);
     });
   };
 
   return this;
-};
+}
+
+module.exports = AsSelectableCollection;

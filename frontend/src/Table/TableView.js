@@ -38,19 +38,12 @@ const TableView = Marionette.CompositeView.extend({
   },
 
   _onSelectChange() {
-    var checked = this.ui.selectCheckbox.prop('checked');
-
-    if (checked) {
-      this.collection.selectAllModels();
-    } else {
-      this.collection.unselectAllModels();
-    }
+    const checked = this.ui.selectCheckbox.prop('checked');
+    this.collection.toggleAll(checked);
   },
 
   _onModelSelected() {
-    var allSelected = this.collection.getSelectedModels().length === this.collection.length;
-
-    this.ui.selectCheckbox.prop('checked', allSelected);
+    this.ui.selectCheckbox.prop('checked', this.collection.allSelected());
   }
 });
 
