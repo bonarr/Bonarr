@@ -1,10 +1,10 @@
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
 var EpisodeModel = require('./EpisodeModel');
-var AsSelectableCollection = require('../Mixins/Collection/AsSelectableCollection');
+var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 require('./EpisodeCollection');
 
-var episodeCollection = PageableCollection.extend({
+var EpisodeCollection = PageableCollection.extend({
   url: window.Sonarr.ApiRoot + '/episode',
   model: EpisodeModel,
 
@@ -26,8 +26,6 @@ var episodeCollection = PageableCollection.extend({
     var filtered = this.filter(function(episode) {
       return episode.get('seasonNumber') === season;
     });
-
-    var EpisodeCollection = require('./EpisodeCollection');
 
     return new EpisodeCollection(filtered);
   },
@@ -58,9 +56,9 @@ var episodeCollection = PageableCollection.extend({
 
     options.data = { seriesId: this.seriesId };
 
-    return this.originalFetch.call(this, options);
+    return this.originalFetch(options);
   }
 });
 
-episodeCollection = AsSelectableCollection.call(episodeCollection);
-module.exports = episodeCollection;
+EpisodeCollection = AsSelectableCollection.apply(EpisodeCollection);
+module.exports = EpisodeCollection;

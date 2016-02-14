@@ -1,6 +1,8 @@
+<td class="select-col">
+  <input type="checkbox" class="select-checkbox">
+</td>
 <td class="folder-name-col">
-  <i class="icon-sonarr-folder"></i>
-  {{name}}
+  <i class="icon-sonarr-folder"></i> {{name}}
 </td>
 <td class="series-select-col">
   {{#if loading}}
@@ -14,8 +16,9 @@
         <span class="x-series-select-title">No match found!</span>
         <span class="caret"></span>
       </button>
-      <div class="x-suggestions"></ul>
-    </div>
+      <div class="x-suggestions">
+        </ul>
+      </div>
   {{/if}}
 </td>
 
