@@ -2,7 +2,7 @@ var _ = require('underscore');
 var vent = require('vent');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
-var Profiles = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var RootFolders = require('./RootFolders/RootFolderCollection');
 var RootFolderLayout = require('./RootFolders/RootFolderLayout');
 var SeriesCollection = require('Series/SeriesCollection');
@@ -53,12 +53,12 @@ var view = Marionette.ItemView.extend({
 
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(RootFolders, 'all', this.render);
-    this.listenTo(Profiles, 'all', this.render);
+    this.listenTo(profileCollection, 'all', this.render);
   },
 
   templateHelpers() {
     return {
-      profiles: Profiles.toJSON(),
+      profiles: profileCollection.toJSON(),
       rootFolders: RootFolders.toJSON()
     };
   },
@@ -72,7 +72,7 @@ var view = Marionette.ItemView.extend({
     var useSeasonFolder = Config.getValueBoolean(Keys.UseSeasonFolder, true);
     var startSearch = Config.getValueBoolean(Keys.StartSearch, false);
 
-    if (Profiles.get(profileId)) {
+    if (profileCollection.get(profileId)) {
       this.ui.profile.val(profileId);
     }
 

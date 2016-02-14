@@ -5,7 +5,6 @@ require('messenger');
 require('moment');
 require('signalR');
 require('jquery-ui');
-require('jquery.knob');
 require('jquery.easypiechart');
 require('jquery.dotdotdot');
 require('typeahead');

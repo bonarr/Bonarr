@@ -2,7 +2,7 @@ var _ = require('underscore');
 var vent = require('vent');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
-var Profiles = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var RootFolders = require('../RootFolders/RootFolderCollection');
 var RootFolderLayout = require('../RootFolders/RootFolderLayout');
 var SeriesCollection = require('Series/SeriesCollection');
@@ -58,7 +58,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
       helpers.existing = existingSeries.toJSON();
     }
 
-    helpers.profiles = Profiles.toJSON();
+    helpers.profiles = profileCollection.toJSON();
     helpers.rootFolders = RootFolders.toJSON();
 
     return helpers;
@@ -71,7 +71,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
     var defaultSeriesType = Config.getValue(Config.Keys.DefaultSeriesType, 'standard');
     var defaultMonitorEpisodes = Config.getValue(Config.Keys.MonitorEpisodes, 'missing');
 
-    if (Profiles.get(defaultProfile)) {
+    if (profileCollection.get(defaultProfile)) {
       this.ui.profile.val(defaultProfile);
     }
 

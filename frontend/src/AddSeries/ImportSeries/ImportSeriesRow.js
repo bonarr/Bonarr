@@ -1,7 +1,8 @@
 var Marionette = require('marionette');
 var TableRowMixin = require('Table/TableRowMixin');
-var SuggestionsView = require('./SuggestionsView');
+var SeriesSuggestionsView = require('./SeriesSuggestionsView');
 var AddSeriesCollection = require('../AddSeriesCollection');
+var ProfileSelectView = require('Profile/ProfileSelectView');
 var tpl = require('./ImportSeriesRow.hbs');
 
 const ImportSeriesRow = Marionette.Layout.extend({
@@ -10,7 +11,8 @@ const ImportSeriesRow = Marionette.Layout.extend({
   className: 'import-series-row',
 
   regions: {
-    suggestions: '.x-suggestions'
+    suggestions: '.suggestions-region',
+    profile: '.profile-region'
   },
 
   ui: {
@@ -34,6 +36,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
     this.listenTo(this.model, 'change:selectedSeries', this.onSelectedSeriesChanged);
 
     this.promise.always(() => {
+      // todo: try and avoid the re-render.
       this.render();
       this.model.set('selectedSeries', this.series.at(0));
     });
@@ -45,6 +48,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
     };
   },
 
+  onRender() {
+    const profileSelectView = new ProfileSelectView();
+    this.profile.show(profileSelectView);
+  },
+
   onSelectedSeriesChanged() {
     const selectedSeries = this.model.get('selectedSeries');
     this.ui.seriesSelectWarning.toggle(!selectedSeries);
@@ -54,7 +62,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
   },
 
   onSeriesDropdownClick() {
-    const suggestionsView = new SuggestionsView({
+    const suggestionsView = new SeriesSuggestionsView({
       model: this.model,
       series: this.series,
       promise: this.promise

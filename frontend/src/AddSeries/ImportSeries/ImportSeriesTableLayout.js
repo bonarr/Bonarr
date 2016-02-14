@@ -17,6 +17,10 @@ const EmptyView = Marionette.Layout.extend({
       label: 'Folder'
     },
     {
+      name: 'profile',
+      label: 'Profile'
+    },
+    {
       name: 'series',
       label: 'Series'
     }

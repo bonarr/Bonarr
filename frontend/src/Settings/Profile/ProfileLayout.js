@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
 var SettingsLayoutBase = require('../SettingsLayoutBase');
-var ProfileCollection = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var ProfileCollectionView = require('./ProfileCollectionView');
 var DelayProfileLayout = require('./Delay/DelayProfileLayout');
 var DelayProfileCollection = require('./Delay/DelayProfileCollection');
@@ -21,7 +21,7 @@ module.exports = SettingsLayoutBase.extend({
   },
 
   onRender() {
-    var promise = Marionette.$.when(ProfileCollection.fetch(),
+    var promise = Marionette.$.when(profileCollection.fetch(),
       this.delayProfileCollection.fetch());
 
     promise.done(_.bind(function() {
@@ -29,7 +29,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.profile.show(new ProfileCollectionView({ collection: ProfileCollection }));
+      this.profile.show(new ProfileCollectionView({ collection: profileCollection }));
       this.delayProfile.show(new DelayProfileLayout({ collection: this.delayProfileCollection }));
     }, this));
   }

@@ -1,9 +1,8 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('AppLayout');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
-var Profiles = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var RootFolders = require('./RootFolders/RootFolderCollection');
 var RootFolderLayout = require('./RootFolders/RootFolderLayout');
 var SeriesCollection = require('Series/SeriesCollection');
@@ -58,7 +57,7 @@ var view = Marionette.ItemView.extend({
     var defaultSeriesType = Config.getValue(Config.Keys.DefaultSeriesType, 'standard');
     var defaultMonitorEpisodes = Config.getValue(Config.Keys.MonitorEpisodes, 'missing');
 
-    if (Profiles.get(defaultProfile)) {
+    if (profileCollection.get(defaultProfile)) {
       this.ui.profile.val(defaultProfile);
     }
 
@@ -70,8 +69,8 @@ var view = Marionette.ItemView.extend({
     this.ui.seriesType.val(defaultSeriesType);
     this.ui.monitor.val(defaultMonitorEpisodes);
 
-    //TODO: make this work via onRender, FM?
-    //works with onShow, but stops working after the first render
+    // TODO: make this work via onRender, FM?
+    // works with onShow, but stops working after the first render
     this.ui.overview.dotdotdot({
       height: 120
     });
@@ -96,7 +95,7 @@ var view = Marionette.ItemView.extend({
       this.templateHelpers.existing = existingSeries[0].toJSON();
     }
 
-    this.templateHelpers.profiles = Profiles.toJSON();
+    this.templateHelpers.profiles = profileCollection.toJSON();
 
     if (!this.model.get('isExisting')) {
       this.templateHelpers.rootFolders = RootFolders.toJSON();

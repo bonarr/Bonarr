@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
 var vent = require('vent');
-var Profiles = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var RootFolders = require('AddSeries/RootFolders/RootFolderCollection');
 var RootFolderLayout = require('AddSeries/RootFolders/RootFolderLayout');
 var UpdateFilesSeriesView = require('./Organize/OrganizeFilesView');
@@ -28,7 +28,7 @@ module.exports = Marionette.ItemView.extend({
 
   templateHelpers() {
     return {
-      profiles: Profiles,
+      profiles: profileCollection,
       rootFolders: RootFolders.toJSON()
     };
   },

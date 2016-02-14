@@ -1,5 +1,5 @@
 var Backgrid = require('backgrid');
-var ProfileCollection = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var _ = require('underscore');
 
 module.exports = Backgrid.Cell.extend({
@@ -10,14 +10,14 @@ module.exports = Backgrid.Cell.extend({
   initialize() {
     this._originalInit.apply(this, arguments);
 
-    this.listenTo(ProfileCollection, 'sync', this.render);
+    this.listenTo(profileCollection, 'sync', this.render);
   },
 
   render() {
     this.$el.empty();
     var profileId = this.model.get(this.column.get('name'));
 
-    var profile = _.findWhere(ProfileCollection.models, { id: profileId });
+    var profile = _.findWhere(profileCollection.models, { id: profileId });
 
     if (profile) {
       this.$el.html(profile.get('name'));

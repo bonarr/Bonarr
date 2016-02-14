@@ -1,13 +1,13 @@
-var Backbone = require('backbone');
-var ProfileModel = require('./ProfileModel');
+const Backbone = require('backbone');
+const ProfileModel = require('./ProfileModel');
 
-var ProfileCollection = Backbone.Collection.extend({
+const ProfileCollection = Backbone.Collection.extend({
   model: ProfileModel,
   url: window.Sonarr.ApiRoot + '/profile'
 });
 
-var profiles = new ProfileCollection();
+const profileCollection = new ProfileCollection();
 
-profiles.fetch();
+profileCollection.fetch();
 
-module.exports = profiles;
+module.exports = profileCollection;

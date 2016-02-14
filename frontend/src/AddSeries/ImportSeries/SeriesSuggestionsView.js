@@ -1,7 +1,7 @@
 var Marionette = require('marionette');
-var tpl = require('./SuggestionsView.hbs');
+var tpl = require('./SeriesSuggestionsView.hbs');
 
-const ImportSeriesRow = Marionette.ItemView.extend({
+const SeriesSuggestionsView = Marionette.ItemView.extend({
   template: tpl,
 
   tagName: 'ul',
@@ -34,4 +34,4 @@ const ImportSeriesRow = Marionette.ItemView.extend({
   }
 });
 
-module.exports = ImportSeriesRow;
+module.exports = SeriesSuggestionsView;

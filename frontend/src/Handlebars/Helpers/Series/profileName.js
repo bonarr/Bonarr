@@ -1,8 +1,8 @@
 var Handlebars = require('handlebars');
-var ProfileCollection = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 
 function profileName(profileId) {
-  const profile = ProfileCollection.get(profileId);
+  const profile = profileCollection.get(profileId);
 
   if (!profile) {
     return;

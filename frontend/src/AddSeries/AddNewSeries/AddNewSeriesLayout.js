@@ -3,7 +3,7 @@ var $ = require('jquery');
 var Marionette = require('marionette');
 var AddSeriesCollection = require('../AddSeriesCollection');
 var SearchResultCollectionView = require('./SearchResultCollectionView');
-var ProfileCollection = require('Profile/ProfileCollection');
+var profileCollection = require('Profile/profileCollection');
 var RootFolderCollection = require('../RootFolders/RootFolderCollection');
 var tpl = require('./AddNewSeriesLayout.hbs');
 var ErrorView = require('./ErrorView');
@@ -27,7 +27,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   initialize() {
-    ProfileCollection.fetch();
+    profileCollection.fetch();
     RootFolderCollection.fetch().done(() => {
       RootFolderCollection.synced = true;
     });

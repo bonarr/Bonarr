@@ -1,0 +1,9 @@
+<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+  <span class="x-button-text">{{selected.name}}</span>
+  <span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+  {{#each list}}
+    <li><a data-id="{{id}}">{{name}}</a></li>
+  {{/each}}
+</ul>
