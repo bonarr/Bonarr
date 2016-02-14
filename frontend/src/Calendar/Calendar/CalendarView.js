@@ -39,6 +39,7 @@ module.exports = Marionette.Layout.extend({
     loading: '.x-loading-indicator',
     month: '.x-month',
     week: '.x-week',
+    forecast: '.x-forecast',
     day: '.x-day'
   },
 
@@ -92,6 +93,9 @@ module.exports = Marionette.Layout.extend({
     if (view === 'week') {
       start = time.clone().startOf(weekName);
       end = time.clone().endOf(weekName);
+    } else if (view === 'forecast') {
+      start = time.clone().subtract(1, 'day').startOf('day');
+      end = time.clone().add(5, 'days').endOf('day');
     } else if (view === 'month') {
       start = time.clone().startOf('month').startOf(weekName);
       end = time.clone().endOf('month').endOf(weekName);
@@ -143,7 +147,6 @@ module.exports = Marionette.Layout.extend({
 
     this.headersRegion.show(new CalendarDayHeaderView({
       view: this.view,
-      headerFormat: this._getHeaderFormat(),
       days: this.dates.days
     }));
 
@@ -181,17 +184,6 @@ module.exports = Marionette.Layout.extend({
   }
 
     return startDate.format(start) + ' &mdash; ' + endDate.format(end);
-  },
-
-  _getHeaderFormat() {
-    switch (this.view) {
-      case 'week':
-        return UiSettings.get('calendarWeekColumnHeader');
-      case 'month':
-        return 'ddd';
-      default:
-        return 'dddd';
-    }
   },
 
   _onViewClick(event) {
