@@ -3,21 +3,17 @@
     word-break: break-all;
   }
 
-
   .file-list {
     height: 350px;
     overflow: auto;
   }
 
-
   .file-browser-row {
     cursor: pointer;
-
 
     .file-size-cell {
       white-space: nowrap;
     }
-
 
     .relative-date-cell {
       width: 120px;
@@ -25,13 +21,31 @@
     }
   }
 
-
   .file-browser-type-cell {
     width: 32px;
   }
 
-
   .file-browser-empty {
     margin-top: 20px;
+  }
+
+  .icon-sonarr-browser-computer {
+    .fa-icon-content(@fa-var-desktop);
+  }
+
+  .icon-sonarr-browser-drive {
+    .fa-icon-content(@fa-var-hdd-o);
+  }
+
+  .icon-sonarr-browser-folder {
+    .fa-icon-content(@fa-var-folder-o);
+  }
+
+  .icon-sonarr-browser-parent {
+    .fa-icon-content(@fa-var-level-up);
+  }
+
+  .icon-sonarr-browser-file {
+    .fa-icon-content(@fa-var-file-o);
   }
 }

@@ -13,21 +13,11 @@ module.exports = Marionette.ItemView.extend({
 
   serializeData() {
     const type = this.model.get('type');
-
-    var icon = '';
-    if (type === 'computer') {
-      icon = 'icon-sonarr-browser-computer';
-    } else if (type === 'parent') {
-      icon = 'icon-sonarr-browser-up';
-    } else if (type === 'folder') {
-      icon = 'icon-sonarr-browser-folder';
-    } else if (type === 'file') {
-      icon = 'icon-sonarr-browser-file';
-    }
+    const name = this.model.get('name');
 
     return {
-      icon: icon,
-      name:this.model.get('name')
+      icon: `icon-sonarr-browser-${type}`,
+      name
     };
   },
 
