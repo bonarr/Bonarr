@@ -105,7 +105,6 @@
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "comma-spacing": 2,
     "computed-property-spacing": 2,
-    "consistent-this": [2, "self"],
     "eol-last": 2,
     "indent": [2, 2, { "SwitchCase": 1 }],
     "new-parens": [2, { "capIsNew": false }],

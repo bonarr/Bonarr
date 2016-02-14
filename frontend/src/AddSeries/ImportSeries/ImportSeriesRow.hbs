@@ -9,41 +9,12 @@
     </div>
   {{else}}
     <div class="dropdown">
-      <button class="btn btn-default dropdown-toggle" type="button" id="dropdown-{{name}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        {{#if suggestions}}
-          {{suggestions.0.title}}
-        {{else}}
-          <i class="icon-sonarr-warning"></i>
-          No match found
-        {{/if}}
+      <button class="btn btn-default dropdown-toggle x-series-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="icon-sonarr-warning x-series-select-warning"></i>
+        <span class="x-series-select-title">No match found!</span>
         <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdown-{{name}}">
-        <li class="import-search">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="icon-sonarr-search"></i></div>
-              <input type="text" class="import-search-input form-control" placeholder="{{name}}" value="{{name}}">
-          </div>
-        </li>
-        {{#if suggestions}}
-          {{#each suggestions}}
-          <li class="suggestion">
-            <a>
-              {{title}}
-              {{#if year}}<span class="label label-default">{{year}}</span>{{/if}}
-              {{#if network}}<span class="label label-default">{{network}}</span>{{/if}}
-            </a>
-          </li>
-          {{/each}}
-        {{else}}
-          <li class="suggestion">
-            <a>
-              <i class="icon-sonarr-warning"></i>
-              No match found
-            </a>
-          </li>
-        {{/if}}
-      </ul>
+      <div class="x-suggestions"></ul>
     </div>
   {{/if}}
 </td>

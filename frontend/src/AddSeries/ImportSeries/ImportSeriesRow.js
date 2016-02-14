@@ -1,59 +1,68 @@
-var TableRow = require('Table/TableRow');
+var Marionette = require('marionette');
+var TableRowMixin = require('Table/TableRowMixin');
+var SuggestionsView = require('./SuggestionsView');
 var AddSeriesCollection = require('../AddSeriesCollection');
 var tpl = require('./ImportSeriesRow.hbs');
 
-module.exports = TableRow.extend({
+const ImportSeriesRow = Marionette.Layout.extend({
   template: tpl,
 
   className: 'import-series-row',
 
+  regions: {
+    suggestions: '.x-suggestions'
+  },
+
+  ui: {
+    seriesSelectWarning: '.x-series-select-warning',
+    seriesSelectTitle: '.x-series-select-title'
+  },
+
   events: {
-    click: 'onClick'
+    'click .x-series-dropdown': 'onSeriesDropdownClick'
   },
 
   initialize(options) {
     const queue = options.taskQueue;
-    this.results = new AddSeriesCollection();
+    this.series = new AddSeriesCollection();
     const name = this.model.get('name');
+
     this.promise = queue.enqueue(() => {
-      return this.results.search(name);
+      return this.series.search(name);
     });
 
+    this.listenTo(this.model, 'change:selectedSeries', this.onSelectedSeriesChanged);
+
     this.promise.always(() => {
-      if (!this.isClosed) {
-        this.render();
-      }
+      this.render();
+      this.model.set('selectedSeries', this.series.at(0));
     });
   },
 
   templateHelpers() {
     return {
-      loading: this.promise.state() === 'pending',
-      suggestions: this.results.toJSON()
+      loading: this.promise.state() === 'pending'
     };
-  }
+  },
 
-  // serializeData() {
-  //   const type = this.model.get('type');
-  //
-  //   var icon = '';
-  //   if (type === 'computer') {
-  //     icon = 'icon-sonarr-browser-computer';
-  //   } else if (type === 'parent') {
-  //     icon = 'icon-sonarr-browser-up';
-  //   } else if (type === 'folder') {
-  //     icon = 'icon-sonarr-browser-folder';
-  //   } else if (type === 'file') {
-  //     icon = 'icon-sonarr-browser-file';
-  //   }
-  //
-  //   return {
-  //     icon: icon,
-  //     name: this.model.get('name')
-  //   };
-  // },
-  //
-  // onClick() {
-  //   this.model.collection.trigger('modelselected', this.model);
-  // }
+  onSelectedSeriesChanged() {
+    const selectedSeries = this.model.get('selectedSeries');
+    this.ui.seriesSelectWarning.toggle(!selectedSeries);
+
+    const title = selectedSeries ? selectedSeries.get('title') : 'No match found!';
+    this.ui.seriesSelectTitle.text(title);
+  },
+
+  onSeriesDropdownClick() {
+    const suggestionsView = new SuggestionsView({
+      model: this.model,
+      series: this.series,
+      promise: this.promise
+    });
+    this.suggestions.show(suggestionsView);
+  }
 });
+
+TableRowMixin(ImportSeriesRow.prototype);
+
+module.exports = ImportSeriesRow;
