@@ -28,21 +28,31 @@ module.exports = Marionette.ItemView.extend({
 
   serializeData() {
     var seriesTitle = this.model.get('series').title;
+    var seriesType = this.model.get('series').seriesType;
+    var images = this.model.get('series').images;
     var start = this.model.get('airDateUtc');
     var end = this._getEndTime();
     var statusLevel = this._getStatusLevel();
     var queueDetails = this._getQueueDetails();
     var downloading = queueDetails || this.model.get('grabbed');
     var missingAbsoluteNumber = this.model.get('series').seriesType === 'anime' && this.model.get('seasonNumber') > 0 && !this.model.has('absoluteEpisodeNumber');
+    var seasonNumber = this.model.get('seasonNumber');
+    var episodeNumber = this.model.get('episodeNumber');
+    var absoluteEpisodeNumber = this.model.get('absoluteEpisodeNumber');
 
     return {
       seriesTitle,
+      seriesType,
+      images,
       start,
       end,
       statusLevel,
       queueDetails,
       downloading,
-      missingAbsoluteNumber
+      missingAbsoluteNumber,
+      seasonNumber,
+      episodeNumber,
+      absoluteEpisodeNumber
     };
   },
 

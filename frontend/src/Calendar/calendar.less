@@ -180,8 +180,9 @@
 
         .calendar-event {
           display: flex;
-          height: 18px;
           margin: 4px 0;
+          line-height: 98px;
+          font-size: 16px;
           border-left: 4px solid @gray;
 
           &:hover, &:focus {
@@ -190,9 +191,21 @@
 
           .clickable();
 
+          .calendar-event-series-poster {
+            height: 100px;
+
+            .series-poster {
+              height: 100px;
+            }
+          }
+
           .calendar-event-time {
             width: 150px;
-            padding-left: 5px;
+            padding-left: 10px;
+          }
+
+          .calendar-event-episode-info {
+            padding-left: 3px;
           }
         }
       }
