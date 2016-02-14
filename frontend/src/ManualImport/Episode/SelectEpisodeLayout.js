@@ -4,7 +4,7 @@ var TableView = require('../../Table/TableView');
 var EpisodeCollection = require('Series/EpisodeCollection');
 var LoadingView = require('Shared/LoadingView');
 var SelectEpisodeRow = require('./SelectEpisodeRow');
-var tpl = require('./SelectEpisodeLayoutTemplate.hbs');
+var tpl = require('./SelectEpisodeLayout.hbs');
 
 module.exports = Marionette.Layout.extend({
   template: tpl,

@@ -1,9 +1,9 @@
-const _ = require('underscore');
-const TableRow = require('../../Table/TableRow');
+const Marionette = require('marionette');
+const TableRowMixin = require('Table/TableRowMixin');
 const tpl = require('./SelectEpisodeRow.hbs');
 
-const SelectTableRow = TableRow.extend({
-  tagName: 'tr',
+const SelectEpisodeTableRow = Marionette.ItemView.extend({
+
   className: 'select-episode-row',
   template: tpl,
 
@@ -11,9 +11,9 @@ const SelectTableRow = TableRow.extend({
     selectCheckbox: '.select-checkbox'
   },
 
-  events: _.extend(TableRow.prototype.events, {
+  events: {
     'click': '_toggle'
-  }),
+  },
 
   _toggle(e) {
     if (e.target.type === 'checkbox') {
@@ -28,4 +28,6 @@ const SelectTableRow = TableRow.extend({
   }
 });
 
-module.exports = SelectTableRow;
+TableRowMixin(SelectEpisodeTableRow);
+
+module.exports = SelectEpisodeTableRow;
