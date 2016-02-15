@@ -144,7 +144,7 @@ module.exports = Marionette.Layout.extend({
    this.dates.days.forEach((day) => {
      const events = groupedEvents[day.format(dayFormat)];
 
-     if (this.view === 'agenda' && !events || !events.length) {
+     if (this.view === 'agenda' && !events) {
        return;
      }
 
