@@ -13,7 +13,7 @@ var view = Marionette.ItemView.extend({
 
   ui: {
     path: '.x-path',
-    modalBody: '.modal-body'
+    modalBody: '.fullscreen-modal-body'
   },
 
   events: {
