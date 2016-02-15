@@ -13,7 +13,7 @@ module.exports = Backbone.Model.extend({
 
   getRoute() {
     const slug = this.get('titleSlug');
-    return `${window.Sonarr.UrlBase}series/${slug}`;
+    return `/series/${slug}`;
   },
 
   setSeasonMonitored(seasonNumber) {
