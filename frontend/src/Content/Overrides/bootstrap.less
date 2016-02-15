@@ -10,54 +10,86 @@
 
 // Break long words in tooltips (especially important for release names)
 .tooltip-inner {
-  word-wrap: break-word;
+  word-wrap : break-word;
 }
 
 // BS3 dropped support for submenus in dropdowns, this adds it back.
 .dropdown-submenu {
-  position:relative;
+  position : relative;
+
   & > .dropdown-menu {
-    top:0;
-    left:100%;
-    margin-top:-6px;
-    margin-left:-1px;
-    -webkit-border-radius:0 6px 6px 6px;
-    -moz-border-radius:0 6px 6px 6px;
-    border-radius:0 6px 6px 6px;
+    top                   : 0;
+    left                  : 100%;
+    margin-top            : -6px;
+    margin-left           : -1px;
+    -webkit-border-radius : 0 6px 6px 6px;
+    -moz-border-radius    : 0 6px 6px 6px;
+    border-radius         : 0 6px 6px 6px;
   }
+
+  & > a:before,
+    > a:after {
+    content           : " ";
+    width             : 0;
+    height            : 0;
+    border            : 5px solid transparent;
+
+    margin-top        : 5px;
+  }
+
+  & > a:before {
+    display : none;
+  }
+
   & > a:after {
-    display:block;
-    content:" ";
-    float:right;
-    width:0;
-    height:0;
-    border-color:transparent;
-    border-style:solid;
-    border-width:5px 0 5px 5px;
-    border-left-color:#cccccc;
-    margin-top:5px;
-    margin-right:-10px;
+    display            : block;
+    float              : right;
+    margin-right       : -10px;
+    border-right-width : 0;
+    border-left-color  : #cccccc;
   }
-}
-.dropdown-submenu:hover {
-  & > .dropdown-menu {
-    display:block;
-  }
-  & > a:after {
-    border-left-color:#ffffff;
-  }
-}
-.dropdown-submenu.pull-left {
-  float:none;
-  & > .dropdown-menu {
-    left:-100%;
-    margin-left:10px;
-    -webkit-border-radius:6px 0 6px 6px;
-    -moz-border-radius:6px 0 6px 6px;
-    border-radius:6px 0 6px 6px;
+
+  &.dropdown-submenu-right {
+    & > .dropdown-menu {
+      left  : auto; // Reset the default from `.dropdown-menu`
+      right : 100%;
+    }
+
+    & > a {
+      padding-left : 25px;
+    }
+
+    & > a:before {
+      display           : block;
+      float             : left;
+      margin-left       : -15px;
+      border-left-width : 0;
+      border-right-color : #cccccc;
+    }
+
+    & > a:after {
+      display : none;
+    }
   }
 }
 
+.dropdown-submenu:hover {
+  & > .dropdown-menu {
+    display : block;
+  }
+  & > a:after {
+    border-left-color : #ffffff;
+  }
+}
+
+.dropdown-submenu.dropdown-submenu-right:hover {
+  & > a:before {
+    border-right-color : #ffffff;
+  }
+}
+
+// Modal header height
+
 .modal-header {
-  min-height: 48px;
+  min-height : 48px;
 }
