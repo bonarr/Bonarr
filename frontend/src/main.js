@@ -14,7 +14,6 @@ var SettingsController = require('./Settings/SettingsController');
 var SystemController = require('./System/SystemController');
 var Router = require('./Router');
 var ModalController = require('./Shared/Modal/ModalController');
-var ControlPanelController = require('./Shared/ControlPanel/ControlPanelController');
 var ActionBarController = require('./Sidebar/ActionBar/ActionBarController');
 var UiSettingsController = require('./Shared/UiSettingsController');
 var StatusModel = require('./System/StatusModel');
@@ -36,7 +35,6 @@ new WantedController();
 new SettingsController();
 new SystemController();
 new ModalController();
-new ControlPanelController();
 new ActionBarController();
 new Router();
 

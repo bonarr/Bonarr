@@ -1,0 +1,37 @@
+<div class="import-series-footer row">
+
+  <div class="form-group col-md-2">
+    <label>Monitored</label>
+    <select class="form-control x-action x-monitored">
+      <option value="true">Monitored</option>
+      <option value="false">Unmonitored</option>
+    </select>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label>Profile</label>
+
+    <select class="form-control x-action x-profiles">
+      <option value="noChange">No change</option>
+      {{#each profiles.models}}
+        <option value="{{id}}">{{attributes.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group col-md-2">
+    <label>Season Folder</label>
+    <select class="form-control x-action x-season-folder">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+  </div>
+
+  <div class="form-group col-md-3 actions">
+    <label><span class="x-selected-count">0</span> series selected</label>
+    <div>s
+      <button class="btn btn-primary x-action x-import">Import</button>
+    </div>
+  </div>
+
+</div>

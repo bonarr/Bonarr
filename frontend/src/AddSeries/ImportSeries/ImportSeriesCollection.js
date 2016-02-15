@@ -2,10 +2,10 @@
 var Backbone = require('backbone');
 var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 
-let AddSeriesCollection = Backbone.Collection.extend({
+let ImportSeriesCollection = Backbone.Collection.extend({
 
 });
 
-AddSeriesCollection = AsSelectableCollection.apply(AddSeriesCollection);
+ImportSeriesCollection = AsSelectableCollection.apply(ImportSeriesCollection);
 
-module.exports = AddSeriesCollection;
+module.exports = ImportSeriesCollection;

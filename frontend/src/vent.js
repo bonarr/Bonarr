@@ -23,8 +23,7 @@ vent.Commands = {
   ShowLogFile: 'showLogFile',
   ShowRenamePreview: 'showRenamePreview',
   ShowManualImport: 'showManualImport',
-  OpenControlPanel: 'OpenControlPanel',
-  CloseControlPanel: 'CloseControlPanel',
+  OpenFooter: 'OpenFooter',
   OpenActionBarCommand: 'OpenActionBarCommand',
   CloseActionBarCommand: 'CloseActionBarCommand'
 };

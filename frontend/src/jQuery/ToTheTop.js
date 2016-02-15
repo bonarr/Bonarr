@@ -1,22 +1,24 @@
-var $ = require('jquery');
-var _ = require('underscore');
+const $ = require('jquery');
+const _ = require('underscore');
 
-$(document).ready(function() {
-  var _window = $(window);
-  var _scrollButton = $('#scroll-up');
+$(document).ready(() => {
+  const $window = $(window);
+  const $scrollButton = $('#scroll-up');
 
-  var _scrollHandler = function() {
-    if (_window.scrollTop() > 100) {
-      _scrollButton.fadeIn();
+  function onScroll() {
+    if ($window.scrollTop() > 100) {
+      $scrollButton.fadeIn();
     } else {
-      _scrollButton.fadeOut();
+      $scrollButton.fadeOut();
     }
-  };
+  }
 
-  $(window).scroll(_.throttle(_scrollHandler, 500));
-  _scrollButton.click(function() {
-    $('html, body').animate({ scrollTop: 0 }, 600);
+  $window.scroll(_.throttle(onScroll, 500));
+
+  $scrollButton.click(() => {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 600);
     return false;
   });
 });
-

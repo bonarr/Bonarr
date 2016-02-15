@@ -36,7 +36,7 @@ module.exports = Marionette.ItemView.extend({
   initialize(options) {
     this.seriesCollection = options.collection;
 
-    RootFolders.fetch().done(function() {
+    RootFolders.fetch().done(function () {
       RootFolders.synced = true;
     });
 
@@ -57,7 +57,7 @@ module.exports = Marionette.ItemView.extend({
     var seasonFolder = this.ui.seasonFolder.val();
     var rootFolder = this.ui.rootFolder.val();
 
-    _.each(selected, function(model) {
+    _.each(selected, function (model) {
       if (monitored === 'true') {
         model.set('monitored', true);
       } else if (monitored === 'false') {
@@ -118,7 +118,9 @@ module.exports = Marionette.ItemView.extend({
 
   _organizeFiles() {
     var selected = this.editorGrid.getSelectedModels();
-    var updateFilesSeriesView = new UpdateFilesSeriesView({ series: selected });
+    var updateFilesSeriesView = new UpdateFilesSeriesView({
+      series: selected
+    });
     this.listenToOnce(updateFilesSeriesView, 'updatingFiles', this._afterSave);
 
     vent.trigger(vent.Commands.OpenFullscreenModal, updateFilesSeriesView);

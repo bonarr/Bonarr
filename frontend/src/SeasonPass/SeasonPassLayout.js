@@ -58,10 +58,6 @@ module.exports = Marionette.Layout.extend({
     this._showFooter();
   },
 
-  onClose() {
-    vent.trigger(vent.Commands.CloseControlPanel);
-  },
-
   _showActionBar() {
     var filteringOptions = {
       type: 'radio',
@@ -118,7 +114,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showFooter() {
-    vent.trigger(vent.Commands.OpenControlPanel, new FooterView({
+    vent.trigger(vent.Commands.OpenFooter, new FooterView({
       editorGrid: this.editorGrid,
       collection: this.seriesCollection
     }));

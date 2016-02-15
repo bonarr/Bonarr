@@ -10,8 +10,8 @@ let AddSeriesCollection = Backbone.Collection.extend({
   parse(response) {
     _.each(response, (model) => {
       model.id = undefined;
-      if (self.unmappedFolderModel) {
-        model.path = self.unmappedFolderModel.get('folder').path;
+      if (this.unmappedFolderModel) {
+        model.path = this.unmappedFolderModel.get('folder').path;
       }
     });
 

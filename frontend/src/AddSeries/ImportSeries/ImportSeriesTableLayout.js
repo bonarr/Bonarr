@@ -6,25 +6,23 @@ var ImportSeriesRow = require('./ImportSeriesRow');
 var rootFolderCollection = require('../RootFolders/RootFolderCollection');
 var TaskQueue = require('Shared/TaskQueue').default; // have no idea why I need this
 var tpl = require('./ImportSeriesTableLayout.hbs');
+var ImportSeriesFooterView = require('./ImportSeriesFooterView');
+var vent = require('vent');
 
 const EmptyView = Marionette.Layout.extend({
 
   template: tpl,
 
-  headers: [
-    {
-      name: 'name',
-      label: 'Folder'
-    },
-    {
-      name: 'profile',
-      label: 'Profile'
-    },
-    {
-      name: 'series',
-      label: 'Series'
-    }
-  ],
+  headers: [{
+    name: 'name',
+    label: 'Folder'
+  }, {
+    name: 'profile',
+    label: 'Profile'
+  }, {
+    name: 'series',
+    label: 'Series'
+  }],
 
   regions: {
     table: '#import-series-table-region'
@@ -61,6 +59,7 @@ const EmptyView = Marionette.Layout.extend({
       });
 
       this.table.show(tableView);
+      vent.trigger(vent.Commands.OpenFooter, new ImportSeriesFooterView({ collection }));
     });
   }
 });

@@ -66,8 +66,9 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize() {
-    this.seriesCollection = SeriesCollection.clone();
-    this.seriesCollection.shadowCollection.bindSignalR();
+    this.seriesCollection = SeriesCollection;
+    // this.seriesCollection = SeriesCollection.clone();
+    // this.seriesCollection.shadowCollection.bindSignalR();
     this.listenTo(this.seriesCollection, 'save', this.render);
 
     this._showActionBar();
@@ -77,12 +78,8 @@ module.exports = Marionette.Layout.extend({
     this._showTable();
   },
 
-  onClose() {
-    vent.trigger(vent.Commands.CloseControlPanel);
-  },
-
   _showTable() {
-    if (this.seriesCollection.shadowCollection.length === 0) {
+    if (this.seriesCollection.length === 0) {
       this.seriesRegion.show(new EmptyView());
       return;
     }
@@ -126,7 +123,7 @@ module.exports = Marionette.Layout.extend({
         {
           key: 'monitored',
           title: 'Monitored Only',
-          icon: 'icon-sonarr-monitored',
+          icon: 'icon-sonarr-monitored'
         },
         {
           key: 'continuing',
@@ -150,7 +147,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showFooter() {
-    vent.trigger(vent.Commands.OpenControlPanel, new FooterView({
+    vent.trigger(vent.Commands.OpenFooter, new FooterView({
       editorGrid: this.editorGrid,
       collection: this.seriesCollection
     }));
