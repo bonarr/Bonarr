@@ -17,8 +17,8 @@ var AppLayout = Marionette.Layout.extend({
   initialize() {
     this.addRegions({
       actionBarRegion: ActionBarRegion,
-      fullscreenModalRegion: FullscreenModalRegion,
-      modalRegion: ModalRegion
+      modalRegion: ModalRegion,
+      fullscreenModalRegion: FullscreenModalRegion
     });
 
     this.listenTo(vent, vent.Commands.OpenFooter, (view) => {

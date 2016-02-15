@@ -55,13 +55,14 @@ const FullScreenModalRegion = Marionette.Region.extend({
 
   onKeypress(event) {
     var view = this.currentView;
+
     if (!view || view.isClosed) {
       return;
     }
 
     if (event.keyCode === EscKeyCode) {
       this.close();
-      event.stopPropagation();
+      event.stopImmediatePropagation();
       event.preventDefault();
     }
   },

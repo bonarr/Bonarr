@@ -3,9 +3,16 @@ var $ = require('jquery');
 var Marionette = require('marionette');
 require('bootstrap');
 
+const EscKeyCode = 27;
+
 const ModalRegion = Marionette.Region.extend({
   el: '#modal-region',
   backdrop: true,
+
+  initialize() {
+    _.bindAll(this, 'onKeypress');
+    $(document).on('keyup', this.onKeypress);
+  },
 
   getEl(selector) {
     var $el = $(selector);
@@ -23,7 +30,7 @@ const ModalRegion = Marionette.Region.extend({
 
     this.bootstrapModal = this.$el.modal({
       show: true,
-      keyboard: true,
+      keyboard: false,
       backdrop: this.backdrop
     });
   },
@@ -41,6 +48,20 @@ const ModalRegion = Marionette.Region.extend({
   onViewClose() {
     this.$el.modal('hide');
     this.stopListening(this.currentView);
+  },
+
+  onKeypress(event) {
+    var view = this.currentView;
+
+    if (!view || view.isClosed) {
+      return;
+    }
+
+    if (event.keyCode === EscKeyCode) {
+      this.close();
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
   }
 });
 
