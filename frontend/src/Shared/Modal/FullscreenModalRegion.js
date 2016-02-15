@@ -15,7 +15,9 @@ const FullScreenModalRegion = Marionette.Region.extend({
   },
 
   close() {
-    this.$el.removeClass('shown');
+    if (this.$el) {
+      this.$el.removeClass('shown');
+    }
     this.closeButtons = null;
 
     var view = this.currentView;
