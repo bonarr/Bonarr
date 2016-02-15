@@ -58,7 +58,14 @@ const ModalRegion = Marionette.Region.extend({
     }
 
     if (event.keyCode === EscKeyCode) {
-      this.close();
+      const $target = $(event.target);
+
+      if ($target.is('select:focus')) {
+        $target.blur();
+      } else {
+        this.close();
+      }
+
       event.stopImmediatePropagation();
       event.preventDefault();
     }
