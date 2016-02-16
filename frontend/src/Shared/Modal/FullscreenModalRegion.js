@@ -26,7 +26,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
     }
     // give animation time to finish before killing the html
     this.closeTimeout = window.setTimeout(() => {
-      // make sure we close the view were were intended to not some future modal.
+      // make sure we close the view we intended to not some future modal.
       if (this.currentView === view) {
         Marionette.Region.prototype.close.apply(this, arguments);
       }
