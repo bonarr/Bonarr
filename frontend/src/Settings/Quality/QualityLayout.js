@@ -7,7 +7,7 @@ module.exports = SettingsLayoutBase.extend({
   template: 'Settings/Quality/QualityLayoutTemplate',
 
   regions: {
-    qualityDefinition: '#quality-definition'
+    qualityDefinitions: '.quality-definitions'
   },
 
   initialize() {
@@ -23,7 +23,7 @@ module.exports = SettingsLayoutBase.extend({
         return;
       }
 
-      this.qualityDefinition.show(new QualityDefinitionCollectionView({ collection: this.qualityDefinitionCollection }));
+      this.qualityDefinitions.show(new QualityDefinitionCollectionView({ collection: this.qualityDefinitionCollection }));
     }, this));
   }
 });
