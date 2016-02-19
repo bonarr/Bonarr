@@ -1,6 +1,6 @@
-@import "../../Content/Bootstrap/mixins/text-overflow";
-@import "../../Content/Bootstrap/variables";
-
+@import "../../Content/Bootstrap/mixins/text-overflow.less";
+@import "../../Content/Bootstrap/variables.less";
+@@import "./AddSeriesModal.less";
 
 #add-new-series {
   .search-error {
@@ -10,13 +10,11 @@
       padding-bottom: 20px;
     }
 
-
     .code {
       text-transform: uppercase;
       font-family: @font-family-monospace;
     }
   }
-
 
   .search-item {
     clear: both;
@@ -27,13 +25,11 @@
       background: #eaf2ff;
     }
 
-
     .already-exists {
       font-size: 22px;
       margin-bottom: 5px;
       display: inline-block;
     }
-
 
     .labels {
       font-size: 18px;
@@ -48,13 +44,11 @@
       }
     }
 
-
     .series-title {
       margin-top: 3px;
       font-size: 36px;
       font-weight: lighter;
     }
-
 
     .series-poster {
       display: inline;
@@ -65,28 +59,23 @@
     }
   }
 
-
   .fade {
     transition: opacity 0.2s;
     opacity: 1;
   }
 
-
   .fade-out {
     opacity: 0;
   }
-
 
   .search-bar {
     margin-bottom: 20px;
   }
 
-
   #result-region {
     transition: opacity 500ms;
     opacity: 1;
   }
-
 
   .spinner-container {
     transition: opacity 500ms;
@@ -100,12 +89,10 @@
     pointer-events: none;
   }
 
-
   &.state-loading {
     .spinner-container {
       opacity: 1;
     }
-
 
     #result-region {
       opacity: 0;

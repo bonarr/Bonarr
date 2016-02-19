@@ -176,7 +176,7 @@ module.exports = Marionette.Layout.extend({
 
     var name = 'monitored';
     this.model.set(name, !this.model.get(name));
-    this.series.setSeasonMonitored(this.model.get('seasonNumber'));
+    this.series.toggleSeasonMonitored(this.model.get('seasonNumber'));
 
     var savePromise = this.series.save().always(this._afterSeasonMonitored.bind(this));
 
@@ -272,13 +272,6 @@ module.exports = Marionette.Layout.extend({
     if (!lastToggled) {
       return;
     }
-
-    var currentIndex = this.episodeCollection.indexOf(model);
-    var lastIndex = this.episodeCollection.indexOf(lastToggled);
-
-    var low = Math.min(currentIndex, lastIndex);
-    var high = Math.max(currentIndex, lastIndex);
-    var range = _.range(low + 1, high);
 
     this.episodeCollection.lastToggled = model;
   },

@@ -1,6 +1,4 @@
-var _ = require('underscore');
 var TemplatedCell = require('Cells/TemplatedCell');
-//require('../Handlebars/Helpers/Numbers');
 
 module.exports = TemplatedCell.extend({
   className: 'seasons-cell',
@@ -15,9 +13,9 @@ module.exports = TemplatedCell.extend({
     var seasonNumber = parseInt(this.$(target).data('season-number'), 10);
     var icon = this.$(target).children('.x-season-monitored-icon');
 
-    this.model.setSeasonMonitored(seasonNumber);
+    this.model.toggleSeasonMonitored(seasonNumber);
 
-    //TODO: unbounce the save so we don't multiple to the server at the same time
+    // TODO: unbounce the save so we don't multiple to the server at the same time
     var savePromise = this.model.save();
 
     icon.spinForPromise(savePromise);

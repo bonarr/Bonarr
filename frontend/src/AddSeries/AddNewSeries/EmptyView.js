@@ -8,7 +8,9 @@ const EmptyView = Marionette.ItemView.extend({
     this.term = options.term;
   },
   serializeData() {
-    return { term: this.term };
+    return {
+      term: this.term
+    };
   }
 });
 
