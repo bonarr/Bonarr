@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var $ = require('jquery');
 var Marionette = require('marionette');
 var AddSeriesCollection = require('../AddSeriesCollection');
 var SearchResultCollectionView = require('./SearchResultCollectionView');
@@ -44,12 +43,10 @@ module.exports = Marionette.Layout.extend({
 
     const term = this.ui.seriesSearch.val();
     if (!term || term === this.collection.term) {
-      return $.Deferred().resolve();
+      return;
     }
 
-    console.log('searching for', term);
-
-    this.$el.addClass('loading');
+    this.$el.addClass('state-loading');
 
     // this.collection.reset();
 
@@ -58,18 +55,10 @@ module.exports = Marionette.Layout.extend({
 
     this.currentSearchPromise.fail(_.bind(this.onError, this));
     this.currentSearchPromise.always(() => {
-      this.$el.removeClass('loading');
+      this.$el.removeClass('state-loading');
     });
 
     return this.currentSearchPromise;
-  },
-
-  _abortExistingSearch() {
-    if (this.currentSearchPromise) {
-      console.log('aborting previous pending search request.');
-      this.currentSearchPromise.abort();
-      this.currentSearchPromise = undefined;
-    }
   },
 
   onShow() {
@@ -80,11 +69,11 @@ module.exports = Marionette.Layout.extend({
   },
 
   onClose() {
-    this._abortExistingSearch();
+    this.collection.abort();
   },
 
   onSearchKeyUp() {
-    this._abortExistingSearch();
+    this.collection.abort();
     var term = this.ui.seriesSearch.val();
 
     if (term) {
@@ -101,9 +90,8 @@ module.exports = Marionette.Layout.extend({
     }
 
     if (this.collection.length) {
-      var resultCollectionView = new SearchResultCollectionView({
-        collection: this.collection,
-        isExisting: false
+      const resultCollectionView = new SearchResultCollectionView({
+        collection: this.collection
       });
       this.searchResult.show(resultCollectionView);
     } else {

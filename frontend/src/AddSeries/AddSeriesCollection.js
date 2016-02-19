@@ -19,13 +19,36 @@ let AddSeriesCollection = Backbone.Collection.extend({
   },
 
   search(term) {
+    if (this.searchPromise) {
+      if (this.term === term) {
+        return this.searchPromise();
+      } else {
+        this.abort();
+      }
+    }
+
     this.term = term;
-    return this.fetch({
+
+    console.log(`Searching for [${term}]`);
+
+    this.searchPromise = this.fetch({
       data: {
         term: term
       }
     });
+    return this.searchPromise;
+  },
+
+  abort() {
+    if (this.searchPromise) {
+      console.log(`Aborting ssearching for [${this.term}]`);
+      this.searchPromise.abort();
+      this.searchPromise = undefined;
+    }
+
+    this.term = undefined;
   }
+
 });
 
 AddSeriesCollection = AsSelectableCollection.apply(AddSeriesCollection);

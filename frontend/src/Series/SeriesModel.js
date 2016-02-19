@@ -7,7 +7,6 @@ module.exports = Backbone.Model.extend({
   defaults: {
     episodeFileCount: 0,
     episodeCount: 0,
-    isExisting: false,
     status: ''
   },
 
