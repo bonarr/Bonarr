@@ -11,7 +11,7 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
     profile: '.x-profiles',
     seasonFolder: '.x-season-folder',
     selectedCount: '.x-selected-count',
-    actions: '.x-action'
+    filedset: 'fieldset'
   },
 
   events: {
@@ -20,7 +20,7 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
 
   templateHelpers() {
     return {
-      profiles: profileCollection
+      profiles: profileCollection.toJSON()
     };
   },
 
@@ -30,16 +30,9 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
   },
 
   _updateInfo() {
-    var selected = this.collection.getSelected();
-    var selectedCount = selected.length;
-
-    this.ui.selectedCount.text(selected.length);
-
-    if (selectedCount === 0) {
-      this.ui.actions.attr('disabled', 'disabled');
-    } else {
-      this.ui.actions.removeAttr('disabled');
-    }
+    const selectedCount = this.collection.getSelected().length;
+    this.ui.selectedCount.text(selectedCount);
+    this.ui.filedset.prop('disabled', !selectedCount);
   },
 
   onRender() {
@@ -50,7 +43,7 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
     const selected = this.collection.getSelected();
     const monitored = this.ui.monitored.val();
     const profile = this.ui.profile.val();
-    var seasonFolder = this.ui.seasonFolder.val();
+    const seasonFolder = this.ui.seasonFolder.val();
 
     _.each(selected, (model) => {
       if (monitored === 'true') {

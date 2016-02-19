@@ -1,37 +1,27 @@
 <div class="import-series-footer row">
-
-  <div class="form-group col-md-2">
-    <label>Monitored</label>
-    <select class="form-control x-action x-monitored">
-      <option value="true">Monitored</option>
-      <option value="false">Unmonitored</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-2">
-    <label>Profile</label>
-
-    <select class="form-control x-action x-profiles">
-      <option value="noChange">No change</option>
-      {{#each profiles.models}}
-        <option value="{{id}}">{{attributes.name}}</option>
-      {{/each}}
-    </select>
-  </div>
-
-  <div class="form-group col-md-2">
-    <label>Season Folder</label>
-    <select class="form-control x-action x-season-folder">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select>
-  </div>
-
-  <div class="form-group col-md-3 actions">
-    <label><span class="x-selected-count">0</span> series selected</label>
-    <div>s
-      <button class="btn btn-primary x-action x-import">Import</button>
+  <fieldset>
+    <div class="form-group col-md-2">
+      <label>Monitoring</label>
+      {{> ../MonitoringSelectionPartial.hbs}}
     </div>
-  </div>
 
+    <div class="form-group col-md-2">
+      <label>Profile</label>
+
+      {{>../../Profile/ProfileSelectionPartial.hbs profiles}}
+    </div>
+
+    <div class="form-group col-md-2 inline">
+      <div class="checkbox c-checkbox chk-season-folder">
+        <label class="checkbox-inline">
+          <input type="checkbox" class="x-season-folder">
+          <span class="check fa fa-check"></span> Season Folder
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group col-md-3 inline">
+      <button class="btn btn-primary btn-import x-import">Import <span class="x-selected-count">0</span> Series</button>
+    </div>
+  </fieldset>
 </div>

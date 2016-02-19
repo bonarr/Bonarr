@@ -8,11 +8,11 @@ const TableView = Marionette.CompositeView.extend({
   itemViewContainer: 'tbody',
 
   ui: {
-    selectCheckbox: '.select-all-checkbox'
+    selectAllCheckbox: '.select-all-checkbox'
   },
 
   events: {
-    'change .select-all-checkbox': '_onSelectChange'
+    'change .select-all-checkbox': 'onSelectChange'
   },
 
   initialize(options = {}) {
@@ -37,13 +37,13 @@ const TableView = Marionette.CompositeView.extend({
     };
   },
 
-  _onSelectChange() {
-    const checked = this.ui.selectCheckbox.prop('checked');
+  onSelectChange() {
+    const checked = this.ui.selectAllCheckbox.prop('checked');
     this.collection.toggleAll(checked);
   },
 
   _onModelSelected() {
-    this.ui.selectCheckbox.prop('checked', this.collection.allSelected());
+    this.ui.selectAllCheckbox.prop('checked', this.collection.allSelected());
   }
 });
 

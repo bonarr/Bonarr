@@ -35,15 +35,7 @@
                   <i class="icon-sonarr-form-info monitor-tooltip x-monitor-tooltip"></i>
                 </label>
                 <div class="control-input">
-                  <select class="form-control x-monitor">
-                    <option value="all">All Episodes</option>
-                    <option value="future">Future Episodes</option>
-                    <option value="missing">Missing Episodes</option>
-                    <option value="existing">Existing Episodes</option>
-                    <option value="first">Only First Season</option>
-                    <option value="latest">Only Latest Season</option>
-                    <option value="none">None</option>
-                  </select>
+                  {{> ./MonitoringSelectionPartial}}
                 </div>
               </div>
               <div class="form-group">
@@ -59,11 +51,11 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label">Series Folder</label>
+                <label class="control-label">Season Folder</label>
                 <div class="control-input">
                   <div class="checkbox c-checkbox">
                     <label>
-                      <input type="checkbox" class="x-season-folder" name="enableSearch">
+                      <input type="checkbox" class="x-season-folder">
                       <span class="check fa fa-check"></span>
                     </label>
                   </div>
