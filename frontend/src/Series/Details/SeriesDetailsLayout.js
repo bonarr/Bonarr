@@ -13,6 +13,7 @@ var SeriesHeaderView = require('./SeriesHeaderView');
 var CommandController = require('Commands/CommandController');
 var LoadingView = require('Shared/LoadingView');
 var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
+var NoEpisodesView = require('./NoEpisodesView');
 require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
@@ -121,27 +122,33 @@ module.exports = Marionette.Layout.extend({
     this.episodeCollection = new EpisodeCollection({ seriesId: this.model.id }).bindSignalR();
     this.episodeFileCollection = new EpisodeFileCollection({ seriesId: this.model.id }).bindSignalR();
 
-    reqres.setHandler(reqres.Requests.GetEpisodeFileById, function(episodeFileId) {
-      return self.episodeFileCollection.get(episodeFileId);
+    reqres.setHandler(reqres.Requests.GetEpisodeFileById, (episodeFileId) => {
+      return this.episodeFileCollection.get(episodeFileId);
     });
 
-    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, function(seriesId, seasonNumber) {
-      if (self.model.get('id') !== seriesId) {
+    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, (seriesId, seasonNumber) => {
+      if (this.model.get('id') !== seriesId) {
         return [];
       }
 
-      return _.where(self.model.get('alternateTitles'), { seasonNumber: seasonNumber });
+      return _.where(this.model.get('alternateTitles'), { seasonNumber: seasonNumber });
     });
 
-    $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(function() {
-      var seasonCollectionView = new SeasonCollectionView({
-        collection: self.seasonCollection,
-        episodeCollection: self.episodeCollection,
-        series: self.model
-      });
+    $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(() => {
+      if (this.episodeCollection.length) {
+        var seasonCollectionView = new SeasonCollectionView({
+          collection: this.seasonCollection,
+          episodeCollection: this.episodeCollection,
+          series: this.model
+        });
 
-      if (!self.isClosed) {
-        self.seasons.show(seasonCollectionView);
+        if (!this.isClosed) {
+          this.seasons.show(seasonCollectionView);
+        }
+      } else {
+        if (!this.isClosed) {
+          this.seasons.show(new NoEpisodesView());
+        }
       }
     });
   },
