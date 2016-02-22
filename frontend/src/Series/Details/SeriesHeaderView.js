@@ -38,5 +38,5 @@ module.exports = Marionette.ItemView.extend({
     if (fanArt) {
       this.ui.backdrop.css({ 'background-image': 'url("' + fanArt.url + '")' });
     }
-  },
+  }
 });
