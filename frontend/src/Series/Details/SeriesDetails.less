@@ -1,4 +1,5 @@
 @import "../../Content/Bootstrap/variables";
+@import "../../Content/icon-mixins";
 @import "SeasonLayout";
 
 .series-header {
@@ -91,7 +92,16 @@
     }
   }
 
+  .icon-sonarr-previous-series {
+    .fa-icon-content(@fa-var-arrow-circle-left);
+  }
+
+  .icon-sonarr-next-series {
+    .fa-icon-content(@fa-var-arrow-circle-right);
+  }
+
 }
+
 
 //.series-poster {
 //  min-width: 56px;

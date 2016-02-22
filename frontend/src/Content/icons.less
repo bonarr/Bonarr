@@ -1,44 +1,7 @@
 @import "FontAwesome/font-awesome";
-@import "FontAwesome/font-awesome";
 @import "Bootstrap/variables";
 @import "variables";
-
-/* Icon rotations and mirroring */
-.fa-rotate-90() {
-  transform : rotate(90deg);
-  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-}
-
-.fa-rotate-180() {
-  transform : rotate(180deg);
-  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
-}
-
-.fa-rotate-270() {
-  transform : rotate(270deg);
-  filter    : progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
-
-.fa-flip-horizontal() {
-  transform : scale(-1, 1);
-}
-
-.fa-flip-vertical() {
-  transform : scale(1, -1);
-}
-
-.fa-icon-content(@fa-icon) {
-  .fa-icon();
-  &:before {
-    content : @fa-icon;
-  }
-}
-
-.fa-icon-color(@color) {
-  &:before {
-    color : @color;
-  }
-}
+@import "icon-mixins";
 
 .icon-sonarr-warning {
   .fa-icon-content(@fa-var-exclamation-triangle);
@@ -511,12 +474,4 @@
 
 .icon-sonarr-heart {
   .fa-icon-content(@fa-var-heart);
-}
-
-.icon-sonarr-previous-series {
-  .fa-icon-content(@fa-var-arrow-circle-left);
-}
-
-.icon-sonarr-next-series {
-  .fa-icon-content(@fa-var-arrow-circle-right);
 }
