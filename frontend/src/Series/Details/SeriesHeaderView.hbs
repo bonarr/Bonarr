@@ -1,46 +1,50 @@
 <div class="row fill-row">
-    <div class="header-content col-md-12 col-lg-12">
-        <div class="backdrop">
-            <div class="backdrop-overlay"></div>
-        </div>
-        <div>
-            <div class="visible-lg poster">
-                {{posterHelper 500}}
-                {{#if_eq status compare="ended"}}
-                    <span class="badge ended-badge">Ended</span>
-                {{/if_eq}}
-            </div>
-            <h1>
-          <span class="title">
-              {{title}}
-          </span>
-            </h1>
+  <div class="header-content col-md-12 col-lg-12">
+    <div class="backdrop">
+      <div class="backdrop-overlay"></div>
+    </div>
+    <div>
+      <div class="visible-lg poster">
+        {{posterHelper 500}}
+        {{#if_eq status compare="ended"}}
+          <span class="badge ended-badge">Ended</span>
+        {{/if_eq}}
+      </div>
+      <h1>
+        <span class="title">
+          {{title}}
+        </span>
+        <span class="series-nav-buttons">
+          <a href="{{previousSeriesUrl}}"><i class="icon-sonarr-previous-series"></i></a>
+          <a href="{{nextSeriesUrl}}"><i class="icon-sonarr-next-series"></i></a>
+        </span>
+      </h1>
 
-            <h2>
-                {{runtime}} minutes
-                {{#if ratings}}
-                    {{starRating ratings}}
-                {{/if}}
-            </h2>
+      <h2>
+        {{runtime}} minutes
+        {{#if ratings}}
+          {{starRating ratings}}
+        {{/if}}
+      </h2>
 
-            <div class="labels">
+      <div class="labels">
         <span class="label label-default" title="{{fileCount}}{{#if_eq fileCount compare="1"}} file{{else}} files{{/if_eq}}">
           <i class="icon-sonarr-hdd"/>
-            {{Bytes sizeOnDisk}}
+          {{Bytes sizeOnDisk}}
         </span>
         <span class="label label-default">
           <i class="icon-sonarr-profile"/>
-            {{profile profileId}}
+          {{profile profileId}}
         </span>
-            </div>
-            <div class=" overview">
-                {{overview}}
-            </div>
-            {{#if tags}}
-                <div class="tags">
-                    {{tagDisplay tags}}
-                </div>
-            {{/if}}
+      </div>
+      <div class=" overview">
+        {{overview}}
+      </div>
+      {{#if tags}}
+        <div class="tags">
+          {{tagDisplay tags}}
         </div>
+      {{/if}}
     </div>
+  </div>
 </div>

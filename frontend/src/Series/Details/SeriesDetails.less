@@ -70,6 +70,27 @@
     font-size  : 20px;
   }
 
+  .series-nav-buttons {
+    .pull-right();
+
+    line-height: 50px;
+    font-size: 30px;
+    opacity: 0.5;
+
+    a {
+      color: #e1e2e3;
+
+      &:focus,
+      &:hover {
+        color: darken(#e1e2e3, 15%);
+      }
+    }
+
+    i {
+      .clickable();
+    }
+  }
+
 }
 
 //.series-poster {
