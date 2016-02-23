@@ -1,6 +1,7 @@
 var Marionette = require('marionette');
 var $ = require('jquery');
 var _ = require('underscore');
+var AppLayout = require('AppLayout');
 var HealthView = require('../Health/HealthView');
 var QueueView = require('Activity/Queue/QueueView');
 var ResolutionUtility = require('../Utilities/ResolutionUtility');
@@ -50,6 +51,8 @@ module.exports = Marionette.Layout.extend({
       // e.g. sidebar collapsed mode and jqGrid
       $(window).resize();
     });
+
+    this.listenTo(AppLayout.mainRegion, 'show', this._onMainRegionShow);
   },
 
   serializeData() {
@@ -65,6 +68,10 @@ module.exports = Marionette.Layout.extend({
     this.$body = $('body');
     this.$aside = $('.aside');
     this.$asideInner = this.$el;
+  },
+
+  _onMainRegionShow() {
+    this._setActiveBasedOnUri();
   },
 
   _onClick(event) {
@@ -132,11 +139,6 @@ module.exports = Marionette.Layout.extend({
 
   _closeSidebar(element) {
     if (element.hasClass('x-nav-root') && element.children('.x-nav-sub').length > 0 && !element.hasClass('active')) {
-      // Watch for second click and floating naw bar being open
-
-      var location = window.location.pathname;
-      var urlBase = window.Sonarr.UrlBase;
-
       return;
     }
 
