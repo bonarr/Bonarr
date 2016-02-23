@@ -30,6 +30,7 @@ module.exports = Marionette.Layout.extend({
 
   initialize() {
     var self = this;
+
     $('[data-toggle-state]').on('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -38,6 +39,12 @@ module.exports = Marionette.Layout.extend({
 
       if (toggleState) {
         self.$body.toggleClass(toggleState);
+
+        // Remove the floating navbar and the aside-collapsed class
+        if (toggleState === 'aside-toggled') {
+          self.$aside.children('.nav-floating').remove();
+          self.$body.removeClass('aside-collapsed');
+        }
       }
       // some elements may need this when toggled class change the content size
       // e.g. sidebar collapsed mode and jqGrid
@@ -64,8 +71,8 @@ module.exports = Marionette.Layout.extend({
     event.preventDefault();
     var $target = $(event.target);
     var $li = $target.closest('li');
-    this._setActive($li);
     this._closeSidebar($li);
+    this._setActive($li);
   },
 
   _onRootHover(event) {
@@ -124,11 +131,17 @@ module.exports = Marionette.Layout.extend({
   },
 
   _closeSidebar(element) {
-    if (element.hasClass('x-nav-root') && element.children('.x-nav-sub').length > 0) {
+    if (element.hasClass('x-nav-root') && element.children('.x-nav-sub').length > 0 && !element.hasClass('active')) {
+      // Watch for second click and floating naw bar being open
+
+      var location = window.location.pathname;
+      var urlBase = window.Sonarr.UrlBase;
+
       return;
     }
 
     if (ResolutionUtility.isMobile()) {
+      this.$aside.children('.nav-floating').remove();
       Marionette.$('body').removeClass('actionbar-extended aside-toggled aside-collapsed');
     }
   }
