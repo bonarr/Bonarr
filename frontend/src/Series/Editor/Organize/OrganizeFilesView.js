@@ -3,9 +3,10 @@ var vent = require('vent');
 var Backbone = require('backbone');
 var Marionette = require('marionette');
 var CommandController = require('Commands/CommandController');
+var template = require('./OrganizeFilesView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Series/Editor/Organize/OrganizeFilesViewTemplate',
+  template: template,
 
   events: {
     'click .x-confirm-organize': '_organize'
