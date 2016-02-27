@@ -13,7 +13,7 @@ module.exports = NzbDroneCell.extend({
       switch (this.cellValue.get('eventType')) {
         case 'grabbed':
           icon = 'icon-sonarr-downloading';
-          toolTip = 'Episode grabbed from {0} and sent to download client'.format(this.cellValue.get('data').indexer);
+          toolTip = 'Episode grabbed from {0} and sent to {1}'.format(this.cellValue.get('data').indexer, this.cellValue.get('data').downloadClient);
           break;
         case 'seriesFolderImported':
           icon = 'icon-sonarr-hdd';
