@@ -116,9 +116,8 @@ module.exports = Marionette.Layout.extend({
 
     this.showingEpisodes = this._shouldShowEpisodes();
 
-    this.listenTo(this.model, 'sync', this._afterSeasonMonitored);
+    this.listenTo(this.model, 'change:monitored', this.onMonitoredChange);
     this.listenTo(this.episodeCollection, 'sync', this._refreshEpisodes);
-
     this.listenTo(this.fullEpisodeCollection, 'sync', this._refreshEpisodes);
   },
 
@@ -184,23 +183,15 @@ module.exports = Marionette.Layout.extend({
   },
 
   _afterSeasonMonitored() {
-    var self = this;
-
-    _.each(this.episodeCollection.models, function(episode) {
-      episode.set({ monitored: self.model.get('monitored') });
+    _.each(this.episodeCollection.models, (episode) => {
+      episode.set({ monitored: this.model.get('monitored') });
     });
   },
 
   _setSeasonMonitoredState() {
-    this.ui.seasonMonitored.removeClass('icon-sonarr-spinner fa-spin');
-
-    if (this.model.get('monitored')) {
-      this.ui.seasonMonitored.addClass('icon-sonarr-monitored');
-      this.ui.seasonMonitored.removeClass('icon-sonarr-unmonitored');
-    } else {
-      this.ui.seasonMonitored.addClass('icon-sonarr-unmonitored');
-      this.ui.seasonMonitored.removeClass('icon-sonarr-monitored');
-    }
+    var monitored = this.model.get('monitored');
+    this.ui.seasonMonitored.toggleClass('icon-sonarr-monitored', monitored);
+    this.ui.seasonMonitored.toggleClass('icon-sonarr-unmonitored', !monitored);
   },
 
   _showEpisodes() {
@@ -297,5 +288,9 @@ module.exports = Marionette.Layout.extend({
     });
 
     vent.trigger(vent.Commands.OpenFullscreenModal, view);
+  },
+
+  onMonitoredChange() {
+    this._setSeasonMonitoredState();
   }
 });
