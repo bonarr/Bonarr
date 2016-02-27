@@ -93,7 +93,7 @@ var view = Marionette.ItemView.extend({
     var consumerKeyObj = _.findWhere(fields, { name: 'ConsumerKey' });
     var consumerSecretObj = _.findWhere(fields, { name: 'ConsumerSecret' });
     var callbackUrl = window.location.origin + '/oauth.html';
-    
+
     var queryParams = {
       callbackUrl: callbackUrl,
       consumerKey: (consumerKeyObj ? consumerKeyObj.value : ''),

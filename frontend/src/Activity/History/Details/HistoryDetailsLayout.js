@@ -2,12 +2,14 @@ var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
 var HistoryDetailsView = require('./HistoryDetailsView');
+var tpl = require('./HistoryDetailsLayout.hbs');
+
 
 module.exports = Marionette.Layout.extend({
-  template: 'Activity/History/Details/HistoryDetailsLayoutTemplate',
+  template: tpl,
 
   regions: {
-    bodyRegion: '.modal-body'
+    bodyRegion: '.x-modal-body'
   },
 
   events: {

@@ -1,0 +1,21 @@
+<div class="fullscreen-modal history-detail-modal">
+  <div class="fullscreen-modal-header">
+    <button type="button" class="close x-close">
+      <i class="icon-sonarr-close-modal"></i>
+    </button>
+
+    <h3>
+      {{#if_eq eventType compare="grabbed"}}Grabbed{{/if_eq}}
+      {{#if_eq eventType compare="downloadFailed"}}Download Failed{{/if_eq}}
+      {{#if_eq eventType compare="downloadFolderImported"}}Episode Imported{{/if_eq}}
+      {{#if_eq eventType compare="episodeFileDeleted"}}Episode File Deleted{{/if_eq}}
+    </h3>
+
+  </div>
+  <div class="fullscreen-modal-body x-modal-body"></div>
+  <div class="fullscreen-modal-footer">
+    {{#if_eq eventType compare="grabbed"}}
+      <button class="btn btn-danger x-mark-as-failed">Mark As Failed</button>{{/if_eq}}
+    <button class="btn x-close">Close</button>
+  </div>
+</div>
