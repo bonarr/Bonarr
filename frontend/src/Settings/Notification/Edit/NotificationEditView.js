@@ -1,4 +1,5 @@
 var vent = require('vent');
+var _ = require('underscore');
 var Marionette = require('marionette');
 var DeleteView = require('../Delete/NotificationDeleteView');
 var AsModelBoundView = require('Mixins/AsModelBoundView');
@@ -88,10 +89,11 @@ var view = Marionette.ItemView.extend({
   _onAuthorizeNotification() {
     this.ui.indicator.show();
 
-    var promise = this.model.connectData(this.ui.authorizedNotificationButton.data('value') + '?callbackUrl=' + callbackUrl);
     var fields = this.model.get('fields');
     var consumerKeyObj = _.findWhere(fields, { name: 'ConsumerKey' });
     var consumerSecretObj = _.findWhere(fields, { name: 'ConsumerSecret' });
+    var callbackUrl = window.location.origin + '/oauth.html';
+    
     var queryParams = {
       callbackUrl: callbackUrl,
       consumerKey: (consumerKeyObj ? consumerKeyObj.value : ''),
@@ -100,8 +102,8 @@ var view = Marionette.ItemView.extend({
 
     var promise = this.model.connectData(this.ui.authorizedNotificationButton.data('value'), queryParams);
 
-    promise.always(function() {
-      self.ui.indicator.hide();
+    promise.always(() => {
+      this.ui.indicator.hide();
     });
   }
 });
