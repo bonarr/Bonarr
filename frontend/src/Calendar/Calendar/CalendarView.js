@@ -97,6 +97,8 @@ module.exports = Marionette.Layout.extend({
       start = time.clone().startOf(weekName);
       end = time.clone().endOf(weekName);
     } else if (view === 'forecast') {
+      this.time = moment();
+      time = this.time;
       start = time.clone().subtract(1, 'day').startOf('day');
       end = time.clone().add(5, 'days').endOf('day');
     } else if (view === 'month') {
