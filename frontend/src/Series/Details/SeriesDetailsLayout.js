@@ -41,6 +41,22 @@ module.exports = Marionette.Layout.extend({
     this.seriesCollection = SeriesCollection;
     // this.seriesCollection.shadowCollection.bindSignalR();
 
+    this.seasonCollection = new SeasonCollection(this.model.get('seasons'));
+    this.episodeCollection = new EpisodeCollection({ seriesId: this.model.id }).bindSignalR();
+    this.episodeFileCollection = new EpisodeFileCollection({ seriesId: this.model.id }).bindSignalR();
+
+    reqres.setHandler(reqres.Requests.GetEpisodeFileById, (episodeFileId) => {
+      return this.episodeFileCollection.get(episodeFileId);
+    });
+
+    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, (seriesId, seasonNumber) => {
+      if (this.model.get('id') !== seriesId) {
+        return [];
+      }
+
+      return _.where(this.model.get('alternateTitles'), { seasonNumber: seasonNumber });
+    });
+
     this.listenTo(this.model, 'change:monitored', this._setMonitoredState);
     this.listenTo(this.model, 'remove', this.onSeriesRemoved);
     this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
@@ -114,42 +130,14 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showSeasons() {
-    var self = this;
-
     this.seasons.show(new LoadingView());
 
-    this.seasonCollection = new SeasonCollection(this.model.get('seasons'));
-    this.episodeCollection = new EpisodeCollection({ seriesId: this.model.id }).bindSignalR();
-    this.episodeFileCollection = new EpisodeFileCollection({ seriesId: this.model.id }).bindSignalR();
-
-    reqres.setHandler(reqres.Requests.GetEpisodeFileById, (episodeFileId) => {
-      return this.episodeFileCollection.get(episodeFileId);
-    });
-
-    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, (seriesId, seasonNumber) => {
-      if (this.model.get('id') !== seriesId) {
-        return [];
-      }
-
-      return _.where(this.model.get('alternateTitles'), { seasonNumber: seasonNumber });
-    });
-
     $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(() => {
-      if (this.episodeCollection.length) {
-        var seasonCollectionView = new SeasonCollectionView({
-          collection: this.seasonCollection,
-          episodeCollection: this.episodeCollection,
-          series: this.model
-        });
-
-        if (!this.isClosed) {
-          this.seasons.show(seasonCollectionView);
-        }
-      } else {
-        if (!this.isClosed) {
-          this.seasons.show(new NoEpisodesView());
-        }
+      if (!this.isClosed) {
+        this._updateSeasons();
       }
+
+      this.listenTo(this.episodeCollection, 'sync', this._updateSeasons);
     });
   },
 
@@ -175,6 +163,22 @@ module.exports = Marionette.Layout.extend({
 
     this._setMonitoredState();
     this._showHeader();
+  },
+
+  _updateSeasons() {
+    if (!this.showingSeasons && this.episodeCollection.length) {
+      var seasonCollectionView = new SeasonCollectionView({
+        collection: this.seasonCollection,
+        episodeCollection: this.episodeCollection,
+        series: this.model
+      });
+
+      this.showingSeasons = true;
+      this.seasons.show(seasonCollectionView);
+    } else if (!this.episodeCollection.length) {
+      this.showingSeasons = false;
+      this.seasons.show(new NoEpisodesView());
+    }
   },
 
   onExpandClick() {
