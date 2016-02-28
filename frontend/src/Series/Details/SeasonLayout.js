@@ -192,6 +192,12 @@ module.exports = Marionette.Layout.extend({
     var monitored = this.model.get('monitored');
     this.ui.seasonMonitored.toggleClass('icon-sonarr-monitored', monitored);
     this.ui.seasonMonitored.toggleClass('icon-sonarr-unmonitored', !monitored);
+
+    if (monitored) {
+      this.ui.seasonMonitored.prop('title', 'Season monitored, click to unmonitor');
+    } else {
+      this.ui.seasonMonitored.prop('title', 'Season unmonitored, click to monitor');
+    }
   },
 
   _showEpisodes() {
