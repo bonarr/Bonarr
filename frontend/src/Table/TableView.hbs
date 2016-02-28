@@ -6,7 +6,7 @@
       </th>
     {{/if}}
     {{#each headers}}
-      <th data-field="{{./name}}">{{label}}</th>
+      <th data-field="{{name}}" {{#if className}}class="{{className}}"{{/if}}>{{label}}</th>
     {{/each}}
   </tr>
 </thead>

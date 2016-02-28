@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var FormatHelpers = require('Shared/FormatHelpers');
 var moment = require('moment');
+var episodeStatus = require('./Episode/episodeStatus');
 require('Activity/Queue/QueueCollection');
 
 Handlebars.registerHelper('EpisodeNumber', function() {
@@ -61,3 +62,5 @@ Handlebars.registerHelper('EpisodeProgressClass', function() {
 
   return 'progress-bar-warning';
 });
+
+Handlebars.registerHelper('episodeStatus', episodeStatus);

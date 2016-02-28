@@ -1,0 +1,35 @@
+table {
+  tr {
+    td {
+      &.episode-number {
+        width : 30px;
+      }
+
+      &.episode-title {
+        a {
+          display: block;
+        }
+      }
+
+      &.relative-date {
+        width: 150px;
+      }
+
+      &.actions {
+        .clickable();
+
+        a {
+          color: #656565;
+
+          &:hover, &:focus {
+            color: #656565;
+          }
+        }
+
+        i {
+          .clickable();
+        }
+      }
+    }
+  }
+}

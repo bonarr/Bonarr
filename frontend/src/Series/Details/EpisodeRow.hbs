@@ -1,0 +1,20 @@
+<td class="episode-monitored x-episode-monitored">
+  <i class="x-episode-monitored-icon"></i>
+</td>
+
+<td class="episode-number">{{episodeNumber}}</td>
+
+<td class="episode-title x-episode-title">
+  <a href="/episode/{{id}}">{{title}}</a>
+</td>
+
+<td class="episode-air-date relative-date">{{relativeDate airDateUtc}}</td>
+
+<td class="episode-status">{{episodeStatus .}}</td>
+
+<td class="episode-actions actions">
+  <i class="icon-sonarr-search x-automatic-search" title="Automatic Search"></i>
+  <a href="/episode/{{id}}/search/manual">
+    <i class="icon-sonarr-search-manual x-manual-search" title="Manual Search"></i>
+  </a>
+</td>

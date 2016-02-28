@@ -1,6 +1,7 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('Table/TableView');
+var EpisodeRow = require('./EpisodeRow');
 var ToggleCell = require('Cells/EpisodeMonitoredCell');
 var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
 var RelativeDateCell = require('Cells/RelativeDateCell');
@@ -13,9 +14,10 @@ var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEdito
 var moment = require('moment');
 var _ = require('underscore');
 var Messenger = require('Shared/Messenger');
+var tpl = require('./SeasonLayout.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Series/Details/SeasonLayout',
+  template: tpl,
 
   ui: {
     seasonSearch: '.x-season-search',
@@ -34,8 +36,36 @@ module.exports = Marionette.Layout.extend({
   },
 
   regions: {
-    episodeGrid: '.x-episode-grid'
+    episodes: '.x-episodes'
   },
+
+  headers: [
+    {
+      name: 'monitored',
+      label: ''
+    },
+    {
+      name: 'episodeNumber',
+      label: '#'
+    },
+    {
+      name: 'title',
+      label: 'Title'
+    },
+    {
+      name: 'airDateUtc',
+      label: 'Air Date'
+    },
+    {
+      name: 'status',
+      label: 'Status',
+      className: 'episode-status'
+    },
+    {
+      name: 'actions',
+      label: ''
+    }
+  ],
 
   columns: [
     {
@@ -206,10 +236,12 @@ module.exports = Marionette.Layout.extend({
 
     if (!this.$el.hasClass('loaded')) {
       this.$el.addClass('loaded');
-      this.episodeGrid.show(new Backgrid.Grid({
-        columns: this.columns,
+
+      this.episodes.show(new TableView({
         collection: this.episodeCollection,
-        className: 'table table-hover season-grid'
+        itemView: EpisodeRow,
+        headers: this.headers,
+        className: 'table table-hover'
       }));
     }
   },

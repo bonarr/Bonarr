@@ -14,10 +14,12 @@ var CommandController = require('Commands/CommandController');
 var LoadingView = require('Shared/LoadingView');
 var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
 var NoEpisodesView = require('./NoEpisodesView');
+var tpl = require('./SeriesDetails.hbs');
+
 require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Series/Details/SeriesDetails',
+  template: tpl,
 
   regions: {
     header: '#series-header-region',
