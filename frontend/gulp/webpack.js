@@ -74,6 +74,7 @@ var config = {
         query: {
           runtime: 'handlebars',
           helperDirs: [
+            root + '/Handlebars/Helpers/Episode',
             root + '/Handlebars/Helpers/Series',
             root + '/Handlebars/Helpers/Rating',
             root + '/Handlebars/Helpers/DateTime',
