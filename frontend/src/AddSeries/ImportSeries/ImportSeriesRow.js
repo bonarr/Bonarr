@@ -71,6 +71,6 @@ const ImportSeriesRow = Marionette.Layout.extend({
   }
 });
 
-TableRowMixin(ImportSeriesRow.prototype);
+TableRowMixin(ImportSeriesRow);
 
 module.exports = ImportSeriesRow;

@@ -2,7 +2,7 @@ const _ = require('underscore');
 
 const selectBoxSelector = '.select-checkbox';
 
-function TableRowMixin(base) {
+function TableRowMixin({ prototype: base }) {
   const superEvents = base.events || {};
   const superinitialize = base.initialize;
 
