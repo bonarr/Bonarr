@@ -1,3 +1,4 @@
+var vent = require('vent');
 const Marionette = require('marionette');
 const TableRowMixin = require('Table/TableRowMixin');
 const EpisodeStatusMixin = require('Table/EpisodeStatusMixin');
@@ -15,7 +16,8 @@ const EpisodeRow = Marionette.ItemView.extend({
 
   events: {
     'click .x-episode-monitored': 'onMonitoredClick',
-    'click .x-episode-title': 'onTitleClick'
+    'click .x-episode-title': 'onTitleClick',
+    'click .x-episode-title a': 'onTitleClick'
   },
 
   initialize() {
@@ -31,6 +33,15 @@ const EpisodeRow = Marionette.ItemView.extend({
 
     this.ui.monitored.spinForPromise(promise);
     promise.always(() => this.render);
+  },
+
+  onTitleClick(e) {
+    e.preventDefault();
+
+    vent.trigger(vent.Commands.ShowEpisodeDetails, {
+      episode: this.model,
+      hideSeriesLink: true
+    });
   }
 
 });
