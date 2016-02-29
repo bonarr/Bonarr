@@ -38,7 +38,7 @@ function episodeFileInfo(episodeFile) {
   }
 
   if (size !== '') {
-    title += ' - {0}'.format(size);
+    title += ` - ${size}`;
   }
 
   if (episodeFile.qualityCutoffNotMet) {
