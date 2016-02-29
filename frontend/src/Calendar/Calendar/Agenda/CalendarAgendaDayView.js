@@ -1,11 +1,12 @@
 var Marionette = require('marionette');
 var CalendarEventCollectionView = require('../Events/CalendarEventCollectionView');
+var tpl = require('./CalendarAgendaDayView.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Calendar/Calendar/Agenda/CalendarAgendaDayView',
+  template: tpl,
   className: 'calendar-day',
 
-  regions : {
+  regions: {
     events: '.x-calendar-day-events'
   },
 
@@ -16,10 +17,10 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onShow () {
+  onShow() {
     this.events.show(new CalendarEventCollectionView({
       collection: this.model.get('events'),
       style: 'agenda'
-  }));
+    }));
   }
 });

@@ -1,5 +1,5 @@
 <div class="calendar-event-series-poster">
-  {{posterHelper 250}}
+  {{poster size=250}}
 </div>
 
 <div class="calendar-event-time">
@@ -11,7 +11,10 @@
 </div>
 
 <div class="calendar-event-episode-info">
-  &mdash; {{seasonNumber}}x{{Pad2 episodeNumber}} {{#if_eq seriesType compare="anime"}}{{#if absoluteEpisodeNumber}}({{absoluteEpisodeNumber}}){{/if}}{{/if_eq}}
+  &mdash; {{seasonNumber}}x{{pad episodeNumber lenght=2}}
+  {{#if_eq seriesType compare="anime" }}
+    {{#if absoluteEpisodeNumber}}({{absoluteEpisodeNumber}}){{/if}}
+  {{/if_eq}}
 </div>
 
 <div class="calendar-event-status pull-right">

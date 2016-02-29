@@ -78,7 +78,8 @@ var config = {
             root + '/Handlebars/Helpers/Series',
             root + '/Handlebars/Helpers/Rating',
             root + '/Handlebars/Helpers/DateTime',
-            root + '/Handlebars/Helpers/Object'
+            root + '/Handlebars/Helpers/Object',
+            root + '/Handlebars/Helpers/Number'
           ],
           knownHelpers: ['if_eq', 'unless_eq']
         }

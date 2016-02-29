@@ -1,14 +1,11 @@
 var Handlebars = require('handlebars');
 var FormatHelpers = require('Shared/FormatHelpers');
+var bytes = require('./Number/bytes');
+var number = require('./Number/number');
 
-Handlebars.registerHelper('Bytes', function(size) {
-  return new Handlebars.SafeString(FormatHelpers.bytes(size));
-});
+Handlebars.registerHelper('Bytes', bytes);
+Handlebars.registerHelper('Number', number);
 
-Handlebars.registerHelper('Pad2', function(input) {
+Handlebars.registerHelper('Pad2', function (input) {
   return FormatHelpers.pad(input, 2);
-});
-
-Handlebars.registerHelper('Number', function(input) {
-  return FormatHelpers.number(input);
 });

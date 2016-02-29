@@ -60,12 +60,12 @@ module.exports = Marionette.ItemView.extend({
     this.$el.addClass(this._getStatusLevel());
 
     this.ui.downloadProgress.easyPieChart({
-      barColor   : '#7932ea',
-      trackColor : false,
-      scaleColor : false,
-      lineWidth  : 2,
-      size       : 14,
-      animate    : false
+      barColor: '#7932ea',
+      trackColor: false,
+      scaleColor: false,
+      lineWidth: 2,
+      size: 14,
+      animate: false
     });
   },
 
@@ -119,7 +119,9 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _showEpisodeDetails() {
-    vent.trigger(vent.Commands.ShowEpisodeDetails, { episode: this.model });
+    vent.trigger(vent.Commands.ShowEpisodeDetails, {
+      episode: this.model
+    });
   },
 
   _getEndTime() {
