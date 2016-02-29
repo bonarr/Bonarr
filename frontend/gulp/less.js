@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var gulpUtil = require('gulp-util');
 var less = require('gulp-less');
 var postcss = require('gulp-postcss');
 var sourcemaps = require('gulp-sourcemaps');
@@ -8,7 +9,6 @@ var livereload = require('gulp-livereload');
 
 var print = require('gulp-print');
 var paths = require('./helpers/paths');
-var errorHandler = require('./helpers/errorHandler');
 
 gulp.task('less', function() {
   var src = [
@@ -30,7 +30,7 @@ gulp.task('less', function() {
     .pipe(postcss([autoprefixer({
       browsers: ['last 2 versions']
     })]))
-    .on('error', errorHandler.onError)
+    .on('error', gulpUtil.log)
     // not providing a path will cause the source map
     // to be embeded. which makes livereload much happier
     // since it doesn't reload the whole page to load the map.

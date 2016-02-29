@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpUtil = require('gulp-util');
 var webpackStream = require('webpack-stream');
 var livereload = require('gulp-livereload');
 var path = require('path');
@@ -54,45 +55,47 @@ var config = {
     ]
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.hbs$/,
-        loader: htmlAnnotate
-      }],
-    loaders: [
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules|JsLibraries)/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
-      },
-      {
-        test: /\.hbs?$/,
-        loader: 'handlebars-loader',
-        query: {
-          runtime: 'handlebars',
-          helperDirs: [
-            root + '/Handlebars/Helpers/Episode',
-            root + '/Handlebars/Helpers/Series',
-            root + '/Handlebars/Helpers/Rating',
-            root + '/Handlebars/Helpers/DateTime',
-            root + '/Handlebars/Helpers/Object',
-            root + '/Handlebars/Helpers/Number'
-          ],
-          knownHelpers: ['if_eq', 'unless_eq']
-        }
+    preLoaders: [{
+      test: /\.hbs$/,
+      loader: htmlAnnotate
+    }],
+    loaders: [{
+      test: /\.js?$/,
+      exclude: /(node_modules|JsLibraries)/,
+      loader: 'babel',
+      query: {
+        presets: ['es2015']
       }
-    ]
+    }, {
+      test: /\.hbs?$/,
+      loader: 'handlebars-loader',
+      query: {
+        runtime: 'handlebars',
+        helperDirs: [
+          root + '/Handlebars/Helpers/Episode',
+          root + '/Handlebars/Helpers/Series',
+          root + '/Handlebars/Helpers/Rating',
+          root + '/Handlebars/Helpers/DateTime',
+          root + '/Handlebars/Helpers/Object',
+          root + '/Handlebars/Helpers/Number'
+        ],
+        knownHelpers: ['if_eq', 'unless_eq']
+      }
+    }]
   }
 };
 
 gulp.task('webpack', function () {
-  return gulp.src('main.js').pipe(webpackStream(config)).pipe(gulp.dest(''));
+  return gulp.src('main.js')
+    .pipe(webpackStream(config))
+    .pipe(gulp.dest(''));
 });
 
 gulp.task('webpackWatch', function () {
   config.watch = true;
-  return gulp.src('').pipe(webpackStream(config)).pipe(gulp.dest('')).pipe(livereload());
+  return gulp.src('')
+    .pipe(webpackStream(config))
+    .on('error', gulpUtil.log)
+    .pipe(gulp.dest(''))
+    .pipe(livereload());
 });
