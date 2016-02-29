@@ -1,6 +1,12 @@
-<td class="episode-monitored x-episode-monitored">
-  <i class="x-episode-monitored-icon"></i>
-</td>
+{{#if monitored}}
+  <td class="episode-monitored x-episode-monitored" title="Episode monitored, click to unmonitor">
+    <i class="icon-sonarr-monitored"></i>
+  </td>
+{{else}}
+  <td class="episode-monitored x-episode-monitored" title="Episode unmonitored, click to monitor">
+    <i class="icon-sonarr-unmonitored"></i>
+  </td>
+{{/if}}
 
 <td class="episode-number">{{episodeNumber}}</td>
 

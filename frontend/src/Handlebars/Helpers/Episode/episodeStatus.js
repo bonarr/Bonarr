@@ -1,3 +1,4 @@
+const Backbone = require('backbone');
 const Handlebars = require('handlebars');
 const moment = require('moment');
 const reqres = require('reqres');

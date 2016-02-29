@@ -17,21 +17,8 @@ const EpisodeRow = Marionette.ItemView.extend({
     'click .x-episode-title': 'onTitleClick'
   },
 
-  onRender() {
-    this._setMonitoredState();
-  },
-
-  _setMonitoredState() {
-    const monitored = this.model.get('monitored');
-
-    this.ui.monitoredIcon.toggleClass('icon-sonarr-monitored', monitored);
-    this.ui.monitoredIcon.toggleClass('icon-sonarr-unmonitored', !monitored);
-
-    if (monitored) {
-      this.ui.monitored.prop('title', 'Episode monitored, click to unmonitor');
-    } else {
-      this.ui.monitored.prop('title', 'Episode unmonitored, click to monitor');
-    }
+  initialize() {
+    this.listenTo(this.model, 'change:monitored', this.render);
   },
 
   onMonitoredClick(e) {
@@ -42,7 +29,7 @@ const EpisodeRow = Marionette.ItemView.extend({
     var promise = this.model.save();
 
     this.ui.monitored.spinForPromise(promise);
-    promise.always(() => this._setMonitoredState);
+    promise.always(() => this.render);
   }
 
 });
