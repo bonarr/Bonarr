@@ -1,27 +1,8 @@
-const Backbone = require('backbone');
 const Handlebars = require('handlebars');
 const moment = require('moment');
 const reqres = require('reqres');
 const FormatHelpers = require('Shared/FormatHelpers');
 const QueueCollection = require('Activity/Queue/QueueCollection');
-
-function getFile(episode) {
-  const hasFile = episode.hasFile;
-
-  if (hasFile) {
-    let episodeFile;
-
-    if (reqres.hasHandler(reqres.Requests.GetEpisodeFileById)) {
-      episodeFile = reqres.request(reqres.Requests.GetEpisodeFileById, episode.episodeFileId);
-    } else if (this.episodeFile) {
-      episodeFile = new Backbone.Model(this.episodeFile);
-    }
-
-    if (episodeFile) {
-      return episodeFile;
-    }
-  }
-}
 
 function episodeFileInfo(episodeFile) {
   const quality = episodeFile.quality;
@@ -85,14 +66,10 @@ function episodeInfo(episode) {
 }
 
 const episodeStatus = function() {
-  const episodeFile = getFile(this);
-
-  if (episodeFile) {
-    return new Handlebars.SafeString(episodeFileInfo(episodeFile));
+  if (this.episodeFile) {
+    return new Handlebars.SafeString(episodeFileInfo(this.episodeFile));
   }
 
-  const ei = episodeInfo(this);
-  const test = 1;
   return new Handlebars.SafeString(episodeInfo(this));
 };
 
