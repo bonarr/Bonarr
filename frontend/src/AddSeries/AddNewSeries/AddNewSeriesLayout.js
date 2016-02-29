@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
-var AddSeriesCollection = require('../AddSeriesCollection');
+var SeriesSearchCollection = require('../SeriesSearchCollection');
 var SearchResultCollectionView = require('./SearchResultCollectionView');
 var profileCollection = require('Profile/profileCollection');
 var RootFolderCollection = require('../RootFolders/RootFolderCollection');
@@ -31,7 +31,7 @@ module.exports = Marionette.Layout.extend({
       RootFolderCollection.synced = true;
     });
 
-    this.collection = new AddSeriesCollection();
+    this.collection = new SeriesSearchCollection();
     this.listenTo(this.collection, 'sync reset', this.onCollectionSync);
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
   },

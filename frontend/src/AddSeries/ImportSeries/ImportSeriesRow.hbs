@@ -4,7 +4,9 @@
 <td class="folder-name-col">
   <i class="icon-sonarr-folder"></i> {{name}}
 </td>
-<td class="profile-col profile-region"></td>
+<td class="profile-col">
+  {{>../../Profile/ProfileSelectionPartial.hbs profiles}}
+</td>
 <td class="series-select-col">
   {{#if loading}}
     <div class="spinner-small">
@@ -22,5 +24,3 @@
       </div>
   {{/if}}
 </td>
-
-{{debug .}}

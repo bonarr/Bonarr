@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 var SeriesModel = require('Series/SeriesModel');
 var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 
-let AddSeriesCollection = Backbone.Collection.extend({
+let SeriesSearchCollection = Backbone.Collection.extend({
   url: window.Sonarr.ApiRoot + '/series/lookup',
   model: SeriesModel,
 
@@ -51,6 +51,6 @@ let AddSeriesCollection = Backbone.Collection.extend({
 
 });
 
-AddSeriesCollection = AsSelectableCollection.apply(AddSeriesCollection);
+SeriesSearchCollection = AsSelectableCollection.apply(SeriesSearchCollection);
 
-module.exports = AddSeriesCollection;
+module.exports = SeriesSearchCollection;

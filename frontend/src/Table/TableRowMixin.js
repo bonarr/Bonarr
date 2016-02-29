@@ -1,9 +1,8 @@
 const _ = require('underscore');
 
-const selectBoxSelector = '.select-checkbox';
-
 function TableRowMixin({ prototype: base }) {
   const superEvents = base.events || {};
+  const superUi = base.ui || {};
   const superinitialize = base.initialize;
 
   const extentions = {
@@ -11,6 +10,10 @@ function TableRowMixin({ prototype: base }) {
 
     events: _.extend(superEvents, {
       'change .select-checkbox': '_tablerow_onSelectedChange'
+    }),
+
+    ui: _.extend(superUi, {
+      selectCheckbox: '.select-checkbox'
     }),
 
     initialize(options = {}) {
@@ -24,7 +27,7 @@ function TableRowMixin({ prototype: base }) {
 
     _tablerow_onSelectedChange(e) {
       e.preventDefault();
-      const checked = !!this.$(selectBoxSelector).prop('checked');
+      const checked = !!this.ui.selectCheckbox.prop('checked');
 
       this.model.selected = checked;
       this.model.trigger('selected', this.model, checked);
@@ -32,7 +35,7 @@ function TableRowMixin({ prototype: base }) {
 
     _tablerow_onModelSelected(model, selected) {
       this.$el.toggleClass('selected', selected);
-      this.$(selectBoxSelector).prop('checked', selected);
+      this.ui.selectCheckbox.prop('checked', selected);
     }
 
   };
