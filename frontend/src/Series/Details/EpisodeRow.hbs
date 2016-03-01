@@ -8,7 +8,12 @@
   </td>
 {{/if}}
 
-<td class="episode-number">{{episodeNumber}}</td>
+<td class="episode-number">
+  {{episodeNumber}}
+  {{#if_eq seriesType compare="anime"}}
+    {{#if absoluteEpisodeNumber}}({{absoluteEpisodeNumber}}){{/if}}
+  {{/if_eq}}
+</td>
 
 <td class="episode-title x-episode-title">
   {{episodeTitle .}}

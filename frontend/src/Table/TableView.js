@@ -1,3 +1,4 @@
+const _ = require('underscore');
 const Marionette = require('marionette');
 const tpl = require('./TableView.hbs');
 
@@ -19,6 +20,10 @@ const TableView = Marionette.CompositeView.extend({
     this.headers = options.headers;
     this.selectable = options.selectable;
 
+    this.itemViewOptions = _.extend({
+      selectable: this.selectable
+    }, options.itemViewOptions);
+
     if (this.selectable) {
       this.listenTo(this.collection || this.collection.fullCollection, 'selected', this._onModelSelected);
     }
@@ -27,12 +32,6 @@ const TableView = Marionette.CompositeView.extend({
   serializeData() {
     return {
       headers: this.headers,
-      selectable: this.selectable
-    };
-  },
-
-  itemViewOptions() {
-    return {
       selectable: this.selectable
     };
   },

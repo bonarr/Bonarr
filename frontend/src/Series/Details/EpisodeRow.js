@@ -19,8 +19,15 @@ const EpisodeRow = Marionette.ItemView.extend({
     'click .x-episode-title a': 'onTitleClick'
   },
 
-  initialize() {
+  initialize(options = {}) {
+    this.series = options.series;
     this.listenTo(this.model, 'change:monitored', this.render);
+  },
+
+  templateHelpers() {
+    return {
+      seriesType: this.series.get('seriesType')
+    };
   },
 
   onMonitoredClick(e) {

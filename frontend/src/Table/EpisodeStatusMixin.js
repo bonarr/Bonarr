@@ -22,8 +22,12 @@ function EpisodeStatusMixin({ prototype: base }) {
         this.stopListening(this.episodeFile, 'change', this._refresh);
       }
 
-      const superHelpers = superTemplateHelpers ? _.result(superTemplateHelpers) : {};
+      let superHelpers = {};
       this.episodeFile = this._episodeStatus_getEpisodeFile();
+
+      if (superTemplateHelpers) {
+        superHelpers = _.isFunction(superTemplateHelpers) ? superTemplateHelpers.call(this) : superTemplateHelpers;
+      }
 
       if (this.episodeFile) {
         this.listenTo(this.episodeFile, 'change', this._refresh);

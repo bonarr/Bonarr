@@ -241,7 +241,10 @@ module.exports = Marionette.Layout.extend({
         collection: this.episodeCollection,
         itemView: EpisodeRow,
         headers: this.headers,
-        className: 'table table-hover'
+        className: 'table table-hover',
+        itemViewOptions: {
+          series: this.series
+        }
       }));
     }
   },
