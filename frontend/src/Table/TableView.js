@@ -24,6 +24,8 @@ const TableView = Marionette.CompositeView.extend({
       selectable: this.selectable
     }, options.itemViewOptions);
 
+    this.listenTo(this.collection, 'add remove update', this.onCollectionUpdate);
+
     if (this.selectable) {
       this.listenTo(this.collection || this.collection.fullCollection, 'selected', this._onModelSelected);
     }
@@ -39,6 +41,11 @@ const TableView = Marionette.CompositeView.extend({
   onSelectChange() {
     const checked = this.ui.selectAllCheckbox.prop('checked');
     this.collection.toggleAll(checked);
+  },
+
+  onCollectionUpdate() {
+    var test = 1;
+    this.render();
   },
 
   _onModelSelected() {

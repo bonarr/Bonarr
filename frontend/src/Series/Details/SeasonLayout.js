@@ -311,6 +311,7 @@ module.exports = Marionette.Layout.extend({
   _updateEpisodeCollection() {
     this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge: true });
 
+    var test = 1;
     this.episodeCollection.each((model) => {
       model.episodeCollection = this.episodeCollection;
     });

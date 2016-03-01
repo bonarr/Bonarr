@@ -151,7 +151,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _commandComplete(options) {
-    if (options.command.get('name') === 'renamefiles') {
+    if (['renamefiles', 'refreshseries'].includes(options.command.get('name'))) {
       if (options.command.get('seriesId') === this.model.get('id')) {
         this._refresh();
       }
