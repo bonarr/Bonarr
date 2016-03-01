@@ -22,14 +22,8 @@ function EpisodeStatusMixin({ prototype: base }) {
         this.stopListening(this.episodeFile, 'change', this._refresh);
       }
 
-      let superHelpers = {};
-      this.episodeFile = this._getEpisodeFile();
-
-      if (superTemplateHelpers && _.isFunction(superTemplateHelpers)) {
-        superHelpers = superTemplateHelpers.apply(this);
-      } else if (superTemplateHelpers) {
-        superHelpers = superTemplateHelpers;
-      }
+      const superHelpers = superTemplateHelpers ? _.result(superTemplateHelpers) : {};
+      this.episodeFile = this._episodeStatus_getEpisodeFile();
 
       if (this.episodeFile) {
         this.listenTo(this.episodeFile, 'change', this._refresh);
@@ -50,7 +44,7 @@ function EpisodeStatusMixin({ prototype: base }) {
       }
     },
 
-    _getEpisodeFile() {
+    _episodeStatus_getEpisodeFile() {
       const hasFile = this.model.get('hasFile');
 
       if (hasFile) {
