@@ -10,7 +10,7 @@ const EpisodeRow = Marionette.ItemView.extend({
   template: tpl,
 
   ui: {
-    monitored     : '.x-episode-monitored'
+    monitored: '.x-episode-monitored'
   },
 
   events: {
