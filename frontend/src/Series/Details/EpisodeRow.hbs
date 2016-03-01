@@ -8,11 +8,55 @@
   </td>
 {{/if}}
 
-<td class="episode-number">
+<td class="episode-number x-episode-number">
   {{episodeNumber}}
   {{#if_eq seriesType compare="anime"}}
     {{#if absoluteEpisodeNumber}}({{absoluteEpisodeNumber}}){{/if}}
   {{/if_eq}}
+
+  <div class="hide x-scene-info">
+    <div class="scene-info">
+      {{#if sceneSeasonNumber includeZero=true}}
+        <div class="row">
+          <div class="key">Season</div>
+          <div class="value">{{sceneSeasonNumber}}</div>
+        </div>
+      {{/if}}
+
+      {{#if sceneEpisodeNumber includeZero=true}}
+        <div class="row">
+          <div class="key">Episode</div>
+          <div class="value">{{sceneEpisodeNumber}}</div>
+        </div>
+      {{/if}}
+
+      {{#if_eq seriesType compare="anime"}}
+        {{#if sceneAbsoluteEpisodeNumber includeZero=true}}
+          <div class="row">
+            <div class="key">Absolute</div>
+            <div class="value">{{sceneAbsoluteEpisodeNumber}}</div>
+          </div>
+        {{/if}}
+      {{/if_eq}}
+
+      {{#if alternateTitles}}
+        <div class="row">
+          {{#if_gt alternateTitles.length compare="1"}}
+            <div class="key">Titles</div>
+          {{else}}
+            <div class="key">Title</div>
+          {{/if_gt}}
+          <div class="value">
+            <ul>
+              {{#each alternateTitles}}
+                <li>{{title}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
 </td>
 
 <td class="episode-title x-episode-title">

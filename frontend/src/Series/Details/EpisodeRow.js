@@ -1,4 +1,5 @@
-var vent = require('vent');
+const vent = require('vent');
+const reqres = require('reqres');
 const Marionette = require('marionette');
 const TableRowMixin = require('Table/TableRowMixin');
 const EpisodeStatusMixin = require('Table/EpisodeStatusMixin');
@@ -10,24 +11,55 @@ const EpisodeRow = Marionette.ItemView.extend({
   template: tpl,
 
   ui: {
-    monitored: '.x-episode-monitored'
+    monitored: '.x-episode-monitored',
+    episodeNumber: '.x-episode-number',
+    sceneInfo: '.x-scene-info'
   },
 
   events: {
     'click .x-episode-monitored': 'onMonitoredClick',
-    'click .x-episode-title': 'onTitleClick',
     'click .x-episode-title a': 'onTitleClick'
   },
 
   initialize(options = {}) {
     this.series = options.series;
     this.listenTo(this.model, 'change:monitored', this.render);
+    this.alternateTitles = [];
+
+    if (reqres.hasHandler(reqres.Requests.GetAlternateNameBySeasonNumber)) {
+      if (this.model.get('sceneSeasonNumber') > 0) {
+        this.alternateTitles = reqres.request(reqres.Requests.GetAlternateNameBySeasonNumber, this.model.get('seriesId'), this.model.get('sceneSeasonNumber'));
+      }
+
+      if (this.alternateTitles.length === 0) {
+        this.alternateTitles = reqres.request(reqres.Requests.GetAlternateNameBySeasonNumber, this.model.get('seriesId'), this.model.get('seasonNumber'));
+      }
+    }
   },
 
   templateHelpers() {
     return {
-      seriesType: this.series.get('seriesType')
+      seriesType: this.series.get('seriesType'),
+      alternateTitles: this.alternateTitles
     };
+  },
+
+  onRender() {
+    const animeWithSceneAbsoluteEpisodeNumber = this.series.get('seriesType') && this.model.get('sceneAbsoluteEpisodeNumber');
+
+    if (this.alternateTitles.length ||
+        this.model.get('sceneSeasonNumber') ||
+        this.model.get('sceneEpisodeNumber') ||
+        animeWithSceneAbsoluteEpisodeNumber) {
+      this.ui.episodeNumber.popover({
+        content: this.ui.sceneInfo.html(),
+        html: true,
+        trigger: 'hover',
+        title: 'Scene Information',
+        placement: 'right',
+        container: this.$el
+      });
+    }
   },
 
   onMonitoredClick(e) {

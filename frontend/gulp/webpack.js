@@ -79,7 +79,7 @@ var config = {
           root + '/Handlebars/Helpers/Object',
           root + '/Handlebars/Helpers/Number'
         ],
-        knownHelpers: ['if_eq', 'unless_eq']
+        knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
       }
     }]
   }
