@@ -2,13 +2,6 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var TableView = require('Table/TableView');
 var EpisodeRow = require('./EpisodeRow');
-var ToggleCell = require('Cells/EpisodeMonitoredCell');
-var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var EpisodeStatusCell = require('Cells/EpisodeStatusCell');
-var EpisodeActionsCell = require('Cells/EpisodeActionsCell');
-var EpisodeNumberCell = require('./EpisodeNumberCell');
-var EpisodeWarningCell = require('./EpisodeWarningCell');
 var CommandController = require('Commands/CommandController');
 var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
 var moment = require('moment');
@@ -64,54 +57,6 @@ module.exports = Marionette.Layout.extend({
     {
       name: 'actions',
       label: ''
-    }
-  ],
-
-  columns: [
-    {
-      name: 'monitored',
-      label: '',
-      cell: ToggleCell,
-      trueClass: 'icon-sonarr-monitored',
-      falseClass: 'icon-sonarr-unmonitored',
-      tooltip: 'Toggle monitored status',
-      sortable: false
-    },
-    {
-      name: 'episodeNumber',
-      label: '#',
-      cell: EpisodeNumberCell
-    },
-    {
-      name: 'this',
-      label: '',
-      cell: EpisodeWarningCell,
-      sortable: false,
-      className: 'episode-warning-cell'
-    },
-    {
-      name: 'this',
-      label: 'Title',
-      hideSeriesLink: true,
-      cell: EpisodeTitleCell,
-      sortable: false
-    },
-    {
-      name: 'airDateUtc',
-      label: 'Air Date',
-      cell: RelativeDateCell
-    },
-    {
-      name: 'status',
-      label: 'Status',
-      cell: EpisodeStatusCell,
-      sortable: false
-    },
-    {
-      name: 'this',
-      label: '',
-      cell: EpisodeActionsCell,
-      sortable: false
     }
   ],
 
@@ -311,7 +256,6 @@ module.exports = Marionette.Layout.extend({
   _updateEpisodeCollection() {
     this.episodeCollection.add(this.fullEpisodeCollection.bySeason(this.model.get('seasonNumber')).models, { merge: true });
 
-    var test = 1;
     this.episodeCollection.each((model) => {
       model.episodeCollection = this.episodeCollection;
     });
