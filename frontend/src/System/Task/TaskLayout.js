@@ -1,10 +1,7 @@
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var BackupCollection = require('./TaskCollection');
-var RelativeTimeCell = require('Cells/RelativeTimeCell');
-var TaskIntervalCell = require('./TaskIntervalCell');
-var ExecuteTaskCell = require('./ExecuteTaskCell');
-var NextExecutionCell = require('./NextExecutionCell');
+var TableView = require('Table/TableView');
+var TaskRow = require('./TaskRow');
+var TaskCollection = require('./TaskCollection');
 var LoadingView = require('Shared/LoadingView');
 require('Mixins/backbone.signalr.mixin');
 
@@ -15,56 +12,46 @@ module.exports = Marionette.Layout.extend({
     tasks: '#x-tasks'
   },
 
-  columns: [
+  headers: [
     {
       name: 'name',
-      label: 'Name',
-      sortable: true,
-      cell: 'string'
+      label: 'Name'
     },
     {
       name: 'interval',
-      label: 'Interval',
-      sortable: true,
-      cell: TaskIntervalCell
+      label: 'Interval'
     },
     {
       name: 'lastExecution',
-      label: 'Last Execution',
-      sortable: true,
-      cell: RelativeTimeCell
+      label: 'Last Execution'
     },
     {
       name: 'nextExecution',
-      label: 'Next Execution',
-      sortable: true,
-      cell: NextExecutionCell
+      label: 'Next Execution'
     },
     {
-      name: 'this',
-      label: '',
-      sortable: false,
-      cell: ExecuteTaskCell
+      name: 'actions',
+      label: ''
     }
   ],
 
   initialize() {
-    this.taskCollection = new BackupCollection();
+    this.taskCollection = new TaskCollection();
 
-    this.listenTo(this.taskCollection, 'sync', this._showTasks);
     this.taskCollection.bindSignalR();
   },
 
   onRender() {
     this.tasks.show(new LoadingView());
 
-    this.taskCollection.fetch();
+    this.taskCollection.fetch().done(() => this._showTasks());
   },
 
   _showTasks() {
-    this.tasks.show(new Backgrid.Grid({
-      columns: this.columns,
+    this.tasks.show(new TableView({
+      headers: this.headers,
       collection: this.taskCollection,
+      itemView: TaskRow,
       className: 'table table-hover'
     }));
   }

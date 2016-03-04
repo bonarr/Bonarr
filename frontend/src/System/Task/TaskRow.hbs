@@ -1,0 +1,23 @@
+<td>{{name}}</td>
+<td class="interval">
+  {{#if_eq interval compare=0}}
+    disabled
+  {{else}}
+    {{duration}}
+  {{/if_eq}}
+</td>
+<td class="last-execution">{{relativeTime lastExecution}}</td>
+<td class="next-execution">
+  {{#if_eq interval compare=0}}
+    -
+  {{else}}
+    {{#if executeNow}}
+      now
+    {{else}}
+      {{relativeTime nextExecution}}
+    {{/if}}
+  {{/if_eq}}
+</td>
+<td class="actions task-actions">
+  <i class="icon-sonarr-refresh icon-can-spin x-execute" title="Execute {{name}}"></i>
+</td>
