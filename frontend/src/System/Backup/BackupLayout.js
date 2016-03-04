@@ -1,10 +1,8 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('Table/TableView');
+var BackupRow = require('./BackupRow');
 var BackupCollection = require('./BackupCollection');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var BackupFilenameCell = require('./BackupFilenameCell');
-var BackupTypeCell = require('./BackupTypeCell');
 var EmptyView = require('./BackupEmptyView');
 var LoadingView = require('Shared/LoadingView');
 
@@ -15,24 +13,18 @@ module.exports = Marionette.Layout.extend({
     backups: '#x-backups'
   },
 
-  columns: [
+  headers: [
     {
       name: 'type',
-      label: '',
-      sortable: false,
-      cell: BackupTypeCell
+      label: ''
     },
     {
-      name: 'this',
-      label: 'Name',
-      sortable: false,
-      cell: BackupFilenameCell
+      name: 'name',
+      label: 'Name'
     },
     {
       name: 'time',
-      label: 'Time',
-      sortable: false,
-      cell: RelativeDateCell
+      label: 'Time'
     }
   ],
 
@@ -70,9 +62,10 @@ module.exports = Marionette.Layout.extend({
     if (this.backupCollection.length === 0) {
       this.backups.show(new EmptyView());
     } else {
-      this.backups.show(new Backgrid.Grid({
-        columns: this.columns,
+      this.backups.show(new TableView({
         collection: this.backupCollection,
+        itemView: BackupRow,
+        headers: this.headers,
         className: 'table table-hover'
       }));
     }

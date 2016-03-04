@@ -1,0 +1,17 @@
+<td class="backup-type">
+  {{#if_eq type compare="manual"}}
+    <i class="icon-sonarr-backup-manual" title="Manual"></i>
+  {{/if_eq}}
+
+  {{#if_eq type compare="update"}}
+    <i class="icon-sonarr-backup-update" title="Before update"></i>
+  {{/if_eq}}
+
+  {{#if_eq type compare="scheduled"}}
+    <i class="icon-sonarr-backup-scheduled" title="Scheduled"></i>
+  {{/if_eq}}
+</td>
+<td>
+  <a href="{{UrlBase}}/backup/{{type}}/{{name}}" class="no-router">{{name}}</a>
+</td>
+<td class="relative-date">{{relativeDate time}}</td>
