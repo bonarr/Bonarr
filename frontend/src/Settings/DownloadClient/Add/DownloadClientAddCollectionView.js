@@ -1,6 +1,7 @@
 var ThingyAddCollectionView = require('../../ThingyAddCollectionView');
 var ThingyHeaderGroupView = require('../../ThingyHeaderGroupView');
 var AddItemView = require('./DownloadClientAddItemView');
+//var tpl = require('./DownloadClientAddCollectionView');
 
 module.exports = ThingyAddCollectionView.extend({
   itemView: ThingyHeaderGroupView.extend({ itemView: AddItemView }),

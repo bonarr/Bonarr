@@ -3,6 +3,7 @@ var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
 var EditView = require('../Edit/DownloadClientEditView');
+//var tpl = require('./DownloadClientAddItemView');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Settings/DownloadClient/Add/DownloadClientAddItemViewTemplate',
