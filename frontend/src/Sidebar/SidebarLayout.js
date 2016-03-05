@@ -60,11 +60,8 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow() {
-    this.healthView = new HealthView();
-    this.queueView = new QueueView();
-
-    this.health.show(this.healthView);
-    this.queue.show(this.queueView);
+    this.health.show(new HealthView());
+    this.queue.show(new QueueView());
 
     this._setActiveBasedOnUri();
 
