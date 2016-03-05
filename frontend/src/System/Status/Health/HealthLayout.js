@@ -1,8 +1,7 @@
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('Table/TableView');
+var HealthRow = require('./HealthRow');
 var HealthCollection = require('../../../Health/HealthCollection');
-var HealthCell = require('./HealthCell');
-var HealthWikiCell = require('./HealthWikiCell');
 var HealthOkView = require('./HealthOkView');
 
 module.exports = Marionette.Layout.extend({
@@ -12,24 +11,18 @@ module.exports = Marionette.Layout.extend({
     grid: '#x-health-grid'
   },
 
-  columns: [
+  headers: [
     {
       name: 'type',
-      label: '',
-      cell: HealthCell,
-      sortable: false
+      label: ''
     },
     {
       name: 'message',
-      label: 'Message',
-      cell: 'string',
-      sortable: false
+      label: 'Message'
     },
     {
-      name: 'wikiUrl',
-      label: '',
-      cell: HealthWikiCell,
-      sortable: false
+      name: 'link',
+      label: 'Link'
     }
   ],
 
@@ -47,11 +40,11 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showTable() {
-    this.grid.show(new Backgrid.Grid({
-      row: Backgrid.Row,
-      columns: this.columns,
+    this.grid.show(new TableView({
+      headers: this.headers,
       collection: HealthCollection,
-      className: 'table table-hover'
+      className: 'table table-hover',
+      itemView: HealthRow
     }));
   }
 });

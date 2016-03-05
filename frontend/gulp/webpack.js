@@ -77,7 +77,8 @@ var config = {
           root + '/Handlebars/Helpers/Rating',
           root + '/Handlebars/Helpers/DateTime',
           root + '/Handlebars/Helpers/Object',
-          root + '/Handlebars/Helpers/Number'
+          root + '/Handlebars/Helpers/Number',
+          root + '/Handlebars/Helpers/String'
         ],
         knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
       }
