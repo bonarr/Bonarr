@@ -18,7 +18,10 @@ const EpisodeRow = Marionette.ItemView.extend({
 
   events: {
     'click .x-episode-monitored': 'onMonitoredClick',
-    'click .x-episode-title a': 'onTitleClick'
+    'click .x-episode-title a': 'onTitleClick',
+    'click .x-quick-search': 'onQuickSearchClick',
+    'click .x-interactive-search': 'onInteractiveSearchClick',
+    'click .x-interactive-search a': 'onInteractiveSearchClick'
   },
 
   initialize(options = {}) {
@@ -79,6 +82,23 @@ const EpisodeRow = Marionette.ItemView.extend({
     vent.trigger(vent.Commands.ShowEpisodeDetails, {
       episode: this.model,
       hideSeriesLink: true
+    });
+  },
+
+  onQuickSearchClick() {
+    CommandController.execute('episodeSearch', {
+      name: 'episodeSearch',
+      episodeIds: [this.model.get('id')]
+    });
+  },
+
+  onInteractiveSearchClick(e) {
+    e.preventDefault();
+
+    vent.trigger(vent.Commands.ShowEpisodeDetails, {
+      episode: this.model,
+      hideSeriesLink: true,
+      openingTab: 'search'
     });
   }
 

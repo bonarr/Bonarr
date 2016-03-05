@@ -124,7 +124,7 @@ module.exports = Marionette.Layout.extend({
         },
         {
           tooltip: 'Manual Import',
-          icon: 'icon-sonarr-search-manual',
+          icon: 'icon-sonarr-search-interactive',
           callback: this._manualImport
         }
       ]
