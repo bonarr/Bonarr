@@ -59,8 +59,8 @@ module.exports = function() {
 
   $.fn.addFormError = function(error) {
     var errorMessage = this.formatErrorMessage(error);
+    var target = this.find('.modal-body, .fullscreen-modal-body');
 
-    var target = this.find('.modal-body');
     if (!target.length) {
       target = this;
     }
