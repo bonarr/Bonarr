@@ -4,6 +4,7 @@ var QueueCollection = require('./QueueCollection');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
+  className: 'label',
 
   initialize() {
     this.listenTo(QueueCollection, 'sync', this.render);
@@ -34,7 +35,9 @@ module.exports = Marionette.ItemView.extend({
       label = 'label-warning';
     }
 
-    this.$el.html('<span class="label {0}">{1}</span>'.format(label, count));
+    this.$el.addClass(label);
+    this.$el.text(count);
+
     return this;
   }
 });

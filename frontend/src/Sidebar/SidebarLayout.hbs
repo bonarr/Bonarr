@@ -7,7 +7,7 @@
           <span class="title">{{title}}</span>
 
           {{#if notification}}
-            <span class="pull-right {{notification}} x-{{notification}}"></span>
+            <span class="pull-right {{notification}} x-{{notification}} {{#notificationHideActive}}hide-active{{/notificationHideActive}}"></span>
           {{/if}}
         </a>
 
@@ -16,7 +16,11 @@
             {{#each items}}
               <li class="x-nav-child">
                 <a href="{{UrlBase}}{{href}}">
-                  <span>{{title}}</span>
+                  <span class="title">{{title}}</span>
+
+                  {{#if notification}}
+                    <span class="pull-right {{notification}} x-{{notification}}"></span>
+                  {{/if}}
                 </a>
               </li>
             {{/each}}

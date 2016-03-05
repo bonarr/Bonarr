@@ -79,6 +79,10 @@
         > a {
           background-color: @sidebar-item-bg-active;
           color: @sidebar-item-color-active;
+
+          > .hide-active {
+            display: none;
+          }
         }
 
         > a > em {
@@ -224,6 +228,10 @@
       .nav,
       > li > a > .title {
         display: none !important;
+      }
+
+      > li.active > a > .hide-active {
+        display: inline-block;
       }
 
       > li {

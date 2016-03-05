@@ -31,10 +31,13 @@ module.exports = [
     title: 'Activity',
     icon: 'activity',
     href: '/activity/history',
+    notification: 'queue',
+    notificationHideActive: true,
     items: [
       {
         title: 'Queue',
-        href: '/activity/queue'
+        href: '/activity/queue',
+        notification: 'queue'
       },
       {
         title: 'Blacklist',
