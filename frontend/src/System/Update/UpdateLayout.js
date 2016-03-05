@@ -1,5 +1,4 @@
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
 var UpdateCollection = require('./UpdateCollection');
 var UpdateCollectionView = require('./UpdateCollectionView');
 var LoadingView = require('Shared/LoadingView');
