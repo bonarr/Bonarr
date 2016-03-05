@@ -98,6 +98,9 @@ module.exports = Marionette.Layout.extend({
       return;
     }
 
+    this.ui.listItems.removeClass('open');
+    $navRoot.addClass('open');
+
     event.stopPropagation();
 
     var marginTop = parseInt(this.$asideInner.css('padding-top'), 0) + parseInt(this.$aside.css('padding-top'), 0);
@@ -110,6 +113,7 @@ module.exports = Marionette.Layout.extend({
 
     $subNavClone.on('mouseleave click', _.bind(function() {
       $subNavClone.remove();
+      $navRoot.removeClass('open');
       this._closeSidebar($subNavClone);
     }, this));
   },
