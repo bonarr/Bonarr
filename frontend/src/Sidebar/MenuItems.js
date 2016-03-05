@@ -96,6 +96,7 @@ module.exports = [
     title: 'System',
     icon: 'system',
     href: '/system/status',
+    notification: 'health',
     items: [
       {
         title: 'Tasks',

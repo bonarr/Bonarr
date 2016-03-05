@@ -13,8 +13,8 @@ module.exports = Marionette.Layout.extend({
   className: 'aside-inner',
 
   regions: {
-    health: '#x-health',
-    queue: '#x-queue-count'
+    health: '.x-health',
+    queue: '.x-queue'
   },
 
   ui: {

@@ -4,6 +4,7 @@ var HealthCollection = require('./HealthCollection');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
+  className: 'label',
 
   initialize() {
     this.listenTo(HealthCollection, 'sync', this._healthSync);
@@ -27,7 +28,9 @@ module.exports = Marionette.ItemView.extend({
       label = 'label-danger';
     }
 
-    this.$el.html('<span class="label {0}">{1}</span>'.format(label, count));
+    this.$el.addClass(label);
+    this.$el.text(count);
+
     return this;
   },
 
