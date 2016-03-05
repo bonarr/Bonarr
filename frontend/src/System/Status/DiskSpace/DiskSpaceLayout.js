@@ -1,10 +1,9 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
+var TableView = require('Table/TableView');
+var DiskSpaceRow = require('./DiskSpaceRow');
 var DiskSpaceCollection = require('./DiskSpaceCollection');
 var LoadingView = require('Shared/LoadingView');
-var DiskSpacePathCell = require('./DiskSpacePathCell');
-var FileSizeCell = require('Cells/FileSizeCell');
 
 module.exports = Marionette.Layout.extend({
   template: 'System/Status/DiskSpace/DiskSpaceLayoutTemplate',
@@ -13,24 +12,18 @@ module.exports = Marionette.Layout.extend({
     grid: '#x-grid'
   },
 
-  columns: [
+  headers: [
     {
       name: 'path',
-      label: 'Location',
-      cell: DiskSpacePathCell,
-      sortable: false
+      label: 'Location'
     },
     {
       name: 'freeSpace',
-      label: 'Free Space',
-      cell: FileSizeCell,
-      sortable: false
+      label: 'Free Space'
     },
     {
       name: 'totalSpace',
-      label: 'Total Space',
-      cell: FileSizeCell,
-      sortable: false
+      label: 'Total Space'
     }
   ],
 
@@ -48,11 +41,11 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showTable() {
-    this.grid.show(new Backgrid.Grid({
-      row: Backgrid.Row,
-      columns: this.columns,
+    this.grid.show(new TableView({
+      headers: this.headers,
       collection: this.collection,
-      className: 'table table-hover'
+      className: 'table table-hover',
+      itemView: DiskSpaceRow
     }));
   }
 });
