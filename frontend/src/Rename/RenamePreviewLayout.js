@@ -4,20 +4,20 @@ var Marionette = require('marionette');
 var RenamePreviewCollection = require('./RenamePreviewCollection');
 var RenamePreviewCollectionView = require('./RenamePreviewCollectionView');
 var EmptyCollectionView = require('./RenamePreviewEmptyCollectionView');
-var RenamePreviewFormatView = require('./RenamePreviewFormatView');
+var RenamePreviewInfoView = require('./RenamePreviewInfoView');
 var LoadingView = require('Shared/LoadingView');
 var CommandController = require('Commands/CommandController');
+var NamingModel = require('../Settings/MediaManagement/Naming/NamingModel');
 
 module.exports = Marionette.Layout.extend({
   template: 'Rename/RenamePreviewLayout',
 
   regions: {
     renamePreviews: '#rename-previews',
-    formatRegion: '.x-format-region'
+    infoRegion: '.x-info-region'
   },
 
   ui: {
-    pathInfo: '.x-path-info',
     renameAll: '.x-rename-all',
     checkboxIcon: '.x-rename-all-button i'
   },
@@ -36,27 +36,44 @@ module.exports = Marionette.Layout.extend({
     viewOptions.seasonNumber = this.seasonNumber;
 
     this.collection = new RenamePreviewCollection(viewOptions);
-    this.listenTo(this.collection, 'sync', this._showPreviews);
-    this.listenTo(this.collection, 'rename:select', this._itemRenameChanged);
+    this.naming = new NamingModel();
 
-    this.collection.fetch();
+    this.listenTo(this.collection, 'rename:select', this._itemRenameChanged);
   },
 
   onRender() {
     this.renamePreviews.show(new LoadingView());
-    this.formatRegion.show(new RenamePreviewFormatView({ model: this.model }));
+
+    var collectionPromise = this.collection.fetch();
+    var namingPromise = this.naming.fetch();
+
+    Marionette.$.when(collectionPromise, namingPromise).done(() => {
+      if (this.isClosed) {
+        return;
+      }
+
+      this._showPreviews();
+      this._showInfo();
+    });
   },
 
   _showPreviews() {
     if (this.collection.length === 0) {
-      this.ui.pathInfo.hide();
-      this.renamePreviews.show(new EmptyCollectionView());
+      this.renamePreviews.show(new EmptyCollectionView({ naming: this.naming }));
       return;
     }
 
-    this.ui.pathInfo.show();
     this.collection.invoke('set', { rename: true });
     this.renamePreviews.show(new RenamePreviewCollectionView({ collection: this.collection }));
+  },
+
+  _showInfo() {
+    var infoView = new RenamePreviewInfoView({
+      model: this.model,
+      naming: this.naming,
+      renameCollection: this.collection
+    });
+    this.infoRegion.show(infoView);
   },
 
   _organizeFiles() {
