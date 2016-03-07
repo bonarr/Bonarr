@@ -18,7 +18,7 @@ function TableRowMixin({ prototype: base }) {
 
     initialize(options = {}) {
       this.selectable = options.selectable;
-      this.listenTo(this.model, 'selected', this._tablerow_onModelSelected);
+      this.listenTo(this.model, 'selected', this._tablerow_refreshCheckbox);
 
       if (superinitialize) {
         superinitialize.apply(this, arguments);
@@ -29,11 +29,12 @@ function TableRowMixin({ prototype: base }) {
       e.preventDefault();
       const checked = !!this.ui.selectCheckbox.prop('checked');
 
-      this.model.selected = checked;
-      this.model.trigger('selected', this.model, checked);
+      this.model.toggleSelect(checked);
+      this._tablerow_refreshCheckbox();
     },
 
-    _tablerow_onModelSelected(model, selected) {
+    _tablerow_refreshCheckbox() {
+      const selected = this.model.selected;
       this.$el.toggleClass('selected', selected);
       this.ui.selectCheckbox.prop('checked', selected);
     }

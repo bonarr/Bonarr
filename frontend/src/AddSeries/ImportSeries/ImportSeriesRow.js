@@ -59,7 +59,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
   },
 
   onSelectedSeriesChanged() {
-    const selectedSeries = this.model.get('selectedSeries');
+    const selectedSeries = this.model.isSelectable();
 
     this.ui.seriesSelectWarning.toggle(!selectedSeries);
     this.ui.profileSelect.prop('disabled', !selectedSeries);

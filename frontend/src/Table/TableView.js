@@ -13,7 +13,7 @@ const TableView = Marionette.CompositeView.extend({
   },
 
   events: {
-    'change .select-all-checkbox': 'onSelectChange'
+    'click .select-all-checkbox': 'onSelectAllClick'
   },
 
   initialize(options = {}) {
@@ -27,7 +27,7 @@ const TableView = Marionette.CompositeView.extend({
     this.listenTo(this.collection, 'add remove update', this.onCollectionUpdate);
 
     if (this.selectable) {
-      this.listenTo(this.collection || this.collection.fullCollection, 'selected', this._onModelSelected);
+      this.listenTo(this.collection || this.collection.fullCollection, 'selected', _.debounce(this._onModelSelected, 10));
     }
   },
 
@@ -38,7 +38,8 @@ const TableView = Marionette.CompositeView.extend({
     };
   },
 
-  onSelectChange() {
+  onSelectAllClick(e) {
+    e.preventDefault();
     const checked = this.ui.selectAllCheckbox.prop('checked');
     this.collection.toggleAll(checked);
   },
@@ -49,7 +50,11 @@ const TableView = Marionette.CompositeView.extend({
   },
 
   _onModelSelected() {
-    this.ui.selectAllCheckbox.prop('checked', this.collection.allSelected());
+    const anySelected = this.collection.anySelected();
+    const allSelected = this.collection.allSelected();
+
+    this.ui.selectAllCheckbox.prop('checked', anySelected);
+    this.ui.selectAllCheckbox.prop('indeterminate', anySelected && !allSelected);
   }
 });
 

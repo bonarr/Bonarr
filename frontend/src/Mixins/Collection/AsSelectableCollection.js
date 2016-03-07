@@ -1,4 +1,5 @@
-var _ = require('underscore');
+const _ = require('underscore');
+const AsSelectableModel = require('./AsSelectableModel');
 
 function AsSelectableCollection() {
 
@@ -11,11 +12,15 @@ function AsSelectableCollection() {
   };
 
   this.prototype.getSelected = function () {
-    return _.where(this.models, { selected: true });
+    return _.where(this.models, {
+      selected: true
+    });
   };
 
   this.prototype.getNotSelected = function () {
-    return _.where(this.models, { selected: false });
+    return _.where(this.models, {
+      selected: false
+    });
   };
 
   this.prototype.selectAll = function () {
@@ -28,10 +33,11 @@ function AsSelectableCollection() {
 
   this.prototype.toggleAll = function (selected) {
     this.models.forEach((model) => {
-      model.selected = !!selected;
-      model.trigger('selected', model, model.selected);
+      model.toggleSelect(selected);
     });
   };
+
+  this.prototype.model = AsSelectableModel.call(this.prototype.model);
 
   return this;
 }
