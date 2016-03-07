@@ -72,16 +72,17 @@ const ImportSeriesRow = Marionette.Layout.extend({
   },
 
   onSelectedSeriesChanged() {
-    const selectedSeries = this.model.isSelectable();
+    const selectedSeries = this.model.get('selectedSeries');
+    const isSelectable = this.model.isSelectable();
 
-    this.ui.seriesSelectWarning.toggle(!selectedSeries);
-    this.ui.profileSelect.prop('disabled', !selectedSeries);
-    this.ui.selectCheckbox.prop('disabled', !selectedSeries);
+    this.ui.seriesSelectWarning.toggle(!isSelectable);
+    this.ui.profileSelect.prop('disabled', !isSelectable);
+    this.ui.selectCheckbox.prop('disabled', !isSelectable);
 
     const title = selectedSeries ? selectedSeries.get('title') : 'No match found!';
     this.ui.seriesSelectTitle.text(title);
 
-    if (selectedSeries) {
+    if (isSelectable) {
       selectedSeries.set('path', this.model.get('path'));
       this._assignProfile();
     }

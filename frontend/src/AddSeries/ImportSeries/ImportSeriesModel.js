@@ -2,7 +2,8 @@ const Backbone = require('backbone');
 
 const ImportSeriesModel = Backbone.Model.extend({
   isSelectable() {
-    return this.get('selectedSeries');
+    const selectedSeries = this.get('selectedSeries');
+    return selectedSeries && !selectedSeries.isExisting();
   }
 });
 

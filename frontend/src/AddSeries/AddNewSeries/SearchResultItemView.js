@@ -37,11 +37,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
   },
 
   onClick() {
-    var existingSeries = SeriesCollection.findWhere({
-      tvdbId: this.model.get('tvdbId')
-    });
-
-    if (!existingSeries) {
+    if (!this.model.isExisting()) {
       vent.trigger(vent.Commands.OpenFullscreenModal, new AddSeriesModal({
         model: this.model
       }));
