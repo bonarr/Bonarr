@@ -22,7 +22,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   events: {
     'click .x-series-dropdown': 'onSeriesDropdownClick',
-    'change .x-profile': 'onProfileSelected'
+    'change .x-profile': '_assignProfile'
   },
 
   initialize(options) {
@@ -58,6 +58,19 @@ const ImportSeriesRow = Marionette.Layout.extend({
     };
   },
 
+  _assignProfile() {
+    const series = this.model.get('selectedSeries');
+    const profileId = parseInt(this.ui.profileSelect.val(), 10);
+
+    if (series && profileId) {
+      series.set('profileId', profileId);
+    }
+  },
+
+  onRender() {
+    this._assignProfile();
+  },
+
   onSelectedSeriesChanged() {
     const selectedSeries = this.model.isSelectable();
 
@@ -67,12 +80,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
     const title = selectedSeries ? selectedSeries.get('title') : 'No match found!';
     this.ui.seriesSelectTitle.text(title);
-  },
 
-  onProfileSelected(e) {
-    const series = this.model.get('selectedSeries');
-    const profileId = parseInt(e.target.value, 10);
-    series.set('profileId', profileId);
+    if (selectedSeries) {
+      selectedSeries.set('path', this.model.get('path'));
+      this._assignProfile();
+    }
   },
 
   onSeriesDropdownClick() {

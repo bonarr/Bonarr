@@ -27,8 +27,17 @@ const TableView = Marionette.CompositeView.extend({
     this.listenTo(this.collection, 'add remove update', this.onCollectionUpdate);
 
     if (this.selectable) {
-      this.listenTo(this.collection || this.collection.fullCollection, 'selected', _.debounce(this._onModelSelected, 10));
+      this.listenTo(this.collection || this.collection.fullCollection, 'selected', _.debounce(this.updateSelectAllState, 10));
+      this.listenTo(this, 'render', this.updateSelectAllState);
     }
+  },
+
+  updateSelectAllState() {
+    const anySelected = this.collection.anySelected();
+    const allSelected = this.collection.allSelected();
+
+    this.ui.selectAllCheckbox.prop('checked', anySelected);
+    this.ui.selectAllCheckbox.prop('indeterminate', anySelected && !allSelected);
   },
 
   serializeData() {
@@ -45,16 +54,7 @@ const TableView = Marionette.CompositeView.extend({
   },
 
   onCollectionUpdate() {
-    var test = 1;
     this.render();
-  },
-
-  _onModelSelected() {
-    const anySelected = this.collection.anySelected();
-    const allSelected = this.collection.allSelected();
-
-    this.ui.selectAllCheckbox.prop('checked', anySelected);
-    this.ui.selectAllCheckbox.prop('indeterminate', anySelected && !allSelected);
   }
 });
 
