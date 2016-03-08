@@ -8,7 +8,7 @@ var tpl = require('./AddNewSeriesLayout.hbs');
 var ErrorView = require('./ErrorView');
 var EmptyView = require('./EmptyView');
 
-module.exports = Marionette.Layout.extend({
+const AddNewSeriesLayout = Marionette.Layout.extend({
   id: 'add-new-series',
 
   template: tpl,
@@ -32,7 +32,12 @@ module.exports = Marionette.Layout.extend({
     });
 
     this.collection = new SeriesSearchCollection();
-    this.listenTo(this.collection, 'sync reset', this.onCollectionSync);
+
+    this.listenTo(this.collection, {
+      'sync reset': this.onCollectionSync,
+      'request': this.onCollectionRequest
+    });
+
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
   },
 
@@ -42,23 +47,11 @@ module.exports = Marionette.Layout.extend({
     }
 
     const term = this.ui.seriesSearch.val();
-    if (!term || term === this.collection.term) {
-      return;
+    if (term) {
+      this.collection.search(term);
+    } else {
+      this.collection.abort();
     }
-
-    this.$el.addClass('state-loading');
-
-    // this.collection.reset();
-
-    // this.searchResult.show(new LoadingView());
-    this.currentSearchPromise = this.collection.search(term);
-
-    this.currentSearchPromise.fail(_.bind(this.onError, this));
-    this.currentSearchPromise.always(() => {
-      this.$el.removeClass('state-loading');
-    });
-
-    return this.currentSearchPromise;
   },
 
   onShow() {
@@ -72,14 +65,27 @@ module.exports = Marionette.Layout.extend({
     this.collection.abort();
   },
 
-  onSearchKeyUp() {
+  onSearchKeyUp(e) {
     this.collection.abort();
-    var term = this.ui.seriesSearch.val();
+    const term = this.ui.seriesSearch.val().trim();
+
+    // force search if key is Enter
+    if (e.keyCode === 13) {
+      this.term = term;
+      this.search();
+      return;
+    }
+
+    if (this.term === term) {
+      return;
+    }
+
+    this.term = term;
 
     if (term) {
       this.debouncedSearch();
     } else {
-      this.collection.term = '';
+      this.collection.abort();
       this.collection.reset();
     }
   },
@@ -101,19 +107,27 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  onError(xhr, status) {
-    if (this.isClosed) {
-      return;
-    }
+  onCollectionRequest(collection, xhr) {
+    this.$el.addClass('state-loading');
+    xhr.error(() => {
+      if (this.isClosed) {
+        return;
+      }
+      if (status === 'abort') {
+        this.searchResult.close();
+      } else {
+        this.searchResult.show(new ErrorView({
+          term: this.collection.term,
+          xhr: xhr
+        }));
+        this.collection.term = '';
+      }
+    });
 
-    if (status === 'abort') {
-      this.searchResult.close();
-    } else {
-      this.searchResult.show(new ErrorView({
-        term: this.collection.term,
-        xhr: xhr
-      }));
-      this.collection.term = '';
-    }
+    xhr.always(() => {
+      this.$el.removeClass('state-loading');
+    });
   }
 });
+
+module.exports = AddNewSeriesLayout;

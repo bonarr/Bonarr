@@ -17,13 +17,17 @@ const ImportSeriesRow = Marionette.Layout.extend({
   ui: {
     seriesSelectWarning: '.x-series-select-warning',
     seriesSelectTitle: '.x-series-select-title',
-    profileSelect: '.x-profile'
+    profileSelect: '.x-profile',
+    monitorSelect: '.x-monitor'
   },
 
   events: {
     'click .x-series-dropdown': 'onSeriesDropdownClick',
-    'change .x-profile': '_assignProfile'
+    'change .x-profile': '_assignProfile',
+    'change .x-monitor': '_assignMonitor'
   },
+
+
 
   initialize(options) {
     const queue = options.taskQueue;
@@ -42,6 +46,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
       const selectedSeries = this.series.at(0);
       if (selectedSeries) {
         this.model.set('selectedSeries', selectedSeries);
+        this.model.select();
       } else {
         this.onSelectedSeriesChanged();
       }
@@ -62,8 +67,23 @@ const ImportSeriesRow = Marionette.Layout.extend({
     const series = this.model.get('selectedSeries');
     const profileId = parseInt(this.ui.profileSelect.val(), 10);
 
+    this.model.set('profileId', profileId);
+
     if (series && profileId) {
       series.set('profileId', profileId);
+    }
+  },
+
+  _assignMonitor() {
+    const series = this.model.get('selectedSeries');
+    const monitor = this.ui.monitorSelect.val();
+
+    this.model.set('monitor', monitor);
+
+    if (series && monitor) {
+      series.setAddOptions({
+        monitor
+      });
     }
   },
 
@@ -76,10 +96,18 @@ const ImportSeriesRow = Marionette.Layout.extend({
     const isSelectable = this.model.isSelectable();
 
     this.ui.seriesSelectWarning.toggle(!isSelectable);
-    this.ui.profileSelect.prop('disabled', !isSelectable);
+    // this.ui.profileSelect.prop('disabled', !isSelectable);
     this.ui.selectCheckbox.prop('disabled', !isSelectable);
 
-    const title = selectedSeries ? selectedSeries.get('title') : 'No match found!';
+    let title = 'No match found!';
+
+    if (selectedSeries) {
+      title = selectedSeries.get('title');
+      if (selectedSeries.isExisting()) {
+        title += ' (Existing)';
+      }
+    }
+
     this.ui.seriesSelectTitle.text(title);
 
     if (isSelectable) {

@@ -260,7 +260,7 @@ module.exports = Marionette.Layout.extend({
       episodes += model.get('episodeCount');
       episodeFiles += model.get('episodeFileCount');
 
-      if (model.get('status').toLowerCase() === 'ended') {
+      if (model.get('status') === 'ended') {
         ended++;
       } else {
         continuing++;

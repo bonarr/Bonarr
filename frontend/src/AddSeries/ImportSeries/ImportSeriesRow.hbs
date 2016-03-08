@@ -4,6 +4,9 @@
 <td class="folder-name-col">
   <i class="icon-sonarr-folder"></i> {{name}}
 </td>
+<td class="monitor-col">
+  {{> ../MonitorSelectionPartial.hbs}}
+</td>
 <td class="profile-col">
   {{>../../Profile/ProfileSelectionPartial.hbs profiles}}
 </td>
@@ -21,6 +24,8 @@
       </button>
       <div class="suggestions-region">
         </ul>
+
+
       </div>
   {{/if}}
 </td>

@@ -17,6 +17,9 @@ const EmptyView = Marionette.Layout.extend({
     name: 'name',
     label: 'Folder'
   }, {
+    name: 'monitor',
+    label: 'Monitor'
+  }, {
     name: 'profile',
     label: 'Profile'
   }, {
@@ -33,10 +36,10 @@ const EmptyView = Marionette.Layout.extend({
     this.folderPromise = $.Deferred();
 
     rootFolderCollection.fetch().
-      done(() => {
-        const rootFolder = rootFolderCollection.get(rootFolderId);
-        rootFolder.fetch().done(() => this.folderPromise.resolve(rootFolder));
-      });
+    done(() => {
+      const rootFolder = rootFolderCollection.get(rootFolderId);
+      rootFolder.fetch().done(() => this.folderPromise.resolve(rootFolder));
+    });
   },
 
   onShow() {
@@ -59,7 +62,9 @@ const EmptyView = Marionette.Layout.extend({
       });
 
       this.table.show(tableView);
-      vent.trigger(vent.Commands.OpenFooter, new ImportSeriesFooterView({ collection }));
+      vent.trigger(vent.Commands.OpenFooter, new ImportSeriesFooterView({
+        collection
+      }));
     });
   }
 });
