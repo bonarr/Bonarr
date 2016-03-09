@@ -2,13 +2,14 @@ var Marionette = require('marionette');
 var $ = require('jquery');
 var _ = require('underscore');
 var AppLayout = require('AppLayout');
-var HealthView = require('../Health/HealthView');
+var HealthView = require('Health/HealthView');
 var QueueView = require('Activity/Queue/QueueView');
-var ResolutionUtility = require('../Utilities/ResolutionUtility');
-var items = require('./MenuItems');
+var ResolutionUtility = require('Utilities/ResolutionUtility');
+var menuItems = require('./menuItems');
+var tpl = require('./SidebarLayout.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Sidebar/SidebarLayout',
+  template: tpl,
 
   className: 'aside-inner',
 
@@ -25,26 +26,24 @@ module.exports = Marionette.Layout.extend({
   },
 
   events: {
-    'click a': '_onClick',
-    'mouseenter .x-nav-root': '_onRootHover'
+    'click a': 'onClick',
+    'mouseenter .x-nav-root': 'onRootHover'
   },
 
   initialize() {
-    var self = this;
-
-    $('[data-toggle-state]').on('click', function(e) {
+    $('[data-toggle-state]').on('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      var $target = $(this);
-      var toggleState = $target.data('toggleState');
+      const $target = $(e.target);
+      const toggleState = $target.data('toggleState');
 
       if (toggleState) {
-        self.$body.toggleClass(toggleState);
+        this.$body.toggleClass(toggleState);
 
         // Remove the floating navbar and the aside-collapsed class
         if (toggleState === 'aside-toggled') {
-          self.$aside.children('.nav-floating').remove();
-          self.$body.removeClass('aside-collapsed');
+          this.$aside.children('.nav-floating').remove();
+          this.$body.removeClass('aside-collapsed');
         }
       }
       // some elements may need this when toggled class change the content size
@@ -52,11 +51,11 @@ module.exports = Marionette.Layout.extend({
       $(window).resize();
     });
 
-    this.listenTo(AppLayout.mainRegion, 'show', this._onMainRegionShow);
+    this.listenTo(AppLayout.mainRegion, 'show', this.onMainRegionShow);
   },
 
   serializeData() {
-    return items;
+    return menuItems.menu;
   },
 
   onShow() {
@@ -70,27 +69,27 @@ module.exports = Marionette.Layout.extend({
     this.$asideInner = this.$el;
   },
 
-  _onMainRegionShow() {
+  onMainRegionShow() {
     this._setActiveBasedOnUri();
   },
 
-  _onClick(event) {
+  onClick(event) {
     event.preventDefault();
-    var $target = $(event.target);
-    var $li = $target.closest('li');
+    const $target = $(event.target);
+    const $li = $target.closest('li');
     this._closeSidebar($li);
     this._setActive($li);
   },
 
-  _onRootHover(event) {
+  onRootHover(event) {
     this._removeFloatingNav();
 
     if (!this.$body.hasClass('aside-collapsed')) {
       return;
     }
 
-    var $navRoot = $(event.target).closest('.x-nav-root');
-    var $subNav = $navRoot.children('.x-nav-sub');
+    const $navRoot = $(event.target).closest('.x-nav-root');
+    const $subNav = $navRoot.children('.x-nav-sub');
     if (!$subNav.length) {
       return;
     }
@@ -100,31 +99,32 @@ module.exports = Marionette.Layout.extend({
 
     event.stopPropagation();
 
-    var marginTop = parseInt(this.$asideInner.css('padding-top'), 0) + parseInt(this.$aside.css('padding-top'), 0);
-    var itemTop = $navRoot.position().top + marginTop - this.ui.sidebar.scrollTop();
+    const marginTop = parseInt(this.$asideInner.css('padding-top'), 0) + parseInt(this.$aside.css('padding-top'), 0);
+    const itemTop = $navRoot.position().top + marginTop - this.ui.sidebar.scrollTop();
 
-    var $subNavClone = $subNav.clone().addClass('nav-floating').css({
+    const $subNavClone = $subNav.clone().addClass('nav-floating').css({
       position: 'fixed',
       top: itemTop
     }).appendTo(this.$aside);
 
-    $subNavClone.on('mouseleave click', _.bind(function() {
+    $subNavClone.on('mouseleave click', () => {
       $subNavClone.remove();
       $navRoot.removeClass('open');
       this._closeSidebar($subNavClone);
-    }, this));
+    });
   },
 
   _setActiveBasedOnUri() {
-    var location = window.location.pathname;
-    var $href = this.$('a[href="' + location + '"]');
-    var $li = $href.closest('li');
+    const location = window.location.pathname;
+    const menuItem = menuItems.findByHref(location);
+    const $href = this.$(`a[href="${menuItem.href}"]`);
+    const $li = $href.closest('li');
     this._setActive($li);
   },
 
   _setActive(element) {
-    var $root = element.closest('.x-nav-root');
-    var $subnav = $root.find('.sidebar-subnav');
+    const $root = element.closest('.x-nav-root');
+    const $subnav = $root.find('.sidebar-subnav');
 
     if (!$subnav.hasClass('in')) {
       this.ui.lists.removeClass('in');

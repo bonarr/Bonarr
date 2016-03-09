@@ -1,4 +1,6 @@
-module.exports = [
+const _ = require('underscore');
+
+const menu = [
   {
     title: 'Series',
     icon: 'series',
@@ -120,3 +122,39 @@ module.exports = [
     ]
   }
 ];
+
+const urls = {};
+
+function addMenuUrls(items) {
+  _.each(items, (item) =>{
+    urls[item.href] = item;
+    if(item.items) {
+      addMenuUrls(item.items);
+    }
+  });
+};
+
+addMenuUrls(menu);
+
+
+function findByHref(href) {
+  if (!href) {
+    return {};
+  }
+
+  const item = urls[href];
+  if (item) {
+    return item;
+  }
+
+  const parent = href.replace(/\/\w*$/,'');
+  return findByHref(parent);
+};
+
+const menuItems = {
+  menu,
+  urls,
+  findByHref
+};
+
+module.exports = menuItems;
