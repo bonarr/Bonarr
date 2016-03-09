@@ -7,7 +7,7 @@ module.exports = Marionette.ItemView.extend({
   className: 'label',
 
   initialize() {
-    this.listenTo(HealthCollection, 'sync', this._healthSync);
+    this.listenTo(HealthCollection, 'sync', this.render);
     HealthCollection.fetch();
   },
 
@@ -18,9 +18,8 @@ module.exports = Marionette.ItemView.extend({
       return this;
     }
 
-    var count = HealthCollection.length;
-    var label = 'label-warning';
-    var errors = HealthCollection.some(function(model) {
+    let label = 'label-warning';
+    var errors = HealthCollection.some(function (model) {
       return model.get('type') === 'error';
     });
 
@@ -29,12 +28,8 @@ module.exports = Marionette.ItemView.extend({
     }
 
     this.$el.addClass(label);
-    this.$el.text(count);
+    this.$el.text(HealthCollection.length);
 
     return this;
-  },
-
-  _healthSync() {
-    this.render();
   }
 });
