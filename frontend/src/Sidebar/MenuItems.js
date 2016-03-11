@@ -5,6 +5,7 @@ const menu = [
     title: 'Series',
     icon: 'series',
     href: '/',
+    aliases: ['/series'],
     items: [
       {
         title: 'Add New',
@@ -126,16 +127,20 @@ const menu = [
 const urls = {};
 
 function addMenuUrls(items) {
-  _.each(items, (item) =>{
+  _.each(items, (item) => {
     urls[item.href] = item;
-    if(item.items) {
+
+    _.each(item.aliases, (alias) => {
+      urls[alias] = item;
+    });
+
+    if (item.items) {
       addMenuUrls(item.items);
     }
   });
-};
+}
 
 addMenuUrls(menu);
-
 
 function findByHref(href) {
   if (!href) {
@@ -147,13 +152,12 @@ function findByHref(href) {
     return item;
   }
 
-  const parent = href.replace(/\/\w*$/,'');
+  const parent = href.replace(/\/[^\/]*$[^\/]*$/, '');
   return findByHref(parent);
-};
+}
 
 const menuItems = {
   menu,
-  urls,
   findByHref
 };
 

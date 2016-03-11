@@ -1,6 +1,5 @@
 var Marionette = require('marionette');
 var $ = require('jquery');
-var _ = require('underscore');
 var AppLayout = require('AppLayout');
 var HealthView = require('Health/HealthView');
 var QueueView = require('Activity/Queue/QueueView');
