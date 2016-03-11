@@ -1,8 +1,6 @@
 var $ = require('jquery');
-var vent = require('vent');
 var Marionette = require('marionette');
 var moment = require('moment');
-var momentRange = require('momentRange');
 var CalendarCollection = require('../CalendarCollection');
 var UiSettings = require('Shared/UiSettingsModel');
 var Config = require('Config');
@@ -20,14 +18,14 @@ module.exports = Marionette.Layout.extend({
   template: 'Calendar/Calendar/CalendarView',
   storageKey: 'calendar.view',
 
-  regions : {
-    headersRegion : '.x-calendar-day-headers',
+  regions: {
+    headersRegion: '.x-calendar-day-headers',
     daysRegion: '.x-calendar-days'
   },
 
   events: {
-    'click .x-view-select' : '_onViewClick',
-    'click .x-navigate'    : '_onNavigateClick'
+    'click .x-view-select': '_onViewClick',
+    'click .x-navigate': '_onNavigateClick'
   },
 
   ui: {
@@ -112,15 +110,15 @@ module.exports = Marionette.Layout.extend({
     var range = moment.range(start, end);
     var days = [];
 
-    range.by('days', function(moment) {
-      days.push(moment);
+    range.by('days', (day) => {
+      days.push(day);
     });
 
     return {
-      start : start,
-      end   : end,
-      range : range,
-      days  : days
+      start: start,
+      end: end,
+      range: range,
+      days: days
     };
   },
 
@@ -143,20 +141,20 @@ module.exports = Marionette.Layout.extend({
 
     this.dayCollection.reset();
 
-   this.dates.days.forEach((day) => {
-     const events = groupedEvents[day.format(dayFormat)];
+    this.dates.days.forEach((day) => {
+      const events = groupedEvents[day.format(dayFormat)];
 
-     if (this.view === 'agenda' && !events) {
-       return;
-     }
+      if (this.view === 'agenda' && !events) {
+        return;
+      }
 
       const calendarDayModel = new CalendarDayModel({
-        view   : this.view,
-        date   : day.toISOString(),
-        events : new CalendarDayEventCollection(events)
+        view: this.view,
+        date: day.toISOString(),
+        events: new CalendarDayEventCollection(events)
       });
 
-     this.dayCollection.add(calendarDayModel);
+      this.dayCollection.add(calendarDayModel);
     });
 
     if (this.view === 'agenda') {
@@ -205,7 +203,7 @@ module.exports = Marionette.Layout.extend({
     } else if (startDate.isSame(endDate, 'year')) {
       start = 'MMM D';
       end = 'MMM D YYYY';
-  }
+    }
 
     return startDate.format(start) + ' &mdash; ' + endDate.format(end);
   },

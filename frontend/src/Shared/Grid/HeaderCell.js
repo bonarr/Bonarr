@@ -32,7 +32,7 @@ module.exports = function() {
         this.$el.prepend(' <i class="sort-direction-icon"></i>');
       }
 
-      //Do we need this?
+      // Do we need this?
       this.$el.addClass(column.get('name'));
 
       if (column.has('className')) {

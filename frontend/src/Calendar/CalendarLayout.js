@@ -1,12 +1,12 @@
 var vent = require('vent');
-var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var UpcomingLayout = require('./Upcoming/UpcomingLayout');
 var CalendarView = require('./Calendar/CalendarView');
 var CalendarFeedView = require('./CalendarFeedView');
+var tpl = require('./CalendarLayout.hbs');
 
 module.exports = Marionette.Layout.extend({
-  template: 'Calendar/CalendarLayout',
+  template: tpl,
 
   regions: {
     upcoming: '#x-upcoming',

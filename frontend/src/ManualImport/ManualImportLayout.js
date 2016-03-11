@@ -168,24 +168,24 @@ module.exports = Marionette.Layout.extend({
     }
 
     if (_.any(selected, function(model) {
-        return !model.has('series');
-      })) {
+      return !model.has('series');
+    })) {
 
       this._showErrorMessage('Series must be chosen for each selected file');
       return;
     }
 
     if (_.any(selected, function(model) {
-        return !model.has('seasonNumber');
-      })) {
+      return !model.has('seasonNumber');
+    })) {
 
       this._showErrorMessage('Season must be chosen for each selected file');
       return;
     }
 
     if (_.any(selected, function(model) {
-        return !model.has('episodes') || model.get('episodes').length === 0;
-      })) {
+      return !model.has('episodes') || model.get('episodes').length === 0;
+    })) {
 
       this._showErrorMessage('One or more episodes must be chosen for each selected file');
       return;

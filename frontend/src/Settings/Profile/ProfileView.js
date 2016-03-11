@@ -11,8 +11,8 @@ var view = Marionette.ItemView.extend({
   className: 'profile-item thingy',
 
   ui: {
-    "progressbar": '.progress .bar',
-    "deleteButton": '.x-delete'
+    'progressbar': '.progress .bar',
+    'deleteButton': '.x-delete'
   },
 
   events: {

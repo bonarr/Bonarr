@@ -62,8 +62,8 @@ var QueueCollection = PageableCollection.extend({
       }
     },
 
-    sizeleft : {
-      sortValue (model, attr) {
+    sizeleft: {
+      sortValue(model, attr) {
         var size = model.get('size');
         var sizeleft = model.get('sizeleft');
 

@@ -5,7 +5,7 @@ module.exports = Marionette.Layout.extend({
   template: 'Calendar/Calendar/Day/CalendarDayView',
   className: 'calendar-day',
 
-  regions : {
+  regions: {
     events: '.x-calendar-day-events'
   },
 
@@ -16,7 +16,7 @@ module.exports = Marionette.Layout.extend({
     };
   },
 
-  onShow () {
+  onShow() {
     this.events.show(new CalendarEventCollectionView({
       collection: this.model.get('events'),
       style: 'standard'

@@ -1,5 +1,3 @@
-'use strict';
-
 String.prototype.format = function() {
   var args = arguments;
 

@@ -2,7 +2,6 @@ var Validation = require('backbone.validation');
 var _ = require('underscore');
 
 module.exports = (function() {
-  'use strict';
   return function() {
     var originalInitialize = this.prototype.initialize;
     var originalOnRender = this.prototype.onRender;
@@ -77,7 +76,7 @@ module.exports = (function() {
       if (this.model) {
         Validation.unbind(this);
 
-        //If we don't do this the next time the model is used the sync is bound to an old view
+        // If we don't do this the next time the model is used the sync is bound to an old view
         this.model.sync = this.model._originalSync;
         this.model._originalSync = undefined;
       }

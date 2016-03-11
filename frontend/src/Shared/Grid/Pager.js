@@ -177,7 +177,7 @@ module.exports = Paginator.extend({
   _jumpToPage() {
     var target = this.$el.find('.x-page-select');
 
-    //Remove event handlers so the blur event is not triggered
+    // Remove event handlers so the blur event is not triggered
     this.undelegateEvents();
 
     var selectedPage = parseInt(target.val(), 10);

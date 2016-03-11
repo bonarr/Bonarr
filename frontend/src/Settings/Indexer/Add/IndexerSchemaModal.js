@@ -20,7 +20,7 @@ module.exports = {
       });
       var modelCollection = _.map(groups, function(values, key, list) {
         return {
-          "header": key,
+          'header': key,
           collection: values
         };
       });

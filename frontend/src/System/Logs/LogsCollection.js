@@ -27,16 +27,16 @@ var collection = PagableCollection.extend({
   },
 
   filterModes: {
-    "all": {},
-    "info": {
+    'all': {},
+    'info': {
       key: 'level',
       value: 'Info'
     },
-    "warn": {
+    'warn': {
       key: 'level',
       value: 'Warn'
     },
-    "error": {
+    'error': {
       key: 'level',
       value: 'Error'
     }

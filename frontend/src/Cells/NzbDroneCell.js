@@ -47,7 +47,7 @@ module.exports = Backgrid.Cell.extend({
       return undefined;
     }
 
-    //if not a model
+    // if not a model
     if (!value.get && typeof value === 'object') {
       value = new Backbone.Model(value);
     }

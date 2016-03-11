@@ -44,27 +44,27 @@ module.exports = Marionette.Layout.extend({
   _setupFilter() {
     var self = this;
 
-    //TODO: This should be a mixin (same as Add Series searching)
+    // TODO: This should be a mixin (same as Add Series searching)
     this.ui.filter.keyup(function(e) {
       if (_.contains([
-          9,
-          16,
-          17,
-          18,
-          19,
-          20,
-          33,
-          34,
-          35,
-          36,
-          37,
-          38,
-          39,
-          40,
-          91,
-          92,
-          93
-        ], e.keyCode)) {
+        9,
+        16,
+        17,
+        18,
+        19,
+        20,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        91,
+        92,
+        93
+      ], e.keyCode)) {
         return;
       }
 

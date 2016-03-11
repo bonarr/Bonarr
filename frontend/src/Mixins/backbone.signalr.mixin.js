@@ -25,7 +25,7 @@ module.exports = _.extend(Backbone.Collection.prototype, {
 
       var model = new collection.model(options.resource, { parse: true });
 
-      //updateOnly will prevent the collection from adding a new item
+      // updateOnly will prevent the collection from adding a new item
       if (bindOptions.updateOnly && !collection.get(model.get('id'))) {
         return;
       }

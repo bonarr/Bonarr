@@ -65,25 +65,25 @@ var view = Marionette.ItemView.extend({
 
   _changeSize() {
     var minSize = this.model.get('minSize') || this.slider.min;
-    var maxSize = this.model.get('maxSize') || null;{
-    var minBytes = minSize * 1024 * 1024;
-    var minThirty = fileSize(minBytes * 30, 1, false);
-    var minSixty = fileSize(minBytes * 60, 1, false);
+    var maxSize = this.model.get('maxSize') || null; {
+      var minBytes = minSize * 1024 * 1024;
+      var minThirty = fileSize(minBytes * 30, 1, false);
+      var minSixty = fileSize(minBytes * 60, 1, false);
 
-    this.ui.thirtyMinuteMinSize.html(minThirty);
-    this.ui.sixtyMinuteMinSize.html(minSixty);
-    }{
-    if (maxSize === 0 || maxSize === null) {
-      this.ui.thirtyMinuteMaxSize.html('Unlimited');
-      this.ui.sixtyMinuteMaxSize.html('Unlimited');
-    } else {
-      var maxBytes = maxSize * 1024 * 1024;
-      var maxThirty = fileSize(maxBytes * 30, 1, false);
-      var maxSixty = fileSize(maxBytes * 60, 1, false);
+      this.ui.thirtyMinuteMinSize.html(minThirty);
+      this.ui.sixtyMinuteMinSize.html(minSixty);
+    } {
+      if (maxSize === 0 || maxSize === null) {
+        this.ui.thirtyMinuteMaxSize.html('Unlimited');
+        this.ui.sixtyMinuteMaxSize.html('Unlimited');
+      } else {
+        var maxBytes = maxSize * 1024 * 1024;
+        var maxThirty = fileSize(maxBytes * 30, 1, false);
+        var maxSixty = fileSize(maxBytes * 60, 1, false);
 
-      this.ui.thirtyMinuteMaxSize.html(maxThirty);
-      this.ui.sixtyMinuteMaxSize.html(maxSixty);
-    }
+        this.ui.thirtyMinuteMaxSize.html(maxThirty);
+        this.ui.sixtyMinuteMaxSize.html(maxSixty);
+      }
     }
   }
 });

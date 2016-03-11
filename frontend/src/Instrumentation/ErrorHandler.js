@@ -16,7 +16,7 @@ window.onerror = function(msg, url, line) {
     a.href = url;
     var filename = a.pathname.split('/').pop();
 
-    //Suppress Firefox debug errors when console window is closed
+    // Suppress Firefox debug errors when console window is closed
     if (filename.toLowerCase() === 'markupview.jsm' || filename.toLowerCase() === 'markup-view.js') {
       return false;
     }
@@ -40,16 +40,16 @@ window.onerror = function(msg, url, line) {
     new Messenger().post('Couldn\'t report JS error.  ' + msg);
   }
 
-  return false; //don't suppress default alerts and logs.
+  return false; // don't suppress default alerts and logs.
 };
 
 $(document).ajaxError(function(event, xmlHttpRequest, ajaxOptions) {
-  //don't report 200 error codes
+  // don't report 200 error codes
   if (xmlHttpRequest.status >= 200 && xmlHttpRequest.status <= 300) {
     return undefined;
   }
 
-  //don't report aborted requests
+  // don't report aborted requests
   if (xmlHttpRequest.statusText === 'abort') {
     return undefined;
   }

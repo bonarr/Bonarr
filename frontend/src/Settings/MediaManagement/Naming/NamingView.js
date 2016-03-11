@@ -22,10 +22,10 @@ module.exports = (function() {
       seasonFolderExample: '.x-season-folder-example'
     },
     events: {
-      "change .x-rename-episodes": '_setFailedDownloadOptionsVisibility',
-      "click .x-show-wizard": '_showWizard',
-      "click .x-naming-token-helper a": '_addToken',
-      "change .x-multi-episode-style": '_multiEpisodeFomatChanged'
+      'change .x-rename-episodes': '_setFailedDownloadOptionsVisibility',
+      'click .x-show-wizard': '_showWizard',
+      'click .x-naming-token-helper a': '_addToken',
+      'change .x-multi-episode-style': '_multiEpisodeFomatChanged'
     },
     regions: { basicNamingRegion: '.x-basic-naming' },
     onRender() {

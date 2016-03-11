@@ -56,43 +56,43 @@ module.exports = Backbone.Model.extend({
     });
 
     switch (options.monitor) {
-    case 'all':
-      {
-        break;
-      }
-    case 'none':
-      {
-        this.unMonitorAllSeasons();
-        break;
-      }
-    case 'future':
-      {
-        addOptions.ignoreEpisodesWithFiles = true;
-        addOptions.ignoreEpisodesWithoutFiles = true;
-        break;
-      }
-    case 'latest':
-      {
-        this.unMonitorAllSeasons();
-        this.setSeasonMonitor(_.max(seasonsNumbers), true);
-        break;
-      }
-    case 'first':
-      {
-        this.unMonitorAllSeasons();
-        this.setSeasonMonitor(_.min(seasonsNumbers), true);
-        break;
-      }
-    case 'missing':
-      {
-        addOptions.ignoreEpisodesWithFiles = true;
-        break;
-      }
-    case 'existing':
-      {
-        addOptions.ignoreEpisodesWithoutFiles = true;
-        break;
-      }
+      case 'all':
+        {
+          break;
+        }
+      case 'none':
+        {
+          this.unMonitorAllSeasons();
+          break;
+        }
+      case 'future':
+        {
+          addOptions.ignoreEpisodesWithFiles = true;
+          addOptions.ignoreEpisodesWithoutFiles = true;
+          break;
+        }
+      case 'latest':
+        {
+          this.unMonitorAllSeasons();
+          this.setSeasonMonitor(_.max(seasonsNumbers), true);
+          break;
+        }
+      case 'first':
+        {
+          this.unMonitorAllSeasons();
+          this.setSeasonMonitor(_.min(seasonsNumbers), true);
+          break;
+        }
+      case 'missing':
+        {
+          addOptions.ignoreEpisodesWithFiles = true;
+          break;
+        }
+      case 'existing':
+        {
+          addOptions.ignoreEpisodesWithoutFiles = true;
+          break;
+        }
     }
 
     this.set('addOptions', addOptions, {

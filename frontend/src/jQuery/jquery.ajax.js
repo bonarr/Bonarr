@@ -3,7 +3,6 @@ module.exports = function () {
 
   var original = $.ajax;
   $.ajax = function (xhr) {
-    'use strict';
     if (xhr && xhr.data && xhr.type === 'DELETE') {
       if (xhr.url.contains('?')) {
         xhr.url += '&';

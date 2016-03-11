@@ -1,7 +1,5 @@
-'use strict';
-
 var $ = require('jquery');
-var _ = require('underscore')
+var _ = require('underscore');
 var vent = require('vent');
 var TemplatedCell = require('Cells/TemplatedCell');
 var RemoveFromQueueView = require('./RemoveFromQueueView');
@@ -45,13 +43,13 @@ module.exports = TemplatedCell.extend({
     var promise = $.ajax({
       url: window.Sonarr.ApiRoot + '/queue/grab',
       type: 'POST',
-      data : JSON.stringify(data)
+      data: JSON.stringify(data)
     });
 
     this.$(this.ui.grab).spinForPromise(promise);
 
     promise.success(function() {
-      //find models that have the same series id and episode ids and remove them
+      // find models that have the same series id and episode ids and remove them
       self.model.trigger('destroy', self.model);
     });
   }

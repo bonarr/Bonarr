@@ -114,5 +114,5 @@ module.exports = Marionette.Layout.extend({
       parentView: this,
       actions: actions
     });
-  },
+  }
 });

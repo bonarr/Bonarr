@@ -24,7 +24,7 @@ module.exports = {
     var date = moment(sourceDate);
     var calendarDate = date.calendar();
 
-    //TODO: It would be nice to not have to hack this...
+    // TODO: It would be nice to not have to hack this...
     var strippedCalendarDate = calendarDate.substring(0, calendarDate.indexOf(' at '));
 
     if (strippedCalendarDate) {

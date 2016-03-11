@@ -34,9 +34,9 @@ module.exports = function() {
     var sortMappings = this._getSortMappings();
 
     return sortMappings[key] || {
-        name: key,
-        sortKey: key
-      };
+      name: key,
+      sortKey: key
+    };
   };
 
   this.prototype._getSecondarySorting = function() {

@@ -4,11 +4,11 @@ var FormatHelpers = require('Shared/FormatHelpers');
 var UiSettings = require('Shared/UiSettingsModel');
 
 module.exports = NzbDroneCell.extend({
-  className : 'relative-date-cell',
-  showSeconds : false,
-  showSecondsOnTooltip : false,
+  className: 'relative-date-cell',
+  showSeconds: false,
+  showSecondsOnTooltip: false,
 
-  render () {
+  render() {
 
     var dateStr = this.model.get(this.column.get('name'));
 

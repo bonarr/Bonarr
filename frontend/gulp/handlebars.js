@@ -17,9 +17,9 @@ console.log('Handlebars (gulp) Compiler: ', compliler.COMPILER_REVISION);
 
 gulp.task('handlebars', function () {
   var coreStream = gulp.src([
-      paths.src.templates,
-      '!*/**/*Partial.*'
-    ])
+    paths.src.templates,
+    '!*/**/*Partial.*'
+  ])
     .pipe(stripbom({
       showLog: false
     }))
@@ -60,8 +60,8 @@ gulp.task('handlebars', function () {
     }));
 
   return streamqueue({
-        objectMode: true
-      },
+    objectMode: true
+  },
       partialStream,
       coreStream
     ).pipe(concat('templates.js'))

@@ -1,5 +1,3 @@
-'use strict';
-
 if (window.Sonarr.Analytics) {
   var d = document;
   var g = d.createElement('script');

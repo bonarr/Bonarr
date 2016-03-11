@@ -14,7 +14,7 @@ module.exports = Marionette.AppRouter.extend({
 
     AppLayout.actionBarRegion.show(view);
   },
-  
+
 
   _closeActionBar() {
     AppLayout.actionBarRegion.close();

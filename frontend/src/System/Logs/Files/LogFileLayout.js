@@ -118,7 +118,7 @@ module.exports = Marionette.Layout.extend({
     this.contents.close();
     var promise = this.collection.fetch();
 
-    //Would be nice to spin the icon on the refresh button
+    // Would be nice to spin the icon on the refresh button
     if (buttonContext) {
       buttonContext.ui.icon.spinForPromise(promise);
     }

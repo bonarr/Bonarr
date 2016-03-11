@@ -80,7 +80,7 @@ $.fn.tagsinput.Constructor.prototype.build = function(options) {
       32,
       44,
       59
-    ] //tab, enter, space, comma, semi-colon
+    ] // tab, enter, space, comma, semi-colon
   };
 
   options = $.extend({}, defaults, options);
@@ -121,10 +121,10 @@ $.fn.tagInput = function(options) {
     }
   });
 
-  //Override the free input being set to false because we're using objects
+  // Override the free input being set to false because we're using objects
   $(tagInput)[0].options.freeInput = true;
 
-  //Remove any existing tags and re-add them
+  // Remove any existing tags and re-add them
   $(this).tagsinput('removeAll');
   _.each(tags, function(tag) {
     $(input).tagsinput('add', tag);

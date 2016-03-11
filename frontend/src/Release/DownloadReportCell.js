@@ -16,8 +16,8 @@ module.exports = Backgrid.Cell.extend({
 
     this.$el.html('<i class="icon-sonarr-spinner fa-spin" title="Adding to download queue" />');
 
-    //Using success callback instead of promise so it
-    //gets called before the sync event is triggered
+    // Using success callback instead of promise so it
+    // gets called before the sync event is triggered
     const promise = this.model.save(null, {
       success() {
         self.model.set('queued', true);

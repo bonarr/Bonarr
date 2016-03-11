@@ -13,7 +13,7 @@ function watchTask(glob, task) {
   var options = {
     name: ' watch:' + task,
     verbose: true
-  }
+  };
   return watch(glob, options, function(events, done) {
     gulp.start(task);
   });

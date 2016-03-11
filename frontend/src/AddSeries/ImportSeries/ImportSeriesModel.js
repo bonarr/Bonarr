@@ -23,7 +23,7 @@ const ImportSeriesModel = Backbone.Model.extend({
   },
 
   onSeriesRequest(model, xhr, options) {
-    xhr.done(()=>{
+    xhr.done(() => {
       this.collection.remove(this);
     });
   }

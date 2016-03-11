@@ -11,9 +11,9 @@ var elipsis = function(value, len) {
     var vs = value.substr(0, len - 2),
       index = Math.max(vs.lastIndexOf(' '), vs.lastIndexOf('.'), vs.lastIndexOf('!'), vs.lastIndexOf('?'));
     if (index !== -1 && index >= (len - 15)) {
-      return vs.substr(0, index) + "...";
+      return vs.substr(0, index) + '...';
     }
-    return value.substr(0, len - 3) + "...";
+    return value.substr(0, len - 3) + '...';
   }
   return value;
 };

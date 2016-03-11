@@ -1,5 +1,4 @@
 module.exports = function() {
-  'use strict';
   var $ = this;
   $.fn.processServerError = function(error) {
     var validationName = error.propertyName.toLowerCase();
@@ -22,7 +21,7 @@ module.exports = function() {
         return $(this).attr('validation-name').toLowerCase() === validationName;
       });
 
-      //still not found?
+      // still not found?
       if (input.length === 0) {
         this.addFormError(error);
         console.error('couldn\'t find input for ' + error.propertyName);
