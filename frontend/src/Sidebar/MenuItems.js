@@ -34,7 +34,7 @@ const menu = [
     title: 'Activity',
     icon: 'activity',
     href: '/activity/history',
-    notification: 'queue',
+    notification: 'activity',
     notificationHideActive: true,
     items: [
       {

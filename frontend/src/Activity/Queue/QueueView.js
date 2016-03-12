@@ -1,43 +1,38 @@
-var _ = require('underscore');
+var vent = require('vent');
 var Marionette = require('marionette');
 var QueueCollection = require('./QueueCollection');
+var tpl = require('./QueueView.hbs');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
-  className: 'label',
+  template: tpl,
 
-  initialize() {
-    this.listenTo(QueueCollection, 'sync', this.render);
-    QueueCollection.fetch();
+  initialize(status) {
+    this.status = status;
+    this.listenTo(vent, 'server:queue/status', this._processSignalrMessage);
   },
 
-  render() {
-    this.$el.empty();
+  serializeData() {
+    if (this.status) {
+      let labelClass = 'label-info';
 
-    if (QueueCollection.length === 0) {
-      return this;
+      if (this.status.errors) {
+        labelClass = 'label-danger';
+      } else if (this.status.warnings) {
+        labelClass = 'label-warning';
+      }
+
+      return {
+        count: this.status.count,
+        labelClass: labelClass
+      };
     }
+  },
 
-    var count = QueueCollection.fullCollection.length;
-    var label = 'label-info';
-
-    var errors = QueueCollection.fullCollection.some(function(model) {
-      return model.has('trackedDownloadStatus') && model.get('trackedDownloadStatus').toLowerCase() === 'error';
-    });
-
-    var warnings = QueueCollection.fullCollection.some(function(model) {
-      return model.has('trackedDownloadStatus') && model.get('trackedDownloadStatus').toLowerCase() === 'warning';
-    });
-
-    if (errors) {
-      label = 'label-danger';
-    } else if (warnings) {
-      label = 'label-warning';
+  _processSignalrMessage({ action, resource }) {
+    if (!this.isClosed) {
+      this.status = resource;
+      this.render();
     }
-
-    this.$el.addClass(label);
-    this.$el.text(count);
-
-    return this;
   }
 });

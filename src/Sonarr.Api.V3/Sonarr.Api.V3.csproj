@@ -94,6 +94,8 @@
     <Compile Include="Profiles\Delay\DelayProfileResource.cs" />
     <Compile Include="Profiles\Delay\DelayProfileValidator.cs" />
     <Compile Include="Queue\QueueActionModule.cs" />
+    <Compile Include="Queue\QueueStatusModule.cs" />
+    <Compile Include="Queue\QueueStatusResource.cs" />
     <Compile Include="RemotePathMappings\RemotePathMappingModule.cs" />
     <Compile Include="RemotePathMappings\RemotePathMappingResource.cs" />
     <Compile Include="Config\UiConfigModule.cs" />

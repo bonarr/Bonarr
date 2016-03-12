@@ -14,7 +14,8 @@ module.exports = Marionette.Layout.extend({
 
   regions: {
     health: '.x-health',
-    queue: '.x-queue'
+    queue: '.x-queue',
+    activity: '.x-activity'
   },
 
   ui: {
@@ -59,7 +60,7 @@ module.exports = Marionette.Layout.extend({
 
   onShow() {
     this.health.show(new HealthView());
-    this.queue.show(new QueueView());
+    this._showQueueNotification();
 
     this._setActiveBasedOnUri();
 
@@ -149,5 +150,16 @@ module.exports = Marionette.Layout.extend({
       this.$aside.children('.nav-floating').remove();
       Marionette.$('body').removeClass('actionbar-extended aside-toggled aside-collapsed');
     }
+  },
+
+  _showQueueNotification() {
+    const promise = $.ajax({
+      url: window.Sonarr.ApiRoot + '/queue/status'
+    });
+
+    promise.done((data) => {
+      this.queue.show(new QueueView(data));
+      this.activity.show(new QueueView(data));
+    });
   }
 });
