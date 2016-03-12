@@ -13,6 +13,7 @@ var CalendarDayHeaderView = require('./Day/CalendarDayHeaderView');
 
 require('Mixins/backbone.signalr.mixin');
 require('jquery.easypiechart');
+require('momentRange');
 
 module.exports = Marionette.Layout.extend({
   template: 'Calendar/Calendar/CalendarView',
