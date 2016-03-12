@@ -1,4 +1,4 @@
-module.exports = () => {
+function AsChangeTrackingModel() {
   var originalInit = this.prototype.initialize;
 
   this.prototype.initialize = () => {
@@ -18,4 +18,6 @@ module.exports = () => {
   };
 
   return this;
-};
+}
+
+module.exports = AsChangeTrackingModel;
