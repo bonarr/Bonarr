@@ -11,8 +11,8 @@ require('../Mixins/backbone.signalr.mixin');
 require('fullcalendar');
 require('jquery.easypiechart');
 
-module.exports = Marionette.ItemView.extend({
-    storageKey : 'calendar.view',
+module.exports= Marionette.ItemView.extend({
+    storageKey: 'calendar.view',
 
     initialize : function() {
         this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
@@ -21,11 +21,11 @@ module.exports = Marionette.ItemView.extend({
         this.listenTo(QueueCollection, 'sync', this._reloadCalendarEvents);
     },
 
-    render : function() {
+    render: function() {
         this.$el.empty().fullCalendar(this._getOptions());
     },
 
-    onShow : function() {
+    onShow: function() {
         this.$('.fc-today-button').click();
     },
 

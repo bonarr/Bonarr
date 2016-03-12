@@ -1,4 +1,4 @@
-const debug = function () {
+const debug = function() {
   console.group('Handlebar context');
   console.debug(this);
   console.groupEnd();

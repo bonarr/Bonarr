@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var Marionette = require('marionette');
 var HealthCollection = require('./HealthCollection');
 
@@ -19,7 +18,7 @@ module.exports = Marionette.ItemView.extend({
     }
 
     let label = 'label-warning';
-    var errors = HealthCollection.some(function (model) {
+    var errors = HealthCollection.some((model) => {
       return model.get('type') === 'error';
     });
 

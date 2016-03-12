@@ -86,13 +86,13 @@ var config = {
   }
 };
 
-gulp.task('webpack', function () {
+gulp.task('webpack', function() {
   return gulp.src('main.js')
     .pipe(webpackStream(config))
     .pipe(gulp.dest(''));
 });
 
-gulp.task('webpackWatch', function () {
+gulp.task('webpackWatch', function() {
   config.watch = true;
   return gulp.src('')
     .pipe(webpackStream(config))

@@ -26,7 +26,7 @@ Handlebars.registerHelper('posterHelper', function(size) {
   var url = getPosterUrl(this.images, parsedSize);
 
   if (url) {
-    const  onError = `src="${url}" onerror="window.Sonarr.imageError(this);"`;
+    const onError = `src="${url}" onerror="window.Sonarr.imageError(this);"`;
     return new Handlebars.SafeString(`<img class="series-poster x-series-poster" ${onError}>`);
   }
 

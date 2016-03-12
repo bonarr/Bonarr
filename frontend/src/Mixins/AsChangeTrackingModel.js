@@ -1,14 +1,14 @@
-module.exports = function() {
+module.exports = () => {
   var originalInit = this.prototype.initialize;
 
-  this.prototype.initialize = function() {
+  this.prototype.initialize = () => {
     this.isSaved = true;
 
-    this.on('change', function() {
+    this.on('change', () => {
       this.isSaved = false;
     }, this);
 
-    this.on('sync', function() {
+    this.on('sync', () => {
       this.isSaved = true;
     }, this);
 

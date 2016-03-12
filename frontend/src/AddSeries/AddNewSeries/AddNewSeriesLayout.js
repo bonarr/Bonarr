@@ -118,7 +118,7 @@ const AddNewSeriesLayout = Marionette.Layout.extend({
       } else {
         this.searchResult.show(new ErrorView({
           term: this.collection.term,
-          xhr: xhr
+          xhr
         }));
         this.collection.term = '';
       }

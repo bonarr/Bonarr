@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 
-const TaskQueue = function (options) {
+const TaskQueue = function(options) {
   _.extend(this, options);
 };
 

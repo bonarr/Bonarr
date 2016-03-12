@@ -4,7 +4,7 @@ var SeriesModel = require('Series/SeriesModel');
 var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 
 let SeriesSearchCollection = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/series/lookup',
+  url: `${window.Sonarr.ApiRoot}/series/lookup`,
   model: SeriesModel,
 
   parse(response) {
@@ -23,9 +23,9 @@ let SeriesSearchCollection = Backbone.Collection.extend({
     if (this.searchPromise) {
       if (this.term === term) {
         return this.searchPromise;
-      } else {
-        this.abort();
       }
+
+      this.abort();
     }
 
     this.term = term;
@@ -33,7 +33,7 @@ let SeriesSearchCollection = Backbone.Collection.extend({
     console.log(`Searching for [${term}]`);
     this.searchPromise = this.fetch({
       data: {
-        term: term
+        term
       }
     });
     return this.searchPromise;
@@ -45,10 +45,8 @@ let SeriesSearchCollection = Backbone.Collection.extend({
       this.searchPromise.abort();
       this.searchPromise = undefined;
     }
-
     this.term = undefined;
   }
-
 });
 
 SeriesSearchCollection = AsSelectableCollection.apply(SeriesSearchCollection);

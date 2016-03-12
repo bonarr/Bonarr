@@ -24,7 +24,7 @@ module.exports = Backgrid.Cell.extend({
       }
     });
 
-    promise.fail(function (xhr) {
+    promise.fail(function(xhr) {
       if (xhr.responseJSON && xhr.responseJSON.message) {
         var message = xhr.responseJSON.message;
         self.$el.html('<i class="icon-sonarr-download-failed" title="${message}" />');

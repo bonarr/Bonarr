@@ -80,7 +80,7 @@ module.exports = Marionette.Layout.extend({
   ],
 
   initialize() {
-    this.seriesCollection =  SeriesCollection.viewCollection;
+    this.seriesCollection = SeriesCollection.viewCollection;
     this._showActionBar();
   },
 

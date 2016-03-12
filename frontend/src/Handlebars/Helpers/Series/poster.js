@@ -24,7 +24,7 @@ const poster = function(options) {
     if (lazy) {
       return new Handlebars.SafeString(`<img class="series-poster x-series-poster lazy" src="${placeholderUrl}" data-original="${url}">`);
     } else {
-      const  onError = `src="${url}" onerror="window.Sonarr.imageError(this);"`;
+      const onError = `src="${url}" onerror="window.Sonarr.imageError(this);"`;
       return new Handlebars.SafeString(`<img class="series-poster x-series-poster" ${onError}>`);
     }
   }

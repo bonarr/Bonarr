@@ -135,7 +135,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
     var addButton = this.ui.addButton;
     addButton.addClass('disabled');
 
-    const profile = this.ui.profile.val();
+    const profileId = this.ui.profile.val();
     const rootFolderPath = this.ui.rootFolder.children(':selected').text();
     const seriesType = this.ui.seriesType.val();
     const seasonFolder = this.ui.seasonFolder.prop('checked');
@@ -143,10 +143,10 @@ const AddSeriesModal = Marionette.ItemView.extend({
     const startSearch = this.ui.startSearch.prop('checked');
 
     this.model.set({
-      profileId: profile,
-      rootFolderPath: rootFolderPath,
-      seasonFolder: seasonFolder,
-      seriesType: seriesType
+      profileId,
+      rootFolderPath,
+      seasonFolder,
+      seriesType
     }, {
       silent: true
     });

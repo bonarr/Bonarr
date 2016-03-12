@@ -135,7 +135,7 @@ module.exports = Marionette.Layout.extend({
   _showCalendar() {
     var dayFormat = 'YYYY-MM-DD';
 
-    var groupedEvents = this.collection.groupBy(function (model) {
+    var groupedEvents = this.collection.groupBy(function(model) {
       return moment(model.get('airDateUtc')).format(dayFormat);
     });
 

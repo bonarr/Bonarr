@@ -151,7 +151,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
       collection: this.collection,
-      actions: actions,
+      actions,
       filtering: filteringOptions
     });
   },
@@ -174,6 +174,7 @@ module.exports = Marionette.Layout.extend({
       });
       return;
     }
+
     var ids = _.pluck(selected, 'id');
     CommandController.execute('episodeSearch', {
       name: 'episodeSearch',
@@ -183,7 +184,7 @@ module.exports = Marionette.Layout.extend({
 
   _searchMissing() {
     if (window.confirm('Are you sure you want to search for {0} missing episodes? '.format(this.collection.state.totalRecords) +
-        'One API request to each indexer will be used for each episode. ' + 'This cannot be stopped once started.')) {
+        'One API request to each indexer will be used for each episode. This cannot be stopped once started.')) {
       CommandController.execute('missingEpisodeSearch', { name: 'missingEpisodeSearch' });
     }
   },
@@ -200,15 +201,14 @@ module.exports = Marionette.Layout.extend({
     }
 
     var promises = [];
-    var self = this;
 
-    _.each(selected, function(episode) {
+    _.each(selected, (episode) => {
       episode.set('monitored', !episode.get('monitored'));
       promises.push(episode.save());
     });
 
-    $.when(promises).done(function() {
-      self.collection.fetch();
+    $.when(promises).done(() => {
+      this.collection.fetch();
     });
   },
 

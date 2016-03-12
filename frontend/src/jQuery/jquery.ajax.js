@@ -1,8 +1,8 @@
-module.exports = function () {
+module.exports = function() {
   var $ = this;
 
   var original = $.ajax;
-  $.ajax = function (xhr) {
+  $.ajax = function(xhr) {
     if (xhr && xhr.data && xhr.type === 'DELETE') {
       if (xhr.url.contains('?')) {
         xhr.url += '&';

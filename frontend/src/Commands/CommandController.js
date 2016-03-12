@@ -19,33 +19,33 @@ const CommandController = {
 
     if (this._lastCommand.command && this._lastCommand.command.isSameCommand(attr) && moment().add('seconds', -5).isBefore(this._lastCommand.time)) {
 
-        Messenger.show({
-          message: 'Please wait at least 5 seconds before running this command again',
-          hideAfter: 5,
-          type: 'error'
-        });
+      Messenger.show({
+        message: 'Please wait at least 5 seconds before running this command again',
+        hideAfter: 5,
+        type: 'error'
+      });
 
-        return this._lastCommand.command.deferred.promise();
-      }
+      return this._lastCommand.command.deferred.promise();
+    }
 
     commandModel.deferred = $.Deferred();
 
     commandModel.save().success(() => {
-        CommandCollection.add(commandModel);
+      CommandCollection.add(commandModel);
 
-        commandModel.bind('change:status', (model) => {
-          if (model.isComplete()) {
-            commandModel.deferred.resolve(commandModel);
-          } else if (model.isFailed()) {
-            commandModel.deferred.reject(commandModel);
-          }
-        });
+      commandModel.bind('change:status', (model) => {
+        if (model.isComplete()) {
+          commandModel.deferred.resolve(commandModel);
+        } else if (model.isFailed()) {
+          commandModel.deferred.reject(commandModel);
+        }
       });
+    });
 
     this._lastCommand = {
-        command: commandModel,
-        time: moment()
-      };
+      command: commandModel,
+      time: moment()
+    };
 
     return commandModel.deferred.promise();
   },
@@ -54,41 +54,41 @@ const CommandController = {
     var existingCommand = CommandCollection.findCommand(options.command);
 
     if (existingCommand) {
-        this._bindToCommandModel.call(this, existingCommand, options);
-      }
+      this._bindToCommandModel.call(this, existingCommand, options);
+    }
 
     CommandCollection.bind('add', (model) => {
-        if (model.isSameCommand(options.command)) {
-          this._bindToCommandModel.call(this, model, options);
-        }
-      });
+      if (model.isSameCommand(options.command)) {
+        this._bindToCommandModel.call(this, model, options);
+      }
+    });
 
     CommandCollection.bind('sync', () => {
-        var command = CommandCollection.findCommand(options.command);
-        if (command) {
-          this._bindToCommandModel.call(this, command, options);
-        }
-      });
+      var command = CommandCollection.findCommand(options.command);
+      if (command) {
+        this._bindToCommandModel.call(this, command, options);
+      }
+    });
   },
 
   _bindToCommandModel: function bindToCommand(model, options) {
     if (!model.isActive()) {
-        options.element.stopSpin();
-        return;
-      }
+      options.element.stopSpin();
+      return;
+    }
 
     model.bind('change:status', (model) => {
-        if (model.isComplete() || model.isFailed()) {
-          options.element.stopSpin();
+      if (model.isComplete() || model.isFailed()) {
+        options.element.stopSpin();
 
-          if (model.isComplete()) {
-            vent.trigger(vent.Events.CommandComplete, {
-              command: model,
-              model: options.model
-            });
-          }
+        if (model.isComplete()) {
+          vent.trigger(vent.Events.CommandComplete, {
+            command: model,
+            model: options.model
+          });
         }
-      });
+      }
+    });
 
     options.element.startSpin();
   }

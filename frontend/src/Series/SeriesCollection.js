@@ -93,7 +93,7 @@ var SeriesCollection = Backbone.Collection.extend({
   }
 });
 
-const seriesCollection =  new SeriesCollection([]).bindSignalR();
+const seriesCollection = new SeriesCollection([]).bindSignalR();
 seriesCollection.fetch();
 seriesCollection.viewCollection = new BackboneSortedCollection(seriesCollection);
 

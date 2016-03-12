@@ -39,7 +39,7 @@ module.exports = DeepModel.extend({
                 var queryParams = {};
                 var splitQuery = query.substring(1).split('&');
 
-                _.each(splitQuery, function (param) {
+                _.each(splitQuery, function(param) {
                   var paramSplit = param.split('=');
                   queryParams[paramSplit[0]] = paramSplit[1];
                 });

@@ -42,7 +42,7 @@ var view = Marionette.CollectionView.extend({
   _showHideEpisodes() {
     var allShowingEpisodes = _.every(this.children._views, 'showingEpisodes');
 
-    _.each(this.children._views, function (view) {
+    _.each(this.children._views, function(view) {
       if (allShowingEpisodes) {
         view._hideEpisodes();
       } else {

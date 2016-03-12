@@ -22,4 +22,3 @@ Handlebars.registerHelper('EllipsisHelper', function(input, length) {
   var result = elipsis(input, length);
   return new Handlebars.SafeString(result);
 });
-
