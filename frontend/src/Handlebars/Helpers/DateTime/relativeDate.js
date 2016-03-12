@@ -3,29 +3,25 @@ const moment = require('moment');
 const UiSettings = require('Shared/UiSettingsModel');
 const FormatHelpers = require('Shared/FormatHelpers');
 
-const relativeDate = function(input, options) {
+function relativeDate(input, options) {
   if (!input) {
     return '';
   }
 
-  var showSeconds = !!options.hash.showSeconds;
-  var showSecondsOnTooltip = !!options.hash.showSecondsOnTooltip;
-  var date = moment(input);
-  var diff = date.diff(moment().zone(date.zone()).startOf('day'), 'days', true);
-  var tooltip = date.format(UiSettings.longDateTime(showSecondsOnTooltip));
-  var text;
+  const showSeconds = !!options.hash.showSeconds;
+  const showSecondsOnTooltip = !!options.hash.showSecondsOnTooltip;
+  const date = moment(input);
+  const diff = date.diff(moment().zone(date.zone()).startOf('day'), 'days', true);
+  const tooltip = date.format(UiSettings.longDateTime(showSecondsOnTooltip));
+  let text = date.format(UiSettings.get('shortDateFormat'));
 
   if (diff > 0 && diff < 1) {
     text = date.format(UiSettings.time(true, showSeconds));
-  } else {
-    if (UiSettings.get('showRelativeDates')) {
-      text = FormatHelpers.relativeDate(input);
-    } else {
-      text = date.format(UiSettings.get('shortDateFormat'));
-    }
+  } else if (UiSettings.get('showRelativeDates')) {
+    text = FormatHelpers.relativeDate(input);
   }
 
   return new handlebars.SafeString(`<span title="${tooltip}">${text}</span>`);
-};
+}
 
 module.exports = relativeDate;

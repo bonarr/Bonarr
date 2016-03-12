@@ -1,6 +1,5 @@
 const Handlebars = require('handlebars');
 const moment = require('moment');
-const reqres = require('reqres');
 const FormatHelpers = require('Shared/FormatHelpers');
 const QueueCollection = require('Activity/Queue/QueueCollection');
 
@@ -37,16 +36,16 @@ function episodeInfo(episode) {
   let tooltip;
 
   if (downloading) {
-    var progress = 100 - (downloading.get('sizeleft') / downloading.get('size') * 100);
+    let progress = 100 - (downloading.get('sizeleft') / downloading.get('size') * 100);
 
     if (progress === 0) {
       icon = 'icon-sonarr-downloading';
       tooltip = 'Episode is downloading';
     } else {
-      const progress = `<div class="progress" title="Episode is downloading - ${progress.toFixed(1)}% ${downloading.get('title')}">`;
-      const progressBar = `<div class="progress-bar progress-bar-purple" style="width: ${progress}%;"></div></div>`;
+      const progressDiv = `<div class="progress" title="Episode is downloading - ${progress.toFixed(1)}% ${downloading.get('title')}">`;
+      const progressBarDiv = `<div class="progress-bar progress-bar-purple" style="width: ${progress}%;"></div></div>`;
 
-      return `${progress}${progressBar}`;
+      return `${progressDiv}${progressBarDiv}`;
     }
   } else if (episode.grabbed) {
     icon = 'icon-sonarr-downloading';
@@ -65,12 +64,12 @@ function episodeInfo(episode) {
   return `<i class="${icon}" title="${tooltip}"></i>`;
 }
 
-const episodeStatus = function() {
+function episodeStatus() {
   if (this.episodeFile) {
     return new Handlebars.SafeString(episodeFileInfo(this.episodeFile));
   }
 
   return new Handlebars.SafeString(episodeInfo(this));
-};
+}
 
 module.exports = episodeStatus;

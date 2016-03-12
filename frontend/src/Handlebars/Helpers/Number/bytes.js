@@ -1,8 +1,8 @@
 const Handlebars = require('handlebars');
 const FormatHelpers = require('Shared/FormatHelpers');
 
-const bytes = function(input) {
+function bytes(input) {
   return new Handlebars.SafeString(FormatHelpers.bytes(input));
-};
+}
 
 module.exports = bytes;

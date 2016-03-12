@@ -1,9 +1,9 @@
-const lowerCase = function(input) {
+function lowerCase(input) {
   if (!input) {
     return '';
   }
 
   return input.toLowerCase();
-};
+}
 
 module.exports = lowerCase;

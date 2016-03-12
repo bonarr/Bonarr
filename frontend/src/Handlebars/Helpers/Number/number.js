@@ -1,6 +1,6 @@
 const FormatHelpers = require('Shared/FormatHelpers');
 
-const number = function(input) {
+function number(input) {
   return FormatHelpers.number(input);
 };
 
