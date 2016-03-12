@@ -3,7 +3,6 @@ var livereload = require('gulp-livereload');
 var watch = require('gulp-watch');
 var paths = require('./helpers/paths.js');
 
-require('./jshint.js');
 require('./handlebars.js');
 require('./less.js');
 require('./copy.js');
@@ -28,5 +27,4 @@ gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], 
   watchTask(paths.src.less, 'less');
   watchTask(paths.src.html, 'copyHtml');
   watchTask([paths.src.content + '**/*.*', '!**/*.less'], 'copyContent');
-  watchTask([paths.src.scripts, paths.src.exclude.libs], 'jshint');
 });

@@ -3,8 +3,6 @@ require('./clean.js');
 require('./copy.js');
 require('./handlebars.js');
 require('./imageMin.js');
-require('./jshint.js');
-require('./eslint.js');
 require('./less.js');
 require('./pretty.js');
 require('./start.js');
