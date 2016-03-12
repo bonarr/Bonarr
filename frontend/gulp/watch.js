@@ -10,15 +10,15 @@ require('./webpack.js');
 
 function watchTask(glob, task) {
   var options = {
-    name: ' watch:' + task,
+    name: `watch: ${task}`,
     verbose: true
   };
-  return watch(glob, options, function(events, done) {
+  return watch(glob, options, () => {
     gulp.start(task);
   });
 }
 
-gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], function() {
+gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], () => {
   livereload.listen();
 
   gulp.start('webpackWatch');
