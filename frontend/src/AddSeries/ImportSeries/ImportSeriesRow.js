@@ -18,14 +18,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
   ui: {
     seriesSelectWarning: '.x-series-select-warning',
     seriesSelectTitle: '.x-series-select-title',
-    profileSelect: '.x-profile',
     monitorSelect: '.x-monitor'
   },
 
   events: {
-    'click .x-series-dropdown': 'onSeriesDropdownClick',
-    'change .x-profile': '_assignProfile',
-    'change .x-monitor': '_assignMonitor'
+    'click .x-series-dropdown': 'onSeriesDropdownClick'
   },
 
   bindings: {
@@ -46,7 +43,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
       return this.series.search(name);
     });
 
-    this.listenTo(this.model, 'change:selectedSeries', this.onSelectedSeriesChanged);
+    this.listenTo(this.model, {
+      'change:selectedSeries': this.onSelectedSeriesChanged,
+      'change:profileId': this.onProfileIdChange,
+      'change:monitor': this.onMonitorChange
+    });
 
     this.promise.always(() => {
       // todo: try and avoid the re-render.
@@ -71,18 +72,17 @@ const ImportSeriesRow = Marionette.Layout.extend({
     };
   },
 
-  _assignProfile() {
+  onProfileIdChange() {
     const series = this.model.get('selectedSeries');
-    const profileId = parseInt(this.ui.profileSelect.val());
+    // const profileId = parseInt(this.ui.profileSelect.val());
 
-    this.model.set('profileId', profileId);
-
-    if (series && profileId) {
+    if (series) {
+      const profileId = this.model.get('profileId');
       series.set('profileId', profileId);
     }
   },
 
-  _assignMonitor() {
+  onMonitorChange() {
     const series = this.model.get('selectedSeries');
     const monitor = this.ui.monitorSelect.val();
 
@@ -96,7 +96,8 @@ const ImportSeriesRow = Marionette.Layout.extend({
   },
 
   onRender() {
-    this._assignProfile();
+    // this.onProfileIdChange();
+    this.onMonitorChange();
   },
 
   onSelectedSeriesChanged() {
@@ -119,8 +120,15 @@ const ImportSeriesRow = Marionette.Layout.extend({
     this.ui.seriesSelectTitle.text(title);
 
     if (isSelectable) {
-      selectedSeries.set('path', this.model.get('path'));
-      this._assignProfile();
+      selectedSeries.set({
+        path: this.model.get('path'),
+        profileId: this.model.get('profileId')
+      });
+
+      const monitor = this.model.get('monitor');
+      selectedSeries.setAddOptions({
+        monitor
+      });
     }
   },
 

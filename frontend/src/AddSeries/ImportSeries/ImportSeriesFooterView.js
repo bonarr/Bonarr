@@ -15,7 +15,14 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
   },
 
   events: {
-    'click .x-import': 'onImportSeries'
+    'click .x-import': 'onImportSeries',
+    'change .x-profile': 'onProfileChange',
+    'change .x-monitor': 'onMOnitorChange'
+  },
+
+  initialize(options) {
+    this.collection = options.collection;
+    this.listenTo(this.collection, 'selected change', this._updateInfo);
   },
 
   templateHelpers() {
@@ -24,19 +31,46 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
     };
   },
 
-  initialize(options) {
-    this.collection = options.collection;
-    this.listenTo(this.collection, 'selected', this._updateInfo);
-  },
+  _updateInfo(model) {
+    const selectedModels = this.collection.getSelected();
 
-  _updateInfo() {
-    const selectedCount = this.collection.getSelected().length;
+    const selectedCount = selectedModels.length;
     this.ui.selectedCount.text(selectedCount);
     this.ui.filedset.prop('disabled', !selectedCount);
+
+    const profileIds = _.unique(_.map(selectedModels, (_model) => {
+      return _model.get('profileId');
+    }));
+
+    const monitorTypes = _.unique(_.map(selectedModels, (_model) => {
+      return _model.get('monitor');
+    }));
+
+    if (profileIds.length === 1) {
+      this.ui.profileSelect.val(profileIds[0]);
+    }
+
+    if (monitorTypes.length === 1) {
+      this.ui.monitorSelect.val(monitorTypes[0]);
+    }
   },
 
   onRender() {
     this._updateInfo();
+  },
+
+  onProfileChange() {
+    const profileId = parseInt(this.ui.profileSelect.val());
+    const selectedModels = this.collection.getSelected();
+
+    _.each(selectedModels, (model) => {
+      debugger;
+      model.set('profileId', profileId);
+    });
+  },
+
+  onMOnitorChange() {
+
   },
 
   onImportSeries() {
