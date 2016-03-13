@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var jsbeautifier = require('gulp-jsbeautifier');
 var paths = require('./helpers/paths.js');
 
-gulp.task('pretty-hbs', function() {
+gulp.task('pretty-hbs', () => {
   gulp.src([
     paths.src.scripts
   ])

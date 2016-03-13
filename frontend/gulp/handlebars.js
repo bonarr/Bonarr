@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var gulpUtil = require('gulp-util');
 var handlebars = require('gulp-handlebars');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
@@ -10,12 +9,13 @@ var streamqueue = require('streamqueue');
 var stripbom = require('gulp-stripbom');
 var compliler = require('handlebars');
 
+var errorHandler = require('./helpers/errorHandler');
 var paths = require('./helpers/paths.js');
 
 console.log('Handlebars (gulp) Version: ', compliler.VERSION);
 console.log('Handlebars (gulp) Compiler: ', compliler.COMPILER_REVISION);
 
-gulp.task('handlebars', function() {
+gulp.task('handlebars', () => {
   var coreStream = gulp.src([
     paths.src.templates,
     '!*/**/*Partial.*'
@@ -26,11 +26,11 @@ gulp.task('handlebars', function() {
     .pipe(handlebars({
       handlebars: compliler
     }))
-    .on('error', gulpUtil.log)
+    .on('error', errorHandler)
     .pipe(declare({
       namespace: 'T',
       noRedeclare: true,
-      processName: function(filePath) {
+      processName: (filePath) => {
         filePath = path.relative(paths.src.root, filePath);
 
         return filePath.replace(/\\/g, '/')
@@ -47,7 +47,7 @@ gulp.task('handlebars', function() {
     .pipe(handlebars({
       handlebars: compliler
     }))
-    .on('error', gulpUtil.log)
+    .on('error', errorHandler)
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>, <%= contents %>)', {}, {
       imports: {

@@ -6,8 +6,10 @@ module.exports = function(source) {
   }
 
   var resourcePath = this.resourcePath.replace(rootPath, '');
-  var wrappedSource = '<!-- begin ' + resourcePath + ' -->\n' + source +
-    '\n<!-- end ' + resourcePath + ' -->';
+  var wrappedSource =`
+  <!-- begin ${resourcePath} -->
+    ${source}
+  <!-- end ${resourcePath} -->`;
 
   return wrappedSource;
 };

@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var paths = require('./helpers/paths.js');
 var stripbom = require('gulp-stripbom');
 
-var stripBom = function(dest) {
+function stripBom(dest) {
   gulp.src([paths.src.scripts, paths.src.exclude.libs])
     .pipe(stripbom({ showLog: false }))
     .pipe(gulp.dest(dest));
@@ -14,8 +14,8 @@ var stripBom = function(dest) {
   gulp.src(paths.src.templates)
     .pipe(stripbom({ showLog: false }))
     .pipe(gulp.dest(dest));
-};
+}
 
-gulp.task('stripBom', function() {
+gulp.task('stripBom', () => {
   stripBom(paths.src.root);
 });

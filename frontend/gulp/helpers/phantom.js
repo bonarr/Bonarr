@@ -1,9 +1,5 @@
-// Switch to phantom.
-// Example:
-//    gulp --phantom
-
 var phantom = false;
-process.argv.forEach(function(val, index, array) {
+process.argv.forEach((val) => {
   if (val === '--phantom') {
     phantom = true;
   }

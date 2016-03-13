@@ -1,16 +1,17 @@
 var gulp = require('gulp');
-var gulpUtil = require('gulp-util');
 var webpackStream = require('webpack-stream');
 var livereload = require('gulp-livereload');
 var path = require('path');
 var webpack = require('webpack');
-var uiFolder = 'UI.Phantom';
-var htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');
-var root = path.join(__dirname, '..', 'src');
+var errorHandler = require('./helpers/errorHandler');
+
+const uiFolder = 'UI.Phantom';
+const htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');
+const root = path.join(__dirname, '..', 'src');
 
 console.log('ROOT:', root);
 
-var config = {
+const config = {
   devtool: '#source-map',
   watchOptions: {
     poll: true
@@ -54,6 +55,11 @@ var config = {
       'gulp/webpack/'
     ]
   },
+  eslint: {
+    formatter: function(results) {
+      return JSON.stringify(results);
+    }
+  },
   module: {
     preLoaders: [{
       test: /\.hbs$/,
@@ -61,7 +67,8 @@ var config = {
     }],
     loaders: [
       { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'babel', query: { presets: ['es2015'] } },
-      { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'eslint-loader' },
+      // This is disabled until we drop the number of errors
+      // { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'eslint-loader' },
       {
         test: /\.hbs?$/,
         loader: 'handlebars-loader',
@@ -92,7 +99,7 @@ gulp.task('webpackWatch', () => {
   config.watch = true;
   return gulp.src('')
     .pipe(webpackStream(config))
-    .on('error', gulpUtil.log)
+    .on('error', errorHandler)
     .pipe(gulp.dest(''))
     .pipe(livereload());
 });

@@ -192,7 +192,7 @@
     computed-property-spacing: [2, "never"],
     consistent-this: [2, "self"],
     eol-last: 2,
-    func-names: 2,
+    func-names: 0,
     func-style: [2, "declaration"],
     indent: [2, 2, {"SwitchCase": 1}],
     key-spacing: [2, {"beforeColon": false, "afterColon": true}],

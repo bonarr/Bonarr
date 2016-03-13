@@ -6,7 +6,7 @@ require('./less');
 require('./handlebars');
 require('./copy');
 
-gulp.task('build', function() {
+gulp.task('build', () => {
   return runSequence('clean', [
     'webpack',
     'less',
