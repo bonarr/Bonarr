@@ -168,7 +168,7 @@
     no-undef: 2,
     no-undef-init: 0,
     no-undefined: 0,
-    no-unused-vars: 2,
+    no-unused-vars: [2, { "args": "none" }],
     no-use-before-define: 2,
 
     # Node.js and CommonJS
@@ -202,7 +202,7 @@
     max-nested-callbacks: [2, 4],
     max-params: [2, 4],
     max-statements: 0,
-    new-cap: 2,
+    new-cap: [2, {"capIsNewExceptions": ["$.Deferred"]}],
     new-parens: 2,
     newline-after-var: 0,
     newline-before-return: 0,

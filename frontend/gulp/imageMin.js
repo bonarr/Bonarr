@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var print = require('gulp-print');
 var paths = require('./helpers/paths.js');
 
-gulp.task('imageMin', function() {
+gulp.task('imageMin', () => {
   var imagemin = require('gulp-imagemin');
   return gulp.src(paths.src.images)
     .pipe(imagemin({

@@ -29,7 +29,7 @@ module.exports = Marionette.CompositeView.extend({
     }
 
     if (!data.message) {
-      data.message = 'An error occurred while searching for \'' + this.term + '\'';
+      data.message = `An error occurred while searching for '${this.term}'`;
     }
 
     return data;

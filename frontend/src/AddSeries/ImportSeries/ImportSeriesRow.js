@@ -27,8 +27,6 @@ const ImportSeriesRow = Marionette.Layout.extend({
     'change .x-monitor': '_assignMonitor'
   },
 
-
-
   initialize(options) {
     const queue = options.taskQueue;
     this.series = new SeriesSearchCollection();
@@ -65,7 +63,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   _assignProfile() {
     const series = this.model.get('selectedSeries');
-    const profileId = parseInt(this.ui.profileSelect.val(), 10);
+    const profileId = parseInt(this.ui.profileSelect.val());
 
     this.model.set('profileId', profileId);
 
