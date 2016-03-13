@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var _ = require('underscore');
 var titleWithYear = require('./Series/titleWithYear');
+var episodeProgressClass = require('./Series/episodeProgressClass');
 var route = require('./Series/route');
 
 var placeholderUrl = window.Sonarr.UrlBase + '/Content/Images/poster-dark.png';
@@ -90,3 +91,4 @@ Handlebars.registerHelper('seasonCountHelper', function() {
 });
 
 Handlebars.registerHelper('titleWithYear', titleWithYear);
+Handlebars.registerHelper('EpisodeProgressClass', episodeProgressClass);
