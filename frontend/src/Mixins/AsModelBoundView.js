@@ -1,4 +1,4 @@
-var ModelBinder = require('backbone.modelbinder');
+const ModelBinder = require('backbone.modelbinder');
 
 function asModelBoundView() {
   const originalOnRender = this.prototype.onRender;
@@ -9,11 +9,9 @@ function asModelBoundView() {
       throw Error('View has no model for binding');
     }
 
-    if (!this._modelBinder) {
-      this._modelBinder = new ModelBinder();
-    }
+    this._modelBinder = this._modelBinder || new ModelBinder();
 
-    var options = {
+    const options = {
       changeTriggers: {
         '': 'change typeahead:selected typeahead:autocompleted',
         '[contenteditable]': 'blur',
@@ -23,9 +21,7 @@ function asModelBoundView() {
 
     this._modelBinder.bind(this.model, this.el, this.bindings, options);
 
-    if (originalOnRender) {
-      originalOnRender.call(this);
-    }
+    return originalOnRender.apply(this, arguments);
   };
 
   this.prototype.onBeforeClose = function() {
@@ -35,12 +31,11 @@ function asModelBoundView() {
     }
 
     if (originalBeforeClose) {
-      originalBeforeClose.call(this);
+      return originalBeforeClose.apply(this, arguments);
     }
   };
 
   return this;
 }
-
 
 module.exports = asModelBoundView;
