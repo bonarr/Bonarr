@@ -3,7 +3,7 @@ var RootFolderModel = require('./RootFolderModel');
 require('Mixins/backbone.signalr.mixin');
 
 var RootFolderCollection = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/rootfolder',
+  url: '/rootfolder',
   model: RootFolderModel
 });
 

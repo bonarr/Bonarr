@@ -47,7 +47,7 @@ module.exports = Marionette.ItemView.extend({
     });
 
     var promise = $.ajax({
-      url: window.Sonarr.ApiRoot + '/seasonpass',
+      url: '/seasonpass',
       type: 'POST',
       data: JSON.stringify({
         series: _.map(selected, function(model) {

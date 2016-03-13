@@ -6,7 +6,7 @@ var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PagableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/wanted/missing',
+  url: '/wanted/missing',
   model: EpisodeModel,
   tableName: 'wanted.missing',
 

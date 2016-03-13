@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var TagModel = require('./TagModel');
 
 var Collection = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/tag',
+  url: '/tag',
   model: TagModel,
 
   comparator(model) {

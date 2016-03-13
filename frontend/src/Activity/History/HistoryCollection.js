@@ -5,7 +5,7 @@ var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PageableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/history',
+  url: '/history',
   model: HistoryModel,
 
   state: {

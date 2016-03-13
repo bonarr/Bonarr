@@ -2,7 +2,7 @@ var PageableCollection = require('backbone.paginator');
 var BackupModel = require('./BackupModel');
 
 module.exports = PageableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/system/backup',
+  url: '/system/backup',
   model: BackupModel,
 
   state: {

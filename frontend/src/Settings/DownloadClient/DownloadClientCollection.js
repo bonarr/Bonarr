@@ -3,7 +3,7 @@ var DownloadClientModel = require('./DownloadClientModel');
 
 module.exports = Backbone.Collection.extend({
   model: DownloadClientModel,
-  url: window.Sonarr.ApiRoot + '/downloadclient',
+  url: '/downloadclient',
 
   comparator(left, right, collection) {
     var result = 0;

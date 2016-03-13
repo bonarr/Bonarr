@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
-  urlRoot: window.Sonarr.ApiRoot + '/rootfolder',
+  urlRoot: '/rootfolder',
   defaults: {
     freeSpace: 0
   }

@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var EpisodeModel = require('Series/EpisodeModel');
 
 module.exports = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/calendar',
+  url: '/calendar',
   model: EpisodeModel,
   tableName: 'calendar',
 

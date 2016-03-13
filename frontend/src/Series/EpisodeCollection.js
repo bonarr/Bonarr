@@ -5,7 +5,7 @@ var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection')
 require('./EpisodeCollection');
 
 var EpisodeCollection = PageableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/episode',
+  url: '/episode',
   model: EpisodeModel,
 
   state: {

@@ -6,7 +6,7 @@ var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PagableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/wanted/cutoff',
+  url: '/wanted/cutoff',
   model: EpisodeModel,
   tableName: 'wanted.cutoff',
 

@@ -4,7 +4,7 @@ var spin = require('jQuery/jquery.spin');
 var ajax = require('jQuery/jquery.ajax');
 
 spin.call(jquery);
-ajax.call(jquery);
+ajax(jquery);
 
 window.$ = jquery;
 window.jQuery = jquery;

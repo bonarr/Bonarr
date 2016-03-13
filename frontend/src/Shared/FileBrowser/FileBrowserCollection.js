@@ -4,7 +4,7 @@ var FileBrowserModel = require('./FileBrowserModel');
 
 module.exports = Backbone.Collection.extend({
   model: FileBrowserModel,
-  url: window.Sonarr.ApiRoot + '/filesystem',
+  url: '/filesystem',
 
   parse(response) {
     var contents = [];

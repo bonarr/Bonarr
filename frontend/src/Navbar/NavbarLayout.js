@@ -46,7 +46,7 @@ module.exports = Marionette.Layout.extend({
     e.preventDefault();
 
     $.ajax({
-      url: window.Sonarr.ApiRoot + '/system/restart',
+      url: '/system/restart',
       type: 'POST'
     });
 
@@ -60,7 +60,7 @@ module.exports = Marionette.Layout.extend({
     e.preventDefault();
 
     $.ajax({
-      url: window.Sonarr.ApiRoot + '/system/shutdown',
+      url: '/system/shutdown',
       type: 'POST'
     });
 

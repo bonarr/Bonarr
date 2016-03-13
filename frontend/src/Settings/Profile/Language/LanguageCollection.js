@@ -3,7 +3,7 @@ var LanguageModel = require('./LanguageModel');
 
 var LanuageCollection = Backbone.Collection.extend({
   model: LanguageModel,
-  url: window.Sonarr.ApiRoot + '/language'
+  url: '/language'
 });
 
 var languages = new LanuageCollection();

@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 
 var StatusModel = Backbone.Model.extend({
-  url: window.Sonarr.ApiRoot + '/system/status'
+  url: '/system/status'
 });
 
 module.exports = new StatusModel();

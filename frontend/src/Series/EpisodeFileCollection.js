@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var EpisodeFileModel = require('./EpisodeFileModel');
 
 module.exports = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/episodefile',
+  url: '/episodefile',
   model: EpisodeFileModel,
 
   originalFetch: Backbone.Collection.prototype.fetch,

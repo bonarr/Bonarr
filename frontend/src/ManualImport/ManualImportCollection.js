@@ -4,7 +4,7 @@ var AsSortedCollection = require('Mixins/AsSortedCollection');
 
 var Collection = PageableCollection.extend({
   model: ManualImportModel,
-  url: window.Sonarr.ApiRoot + '/manualimport',
+  url: '/manualimport',
 
   state: {
     sortKey: 'quality',

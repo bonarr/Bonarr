@@ -154,7 +154,7 @@ module.exports = Marionette.Layout.extend({
 
   _showQueueNotification() {
     const promise = $.ajax({
-      url: window.Sonarr.ApiRoot + '/queue/status'
+      url: '/queue/status'
     });
 
     promise.done((data) => {

@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
   },
 
   methodUrls: {
-    'update': window.Sonarr.ApiRoot + '/episode'
+    update: '/episode'
   },
 
   sync(method, model, options) {

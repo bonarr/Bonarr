@@ -3,7 +3,7 @@ var IndexerModel = require('./IndexerModel');
 
 module.exports = Backbone.Collection.extend({
   model: IndexerModel,
-  url: window.Sonarr.ApiRoot + '/indexer',
+  url: '/indexer',
 
   comparator(left, right, collection) {
     var result = 0;

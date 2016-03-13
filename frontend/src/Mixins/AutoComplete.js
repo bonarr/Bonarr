@@ -26,23 +26,23 @@ $.fn.autoComplete = function(options) {
       var data = {};
       data[options.query] = filter;
       $.ajax({
-        url: window.Sonarr.ApiRoot + options.resource,
+        url: options.resource,
         dataType: 'json',
         type: 'GET',
-        data: data,
+        data,
         success(response) {
           if (options.filter) {
             options.filter.call(this, filter, response, callback);
           } else {
             var matches = [];
 
-            $.each(response, function(i, d) {
+            $.each(response, (i, d) => {
               if (d[options.query] && d[options.property].startsWith(filter)) {
                 matches.push({ value: d[options.property] });
               }
             });
 
-            callback(matches);
+            return callback(matches);
           }
         }
       });

@@ -9,7 +9,7 @@ var moment = require('moment');
 require('Mixins/backbone.signalr.mixin');
 
 var QueueCollection = PageableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/queue',
+  url: '/queue',
   model: QueueModel,
 
   state: {

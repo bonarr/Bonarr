@@ -4,7 +4,7 @@ var AsFilteredCollection = require('Mixins/AsFilteredCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var collection = PagableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/log',
+  url: '/log',
   model: LogsModel,
   tableName: 'logs',
 

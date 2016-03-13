@@ -1,7 +1,7 @@
 const Backbone = require('backbone');
 
 const UiSettings = Backbone.Model.extend({
-  url: window.Sonarr.ApiRoot + '/config/ui',
+  url: '/config/ui',
 
   shortDateTime(includeSeconds) {
     return this.get('shortDateFormat') + ' ' + this.time(true, includeSeconds);

@@ -4,7 +4,6 @@ var Marionette = require('marionette');
 var HistoryDetailsView = require('./HistoryDetailsView');
 var tpl = require('./HistoryDetailsLayout.hbs');
 
-
 module.exports = Marionette.Layout.extend({
   template: tpl,
 
@@ -21,15 +20,15 @@ module.exports = Marionette.Layout.extend({
   },
 
   _markAsFailed() {
-    var url = window.Sonarr.ApiRoot + '/history/failed';
+    var url = '/history/failed';
     var data = {
       id: this.model.get('id')
     };
 
     $.ajax({
-      url: url,
+      url,
       type: 'POST',
-      data: data
+      data
     });
 
     vent.trigger(vent.Commands.CloseFullscreenModal);

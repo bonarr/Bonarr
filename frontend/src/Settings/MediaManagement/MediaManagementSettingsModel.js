@@ -1,7 +1,7 @@
 var SettingsModelBase = require('../SettingsModelBase');
 
 module.exports = SettingsModelBase.extend({
-  url: window.Sonarr.ApiRoot + '/config/mediamanagement',
+  url: '/config/mediamanagement',
   successMessage: 'Media management settings saved',
   errorMessage: 'Failed to save media management settings'
 });

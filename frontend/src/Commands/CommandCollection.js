@@ -3,7 +3,7 @@ var CommandModel = require('./CommandModel');
 require('Mixins/backbone.signalr.mixin');
 
 var CommandCollection = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/command',
+  url: '/command',
   model: CommandModel,
 
   findCommand(command) {

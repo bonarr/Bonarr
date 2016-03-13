@@ -4,7 +4,7 @@ var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 
 var Collection = PageableCollection.extend({
-  url: window.Sonarr.ApiRoot + '/blacklist',
+  url: '/blacklist',
   model: BlacklistModel,
 
   state: {

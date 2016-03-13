@@ -1,6 +1,4 @@
 var $ = require('jquery');
-var vent = require('vent');
-var Marionette = require('marionette');
 var NzbDroneCell = require('Cells/NzbDroneCell');
 
 module.exports = NzbDroneCell.extend({
@@ -21,15 +19,15 @@ module.exports = NzbDroneCell.extend({
   },
 
   _markAsFailed() {
-    var url = window.Sonarr.ApiRoot + '/history/failed';
+    var url = '/history/failed';
     var data = {
       id: this.model.get('id')
     };
 
     $.ajax({
-      url: url,
+      url,
       type: 'POST',
-      data: data
+      data
     });
   }
 });

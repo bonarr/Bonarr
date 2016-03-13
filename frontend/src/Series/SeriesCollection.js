@@ -5,7 +5,7 @@ var BackboneSortedCollection = require('backbone.sorted.collection');
 var moment = require('moment');
 
 var SeriesCollection = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/series',
+  url: '/series',
   model: SeriesModel,
   tableName: 'series',
 

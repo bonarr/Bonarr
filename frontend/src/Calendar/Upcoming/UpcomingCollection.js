@@ -3,7 +3,7 @@ var moment = require('moment');
 var EpisodeModel = require('Series/EpisodeModel');
 
 module.exports = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/calendar',
+  url: '/calendar',
   model: EpisodeModel,
 
   comparator(model1, model2) {

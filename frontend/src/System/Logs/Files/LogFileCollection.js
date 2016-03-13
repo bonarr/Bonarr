@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var LogFileModel = require('./LogFileModel');
 
 module.exports = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/log/file',
+  url: '/log/file',
   model: LogFileModel,
 
   state: {

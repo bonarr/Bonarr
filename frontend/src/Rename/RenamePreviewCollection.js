@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 var RenamePreviewModel = require('./RenamePreviewModel');
 
 module.exports = Backbone.Collection.extend({
-  url: window.Sonarr.ApiRoot + '/rename',
+  url: '/rename',
   model: RenamePreviewModel,
 
   originalFetch: Backbone.Collection.prototype.fetch,

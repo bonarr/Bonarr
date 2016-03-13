@@ -41,7 +41,7 @@ module.exports = TemplatedCell.extend({
     var data = _.omit(this.model.toJSON(), 'series', 'episode');
 
     var promise = $.ajax({
-      url: window.Sonarr.ApiRoot + '/queue/grab',
+      url: '/queue/grab',
       type: 'POST',
       data: JSON.stringify(data)
     });

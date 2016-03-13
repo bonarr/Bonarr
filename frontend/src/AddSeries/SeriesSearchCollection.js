@@ -4,7 +4,7 @@ var SeriesModel = require('Series/SeriesModel');
 var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 
 let SeriesSearchCollection = Backbone.Collection.extend({
-  url: `${window.Sonarr.ApiRoot}/series/lookup`,
+  url: '/series/lookup',
   model: SeriesModel,
 
   parse(response) {
