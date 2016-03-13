@@ -14,11 +14,11 @@ const AddNewSeriesLayout = Marionette.Layout.extend({
   template: tpl,
 
   ui: {
-    seriesSearch: '.x-search-box'
+    searchInput: '.x-search-input'
   },
 
   events: {
-    'keyup .x-search-box': 'onSearchKeyUp'
+    'keyup .x-search-input': 'onSearchInputKeyUp'
   },
 
   regions: {
@@ -46,18 +46,14 @@ const AddNewSeriesLayout = Marionette.Layout.extend({
       return;
     }
 
-    const term = this.ui.seriesSearch.val();
-    if (term) {
-      this.collection.search(term);
-    } else {
-      this.collection.abort();
-    }
+    const term = this.ui.searchInput.val();
+    this.collection.search(term);
   },
 
   onShow() {
     this.searchResult.show(new EmptyView());
-    this.ui.seriesSearch.focus();
-    this.ui.seriesSearch.text('wire');
+    this.ui.searchInput.focus();
+    this.ui.searchInput.text('wire');
     this.search();
   },
 
@@ -65,9 +61,13 @@ const AddNewSeriesLayout = Marionette.Layout.extend({
     this.collection.abort();
   },
 
-  onSearchKeyUp(e) {
-    this.collection.abort();
-    const term = this.ui.seriesSearch.val().trim();
+  onSearchInputKeyUp(e) {
+    const term = this.ui.searchInput.val().trim();
+
+    if (!term) {
+      this.collection.abort();
+      this.collection.reset();
+    }
 
     // force search if key is Enter
     if (e.keyCode === 13) {
@@ -76,18 +76,7 @@ const AddNewSeriesLayout = Marionette.Layout.extend({
       return;
     }
 
-    if (this.term === term) {
-      return;
-    }
-
-    this.term = term;
-
-    if (term) {
-      this.debouncedSearch();
-    } else {
-      this.collection.abort();
-      this.collection.reset();
-    }
+    this.debouncedSearch();
   },
 
   onCollectionSync() {

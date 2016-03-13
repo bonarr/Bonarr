@@ -1,7 +1,12 @@
 <li class="import-search">
   <div class="input-group">
     <div class="input-group-addon"><i class="icon-sonarr-search"></i></div>
-    <input type="text" class="import-search-input form-control x-search-input" placeholder="{{name}}" value="{{name}}">
+    <input type="text" class="import-search-input form-control x-search-input" placeholder="{{name}}" value="{{searchTerm}}">
+  </div>
+</li>
+<li class="spinner">
+  <div class="spinner-small">
+    {{> ../../Shared/LoadingPartial}}
   </div>
 </li>
 {{#if suggestions}}
@@ -17,7 +22,7 @@
 {{else}}
   <li class="suggestion">
     <a class="disabled">
-      <i class="icon-sonarr-warning"></i> No match found
+      <i class="icon-sonarr-warning"></i> No match found for '{{searchTerm}}'
     </a>
   </li>
 {{/if}}

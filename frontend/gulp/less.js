@@ -32,6 +32,7 @@ gulp.task('less', () => {
     .pipe(postcss([autoprefixer({
       browsers: ['last 2 versions']
     })]))
+    .on('error', errorHandler)
 
     // not providing a path will cause the source map
     // to be embeded. which makes livereload much happier
@@ -39,5 +40,6 @@ gulp.task('less', () => {
     // this should be switched to sourcemaps.write('./') for production builds
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest.content))
+    .on('error', errorHandler)
     .pipe(livereload());
 });

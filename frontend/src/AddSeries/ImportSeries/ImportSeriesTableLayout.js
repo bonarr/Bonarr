@@ -35,11 +35,11 @@ const EmptyView = Marionette.Layout.extend({
     const rootFolderId = options.rootFolderId;
     this.folderPromise = $.Deferred();
 
-    rootFolderCollection.fetch().
-    done(() => {
-      const rootFolder = rootFolderCollection.get(rootFolderId);
-      rootFolder.fetch().done(() => this.folderPromise.resolve(rootFolder));
-    });
+    rootFolderCollection.fetch()
+      .done(() => {
+        const rootFolder = rootFolderCollection.get(rootFolderId);
+        rootFolder.fetch().done(() => this.folderPromise.resolve(rootFolder));
+      });
   },
 
   onShow() {
@@ -50,7 +50,7 @@ const EmptyView = Marionette.Layout.extend({
       const collection = new ImportSeriesCollection(unmapped);
 
       const tableView = new TableView({
-        collection: collection,
+        collection,
         itemView: ImportSeriesRow,
         headers: this.headers,
         selectable: true,

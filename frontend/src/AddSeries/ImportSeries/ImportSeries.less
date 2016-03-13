@@ -59,9 +59,26 @@
       padding-right: 5px;
     }
 
-    .suggestion {
-      a {
-        padding: 10px;
+    .dropdown-menu {
+      li.spinner {
+        display: none;
+        height: 40px;
+      }
+
+      .suggestion {
+        a {
+          padding: 10px;
+        }
+      }
+
+      &.state-loading {
+        li.spinner {
+          display: list-item;
+        }
+
+        .suggestion {
+          display: none;
+        }
       }
     }
   }

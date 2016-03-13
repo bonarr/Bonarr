@@ -20,14 +20,19 @@ let SeriesSearchCollection = Backbone.Collection.extend({
 
   search(term) {
     term = term.trim();
-    if (this.searchPromise) {
-      if (this.term === term) {
-        return this.searchPromise;
-      }
 
+    if (!term) {
       this.abort();
+      this.reset();
+      return;
     }
 
+    if (this.searchPromise && this.term === term) {
+      return this.searchPromise;
+    }
+
+    this.abort();
+    this.reset();
     this.term = term;
 
     console.log(`Searching for [${term}]`);

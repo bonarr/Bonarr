@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var Marionette = require('marionette');
 var tpl = require('./SeriesSuggestionsView.hbs');
 
@@ -12,7 +13,7 @@ const SeriesSuggestionsView = Marionette.ItemView.extend({
   },
 
   events: {
-    'keyup .x-search-input': 'onSearchInputKeyup',
+    'keyup .x-search-input': 'onSearchInputKeyUp',
     'click .x-suggestion': 'onSuggestionClick'
   },
 
@@ -21,19 +22,74 @@ const SeriesSuggestionsView = Marionette.ItemView.extend({
     this.debouncedSearch = _.debounce(_.bind(this.search, this), 1000);
   },
 
+  search() {
+    if (this.closed) {
+      return;
+    }
+
+    const term = this.ui.searchInput.val();
+    this.series.search(term);
+  },
+
   templateHelpers() {
     return {
+      searchTerm: this.series.term,
       suggestions: this.series.toJSON()
     };
   },
 
   onShow() {
     this.stopListening(this.series);
-    this.listenTo(this.series, 'sync reset', this.render);
+    this.listenTo(this.series, {
+      'sync': this.render,
+      'request': this.onCollectionRequest
+    });
+    this.ui.searchInput.focus();
   },
 
-  onSearchInputChange() {
+  onRender() {
+    this.ui.searchInput.focus();
+    this.ui.searchInput.val(this.series.term);
+  },
 
+  onSearchInputKeyUp(e) {
+    const term = this.ui.searchInput.val().trim();
+
+    if (!term) {
+      this.series.abort();
+      this.series.reset();
+    }
+
+    // force search if key is Enter
+    if (e.keyCode === 13) {
+      this.term = term;
+      this.search();
+      return;
+    }
+
+    this.debouncedSearch();
+  },
+
+  onCollectionRequest(collection, xhr) {
+    this.$el.addClass('state-loading');
+    xhr.error(() => {
+      if (this.isClosed) {
+        return;
+      }
+      if (status === 'abort') {
+        this.searchResult.close();
+      } else {
+        // this.searchResult.show(new ErrorView({
+        //   term: this.collection.term,
+        //   xhr
+        // }));
+        this.collection.term = '';
+      }
+    });
+
+    xhr.always(() => {
+      this.$el.removeClass('state-loading');
+    });
   },
 
   onSuggestionClick(e) {
