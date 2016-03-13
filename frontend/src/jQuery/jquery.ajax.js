@@ -4,6 +4,10 @@ const absUrlRegex = /^(https?\:)?\/\//i;
 const apiRoot = window.Sonarr.ApiRoot;
 const urlBase = window.Sonarr.urlBase;
 
+function isRelative(xhr) {
+  return !absUrlRegex.test(xhr.url);
+}
+
 function moveBodyToQuery(xhr) {
   if (xhr.data && xhr.type === 'DELETE') {
     if (xhr.url.contains('?')) {
@@ -18,7 +22,7 @@ function moveBodyToQuery(xhr) {
 
 function addRootUrl(xhr) {
   const url = xhr.url;
-  if (!absUrlRegex.test(url) && !url.startsWith(urlBase)) {
+  if (!url.startsWith(urlBase)) {
     if (url.startsWith('signalr')) {
       xhr.url = urlBase + xhr.url;
     } else {
@@ -35,7 +39,7 @@ function addApiKey(xhr) {
 module.exports = function(jQuery) {
   const originalAjax = jQuery.ajax;
   jQuery.ajax = function(xhr) {
-    if (xhr) {
+    if (xhr && isRelative(xhr)) {
       moveBodyToQuery(xhr);
       addRootUrl(xhr);
       addApiKey(xhr);
