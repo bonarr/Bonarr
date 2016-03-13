@@ -1,12 +1,12 @@
 var ModelBinder = require('backbone.modelbinder');
 
-module.exports = function() {
-  var originalOnRender = this.prototype.onRender;
-  var originalBeforeClose = this.prototype.onBeforeClose;
+function asModelBoundView() {
+  const originalOnRender = this.prototype.onRender;
+  const originalBeforeClose = this.prototype.onBeforeClose;
 
   this.prototype.onRender = function() {
     if (!this.model) {
-      throw 'View has no model for binding';
+      throw Error('View has no model for binding');
     }
 
     if (!this._modelBinder) {
@@ -21,7 +21,7 @@ module.exports = function() {
       }
     };
 
-    this._modelBinder.bind(this.model, this.el, null, options);
+    this._modelBinder.bind(this.model, this.el, this.bindings, options);
 
     if (originalOnRender) {
       originalOnRender.call(this);
@@ -40,4 +40,7 @@ module.exports = function() {
   };
 
   return this;
-};
+}
+
+
+module.exports = asModelBoundView;

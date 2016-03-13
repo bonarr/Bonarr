@@ -3,6 +3,7 @@ var TableRowMixin = require('Table/TableRowMixin');
 var SeriesSuggestionsView = require('./SeriesSuggestionsView');
 var SeriesSearchCollection = require('../SeriesSearchCollection');
 var profileCollection = require('Profile/profileCollection');
+var asModelBoundView = require('Mixins/AsModelBoundView');
 var tpl = require('./ImportSeriesRow.hbs');
 
 const ImportSeriesRow = Marionette.Layout.extend({
@@ -25,6 +26,15 @@ const ImportSeriesRow = Marionette.Layout.extend({
     'click .x-series-dropdown': 'onSeriesDropdownClick',
     'change .x-profile': '_assignProfile',
     'change .x-monitor': '_assignMonitor'
+  },
+
+  bindings: {
+    profileId: {
+      selector: '[name=profileId]',
+      converter(direction, value, attribute, model) {
+        return parseInt(value);
+      }
+    }
   },
 
   initialize(options) {
@@ -126,5 +136,6 @@ const ImportSeriesRow = Marionette.Layout.extend({
 });
 
 TableRowMixin(ImportSeriesRow);
+asModelBoundView.apply(ImportSeriesRow);
 
 module.exports = ImportSeriesRow;
