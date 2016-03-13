@@ -7,7 +7,6 @@ require('./Helpers/Episode');
 require('./Helpers/Series');
 require('./Helpers/Quality');
 require('./Helpers/System');
-require('./Helpers/EachReverse');
 require('./Helpers/String');
 require('./Helpers/StarRating');
 require('./Handlebars.Debug');

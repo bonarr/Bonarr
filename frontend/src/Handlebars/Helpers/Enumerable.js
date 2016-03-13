@@ -1,16 +1,13 @@
-var Handlebars = require('handlebars');
+const handlebars = require('handlebars');
+const eachReverse = require('./Enumerable/eachReverse');
+const times = require('./Enumerable/times');
+const forHelper = require('./Enumerable/for');
 
-Handlebars.registerHelper('times', function(n, block) {
-  var accum = '';
+handlebars.registerHelper('eachReverse', eachReverse);
+handlebars.registerHelper('times', times);
+handlebars.registerHelper('for', forHelper);
 
-  for (var i = 0; i < n; ++i) {
-    accum += block.fn(i);
-  }
-
-  return accum;
-});
-
-Handlebars.registerHelper('for', function(from, to, incr, block) {
+handlebars.registerHelper('for', function(from, to, incr, block) {
   var accum = '';
 
   for (var i = from; i < to; i += incr) {

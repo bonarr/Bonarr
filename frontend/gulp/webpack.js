@@ -81,7 +81,8 @@ const config = {
             root + '/Handlebars/Helpers/DateTime',
             root + '/Handlebars/Helpers/Object',
             root + '/Handlebars/Helpers/Number',
-            root + '/Handlebars/Helpers/String'
+            root + '/Handlebars/Helpers/String',
+            root + '/Handlebars/Helpers/Enumerable'
           ],
           knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
         }
