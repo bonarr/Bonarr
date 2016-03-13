@@ -1,4 +1,3 @@
-var vent = require('vent');
 var Marionette = require('marionette');
 var AsModelBoundView = require('Mixins/AsModelBoundView');
 

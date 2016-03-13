@@ -15,18 +15,17 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   setTitle(title) {
-    title = title;
     if (title === 'Sonarr') {
       document.title = 'Sonarr';
     } else {
-      document.title = title + ' - Sonarr';
+      document.title = `${title} - Sonarr`;
     }
 
     if (window.Sonarr.Analytics && window.Piwik) {
       try {
-        var piwik = window.Piwik.getTracker(window.location.protocol + '//piwik.nzbdrone.com/piwik.php', 1);
+        var piwik = window.Piwik.getTracker(`${window.location.protocol}//piwik.nzbdrone.com/piwik.php`, 1);
         piwik.setReferrerUrl('');
-        piwik.setCustomUrl('http://local' + window.location.pathname);
+        piwik.setCustomUrl(`http://local${window.location.pathname}`);
         piwik.setCustomVariable(1, 'version', window.Sonarr.Version, 'page');
         piwik.setCustomVariable(2, 'branch', window.Sonarr.Branch, 'page');
         piwik.trackPageView(title);
@@ -37,7 +36,8 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _onServerUpdated() {
-    var label = window.location.pathname === window.Sonarr.UrlBase + '/system/updates' ? 'Reload' : 'View Changes';
+    const updateUrl = `${window.Sonarr.UrlBase}/system/updates`;
+    var label = window.location.pathname === updateUrl ? 'Reload' : 'View Changes';
 
     Messenger.show({
       message: 'Sonarr has been updated',
@@ -45,9 +45,9 @@ module.exports = Marionette.AppRouter.extend({
       id: 'sonarrUpdated',
       actions: {
         viewChanges: {
-          label: label,
+          label,
           action() {
-            window.location = window.Sonarr.UrlBase + '/system/updates';
+            window.location = updateUrl;
           }
         }
       }
