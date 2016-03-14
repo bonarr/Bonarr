@@ -21,7 +21,9 @@ function asModelBoundView() {
 
     this._modelBinder.bind(this.model, this.el, this.bindings, options);
 
-    return originalOnRender.apply(this, arguments);
+    if (originalOnRender) {
+      return originalOnRender.apply(this, arguments);
+    }
   };
 
   this.prototype.onBeforeClose = function() {

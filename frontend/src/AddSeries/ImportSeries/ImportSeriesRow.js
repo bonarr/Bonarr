@@ -5,6 +5,7 @@ var SeriesSearchCollection = require('../SeriesSearchCollection');
 var profileCollection = require('Profile/profileCollection');
 var asModelBoundView = require('Mixins/AsModelBoundView');
 var tpl = require('./ImportSeriesRow.hbs');
+var errorPopoverTemplate = require('Shared/ApiErrorPopover.hbs');
 
 const ImportSeriesRow = Marionette.Layout.extend({
   template: tpl,
@@ -17,7 +18,8 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   ui: {
     seriesSelectWarning: '.x-series-select-warning',
-    seriesSelectTitle: '.x-series-select-title'
+    seriesSelectTitle: '.x-series-select-title',
+    errors: '.x-errors'
   },
 
   events: {
@@ -59,6 +61,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
         this.onSelectedSeriesChanged();
       }
     });
+  },
+
+  onRender() {
+    this.ui.errors.html(errorPopoverTemplate());
+    this.$('[data-toggle="popover"]').popover();
   },
 
   serializeData() {
