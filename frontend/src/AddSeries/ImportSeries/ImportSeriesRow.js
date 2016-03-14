@@ -17,8 +17,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   ui: {
     seriesSelectWarning: '.x-series-select-warning',
-    seriesSelectTitle: '.x-series-select-title',
-    monitorSelect: '.x-monitor'
+    seriesSelectTitle: '.x-series-select-title'
   },
 
   events: {
@@ -27,11 +26,11 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   bindings: {
     profileId: {
-      selector: '[name=profileId]',
       converter(direction, value, attribute, model) {
         return parseInt(value);
       }
-    }
+    },
+    monitor: {}
   },
 
   initialize(options) {
@@ -84,20 +83,13 @@ const ImportSeriesRow = Marionette.Layout.extend({
 
   onMonitorChange() {
     const series = this.model.get('selectedSeries');
-    const monitor = this.ui.monitorSelect.val();
-
-    this.model.set('monitor', monitor);
+    const monitor = this.model.get('monitor');
 
     if (series && monitor) {
       series.setAddOptions({
         monitor
       });
     }
-  },
-
-  onRender() {
-    // this.onProfileIdChange();
-    this.onMonitorChange();
   },
 
   onSelectedSeriesChanged() {

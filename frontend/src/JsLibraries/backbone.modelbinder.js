@@ -155,9 +155,8 @@
         for (bindingCount = 0; bindingCount < attributeBinding.elementBindings.length; bindingCount++) {
           elementBinding = attributeBinding.elementBindings[bindingCount];
           if (elementBinding.selector === undefined){
-            foundEls = $('[' + this._options['boundAttribute'] + ']', this._rootEl);
-          }
-          if (elementBinding.selector === '') {
+            foundEls = $('[' + this._options['boundAttribute'] + '=' + bindingKey + ']', this._rootEl);
+          } else if (elementBinding.selector === '') {
             foundEls = $(this._rootEl);
           } else {
             foundEls = $(elementBinding.selector, this._rootEl);

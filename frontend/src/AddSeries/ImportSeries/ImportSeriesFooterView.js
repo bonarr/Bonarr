@@ -17,7 +17,7 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
   events: {
     'click .x-import': 'onImportSeries',
     'change .x-profile': 'onProfileChange',
-    'change .x-monitor': 'onMOnitorChange'
+    'change .x-monitor': 'onMonitorChange'
   },
 
   initialize(options) {
@@ -64,13 +64,17 @@ const ImportSeriesFooterView = Marionette.ItemView.extend({
     const selectedModels = this.collection.getSelected();
 
     _.each(selectedModels, (model) => {
-      debugger;
       model.set('profileId', profileId);
     });
   },
 
-  onMOnitorChange() {
+  onMonitorChange() {
+    const monitor = this.ui.monitorSelect.val();
+    const selectedModels = this.collection.getSelected();
 
+    _.each(selectedModels, (model) => {
+      model.set('monitor', monitor);
+    });
   },
 
   onImportSeries() {

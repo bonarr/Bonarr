@@ -1,9 +1,15 @@
 const Backbone = require('backbone');
+const profileCollection = require('Profile/ProfileCollection');
 
 const ImportSeriesModel = Backbone.Model.extend({
 
   initialize() {
     this.listenTo(this, 'change:selectedSeries', this.onSelectedSeriesChanged);
+
+    this.set({
+      profileId: profileCollection.first().id,
+      monitor: 'all'
+    });
   },
 
   isSelectable() {
