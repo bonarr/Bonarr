@@ -1,19 +1,26 @@
-const handlebars = require('handlebars');
 const moment = require('moment');
 const FormatHelpers = require('Shared/FormatHelpers');
+const seriesCollection = require('Series/SeriesCollection');
 
 function episodeNumber() {
+  const series = seriesCollection.get(this.seriesId);
+  const seriesType = series.get('seriesType');
+
+  if (seriesType === 'daily') {
+    return moment(this.airDate).format('L');
+  }
+
   const seasonNumber = this.seasonNumber;
   const paddedEpisodeNumber = FormatHelpers.pad(this.episodeNumber, 2);
   const absoluteEpisodeNumber = FormatHelpers.pad(this.absoluteEpisodeNumber, 2);
 
-  if (this.series.seriesType === 'daily') {
-    return moment(this.airDate).format('L');
-  } else if (this.series.seriesType === 'anime' && absoluteEpisodeNumber !== undefined) {
-    return `${seasonNumber}x${paddedEpisodeNumber} (${absoluteEpisodeNumber})`;
+  let number = `${seasonNumber}x${paddedEpisodeNumber}`;
+
+  if (seriesType === 'anime' && absoluteEpisodeNumber !== undefined) {
+    number = number += ` (${absoluteEpisodeNumber})`;
   }
 
-  return `${seasonNumber}x${paddedEpisodeNumber}`;
+  return number;
 }
 
 module.exports = episodeNumber;

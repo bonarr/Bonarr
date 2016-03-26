@@ -9,7 +9,7 @@
 {{/if}}
 
 <td class="episode-number x-episode-number">
-  {{episodeNumber}}
+  {{episodeNumber .}}
   {{#if_eq seriesType compare="anime"}}
     {{#if absoluteEpisodeNumber}}({{absoluteEpisodeNumber}}){{/if}}
   {{/if_eq}}

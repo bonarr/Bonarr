@@ -93,6 +93,10 @@ module.exports = Backbone.Model.extend({
           addOptions.ignoreEpisodesWithoutFiles = true;
           break;
         }
+      default:
+        {
+          console.warn('Unknow monitor type', options.monitor);
+        }
     }
 
     this.set('addOptions', addOptions, {
