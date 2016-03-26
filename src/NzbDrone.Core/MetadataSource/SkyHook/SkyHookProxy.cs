@@ -26,8 +26,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
              _requestBuilder = requestBuilder.SkyHookTvdb;
             _logger = logger;
             _seriesService = seriesService;
-
-            _requestBuilder = new HttpRequestBuilder("http://skyhook.sonarr.tv/v1/tvdb/{route}/en/");
+            _requestBuilder = requestBuilder.SkyHookTvdb;
         }
 
         public Tuple<Series, List<Episode>> GetSeriesInfo(int tvdbSeriesId)

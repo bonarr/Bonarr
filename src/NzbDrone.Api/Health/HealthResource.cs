@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NzbDrone.Api.REST;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.HealthCheck;
+using Sonarr.Http.REST;
 
 namespace NzbDrone.Api.Health
 {
