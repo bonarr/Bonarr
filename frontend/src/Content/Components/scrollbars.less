@@ -1,47 +1,28 @@
 //
 // Scrollbars
 // --------------------------------------------------
-
-
 // Minimal
 // ------------------------
-
-@scrollbar-width: 12px;
-
-.scrollbar {
-  scrollbar-face-color: @actionbar-bg;
-  scrollbar-arrow-color: @actionbar-bg;
-  scrollbar-track-color: @gray-dark;
-  scrollbar-shadow-color: @gray-dark;
-  scrollbar-highlight-color: @gray-dark;
-  scrollbar-3dlight-color: @gray-dark;
-  scrollbar-darkshadow-color: @gray-dark;
-
-  &::-webkit-scrollbar {
-    width: @scrollbar-width;
+@scrollbar-color: lighten(@gray-dark, 40%);
+&::-webkit-scrollbar {
+  width: 10px;
+}
+&::-webkit-scrollbar-track {
+  // no background
+}
+&::-webkit-scrollbar-thumb {
+  background-color: @scrollbar-color;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  min-height: 50px;
+  &:hover {
+    background-color: darken(@scrollbar-color, 20);
   }
-
-  &::-webkit-scrollbar-track {
-    background-color: @gray-dark;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.25);
-    background-clip: padding-box;
-    border: 3px solid transparent;
-    border-radius: 8px;
-    min-height: 50px;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.35);
-    }
-
-    &:window-inactive {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
+  &:window-inactive {
+    background-color: lighten(@gray-dark, 50);
   }
 }
-
-.thumb-scrollbar&::-webkit-scrollbar-track {
+.thumb-scrollbar &::-webkit-scrollbar-track {
   background: none;
 }
