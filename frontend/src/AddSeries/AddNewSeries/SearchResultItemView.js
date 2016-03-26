@@ -32,7 +32,7 @@ const SearchResultItemView = Marionette.ItemView.extend({
 
     this.ui.lazyImage.lazyload({
       threshold: 200,
-      container: $('.content-wrapper')
+      container: $('#content-wrapper')
     });
   },
 

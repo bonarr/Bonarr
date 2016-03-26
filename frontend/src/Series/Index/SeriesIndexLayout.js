@@ -89,7 +89,7 @@ module.exports = Marionette.Layout.extend({
 
     this.$('img.lazy').lazyload({
       threshold: 200,
-      container: $('.content-wrapper')
+      container: $('#content-wrapper')
     });
   },
 
@@ -128,7 +128,9 @@ module.exports = Marionette.Layout.extend({
     }
   },
 
-  _fetchCollection() {},
+  _fetchCollection() {
+    // do nothing?
+  },
 
   _showActionBar() {
     var actions = {
@@ -240,7 +242,7 @@ module.exports = Marionette.Layout.extend({
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
       collection: this.seriesCollection,
-      actions: actions,
+      actions,
       views: viewOptions,
       filtering: filteringOptions,
       sorting: sortingOptions
@@ -256,7 +258,7 @@ module.exports = Marionette.Layout.extend({
     var continuing = 0;
     var monitored = 0;
 
-    _.each(SeriesCollection.models, function(model) {
+    _.each(SeriesCollection.models, (model) => {
       episodes += model.get('episodeCount');
       episodeFiles += model.get('episodeFileCount');
 
@@ -272,13 +274,13 @@ module.exports = Marionette.Layout.extend({
     });
 
     footerModel.set({
-      series: series,
-      ended: ended,
-      continuing: continuing,
-      monitored: monitored,
+      series,
+      ended,
+      continuing,
+      monitored,
       unmonitored: series - monitored,
-      episodes: episodes,
-      episodeFiles: episodeFiles
+      episodes,
+      episodeFiles
     });
 
     this.footer.show(new FooterView({ model: footerModel }));

@@ -8,10 +8,11 @@ const FullScreenModalRegion = Marionette.Region.extend({
   el: '#fullscreen-modal-region',
 
   initialize() {
+    this.$window = $(window);
     _.bindAll(this, 'close', 'onKeypress', 'resizeBody');
-    this.debouncedResize = _.debounce(this.resizeBody, 200);
     $(document).on('keyup', this.onKeypress);
-    $(window).resize(_.debounce(this.debouncedResize, 100));
+    const debouncedResize = _.debounce(this.resizeBody, 200);
+    this.$window.resize(debouncedResize);
   },
 
   close() {
@@ -39,7 +40,10 @@ const FullScreenModalRegion = Marionette.Region.extend({
       return;
     }
 
-    this.$el.find('.fullscreen-modal-body').css('max-height', ($(window).height() - 190) + 'px');
+    const windowHeight = this.$window.height();
+    const maxHeight = windowHeight - 190;
+
+    this.$el.find('.fullscreen-modal-body').css('max-height', `${maxHeight}px`);
   },
 
   onShow() {
