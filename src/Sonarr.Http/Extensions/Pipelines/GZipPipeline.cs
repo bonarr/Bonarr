@@ -49,6 +49,10 @@ namespace Sonarr.Http.Extensions.Pipelines
                         {
                             contents.Invoke(buffered);
                         }
+                            using (var gzip = new GZipStream(s, CompressionMode.Compress, true))
+                            {
+                                data.CopyTo(gzip);
+                            }
                     };
                 }
             }
