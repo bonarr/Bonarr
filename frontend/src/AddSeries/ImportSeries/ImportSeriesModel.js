@@ -25,15 +25,7 @@ const ImportSeriesModel = Backbone.Model.extend({
     }
 
     this._currentlySelectedSeries = newSelectedSeries;
-    this.listenTo(this._currentlySelectedSeries, 'request', this.onSeriesRequest);
-  },
-
-  onSeriesRequest(model, xhr, options) {
-    xhr.done(() => {
-      this.collection.remove(this);
-    });
   }
-
 });
 
 module.exports = ImportSeriesModel;

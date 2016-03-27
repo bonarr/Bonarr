@@ -79,11 +79,7 @@ const SeriesSuggestionsView = Marionette.ItemView.extend({
       if (status === 'abort') {
         this.searchResult.close();
       } else {
-        // this.searchResult.show(new ErrorView({
-        //   term: this.collection.term,
-        //   xhr
-        // }));
-        this.collection.term = '';
+        this.series.term = '';
       }
     });
 
