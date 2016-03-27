@@ -1,7 +1,7 @@
 var _ = require('underscore');
 require('jQuery/jquery.validation');
 
-module.exports = function() {
+function asValidatedView() {
   const originalInitialize = this.prototype.initialize;
 
   const extentions = {
@@ -9,8 +9,7 @@ module.exports = function() {
       // Validation.bind(this);
       this.listenTo(this, {
         'validation:failed': this.validatedView_onValidationFailed,
-        'validation:reset': this.validatedView_onValidationReset,
-        'close': this.validatedView_onClose
+        'validation:reset': this.validatedView_onValidationReset
       });
 
       if (this.model) {
@@ -39,14 +38,12 @@ module.exports = function() {
       _.each(response.responseJSON, (error) => {
         this.$el.processServerError(error);
       });
-    },
-
-    validatedView_onClose() {
-      // Validation.unbind(this);
     }
   };
 
   this.prototype = _.extend(this.prototype, extentions);
 
   return this;
-};
+}
+
+module.exports = asValidatedView;
