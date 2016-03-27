@@ -1966,7 +1966,7 @@ var Marionette = (function(global, Backbone, _) {
           this.listenTo(this.collection, "remove", this.removeItemView);
           this.listenTo(this.collection, "reset", this._renderChildren);
         }
-      });
+      }, this);
     },
 
     // Retrieve the `itemView` to be used when rendering each of
