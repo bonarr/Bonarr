@@ -3,18 +3,15 @@
       data-container="#main-region"
       data-toggle="popover"
       data-placement="auto"
-      data-trigger="click"
+      data-trigger="hover"
       data-html="true",
       data-content="<ul class='api-error-content'>
+        {{#each .}}
         <li>
-          a1
+          {{errorMessage}}
         </li>
-        <li>
-          a1
-        </li>
-        <li>
-          a1
-        </li>
+        {{/each}}
       </ul>">
   <i class="icon-sonarr-form-danger"></i>
 </span>
+{{debug}}

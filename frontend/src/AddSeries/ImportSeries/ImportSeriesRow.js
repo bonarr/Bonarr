@@ -47,7 +47,8 @@ const ImportSeriesRow = Marionette.Layout.extend({
     this.listenTo(this.model, {
       'change:selectedSeries': this.onSelectedSeriesChanged,
       'change:profileId': this.onProfileIdChange,
-      'change:monitor': this.onMonitorChange
+      'change:monitor': this.onMonitorChange,
+      'error': this.onModelError
     });
 
     this.promise.always(() => {
@@ -61,11 +62,6 @@ const ImportSeriesRow = Marionette.Layout.extend({
         this.onSelectedSeriesChanged();
       }
     });
-  },
-
-  onRender() {
-    this.ui.errors.html(errorPopoverTemplate());
-    this.$('[data-toggle="popover"]').popover();
   },
 
   serializeData() {
@@ -100,6 +96,8 @@ const ImportSeriesRow = Marionette.Layout.extend({
   },
 
   onSelectedSeriesChanged() {
+    this.stopListening(this.onSeriesSave);
+
     const selectedSeries = this.model.get('selectedSeries');
     const isSelectable = this.model.isSelectable();
 
@@ -109,6 +107,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
     let title = 'No match found!';
 
     if (selectedSeries) {
+      this.listenTo(selectedSeries, 'request', this.onSeriesSave);
       title = selectedSeries.get('title');
       if (selectedSeries.isExisting()) {
         title += ' (Existing)';
@@ -128,6 +127,23 @@ const ImportSeriesRow = Marionette.Layout.extend({
         monitor
       });
     }
+  },
+
+  onSeriesSave(model, xhr) {
+    this.ui.errors.html('');
+    xhr.error((resp) => {
+      let errors = null;
+      if (xhr.status === 400) {
+        errors = xhr.responseJSON;
+      } else {
+        errors = [{
+          errorMessage: 'Couldn\'t add series, Check logs for details'
+        }];
+      }
+
+      this.ui.errors.html(errorPopoverTemplate(errors));
+      this.$('[data-toggle="popover"]').popover();
+    });
   },
 
   onSeriesDropdownClick() {
