@@ -76,7 +76,7 @@ module.exports = DeepModel.extend({
     callAction(action, initialQueryParams);
 
     Messenger.monitor({
-      promise: promise,
+      promise,
       successMessage: 'Connecting for \'{0}\' succeeded'.format(this.get('name')),
       errorMessage: 'Connecting for \'{0}\' failed'.format(this.get('name'))
     });
@@ -89,7 +89,7 @@ module.exports = DeepModel.extend({
   },
 
   test() {
-    this.trigger('validation:sync');
+    this.trigger('validation:reset');
 
     var params = {};
 
