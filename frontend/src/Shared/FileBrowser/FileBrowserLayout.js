@@ -79,7 +79,7 @@ module.exports = Marionette.Layout.extend({
     if (path) {
       data.path = path;
     }
-    this.collection.fetch({ data: data });
+    this.collection.fetch({ data });
   },
 
   _showGrid() {
@@ -135,7 +135,7 @@ module.exports = Marionette.Layout.extend({
     var path = this.ui.path.val();
 
     this._deferred.resolve({
-      path: path
+      path
     });
 
     this.close();

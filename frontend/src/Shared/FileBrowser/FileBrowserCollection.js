@@ -16,8 +16,8 @@ module.exports = Backbone.Collection.extend({
         name = 'My Computer';
       }
       contents.push({
-        type: type,
-        name: name,
+        type,
+        name,
         path: response.parent
       });
     }
