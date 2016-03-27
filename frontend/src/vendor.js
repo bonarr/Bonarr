@@ -18,7 +18,6 @@ require('bootstrap.tagsinput');
 require('backbone');
 require('backbone.deepmodel');
 require('backbone.paginator');
-require('backbone.validation');
 
 require('backbone.modelbinder');
 require('backbone.collectionview');

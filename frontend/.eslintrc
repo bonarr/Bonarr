@@ -188,7 +188,7 @@
     array-bracket-spacing: [2, "never"],
     block-spacing: [2, "always"],
     brace-style: [2, "1tbs", { "allowSingleLine": false }],
-    camelcase: 2,
+    camelcase: 0,
     comma-spacing: [2, {"before": false, "after": true}],
     comma-style: [2, "last"],
     computed-property-spacing: [2, "never"],

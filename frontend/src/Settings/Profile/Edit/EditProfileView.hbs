@@ -28,11 +28,11 @@
 
     <div class="col-sm-9 col-md-7 col-lg-5">
         <select class="form-control x-cutoff" name="cutoff.id" validation-name="cutoff">
-            {{#eachReverse items}}
+            {{#each items}}
             {{#if allowed}}
             <option value="{{quality.id}}">{{quality.name}}</option>
             {{/if}}
-            {{/eachReverse}}
+            {{/each}}
         </select>
         <span class="help-block">Once this quality is reached Sonarr will no longer download episodes</span>
     </div>

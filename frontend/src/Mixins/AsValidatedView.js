@@ -1,91 +1,52 @@
-var Validation = require('backbone.validation');
 var _ = require('underscore');
+require('jQuery/jquery.validation');
 
-module.exports = (function() {
-  return function() {
-    var originalInitialize = this.prototype.initialize;
-    var originalOnRender = this.prototype.onRender;
-    var originalBeforeClose = this.prototype.onBeforeClose;
+module.exports = function() {
+  const originalInitialize = this.prototype.initialize;
 
-    var errorHandler = function(response) {
+  const extentions = {
+    initialize() {
+      // Validation.bind(this);
+      this.listenTo(this, {
+        'validation:failed': this.validatedView_onValidationFailed,
+        'validation:reset': this.validatedView_onValidationReset,
+        'close': this.validatedView_onClose
+      });
+
       if (this.model) {
-        this.model.trigger('validation:failed', response);
-      } else {
-        this.trigger('validation:failed', response);
-      }
-    };
-
-    var validatedSync = function(method, model, options) {
-      model.trigger('validation:sync');
-
-      arguments[2].isValidatedCall = true;
-      return model._originalSync.apply(this, arguments).fail(errorHandler.bind(this));
-    };
-
-    var bindToModel = function(model) {
-      if (!model._originalSync) {
-        model._originalSync = model.sync;
-        model.sync = validatedSync.bind(this);
-      }
-    };
-
-    var validationFailed = function(response) {
-      if (response.status === 400) {
-        var view = this;
-        var validationErrors = JSON.parse(response.responseText);
-        _.each(validationErrors, function(error) {
-          view.$el.processServerError(error);
-        });
-      }
-    };
-
-    this.prototype.initialize = function(options) {
-      if (this.model) {
-        this.listenTo(this.model, 'validation:sync', function() {
-          this.$el.removeAllErrors();
-        });
-
-        this.listenTo(this.model, 'validation:failed', validationFailed);
-      } else {
-        this.listenTo(this, 'validation:sync', function() {
-          this.$el.removeAllErrors();
-        });
-
-        this.listenTo(this, 'validation:failed', validationFailed);
+        this.listenTo(this.model, 'request', this.validatedView_onModelRequest);
       }
 
       if (originalInitialize) {
-        originalInitialize.call(this, options);
+        originalInitialize.apply(this, arguments);
       }
-    };
+    },
 
-    this.prototype.onRender = function() {
-      Validation.bind(this);
-      this.bindToModelValidation = bindToModel.bind(this);
+    validatedView_onModelRequest(model, xhr) {
+      this.$el.removeAllErrors();
+      xhr.error((response) => {
+        if (response.status === 400 && !this.isClosed) {
+          this.trigger('validation:failed', response);
+        }
+      });
+    },
 
-      if (this.model) {
-        this.bindToModelValidation(this.model);
-      }
+    validatedView_onValidationReset() {
+      this.$el.removeAllErrors();
+    },
 
-      if (originalOnRender) {
-        originalOnRender.call(this);
-      }
-    };
+    validatedView_onValidationFailed(response) {
+      _.each(response.responseJSON, (error) => {
+        this.$el.processServerError(error);
+      });
+    },
 
-    this.prototype.onBeforeClose = function() {
-      if (this.model) {
-        Validation.unbind(this);
-
-        // If we don't do this the next time the model is used the sync is bound to an old view
-        this.model.sync = this.model._originalSync;
-        this.model._originalSync = undefined;
-      }
-
-      if (originalBeforeClose) {
-        originalBeforeClose.call(this);
-      }
-    };
-
-    return this;
+    validatedView_onClose() {
+      // Validation.unbind(this);
+    }
   };
-}).call(this);
+
+  this.prototype = _.extend(this.prototype, extentions);
+
+  return this;
+};
