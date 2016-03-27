@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const tpl = require('./HealthRow.hbs');
 
 const HealthRow = Marionette.ItemView.extend({
@@ -9,6 +9,6 @@ const HealthRow = Marionette.ItemView.extend({
 
 });
 
-TableRowMixin(HealthRow);
+tableRowMixin.apply(HealthRow);
 
 module.exports = HealthRow;

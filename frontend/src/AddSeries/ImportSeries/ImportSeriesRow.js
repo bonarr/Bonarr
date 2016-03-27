@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var TableRowMixin = require('Table/TableRowMixin');
+var tableRowMixin = require('Table/tableRowMixin');
 var SeriesSuggestionsView = require('./SeriesSuggestionsView');
 var SeriesSearchCollection = require('../SeriesSearchCollection');
 var profileCollection = require('Profile/profileCollection');
@@ -104,7 +104,6 @@ const ImportSeriesRow = Marionette.Layout.extend({
     const isSelectable = this.model.isSelectable();
 
     this.ui.seriesSelectWarning.toggle(!isSelectable);
-    // this.ui.profileSelect.prop('disabled', !isSelectable);
     this.ui.selectCheckbox.prop('disabled', !isSelectable);
 
     let title = 'No match found!';
@@ -142,7 +141,7 @@ const ImportSeriesRow = Marionette.Layout.extend({
   }
 });
 
-TableRowMixin(ImportSeriesRow);
+tableRowMixin.apply(ImportSeriesRow);
 asModelBoundView.apply(ImportSeriesRow);
 
 module.exports = ImportSeriesRow;

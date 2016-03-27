@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const tpl = require('./BackupRow.hbs');
 
 const BackupRow = Marionette.ItemView.extend({
@@ -9,6 +9,6 @@ const BackupRow = Marionette.ItemView.extend({
 
 });
 
-TableRowMixin(BackupRow);
+tableRowMixin.apply(BackupRow);
 
 module.exports = BackupRow;

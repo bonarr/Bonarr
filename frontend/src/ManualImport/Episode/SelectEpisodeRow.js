@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const tpl = require('./SelectEpisodeRow.hbs');
 
 const SelectEpisodeTableRow = Marionette.ItemView.extend({
@@ -28,6 +28,6 @@ const SelectEpisodeTableRow = Marionette.ItemView.extend({
   }
 });
 
-TableRowMixin(SelectEpisodeTableRow);
+tableRowMixin.apply(SelectEpisodeTableRow);
 
 module.exports = SelectEpisodeTableRow;

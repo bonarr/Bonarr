@@ -1,7 +1,6 @@
 var _ = require('underscore');
 
 function AsSelectableModel() {
-
   this.prototype.isSelectable = this.prototype.isSelectable || true;
 
   this.prototype.toggleSelect = function(select) {

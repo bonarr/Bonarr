@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const moment = require('moment');
 const CommandController = require('Commands/CommandController');
 const tpl = require('./TaskRow.hbs');
@@ -41,6 +41,6 @@ const TaskRow = Marionette.ItemView.extend({
 
 });
 
-TableRowMixin(TaskRow);
+tableRowMixin.apply(TaskRow);
 
 module.exports = TaskRow;

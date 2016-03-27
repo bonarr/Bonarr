@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const tpl = require('./DiskSpaceRow.hbs');
 
 const DiskSpaceRow = Marionette.ItemView.extend({
@@ -9,6 +9,6 @@ const DiskSpaceRow = Marionette.ItemView.extend({
 
 });
 
-TableRowMixin(DiskSpaceRow);
+tableRowMixin.apply(DiskSpaceRow);
 
 module.exports = DiskSpaceRow;

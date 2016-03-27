@@ -1,7 +1,7 @@
 const vent = require('vent');
 const reqres = require('reqres');
 const Marionette = require('marionette');
-const TableRowMixin = require('Table/TableRowMixin');
+const tableRowMixin = require('Table/tableRowMixin');
 const EpisodeStatusMixin = require('Table/EpisodeStatusMixin');
 const tpl = require('./EpisodeRow.hbs');
 
@@ -104,7 +104,7 @@ const EpisodeRow = Marionette.ItemView.extend({
 
 });
 
-TableRowMixin(EpisodeRow);
+tableRowMixin.apply(EpisodeRow);
 EpisodeStatusMixin(EpisodeRow);
 
 module.exports = EpisodeRow;

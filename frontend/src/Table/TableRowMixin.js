@@ -1,9 +1,9 @@
 const _ = require('underscore');
 
-function TableRowMixin({ prototype: base }) {
-  const superEvents = base.events || {};
-  const superUi = base.ui || {};
-  const superinitialize = base.initialize;
+function tableRowMixin() {
+  const superEvents = this.prototype.events || {};
+  const superUi = this.prototype.ui || {};
+  const superinitialize = this.prototype.initialize;
 
   const extentions = {
     tagName: 'tr',
@@ -41,7 +41,8 @@ function TableRowMixin({ prototype: base }) {
 
   };
 
-  base = _.extend(base, extentions);
+  this.prototype = _.extend(this.prototype, extentions);
+  return this;
 }
 
-module.exports = TableRowMixin;
+module.exports = tableRowMixin;
