@@ -5,7 +5,7 @@ var CalendarView = require('./Calendar/CalendarView');
 var CalendarFeedView = require('./CalendarFeedView');
 var tpl = require('./CalendarLayout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {

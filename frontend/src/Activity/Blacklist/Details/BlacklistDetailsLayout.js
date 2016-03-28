@@ -1,7 +1,7 @@
 var Marionette = require('marionette');
 var BlacklistDetailsView = require('./BlacklistDetailsView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Activity/Blacklist/Details/BlacklistDetailsLayoutTemplate',
 
   regions: {

@@ -7,7 +7,7 @@ var CommandController = require('Commands/CommandController');
 var LoadingView = require('Shared/LoadingView');
 var NoResultsView = require('./NoResultsView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Episode/Search/EpisodeSearchLayoutTemplate',
 
   regions: {

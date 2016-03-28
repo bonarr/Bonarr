@@ -12,7 +12,7 @@ var HistoryDetailsCell = require('./HistoryDetailsCell');
 var GridPager = require('Shared/Grid/Pager');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Activity/History/HistoryLayoutTemplate',
 
   regions: {

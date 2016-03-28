@@ -4,7 +4,7 @@ var HealthRow = require('./HealthRow');
 var HealthCollection = require('../../../Health/HealthCollection');
 var HealthOkView = require('./HealthOkView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Status/Health/HealthLayoutTemplate',
 
   regions: {
@@ -44,7 +44,7 @@ module.exports = Marionette.Layout.extend({
       headers: this.headers,
       collection: HealthCollection,
       className: 'table table-hover',
-      itemView: HealthRow
+      childView: HealthRow
     }));
   }
 });

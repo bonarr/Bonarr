@@ -3,16 +3,16 @@ var SortingView = require('./SortingView');
 var tpl = require('./SortingCollectionView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
-  itemView: SortingView,
+  childView: SortingView,
   template: tpl,
-  itemViewContainer: '.x-sorting-list',
+  childViewContainer: '.x-sorting-list',
 
   initialize(options) {
     this.viewCollection = options.viewCollection;
     this.listenTo(this.viewCollection, 'drone:sort', this.sort);
   },
 
-  itemViewOptions() {
+  childViewOptions() {
     return {
       viewCollection: this.viewCollection
     };

@@ -4,7 +4,7 @@ var vent = require('vent');
 var Marionette = require('marionette');
 var Config = require('Config');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   initialize(options) {
     if (options.action) {
       this.action = options.action.toLowerCase();

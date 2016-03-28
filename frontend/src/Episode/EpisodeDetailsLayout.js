@@ -5,7 +5,7 @@ var EpisodeHistoryLayout = require('./History/EpisodeHistoryLayout');
 var SeriesCollection = require('Series/SeriesCollection');
 var Messenger = require('Shared/Messenger');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Episode/EpisodeDetailsLayout',
 
   regions: {

@@ -5,7 +5,7 @@ var DiskSpaceRow = require('./DiskSpaceRow');
 var DiskSpaceCollection = require('./DiskSpaceCollection');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Status/DiskSpace/DiskSpaceLayoutTemplate',
 
   regions: {
@@ -45,7 +45,7 @@ module.exports = Marionette.Layout.extend({
       headers: this.headers,
       collection: this.collection,
       className: 'table table-hover',
-      itemView: DiskSpaceRow
+      childView: DiskSpaceRow
     }));
   }
 });

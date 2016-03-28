@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var $ = require('jquery');
 var Marionette = require('marionette');
 var SettingsLayoutBase = require('../SettingsLayoutBase');
 var profileCollection = require('Profile/profileCollection');
@@ -21,7 +22,7 @@ module.exports = SettingsLayoutBase.extend({
   },
 
   onRender() {
-    var promise = Marionette.$.when(profileCollection.fetch(),
+    var promise = $.when(profileCollection.fetch(),
       this.delayProfileCollection.fetch());
 
     promise.done(_.bind(function() {

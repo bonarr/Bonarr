@@ -7,7 +7,7 @@ var ResolutionUtility = require('Utilities/ResolutionUtility');
 var menuItems = require('./menuItems');
 var tpl = require('./SidebarLayout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   className: 'aside-inner',
@@ -148,7 +148,7 @@ module.exports = Marionette.Layout.extend({
 
     if (ResolutionUtility.isMobile()) {
       this.$aside.children('.nav-floating').remove();
-      Marionette.$('body').removeClass('actionbar-extended aside-toggled aside-collapsed');
+      $('body').removeClass('actionbar-extended aside-toggled aside-collapsed');
     }
   },
 

@@ -2,11 +2,11 @@ var Backbone = require('backbone');
 var Marionette = require('marionette');
 
 module.exports = Marionette.CompositeView.extend({
-  itemViewContainer: '.item-list',
+  childViewContainer: '.item-list',
   template: 'Settings/ThingyHeaderGroupView',
   tagName: 'div',
 
-  itemViewOptions() {
+  childViewOptions() {
     return {
       targetCollection: this.targetCollection
     };

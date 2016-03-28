@@ -4,7 +4,7 @@ var QualityDefinitionItemView = require('./QualityDefinitionItemView');
 module.exports = Marionette.CompositeView.extend({
   template: 'Settings/Quality/Definition/QualityDefinitionCollectionTemplate',
 
-  itemViewContainer: '.x-rows',
+  childViewContainer: '.x-rows',
 
-  itemView: QualityDefinitionItemView
+  childView: QualityDefinitionItemView
 });

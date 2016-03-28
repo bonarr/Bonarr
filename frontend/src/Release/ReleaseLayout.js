@@ -8,7 +8,7 @@ var QualityCell = require('Cells/QualityCell');
 var ApprovalStatusCell = require('Cells/ApprovalStatusCell');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Release/ReleaseLayoutTemplate',
 
   regions: {

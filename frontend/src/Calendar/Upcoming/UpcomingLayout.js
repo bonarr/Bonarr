@@ -1,7 +1,7 @@
 var Marionette = require('marionette');
 var UpcomingCollectionView = require('./UpcomingCollectionView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Calendar/Upcoming/UpcomingLayout',
 
   regions: {

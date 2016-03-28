@@ -7,8 +7,8 @@ require('bootstrap');
 
 module.exports = Marionette.CompositeView.extend({
   template: 'Settings/DownloadClient/RemotePathMapping/RemotePathMappingCollectionViewTemplate',
-  itemViewContainer: '.x-rows',
-  itemView: RemotePathMappingItemView,
+  childViewContainer: '.x-rows',
+  childView: RemotePathMappingItemView,
 
   events: {
     'click .x-add': '_addMapping'

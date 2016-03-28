@@ -9,7 +9,7 @@ var AgeCell = require('Release/AgeCell');
 var ProtocolCell = require('Release/ProtocolCell');
 var PeersCell = require('Release/PeersCell');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Episode/Search/ManualLayoutTemplate',
 
   regions: {

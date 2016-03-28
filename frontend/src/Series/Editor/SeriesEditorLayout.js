@@ -11,7 +11,7 @@ var SelectAllCell = require('Cells/SelectAllCell');
 var FooterView = require('./SeriesEditorFooterView');
 require('Mixins/backbone.signalr.mixin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Series/Editor/SeriesEditorLayoutTemplate',
 
   regions: {

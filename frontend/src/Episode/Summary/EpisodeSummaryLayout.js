@@ -9,7 +9,7 @@ var DeleteEpisodeFileCell = require('Cells/DeleteEpisodeFileCell');
 var NoFileView = require('./NoFileView');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Episode/Summary/EpisodeSummaryLayoutTemplate',
 
   regions: {

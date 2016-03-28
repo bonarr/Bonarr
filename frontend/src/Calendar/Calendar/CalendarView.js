@@ -15,7 +15,7 @@ require('Mixins/backbone.signalr.mixin');
 require('jquery.easypiechart');
 require('momentRange');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Calendar/Calendar/CalendarView',
   storageKey: 'calendar.view',
 

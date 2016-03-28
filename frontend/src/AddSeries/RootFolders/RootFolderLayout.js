@@ -6,7 +6,7 @@ var LoadingView = require('Shared/LoadingView');
 var AsValidatedView = require('Mixins/AsValidatedView');
 require('Mixins/FileBrowser');
 
-var Layout = Marionette.Layout.extend({
+var Layout = Marionette.LayoutView.extend({
   template: 'AddSeries/RootFolders/RootFolderLayoutTemplate',
 
   ui: {
@@ -26,7 +26,7 @@ var Layout = Marionette.Layout.extend({
     this.collection = RootFolderCollection;
     this.rootfolderListView = new RootFolderCollectionView({ collection: RootFolderCollection });
 
-    this.listenTo(this.rootfolderListView, 'itemview:folderSelected', this._onFolderSelected);
+    this.listenTo(this.rootfolderListView, 'childview:folderSelected', this._onFolderSelected);
     this.listenTo(RootFolderCollection, 'sync', this._showCurrentDirs);
   },
 

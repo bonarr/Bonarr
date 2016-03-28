@@ -9,7 +9,7 @@ var TaskLayout = require('./Task/TaskLayout');
 var Messenger = require('Shared/Messenger');
 var StatusModel = require('./StatusModel');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/SystemLayoutTemplate',
 
   regions: {

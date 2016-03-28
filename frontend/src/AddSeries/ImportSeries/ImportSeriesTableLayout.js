@@ -9,7 +9,7 @@ var tpl = require('./ImportSeriesTableLayout.hbs');
 var ImportSeriesFooterView = require('./ImportSeriesFooterView');
 var vent = require('vent');
 
-const EmptyView = Marionette.Layout.extend({
+const EmptyView = Marionette.LayoutView.extend({
 
   template: tpl,
 
@@ -51,10 +51,10 @@ const EmptyView = Marionette.Layout.extend({
 
       const tableView = new TableView({
         collection,
-        itemView: ImportSeriesRow,
+        childView: ImportSeriesRow,
         headers: this.headers,
         selectable: true,
-        itemViewOptions: {
+        childViewOptions: {
           taskQueue: new TaskQueue({
             concurrentJobs: 6
           })

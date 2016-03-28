@@ -4,7 +4,7 @@ var TableView = require('Table/TableView');
 var SeriesCollection = require('Series/SeriesCollection');
 var SelectSeriesRow = require('./SelectSeriesRow');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'ManualImport/Series/SelectSeriesLayout',
 
   regions: {
@@ -33,7 +33,7 @@ module.exports = Marionette.Layout.extend({
   onRender() {
     var tableView = new TableView({
       collection: this.seriesCollection,
-      itemView: SelectSeriesRow,
+      childView: SelectSeriesRow,
       headers: this.headers
     });
 

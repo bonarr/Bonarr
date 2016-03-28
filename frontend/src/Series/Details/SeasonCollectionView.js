@@ -4,7 +4,7 @@ var SeasonLayout = require('./SeasonLayout');
 var AsSortedCollectionView = require('Mixins/AsSortedCollectionView');
 
 var view = Marionette.CollectionView.extend({
-  itemView: SeasonLayout,
+  childView: SeasonLayout,
 
   initialize(options) {
     if (!options.episodeCollection) {
@@ -17,7 +17,7 @@ var view = Marionette.CollectionView.extend({
     this.listenTo(this.series, 'seasons:expand', this._showHideEpisodes);
   },
 
-  itemViewOptions() {
+  childViewOptions() {
     return {
       episodeCollection: this.episodeCollection,
       series: this.series

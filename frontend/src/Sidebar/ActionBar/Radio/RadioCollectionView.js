@@ -5,7 +5,7 @@ var Config = require('Config');
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',
   className: 'actionbar-list actionbar-radio-list',
-  itemView: RadioView,
+  childView: RadioView,
 
   attributes: {
     'data-toggle': 'buttons'
@@ -16,7 +16,7 @@ module.exports = Marionette.CollectionView.extend({
 
     this.setActive();
 
-    this.listenTo(this, 'itemview:click', this.itemViewClicked);
+    this.listenTo(this, 'childview:click', this.childViewClicked);
   },
 
   setActive() {
@@ -38,9 +38,9 @@ module.exports = Marionette.CollectionView.extend({
     });
   },
 
-  itemViewClicked(itemView) {
+  childViewClicked(childView) {
     this.children.each(function(view) {
-      if (view.model.get('key').toLocaleLowerCase() === itemView.model.get('key').toLowerCase()) {
+      if (view.model.get('key').toLocaleLowerCase() === childView.model.get('key').toLowerCase()) {
         view.model.set('active', true);
         view.$el.addClass('active');
       } else {

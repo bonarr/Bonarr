@@ -7,7 +7,7 @@ var asModelBoundView = require('Mixins/AsModelBoundView');
 var tpl = require('./ImportSeriesRow.hbs');
 var errorPopoverTemplate = require('Shared/ApiErrorPopover.hbs');
 
-const ImportSeriesRow = Marionette.Layout.extend({
+const ImportSeriesRow = Marionette.LayoutView.extend({
   template: tpl,
 
   className: 'import-series-row',

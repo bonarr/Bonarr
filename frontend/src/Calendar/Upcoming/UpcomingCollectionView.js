@@ -8,7 +8,7 @@ var Config = require('Config');
 require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.CollectionView.extend({
-  itemView: UpcomingItemView,
+  childView: UpcomingItemView,
 
   initialize() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';

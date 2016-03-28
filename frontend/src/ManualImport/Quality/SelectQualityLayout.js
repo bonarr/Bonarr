@@ -4,7 +4,7 @@ var LoadingView = require('Shared/LoadingView');
 var ProfileSchemaCollection = require('../../Settings/Profile/ProfileSchemaCollection');
 var SelectQualityView = require('./SelectQualityView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'ManualImport/Quality/SelectQualityLayoutTemplate',
 
   regions: {

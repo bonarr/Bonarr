@@ -1,7 +1,7 @@
 var Marionette = require('marionette');
 
 module.exports = Marionette.CompositeView.extend({
-  itemViewOptions() {
+  childViewOptions() {
     return {
       targetCollection: this.targetCollection
     };

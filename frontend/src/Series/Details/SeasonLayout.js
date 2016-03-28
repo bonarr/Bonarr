@@ -9,7 +9,7 @@ var _ = require('underscore');
 var Messenger = require('Shared/Messenger');
 var tpl = require('./SeasonLayout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   ui: {
@@ -184,10 +184,10 @@ module.exports = Marionette.Layout.extend({
 
       this.episodes.show(new TableView({
         collection: this.episodeCollection,
-        itemView: EpisodeRow,
+        childView: EpisodeRow,
         headers: this.headers,
         className: 'table table-hover',
-        itemViewOptions: {
+        childViewOptions: {
           series: this.series
         }
       }));

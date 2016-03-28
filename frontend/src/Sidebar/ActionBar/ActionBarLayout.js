@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
 var ButtonCollection = require('./ButtonCollection');
@@ -9,7 +10,7 @@ var SortingCollectionView = require('./Sorting/SortingCollectionView');
 var FilteringCollectionView = require('./Filtering/FilteringCollectionView');
 var ResolutionUtility = require('../../Utilities/ResolutionUtility');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Sidebar/ActionBar/ActionBarLayoutTemplate',
   className: 'aside-inner actionbar',
 
@@ -107,10 +108,10 @@ module.exports = Marionette.Layout.extend({
   },
 
   _toggleOptions() {
-    Marionette.$('body').toggleClass('actionbar-extended');
+    $('body').toggleClass('actionbar-extended');
 
     if (ResolutionUtility.isMobile()) {
-      Marionette.$('body').toggleClass('aside-collapsed');
+      $('body').toggleClass('aside-collapsed');
     }
   }
 });

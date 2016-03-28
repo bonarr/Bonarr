@@ -20,7 +20,7 @@ require('Mixins/backbone.signalr.mixin');
 require('Mixins/backbone.signalr.mixin');
 require('jquery.lazyload');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {
@@ -81,7 +81,6 @@ module.exports = Marionette.Layout.extend({
 
   initialize() {
     this.seriesCollection = SeriesCollection.viewCollection;
-    this._showActionBar();
   },
 
   onShow() {
@@ -94,36 +93,36 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showTable() {
-    this.currentView = new Backgrid.Grid({
+    const view = new Backgrid.Grid({
       collection: this.seriesCollection,
       columns: this.columns,
       className: 'table table-hover'
     });
 
-    this._renderView();
+    this._renderView(view);
   },
 
   _showList() {
-    this.currentView = new ListCollectionView({
+    const view = new ListCollectionView({
       collection: this.seriesCollection
     });
 
-    this._renderView();
+    this._renderView(view);
   },
 
   _showPosters() {
-    this.currentView = new PosterCollectionView({
+    const view = new PosterCollectionView({
       collection: this.seriesCollection
     });
 
-    this._renderView();
+    this._renderView(view);
   },
 
-  _renderView() {
+  _renderView(view) {
     if (SeriesCollection.length === 0) {
       this.seriesRegion.show(new EmptyView());
     } else {
-      this.seriesRegion.show(this.currentView);
+      this.seriesRegion.show(view);
       this._showFooter();
     }
   },
@@ -133,7 +132,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       items: [
         {
           tooltip: 'RSS Sync',
@@ -151,7 +150,7 @@ module.exports = Marionette.Layout.extend({
       ]
     };
 
-    var sortingOptions = {
+    const sortingOptions = {
       items: [
         {
           title: 'Title',

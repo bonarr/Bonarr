@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var $ = require('jquery');
 var Marionette = require('marionette');
 var SettingsLayoutBase = require('../SettingsLayoutBase');
 var NamingView = require('./Naming/NamingView');
@@ -26,7 +27,7 @@ module.exports = SettingsLayoutBase.extend({
   },
 
   onRender() {
-    var promise = Marionette.$.when(this.model.fetch(), this.namingModel.fetch());
+    var promise = $.when(this.model.fetch(), this.namingModel.fetch());
 
     promise.done(_.bind(function() {
       if (this.isClosed) {

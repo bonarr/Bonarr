@@ -9,7 +9,7 @@ var BlacklistActionsCell = require('./BlacklistActionsCell');
 var GridPager = require('Shared/Grid/Pager');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Activity/Blacklist/BlacklistLayoutTemplate',
 
   regions: {

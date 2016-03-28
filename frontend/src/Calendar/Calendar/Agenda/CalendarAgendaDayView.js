@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var CalendarEventCollectionView = require('../Events/CalendarEventCollectionView');
 var tpl = require('./CalendarAgendaDayView.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
   className: 'calendar-day',
 

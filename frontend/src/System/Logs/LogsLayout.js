@@ -4,7 +4,7 @@ var LogsFileLayout = require('./Files/LogFileLayout');
 var LogFileCollection = require('./Files/LogFileCollection');
 var UpdateLogFileCollection = require('./Updates/LogFileCollection');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Logs/LogsLayoutTemplate',
 
   ui: {

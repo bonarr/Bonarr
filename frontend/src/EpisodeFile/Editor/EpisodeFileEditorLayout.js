@@ -14,7 +14,7 @@ var ProfileSchemaCollection = require('../../Settings/Profile/ProfileSchemaColle
 var QualitySelectView = require('./QualitySelectView');
 var EmptyView = require('./EmptyView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'EpisodeFile/Editor/EpisodeFileEditorLayout',
 
   regions: {

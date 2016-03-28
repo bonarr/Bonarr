@@ -6,7 +6,7 @@ var Messenger = require('Shared/Messenger');
 
 require('./Search');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Navbar/NavbarLayout',
 
   ui: {

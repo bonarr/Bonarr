@@ -5,7 +5,7 @@ var DiskSpaceLayout = require('./DiskSpace/DiskSpaceLayout');
 var HealthLayout = require('./Health/HealthLayout');
 var MoreInfoView = require('./MoreInfo/MoreInfoView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Status/StatusLayoutTemplate',
 
   regions: {

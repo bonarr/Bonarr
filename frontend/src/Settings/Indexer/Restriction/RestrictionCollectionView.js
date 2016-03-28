@@ -8,8 +8,8 @@ require('bootstrap');
 
 module.exports = Marionette.CompositeView.extend({
   template: 'Settings/Indexer/Restriction/RestrictionCollectionView',
-  itemViewContainer: '.x-rows',
-  itemView: RestrictionItemView,
+  childViewContainer: '.x-rows',
+  childView: RestrictionItemView,
 
   events: {
     'click .x-add': '_addMapping'

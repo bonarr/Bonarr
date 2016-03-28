@@ -3,7 +3,7 @@ var ThingyHeaderGroupView = require('../../ThingyHeaderGroupView');
 var AddItemView = require('./IndexerAddItemView');
 
 module.exports = ThingyAddCollectionView.extend({
-  itemView: ThingyHeaderGroupView.extend({ itemView: AddItemView }),
-  itemViewContainer: '.add-indexer .items',
+  childView: ThingyHeaderGroupView.extend({ childView: AddItemView }),
+  childViewContainer: '.add-indexer .items',
   template: 'Settings/Indexer/Add/IndexerAddCollectionViewTemplate'
 });

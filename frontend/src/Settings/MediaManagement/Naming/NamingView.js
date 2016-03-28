@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var Marionette = require('marionette');
 var NamingSampleModel = require('./NamingSampleModel');
 var BasicNamingView = require('./Basic/BasicNamingView');
@@ -6,7 +5,7 @@ var AsModelBoundView = require('Mixins/AsModelBoundView');
 var AsValidatedView = require('Mixins/AsValidatedView');
 
 module.exports = (function() {
-  var view = Marionette.Layout.extend({
+  var view = Marionette.LayoutView.extend({
     template: 'Settings/MediaManagement/Naming/NamingViewTemplate',
     ui: {
       namingOptions: '.x-naming-options',

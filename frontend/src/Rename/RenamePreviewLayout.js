@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var $ = require('jquery');
 var vent = require('vent');
 var Marionette = require('marionette');
 var RenamePreviewCollection = require('./RenamePreviewCollection');
@@ -9,7 +10,7 @@ var LoadingView = require('Shared/LoadingView');
 var CommandController = require('Commands/CommandController');
 var NamingModel = require('../Settings/MediaManagement/Naming/NamingModel');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Rename/RenamePreviewLayout',
 
   regions: {
@@ -47,8 +48,8 @@ module.exports = Marionette.Layout.extend({
     var collectionPromise = this.collection.fetch();
     var namingPromise = this.naming.fetch();
 
-    Marionette.$.when(collectionPromise, namingPromise).done(() => {
       if (this.isClosed) {
+    $.when(collectionPromise, namingPromise).done(() => {
         return;
       }
 

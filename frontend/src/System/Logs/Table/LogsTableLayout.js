@@ -9,7 +9,7 @@ var LogCollection = require('../LogsCollection');
 var LoadingView = require('Shared/LoadingView');
 require('jQuery/jquery.spin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Logs/Table/LogsTableLayoutTemplate',
 
   regions: {

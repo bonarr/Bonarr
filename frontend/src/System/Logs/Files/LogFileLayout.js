@@ -10,7 +10,7 @@ var ContentsModel = require('./ContentsModel');
 var LoadingView = require('Shared/LoadingView');
 require('jQuery/jquery.spin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Logs/Files/LogFileLayoutTemplate',
 
   regions: {

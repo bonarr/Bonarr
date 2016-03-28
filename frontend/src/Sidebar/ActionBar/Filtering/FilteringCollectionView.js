@@ -4,9 +4,9 @@ var FilteringView = require('./FilteringView');
 var Config = require('Config');
 
 module.exports = Marionette.CompositeView.extend({
-  itemView: FilteringView,
+  childView: FilteringView,
   template: 'Sidebar/ActionBar/Filtering/FilteringCollectionViewTemplate',
-  itemViewContainer: '.x-filtering-list',
+  childViewContainer: '.x-filtering-list',
 
   initialize(options) {
     this.menu = options.menu;
@@ -16,7 +16,7 @@ module.exports = Marionette.CompositeView.extend({
     this.listenTo(this.viewCollection, 'sonarr:filter', this._filter);
   },
 
-  itemViewOptions() {
+  childViewOptions() {
     return {
       viewCollection: this.viewCollection
     };

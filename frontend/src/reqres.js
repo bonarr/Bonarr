@@ -1,6 +1,6 @@
-var Wreqr = require('./JsLibraries/backbone.wreqr');
+const Backbone = require('backbone');
 
-var reqres = new Wreqr.RequestResponse();
+const reqres = new Backbone.Wreqr.RequestResponse();
 
 reqres.Requests = {
   GetEpisodeFileById: 'GetEpisodeFileById',

@@ -8,7 +8,7 @@ var tpl = require('./AddNewSeriesLayout.hbs');
 var ErrorView = require('./ErrorView');
 var EmptyView = require('./EmptyView');
 
-const AddNewSeriesLayout = Marionette.Layout.extend({
+const AddNewSeriesLayout = Marionette.LayoutView.extend({
   id: 'add-new-series',
 
   template: tpl,

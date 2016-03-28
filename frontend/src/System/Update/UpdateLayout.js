@@ -3,7 +3,7 @@ var UpdateCollection = require('./UpdateCollection');
 var UpdateCollectionView = require('./UpdateCollectionView');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Update/UpdateLayoutTemplate',
 
   regions: {

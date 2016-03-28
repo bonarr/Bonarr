@@ -18,7 +18,7 @@ var ApprovalStatusCell = require('Cells/ApprovalStatusCell');
 var ManualImportCollection = require('./ManualImportCollection');
 var Messenger = require('Shared/Messenger');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'ManualImport/ManualImportLayout',
 
   regions: {

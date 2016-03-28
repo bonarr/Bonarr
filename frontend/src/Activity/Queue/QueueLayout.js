@@ -13,7 +13,7 @@ var ProgressCell = require('./ProgressCell');
 var ProtocolCell = require('Release/ProtocolCell');
 var GridPager = require('Shared/Grid/Pager');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Activity/Queue/QueueLayoutTemplate',
 
   regions: {

@@ -11,7 +11,7 @@ var SeriesTitleCell = require('Cells/SeriesTitleCell');
 var SeasonsCell = require('./SeasonsCell');
 require('Mixins/backbone.signalr.mixin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'SeasonPass/SeasonPassLayoutTemplate',
 
   regions: {

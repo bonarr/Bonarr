@@ -1,6 +1,6 @@
-var Wreqr = require('./JsLibraries/backbone.wreqr');
+const Backbone = require('backbone');
 
-var vent = new Wreqr.EventAggregator();
+const vent = new Backbone.Wreqr.EventAggregator();
 
 vent.Events = {
   SeriesAdded: 'series:added',

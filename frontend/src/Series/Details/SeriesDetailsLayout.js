@@ -18,7 +18,7 @@ var tpl = require('./SeriesDetails.hbs');
 
 require('Mixins/backbone.signalr.mixin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {

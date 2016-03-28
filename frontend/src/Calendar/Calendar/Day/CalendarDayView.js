@@ -1,12 +1,13 @@
 var Marionette = require('marionette');
 var CalendarEventCollectionView = require('../Events/CalendarEventCollectionView');
+var tpl = require('./CalendarDayView.hbs');
 
-module.exports = Marionette.Layout.extend({
-  template: 'Calendar/Calendar/Day/CalendarDayView',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
   className: 'calendar-day',
 
   regions: {
-    events: '.x-calendar-day-events'
+    dayEvents: '.x-calendar-day-events-region'
   },
 
   serializeData() {
@@ -17,7 +18,7 @@ module.exports = Marionette.Layout.extend({
   },
 
   onShow() {
-    this.events.show(new CalendarEventCollectionView({
+    this.dayEvents.show(new CalendarEventCollectionView({
       collection: this.model.get('events'),
       style: 'standard'
     }));

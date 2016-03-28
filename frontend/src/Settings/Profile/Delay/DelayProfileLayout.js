@@ -8,7 +8,7 @@ var DelayProfileCollectionView = require('./DelayProfileCollectionView');
 var EditView = require('./Edit/DelayProfileEditView');
 var Model = require('./DelayProfileModel');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Settings/Profile/Delay/DelayProfileLayoutTemplate',
 
   regions: {

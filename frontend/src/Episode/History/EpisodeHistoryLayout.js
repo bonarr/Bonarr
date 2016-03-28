@@ -9,7 +9,7 @@ var EpisodeHistoryDetailsCell = require('./EpisodeHistoryDetailsCell');
 var NoHistoryView = require('./NoHistoryView');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Episode/History/EpisodeHistoryLayoutTemplate',
 
   regions: {

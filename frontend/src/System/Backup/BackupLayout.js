@@ -6,7 +6,7 @@ var BackupCollection = require('./BackupCollection');
 var EmptyView = require('./BackupEmptyView');
 var LoadingView = require('Shared/LoadingView');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Backup/BackupLayoutTemplate',
 
   regions: {
@@ -64,7 +64,7 @@ module.exports = Marionette.Layout.extend({
     } else {
       this.backups.show(new TableView({
         collection: this.backupCollection,
-        itemView: BackupRow,
+        childView: BackupRow,
         headers: this.headers,
         className: 'table table-hover'
       }));

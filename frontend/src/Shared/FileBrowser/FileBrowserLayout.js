@@ -9,7 +9,7 @@ var TableView = require('Table/TableView');
 var tpl = require('./FileBrowserLayout.hbs');
 require('Mixins/DirectoryAutoComplete');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {
@@ -91,7 +91,7 @@ module.exports = Marionette.Layout.extend({
 
     var tableView = new TableView({
       collection: this.collection,
-      itemView: FileBrowserRow,
+      childView: FileBrowserRow,
       headers: this.headers
     });
 

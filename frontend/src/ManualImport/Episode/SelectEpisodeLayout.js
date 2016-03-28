@@ -6,7 +6,7 @@ var LoadingView = require('Shared/LoadingView');
 var SelectEpisodeRow = require('./SelectEpisodeRow');
 var tpl = require('./SelectEpisodeLayout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {
@@ -46,7 +46,7 @@ module.exports = Marionette.Layout.extend({
     this.listenToOnce(this.episodeCollection, 'sync', function() {
       this.episodes.show(new TableView({
         collection: this.episodeCollection.bySeason(this.seasonNumber),
-        itemView: SelectEpisodeRow,
+        childView: SelectEpisodeRow,
         headers: this.headers,
         selectable: true,
         className: 'table table-hover season-grid'

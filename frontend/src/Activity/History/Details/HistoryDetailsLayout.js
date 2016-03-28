@@ -4,7 +4,7 @@ var Marionette = require('marionette');
 var HistoryDetailsView = require('./HistoryDetailsView');
 var tpl = require('./HistoryDetailsLayout.hbs');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {

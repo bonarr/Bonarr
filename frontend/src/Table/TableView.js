@@ -6,7 +6,7 @@ const TableView = Marionette.CompositeView.extend({
   tagName: 'table',
   className: 'table',
   template: tpl,
-  itemViewContainer: 'tbody',
+  childViewContainer: 'tbody',
 
   ui: {
     selectAllCheckbox: '.select-all-checkbox'
@@ -20,9 +20,9 @@ const TableView = Marionette.CompositeView.extend({
     this.headers = options.headers;
     this.selectable = options.selectable;
 
-    this.itemViewOptions = _.extend({
+    this.childViewOptions = _.extend({
       selectable: this.selectable
-    }, options.itemViewOptions);
+    }, options.childViewOptions);
 
     if (this.selectable) {
       this.listenTo(this.collection || this.collection.fullCollection, 'selected', _.debounce(this.updateSelectAllState, 10));

@@ -11,7 +11,7 @@ var SeriesCollection = require('Series/SeriesCollection');
 var Config = require('Config');
 var AsEditModalView = require('Mixins/AsEditModalView');
 
-var view = Marionette.Layout.extend({
+var view = Marionette.LayoutView.extend({
   template: 'Settings/Profile/Edit/EditProfileLayout',
 
   regions: {

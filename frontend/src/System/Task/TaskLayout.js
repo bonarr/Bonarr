@@ -5,7 +5,7 @@ var TaskCollection = require('./TaskCollection');
 var LoadingView = require('Shared/LoadingView');
 require('Mixins/backbone.signalr.mixin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'System/Task/TaskLayoutTemplate',
 
   regions: {
@@ -51,7 +51,7 @@ module.exports = Marionette.Layout.extend({
     this.tasks.show(new TableView({
       headers: this.headers,
       collection: this.taskCollection,
-      itemView: TaskRow,
+      childView: TaskRow,
       className: 'table table-hover'
     }));
   }

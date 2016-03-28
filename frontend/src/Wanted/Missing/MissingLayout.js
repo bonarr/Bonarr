@@ -18,7 +18,7 @@ var CommandController = require('Commands/CommandController');
 require('backgrid.selectall');
 require('Mixins/backbone.signalr.mixin');
 
-module.exports = Marionette.Layout.extend({
+module.exports = Marionette.LayoutView.extend({
   template: 'Wanted/Missing/MissingLayoutTemplate',
 
   regions: {
