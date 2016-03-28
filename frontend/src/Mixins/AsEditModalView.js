@@ -34,7 +34,7 @@ module.exports = function() {
     this.savePromise.always(() => {
       this.saving = false;
 
-      if (!this.isClosed) {
+      if (!this.isDestroyed) {
         this.ui.indicator.hide();
       }
     });

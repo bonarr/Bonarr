@@ -24,7 +24,7 @@ function asValidatedView() {
     validatedView_onModelRequest(model, xhr) {
       this.$el.removeAllErrors();
       xhr.error((response) => {
-        if (response.status === 400 && !this.isClosed) {
+        if (response.status === 400 && !this.isDestroyed) {
           this.trigger('validation:failed', response);
         }
       });

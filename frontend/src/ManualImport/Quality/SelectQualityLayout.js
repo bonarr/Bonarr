@@ -37,6 +37,6 @@ module.exports = Marionette.LayoutView.extend({
 
   _selectQuality() {
     this.trigger('manualimport:selected:quality', { quality: this.selectQualityView.selectedQuality() });
-    this.close();
+    this.destroy();
   }
 });

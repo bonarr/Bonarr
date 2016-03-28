@@ -21,6 +21,6 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     this.trigger('manualimport:selected:season', { seasonNumber: seasonNumber });
-    this.close();
+    this.destroy();
   }
 });

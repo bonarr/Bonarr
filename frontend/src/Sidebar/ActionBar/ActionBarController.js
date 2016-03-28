@@ -10,13 +10,11 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _openActionBar(options) {
-    var view = new ActionBarLayout(options);
-
+    const view = new ActionBarLayout(options);
     AppLayout.actionBarRegion.show(view);
   },
 
-
   _closeActionBar() {
-    AppLayout.actionBarRegion.close();
+    AppLayout.actionBarRegion.empty();
   }
 });

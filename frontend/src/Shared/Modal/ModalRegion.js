@@ -26,7 +26,7 @@ const ModalRegion = Marionette.Region.extend({
 
     this.currentView.$el.addClass('modal-dialog');
 
-    this.listenToOnce(this.currentView, 'close', this.onViewClose);
+    this.listenToOnce(this.currentView, 'destroy', this.onViewClose);
 
     this.bootstrapModal = this.$el.modal({
       show: true,
@@ -42,7 +42,7 @@ const ModalRegion = Marionette.Region.extend({
   },
 
   onBootstrapHide() {
-    this.close();
+    this.empty();
   },
 
   onViewClose() {
@@ -53,7 +53,7 @@ const ModalRegion = Marionette.Region.extend({
   onKeypress(event) {
     var view = this.currentView;
 
-    if (!view || view.isClosed) {
+    if (!view || view.isDestroyed) {
       return;
     }
 
@@ -63,7 +63,7 @@ const ModalRegion = Marionette.Region.extend({
       if ($target.is('select:focus')) {
         $target.blur();
       } else {
-        this.close();
+        this.empty();
       }
 
       event.stopImmediatePropagation();

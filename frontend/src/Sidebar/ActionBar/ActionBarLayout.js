@@ -45,7 +45,7 @@ module.exports = Marionette.LayoutView.extend({
     this.filtering = options.filtering;
     this.sorting = options.sorting;
 
-    this.listenTo(this.parentView, 'close', function() {
+    this.listenTo(this.parentView, 'destroy', function() {
       vent.trigger(vent.Commands.CloseActionBarCommand);
     });
   },

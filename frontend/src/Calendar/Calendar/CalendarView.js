@@ -116,10 +116,10 @@ module.exports = Marionette.LayoutView.extend({
     });
 
     return {
-      start: start,
-      end: end,
-      range: range,
-      days: days
+      start,
+      end,
+      range,
+      days
     };
   },
 
@@ -136,7 +136,7 @@ module.exports = Marionette.LayoutView.extend({
   _showCalendar() {
     var dayFormat = 'YYYY-MM-DD';
 
-    var groupedEvents = this.collection.groupBy(function(model) {
+    var groupedEvents = this.collection.groupBy((model) => {
       return moment(model.get('airDateUtc')).format(dayFormat);
     });
 
@@ -159,7 +159,7 @@ module.exports = Marionette.LayoutView.extend({
     });
 
     if (this.view === 'agenda') {
-      this.headersRegion.close();
+      this.headersRegion.empty();
 
       this.daysRegion.show(new CalendarAgendaCollectionView({
         collection: this.dayCollection
@@ -206,7 +206,7 @@ module.exports = Marionette.LayoutView.extend({
       end = 'MMM D YYYY';
     }
 
-    return startDate.format(start) + ' &mdash; ' + endDate.format(end);
+    return `${startDate.format(start)} &mdash; ${endDate.format(end)}`;
   },
 
   _onViewClick(event) {
@@ -227,9 +227,9 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     if (navigate === 'previous') {
-      this.time = this.time.subtract(1, this.view + 's');
+      this.time = this.time.subtract(1, `${this.view}s`);
     } else if (navigate === 'next') {
-      this.time = this.time.add(1, this.view + 's');
+      this.time = this.time.add(1, `${this.view}s`);
     } else {
       this.time = moment();
     }

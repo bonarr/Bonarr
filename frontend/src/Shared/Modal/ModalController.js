@@ -35,7 +35,7 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _closeFullscreenModal() {
-    AppLayout.fullscreenModalRegion.close();
+    AppLayout.fullscreenModalRegion.empty();
   },
 
   _openModal(view) {

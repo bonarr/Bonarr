@@ -65,7 +65,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showTable() {
-    if (!this.isClosed) {
+    if (!this.isDestroyed) {
       this.grid.show(new Backgrid.Grid({
         row: Backgrid.Row,
         columns: this.columns,

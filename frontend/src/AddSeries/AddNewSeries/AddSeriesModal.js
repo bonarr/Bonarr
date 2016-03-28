@@ -169,7 +169,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
 
   onSeriesAdded() {
     SeriesCollection.add(this.model);
-    this.close();
+    this.destroy();
 
     Messenger.show({
       message: 'Added: ' + this.model.get('title'),

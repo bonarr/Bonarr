@@ -35,7 +35,7 @@ module.exports = SettingsLayoutBase.extend({
     );
 
     promise.done(_.bind(function() {
-      if (this.isClosed) {
+      if (this.isDestroyed) {
         return;
       }
 

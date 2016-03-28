@@ -1,5 +1,4 @@
 var vent = require('vent');
-var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var DeleteView = require('../Delete/DelayProfileDeleteView');
 var AsModelBoundView = require('Mixins/AsModelBoundView');

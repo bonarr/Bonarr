@@ -138,6 +138,6 @@ module.exports = Marionette.LayoutView.extend({
       path
     });
 
-    this.close();
+    this.destroy();
   }
 });

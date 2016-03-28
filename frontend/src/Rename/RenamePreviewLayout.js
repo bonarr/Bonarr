@@ -48,8 +48,8 @@ module.exports = Marionette.LayoutView.extend({
     var collectionPromise = this.collection.fetch();
     var namingPromise = this.naming.fetch();
 
-      if (this.isClosed) {
     $.when(collectionPromise, namingPromise).done(() => {
+      if (this.isDestroyed) {
         return;
       }
 

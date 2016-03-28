@@ -30,7 +30,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   _processSignalrMessage({ action, resource }) {
-    if (!this.isClosed) {
+    if (!this.isDestroyed) {
       this.status = resource;
       this.render();
     }

@@ -80,7 +80,7 @@ module.exports = Marionette.LayoutView.extend({
 
   _onSelected(model) {
     this.trigger('manualimport:selected:series', { model: model });
-    this.close();
+    this.destroy();
   },
 
   _setFocus() {

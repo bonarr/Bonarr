@@ -30,7 +30,7 @@ module.exports = SettingsLayoutBase.extend({
     var promise = $.when(this.model.fetch(), this.namingModel.fetch());
 
     promise.done(_.bind(function() {
-      if (this.isClosed) {
+      if (this.isDestroyed) {
         return;
       }
 

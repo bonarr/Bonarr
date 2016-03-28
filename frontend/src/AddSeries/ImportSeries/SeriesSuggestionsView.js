@@ -23,7 +23,7 @@ const SeriesSuggestionsView = Marionette.ItemView.extend({
   },
 
   search() {
-    if (this.closed) {
+    if (this.isDestroyed) {
       return;
     }
 
@@ -73,11 +73,11 @@ const SeriesSuggestionsView = Marionette.ItemView.extend({
   onCollectionRequest(collection, xhr) {
     this.$el.addClass('state-loading');
     xhr.error(() => {
-      if (this.isClosed) {
+      if (this.isDestroyed) {
         return;
       }
       if (status === 'abort') {
-        this.searchResult.close();
+        this.searchResult.empty();
       } else {
         this.series.term = '';
       }

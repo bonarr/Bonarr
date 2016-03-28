@@ -77,7 +77,7 @@ module.exports = Marionette.LayoutView.extend({
 
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
-      actions: actions
+      actions
     });
   },
 
@@ -96,7 +96,7 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     var model = this.collection.first();
-    this._fetchLogFileContents({ model: model });
+    this._fetchLogFileContents({ model });
   },
 
   _fetchLogFileContents(options) {
@@ -111,11 +111,11 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showDetails(model) {
-    this.contents.show(new ContentsView({ model: model }));
+    this.contents.show(new ContentsView({ model }));
   },
 
   _refreshTable(buttonContext) {
-    this.contents.close();
+    this.contents.empty();
     var promise = this.collection.fetch();
 
     // Would be nice to spin the icon on the refresh button

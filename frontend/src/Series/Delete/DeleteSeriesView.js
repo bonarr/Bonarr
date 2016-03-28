@@ -10,7 +10,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   triggers: {
-    'click .x-close': 'close'
+    'click .x-close': 'destroy'
   },
 
   ui: {
@@ -29,7 +29,7 @@ module.exports = Marionette.ItemView.extend({
       wait: true
     }).done(() => {
       vent.trigger(vent.Events.SeriesDeleted, { series: self.model });
-      this.close();
+      this.destroy();
     });
   },
 

@@ -66,7 +66,14 @@ const config = {
       loader: htmlAnnotate
     }],
     loaders: [
-      { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'babel', query: { presets: ['es2015'] } },
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|JsLibraries)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      },
       // This is disabled until we drop the number of errors
       // { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'eslint-loader' },
       {

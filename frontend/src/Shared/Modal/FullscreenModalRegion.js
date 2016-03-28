@@ -3,64 +3,64 @@ var $ = require('jquery');
 var Marionette = require('marionette');
 
 const EscKeyCode = 27;
+const $window = $(window);
 
 const FullScreenModalRegion = Marionette.Region.extend({
   el: '#fullscreen-modal-region',
 
   initialize() {
-    this.$window = $(window);
-    _.bindAll(this, 'close', 'onKeypress', 'resizeBody');
+    _.bindAll(this, 'destroy', 'onKeypress', 'resizeBody');
     $(document).on('keyup', this.onKeypress);
     const debouncedResize = _.debounce(this.resizeBody, 200);
-    this.$window.resize(debouncedResize);
+    $window.resize(debouncedResize);
   },
 
-  close() {
+  destroy() {
     if (this.$el) {
       this.$el.removeClass('shown');
     }
-    this.closeButtons = null;
+    this.destroyButtons = null;
 
     var view = this.currentView;
-    if (!view || view.isClosed) {
+    if (!view || view.isDestroyed) {
       return;
     }
     // give animation time to finish before killing the html
-    this.closeTimeout = window.setTimeout(() => {
-      // make sure we close the view we intended to not some future modal.
+    this.destroyTimeout = window.setTimeout(() => {
+      // make sure we destroy the view we intended to not some future modal.
       if (this.currentView === view) {
-        Marionette.Region.prototype.close.apply(this, arguments);
+        Marionette.Region.prototype.destroy.apply(this, arguments);
       }
     }, 1000);
   },
 
   resizeBody() {
-    var view = this.currentView;
-    if (!view || view.isClosed) {
+    const view = this.currentView;
+    if (!view || view.isDestroyed) {
       return;
     }
 
-    const windowHeight = this.$window.height();
+    const windowHeight = $window.height();
     const maxHeight = windowHeight - 190;
 
     this.$el.find('.fullscreen-modal-body').css('max-height', `${maxHeight}px`);
   },
 
   onShow() {
-    window.clearTimeout(this.closeTimeout);
+    window.clearTimeout(this.destroyTimeout);
 
     this.$el.addClass('shown');
-    this.closeButtons = this.$el.find('.x-close');
-    this.closeButtons.on('click', this.close);
+    this.destroyButtons = this.$el.find('.x-close');
+    this.destroyButtons.on('click', this.destroy);
 
     this.resizeBody();
-    this.listenToOnce(this.currentView, 'close', this.onViewClose);
+    this.listenToOnce(this.currentView, 'destroy', this.onViewClose);
   },
 
   onKeypress(event) {
-    var view = this.currentView;
+    const view = this.currentView;
 
-    if (!view || view.isClosed) {
+    if (!view || view.isDestroyed) {
       return;
     }
 
@@ -70,7 +70,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
       if ($target.is('select:focus')) {
         $target.blur();
       } else {
-        this.close();
+        this.empty();
       }
 
       event.stopImmediatePropagation();
@@ -79,7 +79,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
   },
 
   onViewClose() {
-    this.close();
+    this.empty();
     this.stopListening(this.currentView);
   }
 });

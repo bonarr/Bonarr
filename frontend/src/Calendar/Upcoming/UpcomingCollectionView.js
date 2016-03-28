@@ -19,7 +19,7 @@ module.exports = Marionette.CollectionView.extend({
     this.timer = window.setInterval(this._fetchCollection, 60 * 60 * 1000);
   },
 
-  onClose() {
+  onDestroy() {
     window.clearInterval(this.timer);
   },
 

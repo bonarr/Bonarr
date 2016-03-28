@@ -55,11 +55,11 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _selectEpisodes() {
-    var episodes = _.map(this.episodeView.getSelectedModels(), function(episode) {
+    const episodes = _.map(this.episodeView.getSelectedModels(), (episode) => {
       return episode.toJSON();
     });
 
-    this.trigger('manualimport:selected:episodes', { episodes: episodes });
-    this.close();
+    this.trigger('manualimport:selected:episodes', { episodes });
+    this.destroy();
   }
 });

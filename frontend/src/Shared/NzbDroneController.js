@@ -60,7 +60,7 @@ module.exports = Marionette.AppRouter.extend({
     if (this.pendingUpdate) {
       window.location.reload();
     } else {
-      AppLayout.fullscreenModalRegion.close();
+      AppLayout.fullscreenModalRegion.empty();
       AppLayout.mainRegion.show(view);
     }
   }

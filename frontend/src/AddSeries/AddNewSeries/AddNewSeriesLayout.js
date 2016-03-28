@@ -42,7 +42,7 @@ const AddNewSeriesLayout = Marionette.LayoutView.extend({
   },
 
   search() {
-    if (this.closed) {
+    if (this.isDestroyed) {
       return;
     }
 
@@ -57,7 +57,7 @@ const AddNewSeriesLayout = Marionette.LayoutView.extend({
     this.search();
   },
 
-  onClose() {
+  onDestroy() {
     this.collection.abort();
   },
 
@@ -80,7 +80,7 @@ const AddNewSeriesLayout = Marionette.LayoutView.extend({
   },
 
   onCollectionSync() {
-    if (this.isClosed) {
+    if (this.isDestroyed) {
       return;
     }
 
@@ -99,11 +99,11 @@ const AddNewSeriesLayout = Marionette.LayoutView.extend({
   onCollectionRequest(collection, xhr) {
     this.$el.addClass('state-loading');
     xhr.error(() => {
-      if (this.isClosed) {
+      if (this.isDestroyed) {
         return;
       }
       if (status === 'abort') {
-        this.searchResult.close();
+        this.searchResult.empty();
       } else {
         this.searchResult.show(new ErrorView({
           term: this.collection.term,

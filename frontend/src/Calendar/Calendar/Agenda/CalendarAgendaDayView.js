@@ -7,7 +7,7 @@ module.exports = Marionette.LayoutView.extend({
   className: 'calendar-day',
 
   regions: {
-    events: '.x-calendar-day-events'
+    dayEvents: '.x-calendar-day-events'
   },
 
   serializeData() {
@@ -18,7 +18,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   onShow() {
-    this.events.show(new CalendarEventCollectionView({
+    this.dayEvents.show(new CalendarEventCollectionView({
       collection: this.model.get('events'),
       style: 'agenda'
     }));

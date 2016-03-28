@@ -10,8 +10,8 @@ var region = Marionette.Region.extend({
     $body.addClass('actionbar-visible');
   },
 
-  onClose() {
-    Marionette.$('body').removeClass('actionbar-visible actionbar-extended');
+  onEmpty() {
+    $body.removeClass('actionbar-visible actionbar-extended');
   }
 });
 

@@ -101,7 +101,7 @@ module.exports = Marionette.LayoutView.extend({
     });
   },
 
-  onClose() {
+  onDestroy() {
     reqres.removeHandler(reqres.Requests.GetEpisodeFileById);
   },
 
@@ -135,7 +135,7 @@ module.exports = Marionette.LayoutView.extend({
     this.seasons.show(new LoadingView());
 
     $.when(this.episodeCollection.fetch(), this.episodeFileCollection.fetch()).done(() => {
-      if (!this.isClosed) {
+      if (!this.isDestroyed) {
         this._updateSeasons();
       }
 

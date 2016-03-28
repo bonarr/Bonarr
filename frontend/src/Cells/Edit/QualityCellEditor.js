@@ -10,8 +10,8 @@ module.exports = Backgrid.CellEditor.extend({
 
   events: {
     'change': 'save',
-    'blur': 'close',
-    'keydown': 'close'
+    'blur': 'destroy',
+    'keydown': 'destroy'
   },
 
   render() {
@@ -64,7 +64,7 @@ module.exports = Backgrid.CellEditor.extend({
     model.trigger('backgrid:edited', model, column, new Backgrid.Command(e));
   },
 
-  close(e) {
+  destroy(e) {
     var model = this.model;
     var column = this.column;
     var command = new Backgrid.Command(e);

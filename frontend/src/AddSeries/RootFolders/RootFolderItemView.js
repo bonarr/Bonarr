@@ -18,7 +18,7 @@ module.exports = Marionette.ItemView.extend({
     var self = this;
 
     this.model.destroy().success(function() {
-      self.close();
+      self.destroy();
     });
   },
 
