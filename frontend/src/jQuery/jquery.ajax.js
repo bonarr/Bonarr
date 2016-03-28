@@ -1,6 +1,6 @@
 const $ = require('JsLibraries/jquery');
 
-const absUrlRegex = /^(https?\:)?\/\//i;
+const absUrlRegex = /^(https?:)?\/\//i;
 const apiRoot = window.Sonarr.ApiRoot;
 const urlBase = window.Sonarr.UrlBase;
 
@@ -21,7 +21,7 @@ function moveBodyToQuery(xhr) {
 }
 
 function addRootUrl(xhr) {
-  var url = xhr.url;
+  const url = xhr.url;
   if (url.startsWith('/signalr')) {
     xhr.url = urlBase + xhr.url;
   } else {
