@@ -8,12 +8,12 @@ using NzbDrone.Core.Tv;
 
 namespace Sonarr.Api.V3.Calendar
 {
-    public class CalendarFeedModule : SonarrV3Module
+    public class CalendarFeedModule : SonarrV3FeedModule
     {
         private readonly IEpisodeService _episodeService;
 
         public CalendarFeedModule(IEpisodeService episodeService)
-            : base("feed/calendar")
+            : base("calendar")
         {
             _episodeService = episodeService;
 
