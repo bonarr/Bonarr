@@ -3,6 +3,14 @@
 @import "variables";
 @import "icon-mixins";
 
+i {
+  cursor: default;
+}
+
+a > i {
+  .clickable();
+}
+
 .icon-sonarr-warning {
   .fa-icon-content(@fa-var-exclamation-triangle);
 }

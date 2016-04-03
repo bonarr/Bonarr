@@ -1,71 +1,71 @@
 <nav role="navigation" class="navbar topnavbar">
-    <div class="navbar-header">
-        <a href="/" class="navbar-brand">
-            <div class="brand-logo">
-                <img src="/Content/Images/logos/32.png" alt="Sonarr" class="img-responsive">
-            </div>
-            <div class="brand-logo-collapsed">
-                <img src="/Content/Images/logos/32.png" alt="Sonarr" class="img-responsive">
-            </div>
+  <div class="navbar-header">
+    <a href="/" class="navbar-brand">
+      <div class="brand-logo">
+        <img src="/Content/Images/logos/32.png" alt="Sonarr" class="img-responsive">
+      </div>
+      <div class="brand-logo-collapsed">
+        <img src="/Content/Images/logos/32.png" alt="Sonarr" class="img-responsive">
+      </div>
+    </a>
+    <div id="bootstrap-size">
+      <span class="visible-xs-block">xs</span>
+      <span class="visible-sm-block">sm</span>
+      <span class="visible-md-block">md</span>
+      <span class="visible-lg-block">lg</span>
+    </div>
+  </div>
+  <div class="nav-wrapper">
+    <ul class="nav navbar-nav">
+      <li class="navbar-collapse-button">
+        <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+        <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
+          <i class="icon-sonarr-navbar-collapse"></i>
         </a>
-        <div id="bootstrap-size">
-            <span class="visible-xs-block">xs</span>
-            <span class="visible-sm-block">sm</span>
-            <span class="visible-md-block">md</span>
-            <span class="visible-lg-block">lg</span>
-        </div>
-    </div>
-    <div class="nav-wrapper">
-        <ul class="nav navbar-nav">
-            <li class="navbar-collapse-button">
-                <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
-                <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
-                    <em class="icon-sonarr-navbar-collapse"></em>
-                </a>
-            </li>
+      </li>
+      <li>
+        <a href="#" class="navbar-search x-navbar-search">
+          <i class="icon-sonarr-search"></i>
+          <input type="text" class="form-control navbar-search-input x-navbar-search-input" placeholder="Search">
+        </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown dropdown-list">
+        <a href="#" data-toggle="dropdown" aria-expanded="true">
+          <i class="icon-sonarr-user"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="{{UrlBase}}/system/restart" class="x-navbar-restart no-router">
+              <em class="icon-sonarr-restart"></em>
+              Restart
+            </a>
+          </li>
+          <li>
+            <a href="{{UrlBase}}/system/shutdown" class="x-navbar-shutdown no-router">
+              <i class="icon-sonarr-shutdown"></i>
+              Shutdown
+            </a>
+          </li>
+          {{#if_eq authentication compare="forms"}}
+            <li role="separator" class="divider"></li>
             <li>
-                <a href="#" class="navbar-search x-navbar-search">
-                    <em class="icon-sonarr-search"></em>
-                    <input type="text" class="form-control navbar-search-input x-navbar-search-input" placeholder="Search">
-                </a>
+              <a href="{{UrlBase}}/logout" class="x-navbar-logout no-router">
+                <i class="icon-sonarr-logout"></i>
+                Logout
+              </a>
             </li>
+          {{/if_eq}}
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown dropdown-list">
-                <a href="#" data-toggle="dropdown" aria-expanded="true">
-                    <em class="icon-sonarr-user"></em>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{UrlBase}}/system/restart" class="x-navbar-restart no-router">
-                            <em class="icon-sonarr-restart"></em>
-                            Restart
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{UrlBase}}/system/shutdown" class="x-navbar-shutdown no-router">
-                            <em class="icon-sonarr-shutdown"></em>
-                            Shutdown
-                        </a>
-                    </li>
-                    {{#if_eq authentication compare="forms"}}
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{UrlBase}}/logout" class="x-navbar-logout no-router">
-                            <em class="icon-sonarr-logout"></em>
-                            Logout
-                        </a>
-                    </li>
-                    {{/if_eq}}
-                </ul>
-            </li>
+      </li>
 
-            <li class="navbar-collapse-button-right">
-                <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
-                <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
-                    <em class="icon-sonarr-navbar-collapse"></em>
-                </a>
-            </li>
-        </ul>
-    </div>
+      <li class="navbar-collapse-button-right">
+        <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+        <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+          <i class="icon-sonarr-navbar-collapse"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>

@@ -34,8 +34,13 @@ module.exports = Marionette.LayoutView.extend({
     $('[data-toggle-state]').on('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+
       const $target = $(e.target);
-      const toggleState = $target.data('toggleState');
+      let toggleState = $target.data('toggleState');
+
+      if (!toggleState && $target.closest('a') && $target.closest('a')[0]) {
+        toggleState = $($target.closest('a')[0]).data('toggleState');
+      }
 
       if (toggleState) {
         this.$body.toggleClass(toggleState);
