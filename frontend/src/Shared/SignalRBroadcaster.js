@@ -23,10 +23,10 @@ module.exports = {
       }
     };
 
-    var tryingToReconnect = false;
-    var messengerId = 'signalR';
+    const messengerId = 'signalR';
+    let tryingToReconnect = false;
 
-    this.signalRconnection = $.connection(`${window.Sonarr.UrlBase}/signalr`);
+    this.signalRconnection = $.connection(`/signalr`);
 
     this.signalRconnection.stateChanged(function(change) {
       console.debug(`SignalR: [${getStatus(change.newState)}]`);
