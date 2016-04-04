@@ -3,7 +3,7 @@
     <div class="backdrop">
       <div class="backdrop-overlay"></div>
     </div>
-    <div>
+    <div class="header-info">
       <div class="visible-lg poster">
         {{posterHelper 500}}
         {{#if_eq status compare="ended"}}
@@ -14,7 +14,7 @@
         <span class="title">
           {{title}}
         </span>
-        <span class="series-nav-buttons">
+        <span class="series-nav-buttons hidden-xs">
           <a href="{{previousSeriesUrl}}"><i class="icon-sonarr-previous-series"></i></a>
           <a href="{{nextSeriesUrl}}"><i class="icon-sonarr-next-series"></i></a>
         </span>
