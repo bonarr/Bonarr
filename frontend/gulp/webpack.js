@@ -1,10 +1,10 @@
-var fs = require('fs');
-var gulp = require('gulp');
-var webpackStream = require('webpack-stream');
-var livereload = require('gulp-livereload');
-var path = require('path');
-var webpack = require('webpack');
-var errorHandler = require('./helpers/errorHandler');
+const fs = require('fs');
+const gulp = require('gulp');
+const webpackStream = require('webpack-stream');
+const livereload = require('gulp-livereload');
+const path = require('path');
+const webpack = require('webpack');
+const errorHandler = require('./helpers/errorHandler');
 
 const uiFolder = 'UI.Phantom';
 const htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');

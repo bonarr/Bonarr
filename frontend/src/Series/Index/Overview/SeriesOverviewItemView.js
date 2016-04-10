@@ -1,6 +1,14 @@
-var SeriesIndexItemView = require('../SeriesIndexItemView');
-var tpl = require('./SeriesOverviewItemView.hbs');
+const SeriesIndexItemView = require('../SeriesIndexItemView');
+const lazyImage = require('Behaviours/lazyImages');
+const tpl = require('./SeriesOverviewItemView.hbs');
 
-module.exports = SeriesIndexItemView.extend({
-  template: tpl
+const SeriesOverviewItemView = SeriesIndexItemView.extend({
+  template: tpl,
+  behaviors: {
+    lazyImage: {
+      behaviorClass: lazyImage
+    }
+  }
 });
+
+module.exports = SeriesOverviewItemView;

@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
 var vent = require('vent');
-var $ = require('jquery');
 var PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
 var OverViewCollectionView = require('./Overview/SeriesOverviewCollectionView');
 var TableCollectionView = require('./Table/SeriesTableLayout');
@@ -18,7 +17,6 @@ var FooterModel = require('./FooterModel');
 var tpl = require('./SeriesIndexLayout.hbs');
 require('Mixins/backbone.signalr.mixin');
 require('Mixins/backbone.signalr.mixin');
-require('jquery.lazyload');
 
 const SeriesIndexLayout = Marionette.LayoutView.extend({
   template: tpl,
@@ -26,10 +24,6 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
   regions: {
     seriesRegion: '#x-series',
     footer: '#x-series-footer'
-  },
-
-  ui: {
-    lazyImage: 'img.lazy'
   },
 
   columns: [
@@ -85,11 +79,6 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
 
   onShow() {
     this._showActionBar();
-
-    this.$('img.lazy').lazyload({
-      threshold: 200,
-      container: $('#content-wrapper')
-    });
   },
 
   _showTable() {

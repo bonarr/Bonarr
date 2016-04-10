@@ -1,15 +1,18 @@
 var vent = require('vent');
 var Marionette = require('marionette');
-var SeriesCollection = require('Series/SeriesCollection');
 var AddSeriesModal = require('./AddSeriesModal');
 var tpl = require('./SearchResultItemView.hbs');
-var $ = require('jquery');
-
+var lazyImage = require('Behaviours/lazyImages');
 require('jquery.dotdotdot');
-require('jquery.lazyload');
 
 const SearchResultItemView = Marionette.ItemView.extend({
   template: tpl,
+
+  behaviors: {
+    lazyImage: {
+      behaviorClass: lazyImage
+    }
+  },
 
   ui: {
     overview: '.x-overview',
@@ -28,11 +31,6 @@ const SearchResultItemView = Marionette.ItemView.extend({
     this.ui.overview.dotdotdot({
       height: 100,
       wrap: 'letter'
-    });
-
-    this.ui.lazyImage.lazyload({
-      threshold: 200,
-      container: $('#content-wrapper')
     });
   },
 

@@ -1,12 +1,8 @@
-var Backbone = require('backbone');
-require('JsLibraries/backbone.marionette');
+const Marionette = require('JsLibraries/backbone.marionette');
+const templateMixin = require('Handlebars/backbone.marionette.templates');
+const asNamedView = require('Mixins/AsNamedView');
 
-window.Marionette = Backbone.Marionette;
+templateMixin.call(Marionette.TemplateCache);
+asNamedView.call(Marionette.ItemView.prototype);
 
-var templateMixin = require('../Handlebars/backbone.marionette.templates');
-var asNamedView = require('Mixins/AsNamedView');
-
-templateMixin.call(window.Marionette.TemplateCache);
-asNamedView.call(window.Marionette.ItemView.prototype);
-
-module.exports = window.Marionette;
+module.exports = Marionette;
