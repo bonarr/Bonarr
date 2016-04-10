@@ -4,7 +4,6 @@ require('./copy.js');
 require('./handlebars.js');
 require('./imageMin.js');
 require('./less.js');
-require('./pretty.js');
 require('./start.js');
 require('./stripBom.js');
 require('./watch.js');
