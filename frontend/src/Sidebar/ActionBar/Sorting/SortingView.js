@@ -21,17 +21,17 @@ module.exports = Marionette.ItemView.extend({
   },
 
   onRender() {
-    if (this.viewCollection.state) {
-      var sortKey = this.viewCollection.state.sortKey;
-      var name = this.viewCollection._getSortMapping(sortKey).name;
-      var order = this.viewCollection.state.order;
-
-      if (name === this.model.get('name')) {
-        this._setSortStatus(order);
-      } else {
-        this._removeSortStatus();
-      }
-    }
+    // if (this.viewCollection.state) {
+    //   var sortKey = this.viewCollection.state.sortKey;
+    //   var name = this.viewCollection._getSortMapping(sortKey).name;
+    //   var order = this.viewCollection.state.order;
+    //
+    //   if (name === this.model.get('name')) {
+    //     this._setSortStatus(order);
+    //   } else {
+    //     this._removeSortStatus();
+    //   }
+    // }
   },
 
   onClick(e) {

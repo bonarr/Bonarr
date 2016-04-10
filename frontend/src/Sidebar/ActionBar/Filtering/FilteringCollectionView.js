@@ -60,15 +60,15 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   _setInitialFilter() {
-    if (this.menu.storeState) {
-      var mode = Config.getValue(this.menu.menuKey);
-
-      if (mode && !this.menu.callback) {
-        this.viewCollection.setFilterMode(mode);
-      }
-    }
-
-    this._filterCollection();
+    // if (this.menu.storeState) {
+    //   var mode = Config.getValue(this.menu.menuKey);
+    //
+    //   if (mode && !this.menu.callback) {
+    //     this.viewCollection.setFilterMode(mode);
+    //   }
+    // }
+    //
+    // this._filterCollection();
   },
 
   _filterCollection() {

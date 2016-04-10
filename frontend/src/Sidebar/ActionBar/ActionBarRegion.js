@@ -3,7 +3,7 @@ var $ = require('jquery');
 
 const $body = $('body');
 
-var region = Marionette.Region.extend({
+const region = Marionette.Region.extend({
   el: '#actionbar-region',
 
   onShow() {
