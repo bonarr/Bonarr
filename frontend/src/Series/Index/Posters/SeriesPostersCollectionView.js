@@ -1,9 +1,7 @@
 var Marionette = require('marionette');
-var PosterItemView = require('./SeriesPostersItemView');
-var tpl = require('./SeriesPostersCollectionView.hbs');
+var SeriesPostersItemView = require('./SeriesPostersItemView');
 
-module.exports = Marionette.CompositeView.extend({
-  childView: PosterItemView,
-  childViewContainer: '#x-series-posters',
-  template: tpl
+module.exports = Marionette.CollectionView.extend({
+  className: 'series-posters',
+  childView: SeriesPostersItemView
 });

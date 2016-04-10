@@ -1,6 +1,6 @@
 var Marionette = require('marionette');
-var ListItemView = require('./SeriesOverviewItemView');
+var SeriesOverviewItemView = require('./SeriesOverviewItemView');
 
 module.exports = Marionette.CollectionView.extend({
-  childView: ListItemView
+  childView: SeriesOverviewItemView
 });

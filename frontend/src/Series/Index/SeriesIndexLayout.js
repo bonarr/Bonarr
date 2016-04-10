@@ -20,7 +20,7 @@ require('Mixins/backbone.signalr.mixin');
 require('Mixins/backbone.signalr.mixin');
 require('jquery.lazyload');
 
-module.exports = Marionette.LayoutView.extend({
+const SeriesIndexLayout = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {
@@ -80,7 +80,7 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.seriesCollection = SeriesCollection.viewCollection;
+    // nothing yet
   },
 
   onShow() {
@@ -94,7 +94,7 @@ module.exports = Marionette.LayoutView.extend({
 
   _showTable() {
     const view = new Backgrid.Grid({
-      collection: this.seriesCollection,
+      collection: this.collection,
       columns: this.columns,
       className: 'table table-hover'
     });
@@ -104,7 +104,7 @@ module.exports = Marionette.LayoutView.extend({
 
   _showList() {
     const view = new ListCollectionView({
-      collection: this.seriesCollection
+      collection: this.collection
     });
 
     this._renderView(view);
@@ -112,7 +112,7 @@ module.exports = Marionette.LayoutView.extend({
 
   _showPosters() {
     const view = new PosterCollectionView({
-      collection: this.seriesCollection
+      collection: this.collection
     });
 
     this._renderView(view);
@@ -240,7 +240,7 @@ module.exports = Marionette.LayoutView.extend({
 
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
-      collection: this.seriesCollection,
+      collection: this.collection,
       actions,
       views: viewOptions,
       filtering: filteringOptions,
@@ -285,3 +285,5 @@ module.exports = Marionette.LayoutView.extend({
     this.footer.show(new FooterView({ model: footerModel }));
   }
 });
+
+module.exports = SeriesIndexLayout;

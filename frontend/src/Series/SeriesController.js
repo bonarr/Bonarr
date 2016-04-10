@@ -1,5 +1,5 @@
 var NzbDroneController = require('Shared/NzbDroneController');
-var SeriesCollection = require('./SeriesCollection');
+var seriesCollection = require('./seriesCollection');
 var SeriesIndexLayout = require('./Index/SeriesIndexLayout');
 var SeriesDetailsLayout = require('./Details/SeriesDetailsLayout');
 
@@ -14,16 +14,17 @@ module.exports = NzbDroneController.extend({
 
   series() {
     this.setTitle('Sonarr');
-    this.showMainRegion(new SeriesIndexLayout());
+    this.showMainRegion(new SeriesIndexLayout({
+      collection: seriesCollection
+    }));
   },
 
   seriesDetails(query) {
-    var series = SeriesCollection.where({ titleSlug: query });
+    const series = seriesCollection.findWhere({ titleSlug: query });
 
-    if (series.length) {
-      var targetSeries = series[0];
-      this.setTitle(targetSeries.get('title'));
-      this.showMainRegion(new SeriesDetailsLayout({ model: targetSeries }));
+    if (series) {
+      this.setTitle(series.get('title'));
+      this.showMainRegion(new SeriesDetailsLayout({ model: series }));
     } else {
       this.showNotFound();
     }

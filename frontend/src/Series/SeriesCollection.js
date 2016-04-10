@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var SeriesModel = require('./SeriesModel');
-var BackboneSortedCollection = require('backbone.sorted.collection');
 var moment = require('moment');
 
 var SeriesCollection = Backbone.Collection.extend({
@@ -10,21 +9,18 @@ var SeriesCollection = Backbone.Collection.extend({
   tableName: 'series',
 
   save() {
-    var self = this;
-
-    var proxy = _.extend(new Backbone.Model(), {
+    const proxy = _.extend(new Backbone.Model(), {
       id: '',
-
-      url: self.url + '/editor',
+      url: `${this.url}/editor`,
 
       toJSON() {
-        return self.filter(function(model) {
+        return self.filter((model) => {
           return model.edited;
         });
       }
     });
 
-    this.listenTo(proxy, 'sync', function(proxyModel, models) {
+    this.listenToOnce(proxy, 'sync', (proxyModel, models) => {
       this.add(models, { merge: true });
       this.trigger('save', this);
     });
@@ -95,6 +91,5 @@ var SeriesCollection = Backbone.Collection.extend({
 
 const seriesCollection = new SeriesCollection([]).bindSignalR();
 seriesCollection.fetch();
-seriesCollection.viewCollection = new BackboneSortedCollection(seriesCollection);
 
 module.exports = seriesCollection;
