@@ -20,6 +20,10 @@ const TableView = Marionette.CompositeView.extend({
     this.headers = options.headers;
     this.selectable = options.selectable;
 
+    _.each(this.headers, (header) => {
+      header.label = header.label || header.name;
+    });
+
     this.childViewOptions = _.extend({
       selectable: this.selectable
     }, options.childViewOptions);

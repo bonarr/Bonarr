@@ -23,8 +23,7 @@ module.exports = Marionette.LayoutView.extend({
       label: '#'
     },
     {
-      name: 'title',
-      label: 'Title'
+      name: 'title'
     },
     {
       name: 'airDateUtc',

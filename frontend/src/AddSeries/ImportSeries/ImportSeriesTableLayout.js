@@ -15,16 +15,13 @@ const EmptyView = Marionette.LayoutView.extend({
 
   headers: [{
     name: 'name',
-    label: 'Folder'
+    label: 'folder'
   }, {
-    name: 'monitor',
-    label: 'Monitor'
+    name: 'monitor'
   }, {
-    name: 'profile',
-    label: 'Profile'
+    name: 'profile'
   }, {
-    name: 'series',
-    label: 'Series'
+    name: 'series'
   }],
 
   regions: {
