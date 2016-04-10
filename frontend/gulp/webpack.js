@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var webpackStream = require('webpack-stream');
 var livereload = require('gulp-livereload');
@@ -9,6 +10,15 @@ const uiFolder = 'UI.Phantom';
 const htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');
 const root = path.join(__dirname, '..', 'src');
 
+const hbsHelpersRoot = path.join(root, 'Handlebars', 'Helpers');
+const handlebarsHelperDir = fs.readdirSync(hbsHelpersRoot)
+.map((file) => {
+  const helperDir = path.join(hbsHelpersRoot, file);
+  return fs.statSync(helperDir).isDirectory()? helperDir : undefined;
+})
+.filter((dir) => {
+  return !!dir;
+});
 console.log('ROOT:', root);
 
 const config = {
@@ -81,16 +91,7 @@ const config = {
         loader: 'handlebars-loader',
         query: {
           runtime: 'handlebars',
-          helperDirs: [
-            root + '/Handlebars/Helpers/Episode',
-            root + '/Handlebars/Helpers/Series',
-            root + '/Handlebars/Helpers/Rating',
-            root + '/Handlebars/Helpers/DateTime',
-            root + '/Handlebars/Helpers/Object',
-            root + '/Handlebars/Helpers/Number',
-            root + '/Handlebars/Helpers/String',
-            root + '/Handlebars/Helpers/Enumerable'
-          ],
+          helperDirs: handlebarsHelperDir,
           knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
         }
       }]
