@@ -1,31 +1,36 @@
 var $ = require('jquery');
 var Marionette = require('marionette');
-var ImportSeriesCollection = require('./ImportSeriesCollection');
 var TableView = require('Table/TableView');
-var ImportSeriesRow = require('./ImportSeriesRow');
-var rootFolderCollection = require('../RootFolders/RootFolderCollection');
-var TaskQueue = require('Shared/TaskQueue').default; // have no idea why I need this
-var tpl = require('./ImportSeriesTableLayout.hbs');
-var ImportSeriesFooterView = require('./ImportSeriesFooterView');
-var vent = require('vent');
+var tpl = require('./SeriesTableLayout.hbs');
 
-const ImportSeriesTableLayout = Marionette.LayoutView.extend({
+const SeriesTableLayout = Marionette.LayoutView.extend({
 
   template: tpl,
 
   headers: [{
-    name: 'name',
-    label: 'folder'
+    name: 'status'
   }, {
-    name: 'monitor'
+    name: 'title',
+    label: 'Title'
   }, {
-    name: 'profile'
+    name: 'profile',
+    label: 'Profile'
   }, {
-    name: 'series'
+    name: 'network',
+    label: 'Network'
+  }, {
+    name: 'netAiring',
+    label: 'Net Airing'
+  }, {
+    name: 'seasons',
+    label: 'Seasons'
+  }, {
+    name: 'episodes',
+    label: 'Episodes'
   }],
 
   regions: {
-    table: '#import-series-table-region'
+    table: '#series-table-region'
   },
 
   initialize(options = {}) {
@@ -66,4 +71,4 @@ const ImportSeriesTableLayout = Marionette.LayoutView.extend({
   }
 });
 
-module.exports = ImportSeriesTableLayout;
+module.exports = SeriesTableLayout;

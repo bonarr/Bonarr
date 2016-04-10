@@ -32,7 +32,12 @@ namespace Sonarr.Api.V3.Series
         public int? EpisodeCount { get; set; }
         public int? EpisodeFileCount { get; set; }
         public long? SizeOnDisk { get; set; }
+
+        // V3: replace with Ended
         public SeriesStatusType Status { get; set; }
+
+        public bool Ended => Status == SeriesStatusType.Ended;
+
         public string ProfileName { get; set; }
         public string Overview { get; set; }
         public DateTime? NextAiring { get; set; }

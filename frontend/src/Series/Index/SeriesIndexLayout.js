@@ -1,10 +1,10 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
-var Backgrid = require('backgrid');
 var vent = require('vent');
 var $ = require('jquery');
 var PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
-var ListCollectionView = require('./Overview/SeriesOverviewCollectionView');
+var OverViewCollectionView = require('./Overview/SeriesOverviewCollectionView');
+var TableCollectionView = require('./Table/SeriesTableLayout');
 var EmptyView = require('./EmptyView');
 var SeriesCollection = require('../SeriesCollection');
 var RelativeDateCell = require('Cells/RelativeDateCell');
@@ -93,17 +93,21 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
   },
 
   _showTable() {
-    const view = new Backgrid.Grid({
-      collection: this.collection,
-      columns: this.columns,
-      className: 'table table-hover'
+    // const view = new Backgrid.Grid({
+    //   collection: this.collection,
+    //   columns: this.columns,
+    //   className: 'table table-hover'
+    // });
+
+    const view = new TableCollectionView({
+      collection: this.collection
     });
 
     this._renderView(view);
   },
 
-  _showList() {
-    const view = new ListCollectionView({
+  _showOverView() {
+    const view = new OverViewCollectionView({
       collection: this.collection
     });
 
@@ -226,7 +230,7 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
           title: '',
           tooltip: 'Overview List',
           icon: 'icon-sonarr-view-list',
-          callback: this._showList
+          callback: this._showOverView
         },
         {
           key: 'tableView',
