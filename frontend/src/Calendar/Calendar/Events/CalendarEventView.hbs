@@ -9,7 +9,11 @@
     {{/if}}
 
     {{#if downloading}}
-      <div class="download-progress" title="Episode is downloading - {{progress}}% {{releaseTitle}}" data-percent="{{progress}}"></div>
+      {{#if queueDetails}}
+        <div class="download-progress" title="Episode is downloading - {{queueDetails.progress}}% {{queueDetails.releaseTitle}}" data-percent="{{queueDetails.progress}}"></div>
+      {{else}}
+        <i class="icon-sonarr-downloading" title="Episode is downloading"></i>
+      {{/if}}
     {{/if}}
 
     {{#if failed}}
