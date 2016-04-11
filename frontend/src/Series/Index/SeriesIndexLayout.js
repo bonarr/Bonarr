@@ -1,22 +1,14 @@
-var _ = require('underscore');
-var Marionette = require('marionette');
-var vent = require('vent');
-var PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
-var OverViewCollectionView = require('./Overview/SeriesOverviewCollectionView');
-var TableCollectionView = require('./Table/SeriesTableLayout');
-var EmptyView = require('./EmptyView');
-var SeriesCollection = require('../SeriesCollection');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var ProfileCell = require('Cells/ProfileCell');
-var EpisodeProgressCell = require('Cells/EpisodeProgressCell');
-var SeriesActionsCell = require('Cells/SeriesActionsCell');
-var SeriesStatusCell = require('Cells/SeriesStatusCell');
-var FooterView = require('./FooterView');
-var FooterModel = require('./FooterModel');
-var tpl = require('./SeriesIndexLayout.hbs');
-require('Mixins/backbone.signalr.mixin');
-require('Mixins/backbone.signalr.mixin');
+const _ = require('underscore');
+const Marionette = require('marionette');
+const vent = require('vent');
+const PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
+const OverViewCollectionView = require('./Overview/SeriesOverviewCollectionView');
+const TableCollectionView = require('./Table/SeriesTableLayout');
+const EmptyView = require('./EmptyView');
+const SeriesCollection = require('../SeriesCollection');
+const FooterView = require('./FooterView');
+const FooterModel = require('./FooterModel');
+const tpl = require('./SeriesIndexLayout.hbs');
 
 const SeriesIndexLayout = Marionette.LayoutView.extend({
   template: tpl,
@@ -25,53 +17,6 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
     seriesRegion: '#x-series',
     footer: '#x-series-footer'
   },
-
-  columns: [
-    {
-      name: 'statusWeight',
-      label: '',
-      cell: SeriesStatusCell
-    },
-    {
-      name: 'title',
-      label: 'Title',
-      cell: SeriesTitleCell,
-      cellValue: 'this',
-      sortValue: 'sortTitle'
-    },
-    {
-      name: 'profileId',
-      label: 'Profile',
-      cell: ProfileCell
-    },
-    {
-      name: 'network',
-      label: 'Network',
-      cell: 'string'
-    },
-    {
-      name: 'nextAiring',
-      label: 'Next Airing',
-      cell: RelativeDateCell
-    },
-    {
-      name: 'seasonCount',
-      label: 'Seasons',
-      cell: 'integer'
-    },
-    {
-      name: 'percentOfEpisodes',
-      label: 'Episodes',
-      cell: EpisodeProgressCell,
-      className: 'episode-progress-cell'
-    },
-    {
-      name: 'this',
-      label: '',
-      sortable: false,
-      cell: SeriesActionsCell
-    }
-  ],
 
   initialize() {
     // nothing yet
@@ -82,12 +27,6 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
   },
 
   _showTable() {
-    // const view = new Backgrid.Grid({
-    //   collection: this.collection,
-    //   columns: this.columns,
-    //   className: 'table table-hover'
-    // });
-
     const view = new TableCollectionView({
       collection: this.collection
     });
@@ -118,10 +57,6 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
       this.seriesRegion.show(view);
       this._showFooter();
     }
-  },
-
-  _fetchCollection() {
-    // do nothing?
   },
 
   _showActionBar() {
@@ -172,7 +107,7 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
       ]
     };
 
-    var filteringOptions = {
+    const filteringOptions = {
       type: 'radio',
       storeState: true,
       menuKey: 'series.filterMode',
@@ -201,7 +136,7 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
       ]
     };
 
-    var viewOptions = {
+    const viewOptions = {
       type: 'radio',
       storeState: true,
       menuKey: 'seriesViewMode',
@@ -242,13 +177,13 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
   },
 
   _showFooter() {
-    var footerModel = new FooterModel();
-    var series = SeriesCollection.models.length;
-    var episodes = 0;
-    var episodeFiles = 0;
-    var ended = 0;
-    var continuing = 0;
-    var monitored = 0;
+    const footerModel = new FooterModel();
+    const series = SeriesCollection.models.length;
+    let episodes = 0;
+    let episodeFiles = 0;
+    let ended = 0;
+    let continuing = 0;
+    let monitored = 0;
 
     _.each(SeriesCollection.models, (model) => {
       episodes += model.get('episodeCount');

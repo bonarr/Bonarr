@@ -1,8 +1,8 @@
-var SeriesIndexItemView = require('../SeriesIndexItemView');
-var lazyImage = require('Behaviours/lazyImages');
-var tpl = require('./SeriesPostersItemView.hbs');
+const SeriesIndexItemView = require('../SeriesIndexItemView');
+const lazyImage = require('Behaviours/lazyImages');
+const tpl = require('./SeriesPostersItemView.hbs');
 
-module.exports = SeriesIndexItemView.extend({
+const SeriesPosterItemView = SeriesIndexItemView.extend({
   tagName: 'li',
   className: 'series-poster-item',
   template: tpl,
@@ -12,3 +12,5 @@ module.exports = SeriesIndexItemView.extend({
     }
   }
 });
+
+module.exports = SeriesPosterItemView;

@@ -1,13 +1,13 @@
-var root = './frontend/src/';
+const root = './frontend/src/';
 
-var paths = {
+const paths = {
   src: {
-    root: root,
+    root,
     templates: root + '**/*.hbs',
     html: root + '*.html',
     partials: root + '**/*Partial.hbs',
     scripts: root + '**/*.js',
-    less: [root + '**/*.less'],
+    less: [ root + '**/*.less' ],
     content: root + 'Content/',
     images: root + 'Content/Images/**/*',
     exclude: {

@@ -41,7 +41,7 @@
     no-this-before-super: 2,
     no-useless-escape: 2,
     no-useless-constructor: 2,
-    no-var: 2,
+    no-var: 1,
     object-shorthand: [2, "properties"],
     prefer-arrow-callback: 2,
     prefer-const: 1,
