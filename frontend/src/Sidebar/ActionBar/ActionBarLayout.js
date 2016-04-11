@@ -1,14 +1,15 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var vent = require('vent');
-var Marionette = require('marionette');
-var ButtonCollection = require('./ButtonCollection');
-var ButtonModel = require('./ButtonModel');
-var ActionCollectionView = require('./Action/ActionCollectionView');
-var RadioCollectionView = require('./Radio/RadioCollectionView');
-var SortingCollectionView = require('./Sorting/SortingCollectionView');
-var FilteringCollectionView = require('./Filtering/FilteringCollectionView');
-var ResolutionUtility = require('../../Utilities/ResolutionUtility');
+const _ = require('underscore');
+const $ = require('jquery');
+const vent = require('vent');
+const Backbone = require('backbone');
+const Marionette = require('marionette');
+const ButtonCollection = require('./ButtonCollection');
+const ButtonModel = require('./ButtonModel');
+const ActionCollectionView = require('./Action/ActionCollectionView');
+const RadioCollectionView = require('./Radio/RadioCollectionView');
+const SortingCollectionView = require('./Sorting/SortingCollectionView');
+const FilteringCollectionView = require('./Filtering/FilteringCollectionView');
+const ResolutionUtility = require('../../Utilities/ResolutionUtility');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'Sidebar/ActionBar/ActionBarLayoutTemplate',
@@ -31,11 +32,11 @@ module.exports = Marionette.LayoutView.extend({
 
   initialize(options) {
     if (!options) {
-      throw 'options needs to be passed';
+      throw new Error('options needs to be passed');
     }
 
     if (!options.parentView) {
-      throw 'context needs to be passed';
+      throw new Error('context needs to be passed');
     }
 
     this.parentView = options.parentView;
@@ -45,7 +46,7 @@ module.exports = Marionette.LayoutView.extend({
     this.filtering = options.filtering;
     this.sorting = options.sorting;
 
-    this.listenTo(this.parentView, 'destroy', function() {
+    this.listenTo(this.parentView, 'destroy', () => {
       vent.trigger(vent.Commands.CloseActionBarCommand);
     });
   },
@@ -56,15 +57,14 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     if (this.actions) {
-      var actionCollection = this._buildCollection(this.actions);
+      const actionCollection = new Backbone.Collection(this.actions.items);
       this.actionsRegion.show(new ActionCollectionView({
-        menu: this.actions,
         collection: actionCollection
       }));
     }
 
     if (this.views) {
-      var viewCollection = this._buildCollection(this.views);
+      const viewCollection = this._buildCollection(this.views);
       this.viewsRegion.show(new RadioCollectionView({
         menu: this.views,
         collection: viewCollection
@@ -72,7 +72,7 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     if (this.filtering) {
-      var filteringCollection = this._buildCollection(this.filtering);
+      const filteringCollection = this._buildCollection(this.filtering);
       this.filteringRegion.show(new FilteringCollectionView({
         menu: this.filtering,
         collection: filteringCollection,
@@ -81,7 +81,7 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     if (this.sorting) {
-      var sortingCollection = this._buildCollection(this.sorting);
+      const sortingCollection = this._buildCollection(this.sorting);
       this.sortingRegion.show(new SortingCollectionView({
         menu: this.sorting,
         collection: sortingCollection,
@@ -91,14 +91,14 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _buildCollection(buttonGroup) {
-    var collection = new ButtonCollection();
+    const collection = new ButtonCollection();
 
-    _.each(buttonGroup.items, function(button) {
+    _.each(buttonGroup.items, (button) => {
       if (buttonGroup.storeState && !button.key) {
-        throw 'must provide key for all buttons when storeState is enabled';
+        throw new Error('must provide key for all buttons when storeState is enabled');
       }
 
-      var model = new ButtonModel(button);
+      const model = new ButtonModel(button);
       model.set('menuKey', buttonGroup.menuKey);
       model.ownerContext = this.parentView;
       collection.add(model);

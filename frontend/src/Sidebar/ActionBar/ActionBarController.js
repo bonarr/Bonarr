@@ -1,7 +1,7 @@
-var Marionette = require('marionette');
-var vent = require('vent');
-var AppLayout = require('AppLayout');
-var ActionBarLayout = require('./ActionBarLayout');
+const Marionette = require('marionette');
+const vent = require('vent');
+const AppLayout = require('AppLayout');
+const ActionBarLayout = require('./ActionBarLayout');
 
 module.exports = Marionette.AppRouter.extend({
   initialize() {

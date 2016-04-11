@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var ActionView = require('./ActionView');
+const Marionette = require('marionette');
+const ActionView = require('./ActionView');
 
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',

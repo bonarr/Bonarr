@@ -1,14 +1,18 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
+const _ = require('underscore');
+const Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
   url: '/command',
+
+  initialize() {
+    this.listenTo(this, 'request', this.onRequest);
+  },
 
   parse(response) {
     response.name = response.name.toLocaleLowerCase();
     response.body.name = response.body.name.toLocaleLowerCase();
 
-    for (var key in response.body) {
+    for (const key in response.body) {
       response[key] = response.body[key];
     }
 
@@ -22,13 +26,14 @@ module.exports = Backbone.Model.extend({
       return false;
     }
 
-    for (var key in command) {
+    for (const key in command) {
       if (key !== 'name') {
-        if (Array.isArray(command[key])) {
-          if (_.difference(command[key], this.get(key)).length > 0) {
+        const value = command[key];
+        if (Array.isArray(value)) {
+          if (_.difference(value, this.get(key)).length > 0) {
             return false;
           }
-        } else if (command[key] !== this.get(key)) {
+        } else if (value !== this.get(key)) {
           return false;
         }
       }
@@ -38,7 +43,8 @@ module.exports = Backbone.Model.extend({
   },
 
   isActive() {
-    return this.get('status') !== 'completed' && this.get('status') !== 'failed';
+    const status = this.get('status');
+    return status !== 'completed' && status !== 'failed';
   },
 
   isComplete() {
@@ -47,5 +53,9 @@ module.exports = Backbone.Model.extend({
 
   isFailed() {
     return this.get('status') === 'failed';
+  },
+
+  onRequest(model, promise) {
+    this.promise = promise;
   }
 });

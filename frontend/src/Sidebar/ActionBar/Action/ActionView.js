@@ -1,23 +1,16 @@
-var Backbone = require('backbone');
-var Marionette = require('marionette');
-var _ = require('underscore');
-var CommandController = require('Commands/CommandController');
+const Backbone = require('backbone');
+const Marionette = require('marionette');
+const _ = require('underscore');
+const CommandController = require('Commands/CommandController');
+const tpl = require('./ActionView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Sidebar/ActionBar/Action/ActionViewTemplate',
+  template: tpl,
   tagName: 'li',
   className: 'actionbar-list-item',
 
-  ui: {
-    icon: 'i'
-  },
-
   events: {
     'click': 'onClick'
-  },
-
-  initialize() {
-    this.storageKey = this.model.get('menuKey') + ':' + this.model.get('key');
   },
 
   onRender() {
@@ -35,10 +28,10 @@ module.exports = Marionette.ItemView.extend({
       this.$el.data('container', 'body');
     }
 
-    var command = this.model.get('command');
+    const command = this.model.get('command');
 
     if (command) {
-      var properties = _.extend({ name: command }, this.model.get('properties'));
+      const properties = _.extend({ name: command }, this.model.get('properties'));
 
       CommandController.bindToCommand({
         command: properties,
@@ -58,25 +51,25 @@ module.exports = Marionette.ItemView.extend({
   },
 
   invokeCommand() {
-    var command = this.model.get('command');
+    const command = this.model.get('command');
     if (command) {
       CommandController.execute(command, this.model.get('properties'));
     }
   },
 
   invokeRoute() {
-    var route = this.model.get('route');
+    const route = this.model.get('route');
     if (route) {
       Backbone.history.navigate(route, { trigger: true });
     }
   },
 
   invokeCallback() {
-    var callback = this.model.get('callback');
+    const callback = this.model.get('callback');
 
     if (callback) {
       if (!this.model.ownerContext) {
-        throw 'ownerContext must be set.';
+        throw new Error('ownerContext must be set.');
       }
 
       callback.call(this.model.ownerContext, this);

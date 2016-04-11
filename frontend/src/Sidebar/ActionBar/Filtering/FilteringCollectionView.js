@@ -1,7 +1,6 @@
-var PageableCollection = require('backbone.paginator');
-var Marionette = require('marionette');
-var FilteringView = require('./FilteringView');
-var Config = require('Config');
+const Marionette = require('marionette');
+const FilteringView = require('./FilteringView');
+const Config = require('Config');
 
 module.exports = Marionette.CompositeView.extend({
   childView: FilteringView,
@@ -23,7 +22,7 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   _setActive() {
-    var storedKey = this.menu.defaultAction;
+    let storedKey = this.menu.defaultAction;
 
     if (this.menu.storeState) {
       storedKey = Config.getValue(this.menu.menuKey, storedKey);
@@ -33,7 +32,7 @@ module.exports = Marionette.CompositeView.extend({
       return;
     }
 
-    this.collection.each(function(model) {
+    this.collection.each((model) => {
       if (model.get('key').toLocaleLowerCase() === storedKey.toLowerCase()) {
         model.set('active', true);
       } else {
@@ -50,7 +49,7 @@ module.exports = Marionette.CompositeView.extend({
     if (this.menu.callback) {
       this.menu.callback.call(model.ownerContext, model);
     } else {
-      var mode = model.get('key');
+      const mode = model.get('key');
       this.viewCollection.setFilterMode(mode);
     }
 
@@ -61,7 +60,7 @@ module.exports = Marionette.CompositeView.extend({
 
   _setInitialFilter() {
     // if (this.menu.storeState) {
-    //   var mode = Config.getValue(this.menu.menuKey);
+    //   const mode = Config.getValue(this.menu.menuKey);
     //
     //   if (mode && !this.menu.callback) {
     //     this.viewCollection.setFilterMode(mode);

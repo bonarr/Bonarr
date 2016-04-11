@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var tpl = require('./SortingView.hbs');
+const Marionette = require('marionette');
+const tpl = require('./SortingView.hbs');
 
 module.exports = Marionette.ItemView.extend({
   template: tpl,
@@ -22,9 +22,9 @@ module.exports = Marionette.ItemView.extend({
 
   onRender() {
     // if (this.viewCollection.state) {
-    //   var sortKey = this.viewCollection.state.sortKey;
-    //   var name = this.viewCollection._getSortMapping(sortKey).name;
-    //   var order = this.viewCollection.state.order;
+    //   const sortKey = this.viewCollection.state.sortKey;
+    //   const name = this.viewCollection._getSortMapping(sortKey).name;
+    //   const order = this.viewCollection.state.order;
     //
     //   if (name === this.model.get('name')) {
     //     this._setSortStatus(order);

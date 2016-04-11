@@ -1,6 +1,6 @@
-var Marionette = require('marionette');
-var SortingView = require('./SortingView');
-var tpl = require('./SortingCollectionView.hbs');
+const Marionette = require('marionette');
+const SortingView = require('./SortingView');
+const tpl = require('./SortingCollectionView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
   childView: SortingView,
@@ -19,15 +19,13 @@ module.exports = Marionette.CompositeView.extend({
   },
 
   sort(sortModel, sortDirection) {
-    var collection = this.viewCollection;
+    const collection = this.viewCollection;
 
-    var order;
+    let order = null;
     if (sortDirection === 'ascending') {
       order = -1;
     } else if (sortDirection === 'descending') {
       order = 1;
-    } else {
-      order = null;
     }
 
     collection.setSorting(sortModel.get('name'), order);

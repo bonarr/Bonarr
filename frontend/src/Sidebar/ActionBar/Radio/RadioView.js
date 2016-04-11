@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var Config = require('Config');
+const Marionette = require('marionette');
+const Config = require('Config');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'li',
@@ -44,7 +44,7 @@ module.exports = Marionette.ItemView.extend({
       throw 'ownerContext must be set.';
     }
 
-    var callback = this.model.get('callback');
+    const callback = this.model.get('callback');
     if (callback) {
       callback.call(this.model.ownerContext, this);
     }

@@ -1,31 +1,30 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var vent = require('vent');
-var CommandModel = require('./CommandModel');
-var CommandCollection = require('./CommandCollection');
-var CommandMessengerCollectionView = require('./CommandMessengerCollectionView');
-var moment = require('moment');
-var Messenger = require('Shared/Messenger');
+const _ = require('underscore');
+const $ = require('jquery');
+const vent = require('vent');
+const CommandModel = require('./CommandModel');
+const CommandCollection = require('./CommandCollection');
+const CommandMessengerCollectionView = require('./CommandMessengerCollectionView');
+const Messenger = require('Shared/Messenger');
 require('jQuery/jquery.spin');
 
 CommandMessengerCollectionView.render();
 
+let lastCommand = null;
+
 const CommandController = {
-  _lastCommand: {},
 
   execute(name, properties) {
-    var attr = _.extend({ name: name.toLocaleLowerCase() }, properties);
-    var commandModel = new CommandModel(attr);
+    const attr = _.extend({ name: name.toLocaleLowerCase() }, properties);
+    const commandModel = new CommandModel(attr);
 
-    if (this._lastCommand.command && this._lastCommand.command.isSameCommand(attr) && moment().add('seconds', -5).isBefore(this._lastCommand.time)) {
-
+    if (lastCommand && lastCommand.isSameCommand(attr)) {
       Messenger.show({
         message: 'Please wait at least 5 seconds before running this command again',
         hideAfter: 5,
         type: 'error'
       });
 
-      return this._lastCommand.command.deferred.promise();
+      return lastCommand.promise;
     }
 
     commandModel.deferred = $.Deferred();
@@ -42,36 +41,39 @@ const CommandController = {
       });
     });
 
-    this._lastCommand = {
-      command: commandModel,
-      time: moment()
-    };
+    lastCommand = commandModel;
+
+    // clear last command after 5 seconds.
+    clearTimeout(this.lastCommandTimeout);
+    this.lastCommandTimeout = setTimeout(() => {
+      lastCommand = null;
+    }, 5000);
 
     return commandModel.deferred.promise();
   },
 
   bindToCommand(options) {
-    var existingCommand = CommandCollection.findCommand(options.command);
+    const existingCommand = CommandCollection.findCommand(options.command);
 
     if (existingCommand) {
-      this._bindToCommandModel.call(this, existingCommand, options);
+      this._bindToCommandModel(existingCommand, options);
     }
 
     CommandCollection.bind('add', (model) => {
       if (model.isSameCommand(options.command)) {
-        this._bindToCommandModel.call(this, model, options);
+        this._bindToCommandModel(model, options);
       }
     });
 
     CommandCollection.bind('sync', () => {
-      var command = CommandCollection.findCommand(options.command);
+      const command = CommandCollection.findCommand(options.command);
       if (command) {
-        this._bindToCommandModel.call(this, command, options);
+        this._bindToCommandModel(command, options);
       }
     });
   },
 
-  _bindToCommandModel: function bindToCommand(model, options) {
+  _bindToCommandModel(model, options) {
     if (!model.isActive()) {
       options.element.stopSpin();
       return;

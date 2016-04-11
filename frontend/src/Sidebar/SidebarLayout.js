@@ -1,11 +1,11 @@
-var Marionette = require('marionette');
+const Marionette = require('marionette');
 var $ = require('jquery');
-var AppLayout = require('AppLayout');
-var HealthView = require('Health/HealthView');
-var QueueView = require('Activity/Queue/QueueView');
-var ResolutionUtility = require('Utilities/ResolutionUtility');
-var menuItems = require('./menuItems');
-var tpl = require('./SidebarLayout.hbs');
+const AppLayout = require('AppLayout');
+const HealthView = require('Health/HealthView');
+const QueueView = require('Activity/Queue/QueueView');
+const ResolutionUtility = require('Utilities/ResolutionUtility');
+const menuItems = require('./menuItems');
+const tpl = require('./SidebarLayout.hbs');
 
 module.exports = Marionette.LayoutView.extend({
   template: tpl,

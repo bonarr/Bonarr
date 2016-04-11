@@ -1,6 +1,6 @@
-var Backbone = require('backbone');
-var Marionette = require('marionette');
-var _ = require('underscore');
+const Backbone = require('backbone');
+const Marionette = require('marionette');
+const _ = require('underscore');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Sidebar/ActionBar/Filtering/FilteringViewTemplate',

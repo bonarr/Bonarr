@@ -1,4 +1,4 @@
-var Marionette = require('marionette');
+const Marionette = require('marionette');
 var $ = require('jquery');
 
 const $body = $('body');

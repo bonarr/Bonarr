@@ -1,12 +1,12 @@
-var vent = require('vent');
-var _ = require('underscore');
-var Backbone = require('backbone');
+const vent = require('vent');
+const _ = require('underscore');
+const Backbone = require('backbone');
 
 require('signalR');
 
 module.exports = _.extend(Backbone.Collection.prototype, {
   bindSignalR(bindOptions) {
-    var collection = this;
+    const collection = this;
     bindOptions = bindOptions || {};
 
     var processMessage = function(options) {

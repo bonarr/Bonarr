@@ -1,6 +1,6 @@
-var Marionette = require('marionette');
-var RadioView = require('./RadioView');
-var Config = require('Config');
+const Marionette = require('marionette');
+const RadioView = require('./RadioView');
+const Config = require('Config');
 
 module.exports = Marionette.CollectionView.extend({
   tagName: 'ul',
@@ -20,7 +20,7 @@ module.exports = Marionette.CollectionView.extend({
   },
 
   setActive() {
-    var storedKey = this.menu.defaultAction;
+    let storedKey = this.menu.defaultAction;
 
     if (this.menu.storeState) {
       storedKey = Config.getValue(this.menu.menuKey, storedKey);
@@ -29,7 +29,8 @@ module.exports = Marionette.CollectionView.extend({
     if (!storedKey) {
       return;
     }
-    this.collection.each(function(model) {
+
+    this.collection.each((model) => {
       if (model.get('key').toLocaleLowerCase() === storedKey.toLowerCase()) {
         model.set('active', true);
       } else {
@@ -39,7 +40,7 @@ module.exports = Marionette.CollectionView.extend({
   },
 
   childViewClicked(childView) {
-    this.children.each(function(view) {
+    this.children.each((view) => {
       if (view.model.get('key').toLocaleLowerCase() === childView.model.get('key').toLowerCase()) {
         view.model.set('active', true);
         view.$el.addClass('active');

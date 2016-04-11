@@ -11,7 +11,7 @@ const paths = {
     content: root + 'Content/',
     images: root + 'Content/Images/**/*',
     exclude: {
-      libs: '!**/JsLibraries/**'
+      libs: `!${root}JsLibraries/**`
     }
   },
   dest: {
