@@ -1,18 +1,18 @@
-var gulp = require('gulp');
+const gulp = require('gulp');
 
-var less = require('gulp-less');
-var postcss = require('gulp-postcss');
-var sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('autoprefixer');
-var livereload = require('gulp-livereload');
-var path = require('path');
+const less = require('gulp-less');
+const postcss = require('gulp-postcss');
+const sourcemaps = require('gulp-sourcemaps');
+const autoprefixer = require('autoprefixer');
+const livereload = require('gulp-livereload');
+const path = require('path');
 
-var print = require('gulp-print');
-var paths = require('./helpers/paths');
-var errorHandler = require('./helpers/errorHandler');
+const print = require('gulp-print');
+const paths = require('./helpers/paths');
+const errorHandler = require('./helpers/errorHandler');
 
 gulp.task('less', () => {
-  var src = [
+  const src = [
     path.join(paths.src.content, 'Bootstrap', 'bootstrap.less'),
     path.join(paths.src.content, 'Vendor', 'vendor.less'),
     path.join(paths.src.content, 'sonarr.less')
@@ -22,6 +22,7 @@ gulp.task('less', () => {
     .pipe(print())
     .pipe(sourcemaps.init())
     .pipe(less({
+      paths: [paths.src.root],
       dumpLineNumbers: 'false',
       compress: true,
       yuicompress: true,

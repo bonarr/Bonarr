@@ -1,93 +1,92 @@
 @hiddenOpacity: 0;
-@import "../../../Content/variables";
+@import "Content/variables";
+
 .series-posters {
-  list-style-type : none;
-  padding         : 0px;
+  list-style-type: none;
+  padding: 0;
 
   li.series-poster-item {
-    display        : inline-block;
-    vertical-align : top;
-    margin         : 10px;
-    border         : solid 2px transparent;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    border: solid 2px transparent;
 
     &:hover {
-      border-color : @sonarr-blue;
+      border-color: @sonarr-blue;
     }
   }
 
   .progress {
-    background    : @gray;
-    border-radius : 0;
-    border        : none;
-    margin        : 0px;
+    background: @gray;
+    border-radius: 0;
+    border: none;
+    margin: 0;
   }
 
   .badge {
-    opacity : 0.8;
+    opacity: .8;
   }
 
   .series-poster {
-    height : 250px;
-    width  : 170px;
+    height: 250px;
+    width: 170px;
   }
 
   .series-poster-container {
-    position : relative;
+    position: relative;
   }
 
   .title {
-    position   : absolute;
-    left       : 0;
-    right      : 0;
-    background : black;
-    color      : white;
-    opacity    : @hiddenOpacity;
-    font-size  : 16px;
-    padding    : 5px;
-    text-align : center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: black;
+    color: white;
+    opacity: @hiddenOpacity;
+    font-size: 16px;
+    padding: 5px;
+    text-align: center;
   }
 
   .ended-badge {
-    background-color : @brand-danger-dark;
-    position         : absolute;
-    right            : 10px;
-    bottom           : 10px;
+    background-color: @brand-danger-dark;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
   }
 
   .series-controls {
     .clickable();
+
     .badge {
-      background-color : @gray-dark;
-      width            : 30px;
+      background-color: @gray-dark;
+      width: 30px;
 
       &:hover {
-        opacity : 1;
+        opacity: 1;
       }
     }
-
-    opacity    : @hiddenOpacity;
-    position   : absolute;
-    left       : 10px;
-    bottom     : 0;
-    font-size  : 30px;
-    color      : black;
-
-    transition : opacity 0s;
-
+    opacity: @hiddenOpacity;
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    font-size: 30px;
+    color: black;
+    transition: opacity 0s;
   }
+
   :hover {
     .series-controls {
-      opacity    : 1;
-      transition : opacity 200ms linear 150ms;
+      opacity: 1;
+      transition: opacity 200ms linear 150ms;
     }
 
     .title {
-      opacity    : 0.7;
-      transition : opacity 200ms linear 150ms;
+      opacity: .7;
+      transition: opacity 200ms linear 150ms;
     }
   }
-
   @media (max-width : @screen-xs-max) {
-    padding : 0px;
+    padding: 0;
   }
 }
