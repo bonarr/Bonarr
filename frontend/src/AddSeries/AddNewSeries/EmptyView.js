@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var tpl = require('./EmptyView.hbs');
+const Marionette = require('marionette');
+const tpl = require('./EmptyView.hbs');
 
 const EmptyView = Marionette.ItemView.extend({
   template: tpl,

@@ -1,5 +1,4 @@
-var vent = require('vent');
-var Marionette = require('marionette');
+const Marionette = require('marionette');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Series/Delete/DeleteSeriesTemplate',
@@ -20,21 +19,19 @@ module.exports = Marionette.ItemView.extend({
   },
 
   removeSeries() {
-    var self = this;
-    var deleteFiles = this.ui.deleteFiles.prop('checked');
+    const deleteFiles = this.ui.deleteFiles.prop('checked');
     this.ui.indicator.show();
 
     this.model.destroy({
-      data: { 'deleteFiles': deleteFiles },
+      data: { deleteFiles },
       wait: true
     }).done(() => {
-      vent.trigger(vent.Events.SeriesDeleted, { series: self.model });
       this.destroy();
     });
   },
 
   changeDeletedFiles() {
-    var deleteFiles = this.ui.deleteFiles.prop('checked');
+    const deleteFiles = this.ui.deleteFiles.prop('checked');
 
     if (deleteFiles) {
       this.ui.deleteFilesInfo.show();

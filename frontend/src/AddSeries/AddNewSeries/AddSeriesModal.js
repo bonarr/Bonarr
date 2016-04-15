@@ -187,10 +187,6 @@ const AddSeriesModal = Marionette.ItemView.extend({
       hideAfter: 8,
       hideOnNavigate: true
     });
-
-    vent.trigger(vent.Events.SeriesAdded, {
-      series: this.model
-    });
   }
 });
 

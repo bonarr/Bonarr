@@ -1,12 +1,12 @@
-var _ = require('underscore');
-var Marionette = require('marionette');
-var SeriesSearchCollection = require('../SeriesSearchCollection');
-var SearchResultCollectionView = require('./SearchResultCollectionView');
-var profileCollection = require('Profile/profileCollection');
-var RootFolderCollection = require('../RootFolders/RootFolderCollection');
-var tpl = require('./AddNewSeriesLayout.hbs');
-var ErrorView = require('./ErrorView');
-var EmptyView = require('./EmptyView');
+const _ = require('underscore');
+const Marionette = require('marionette');
+const SeriesSearchCollection = require('../SeriesSearchCollection');
+const SearchResultCollectionView = require('./SearchResultCollectionView');
+const profileCollection = require('Profile/profileCollection');
+const RootFolderCollection = require('../RootFolders/RootFolderCollection');
+const tpl = require('./AddNewSeriesLayout.hbs');
+const ErrorView = require('./ErrorView');
+const EmptyView = require('./EmptyView');
 
 const AddNewSeriesLayout = Marionette.LayoutView.extend({
   id: 'add-new-series',

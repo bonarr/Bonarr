@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var tpl = require('./ErrorView.hbs');
+const Marionette = require('marionette');
+const tpl = require('./ErrorView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
   template: tpl,
@@ -9,28 +9,25 @@ module.exports = Marionette.CompositeView.extend({
     this.xhr = options.xhr;
   },
 
-  templateHelpers() {
-    var xhr = this.xhr;
-
-    var data = {
+  serializeData() {
+    const xhr = this.xhr;
+    const data = {
       status: xhr.status,
       statusText: xhr.statusText
     };
 
     if (xhr) {
       try {
-        var messageJson = JSON.parse(xhr.responseText);
+        const messageJson = JSON.parse(xhr.responseText);
         if (messageJson && messageJson.message) {
           data.message = messageJson.message;
         }
       } catch (e) {
-        // don't do anything
+        console.error(e);
       }
     }
 
-    if (!data.message) {
-      data.message = `An error occurred while searching for '${this.term}'`;
-    }
+    data.message = data.message || `An error occurred while searching for '${this.term}'`;
 
     return data;
   }

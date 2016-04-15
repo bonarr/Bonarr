@@ -1,8 +1,8 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var AddSeriesModal = require('./AddSeriesModal');
-var tpl = require('./SearchResultItemView.hbs');
-var lazyImage = require('Behaviours/lazyImages');
+const vent = require('vent');
+const Marionette = require('marionette');
+const AddSeriesModal = require('./AddSeriesModal');
+const tpl = require('./SearchResultItemView.hbs');
+const lazyImage = require('Behaviours/lazyImages');
 require('jquery.dotdotdot');
 
 const SearchResultItemView = Marionette.ItemView.extend({
