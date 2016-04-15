@@ -1,12 +1,11 @@
-var _ = require('underscore');
-var Marionette = require('marionette');
-var ActionBarRegion = require('Sidebar/ActionBar/ActionBarRegion');
-var FullscreenModalRegion = require('Shared/Modal/FullscreenModalRegion');
-var ModalRegion = require('Shared/Modal/ModalRegion');
-var FooterRegion = require('Layout/Footer/FooterRegion');
-var vent = require('vent');
+const Marionette = require('marionette');
+const ActionBarRegion = require('Sidebar/ActionBar/ActionBarRegion');
+const FullscreenModalRegion = require('Shared/Modal/FullscreenModalRegion');
+const ModalRegion = require('Shared/Modal/ModalRegion');
+const FooterRegion = require('Layout/Footer/FooterRegion');
+const vent = require('vent');
 
-var AppLayout = Marionette.LayoutView.extend({
+const AppLayout = Marionette.LayoutView.extend({
   el: 'body',
 
   ui: {

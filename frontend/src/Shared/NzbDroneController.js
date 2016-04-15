@@ -1,8 +1,8 @@
-var vent = require('vent');
-var AppLayout = require('AppLayout');
-var Marionette = require('marionette');
-var NotFoundView = require('./NotFoundView');
-var Messenger = require('./Messenger');
+const vent = require('vent');
+const AppLayout = require('AppLayout');
+const Marionette = require('marionette');
+const NotFoundView = require('./NotFoundView');
+const Messenger = require('./Messenger');
 
 module.exports = Marionette.AppRouter.extend({
   initialize() {
@@ -23,7 +23,7 @@ module.exports = Marionette.AppRouter.extend({
 
     if (window.Sonarr.Analytics && window.Piwik) {
       try {
-        var piwik = window.Piwik.getTracker(`${window.location.protocol}//piwik.nzbdrone.com/piwik.php`, 1);
+        const piwik = window.Piwik.getTracker(`${window.location.protocol}//piwik.nzbdrone.com/piwik.php`, 1);
         piwik.setReferrerUrl('');
         piwik.setCustomUrl(`http://local${window.location.pathname}`);
         piwik.setCustomVariable(1, 'version', window.Sonarr.Version, 'page');
@@ -37,7 +37,7 @@ module.exports = Marionette.AppRouter.extend({
 
   _onServerUpdated() {
     const updateUrl = `${window.Sonarr.UrlBase}/system/updates`;
-    var label = window.location.pathname === updateUrl ? 'Reload' : 'View Changes';
+    const label = window.location.pathname === updateUrl ? 'Reload' : 'View Changes';
 
     Messenger.show({
       message: 'Sonarr has been updated',

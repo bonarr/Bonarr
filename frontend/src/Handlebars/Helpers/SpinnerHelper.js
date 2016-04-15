@@ -1,11 +1,11 @@
 var Handlebars = require('handlebars');
-var StatusModel = require('System/StatusModel');
+var statusModel = require('System/statusModel');
 
 
 
 
 Handlebars.registerHelper('if_windows', function(options) {
-  if (StatusModel.get('isWindows')) {
+  if (statusModel.get('isWindows')) {
     return options.fn(this);
   }
 
@@ -13,7 +13,7 @@ Handlebars.registerHelper('if_windows', function(options) {
 });
 
 Handlebars.registerHelper('if_mono', function(options) {
-  if (StatusModel.get('isMono')) {
+  if (statusModel.get('isMono')) {
     return options.fn(this);
   }
 

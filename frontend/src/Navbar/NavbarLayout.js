@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var Marionette = require('marionette');
 var vent = require('vent');
-var StatusModel = require('System/StatusModel');
+var statusModel = require('System/statusModel');
 var Messenger = require('Shared/Messenger');
 
 require('./Search');
@@ -26,7 +26,7 @@ module.exports = Marionette.LayoutView.extend({
     });
 
     this.templateHelpers = {
-      authentication: StatusModel.get('authentication')
+      authentication: statusModel.get('authentication')
     };
   },
 

@@ -1,13 +1,12 @@
-var $ = require('jquery');
-var Backbone = require('backbone');
-var Marionette = require('marionette');
-var SystemInfoLayout = require('./Status/SystemInfoLayout');
-var LogsLayout = require('./Logs/LogsLayout');
-var UpdateLayout = require('./Update/UpdateLayout');
-var BackupLayout = require('./Backup/BackupLayout');
-var TaskLayout = require('./Task/TaskLayout');
-var Messenger = require('Shared/Messenger');
-var StatusModel = require('./StatusModel');
+const Backbone = require('backbone');
+const Marionette = require('marionette');
+const SystemInfoLayout = require('./Status/SystemInfoLayout');
+const LogsLayout = require('./Logs/LogsLayout');
+const UpdateLayout = require('./Update/UpdateLayout');
+const BackupLayout = require('./Backup/BackupLayout');
+const TaskLayout = require('./Task/TaskLayout');
+const Messenger = require('Shared/Messenger');
+const statusModel = require('./statusModel');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'System/SystemLayoutTemplate',
@@ -42,7 +41,7 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     this.templateHelpers = {
-      authentication: StatusModel.get('authentication')
+      authentication: statusModel.get('authentication')
     };
   },
 
