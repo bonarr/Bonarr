@@ -1,17 +1,18 @@
-var _ = require('underscore');
-var vent = require('vent');
-var Backbone = require('backbone');
-var Marionette = require('marionette');
-var profileCollection = require('Profile/profileCollection');
-var RootFolders = require('../RootFolders/RootFolderCollection');
-var RootFolderLayout = require('../RootFolders/RootFolderLayout');
-var SeriesCollection = require('Series/SeriesCollection');
-var Config = require('Config');
-var Messenger = require('Shared/Messenger');
-var AsValidatedView = require('Mixins/AsValidatedView');
-var tpl = require('./AddSeriesModal.hbs');
+const _ = require('underscore');
+const vent = require('vent');
+const Backbone = require('backbone');
+const Marionette = require('marionette');
+const profileCollection = require('Profile/profileCollection');
+const RootFolders = require('../RootFolders/RootFolderCollection');
+const RootFolderLayout = require('../RootFolders/RootFolderLayout');
+const SeriesCollection = require('Series/SeriesCollection');
+const Config = require('Config');
+const Messenger = require('Shared/Messenger');
+const AsValidatedView = require('Mixins/AsValidatedView');
+const tpl = require('./AddSeriesModal.hbs');
+const monitorTooltipTpl = require('../MonitorTooltip.hbs');
 
-var Keys = {
+const Keys = {
   DefaultProfileId: 'AddSeries.DefaultProfileId',
   DefaultRootFolderId: 'AddSeries.DefaultRootFolderId',
   UseSeasonFolder: 'AddSeries.UseSeasonFolder',
@@ -60,13 +61,13 @@ const AddSeriesModal = Marionette.ItemView.extend({
   },
 
   onRender() {
-    var profileId = Config.getValue(Keys.DefaultProfileId);
-    var rootFolderId = Config.getValue(Keys.DefaultRootFolderId);
-    var seriesType = Config.getValue(Keys.DefaultSeriesType, 'standard');
-    var monitorType = Config.getValue(Keys.MonitorEpisodes, 'missing');
+    const profileId = Config.getValue(Keys.DefaultProfileId);
+    const rootFolderId = Config.getValue(Keys.DefaultRootFolderId);
+    const seriesType = Config.getValue(Keys.DefaultSeriesType, 'standard');
+    const monitorType = Config.getValue(Keys.MonitorEpisodes, 'missing');
 
-    var useSeasonFolder = Config.getValueBoolean(Keys.UseSeasonFolder, true);
-    var startSearch = Config.getValueBoolean(Keys.StartSearch, false);
+    const useSeasonFolder = Config.getValueBoolean(Keys.UseSeasonFolder, true);
+    const startSearch = Config.getValueBoolean(Keys.StartSearch, false);
 
     if (profileCollection.get(profileId)) {
       this.ui.profile.val(profileId);
@@ -83,7 +84,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
     this.ui.startSearch.prop('checked', startSearch);
 
     this.ui.monitorTooltip.popover({
-      content: Marionette.TemplateCache.get('AddSeries/MonitoringTooltipTemplate')(),
+      content: monitorTooltipTpl(),
       html: true,
       trigger: 'hover',
       title: 'Episode Monitoring Options',
@@ -101,9 +102,9 @@ const AddSeriesModal = Marionette.ItemView.extend({
   },
 
   onRootFolderChanged() {
-    var rootFolderValue = this.ui.rootFolder.val();
+    const rootFolderValue = this.ui.rootFolder.val();
     if (rootFolderValue === 'addNew') {
-      var rootFolderLayout = new RootFolderLayout();
+      const rootFolderLayout = new RootFolderLayout();
       this.listenToOnce(rootFolderLayout, 'folderSelected', this.onRootFolderAdded);
       vent.trigger(vent.Commands.OpenFullscreenModal, rootFolderLayout);
     } else {
@@ -132,7 +133,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
   onAdd(event) {
     event.preventDefault();
 
-    var addButton = this.ui.addButton;
+    const addButton = this.ui.addButton;
     addButton.addClass('disabled');
 
     const profileId = this.ui.profile.val();
@@ -156,7 +157,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
       startSearch
     });
 
-    var promise = this.model.save();
+    const promise = this.model.save();
 
     this.ui.addButton.spinForPromise(promise);
 
@@ -172,7 +173,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
     this.destroy();
 
     Messenger.show({
-      message: 'Added: ' + this.model.get('title'),
+      message: `Added: ${this.model.get('title')}`,
       actions: {
         goToSeries: {
           label: 'Go to Series',
