@@ -1,5 +1,4 @@
-var $ = require('jquery');
-var vent = require('./vent');
+const vent = require('./vent');
 
 module.exports = {
   Events: {
@@ -10,26 +9,22 @@ module.exports = {
     AdvancedSettings: 'advancedSettings'
   },
 
-  getValueJson(key, defaultValue) {
-    defaultValue = defaultValue || {};
-
-    var storeValue = window.localStorage.getItem(key);
+  getValueJson(key, defaultValue = {}) {
+    const storeValue = window.localStorage.getItem(key);
 
     if (!storeValue) {
       return defaultValue;
     }
 
-    return $.parseJSON(storeValue);
+    return JSON.parse(storeValue);
   },
 
-  getValueBoolean(key, defaultValue) {
-    defaultValue = defaultValue || false;
-
+  getValueBoolean(key, defaultValue = false) {
     return this.getValue(key, defaultValue.toString()) === 'true';
   },
 
   getValue(key, defaultValue) {
-    var storeValue = window.localStorage.getItem(key);
+    const storeValue = window.localStorage.getItem(key);
 
     if (!storeValue) {
       return defaultValue;
@@ -52,8 +47,8 @@ module.exports = {
     try {
       window.localStorage.setItem(key, value);
       vent.trigger(this.Events.ConfigUpdatedEvent, {
-        key: key,
-        value: value
+        key,
+        value
       });
     } catch (error) {
       console.error('Unable to save config: [{0}] => [{1}]'.format(key, value));

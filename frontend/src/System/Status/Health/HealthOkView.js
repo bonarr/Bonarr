@@ -1,5 +1,6 @@
-var Marionette = require('marionette');
+const Marionette = require('marionette');
+const tpl = require('./HealthOkView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'System/Status/Health/HealthOkViewTemplate'
+  template: tpl
 });

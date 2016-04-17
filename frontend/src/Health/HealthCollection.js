@@ -1,13 +1,13 @@
-var Backbone = require('backbone');
-var HealthModel = require('./HealthModel');
+const Backbone = require('backbone');
+const HealthModel = require('./HealthModel');
 require('Mixins/backbone.signalr.mixin');
 
-var Collection = Backbone.Collection.extend({
+const HealthCollection = Backbone.Collection.extend({
   url: '/health',
   model: HealthModel
 });
 
-var collection = new Collection().bindSignalR();
-collection.fetch();
+const healthCollection = new HealthCollection().bindSignalR();
+healthCollection.fetch();
 
-module.exports = collection;
+module.exports = healthCollection;

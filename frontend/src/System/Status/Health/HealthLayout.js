@@ -1,11 +1,12 @@
-var Marionette = require('marionette');
-var TableView = require('Table/TableView');
-var HealthRow = require('./HealthRow');
-var HealthCollection = require('../../../Health/HealthCollection');
-var HealthOkView = require('./HealthOkView');
+const Marionette = require('marionette');
+const TableView = require('Table/TableView');
+const healthCollection = require('Health/healthCollection');
+const HealthRow = require('./HealthRow');
+const HealthOkView = require('./HealthOkView');
+const tpl = require('./HealthLayout.hbs');
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Status/Health/HealthLayoutTemplate',
+  template: tpl,
 
   regions: {
     grid: '#x-health-grid'
@@ -27,12 +28,12 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.listenTo(HealthCollection, 'sync', this.render);
-    HealthCollection.fetch();
+    this.listenTo(healthCollection, 'sync', this.render);
+    healthCollection.fetch();
   },
 
   onRender() {
-    if (HealthCollection.length === 0) {
+    if (healthCollection.length === 0) {
       this.grid.show(new HealthOkView());
     } else {
       this._showTable();
@@ -42,7 +43,7 @@ module.exports = Marionette.LayoutView.extend({
   _showTable() {
     this.grid.show(new TableView({
       headers: this.headers,
-      collection: HealthCollection,
+      collection: healthCollection,
       className: 'table table-hover',
       childView: HealthRow
     }));

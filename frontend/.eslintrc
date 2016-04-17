@@ -23,7 +23,12 @@
     },
   },
 
+  "plugins": [
+    "filenames"
+  ],
+
   "rules": {
+    "filenames/filenames": [2, "^[a-z-A-Z]+$", "match-regex-and-exported"],
 
     // ECMAScript 6
 

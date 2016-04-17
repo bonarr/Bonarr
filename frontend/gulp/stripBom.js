@@ -1,6 +1,6 @@
-var gulp = require('gulp');
-var paths = require('./helpers/paths.js');
-var stripbom = require('gulp-stripbom');
+const gulp = require('gulp');
+const paths = require('./helpers/paths.js');
+const stripbom = require('gulp-stripbom');
 
 function stripBom(dest) {
   gulp.src([paths.src.scripts, paths.src.exclude.libs])

@@ -26,7 +26,7 @@ module.exports = {
     const messengerId = 'signalR';
     let tryingToReconnect = false;
 
-    this.signalRconnection = $.connection(`/signalr`);
+    this.signalRconnection = $.connection('/signalr');
 
     this.signalRconnection.stateChanged(function(change) {
       console.debug(`SignalR: [${getStatus(change.newState)}]`);

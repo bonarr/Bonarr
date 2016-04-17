@@ -1,24 +1,24 @@
 var Marionette = require('marionette');
-var HealthCollection = require('./HealthCollection');
+var healthCollection = require('./healthCollection');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'span',
   className: 'label',
 
   initialize() {
-    this.listenTo(HealthCollection, 'sync', this.render);
-    HealthCollection.fetch();
+    this.listenTo(healthCollection, 'sync', this.render);
+    healthCollection.fetch();
   },
 
   render() {
     this.$el.empty();
 
-    if (HealthCollection.length === 0) {
+    if (healthCollection.length === 0) {
       return this;
     }
 
     let label = 'label-warning';
-    var errors = HealthCollection.some((model) => {
+    var errors = healthCollection.some((model) => {
       return model.get('type') === 'error';
     });
 
@@ -27,7 +27,7 @@ module.exports = Marionette.ItemView.extend({
     }
 
     this.$el.addClass(label);
-    this.$el.text(HealthCollection.length);
+    this.$el.text(healthCollection.length);
 
     return this;
   }

@@ -1,12 +1,12 @@
-var Backbone = require('backbone');
-var Marionette = require('marionette');
-var AboutView = require('./About/AboutView');
-var DiskSpaceLayout = require('./DiskSpace/DiskSpaceLayout');
-var HealthLayout = require('./Health/HealthLayout');
-var MoreInfoView = require('./MoreInfo/MoreInfoView');
+const Marionette = require('marionette');
+const AboutView = require('./About/AboutView');
+const DiskSpaceLayout = require('./DiskSpace/DiskSpaceLayout');
+const HealthLayout = require('./Health/HealthLayout');
+const MoreInfoView = require('./MoreInfo/MoreInfoView');
+const tpl = require('./StatusLayout.hbs');
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Status/StatusLayoutTemplate',
+  template: tpl,
 
   regions: {
     about: '#about',

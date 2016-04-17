@@ -1,8 +1,8 @@
-var NzbDroneController = require('./Shared/NzbDroneController');
-var CalendarLayout = require('./Calendar/CalendarLayout');
-var ReleaseLayout = require('./Release/ReleaseLayout');
-var SeasonPassLayout = require('./SeasonPass/SeasonPassLayout');
-var SeriesEditorLayout = require('./Series/Editor/SeriesEditorLayout');
+const NzbDroneController = require('./Shared/NzbDroneController');
+const CalendarLayout = require('./Calendar/CalendarLayout');
+const ReleaseLayout = require('./Release/ReleaseLayout');
+const SeasonPassLayout = require('./SeasonPass/SeasonPassLayout');
+const SeriesEditorLayout = require('./Series/Editor/SeriesEditorLayout');
 
 module.exports = NzbDroneController.extend({
   calendar() {

@@ -5,10 +5,9 @@ const LogsLayout = require('./Logs/LogsLayout');
 const UpdateLayout = require('./Update/UpdateLayout');
 const BackupLayout = require('./Backup/BackupLayout');
 const TaskLayout = require('./Task/TaskLayout');
-const Messenger = require('Shared/Messenger');
 const statusModel = require('./statusModel');
 
-module.exports = Marionette.LayoutView.extend({
+const SystemLayout = Marionette.LayoutView.extend({
   template: 'System/SystemLayoutTemplate',
 
   regions: {
@@ -121,3 +120,5 @@ module.exports = Marionette.LayoutView.extend({
     this._navigate('system/tasks');
   }
 });
+
+module.exports = SystemLayout;

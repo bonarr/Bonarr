@@ -7,7 +7,7 @@ const paths = {
     html: root + '*.html',
     partials: root + '**/*Partial.hbs',
     scripts: root + '**/*.js',
-    less: [ root + '**/*.less' ],
+    less: [root + '**/*.less'],
     content: root + 'Content/',
     images: root + 'Content/Images/**/*',
     exclude: {
