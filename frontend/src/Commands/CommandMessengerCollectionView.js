@@ -1,5 +1,5 @@
 var Marionette = require('marionette');
-var commandCollection = require('./CommandCollection');
+var commandCollection = require('./commandCollection');
 var CommandMessengerItemView = require('./CommandMessengerItemView');
 
 var CollectionView = Marionette.CollectionView.extend({

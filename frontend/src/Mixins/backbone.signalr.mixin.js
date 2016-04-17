@@ -5,40 +5,40 @@ const Backbone = require('backbone');
 require('signalR');
 
 module.exports = _.extend(Backbone.Collection.prototype, {
-  bindSignalR(bindOptions) {
-    const collection = this;
-    bindOptions = bindOptions || {};
+  bindSignalR(bindOptions = {}) {
+    const resourceName = this.url.replace(/^\//, '');
 
-    var processMessage = function(options) {
-      if (options.action === 'sync') {
-        console.log('sync received, re-fetching collection');
-        collection.fetch();
+    function processMessage(message) {
+      const action = message.action;
+      const resource = message.resource;
 
+      if (action === 'sync') {
+        this.fetch();
         return;
       }
 
-      if (options.action === 'deleted') {
-        collection.remove(new collection.model(options.resource, { parse: true }));
+      const id = resource.id;
+      const model = this.get(id);
 
+      if (action === 'deleted') {
+        if (model) {
+          this.remove(model);
+        }
+        return;
+      } else if (action === 'updated') {
+        if (model) {
+          model.set(resource);
+        } else if (!bindOptions.updateOnly) {
+          this.create(resource);
+        }
+        return;
+      } else if (action === 'created') {
+        this.create(resource);
         return;
       }
+    }
 
-      var model = new collection.model(options.resource, { parse: true });
-
-      // updateOnly will prevent the collection from adding a new item
-      if (bindOptions.updateOnly && !collection.get(model.get('id'))) {
-        return;
-      }
-
-      collection.add(model, {
-        merge: true,
-        changeSource: 'signalr'
-      });
-
-      console.log(options.action + ': {0}}'.format(options.resource));
-    };
-
-    collection.listenTo(vent, 'server:' + collection.url.split('/api/v3/')[1], processMessage);
+    this.listenTo(vent, `server:${resourceName}`, processMessage, this);
 
     return this;
   }

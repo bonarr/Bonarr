@@ -1,42 +1,44 @@
-var vent = require('vent');
-var $ = require('jquery');
-var Messenger = require('./Messenger');
+const $ = require('jquery');
+const vent = require('vent');
+const Messenger = require('Shared/Messenger');
 
 require('signalR');
+
+const messengerId = 'signalR';
+
+function getStatus(status) {
+  switch (status) {
+    case 0:
+      return 'connecting';
+    case 1:
+      return 'connected';
+    case 2:
+      return 'reconnecting';
+    case 4:
+      return 'disconnected';
+    default:
+      throw new Error(`invalid status ${status}`);
+  }
+}
 
 module.exports = {
   appInitializer() {
     console.log('starting signalR');
 
-    var getStatus = function(status) {
-      switch (status) {
-        case 0:
-          return 'connecting';
-        case 1:
-          return 'connected';
-        case 2:
-          return 'reconnecting';
-        case 4:
-          return 'disconnected';
-        default:
-          throw 'invalid status ' + status;
-      }
-    };
-
-    const messengerId = 'signalR';
     let tryingToReconnect = false;
 
     this.signalRconnection = $.connection('/signalr');
 
-    this.signalRconnection.stateChanged(function(change) {
-      console.debug(`SignalR: [${getStatus(change.newState)}]`);
+    this.signalRconnection.stateChanged((change) => {
+      console.log(`SignalR: [${getStatus(change.newState)}]`);
     });
 
-    this.signalRconnection.received(function(message) {
-      vent.trigger('server:' + message.name, message.body);
+    this.signalRconnection.received((message) => {
+      console.debug('SignalR: received', message.name, message.body);
+      vent.trigger(`server:${message.name}`, message.body);
     });
 
-    this.signalRconnection.reconnecting(function() {
+    this.signalRconnection.reconnecting(() => {
       if (window.Sonarr.unloading) {
         return;
       }
@@ -44,11 +46,11 @@ module.exports = {
       tryingToReconnect = true;
     });
 
-    this.signalRconnection.reconnected(function() {
+    this.signalRconnection.reconnected(() => {
       tryingToReconnect = false;
     });
 
-    this.signalRconnection.disconnected(function() {
+    this.signalRconnection.disconnected(() => {
       if (tryingToReconnect) {
         $('<div class="modal-backdrop fade in"></div>').appendTo(document.body);
 

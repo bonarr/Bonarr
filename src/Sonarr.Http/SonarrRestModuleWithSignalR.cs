@@ -54,13 +54,16 @@ namespace Sonarr.Http
      
         protected void BroadcastResourceChange(ModelAction action)
         {
-            var signalRMessage = new SignalRMessage
+            if (GetType().Namespace.Contains("V3"))
             {
-                Name = Resource,
-                Body = new ResourceChangeMessage<TResource>(action)
-            };
+                var signalRMessage = new SignalRMessage
+                {
+                    Name = Resource,
+                    Body = new ResourceChangeMessage<TResource>(action)
+                };
 
-            _signalRBroadcaster.BroadcastMessage(signalRMessage);
+                _signalRBroadcaster.BroadcastMessage(signalRMessage);
+            }
         }
     }
 }

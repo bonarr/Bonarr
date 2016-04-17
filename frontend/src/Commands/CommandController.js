@@ -2,7 +2,7 @@ const _ = require('underscore');
 const $ = require('jquery');
 const vent = require('vent');
 const CommandModel = require('./CommandModel');
-const CommandCollection = require('./CommandCollection');
+const commandCollection = require('./commandCollection');
 const CommandMessengerCollectionView = require('./CommandMessengerCollectionView');
 const Messenger = require('Shared/Messenger');
 require('jQuery/jquery.spin');
@@ -30,7 +30,7 @@ const CommandController = {
     commandModel.deferred = $.Deferred();
 
     commandModel.save().success(() => {
-      CommandCollection.add(commandModel);
+      commandCollection.add(commandModel);
 
       commandModel.bind('change:status', (model) => {
         if (model.isComplete()) {
@@ -53,20 +53,20 @@ const CommandController = {
   },
 
   bindToCommand(options) {
-    const existingCommand = CommandCollection.findCommand(options.command);
+    const existingCommand = commandCollection.findCommand(options.command);
 
     if (existingCommand) {
       this._bindToCommandModel(existingCommand, options);
     }
 
-    CommandCollection.bind('add', (model) => {
+    commandCollection.bind('add', (model) => {
       if (model.isSameCommand(options.command)) {
         this._bindToCommandModel(model, options);
       }
     });
 
-    CommandCollection.bind('sync', () => {
-      const command = CommandCollection.findCommand(options.command);
+    commandCollection.bind('sync', () => {
+      const command = commandCollection.findCommand(options.command);
       if (command) {
         this._bindToCommandModel(command, options);
       }

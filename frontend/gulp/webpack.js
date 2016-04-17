@@ -43,8 +43,7 @@ const config = {
       'radio': 'JsLibraries/backbone.radio',
       'backgrid.selectall': 'Shims/backbone.backgrid.selectall',
       'marionette': 'Shims/backbone.marionette',
-      'momentRange': 'JsLibraries/moment-range',
-      'signalR': 'Shims/jquery.signalR'
+      'momentRange': 'JsLibraries/moment-range'
     }
   },
   output: {
