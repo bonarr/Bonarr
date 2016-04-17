@@ -1,11 +1,10 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var QueueCollection = require('./QueueCollection');
-var tpl = require('./QueueView.hbs');
+const vent = require('vent');
+const Marionette = require('marionette');
+const tpl = require('./QueueView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  tagName: 'span',
   template: tpl,
+  tagName: 'span',
 
   initialize(status) {
     this.status = status;
@@ -24,7 +23,7 @@ module.exports = Marionette.ItemView.extend({
 
       return {
         count: this.status.count,
-        labelClass: labelClass
+        labelClass
       };
     }
   },

@@ -11,8 +11,8 @@ const CommandCollection = Backbone.Collection.extend({
   }
 });
 
-const collection = new CommandCollection().bindSignalR();
+const commandCollection = new CommandCollection().bindSignalR();
 
-collection.fetch();
+commandCollection.fetch();
 
-module.exports = collection;
+module.exports = commandCollection;

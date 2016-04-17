@@ -28,7 +28,7 @@
   ],
 
   "rules": {
-    "filenames/filenames": [2, "^[a-z-A-Z]+$", "match-regex-and-exported"],
+    "filenames/filenames": [2, "^.+$", "match-exported"],
 
     // ECMAScript 6
 
