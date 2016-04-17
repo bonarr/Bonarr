@@ -5,7 +5,7 @@ require('jquery.lazyload');
 
 const $containerWrapper = $('#content-wrapper');
 
-const lazyImage = Marionette.Behavior.extend({
+const lazyImages = Marionette.Behavior.extend({
   defaults: {
     threshold: 200
   },
@@ -16,6 +16,9 @@ const lazyImage = Marionette.Behavior.extend({
 
   onRender() {
     _.defer(() => {
+      if (this.view.isDestroyed) {
+        return;
+      }
       this.ui.lazyImages.lazyload({
         threshold: this.options.threshold,
         container: $containerWrapper
@@ -24,4 +27,4 @@ const lazyImage = Marionette.Behavior.extend({
   }
 });
 
-module.exports = lazyImage;
+module.exports = lazyImages;
