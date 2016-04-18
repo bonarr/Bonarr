@@ -1,5 +1,6 @@
 var vent = require('vent');
 var Marionette = require('marionette');
+var Config = require('Config');
 var UpcomingLayout = require('./Upcoming/UpcomingLayout');
 var CalendarView = require('./Calendar/CalendarView');
 var CalendarFeedView = require('./CalendarFeedView');
@@ -13,8 +14,25 @@ module.exports = Marionette.LayoutView.extend({
     calendar: '#x-calendar'
   },
 
+  ui: {
+    upcomingContainer: '.upcoming-container'
+  },
+
+  events: {
+    'click .upcoming-visibility-controls': '_toggleUpcomingVisibility'
+  },
+
+  initialize() {
+    this.showUpcoming = Config.getValueBoolean('upcoming.show', true);
+  },
+
   onShow() {
-    this._showUpcoming();
+    if (this.showUpcoming) {
+      this._showUpcoming();
+    }
+
+    this.ui.upcomingContainer.toggleClass('show-upcoming', this.showUpcoming);
+
     this._showCalendar();
     this._showActionBar();
   },
@@ -81,6 +99,20 @@ module.exports = Marionette.LayoutView.extend({
     } else {
       this.calendarView.setShowUnmonitored(false);
       this.upcomingLayout.setShowUnmonitored(false);
+    }
+  },
+
+  _toggleUpcomingVisibility() {
+    const showUpcoming = !this.showUpcoming;
+
+    Config.setValue('upcoming.show', showUpcoming);
+    this.ui.upcomingContainer.toggleClass('show-upcoming', showUpcoming);
+    this.showUpcoming = showUpcoming;
+
+    if (this.showUpcoming) {
+      this._showUpcoming();
+    } else {
+      this.upcoming.empty();
     }
   }
 });

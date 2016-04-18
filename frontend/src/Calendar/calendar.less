@@ -3,6 +3,7 @@
 @import "Content/Bootstrap/buttons";
 @import "Content/variables";
 @import "Content/mixins";
+@import "Content/icon-mixins";
 
 .calendar-layout {
 
@@ -15,11 +16,59 @@
   .upcoming-container {
     flex-basis   : auto;
     padding-left : 20px;
-    width        : 350px;
+    width        : 0;
     display      : none;
 
     @media (min-width: @screen-xl-min) {
       display : block;
+
+      &.show-upcoming {
+        width: 350px;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .upcoming-visibility-controls {
+      .clickable();
+
+      .open-upcoming, .close-upcoming {
+        .clickable();
+      }
+
+      margin-top: 9px;
+      margin-right: -5px;
+      font-size: 18px;
+
+      .close-upcoming {
+        display: none;
+      }
+
+      .open-upcoming {
+        display: block;
+      }
+    }
+
+    &.show-upcoming {
+      .upcoming-visibility-controls {
+        .close-upcoming {
+          display: block;
+        }
+
+        .open-upcoming {
+          display: none;
+        }
+      }
+    }
+
+    .icon-sonarr-close-upcoming {
+      .fa-icon-content(@fa-var-caret-square-o-right);
+    }
+
+    .icon-sonarr-open-upcoming {
+      .fa-icon-content(@fa-var-caret-square-o-left);
     }
   }
 
@@ -368,6 +417,10 @@
           width: 310px;
         }
       }
+    }
+
+    .upcoming-title {
+      margin-top: 8px;
     }
 
     .upcoming-hr {
