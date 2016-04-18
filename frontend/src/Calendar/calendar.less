@@ -302,6 +302,26 @@
       margin-right: 2px;
       line-height: 12px;
     }
+
+    .calendar-header-mobile-views {
+      .view-select {
+        .active-icon {
+          .pull-right();
+
+          display: none;
+        }
+
+        &.active {
+          .active-icon {
+            display: inline-block;
+          }
+        }
+      }
+
+      .calendar-mobile-view-button-text {
+        text-transform: capitalize;
+      }
+    }
   }
 
   .upcoming {

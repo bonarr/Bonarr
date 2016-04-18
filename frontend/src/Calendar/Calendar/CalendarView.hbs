@@ -17,7 +17,22 @@
 
     <div class="calendar-header-group calendar-header-right">
       <span class="loading-indicator x-loading-indicator spinner-small">{{>LoadingPartial}}</span>
-      <div class="btn-group calendar-header-views">
+
+      <!-- Mobile -->
+      <div class="btn-group visible-xs pull-right calendar-header-mobile-views">
+        <button type="button" class="btn btn-default btn-select-view dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="calendar-mobile-view-button-text x-calendar-mobile-view-button-text">View</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="no-router week view-select x-week x-view-select" data-view="week">Week <i class="active-icon icon-sonarr-check"></i></a></li>
+          <li><a href="#" class="no-router forecast view-select x-forecast x-view-select" data-view="forecast">Forecast <i class="active-icon icon-sonarr-check"></i></a></li>
+          <li><a href="#" class="no-router day view-select x-day x-view-select" data-view="day">Day <i class="active-icon icon-sonarr-check"></i></a></li>
+          <li><a href="#" class="no-router agenda view-select x-agenda x-view-select" data-view="agenda">Agenda <i class="active-icon icon-sonarr-check"></i></a></li>
+        </ul>
+      </div>
+
+      <!-- Desktop -->
+      <div class="btn-group hidden-xs calendar-header-views">
         {{#if showMonth}}<button class="btn btn-default btn-select-view month x-month x-view-select" data-view="month">Month</button>{{/if}}
         <button class="btn btn-default btn-select-view week x-week x-view-select" data-view="week">Week</button>
         <button class="btn btn-default btn-select-view forecast x-forecast x-view-select" data-view="forecast">Forecast</button>

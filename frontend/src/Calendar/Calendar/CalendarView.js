@@ -41,7 +41,8 @@ module.exports = Marionette.LayoutView.extend({
     week: '.x-week',
     forecast: '.x-forecast',
     day: '.x-day',
-    agenda: '.x-agenda'
+    agenda: '.x-agenda',
+    mobileViewButtonText: '.x-calendar-mobile-view-button-text'
   },
 
   initialize() {
@@ -181,6 +182,7 @@ module.exports = Marionette.LayoutView.extend({
     this.ui[this.view].addClass('active');
     this.ui.loading.addClass('hidden');
     this.ui.title.html(this._getTitle());
+    this._setMobileButtonText(this.view);
   },
 
   _getTitle() {
@@ -210,6 +212,8 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _onViewClick(event) {
+    event.preventDefault();
+
     var $target = $(event.target);
     var view = $target.data('view');
 
@@ -256,5 +260,9 @@ module.exports = Marionette.LayoutView.extend({
 
     this.ui.previous.toggleClass('disabled', showingForecastView);
     this.ui.next.toggleClass('disabled', showingForecastView);
+  },
+
+  _setMobileButtonText(view) {
+    this.ui.mobileViewButtonText.text(view);
   }
 });
