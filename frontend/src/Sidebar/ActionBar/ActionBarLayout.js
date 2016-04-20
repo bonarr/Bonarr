@@ -57,7 +57,7 @@ module.exports = Marionette.LayoutView.extend({
     }
 
     if (this.actions) {
-      const actionCollection = new Backbone.Collection(this.actions.items);
+      const actionCollection = this._buildCollection(this.actions);
       this.actionsRegion.show(new ActionCollectionView({
         collection: actionCollection
       }));
