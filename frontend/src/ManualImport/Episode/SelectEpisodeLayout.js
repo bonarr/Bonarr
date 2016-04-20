@@ -54,7 +54,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _selectEpisodes() {
-    const episodes = _.map(this.episodeView.getSelectedModels(), (episode) => {
+    const episodes = _.map(this.episodeCollection.getSelected(), (episode) => {
       return episode.toJSON();
     });
 
