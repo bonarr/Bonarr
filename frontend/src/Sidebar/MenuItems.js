@@ -149,6 +149,10 @@ function findByHref(href) {
 
   if (window.Sonarr.UrlBase) {
     href = href.substring(window.Sonarr.UrlBase.length);
+
+    if (href === '') {
+      href = '/';
+    }
   }
 
   const item = urls[href];
