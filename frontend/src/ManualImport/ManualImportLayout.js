@@ -26,7 +26,8 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   ui: {
-    importButton: '.x-import'
+    importButton: '.x-import',
+    title: '.x-title'
   },
 
   events: {
@@ -147,8 +148,10 @@ module.exports = Marionette.LayoutView.extend({
 
   _manualImport(e) {
     this.folder = e.folder;
-    this.templateHelpers.title = this.folder;
-    this.render();
+    this.ui.title.text(this.folder);
+
+    this._showLoading();
+    this._loadCollection();
   },
 
   _automaticImport(e) {
@@ -157,7 +160,7 @@ module.exports = Marionette.LayoutView.extend({
       path: e.folder
     });
 
-    vent.trigger(vent.Commands.CloseFullscreenModal);
+    this.destroy();
   },
 
   _import() {
