@@ -70,8 +70,9 @@ module.exports = Marionette.LayoutView.extend({
     this._showActionBar();
   },
 
-  onShow() {
+  onRender() {
     this.history.show(new LoadingView());
+    this.collection.fetch();
   },
 
   _showTable(collection) {

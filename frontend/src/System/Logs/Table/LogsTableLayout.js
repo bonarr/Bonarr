@@ -62,6 +62,7 @@ module.exports = Marionette.LayoutView.extend({
 
   onRender() {
     this.grid.show(new LoadingView());
+    this.collection.fetch();
   },
 
   _showTable() {
