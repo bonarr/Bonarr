@@ -70,7 +70,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
       if ($target.is('select:focus')) {
         $target.blur();
       } else {
-        this.empty();
+        this.destroy();
       }
 
       event.stopImmediatePropagation();
@@ -79,7 +79,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
   },
 
   onViewClose() {
-    this.empty();
+    this.destroy();
     this.stopListening(this.currentView);
   }
 });
