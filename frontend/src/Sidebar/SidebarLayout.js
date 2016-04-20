@@ -122,7 +122,7 @@ module.exports = Marionette.LayoutView.extend({
   _setActiveBasedOnUri() {
     const location = window.location.pathname;
     const menuItem = menuItems.findByHref(location);
-    const $href = this.$(`a[href="${menuItem.href}"]`);
+    const $href = this.$(`a[href="${window.Sonarr.UrlBase}${menuItem.href}"]`);
     const $li = $href.closest('li');
     this._setActive($li);
   },

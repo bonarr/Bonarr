@@ -147,6 +147,10 @@ function findByHref(href) {
     return {};
   }
 
+  if (window.Sonarr.UrlBase) {
+    href = href.substring(window.Sonarr.UrlBase.length);
+  }
+
   const item = urls[href];
   if (item) {
     return item;
