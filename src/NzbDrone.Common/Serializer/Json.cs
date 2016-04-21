@@ -20,7 +20,7 @@ namespace NzbDrone.Common.Serializer
                             DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                             NullValueHandling = NullValueHandling.Ignore,
                             Formatting = Formatting.Indented,
-                            DefaultValueHandling = DefaultValueHandling.Ignore,
+                            DefaultValueHandling = DefaultValueHandling.Include,
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
                         };
 
