@@ -1,0 +1,13 @@
+<td>{{eventType}}</td>
+<td>{{sourceTitle}}</td>
+<td>{{historyQuality quality}}</td>
+<td>{{relativeDate date}}</td>
+<td class="x-details-cell">
+  <i class="icon-sonarr-form-info"></i>
+  <span class="hide x-details"></span>
+</td>
+<td>
+  {{#if_eq eventType compare="grabbed"}}
+    <i class="icon-sonarr-delete-row icon-sonarr-danger x-failed" title="Mark download as failed"></i>
+  {{/if_eq}}
+</td>
