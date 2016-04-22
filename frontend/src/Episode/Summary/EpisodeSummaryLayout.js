@@ -1,13 +1,11 @@
-var reqres = require('reqres');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var EpisodeFileModel = require('Series/EpisodeFileModel');
-var EpisodeFileCollection = require('Series/EpisodeFileCollection');
-var FileSizeCell = require('Cells/FileSizeCell');
-var QualityCell = require('Cells/QualityCell');
-var DeleteEpisodeFileCell = require('Cells/DeleteEpisodeFileCell');
-var NoFileView = require('./NoFileView');
-var LoadingView = require('Shared/LoadingView');
+const reqres = require('reqres');
+const Marionette = require('marionette');
+const TableView = require('Table/TableView');
+const EpisodeFileModel = require('Series/EpisodeFileModel');
+const EpisodeFileCollection = require('Series/EpisodeFileCollection');
+const LoadingView = require('Shared/LoadingView');
+const EpisodeFileRow = require('./EpisodeFileRow');
+const NoFileView = require('./NoFileView');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'Episode/Summary/EpisodeSummaryLayoutTemplate',
@@ -17,31 +15,19 @@ module.exports = Marionette.LayoutView.extend({
     activity: '.episode-file-info'
   },
 
-  columns: [
+  headers: [
     {
-      name: 'path',
-      label: 'Path',
-      cell: 'string',
-      sortable: false
+      name: 'path'
     },
     {
-      name: 'size',
-      label: 'Size',
-      cell: FileSizeCell,
-      sortable: false
+      name: 'size'
     },
     {
-      name: 'quality',
-      label: 'Quality',
-      cell: QualityCell,
-      sortable: false,
-      editable: true
+      name: 'quality'
     },
     {
-      name: 'this',
-      label: '',
-      cell: DeleteEpisodeFileCell,
-      sortable: false
+      name: 'actions',
+      label: ' '
     }
   ],
 
@@ -84,11 +70,11 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showTable() {
-    this.activity.show(new Backgrid.Grid({
+    this.activity.show(new TableView({
       collection: this.episodeFileCollection,
-      columns: this.columns,
-      className: 'table table-bordered',
-      emptyText: 'Nothing to see here!'
+      childView: EpisodeFileRow,
+      headers: this.headers,
+      className: 'table table-bordered'
     }));
   },
 
