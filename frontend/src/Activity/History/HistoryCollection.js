@@ -1,17 +1,19 @@
-var HistoryModel = require('./HistoryModel');
+var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
-var AsFilteredCollection = require('Mixins/AsFilteredCollection');
-var AsSortedCollection = require('Mixins/AsSortedCollection');
+var AsPageableCollection = require('Mixins/Collection/AsPageableCollection');
+// var AsFilteredCollection = require('Mixins/AsFilteredCollection');
+// var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+var HistoryModel = require('./HistoryModel');
 
-var Collection = PageableCollection.extend({
+var Collection = Backbone.Collection.extend({
   url: '/history',
   model: HistoryModel,
 
   state: {
     pageSize: 15,
     sortKey: 'date',
-    order: 1
+    sortDir: 'desc'
   },
 
   queryParams: {
@@ -73,8 +75,9 @@ var Collection = PageableCollection.extend({
   }
 });
 
-Collection = AsFilteredCollection.call(Collection);
-Collection = AsSortedCollection.call(Collection);
-Collection = AsPersistedStateCollection.call(Collection);
+Collection = AsPageableCollection.apply(Collection);
+// Collection = AsFilteredCollection.call(Collection);
+// Collection = AsSortedCollection.call(Collection);
+// Collection = AsPersistedStateCollection.call(Collection);
 
 module.exports = Collection;

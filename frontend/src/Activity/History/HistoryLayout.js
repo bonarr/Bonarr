@@ -10,6 +10,7 @@ var HistoryQualityCell = require('./HistoryQualityCell');
 var RelativeDateCell = require('Cells/RelativeDateCell');
 var HistoryDetailsCell = require('./HistoryDetailsCell');
 var GridPager = require('Shared/Grid/Pager');
+var TablePagerView = require('Table/TablePagerView');
 var LoadingView = require('Shared/LoadingView');
 
 module.exports = Marionette.LayoutView.extend({
@@ -64,7 +65,7 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.collection = new HistoryCollection({ tableName: 'history' });
+    this.collection = new HistoryCollection([], { tableName: 'history' });
     this.listenTo(this.collection, 'sync', this._showTable);
 
     this._showActionBar();
@@ -82,8 +83,7 @@ module.exports = Marionette.LayoutView.extend({
       className: 'table table-hover'
     }));
 
-    this.pager.show(new GridPager({
-      columns: this.columns,
+    this.pager.show(new TablePagerView({
       collection: collection
     }));
   },
