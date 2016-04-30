@@ -1,5 +1,5 @@
-var Backbone = require('backbone');
-var EpisodeFileModel = require('./EpisodeFileModel');
+const Backbone = require('backbone');
+const EpisodeFileModel = require('./EpisodeFileModel');
 
 module.exports = Backbone.Collection.extend({
   url: '/episodefile',
@@ -9,20 +9,15 @@ module.exports = Backbone.Collection.extend({
 
   initialize(options) {
     this.seriesId = options.seriesId;
-    this.models = [];
   },
 
-  fetch(options) {
-    if (!this.seriesId) {
-      throw 'seriesId is required';
+  fetch(options = {}) {
+    const seriesId = this.seriesId;
+    if (!seriesId) {
+      throw new Error('seriesId is required');
     }
 
-    if (!options) {
-      options = {};
-    }
-
-    options.data = { seriesId: this.seriesId };
-
-    return this.originalFetch.call(this, options);
+    options.data = { seriesId };
+    return this.originalFetch(options);
   }
 });

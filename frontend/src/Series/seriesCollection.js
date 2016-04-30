@@ -1,9 +1,10 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
-var SeriesModel = require('./SeriesModel');
-var moment = require('moment');
+const _ = require('underscore');
+const Backbone = require('backbone');
+const SeriesModel = require('./SeriesModel');
+const moment = require('moment');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-var SeriesCollection = Backbone.Collection.extend({
+const SeriesCollection = Backbone.Collection.extend({
   url: '/series',
   model: SeriesModel,
   tableName: 'series',
@@ -56,7 +57,7 @@ var SeriesCollection = Backbone.Collection.extend({
 
     nextAiring: {
       sortValue(model, attr, order) {
-        var nextAiring = model.get(attr);
+        const nextAiring = model.get(attr);
 
         if (nextAiring) {
           return moment(nextAiring).unix();
@@ -72,8 +73,8 @@ var SeriesCollection = Backbone.Collection.extend({
 
     percentOfEpisodes: {
       sortValue(model, attr) {
-        var percentOfEpisodes = model.get(attr);
-        var episodeCount = model.get('episodeCount');
+        const percentOfEpisodes = model.get(attr);
+        const episodeCount = model.get('episodeCount');
 
         return percentOfEpisodes + episodeCount / 1000000;
       }
@@ -81,15 +82,16 @@ var SeriesCollection = Backbone.Collection.extend({
 
     path: {
       sortValue(model) {
-        var path = model.get('path');
-
+        const path = model.get('path');
         return path.toLowerCase();
       }
     }
   }
 });
 
-const seriesCollection = new SeriesCollection([]).bindSignalR();
+asSignalRCollection.apply(SeriesCollection.prototype);
+
+const seriesCollection = new SeriesCollection();
 seriesCollection.fetch();
 
 module.exports = seriesCollection;

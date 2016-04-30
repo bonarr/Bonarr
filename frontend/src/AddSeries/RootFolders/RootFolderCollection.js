@@ -1,10 +1,12 @@
-var Backbone = require('backbone');
-var RootFolderModel = require('./RootFolderModel');
-require('Mixins/backbone.signalr.mixin');
+const Backbone = require('backbone');
+const RootFolderModel = require('./RootFolderModel');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-var RootFolderCollection = Backbone.Collection.extend({
+const RootFolderCollection = Backbone.Collection.extend({
   url: '/rootfolder',
   model: RootFolderModel
 });
+
+asSignalRCollection.apply(RootFolderCollection.prototype);
 
 module.exports = new RootFolderCollection();

@@ -1,11 +1,11 @@
-var _ = require('underscore');
-var EpisodeModel = require('Series/EpisodeModel');
-var PagableCollection = require('backbone.paginator');
-var AsFilteredCollection = require('Mixins/AsFilteredCollection');
-var AsSortedCollection = require('Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+const EpisodeModel = require('Series/EpisodeModel');
+const PagableCollection = require('backbone.paginator');
+const AsFilteredCollection = require('Mixins/AsFilteredCollection');
+const AsSortedCollection = require('Mixins/AsSortedCollection');
+const AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-var Collection = PagableCollection.extend({
+let MissingCollection = PagableCollection.extend({
   url: '/wanted/missing',
   model: EpisodeModel,
   tableName: 'wanted.missing',
@@ -55,7 +55,9 @@ var Collection = PagableCollection.extend({
     return resp;
   }
 });
-Collection = AsFilteredCollection.call(Collection);
-Collection = AsSortedCollection.call(Collection);
 
-module.exports = AsPersistedStateCollection.call(Collection);
+MissingCollection = AsFilteredCollection.call(MissingCollection);
+MissingCollection = AsSortedCollection.call(MissingCollection);
+asSignalRCollection.call(MissingCollection.prototype);
+
+module.exports = AsPersistedStateCollection.call(MissingCollection);

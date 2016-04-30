@@ -1,22 +1,21 @@
-var $ = require('jquery');
-var _ = require('underscore');
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var MissingCollection = require('./MissingCollection');
-var SelectAllCell = require('Cells/SelectAllCell');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var EpisodeStatusCell = require('Cells/EpisodeStatusCell');
-var GridPager = require('Shared/Grid/Pager');
-var LoadingView = require('Shared/LoadingView');
-var Messenger = require('Shared/Messenger');
-var CommandController = require('Commands/CommandController');
+const $ = require('jquery');
+const _ = require('underscore');
+const vent = require('vent');
+const Marionette = require('marionette');
+const Backgrid = require('backgrid');
+const MissingCollection = require('./MissingCollection');
+const SelectAllCell = require('Cells/SelectAllCell');
+const SeriesTitleCell = require('Cells/SeriesTitleCell');
+const EpisodeNumberCell = require('Cells/EpisodeNumberCell');
+const EpisodeTitleCell = require('Cells/EpisodeTitleCell');
+const RelativeDateCell = require('Cells/RelativeDateCell');
+const EpisodeStatusCell = require('Cells/EpisodeStatusCell');
+const GridPager = require('Shared/Grid/Pager');
+const LoadingView = require('Shared/LoadingView');
+const Messenger = require('Shared/Messenger');
+const CommandController = require('Commands/CommandController');
 
 require('backgrid.selectall');
-require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'Wanted/Missing/MissingLayoutTemplate',
@@ -69,7 +68,7 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.collection = new MissingCollection().bindSignalR({ updateOnly: true });
+    this.collection = new MissingCollection();
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this._showActionBar();
@@ -96,7 +95,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       type: 'default',
       collapse: true,
       items: [
@@ -130,7 +129,7 @@ module.exports = Marionette.LayoutView.extend({
       ]
     };
 
-    var filteringOptions = {
+    const filteringOptions = {
       storeState: false,
       menuKey: 'wanted.filterMode',
       defaultAction: 'monitored',
@@ -157,16 +156,16 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _setFilter(buttonContext) {
-    var mode = buttonContext.model.get('key');
+    const mode = buttonContext.model.get('key');
     this.collection.state.currentPage = 1;
-    var promise = this.collection.setFilterMode(mode);
+    const promise = this.collection.setFilterMode(mode);
     if (buttonContext) {
       buttonContext.ui.icon.spinForPromise(promise);
     }
   },
 
   _searchSelected() {
-    var selected = this.missingGrid.getSelectedModels();
+    const selected = this.missingGrid.getSelectedModels();
     if (selected.length === 0) {
       Messenger.show({
         type: 'error',
@@ -175,7 +174,7 @@ module.exports = Marionette.LayoutView.extend({
       return;
     }
 
-    var ids = _.pluck(selected, 'id');
+    const ids = _.pluck(selected, 'id');
     CommandController.execute('episodeSearch', {
       name: 'episodeSearch',
       episodeIds: ids
@@ -183,14 +182,14 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _searchMissing() {
-    if (window.confirm('Are you sure you want to search for {0} missing episodes? '.format(this.collection.state.totalRecords) +
-        'One API request to each indexer will be used for each episode. This cannot be stopped once started.')) {
+    if (window.confirm(`Are you sure you want to search for ${this.collection.state.totalRecords} missing episodes?
+        One API request to each indexer will be used for each episode. This cannot be stopped once started.`)) {
       CommandController.execute('missingEpisodeSearch', { name: 'missingEpisodeSearch' });
     }
   },
 
   _toggleMonitoredOfSelected() {
-    var selected = this.missingGrid.getSelectedModels();
+    const selected = this.missingGrid.getSelectedModels();
 
     if (selected.length === 0) {
       Messenger.show({
@@ -200,7 +199,7 @@ module.exports = Marionette.LayoutView.extend({
       return;
     }
 
-    var promises = [];
+    const promises = [];
 
     _.each(selected, (episode) => {
       episode.set('monitored', !episode.get('monitored'));

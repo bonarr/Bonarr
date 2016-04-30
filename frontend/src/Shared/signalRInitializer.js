@@ -1,6 +1,5 @@
 const $ = require('jquery');
 const vent = require('vent');
-// const AsSignalRCollection = require('Mixins/Collection/AsSignalRCollection');
 const Messenger = require('Shared/Messenger');
 
 require('signalR');
@@ -73,9 +72,6 @@ const signalRInitializer = {
     });
 
     this.signalRconnection.start({ transport: ['longPolling'] });
-    // AsSignalRCollection.apply(backbone.Collection.prototype);
-
-    return this;
   }
 };
 

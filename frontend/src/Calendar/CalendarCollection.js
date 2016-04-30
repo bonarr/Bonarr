@@ -1,14 +1,19 @@
-var Backbone = require('backbone');
-var EpisodeModel = require('Series/EpisodeModel');
+const Backbone = require('backbone');
+const EpisodeModel = require('Series/EpisodeModel');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-module.exports = Backbone.Collection.extend({
+const CalendarCollection = Backbone.Collection.extend({
   url: '/calendar',
   model: EpisodeModel,
   tableName: 'calendar',
 
   comparator(model) {
-    var date = new Date(model.get('airDateUtc'));
-    var time = date.getTime();
+    const date = new Date(model.get('airDateUtc'));
+    const time = date.getTime();
     return time;
   }
 });
+
+asSignalRCollection.apply(CalendarCollection.prototype);
+
+module.exports = CalendarCollection;

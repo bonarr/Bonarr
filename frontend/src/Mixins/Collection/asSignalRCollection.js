@@ -1,9 +1,5 @@
 const vent = require('vent');
-// const radio = require('radio').channel('signalR');
 require('signalR');
-
-// const radio = require('radio');
-// const signalRChannel = radio.channel('signalR');
 
 function processMessage(message) {
   const action = message.action;
@@ -35,12 +31,12 @@ function processMessage(message) {
   }
 }
 
-function AsSignalRCollection() {
-  const originalConstructor = this.constructor;
+function asSignalRCollection() {
+  const originalInit = this.initialize;
   this.bindOptions = this.bindOptions || {};
-  this.constructor = function() {
-    if (originalConstructor) {
-      originalConstructor.apply(this, arguments);
+  this.initialize = function() {
+    if (originalInit) {
+      originalInit.apply(this, arguments);
     }
 
     const resourceName = this.url.replace(/^\//, '');
@@ -50,4 +46,4 @@ function AsSignalRCollection() {
   };
 }
 
-module.exports = AsSignalRCollection;
+module.exports = asSignalRCollection;

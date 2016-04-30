@@ -5,14 +5,14 @@ var UpcomingCollection = require('./UpcomingCollection');
 var UpcomingItemView = require('./UpcomingItemView');
 var Config = require('Config');
 
-require('Mixins/backbone.signalr.mixin');
+
 
 module.exports = Marionette.CollectionView.extend({
   childView: UpcomingItemView,
 
   initialize() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
-    this.collection = new UpcomingCollection().bindSignalR({ updateOnly: true });
+    this.collection = new UpcomingCollection();
     this._fetchCollection();
 
     this._fetchCollection = _.bind(this._fetchCollection, this);

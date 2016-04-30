@@ -35,7 +35,7 @@ function addApiKey(xhr) {
 }
 
 module.exports = function(jQuery) {
-  var originalAjax = jQuery.ajax;
+  const originalAjax = jQuery.ajax;
   jQuery.ajax = function(xhr) {
     if (xhr && isRelative(xhr)) {
       moveBodyToQuery(xhr);

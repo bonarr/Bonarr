@@ -1,14 +1,12 @@
-var _ = require('underscore');
-var PageableCollection = require('backbone.paginator');
-var QueueModel = require('./QueueModel');
-var FormatHelpers = require('Shared/FormatHelpers');
-var AsSortedCollection = require('Mixins/AsSortedCollection');
-var AsPageableCollection = require('Mixins/AsPageableCollection');
-var moment = require('moment');
+const _ = require('underscore');
+const PageableCollection = require('backbone.paginator');
+const QueueModel = require('./QueueModel');
+const FormatHelpers = require('Shared/FormatHelpers');
+const AsSortedCollection = require('Mixins/AsSortedCollection');
+const AsPageableCollection = require('Mixins/AsPageableCollection');
+const moment = require('moment');
 
-require('Mixins/backbone.signalr.mixin');
-
-var QueueCollection = PageableCollection.extend({
+const QueueCollection = PageableCollection.extend({
   url: '/queue',
   model: QueueModel,
 
@@ -20,7 +18,7 @@ var QueueCollection = PageableCollection.extend({
   mode: 'client',
 
   findEpisode(episodeId) {
-    return _.find(this.fullCollection.models, function(queueModel) {
+    return _.find(this.fullCollection.models, (queueModel) => {
       return queueModel.get('episode').id === episodeId;
     });
   },
@@ -28,7 +26,7 @@ var QueueCollection = PageableCollection.extend({
   sortMappings: {
     series: {
       sortValue(model, attr) {
-        var series = model.get(attr);
+        const series = model.get(attr);
 
         return series.get('sortTitle');
       }
@@ -36,15 +34,14 @@ var QueueCollection = PageableCollection.extend({
 
     episode: {
       sortValue(model, attr) {
-        var episode = model.get('episode');
-
+        const episode = model.get('episode');
         return FormatHelpers.pad(episode.get('seasonNumber'), 4) + FormatHelpers.pad(episode.get('episodeNumber'), 4);
       }
     },
 
     episodeTitle: {
       sortValue(model, attr) {
-        var episode = model.get('episode');
+        const episode = model.get('episode');
 
         return episode.get('title');
       }
@@ -52,7 +49,7 @@ var QueueCollection = PageableCollection.extend({
 
     timeleft: {
       sortValue(model, attr) {
-        var eta = model.get('estimatedCompletionTime');
+        const eta = model.get('estimatedCompletionTime');
 
         if (eta) {
           return moment(eta).unix();
@@ -64,8 +61,8 @@ var QueueCollection = PageableCollection.extend({
 
     sizeleft: {
       sortValue(model, attr) {
-        var size = model.get('size');
-        var sizeleft = model.get('sizeleft');
+        const size = model.get('size');
+        const sizeleft = model.get('sizeleft');
 
         if (size && sizeleft) {
           return sizeleft / size;
@@ -77,11 +74,10 @@ var QueueCollection = PageableCollection.extend({
   }
 });
 
-QueueCollection = AsSortedCollection.call(QueueCollection);
-QueueCollection = AsPageableCollection.call(QueueCollection);
+AsSortedCollection.call(QueueCollection);
+AsPageableCollection.call(QueueCollection);
 
-var collection = new QueueCollection().bindSignalR();
-collection.fetch();
+const queueCollection = new QueueCollection();
+queueCollection.fetch();
 
-
-module.exports = collection;
+module.exports = queueCollection;

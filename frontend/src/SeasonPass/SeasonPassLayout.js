@@ -1,18 +1,17 @@
-var _ = require('underscore');
-var vent = require('vent');
-var Backgrid = require('backgrid');
-var Marionette = require('marionette');
-var EmptyView = require('Series/Index/EmptyView');
-var SeriesCollection = require('Series/SeriesCollection');
-var FooterView = require('./SeasonPassFooterView');
-var SelectAllCell = require('Cells/SelectAllCell');
-var SeriesStatusCell = require('Cells/SeriesStatusCell');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var SeasonsCell = require('./SeasonsCell');
-require('Mixins/backbone.signalr.mixin');
+const vent = require('vent');
+const Backgrid = require('backgrid');
+const Marionette = require('marionette');
+const EmptyView = require('Series/Index/EmptyView');
+const SeriesCollection = require('Series/SeriesCollection');
+const FooterView = require('./SeasonPassFooterView');
+const SelectAllCell = require('Cells/SelectAllCell');
+const SeriesStatusCell = require('Cells/SeriesStatusCell');
+const SeriesTitleCell = require('Cells/SeriesTitleCell');
+const SeasonsCell = require('./SeasonsCell');
+const tpl = require('./SeasonPassLayout.hbs');
 
-module.exports = Marionette.LayoutView.extend({
-  template: 'SeasonPass/SeasonPassLayoutTemplate',
+const SeasonPassLayout = Marionette.LayoutView.extend({
+  template: tpl,
 
   regions: {
     series: '#x-series'
@@ -46,10 +45,7 @@ module.exports = Marionette.LayoutView.extend({
 
   initialize() {
     this.seriesCollection = SeriesCollection.clone();
-    this.seriesCollection.shadowCollection.bindSignalR();
-
     this.listenTo(this.seriesCollection, 'seasonpass:saved', this.render);
-
     this._showActionBar();
   },
 
@@ -59,7 +55,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showActionBar() {
-    var filteringOptions = {
+    const filteringOptions = {
       type: 'radio',
       storeState: true,
       menuKey: 'seasonpass.filterMode',
@@ -121,8 +117,9 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _setFilter(buttonContext) {
-    var mode = buttonContext.model.get('key');
-
+    const mode = buttonContext.model.get('key');
     this.seriesCollection.setFilterMode(mode);
   }
 });
+
+module.exports = SeasonPassLayout;

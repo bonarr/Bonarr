@@ -1,6 +1,6 @@
 const Backbone = require('backbone');
 const CommandModel = require('./CommandModel');
-require('Mixins/backbone.signalr.mixin');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
 const CommandCollection = Backbone.Collection.extend({
   url: '/command',
@@ -11,7 +11,9 @@ const CommandCollection = Backbone.Collection.extend({
   }
 });
 
-const commandCollection = new CommandCollection().bindSignalR();
+asSignalRCollection.apply(CommandCollection.prototype);
+
+const commandCollection = new CommandCollection();
 
 commandCollection.fetch();
 

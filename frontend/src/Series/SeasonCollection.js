@@ -1,5 +1,5 @@
-var Backbone = require('backbone');
-var SeasonModel = require('./SeasonModel');
+const Backbone = require('backbone');
+const SeasonModel = require('./SeasonModel');
 
 module.exports = Backbone.Collection.extend({
   model: SeasonModel,

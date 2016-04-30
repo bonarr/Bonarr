@@ -1,22 +1,20 @@
-var $ = require('jquery');
-var _ = require('underscore');
-var vent = require('vent');
-var reqres = require('reqres');
-var Marionette = require('marionette');
-var Backbone = require('backbone');
-var SeriesCollection = require('../SeriesCollection');
-var EpisodeCollection = require('../EpisodeCollection');
-var EpisodeFileCollection = require('../EpisodeFileCollection');
-var SeasonCollection = require('../SeasonCollection');
-var SeasonCollectionView = require('./SeasonCollectionView');
-var SeriesHeaderView = require('./SeriesHeaderView');
-var CommandController = require('Commands/CommandController');
-var LoadingView = require('Shared/LoadingView');
-var EpisodeFileEditorLayout = require('../../EpisodeFile/Editor/EpisodeFileEditorLayout');
-var NoEpisodesView = require('./NoEpisodesView');
-var tpl = require('./SeriesDetails.hbs');
-
-require('Mixins/backbone.signalr.mixin');
+const $ = require('jquery');
+const _ = require('underscore');
+const vent = require('vent');
+const reqres = require('reqres');
+const Marionette = require('marionette');
+const Backbone = require('backbone');
+const SeriesCollection = require('Series/SeriesCollection');
+const EpisodeCollection = require('Series/EpisodeCollection');
+const EpisodeFileCollection = require('Series/EpisodeFileCollection');
+const SeasonCollection = require('Series/SeasonCollection');
+const SeasonCollectionView = require('./SeasonCollectionView');
+const SeriesHeaderView = require('./SeriesHeaderView');
+const CommandController = require('Commands/CommandController');
+const LoadingView = require('Shared/LoadingView');
+const EpisodeFileEditorLayout = require('EpisodeFile/Editor/EpisodeFileEditorLayout');
+const NoEpisodesView = require('./NoEpisodesView');
+const tpl = require('./SeriesDetails.hbs');
 
 module.exports = Marionette.LayoutView.extend({
   template: tpl,
@@ -41,22 +39,24 @@ module.exports = Marionette.LayoutView.extend({
 
   initialize() {
     this.seriesCollection = SeriesCollection;
-    // this.seriesCollection.shadowCollection.bindSignalR();
+    // this.seriesCollection.shadowCollection;
+
+    const seriesId = this.model.id;
 
     this.seasonCollection = new SeasonCollection(this.model.get('seasons'));
-    this.episodeCollection = new EpisodeCollection({ seriesId: this.model.id }).bindSignalR();
-    this.episodeFileCollection = new EpisodeFileCollection({ seriesId: this.model.id }).bindSignalR();
+    this.episodeCollection = new EpisodeCollection({ seriesId });
+    this.episodeFileCollection = new EpisodeFileCollection({ seriesId });
 
     reqres.setHandler(reqres.Requests.GetEpisodeFileById, (episodeFileId) => {
       return this.episodeFileCollection.get(episodeFileId);
     });
 
-    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, (seriesId, seasonNumber) => {
-      if (this.model.get('id') !== seriesId) {
+    reqres.setHandler(reqres.Requests.GetAlternateNameBySeasonNumber, (_seriesId, seasonNumber) => {
+      if (seriesId !== _seriesId) {
         return [];
       }
 
-      return _.where(this.model.get('alternateTitles'), { seasonNumber: seasonNumber });
+      return _.where(this.model.get('alternateTitles'), { seasonNumber });
     });
 
     this.listenTo(this.model, 'change:monitored', this._setMonitoredState);
@@ -106,12 +106,12 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   onMonitoredClick() {
-    var savePromise = this.model.save('monitored', !this.model.get('monitored'), { wait: true });
+    const savePromise = this.model.save('monitored', !this.model.get('monitored'), { wait: true });
     this.ui.monitored.spinForPromise(savePromise);
   },
 
   _setMonitoredState() {
-    var monitored = this.model.get('monitored');
+    const monitored = this.model.get('monitored');
 
     this.ui.monitored.removeAttr('data-idle-icon');
     this.ui.monitored.removeClass('fa-spin icon-sonarr-spinner');
@@ -169,7 +169,7 @@ module.exports = Marionette.LayoutView.extend({
 
   _updateSeasons() {
     if (!this.showingSeasons && this.episodeCollection.length) {
-      var seasonCollectionView = new SeasonCollectionView({
+      const seasonCollectionView = new SeasonCollectionView({
         collection: this.seasonCollection,
         episodeCollection: this.episodeCollection,
         series: this.model
@@ -200,7 +200,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   onEditFileClick() {
-    var view = new EpisodeFileEditorLayout({
+    const view = new EpisodeFileEditorLayout({
       series: this.model,
       episodeCollection: this.episodeCollection
     });
@@ -209,7 +209,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       items: [
         {
           tooltip: 'Update series info and scan disk',
@@ -248,7 +248,7 @@ module.exports = Marionette.LayoutView.extend({
           callback: this.onEditClick
         },
         {
-          tooltip: 'Delete ' + this.model.get('title'),
+          tooltip: `Delete ${this.model.get('title')}`,
           icon: 'icon-sonarr-delete-item',
           callback: this.onDeleteClick
         }
@@ -257,7 +257,7 @@ module.exports = Marionette.LayoutView.extend({
 
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
-      actions: actions
+      actions
     });
   }
 });

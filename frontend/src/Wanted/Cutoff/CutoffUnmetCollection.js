@@ -1,11 +1,11 @@
-var _ = require('underscore');
-var EpisodeModel = require('Series/EpisodeModel');
-var PagableCollection = require('backbone.paginator');
-var AsFilteredCollection = require('Mixins/AsFilteredCollection');
-var AsSortedCollection = require('Mixins/AsSortedCollection');
-var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+const EpisodeModel = require('Series/EpisodeModel');
+const PagableCollection = require('backbone.paginator');
+const AsFilteredCollection = require('Mixins/AsFilteredCollection');
+const AsSortedCollection = require('Mixins/AsSortedCollection');
+const AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-var Collection = PagableCollection.extend({
+let CutoffUnmetCollection = PagableCollection.extend({
   url: '/wanted/cutoff',
   model: EpisodeModel,
   tableName: 'wanted.cutoff',
@@ -56,7 +56,8 @@ var Collection = PagableCollection.extend({
   }
 });
 
-Collection = AsFilteredCollection.call(Collection);
-Collection = AsSortedCollection.call(Collection);
+CutoffUnmetCollection = AsFilteredCollection.call(CutoffUnmetCollection);
+CutoffUnmetCollection = AsSortedCollection.call(CutoffUnmetCollection);
+asSignalRCollection.call(CutoffUnmetCollection.prototype);
 
-module.exports = AsPersistedStateCollection.call(Collection);
+module.exports = AsPersistedStateCollection.call(CutoffUnmetCollection);

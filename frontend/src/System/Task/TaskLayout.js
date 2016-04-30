@@ -1,12 +1,12 @@
-var Marionette = require('marionette');
-var TableView = require('Table/TableView');
-var TaskRow = require('./TaskRow');
-var TaskCollection = require('./TaskCollection');
-var LoadingView = require('Shared/LoadingView');
-require('Mixins/backbone.signalr.mixin');
+const Marionette = require('marionette');
+const TableView = require('Table/TableView');
+const TaskRow = require('./TaskRow');
+const TaskCollection = require('./TaskCollection');
+const LoadingView = require('Shared/LoadingView');
+const tpl = require('./TaskLayout.hbs');
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Task/TaskLayoutTemplate',
+  template: tpl,
 
   regions: {
     tasks: '#x-tasks'
@@ -38,7 +38,7 @@ module.exports = Marionette.LayoutView.extend({
   initialize() {
     this.taskCollection = new TaskCollection();
 
-    this.taskCollection.bindSignalR();
+    this.taskCollection;
   },
 
   onRender() {

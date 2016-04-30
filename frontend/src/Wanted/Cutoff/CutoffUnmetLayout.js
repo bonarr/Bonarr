@@ -1,20 +1,19 @@
-var _ = require('underscore');
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var CutoffUnmetCollection = require('./CutoffUnmetCollection');
-var SelectAllCell = require('Cells/SelectAllCell');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var EpisodeStatusCell = require('Cells/EpisodeStatusCell');
-var GridPager = require('Shared/Grid/Pager');
-var LoadingView = require('Shared/LoadingView');
-var Messenger = require('Shared/Messenger');
-var CommandController = require('Commands/CommandController');
+const _ = require('underscore');
+const vent = require('vent');
+const Marionette = require('marionette');
+const Backgrid = require('backgrid');
+const CutoffUnmetCollection = require('./CutoffUnmetCollection');
+const SelectAllCell = require('Cells/SelectAllCell');
+const SeriesTitleCell = require('Cells/SeriesTitleCell');
+const EpisodeNumberCell = require('Cells/EpisodeNumberCell');
+const EpisodeTitleCell = require('Cells/EpisodeTitleCell');
+const RelativeDateCell = require('Cells/RelativeDateCell');
+const EpisodeStatusCell = require('Cells/EpisodeStatusCell');
+const GridPager = require('Shared/Grid/Pager');
+const LoadingView = require('Shared/LoadingView');
+const Messenger = require('Shared/Messenger');
+const CommandController = require('Commands/CommandController');
 require('backgrid.selectall');
-require('Mixins/backbone.signalr.mixin');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'Wanted/Cutoff/CutoffUnmetLayoutTemplate',
@@ -67,7 +66,7 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.collection = new CutoffUnmetCollection().bindSignalR({ updateOnly: true });
+    this.collection = new CutoffUnmetCollection();
 
     this.listenTo(this.collection, 'sync', this._showTable);
     this._showActionBar();
@@ -94,7 +93,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       items: [
         {
           tooltip: 'Search Selected',
@@ -105,7 +104,7 @@ module.exports = Marionette.LayoutView.extend({
       ]
     };
 
-    var filteringOptions = {
+    const filteringOptions = {
       storeState: false,
       menuKey: 'wanted.filterMode',
       defaultAction: 'monitored',
@@ -126,16 +125,16 @@ module.exports = Marionette.LayoutView.extend({
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
       collection: this.collection,
-      actions: actions,
+      actions,
       filtering: filteringOptions
     });
   },
 
   _setFilter(buttonContext) {
-    var mode = buttonContext.model.get('key');
+    const mode = buttonContext.model.get('key');
 
     this.collection.state.currentPage = 1;
-    var promise = this.collection.setFilterMode(mode);
+    const promise = this.collection.setFilterMode(mode);
 
     if (buttonContext) {
       buttonContext.ui.icon.spinForPromise(promise);
@@ -143,7 +142,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _searchSelected() {
-    var selected = this.cutoffGrid.getSelectedModels();
+    const selected = this.cutoffGrid.getSelectedModels();
 
     if (selected.length === 0) {
       Messenger.show({
@@ -154,7 +153,7 @@ module.exports = Marionette.LayoutView.extend({
       return;
     }
 
-    var ids = _.pluck(selected, 'id');
+    const ids = _.pluck(selected, 'id');
 
     CommandController.execute('episodeSearch', {
       name: 'episodeSearch',

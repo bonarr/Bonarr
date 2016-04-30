@@ -1,19 +1,20 @@
-var Backbone = require('backbone');
-var moment = require('moment');
-var EpisodeModel = require('Series/EpisodeModel');
+const Backbone = require('backbone');
+const moment = require('moment');
+const EpisodeModel = require('Series/EpisodeModel');
+const asSignalRCollection = require('Mixins/Collection/asSignalRCollection');
 
-module.exports = Backbone.Collection.extend({
+const UpcomingCollection = Backbone.Collection.extend({
   url: '/calendar',
   model: EpisodeModel,
 
   comparator(model1, model2) {
-    var airDate1 = model1.get('airDateUtc');
-    var date1 = moment(airDate1);
-    var time1 = date1.unix();
+    const airDate1 = model1.get('airDateUtc');
+    const date1 = moment(airDate1);
+    const time1 = date1.unix();
 
-    var airDate2 = model2.get('airDateUtc');
-    var date2 = moment(airDate2);
-    var time2 = date2.unix();
+    const airDate2 = model2.get('airDateUtc');
+    const date2 = moment(airDate2);
+    const time2 = date2.unix();
 
     if (time1 < time2) {
       return -1;
@@ -26,3 +27,7 @@ module.exports = Backbone.Collection.extend({
     return 0;
   }
 });
+
+asSignalRCollection.apply(UpcomingCollection.prototype);
+
+module.exports = UpcomingCollection;

@@ -1,18 +1,18 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var EmptyView = require('../Index/EmptyView');
-var SeriesCollection = require('../SeriesCollection');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var ProfileCell = require('Cells/ProfileCell');
-var SeriesStatusCell = require('Cells/SeriesStatusCell');
-var SeasonFolderCell = require('Cells/SeasonFolderCell');
-var SelectAllCell = require('Cells/SelectAllCell');
-var FooterView = require('./SeriesEditorFooterView');
-require('Mixins/backbone.signalr.mixin');
+const vent = require('vent');
+const Marionette = require('marionette');
+const Backgrid = require('backgrid');
+const EmptyView = require('../Index/EmptyView');
+const SeriesCollection = require('../SeriesCollection');
+const SeriesTitleCell = require('Cells/SeriesTitleCell');
+const ProfileCell = require('Cells/ProfileCell');
+const SeriesStatusCell = require('Cells/SeriesStatusCell');
+const SeasonFolderCell = require('Cells/SeasonFolderCell');
+const SelectAllCell = require('Cells/SelectAllCell');
+const FooterView = require('./SeriesEditorFooterView');
+const tpl = require('./SeriesEditorLayout.hbs');
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'Series/Editor/SeriesEditorLayoutTemplate',
+  template: tpl,
 
   regions: {
     seriesRegion: '#x-series-editor'
@@ -68,7 +68,7 @@ module.exports = Marionette.LayoutView.extend({
   initialize() {
     this.seriesCollection = SeriesCollection;
     // this.seriesCollection = SeriesCollection.clone();
-    // this.seriesCollection.shadowCollection.bindSignalR();
+    // this.seriesCollection.shadowCollection;
     this.listenTo(this.seriesCollection, 'save', this.render);
 
     this._showActionBar();
@@ -97,7 +97,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       items: [
         {
           title: 'Update Library',
@@ -109,7 +109,7 @@ module.exports = Marionette.LayoutView.extend({
       ]
     };
 
-    var filteringOptions = {
+    const filteringOptions = {
       type: 'radio',
       storeState: true,
       menuKey: 'serieseditor.filterMode',
@@ -141,7 +141,7 @@ module.exports = Marionette.LayoutView.extend({
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
       collection: this.seriesCollection,
-      actions: actions,
+      actions,
       filtering: filteringOptions
     });
   },

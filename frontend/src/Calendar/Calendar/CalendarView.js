@@ -11,7 +11,6 @@ const CalendarDayCollection = require('./Day/CalendarDayCollection');
 const CalendarDayModel = require('./Day/CalendarDayModel');
 const CalendarDayHeaderView = require('./Day/CalendarDayHeaderView');
 
-require('Mixins/backbone.signalr.mixin');
 require('jquery.easypiechart');
 require('momentRange');
 
@@ -47,7 +46,7 @@ module.exports = Marionette.LayoutView.extend({
 
   initialize() {
     this.showUnmonitored = Config.getValue('calendar.show', 'monitored') === 'all';
-    this.collection = new CalendarCollection().bindSignalR({ updateOnly: true });
+    this.collection = new CalendarCollection();
     this.dayCollection = new CalendarDayCollection();
 
     // TODO: Make sure this doesn't re-render the entire calendar when one event is updated
