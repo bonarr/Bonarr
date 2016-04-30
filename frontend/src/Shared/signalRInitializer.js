@@ -1,5 +1,6 @@
 const $ = require('jquery');
 const vent = require('vent');
+// const AsSignalRCollection = require('Mixins/Collection/AsSignalRCollection');
 const Messenger = require('Shared/Messenger');
 
 require('signalR');
@@ -21,8 +22,8 @@ function getStatus(status) {
   }
 }
 
-module.exports = {
-  appInitializer() {
+const signalRInitializer = {
+  init() {
     console.log('starting signalR');
 
     let tryingToReconnect = false;
@@ -72,7 +73,10 @@ module.exports = {
     });
 
     this.signalRconnection.start({ transport: ['longPolling'] });
+    // AsSignalRCollection.apply(backbone.Collection.prototype);
 
     return this;
   }
 };
+
+module.exports = signalRInitializer;

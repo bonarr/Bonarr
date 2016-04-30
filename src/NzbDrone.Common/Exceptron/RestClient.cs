@@ -59,9 +59,7 @@ namespace NzbDrone.Common.Exceptron
 
         public static string ReadResponse(WebResponse webResponse)
         {
-            if (webResponse == null) return string.Empty;
-
-            var responseStream = webResponse.GetResponseStream();
+            var responseStream = webResponse?.GetResponseStream();
 
             if (responseStream == null) return string.Empty;
             

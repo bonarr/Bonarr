@@ -1,15 +1,15 @@
-var $ = require('jquery');
-var Marionette = require('marionette');
-var moment = require('moment');
-var CalendarCollection = require('../CalendarCollection');
-var UiSettings = require('Shared/UiSettingsModel');
-var Config = require('Config');
-var CalendarAgendaCollectionView = require('./Agenda/CalendarAgendaCollectionView');
-var CalendarDayCollectionView = require('./Day/CalendarDayCollectionView');
-var CalendarDayEventCollection = require('./Day/CalendarDayEventCollection');
-var CalendarDayCollection = require('./Day/CalendarDayCollection');
-var CalendarDayModel = require('./Day/CalendarDayModel');
-var CalendarDayHeaderView = require('./Day/CalendarDayHeaderView');
+const $ = require('jquery');
+const Marionette = require('marionette');
+const moment = require('moment');
+const CalendarCollection = require('../CalendarCollection');
+const UiSettings = require('Shared/UiSettingsModel');
+const Config = require('Config');
+const CalendarAgendaCollectionView = require('./Agenda/CalendarAgendaCollectionView');
+const CalendarDayCollectionView = require('./Day/CalendarDayCollectionView');
+const CalendarDayEventCollection = require('./Day/CalendarDayEventCollection');
+const CalendarDayCollection = require('./Day/CalendarDayCollection');
+const CalendarDayModel = require('./Day/CalendarDayModel');
+const CalendarDayHeaderView = require('./Day/CalendarDayHeaderView');
 
 require('Mixins/backbone.signalr.mixin');
 require('jquery.easypiechart');
@@ -81,17 +81,17 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _getViewName() {
-    var defaultView = this._isMobile ? 'day' : 'week';
+    const defaultView = this._isMobile ? 'day' : 'week';
 
     return Config.getValue(this.storageKey, defaultView);
   },
 
   _getDates() {
-    var view = this.view;
-    var time = this.time;
-    var weekName = this.firstDayOfWeek === 0 ? 'week' : 'isoWeek';
-    var start = time.clone().startOf('day');
-    var end = time.clone().endOf('day');
+    const view = this.view;
+    const weekName = this.firstDayOfWeek === 0 ? 'week' : 'isoWeek';
+    let time = this.time;
+    let start = time.clone().startOf('day');
+    let end = time.clone().endOf('day');
 
     if (view === 'week') {
       start = time.clone().startOf(weekName);
@@ -109,8 +109,8 @@ module.exports = Marionette.LayoutView.extend({
       end = time.clone().endOf('month');
     }
 
-    var range = moment.range(start, end);
-    var days = [];
+    const range = moment.range(start, end);
+    const days = [];
 
     range.by('days', (day) => {
       days.push(day);
@@ -135,9 +135,9 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showCalendar() {
-    var dayFormat = 'YYYY-MM-DD';
+    const dayFormat = 'YYYY-MM-DD';
 
-    var groupedEvents = this.collection.groupBy((model) => {
+    const groupedEvents = this.collection.groupBy((model) => {
       return moment(model.get('airDateUtc')).format(dayFormat);
     });
 
@@ -194,11 +194,11 @@ module.exports = Marionette.LayoutView.extend({
       return 'Agenda';
     }
 
-    var startDate = this.dates.start;
-    var endDate = this.dates.end;
+    const startDate = this.dates.start;
+    const endDate = this.dates.end;
 
-    var start = 'MMM D YYYY';
-    var end = 'MMM D YYYY';
+    let start = 'MMM D YYYY';
+    let end = 'MMM D YYYY';
 
     if (startDate.isSame(endDate, 'month')) {
       start = 'MMM D';
@@ -214,8 +214,8 @@ module.exports = Marionette.LayoutView.extend({
   _onViewClick(event) {
     event.preventDefault();
 
-    var $target = $(event.target);
-    var view = $target.data('view');
+    const $target = $(event.target);
+    const view = $target.data('view');
 
     if (view !== this.view) {
       this._changeView(view);
@@ -223,8 +223,8 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _onNavigateClick(event) {
-    var $target = $(event.target).closest('.x-navigate');
-    var navigate = $target.data('navigate');
+    const $target = $(event.target).closest('.x-navigate');
+    const navigate = $target.data('navigate');
 
     if ($target.hasClass('disabled')) {
       return;
@@ -256,7 +256,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _disableButtons() {
-    var showingForecastView = this.view === 'forecast';
+    const showingForecastView = this.view === 'forecast';
 
     this.ui.previous.toggleClass('disabled', showingForecastView);
     this.ui.next.toggleClass('disabled', showingForecastView);

@@ -1,32 +1,32 @@
 const $ = require('jquery');
 const Backbone = require('backbone');
 const Marionette = require('marionette');
-const RouteBinder = require('./jQuery/RouteBinder');
-const SignalRBroadcaster = require('./Shared/SignalRBroadcaster');
-const NavbarLayout = require('./Navbar/NavbarLayout');
-const SidebarLayout = require('./Sidebar/SidebarLayout');
+const RouteBinder = require('jQuery/RouteBinder');
+const signalRInitializer = require('Shared/signalRInitializer');
+const NavbarLayout = require('Navbar/NavbarLayout');
+const SidebarLayout = require('Sidebar/SidebarLayout');
 const AppLayout = require('./AppLayout');
-const SeriesController = require('./Series/SeriesController');
-const AddSeriesController = require('./AddSeries/AddSeriesController');
-const ActivityController = require('./Activity/ActivityController');
-const WantedController = require('./Wanted/WantedController');
-const SettingsController = require('./Settings/SettingsController');
-const SystemController = require('./System/SystemController');
+const AddSeriesController = require('AddSeries/AddSeriesController');
+const ActivityController = require('Activity/ActivityController');
+const WantedController = require('Wanted/WantedController');
+const SettingsController = require('Settings/SettingsController');
+const SystemController = require('System/SystemController');
 const Router = require('./Router');
-const ModalController = require('./Shared/Modal/ModalController');
-const ActionBarController = require('./Sidebar/ActionBar/ActionBarController');
-const UiSettingsController = require('./Shared/UiSettingsController');
-const statusModel = require('./System/statusModel');
-const TagCollection = require('./Tags/TagCollection');
-const UiSettingsModel = require('./Shared/UiSettingsModel');
-const SeriesCollection = require('./Series/SeriesCollection');
+const ModalController = require('Shared/Modal/ModalController');
+const ActionBarController = require('Sidebar/ActionBar/ActionBarController');
+const UiSettingsController = require('Shared/UiSettingsController');
+const statusModel = require('System/statusModel');
+const TagCollection = require('Tags/TagCollection');
+const UiSettingsModel = require('Shared/UiSettingsModel');
+const SeriesController = require('Series/SeriesController');
+const SeriesCollection = require('Series/SeriesCollection');
 
-require('./jQuery/ToTheTop');
-require('./Instrumentation/StringFormat');
-require('./LifeCycle');
-require('./Hotkeys/Hotkeys');
-require('./Shared/piwikCheck');
-require('./Shared/VersionChangeMonitor');
+require('jQuery/ToTheTop');
+require('Instrumentation/StringFormat');
+require('LifeCycle');
+require('Hotkeys/Hotkeys');
+require('Shared/piwikCheck');
+require('Shared/VersionChangeMonitor');
 
 new SeriesController();
 new AddSeriesController();
@@ -53,7 +53,7 @@ const preloadPromise = $.when(
 );
 
 preloadPromise.done(() => {
-  app.addInitializer(SignalRBroadcaster.appInitializer, { app });
+  app.addInitializer(signalRInitializer.init, { app });
   app.addInitializer(() => {
     Backbone.history.start({
       pushState: true,
