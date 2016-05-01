@@ -5,7 +5,7 @@
     </div>
     <div class="header-info">
       <div class="visible-lg poster">
-        {{posterHelper 500}}
+        {{poster size=500}}
         {{#if_eq status compare="ended"}}
           <span class="badge ended-badge">Ended</span>
         {{/if_eq}}
@@ -23,7 +23,7 @@
       <h2>
         {{runtime}} minutes
         {{#if ratings}}
-          {{starRating ratings}}
+          {{heartRating ratings}}
         {{/if}}
       </h2>
 
@@ -34,7 +34,7 @@
         </span>
         <span class="label label-default">
           <i class="icon-sonarr-profile"/>
-          {{profile profileId}}
+          {{profileName profileId}}
         </span>
       </div>
       <div class=" overview">
@@ -42,7 +42,7 @@
       </div>
       {{#if tags}}
         <div class="tags">
-          {{tagDisplay tags}}
+          {{tagDisplayHelper tags}}
         </div>
       {{/if}}
     </div>

@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var SeriesPostersItemView = require('./SeriesPostersItemView');
+const Marionette = require('marionette');
+const SeriesPostersItemView = require('./SeriesPostersItemView');
 
 module.exports = Marionette.CollectionView.extend({
   className: 'series-posters',

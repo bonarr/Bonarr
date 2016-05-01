@@ -1,8 +1,9 @@
 const Marionette = require('marionette');
 const _ = require('underscore');
+const tpl = require('./SeriesHeaderView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Series/Details/SeriesHeaderView',
+  template: tpl,
 
   ui: {
     backdrop: '.backdrop'

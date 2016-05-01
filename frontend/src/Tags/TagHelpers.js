@@ -1,23 +1,16 @@
-var _ = require('underscore');
-var Handlebars = require('handlebars');
-var TagCollection = require('./TagCollection');
+const _ = require('underscore');
+const Handlebars = require('handlebars');
+const TagCollection = require('./TagCollection');
+const tagDisplayHelper = require('Handlebars/Helpers/Tags/tagDisplayHelper');
 
-Handlebars.registerHelper('tagDisplay', function(tags) {
-  var tagLabels = _.map(TagCollection.filter(function(tag) {
-    return _.contains(tags, tag.get('id'));
-  }), function(tag) {
-    return '<span class="label label-info"><i class="icon-sonarr-tag"/>{0}</span>'.format(tag.get('label'));
-  });
+Handlebars.registerHelper('tagDisplay', tagDisplayHelper);
 
-  return new Handlebars.SafeString(tagLabels.join(' '));
-});
-
-Handlebars.registerHelper('genericTagDisplay', function(tags, classes) {
+Handlebars.registerHelper('genericTagDisplay', (tags, classes) => {
   if (!tags) {
     return new Handlebars.SafeString('');
   }
 
-  var tagLabels = _.map(tags.split(','), function(tag) {
+  const tagLabels = _.map(tags.split(','), (tag) => {
     return '<span class="{0}">{1}</span>'.format(classes, tag);
   });
 

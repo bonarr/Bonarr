@@ -8,8 +8,6 @@ require('./Helpers/Series');
 require('./Helpers/Quality');
 require('./Helpers/System');
 require('./Helpers/String');
-require('./Helpers/StarRating');
-require('./Handlebars.Debug');
 
 module.exports = function() {
   this.get = function(templateId) {

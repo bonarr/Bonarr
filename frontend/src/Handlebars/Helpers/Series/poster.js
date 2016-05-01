@@ -4,10 +4,10 @@ const _ = require('underscore');
 const placeholderUrl = `${window.Sonarr.UrlBase}/Content/Images/poster-dark.png`;
 
 function getPosterUrl(images, size) {
-  var posterImage = _.findWhere(images, { coverType: 'poster' });
+  const posterImage = _.findWhere(images, { coverType: 'poster' });
   if (posterImage) {
     // remove protocol.
-    var url = posterImage.url.replace(/^https?\:/, '');
+    let url = posterImage.url.replace(/^https?\:/, '');
     if (size) {
       url = url.replace('poster.jpg', `poster-${size}.jpg`);
     }
