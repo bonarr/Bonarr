@@ -2,7 +2,6 @@
 @import "Content/Layout/media-queries";
 
 .topnavbar {
-
   @media @upto-tablet {
     .navbar-nav {
       margin-top: 5px;
@@ -13,61 +12,61 @@
 
   .navbar-search {
     &:focus, &:hover {
-      color : white;
+      color: white;
     }
 
     .navbar-search-input {
-      display          : inline-block;
-      background-color : transparent;
-      border           : none;
-      border-radius    : 0;
-      border-bottom    : solid 1px white;
-      padding          : 0 6px;
-      line-height      : 22px;
-      height           : 22px;
-      transition       : border .3s ease-out;
-      box-shadow       : none;
-      color            : white;
+      display: inline-block;
+      background-color: transparent;
+      border: none;
+      border-radius: 0;
+      border-bottom: solid 1px white;
+      padding: 0 6px;
+      line-height: 22px;
+      height: 22px;
+      transition: border 0.3s ease-out;
+      box-shadow: none;
+      color: white;
       .placeholder(white);
 
       &:focus {
-        border-bottom : solid 1px transparent;
-        color         : white;
+        border-bottom: solid 1px transparent;
+        color: white;
         .placeholder(transparent);
       }
     }
 
     .twitter-typeahead {
-      width          : inherit;
-      line-height    : 14px;
-      vertical-align : middle;
-      margin-bottom  : -2px;
+      width: inherit;
+      line-height: 14px;
+      vertical-align: middle;
+      margin-bottom: -2px;
 
       .tt-hint {
-        color : #5f5f5f;
+        color: #5f5f5f;
       }
 
       .tt-dropdown-menu {
-        margin-top              : 15px;
-        width                   : 400px;
-        border-top-left-radius  : 0;
-        border-top-right-radius : 0;
+        margin-top: 15px;
+        width: 400px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
 
         @media @upto-tablet {
-          position   : fixed !important;
-          top        : 55px !important;
-          right      : 0 !important;
-          left       : 0 !important;
-          margin     : 0;
+          position: fixed !important;
+          top: 55px !important;
+          right: 0 !important;
+          left: 0 !important;
+          margin: 0;
         }
       }
     }
   }
 
   #bootstrap-size {
-    position : absolute;
-    top      : 15px;
-    left     : 5px;
+    position: absolute;
+    top: 15px;
+    left: 5px;
   }
 
   @media @tablet {

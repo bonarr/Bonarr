@@ -6,21 +6,20 @@
 @import "Content/icon-mixins";
 
 .calendar-layout {
-
-  display : flex;
+  display: flex;
 
   .calendar-container {
-    flex-grow : 1;
+    flex-grow: 1;
   }
 
   .upcoming-container {
-    flex-basis   : auto;
-    padding-left : 20px;
-    width        : 0;
-    display      : none;
+    flex-basis: auto;
+    padding-left: 20px;
+    width: 0;
+    display: none;
 
     @media (min-width: @screen-xl-min) {
-      display : block;
+      display: block;
 
       &.show-upcoming {
         width: 350px;
@@ -72,9 +71,7 @@
     }
   }
 
-  .upcoming .event .status,
-  .calendar .calendar-day .calendar-events .calendar-event,
-  .calendar-legend .legend-label {
+  .upcoming .event .status, .calendar .calendar-day .calendar-events .calendar-event, .calendar-legend .legend-label {
     &.primary {
       border-left-color: @btn-primary-bg;
 
@@ -191,7 +188,6 @@
 
         .calendar-event {
           .clickable();
-
           margin: 2px;
           padding: 5px;
           border: 1px solid @gray;
@@ -206,9 +202,6 @@
             overflow-x: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-          }
-
-          .calendar-event-time {
           }
         }
       }
@@ -320,8 +313,7 @@
 
     .fc-event {
       .clickable;
-
-      color: #777;
+      color: #777777;
       background-color: #f5f5f5;
 
       .status {
@@ -339,7 +331,7 @@
 
     // Highlight today
     .fc-state-highlight {
-      background : #e8e8e8;
+      background: #e8e8e8;
     }
 
     //.past {
@@ -356,7 +348,6 @@
       .view-select {
         .active-icon {
           .pull-right();
-
           display: none;
         }
 
@@ -393,12 +384,12 @@
       }
 
       .status {
-        text-align    : center;
-        display       : inline-block;
-        border-left   : 4px solid #eeeeee;
-        padding-right : 10px;
-        float         : left;
-        height        : 75px;
+        text-align: center;
+        display: inline-block;
+        border-left: 4px solid #eeeeee;
+        padding-right: 10px;
+        float: left;
+        height: 75px;
       }
 
       .episode-title {

@@ -5,7 +5,6 @@
 
 .wrapper {
   > .aside {
-
     display: none;
     position: absolute;
     width: @aside-wd;
@@ -25,7 +24,6 @@
     }
 
     > .nav-floating {
-
       // position: handled from directive
       left: inherit;
       margin-left: @aside-wd;
@@ -57,7 +55,7 @@
       > .aside {
         left: 0;
         .translate3d(-@aside-wd,0,0);
-        .transition-transform(.3s ease);
+        .transition-transform(0.3s ease);
       }
     }
 
@@ -103,7 +101,7 @@
 .started {
   .wrapper {
     > .aside {
-      display : block;
+      display: block;
     }
   }
 }
@@ -121,12 +119,10 @@
   // Items
   .nav {
     > li {
-      > a,
-      > .nav-item {
+      > a, > .nav-item {
         color: @sidebar-item-color;
 
-        &:focus,
-        &:hover {
+        &:focus, &:hover {
           color: @sidebar-item-color-active;
         }
 
@@ -140,10 +136,8 @@
 
 
 
-      &.active,
-      &.open {
-        &,
-        > a {
+      &.active, &.open {
+        &, > a {
           background-color: @sidebar-item-bg-active;
           color: @sidebar-item-color-active;
         }
@@ -152,8 +146,6 @@
           color: @sidebar-icon-color-active;
         }
       }
-
-
     }
   }
 }
@@ -166,19 +158,16 @@
   }
 
   > li {
-    > a,
-    > .nav-item {
+    > a, > .nav-item {
       color: @sidebar-item-color;
 
-      &:focus,
-      &:hover {
+      &:focus, &:hover {
         color: @sidebar-item-color-active;
       }
     }
 
     &.active {
-      > a,
-      > .nav-item {
+      > a, > .nav-item {
         color: @sidebar-icon-color-active;
 
         &:after {
@@ -196,11 +185,10 @@
 .nav-tabs {
   > li {
     &.active > a {
-      color : black;
+      color: black;
 
-      &:hover,
-      &:focus {
-        color : black;
+      &:hover, &:focus {
+        color: black;
       }
     }
   }
