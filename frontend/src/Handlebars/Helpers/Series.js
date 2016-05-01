@@ -91,4 +91,4 @@ Handlebars.registerHelper('seasonCountHelper', function() {
 });
 
 Handlebars.registerHelper('titleWithYear', titleWithYear);
-Handlebars.registerHelper('EpisodeProgressClass', episodeProgressClass);
+Handlebars.registerHelper('episodeProgressClass', episodeProgressClass);

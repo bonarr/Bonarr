@@ -1,6 +1,6 @@
 const _ = require('underscore');
 const reqres = require('reqres');
-const Backbone = require('Backbone');
+const Backbone = require('backbone');
 const QueueCollection = require('Activity/Queue/QueueCollection');
 
 function EpisodeStatusMixin({ prototype: base }) {
