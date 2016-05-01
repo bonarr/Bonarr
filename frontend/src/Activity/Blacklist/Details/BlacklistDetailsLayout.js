@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var BlacklistDetailsView = require('./BlacklistDetailsView');
+const Marionette = require('marionette');
+const BlacklistDetailsView = require('./BlacklistDetailsView');
 
 module.exports = Marionette.LayoutView.extend({
   template: 'Activity/Blacklist/Details/BlacklistDetailsLayoutTemplate',
