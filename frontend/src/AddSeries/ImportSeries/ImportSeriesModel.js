@@ -1,5 +1,5 @@
 const Backbone = require('backbone');
-const profileCollection = require('Profile/ProfileCollection');
+const profileCollection = require('Profile/profileCollection');
 
 const ImportSeriesModel = Backbone.Model.extend({
 

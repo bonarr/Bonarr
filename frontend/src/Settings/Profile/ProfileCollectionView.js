@@ -1,38 +1,39 @@
-var _ = require('underscore');
-var vent = require('vent');
-var Marionette = require('marionette');
-var ProfileView = require('./ProfileView');
-var EditProfileView = require('./Edit/EditProfileLayout');
-var ProfileCollection = require('./ProfileSchemaCollection');
+const _ = require('underscore');
+const vent = require('vent');
+const Marionette = require('marionette');
+const ProfileView = require('./ProfileView');
+const EditProfileView = require('./Edit/EditProfileLayout');
+const ProfileSchemaCollection = require('./ProfileSchemaCollection');
+const tpl = require('./ProfileCollectionView.hbs');
 
 module.exports = Marionette.CompositeView.extend({
   childView: ProfileView,
   childViewContainer: '.profiles',
-  template: 'Settings/Profile/ProfileCollectionView',
+  template: tpl,
 
   ui: {
     'addCard': '.x-add-card'
   },
 
   events: {
-    'click .x-add-card': '_addProfile'
+    'click .x-add-card': 'onAddClick'
   },
 
   appendHtml(collectionView, childView, index) {
     collectionView.ui.addCard.before(childView.el);
   },
 
-  _addProfile() {
-    var self = this;
-    var schemaCollection = new ProfileCollection();
-    schemaCollection.fetch({
+  onAddClick() {
+    const self = this;
+    const profileSchemaCollection = new ProfileSchemaCollection();
+    profileSchemaCollection.fetch({
       success(collection) {
-        var model = _.first(collection.models);
+        const model = _.first(collection.models);
         model.set('id', undefined);
         model.set('name', '');
         model.collection = self.collection;
-        var view = new EditProfileView({
-          model: model,
+        const view = new EditProfileView({
+          model,
           profileCollection: self.collection
         });
 
