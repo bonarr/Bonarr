@@ -1,7 +1,7 @@
-var NzbDroneController = require('Shared/NzbDroneController');
-var seriesCollection = require('./seriesCollection');
-var SeriesIndexLayout = require('./Index/SeriesIndexLayout');
-var SeriesDetailsLayout = require('./Details/SeriesDetailsLayout');
+const NzbDroneController = require('Shared/NzbDroneController');
+const seriesCollection = require('./seriesCollection');
+const SeriesIndexLayout = require('./Index/SeriesIndexLayout');
+const SeriesDetailsLayout = require('./Details/SeriesDetailsLayout');
 
 module.exports = NzbDroneController.extend({
   initialize() {
@@ -26,6 +26,7 @@ module.exports = NzbDroneController.extend({
       this.setTitle(series.get('title'));
       this.showMainRegion(new SeriesDetailsLayout({ model: series }));
     } else {
+      console.want(`Series ${query} not found.`, series);
       this.showNotFound();
     }
   }

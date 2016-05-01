@@ -5,7 +5,7 @@ const PosterCollectionView = require('./Posters/SeriesPostersCollectionView');
 const OverViewCollectionView = require('./Overview/SeriesOverviewCollectionView');
 const TableCollectionView = require('./Table/SeriesTableLayout');
 const EmptyView = require('./EmptyView');
-const SeriesCollection = require('../SeriesCollection');
+const seriesCollection = require('../seriesCollection');
 const FooterView = require('./FooterView');
 const FooterModel = require('./FooterModel');
 const tpl = require('./SeriesIndexLayout.hbs');
@@ -51,7 +51,7 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
   },
 
   _renderView(view) {
-    if (SeriesCollection.length === 0) {
+    if (seriesCollection.length === 0) {
       this.seriesRegion.show(new EmptyView());
     } else {
       this.seriesRegion.show(view);
@@ -178,14 +178,14 @@ const SeriesIndexLayout = Marionette.LayoutView.extend({
 
   _showFooter() {
     const footerModel = new FooterModel();
-    const series = SeriesCollection.models.length;
+    const series = seriesCollection.models.length;
     let episodes = 0;
     let episodeFiles = 0;
     let ended = 0;
     let continuing = 0;
     let monitored = 0;
 
-    _.each(SeriesCollection.models, (model) => {
+    _.each(seriesCollection.models, (model) => {
       episodes += model.get('episodeCount');
       episodeFiles += model.get('episodeFileCount');
 

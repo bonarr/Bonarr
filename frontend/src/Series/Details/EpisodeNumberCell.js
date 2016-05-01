@@ -1,7 +1,7 @@
 var Marionette = require('marionette');
 var NzbDroneCell = require('Cells/NzbDroneCell');
 var reqres = require('reqres');
-var SeriesCollection = require('../SeriesCollection');
+var seriesCollection = require('../seriesCollection');
 
 module.exports = NzbDroneCell.extend({
   className: 'episode-number-cell',
@@ -11,7 +11,7 @@ module.exports = NzbDroneCell.extend({
     this.$el.empty();
     this.$el.html(this.model.get('episodeNumber'));
 
-    var series = SeriesCollection.get(this.model.get('seriesId'));
+    var series = seriesCollection.get(this.model.get('seriesId'));
 
     if (series.get('seriesType') === 'anime' && this.model.has('absoluteEpisodeNumber')) {
       this.$el.html('{0} ({1})'.format(this.model.get('episodeNumber'), this.model.get('absoluteEpisodeNumber')));

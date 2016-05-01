@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var ToggleCell = require('./ToggleCell');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 var Messenger = require('Shared/Messenger');
 
 module.exports = ToggleCell.extend({
@@ -9,7 +9,7 @@ module.exports = ToggleCell.extend({
   _originalOnClick: ToggleCell.prototype._onClick,
 
   _onClick(e) {
-    var series = SeriesCollection.get(this.model.get('seriesId'));
+    var series = seriesCollection.get(this.model.get('seriesId'));
 
     if (!series.get('monitored')) {
 

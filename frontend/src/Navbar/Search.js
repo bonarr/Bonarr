@@ -1,12 +1,12 @@
 var _ = require('underscore');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 require('typeahead');
 
 var substringMatcher = function() {
   return function findMatches(q, cb) {
-    var matches = _.select(SeriesCollection.toJSON(), function(series) {
+    var matches = _.select(seriesCollection.toJSON(), function(series) {
       return series.title.toLowerCase().indexOf(q.toLowerCase()) > -1;
     });
     cb(_.take(matches, 10));

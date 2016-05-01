@@ -19,7 +19,7 @@ const statusModel = require('System/statusModel');
 const TagCollection = require('Tags/TagCollection');
 const UiSettingsModel = require('Shared/UiSettingsModel');
 const SeriesController = require('Series/SeriesController');
-const SeriesCollection = require('Series/SeriesCollection');
+const seriesCollection = require('Series/seriesCollection');
 
 require('jQuery/ToTheTop');
 require('Instrumentation/StringFormat');
@@ -49,7 +49,7 @@ const preloadPromise = $.when(
   statusModel.fetch(),
   TagCollection.fetch(),
   UiSettingsModel.fetch(),
-  SeriesCollection.fetch()
+  seriesCollection.fetch()
 );
 
 preloadPromise.done(() => {

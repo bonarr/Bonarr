@@ -2,7 +2,7 @@ const vent = require('vent');
 const Backgrid = require('backgrid');
 const Marionette = require('marionette');
 const EmptyView = require('Series/Index/EmptyView');
-const SeriesCollection = require('Series/SeriesCollection');
+const seriesCollection = require('Series/seriesCollection');
 const FooterView = require('./SeasonPassFooterView');
 const SelectAllCell = require('Cells/SelectAllCell');
 const SeriesStatusCell = require('Cells/SeriesStatusCell');
@@ -44,7 +44,7 @@ const SeasonPassLayout = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.seriesCollection = SeriesCollection.clone();
+    this.seriesCollection = seriesCollection.clone();
     this.listenTo(this.seriesCollection, 'seasonpass:saved', this.render);
     this._showActionBar();
   },

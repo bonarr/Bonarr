@@ -1,5 +1,5 @@
 var Backbone = require('backbone');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 
 module.exports = Backbone.Model.extend({
   // Hack to deal with Backbone 1.0's bug
@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
   },
 
   parse(model) {
-    model.series = SeriesCollection.get(model.seriesId);
+    model.series = seriesCollection.get(model.seriesId);
     return model;
   }
 });

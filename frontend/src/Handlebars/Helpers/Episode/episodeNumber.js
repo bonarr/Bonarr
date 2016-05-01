@@ -1,6 +1,6 @@
 const moment = require('moment');
 const FormatHelpers = require('Shared/FormatHelpers');
-const seriesCollection = require('Series/SeriesCollection');
+const seriesCollection = require('Series/seriesCollection');
 
 function episodeNumber() {
   const series = seriesCollection.get(this.seriesId);

@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Marionette = require('marionette');
 var TableView = require('Table/TableView');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 var SelectSeriesRow = require('./SelectSeriesRow');
 
 module.exports = Marionette.LayoutView.extend({
@@ -23,7 +23,7 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.seriesCollection = SeriesCollection.clone();
+    this.seriesCollection = seriesCollection.clone();
     this._setModelCollection();
 
     this.listenTo(this.seriesCollection, 'modelselected', this._onSelected);

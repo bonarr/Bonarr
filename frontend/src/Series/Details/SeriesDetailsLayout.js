@@ -4,7 +4,7 @@ const vent = require('vent');
 const reqres = require('reqres');
 const Marionette = require('marionette');
 const Backbone = require('backbone');
-const SeriesCollection = require('Series/SeriesCollection');
+const seriesCollection = require('Series/seriesCollection');
 const EpisodeCollection = require('Series/EpisodeCollection');
 const EpisodeFileCollection = require('Series/EpisodeFileCollection');
 const SeasonCollection = require('Series/SeasonCollection');
@@ -16,7 +16,7 @@ const EpisodeFileEditorLayout = require('EpisodeFile/Editor/EpisodeFileEditorLay
 const NoEpisodesView = require('./NoEpisodesView');
 const tpl = require('./SeriesDetails.hbs');
 
-module.exports = Marionette.LayoutView.extend({
+const SeriesDetailsLayout = Marionette.LayoutView.extend({
   template: tpl,
 
   regions: {
@@ -38,7 +38,7 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   initialize() {
-    this.seriesCollection = SeriesCollection;
+    this.seriesCollection = seriesCollection;
     // this.seriesCollection.shadowCollection;
 
     const seriesId = this.model.id;
@@ -261,3 +261,5 @@ module.exports = Marionette.LayoutView.extend({
     });
   }
 });
+
+module.exports = SeriesDetailsLayout;

@@ -1,5 +1,5 @@
-var Marionette = require('marionette');
-var _ = require('underscore');
+const Marionette = require('marionette');
+const _ = require('underscore');
 
 module.exports = Marionette.ItemView.extend({
   template: 'Series/Details/SeriesHeaderView',
@@ -36,7 +36,7 @@ module.exports = Marionette.ItemView.extend({
   onRender() {
     const fanArt = _.findWhere(this.model.get('images'), { coverType: 'fanart' });
     if (fanArt) {
-      this.ui.backdrop.css({ 'background-image': 'url("' + fanArt.url + '")' });
+      this.ui.backdrop.css({ 'background-image': `url("${fanArt.url}")` });
     }
   }
 });

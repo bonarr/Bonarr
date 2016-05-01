@@ -2,7 +2,7 @@ const vent = require('vent');
 const Marionette = require('marionette');
 const Backgrid = require('backgrid');
 const EmptyView = require('../Index/EmptyView');
-const SeriesCollection = require('../SeriesCollection');
+const seriesCollection = require('../seriesCollection');
 const SeriesTitleCell = require('Cells/SeriesTitleCell');
 const ProfileCell = require('Cells/ProfileCell');
 const SeriesStatusCell = require('Cells/SeriesStatusCell');
@@ -66,8 +66,8 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.seriesCollection = SeriesCollection;
-    // this.seriesCollection = SeriesCollection.clone();
+    this.seriesCollection = seriesCollection;
+    // this.seriesCollection = seriesCollection.clone();
     // this.seriesCollection.shadowCollection;
     this.listenTo(this.seriesCollection, 'save', this.render);
 

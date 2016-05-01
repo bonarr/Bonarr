@@ -5,7 +5,7 @@ const Marionette = require('marionette');
 const profileCollection = require('Profile/profileCollection');
 const RootFolders = require('../RootFolders/RootFolderCollection');
 const RootFolderLayout = require('../RootFolders/RootFolderLayout');
-const SeriesCollection = require('Series/SeriesCollection');
+const seriesCollection = require('Series/seriesCollection');
 const Config = require('Config');
 const Messenger = require('Shared/Messenger');
 const AsValidatedView = require('Mixins/AsValidatedView');
@@ -169,7 +169,7 @@ const AddSeriesModal = Marionette.ItemView.extend({
   },
 
   onSeriesAdded() {
-    SeriesCollection.add(this.model);
+    seriesCollection.add(this.model);
     this.destroy();
 
     Messenger.show({

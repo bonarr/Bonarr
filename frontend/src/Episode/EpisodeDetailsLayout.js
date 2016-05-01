@@ -2,7 +2,7 @@ var Marionette = require('marionette');
 var SummaryLayout = require('./Summary/EpisodeSummaryLayout');
 var SearchLayout = require('./Search/EpisodeSearchLayout');
 var EpisodeHistoryLayout = require('./History/EpisodeHistoryLayout');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 var Messenger = require('Shared/Messenger');
 
 module.exports = Marionette.LayoutView.extend({
@@ -33,7 +33,7 @@ module.exports = Marionette.LayoutView.extend({
   initialize(options) {
     this.templateHelpers.hideSeriesLink = options.hideSeriesLink;
 
-    this.series = SeriesCollection.get(this.model.get('seriesId'));
+    this.series = seriesCollection.get(this.model.get('seriesId'));
     this.templateHelpers.series = this.series.toJSON();
     this.openingTab = options.openingTab || 'summary';
 

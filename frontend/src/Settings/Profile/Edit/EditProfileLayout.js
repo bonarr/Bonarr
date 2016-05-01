@@ -7,7 +7,7 @@ var EditProfileItemView = require('./EditProfileItemView');
 var QualitySortableCollectionView = require('./QualitySortableCollectionView');
 var EditProfileView = require('./EditProfileView');
 var DeleteView = require('../DeleteProfileView');
-var SeriesCollection = require('Series/SeriesCollection');
+var seriesCollection = require('Series/seriesCollection');
 var Config = require('Config');
 var AsEditModalView = require('Mixins/AsEditModalView');
 
@@ -28,7 +28,7 @@ var view = Marionette.LayoutView.extend({
   initialize(options) {
     this.profileCollection = options.profileCollection;
     this.itemsCollection = new Backbone.Collection(_.toArray(this.model.get('items')).reverse());
-    this.listenTo(SeriesCollection, 'all', this._updateDisableStatus);
+    this.listenTo(seriesCollection, 'all', this._updateDisableStatus);
   },
 
   onRender() {
@@ -111,7 +111,7 @@ var view = Marionette.LayoutView.extend({
   },
 
   _isQualityInUse() {
-    return SeriesCollection.where({ 'profileId': this.model.id }).length !== 0;
+    return seriesCollection.where({ 'profileId': this.model.id }).length !== 0;
   }
 });
 module.exports = AsEditModalView.call(view);
