@@ -3,19 +3,22 @@
 /* ========================================================================
    Component: sidebar.less
  ========================================================================== */
+@submenu-header-hg: 40px; // Submenu header when hover collapse sidebar
+@sidebar-item-border-wd: 3px;
+@scrollbar-wd: 17px;
+
+
 @sidebar-bg: @aside-bg;
-@sidebar-item-color: #515253;
+@sidebar-item-color: #e1e2e3;
 @sidebar-item-color-active: @sonarr-blue;
-@sidebar-item-bg-active: darken(@sidebar-bg, 1%);
+@sidebar-item-bg-expanded: darken(@sidebar-bg, 5%);
+@sidebar-item-bg-active: darken(@sidebar-bg, 10%);
 @sidebar-icon-color: inherits;
 @sidebar-icon-color-active: @sonarr-blue;
 @sidebar-bullet-color: rgba(0,0,0,.25);
 @sidebar-bullet-color-active: @sidebar-icon-color-active;
 @sidebar-heading-color: #919da8;
 @sidebar-label-color: @sidebar-item-color;
-@submenu-header-hg: 40px; // Submenu header when hover collapse sidebar
-@sidebar-item-border-wd: 3px;
-@scrollbar-wd: 17px;
 
 .sidebar {
   height: 100%;
@@ -93,10 +96,6 @@
       &.active {
         border-left-color: @sidebar-item-color-active;
       }
-    }
-
-    > li:first-of-type {
-      padding-top: 10px;
     }
 
     .label {

@@ -107,3 +107,101 @@
     }
   }
 }
+
+/* ========================================================================
+   Component: sidebar
+ ========================================================================== */
+.sidebar {
+  background-color: @sidebar-bg;
+
+  .expanded {
+    border-left-color: @sidebar-item-color-active;
+    background-color: @sidebar-item-bg-expanded;
+  }
+  // Items
+  .nav {
+    > li {
+      > a,
+      > .nav-item {
+        color: @sidebar-item-color;
+
+        &:focus,
+        &:hover {
+          color: @sidebar-item-color-active;
+        }
+
+        // Item icon
+        > em {
+          color: @sidebar-icon-color;
+        }
+      }
+
+      // Active item state
+
+
+
+      &.active,
+      &.open {
+        &,
+        > a {
+          background-color: @sidebar-item-bg-active;
+          color: @sidebar-item-color-active;
+        }
+
+        > a > em {
+          color: @sidebar-icon-color-active;
+        }
+      }
+
+
+    }
+  }
+}
+
+.sidebar-subnav {
+  background-color: @sidebar-bg;
+
+  > .sidebar-subnav-header {
+    color: @sidebar-item-color;
+  }
+
+  > li {
+    > a,
+    > .nav-item {
+      color: @sidebar-item-color;
+
+      &:focus,
+      &:hover {
+        color: @sidebar-item-color-active;
+      }
+    }
+
+    &.active {
+      > a,
+      > .nav-item {
+        color: @sidebar-icon-color-active;
+
+        &:after {
+          border-color: @sidebar-bullet-color-active;
+          background-color: @sidebar-bullet-color-active;
+        }
+      }
+    }
+  }
+  // li
+}
+
+// nav-tabs
+
+.nav-tabs {
+  > li {
+    &.active > a {
+      color : black;
+
+      &:hover,
+      &:focus {
+        color : black;
+      }
+    }
+  }
+}

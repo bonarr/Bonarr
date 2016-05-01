@@ -1,5 +1,5 @@
 const Marionette = require('marionette');
-var $ = require('jquery');
+const $ = require('jquery');
 const AppLayout = require('AppLayout');
 const HealthView = require('Health/HealthView');
 const QueueView = require('Activity/Queue/QueueView');
@@ -127,8 +127,8 @@ module.exports = Marionette.LayoutView.extend({
     this._setActive($li);
   },
 
-  _setActive(element) {
-    const $root = element.closest('.x-nav-root');
+  _setActive($element) {
+    const $root = $element.closest('.x-nav-root');
     const $subnav = $root.find('.sidebar-subnav');
 
     if (!$subnav.hasClass('in')) {
@@ -136,9 +136,10 @@ module.exports = Marionette.LayoutView.extend({
       $subnav.addClass('in');
     }
 
-    this.ui.listItems.removeClass('active');
-    element.addClass('active');
-    $root.addClass('active');
+    this.ui.listItems.removeClass('active expanded');
+
+    $element.addClass('active');
+    $root.addClass('expanded');
   },
 
   _removeFloatingNav() {
