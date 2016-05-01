@@ -6,8 +6,8 @@ function startTime(input) {
     return '';
   }
 
-  var time = moment(input);
-  var includeMinutes = time.get('minutes') !== 0;
+  const time = moment(input);
+  const includeMinutes = time.get('minutes') !== 0;
 
   return time.format(UiSettings.time(includeMinutes, false));
 }

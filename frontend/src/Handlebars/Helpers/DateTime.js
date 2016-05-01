@@ -11,6 +11,6 @@ Handlebars.registerHelper('shortDate', shortDate);
 Handlebars.registerHelper('RelativeDate', relativeDate);
 Handlebars.registerHelper('day', day);
 Handlebars.registerHelper('month', month);
-Handlebars.registerHelper('StartTime', startTime);
+Handlebars.registerHelper('startTime', startTime);
 Handlebars.registerHelper('lts', lts);
 Handlebars.registerHelper('formatDate', formatDate);
