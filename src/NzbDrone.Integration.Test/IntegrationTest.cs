@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NLog;
 using NzbDrone.Test.Common;
-using NUnit.Framework;
-using System.IO;
+using Sonarr.Http.ClientSchema;
 
 namespace NzbDrone.Integration.Test
 {
@@ -44,7 +42,7 @@ namespace NzbDrone.Integration.Test
                 Implementation = "Wombles",
                 Name = "Wombles",
                 Protocol = Core.Indexers.DownloadProtocol.Usenet,
-                Fields = new List<Api.ClientSchema.Field>()
+                Fields = new List<Field>()
             });
         }
 
