@@ -1,6 +1,6 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Marionette = require('marionette');
+const _ = require('underscore');
+const $ = require('jquery');
+const Marionette = require('marionette');
 
 const EscKeyCode = 27;
 const $window = $(window);
@@ -9,27 +9,27 @@ const FullScreenModalRegion = Marionette.Region.extend({
   el: '#fullscreen-modal-region',
 
   initialize() {
-    _.bindAll(this, 'destroy', 'onKeypress', 'resizeBody');
+    _.bindAll(this, 'empty', 'onKeypress', 'resizeBody');
     $(document).on('keyup', this.onKeypress);
     const debouncedResize = _.debounce(this.resizeBody, 200);
     $window.resize(debouncedResize);
   },
 
-  destroy() {
+  empty() {
     if (this.$el) {
       this.$el.removeClass('shown');
     }
     this.destroyButtons = null;
 
-    var view = this.currentView;
+    const view = this.currentView;
     if (!view || view.isDestroyed) {
       return;
     }
     // give animation time to finish before killing the html
     this.destroyTimeout = window.setTimeout(() => {
       // make sure we destroy the view we intended to not some future modal.
-      if (this.currentView === view) {
-        Marionette.Region.prototype.destroy.apply(this, arguments);
+      if (!this.currentView || this.currentView === view) {
+        Marionette.Region.prototype.empty.apply(this, arguments);
       }
     }, 1000);
   },
@@ -51,7 +51,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
 
     this.$el.addClass('shown');
     this.destroyButtons = this.$el.find('.x-close');
-    this.destroyButtons.on('click', this.destroy);
+    this.destroyButtons.on('click', this.empty);
 
     this.resizeBody();
     this.listenToOnce(this.currentView, 'destroy', this.onViewClose);
@@ -70,7 +70,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
       if ($target.is('select:focus')) {
         $target.blur();
       } else {
-        this.destroy();
+        this.empty();
       }
 
       event.stopImmediatePropagation();
@@ -79,7 +79,7 @@ const FullScreenModalRegion = Marionette.Region.extend({
   },
 
   onViewClose() {
-    this.destroy();
+    this.empty();
     this.stopListening(this.currentView);
   }
 });
