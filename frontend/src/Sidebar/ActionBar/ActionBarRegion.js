@@ -1,9 +1,9 @@
 const Marionette = require('marionette');
-var $ = require('jquery');
+const $ = require('jquery');
 
 const $body = $('body');
 
-const region = Marionette.Region.extend({
+const ActionBarRegion = Marionette.Region.extend({
   el: '#actionbar-region',
 
   onShow() {
@@ -15,4 +15,4 @@ const region = Marionette.Region.extend({
   }
 });
 
-module.exports = region;
+module.exports = ActionBarRegion;

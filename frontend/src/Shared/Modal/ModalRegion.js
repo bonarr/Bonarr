@@ -1,6 +1,6 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Marionette = require('marionette');
+const _ = require('underscore');
+const $ = require('jquery');
+const Marionette = require('marionette');
 require('bootstrap');
 
 const EscKeyCode = 27;
@@ -15,7 +15,7 @@ const ModalRegion = Marionette.Region.extend({
   },
 
   getEl(selector) {
-    var $el = $(selector);
+    const $el = $(selector);
     $el.on('hide.bs.modal', _.bind(this.onBootstrapHide, this));
     $el.on('show.bs.modal', _.bind(this.onBootstrapShow, this));
     return $el;
@@ -51,7 +51,7 @@ const ModalRegion = Marionette.Region.extend({
   },
 
   onKeypress(event) {
-    var view = this.currentView;
+    const view = this.currentView;
 
     if (!view || view.isDestroyed) {
       return;
