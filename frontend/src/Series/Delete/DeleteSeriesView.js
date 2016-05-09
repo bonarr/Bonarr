@@ -1,7 +1,8 @@
 const Marionette = require('marionette');
+const tpl = require('./DeleteSeriesView.hbs');
 
 module.exports = Marionette.ItemView.extend({
-  template: 'Series/Delete/DeleteSeriesTemplate',
+  template: tpl,
 
   events: {
     'click .x-confirm-delete': 'removeSeries',
