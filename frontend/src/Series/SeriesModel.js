@@ -1,5 +1,5 @@
-var Backbone = require('backbone');
-var _ = require('underscore');
+const Backbone = require('backbone');
+const _ = require('underscore');
 
 module.exports = Backbone.Model.extend({
   urlRoot: '/series',
@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
   },
 
   isExisting() {
-    return !!this.get('added');
+    return !this.isNew();
   },
 
   getRoute() {

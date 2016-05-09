@@ -1,7 +1,7 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
-var SeriesModel = require('Series/SeriesModel');
-var AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
+const _ = require('underscore');
+const Backbone = require('backbone');
+const SeriesModel = require('Series/SeriesModel');
+const AsSelectableCollection = require('Mixins/Collection/AsSelectableCollection');
 
 let SeriesSearchCollection = Backbone.Collection.extend({
   url: '/series/lookup',
@@ -9,10 +9,8 @@ let SeriesSearchCollection = Backbone.Collection.extend({
 
   parse(response) {
     _.each(response, (model) => {
-      model.id = undefined;
-      if (this.unmappedFolderModel) {
-        model.path = this.unmappedFolderModel.get('folder').path;
-      }
+      // make sure we don't have series with id of 0
+      model.id = model.id || undefined;
     });
 
     return response;
