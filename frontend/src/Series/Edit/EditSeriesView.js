@@ -1,14 +1,15 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var profileCollection = require('Profile/profileCollection');
-var AsModelBoundView = require('Mixins/AsModelBoundView');
-var AsValidatedView = require('Mixins/AsValidatedView');
-var AsEditModalView = require('Mixins/AsEditModalView');
+const vent = require('vent');
+const Marionette = require('marionette');
+const profileCollection = require('Profile/profileCollection');
+const AsModelBoundView = require('Mixins/AsModelBoundView');
+const AsValidatedView = require('Mixins/AsValidatedView');
+const AsEditModalView = require('Mixins/AsEditModalView');
+const tpl = require('./EditSeriesView.hbs');
 require('Mixins/TagInput');
 require('Mixins/FileBrowser');
 
-var view = Marionette.ItemView.extend({
-  template: 'Series/Edit/EditSeriesView',
+const EditSeriesView = Marionette.ItemView.extend({
+  template: tpl,
 
   ui: {
     profile: '.x-profile',
@@ -35,15 +36,15 @@ var view = Marionette.ItemView.extend({
   },
 
   _onBeforeSave() {
-    var profileId = this.ui.profile.val();
+    const profileId = this.ui.profile.val();
     this.model.set({
-      profileId: profileId
+      profileId
     });
   },
 
   _onAfterSave() {
     this.trigger('saved');
-    vent.trigger(vent.Commands.CloseFullscreenModal);
+    this.destroy();
   },
 
   _removeSeries() {
@@ -53,8 +54,8 @@ var view = Marionette.ItemView.extend({
   }
 });
 
-AsModelBoundView.call(view);
-AsValidatedView.call(view);
-AsEditModalView.call(view);
+AsModelBoundView.call(EditSeriesView);
+AsValidatedView.call(EditSeriesView);
+AsEditModalView.call(EditSeriesView);
 
-module.exports = view;
+module.exports = EditSeriesView;
