@@ -5,13 +5,13 @@ const RouteBinder = require('jQuery/RouteBinder');
 const signalRInitializer = require('Shared/signalRInitializer');
 const NavbarLayout = require('Navbar/NavbarLayout');
 const SidebarLayout = require('Sidebar/SidebarLayout');
-const AppLayout = require('./AppLayout');
+const appLayout = require('appLayout');
 const AddSeriesController = require('AddSeries/AddSeriesController');
 const ActivityController = require('Activity/ActivityController');
 const WantedController = require('Wanted/WantedController');
 const SettingsController = require('Settings/SettingsController');
 const SystemController = require('System/SystemController');
-const Router = require('./Router');
+const Router = require('Router');
 const ModalController = require('Shared/Modal/ModalController');
 const ActionBarController = require('Sidebar/ActionBar/ActionBarController');
 const UiSettingsController = require('Shared/UiSettingsController');
@@ -61,8 +61,8 @@ preloadPromise.done(() => {
     });
 
     RouteBinder.bind();
-    AppLayout.navbarRegion.show(new NavbarLayout());
-    AppLayout.sidebarRegion.show(new SidebarLayout());
+    appLayout.navbarRegion.show(new NavbarLayout());
+    appLayout.sidebarRegion.show(new SidebarLayout());
     $('body').addClass('started');
   });
 

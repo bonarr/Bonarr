@@ -1,5 +1,5 @@
 const vent = require('vent');
-const AppLayout = require('AppLayout');
+const appLayout = require('appLayout');
 const Marionette = require('marionette');
 const NotFoundView = require('./NotFoundView');
 const Messenger = require('./Messenger');
@@ -60,8 +60,8 @@ module.exports = Marionette.AppRouter.extend({
     if (this.pendingUpdate) {
       window.location.reload();
     } else {
-      AppLayout.fullscreenModalRegion.empty();
-      AppLayout.mainRegion.show(view);
+      appLayout.fullscreenModalRegion.empty();
+      appLayout.mainRegion.show(view);
     }
   }
 });

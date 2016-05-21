@@ -1,6 +1,6 @@
 const Marionette = require('marionette');
 const $ = require('jquery');
-const AppLayout = require('AppLayout');
+const appLayout = require('appLayout');
 const HealthView = require('Health/HealthView');
 const QueueView = require('Activity/Queue/QueueView');
 const ResolutionUtility = require('Utilities/ResolutionUtility');
@@ -56,7 +56,7 @@ module.exports = Marionette.LayoutView.extend({
       $(window).resize();
     });
 
-    this.listenTo(AppLayout.mainRegion, 'show', this.onMainRegionShow);
+    this.listenTo(appLayout.mainRegion, 'show', this.onMainRegionShow);
   },
 
   serializeData() {

@@ -1,4 +1,3 @@
-var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var MetadataItemView = require('./MetadataItemView');
 

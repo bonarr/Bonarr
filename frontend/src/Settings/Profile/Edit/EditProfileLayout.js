@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var Backbone = require('backbone');
 var EditProfileItemView = require('./EditProfileItemView');

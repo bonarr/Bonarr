@@ -1,6 +1,6 @@
 const Marionette = require('marionette');
 const vent = require('vent');
-const AppLayout = require('AppLayout');
+const appLayout = require('appLayout');
 const ActionBarLayout = require('./ActionBarLayout');
 
 module.exports = Marionette.AppRouter.extend({
@@ -11,10 +11,10 @@ module.exports = Marionette.AppRouter.extend({
 
   _openActionBar(options) {
     const view = new ActionBarLayout(options);
-    AppLayout.actionBarRegion.show(view);
+    appLayout.actionBarRegion.show(view);
   },
 
   _closeActionBar() {
-    AppLayout.actionBarRegion.empty();
+    appLayout.actionBarRegion.empty();
   }
 });

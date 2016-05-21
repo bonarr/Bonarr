@@ -1,7 +1,7 @@
 var vent = require('vent');
 var reqres = require('reqres');
 
-var AppLayout = require('AppLayout');
+var appLayout = require('appLayout');
 var Marionette = require('marionette');
 var EditSeriesView = require('Series/Edit/EditSeriesView');
 var DeleteSeriesView = require('Series/Delete/DeleteSeriesView');
@@ -31,25 +31,25 @@ module.exports = Marionette.AppRouter.extend({
   },
 
   _openFullscreenModal(view) {
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _closeFullscreenModal() {
-    AppLayout.fullscreenModalRegion.empty();
+    appLayout.fullscreenModalRegion.empty();
   },
 
   _openModal(view) {
-    AppLayout.modalRegion.show(view);
+    appLayout.modalRegion.show(view);
   },
 
   _editSeries(options) {
     var view = new EditSeriesView({ model: options.series });
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _deleteSeries(options) {
     var view = new DeleteSeriesView({ model: options.series });
-    AppLayout.modalRegion.show(view);
+    appLayout.modalRegion.show(view);
   },
 
   _showEpisode(options) {
@@ -58,32 +58,32 @@ module.exports = Marionette.AppRouter.extend({
       hideSeriesLink: options.hideSeriesLink,
       openingTab: options.openingTab
     });
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _showHistory(options) {
     var view = new HistoryDetailsLayout({ model: options.model });
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _showLogDetails(options) {
     var view = new LogDetailsView({ model: options.model });
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _showRenamePreview(options) {
     var view = new RenamePreviewLayout(options);
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _showManualImport(options) {
     var view = new ManualImportLayout(options);
-    AppLayout.fullscreenModalRegion.show(view);
+    appLayout.fullscreenModalRegion.show(view);
   },
 
   _selectPath(options) {
     var view = new FileBrowserLayout(options);
-    AppLayout.modalRegion.show(view);
+    appLayout.modalRegion.show(view);
     return view.promise;
   }
 

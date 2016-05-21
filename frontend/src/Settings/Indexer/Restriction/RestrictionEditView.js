@@ -1,6 +1,5 @@
 var _ = require('underscore');
 var vent = require('vent');
-var AppLayout = require('AppLayout');
 var Marionette = require('marionette');
 var DeleteView = require('./RestrictionDeleteView');
 var CommandController = require('Commands/CommandController');

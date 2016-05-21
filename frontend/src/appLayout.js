@@ -43,8 +43,6 @@ const AppLayout = Marionette.LayoutView.extend({
   }
 });
 
-const appLayout = new AppLayout({
-
-});
+const appLayout = new AppLayout();
 
 module.exports = appLayout;
