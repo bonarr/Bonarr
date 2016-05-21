@@ -18,6 +18,18 @@ module.exports = Backbone.Model.extend({
     return `/series/${slug}`;
   },
 
+  nextSeries() {
+    const collection = this.collection;
+    const index = collection.indexOf(this);
+    return (index < collection.length - 1) ? collection.at(index + 1) : collection.first();
+  },
+
+  previousSeries() {
+    const collection = this.collection;
+    const index = collection.indexOf(this);
+    return index > 0 ? collection.at(index - 1) : collection.last();
+  },
+
   toggleSeasonMonitored(seasonNumber) {
     _.each(this.get('seasons'), (season) => {
       if (season.seasonNumber === seasonNumber) {

@@ -145,8 +145,7 @@ const SeriesDetailsLayout = Marionette.LayoutView.extend({
 
   _showHeader() {
     this.header.show(new SeriesHeaderView({
-      model: this.model,
-      episodeFileCollection: this.episodeFileCollection
+      model: this.model
     }));
   },
 

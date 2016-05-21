@@ -2,7 +2,7 @@ const Marionette = require('marionette');
 const _ = require('underscore');
 const tpl = require('./SeriesHeaderView.hbs');
 
-module.exports = Marionette.ItemView.extend({
+const SeriesHeaderView = Marionette.ItemView.extend({
   template: tpl,
 
   ui: {
@@ -14,21 +14,15 @@ module.exports = Marionette.ItemView.extend({
     'click .x-next': 'onNextClick'
   },
 
-  initialize(options) {
-    this.episodeFileCollection = options.episodeFileCollection;
-
+  initialize() {
     this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.episodeFileCollection, 'sync', this.render);
   },
 
   templateHelpers() {
-    const collection = this.model.collection;
-    const index = collection.indexOf(this.model);
-    const previousSeries = index > 0 ? collection.at(index - 1) : collection.last();
-    const nextSeries = index < collection.length - 1 ? collection.at(index + 1) : collection.first();
+    const previousSeries = this.model.previousSeries();
+    const nextSeries = this.model.nextSeries();
 
     return {
-      fileCount: this.episodeFileCollection.length,
       previousSeriesUrl: previousSeries.getRoute(),
       nextSeriesUrl: nextSeries.getRoute()
     };
@@ -41,3 +35,5 @@ module.exports = Marionette.ItemView.extend({
     }
   }
 });
+
+module.exports = SeriesHeaderView;
