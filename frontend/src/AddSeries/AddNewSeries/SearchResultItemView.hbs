@@ -1,20 +1,22 @@
 <div class="search-item panel clickable">
   <div class="panel-body">
     <a href="{{tvdbUrl}}" class="poster-link" target="_blank">
-            {{poster lazy=true}}
-        </a>
+      {{poster lazy=true}}
+    </a>
     <div class="header">
       <span class="series-title">
         {{titleWithYear .}}
       </span>
-      {{#if existing}}
-        <span class="label label-primary already-exists">Already in your library</span>
+      {{#if isExisting}}
+        <i class="icon-already-exist fa fa-check-circle" aria-hidden="true" title="Already in your library"></i>
       {{/if}}
       <div class="labels">
         {{#if ratings.votes}}
           <span class="label label-default">{{heartRating ratings}}</span>
         {{/if}}
-        <span class="label label-default">{{network}}</span>
+        {{#if network}}
+          <span class="label label-default">{{network}}</span>
+        {{/if}}
         {{#unless_eq status compare="continuing" }}
           <span class="label label-danger">Ended</span>
         {{/unless_eq}}

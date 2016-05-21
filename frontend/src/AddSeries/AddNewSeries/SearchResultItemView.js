@@ -1,4 +1,5 @@
 const vent = require('vent');
+const Backbone = require('backbone');
 const Marionette = require('marionette');
 const AddSeriesModal = require('./AddSeriesModal');
 const tpl = require('./SearchResultItemView.hbs');
@@ -27,6 +28,12 @@ const SearchResultItemView = Marionette.ItemView.extend({
     this.listenTo(this.model, 'change', this.render);
   },
 
+  templateHelpers() {
+    return {
+      isExisting: this.model.isExisting()
+    };
+  },
+
   onShow() {
     this.ui.overview.dotdotdot({
       height: 100,
@@ -35,7 +42,11 @@ const SearchResultItemView = Marionette.ItemView.extend({
   },
 
   onClick() {
-    if (!this.model.isExisting()) {
+    if (this.model.isExisting()) {
+      Backbone.history.navigate(this.model.getRoute(), {
+        trigger: true
+      });
+    } else {
       vent.trigger(vent.Commands.OpenFullscreenModal, new AddSeriesModal({
         model: this.model
       }));
