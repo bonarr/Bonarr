@@ -8,26 +8,26 @@ const vent = require('vent');
 const AppLayout = Marionette.LayoutView.extend({
   el: 'body',
 
-  ui: {
-    footerRegion: '#footer-region'
-  },
-
   regions: {
     navbarRegion: '#navbar-region',
     sidebarRegion: '#sidebar-region',
-    mainRegion: '#main-region'
+    mainRegion: '#main-region',
+    actionBarRegion: ActionBarRegion,
+    modalRegion: ModalRegion,
+    fullscreenModalRegion: FullscreenModalRegion,
+    footerRegion: FooterRegion
   },
 
   initialize() {
-    this.addRegions({
-      actionBarRegion: ActionBarRegion,
-      modalRegion: ModalRegion,
-      fullscreenModalRegion: FullscreenModalRegion,
-      footerRegion: FooterRegion
-    });
-
     this.listenTo(vent, vent.Commands.OpenFooter, (view) => {
       this._showInRegion(this.footerRegion, view);
+    });
+
+    const $contentWrapper = this.$('#content-wrapper');
+
+    this.listenTo(this.mainRegion, 'show', () => {
+      // reset scroll state when main region is replaces
+      $contentWrapper.scrollTop(0);
     });
   },
 
@@ -36,9 +36,7 @@ const AppLayout = Marionette.LayoutView.extend({
 
     // bind the region to main region
     if (region === this.footerRegion || region === this.actionBarRegion) {
-      this.listenToOnce(this.mainRegion, 'empty', () => {
-        region.empty();
-      });
+      this.listenToOnce(this.mainRegion, 'empty', () => region.empty());
     }
   }
 });
