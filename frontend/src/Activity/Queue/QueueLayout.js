@@ -76,14 +76,9 @@ module.exports = Marionette.LayoutView.extend({
   ],
 
   initialize() {
-    this.collection = new QueueCollection();
-    this.collection.fetch();
+    this.listenTo(QueueCollection, 'sync', this._showTable);
 
     this._showActionBar();
-  },
-
-  onRender() {
-    this.listenTo(this.collection, 'sync', this._showTable);
   },
 
   onShow() {
@@ -93,13 +88,13 @@ module.exports = Marionette.LayoutView.extend({
   _showTable() {
     this.table.show(new Backgrid.Grid({
       columns: this.columns,
-      collection: this.collection,
+      collection: QueueCollection,
       className: 'table table-hover'
     }));
 
     this.pager.show(new GridPager({
       columns: this.columns,
-      collection: this.collection
+      collection: QueueCollection
     }));
   },
 
