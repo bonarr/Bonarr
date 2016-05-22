@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 var PageableCollection = require('backbone.paginator');
-var AsPageableCollection = require('Mixins/Collection/AsPageableCollection');
+var AsServerSideCollection = require('Mixins/Collection/AsServerSideCollection');
 // var AsFilteredCollection = require('Mixins/AsFilteredCollection');
 // var AsSortedCollection = require('Mixins/AsSortedCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
@@ -75,7 +75,7 @@ var Collection = Backbone.Collection.extend({
   }
 });
 
-Collection = AsPageableCollection.apply(Collection);
+Collection = AsServerSideCollection.apply(Collection);
 // Collection = AsFilteredCollection.call(Collection);
 // Collection = AsSortedCollection.call(Collection);
 // Collection = AsPersistedStateCollection.call(Collection);

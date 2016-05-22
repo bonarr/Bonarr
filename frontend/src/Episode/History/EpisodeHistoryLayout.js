@@ -44,9 +44,14 @@ module.exports = Marionette.LayoutView.extend({
     this.series = options.series;
 
     this.collection = new HistoryCollection({
-      episodeId: this.model.id,
       tableName: 'episodeHistory'
     });
+
+    this.collection.setFilter({
+      filterKey: 'episodeId',
+      filterValue: this.model.id
+    });
+
     this.collection.fetch();
     this.listenTo(this.collection, 'sync', this._showTable);
   },

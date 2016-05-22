@@ -1,6 +1,7 @@
 const vent = require('vent');
 const reqres = require('reqres');
 const Marionette = require('marionette');
+const CommandController = require('Commands/CommandController');
 const tableRowMixin = require('Table/tableRowMixin');
 const EpisodeStatusMixin = require('Table/EpisodeStatusMixin');
 const tpl = require('./EpisodeRow.hbs');
