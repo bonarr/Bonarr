@@ -77,6 +77,7 @@ module.exports = Marionette.LayoutView.extend({
 
   initialize() {
     this.listenTo(QueueCollection, 'sync', this._showTable);
+    QueueCollection.fetch();
 
     this._showActionBar();
   },
