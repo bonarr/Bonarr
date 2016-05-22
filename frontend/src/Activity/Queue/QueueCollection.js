@@ -77,7 +77,4 @@ const QueueCollection = PageableCollection.extend({
 AsSortedCollection.call(QueueCollection);
 AsPageableCollection.call(QueueCollection);
 
-const queueCollection = new QueueCollection();
-queueCollection.fetch();
-
-module.exports = queueCollection;
+module.exports = QueueCollection;
