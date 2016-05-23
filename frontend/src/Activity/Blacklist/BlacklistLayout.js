@@ -87,7 +87,7 @@ module.exports = Marionette.LayoutView.extend({
 
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
-      actions: actions
+      actions
     });
   },
 

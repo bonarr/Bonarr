@@ -1,10 +1,11 @@
 const Marionette = require('marionette');
 const Config = require('Config');
+const tpl = require('./RadioView.hbs');
 
 module.exports = Marionette.ItemView.extend({
   tagName: 'li',
   className: 'actionbar-list-item actionbar-radio-list-item',
-  template: 'Sidebar/ActionBar/Radio/RadioViewTemplate',
+  template: tpl,
 
   ui: {
     icon: 'i'
@@ -15,7 +16,7 @@ module.exports = Marionette.ItemView.extend({
   },
 
   initialize() {
-    this.storageKey = this.model.get('menuKey') + ':' + this.model.get('key');
+    this.storageKey = `${this.model.get('menuKey')}:${this.model.get('key')}`;
   },
 
   onRender() {
@@ -41,7 +42,7 @@ module.exports = Marionette.ItemView.extend({
 
   invokeCallback() {
     if (!this.model.ownerContext) {
-      throw 'ownerContext must be set.';
+      throw new Error('ownerContext must be set.');
     }
 
     const callback = this.model.get('callback');

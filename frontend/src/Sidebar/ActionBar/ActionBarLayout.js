@@ -1,7 +1,6 @@
 const _ = require('underscore');
 const $ = require('jquery');
 const vent = require('vent');
-const Backbone = require('backbone');
 const Marionette = require('marionette');
 const ButtonCollection = require('./ButtonCollection');
 const ButtonModel = require('./ButtonModel');
@@ -10,9 +9,10 @@ const RadioCollectionView = require('./Radio/RadioCollectionView');
 const SortingCollectionView = require('./Sorting/SortingCollectionView');
 const FilteringCollectionView = require('./Filtering/FilteringCollectionView');
 const ResolutionUtility = require('../../Utilities/ResolutionUtility');
+const tpl = require('./ActionBarLayout.hbs');
 
-module.exports = Marionette.LayoutView.extend({
-  template: 'Sidebar/ActionBar/ActionBarLayoutTemplate',
+const ActionBarLayout = Marionette.LayoutView.extend({
+  template: tpl,
   className: 'aside-inner actionbar',
 
   regions: {
@@ -115,3 +115,5 @@ module.exports = Marionette.LayoutView.extend({
     }
   }
 });
+
+module.exports = ActionBarLayout;
