@@ -1,11 +1,10 @@
 <nav class="sidebar scrollbar">
   <ul class="nav">
     {{#each .}}
-      <li class="x-nav-root">
+      <li class="nav-root-item x-nav-root">
         <a href="{{UrlBase}}{{href}}">
-          <em class="icon-sonarr-navbar-icon icon-sonarr-navbar-{{icon}}"></em>
+          <em class="icon-sonarr-navbar-{{icon}}"></em>
           <span class="title">{{title}}</span>
-
           {{#if notification}}
             <span class="pull-right {{notification}} x-{{notification}} {{#notificationHideActive}}hide-active{{/notificationHideActive}}"></span>
           {{/if}}
@@ -17,7 +16,6 @@
               <li class="x-nav-child">
                 <a href="{{UrlBase}}{{href}}">
                   <span class="title">{{title}}</span>
-
                   {{#if notification}}
                     <span class="pull-right {{notification}} x-{{notification}}"></span>
                   {{/if}}

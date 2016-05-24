@@ -28,7 +28,7 @@
   ],
 
   "rules": {
-    "filenames/filenames": ["error", "^.+$", "match-exported"],
+    "filenames/match-exported": ["error"],
 
     // ECMAScript 6
 

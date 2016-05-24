@@ -13,7 +13,7 @@ const tpl = require('./ActionBarLayout.hbs');
 
 const ActionBarLayout = Marionette.LayoutView.extend({
   template: tpl,
-  className: 'aside-inner actionbar',
+  className: 'actionbar',
 
   regions: {
     actionsRegion: '.x-actions',

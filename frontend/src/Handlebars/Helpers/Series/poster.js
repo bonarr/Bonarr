@@ -16,8 +16,9 @@ function getPosterUrl(images, size) {
 }
 
 function poster(options) {
+  const pixelRatio = Math.floor(window.devicePixelRatio);
   const lazy = options.hash.lazy;
-  const size = options.hash.size;
+  const size = options.hash.size * pixelRatio;
   const url = getPosterUrl(this.images, size);
 
   if (url) {

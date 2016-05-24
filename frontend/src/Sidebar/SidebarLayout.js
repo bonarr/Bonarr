@@ -10,7 +10,7 @@ const tpl = require('./SidebarLayout.hbs');
 module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
-  className: 'aside-inner',
+  // className: 'aside-inner',
 
   regions: {
     health: '.x-health',

@@ -1,206 +1,234 @@
-@import "./layout-variables";
+// @import "./layout-variables";
 
-html {
-  height: 100%;
-
-  // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
-  touch-action: manipulation;
+#content-section {
+  margin-top: 55px;
+  padding-top: 30px;
 }
 
-html,
-body {
-  overflow: hidden;
-  height: 100%;
+
+// html {
+//   height: 100%;
+//
+//   // http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away
+//   touch-action: manipulation;
+// }
+//
+// html,
+// body {
+//   // overflow-x: hidden;
+//   // height: 100%;
+// }
+
+#content-section {
+  margin-left: @aside-wd;
+}
+
+.actionbar-visible {
+  #content-section {
+    margin-left: @aside-wd + @aside-wd-collapsed;
+  }
+}
+
+.aside-collapsed  {
+  #content-section {
+    margin-left: @aside-wd-collapsed;
+  }
+
+  &.actionbar-visible {
+    #content-section {
+      margin-left: @aside-wd-collapsed * 2;
+    }
+  }
 }
 
 // Main wrapper
 // -----------------------------
 
-.wrapper {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  overflow: hidden;
+// .wrapper {
+  // position: relative;
+  // width: 100%;
+  // height: auto;
+  // min-height: 100%;
+  // overflow: hidden;
 
-  .topnavbar-wrapper {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: @z-index-main-section + 10;
-  }
+  // .topnavbar-wrapper {
+  //   // position: fixed;
+  //   top: 0;
+  //   width: 100%;
+  //   z-index: @z-index-main-section + 10;
+  // }
 
-  .dropdown-backdrop {
-    z-index: @z-index-main-section - 2;
-  }
+  // .dropdown-backdrop {
+  //   z-index: @z-index-main-section - 2;
+  // }
 
-  // Contains the main content
-  > section {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: @content-bg;
-    transform: translateZ(0);
-    top: @navbar-hg;
+  // // Contains the main content
+  // > section {
+  //   // position: fixed;
+  //   // right: 0;
+  //   // bottom: 0;
+  //   // left: 0;
+  //   overflow-x: hidden;
+  //   overflow-y: auto;
+  //   // background-color: @content-bg;
+  //   // transform: translateZ(0);
+  //   // // top: @navbar-hg;
+  //
+  //   // margin-bottom: @footer-hg !important; // ensure a space for the footer
+  // }
 
-    // margin-bottom: @footer-hg !important; // ensure a space for the footer
-  }
+  // // Page Footer
+  // > footer {
+  //   position: absolute;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   height: @footer-hg;
+  //   border-top: 1px solid @gray-light;
+  //   padding: @content-padding;
+  //   z-index: @z-index-main-section - 2;
+  //
+  //   > p {
+  //     margin: 0;
+  //   }
+  // }
+// }
 
-  // Page Footer
-  > footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: @footer-hg;
-    border-top: 1px solid @gray-light;
-    padding: @content-padding;
-    z-index: @z-index-main-section - 2;
+// .modal-open .wrapper {
+//   z-index: 0;
+// }
 
-    > p {
-      margin: 0;
-    }
-  }
-}
+// // Page main content
+// // -----------------------------
+//
+// #content-wrapper {
+//   padding: 15px;
+//   width: 100%;
+//
+//   // styling to visually wrap the component
+//   border-top: 1px solid rgba(0,0,0,.15);
+//   margin-top: -1px;
+//   overflow-y: scroll;
+//   height: 100%;
+//
+//   > h3,
+//   > .content-heading {
+//     font-size: @font-size-h3;
+//     line-height: @headings-line-height;
+//     color: #929292;
+//     margin: -15px -15px 20px;
+//     padding: 15px;
+//     font-weight: normal;
+//     background-color: @content-heading-bg;
+//     border-bottom: 1px solid @content-heading-border;
+//
+//     > small {
+//       display: block;
+//       font-size: 12px;
+//       color: @text-muted;
+//     }
+//   }
+//
+//   > button,
+//   > .btn {
+//     margin: 10px 10px 0 0;
+//   }
+//
+//   .container,
+//   .container-fluid {
+//     padding-left: 0;
+//     padding-right: 0;
+//   }
+//
+//   @media @tablet {
+//     padding: @content-padding;
+//
+//     //overflow: auto; // required for portlets
+//     > h3,
+//     > .content-heading {
+//       margin: -@content-padding -@content-padding @content-padding;
+//       padding: @content-padding;
+//     }
+//
+//     > button,
+//     > .btn {
+//       margin: 0;
+//     }
+//   }
+//
+//   .fill-region {
+//     margin: -20px -5px 0 -35px;
+//
+//     @media @upto-desktop-lg {
+//       margin: -30px 0 0 -30px;
+//     }
+//
+//     .fill-row {
+//       margin-left: 0;
+//       margin-right: 0;
+//     }
+//   }
+// }
 
-.modal-open .wrapper {
-  z-index: 0;
-}
-
-// Page main content
-// -----------------------------
-
-#content-wrapper {
-  padding: 15px;
-  width: 100%;
-
-  // styling to visually wrap the component
-  border-top: 1px solid rgba(0,0,0,.15);
-  margin-top: -1px;
-  overflow-y: scroll;
-  height: 100%;
-
-  > h3,
-  > .content-heading {
-    font-size: @font-size-h3;
-    line-height: @headings-line-height;
-    color: #929292;
-    margin: -15px -15px 20px;
-    padding: 15px;
-    font-weight: normal;
-    background-color: @content-heading-bg;
-    border-bottom: 1px solid @content-heading-border;
-
-    > small {
-      display: block;
-      font-size: 12px;
-      color: @text-muted;
-    }
-  }
-
-  > button,
-  > .btn {
-    margin: 10px 10px 0 0;
-  }
-
-  .container,
-  .container-fluid {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  @media @tablet {
-    padding: @content-padding;
-
-    //overflow: auto; // required for portlets
-    > h3,
-    > .content-heading {
-      margin: -@content-padding -@content-padding @content-padding;
-      padding: @content-padding;
-    }
-
-    > button,
-    > .btn {
-      margin: 0;
-    }
-  }
-
-  .fill-region {
-    margin: -20px -5px 0 -35px;
-
-    @media @upto-desktop-lg {
-      margin: -30px 0 0 -30px;
-    }
-
-    .fill-row {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-}
-
-// Desktop layout
-// -----------------------------
-
-@media @tablet {
-  body {
-    min-height: 100%;
-  }
-
-  .started {
-    .wrapper {
-      > section,
-      > footer {
-        left : @sidebar-wd;
-      }
-    }
-  }
-
-  .aside-collapsed {
-    .wrapper {
-      > section,
-      > footer {
-        left: @sidebar-collapsed-wd;
-      }
-    }
-  }
-
-  .actionbar-visible {
-    .wrapper {
-      > section,
-      > footer {
-        left: @sidebar-actionbar-wd;
-      }
-    }
-  }
-
-  .actionbar-visible.actionbar-extended {
-    .wrapper {
-      > section,
-      > footer {
-        left: @sidebar-actionbar-extended-wd;
-      }
-    }
-  }
-
-  .aside-collapsed.actionbar-visible {
-    .wrapper {
-      > section,
-      > footer {
-        left: @sidebar-collapsed-actionbar-wd;
-      }
-    }
-  }
-
-  .aside-collapsed.actionbar-visible.actionbar-extended {
-    .wrapper {
-      > section,
-      > footer {
-        left: @sidebar-collapsed-actionbar-extended-wd;
-      }
-    }
-  }
-}
+// // Desktop layout
+// // -----------------------------
+//
+// @media @tablet {
+//   body {
+//     min-height: 100%;
+//   }
+//
+//   .started {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left : @sidebar-wd;
+//       }
+//     }
+//   }
+//
+//   .aside-collapsed {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left: @sidebar-collapsed-wd;
+//       }
+//     }
+//   }
+//
+//   .actionbar-visible {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left: @sidebar-actionbar-wd;
+//       }
+//     }
+//   }
+//
+//   .actionbar-visible.actionbar-extended {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left: @sidebar-actionbar-extended-wd;
+//       }
+//     }
+//   }
+//
+//   .aside-collapsed.actionbar-visible {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left: @sidebar-collapsed-actionbar-wd;
+//       }
+//     }
+//   }
+//
+//   .aside-collapsed.actionbar-visible.actionbar-extended {
+//     .wrapper {
+//       > section,
+//       > footer {
+//         left: @sidebar-collapsed-actionbar-extended-wd;
+//       }
+//     }
+//   }
+// }

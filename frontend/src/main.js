@@ -63,7 +63,7 @@ preloadPromise.done(() => {
     RouteBinder.bind();
     appLayout.navbarRegion.show(new NavbarLayout());
     appLayout.sidebarRegion.show(new SidebarLayout());
-    $('body').addClass('started');
+    // $('body').addClass('started');
   });
 
   app.addInitializer(UiSettingsController.appInitializer);

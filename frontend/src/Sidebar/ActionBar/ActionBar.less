@@ -1,11 +1,20 @@
 @import "Content/variables";
 @import "Content/Layout/layout-variables";
 
+
+.aside-collapsed {
+  .actionbar {
+    left: @aside-wd-collapsed;
+  }
+}
+
 // Right sidebar
-.wrapper {
-  > .aside-right {
-    visibility: hidden;
-    position: absolute;
+.actionbar {
+    position: fixed;
+    // visibility: hidden;
+    // position: absolute;
+    z-index: 10;
+    float: left;
     width: @aside-wd-collapsed;
     top: @navbar-hg;
     left: @aside-wd;
@@ -13,11 +22,11 @@
     .backface-visibility(hidden);
     cursor: default;
 
-    .aside-inner {
-      height: 100%;
-      width: @aside-wd-collapsed;
-      overflow: hidden;
-    }
+    // .aside-inner {
+    //   height: 100%;
+    //   width: @aside-wd-collapsed;
+    //   overflow: hidden;
+    // }
 
     .standard {
       float            : left;
@@ -30,34 +39,37 @@
       float      : left;
       width      : @aside-wd;
       height     : 100%;
-      visibility : hidden;
+      display: none;
       background-color: @actionbar-extended-bg;
     }
   }
-}
 
-.actionbar-visible {
-  .wrapper {
-    > .aside-right {
-      visibility: visible;
-    }
-  }
-}
+// .actionbar-visible {
+//   .wrapper {
+//     > .aside-right {
+//       visibility: visible;
+//     }
+//   }
+// }
 
 .actionbar-extended {
-  .wrapper {
-    > .aside-right {
-      width: @aside-wd-collapsed + @aside-wd;
-
-      .aside-inner {
-        width: @aside-wd-collapsed + @aside-wd;
-      }
+  // .wrapper {
+  //   > .aside-right {
+  //     width: @aside-wd-collapsed + @aside-wd;
+  //
+  //     .aside-inner {
+  //
+  //     }
 
       .extended {
-        visibility : visible;
+        opacity: 0.95;
+        position: absolute;
+        display: block;
+        left: 70px;
+        //  width: @aside-wd-collapsed + @aside-wd;
       }
-    }
-  }
+  //   }
+  // }
 }
 
 .actionbar {
@@ -181,43 +193,43 @@
   }
 }
 
-@media @tablet {
-  .aside-collapsed {
-    .wrapper {
-      > .aside-right{
-        left: @aside-wd-collapsed;
-      }
-    }
-  }
-}
+// @media @tablet {
+//   .aside-collapsed {
+//     .wrapper {
+//       > .aside-right{
+//         left: @aside-wd-collapsed;
+//       }
+//     }
+//   }
+// }
 
-@media @upto-tablet {
-  .wrapper {
-    > .aside-right {
-      left: -@aside-wd - @aside-wd-collapsed;
-      z-index: @z-index-main-section + 5;
-    }
-  }
-
-  .actionbar-visible {
-    > .aside-right {
-      left: 0;
-    }
-  }
-
-  .aside-toggled.actionbar-visible {
-    .wrapper {
-      > .aside-right {
-        left: @aside-wd;
-      }
-    }
-  }
-
-  .aside-collapsed.aside-toggled.actionbar-visible {
-    .wrapper {
-      > .aside-right {
-        left: @aside-wd-collapsed;
-      }
-    }
-  }
-}
+// @media @upto-tablet {
+//   .wrapper {
+//     > .aside-right {
+//       left: -@aside-wd - @aside-wd-collapsed;
+//       z-index: @z-index-main-section + 5;
+//     }
+//   }
+//
+//   .actionbar-visible {
+//     > .aside-right {
+//       left: 0;
+//     }
+//   }
+//
+//   .aside-toggled.actionbar-visible {
+//     .wrapper {
+//       > .aside-right {
+//         left: @aside-wd;
+//       }
+//     }
+//   }
+//
+//   .aside-collapsed.aside-toggled.actionbar-visible {
+//     .wrapper {
+//       > .aside-right {
+//         left: @aside-wd-collapsed;
+//       }
+//     }
+//   }
+// }

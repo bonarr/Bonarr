@@ -1,9 +1,6 @@
-const $ = require('jquery');
 const Marionette = require('backbone.marionette');
 const _ = require('underscore');
 require('jquery.lazyload');
-
-const $containerWrapper = $('#content-wrapper');
 
 const lazyImages = Marionette.Behavior.extend({
   defaults: {
@@ -20,8 +17,8 @@ const lazyImages = Marionette.Behavior.extend({
         return;
       }
       this.ui.lazyImages.lazyload({
-        threshold: this.options.threshold,
-        container: $containerWrapper
+        threshold: this.options.threshold
+        // container: $containerWrapper
       });
     });
   }

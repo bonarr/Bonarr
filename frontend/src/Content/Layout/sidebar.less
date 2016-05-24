@@ -20,12 +20,20 @@
 @sidebar-heading-color: #919da8;
 @sidebar-label-color: @sidebar-item-color;
 
+#sidebar-region {
+  z-index: 10;
+}
+
 .sidebar {
+  width: @aside-wd;
+   z-index: 10;
   height: 100%;
   padding-bottom: 20px;
   background-color: @sidebar-bg;
   overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  position: fixed;
+  top: 55px;
 
   // draw a divider for the sidebar
   &:after {
@@ -114,20 +122,20 @@
 }
 
 // Hides the scrollbar only on desktops
-@tablet-landscape: ~"only screen and (min-width: 1025px)";
+// @tablet-landscape: ~"only screen and (min-width: 1025px)";
 
-@media @tablet-landscape {
-  .sidebar {
-    margin-right: -@scrollbar-wd;
-    overflow-y: scroll;
-
-    > .nav {
-      > li:first-of-type {
-        padding-top: 8px;
-      }
-    }
-  }
-}
+// @media @tablet-landscape {
+//   .sidebar {
+//     margin-right: -@scrollbar-wd;
+//     overflow-y: scroll;
+//
+//     // > .nav {
+//     //   > li:first-of-type {
+//     //     padding-top: 8px;
+//     //   }
+//     // }
+//   }
+// }
 
 // Sub Levels
 .sidebar-subnav {
@@ -217,19 +225,20 @@
 // Desktop styles
 // ---------------------------------
 
-@media @tablet {
-  .sidebar > .nav {
-    .label {
-      margin: 2px 0 0;
-    }
-  }
-}
+// @media @tablet {
+//   .sidebar > .nav {
+//     .label {
+//       margin: 2px 0 0;
+//     }
+//   }
+// }
 // @media @tablet
 // Collapsed state styles
 
 .aside-collapsed {
   .sidebar {
-    overflow-x: hidden;
+    width: @aside-wd-collapsed;
+    // overflow-x: hidden;
 
     // Applies to first level items
     > .nav {
@@ -257,34 +266,34 @@
 
           > em {
             font-size: 1.6em; // increase icons size
-            width: auto;
+            // width: auto;
           }
 
-          &:focus {
-            // accessibility
-            background-color: transparent;
-
-            > em {
-              color: inherit;
-            }
-          }
+          // &:focus {
+          //   // accessibility
+          //   background-color: transparent;
+          //
+          //   > em {
+          //     color: inherit;
+          //   }
+          // }
         }
       }
 
-      > li:first-of-type {
-        padding-top: 0;
-      }
+      // > li:first-of-type {
+      //   padding-top: 0;
+      // }
     }
 
     // labels in menu items
-    .nav {
-      .label {
-        position: absolute;
-        top: 10px;
-        right: 5px;
-        text-indent: 0;
-      }
-    }
+    // .nav {
+    //   .label {
+    //     position: absolute;
+    //     top: 10px;
+    //     right: 5px;
+    //     text-indent: 0;
+    //   }
+    // }
   }
   // .sidebar
 }
