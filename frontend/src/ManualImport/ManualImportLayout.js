@@ -136,6 +136,7 @@ module.exports = Marionette.LayoutView.extend({
 
     this.workspace.show(this.fileView);
     this._updateButtons();
+    this.ui.importButton.show();
   },
 
   _showSelectFolder() {
@@ -212,7 +213,6 @@ module.exports = Marionette.LayoutView.extend({
 
   _updateButtons(model, selected) {
     if (!this.fileView) {
-      this.ui.importButton.attr('disabled', 'disabled');
       return;
     }
 
