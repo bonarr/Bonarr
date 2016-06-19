@@ -1,83 +1,47 @@
-var Backbone = require('backbone');
-var PageableCollection = require('backbone.paginator');
-var AsServerSideCollection = require('Mixins/Collection/AsServerSideCollection');
-// var AsFilteredCollection = require('Mixins/AsFilteredCollection');
-// var AsSortedCollection = require('Mixins/AsSortedCollection');
+var ServerSideCollection = require('Table/ServerSideCollection');
 var AsPersistedStateCollection = require('Mixins/AsPersistedStateCollection');
 var HistoryModel = require('./HistoryModel');
 
-var Collection = Backbone.Collection.extend({
+var Collection = ServerSideCollection.extend({
   url: '/history',
   model: HistoryModel,
 
-  state: {
+  storeState: true,
+
+  initialState: {
     pageSize: 15,
     sortKey: 'date',
-    sortDir: 'desc'
-  },
-
-  queryParams: {
-    totalPages: null,
-    totalRecords: null,
-    pageSize: 'pageSize',
-    sortKey: 'sortKey',
-    order: 'sortDir',
-    directions: {
-      '-1': 'asc',
-      '1': 'desc'
-    }
+    sortDirection: 'desc'
   },
 
   filterModes: {
-    'all': {},
-    'grabbed': {
+    all: {},
+
+    grabbed: {
       key: 'eventType',
       value: '1'
     },
-    'imported': {
+
+    imported: {
       key: 'eventType',
       value: '3'
     },
-    'failed': {
+
+    failed: {
       key: 'eventType',
       value: '4'
     },
-    'deleted': {
+
+    deleted: {
       key: 'eventType',
       value: '5'
     }
   },
 
   sortMappings: {
-    'series': { sortKey: 'series.sortTitle' }
-  },
-
-  initialize(options) {
-    delete this.queryParams.episodeId;
-
-    if (options) {
-      if (options.episodeId) {
-        this.queryParams.episodeId = options.episodeId;
-      }
-    }
-  },
-
-  parseState(resp) {
-    return { totalRecords: resp.totalRecords };
-  },
-
-  parseRecords(resp) {
-    if (resp) {
-      return resp.records;
-    }
-
-    return resp;
+    series: { sortKey: 'series.sortTitle' }
   }
-});
 
-Collection = AsServerSideCollection.apply(Collection);
-// Collection = AsFilteredCollection.call(Collection);
-// Collection = AsSortedCollection.call(Collection);
-// Collection = AsPersistedStateCollection.call(Collection);
+});
 
 module.exports = Collection;

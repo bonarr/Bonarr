@@ -36,18 +36,18 @@ const TablePagerView = Marionette.ItemView.extend({
   },
 
   serializeData() {
-    return this.collection.state;
+    return this.collection.state.toJSON();
   },
 
   onRender() {
-    this.listenTo(this.collection || this.collection.fullCollection, 'reset sync', _.debounce(this._update, 10));
+    this.listenTo(this.collection.state, 'change', _.debounce(this._update, 10));
     this._update();
   },
 
-  _gotToPage(e, page) {
+  _goToPage(e, page) {
     e.preventDefault();
 
-    this.collection.state.page = page;
+    this.collection.state.set('page', page);
     const promise = this.collection.fetch();
 
     $(e.target).spinForPromise(promise);
@@ -55,30 +55,34 @@ const TablePagerView = Marionette.ItemView.extend({
 
   _update() {
     const state = this.collection.state;
-    this.ui.page.text(state.page);
-    this.ui.totalPages.text(state.totalPages);
-    this.ui.totalRecords.text(FormatHelpers.number(state.totalRecords));
+    const page = state.get('page');
+    const totalPages = state.get('totalPages');
+    const totalRecords = state.get('totalRecords');
 
-    this.ui.firstPageBtn.toggleClass('disabled', state.page === 1);
-    this.ui.previousPageBtn.toggleClass('disabled', state.page === 1);
-    this.ui.nextPageBtn.toggleClass('disabled', state.page === state.totalPages);
-    this.ui.lastPageBtn.toggleClass('disabled', state.page === state.totalPages);
+    this.ui.page.text(page);
+    this.ui.totalPages.text(totalPages);
+    this.ui.totalRecords.text(FormatHelpers.number(totalRecords));
+
+    this.ui.firstPageBtn.toggleClass('disabled', page === 1);
+    this.ui.previousPageBtn.toggleClass('disabled', page === 1);
+    this.ui.nextPageBtn.toggleClass('disabled', page === totalPages);
+    this.ui.lastPageBtn.toggleClass('disabled', page === totalPages);
   },
 
   onFirstPageClick(e) {
-    this._gotToPage(e, 1);
+    this._goToPage(e, 1);
   },
 
   onPreviousPageClick(e) {
-    this._gotToPage(e, this.collection.state.page - 1);
+    this._goToPage(e, this.collection.state.get('page') - 1);
   },
 
   onNextPageClick(e) {
-    this._gotToPage(e, this.collection.state.page + 1);
+    this._goToPage(e, this.collection.state.get('page') + 1);
   },
 
   onLastPageClick(e) {
-    this._gotToPage(e, this.collection.state.totalPages);
+    this._goToPage(e, this.collection.state.get('totalPages'));
   },
 
   onPageInfoClick(e) {
@@ -87,10 +91,10 @@ const TablePagerView = Marionette.ItemView.extend({
     const state = this.collection.state;
     const select = $('<select class="x-page-selector"></select>');
 
-    for (var i = 0; i < state.totalPages; i++) {
+    for (var i = 0; i < state.get('totalPages'); i++) {
       const page = i + 1;
 
-      if (page === state.page) {
+      if (page === state.get('page')) {
         select.append(`<option value="${page}" selected>${page}</option>`);
       } else {
         select.append(`<option value="${page}">${page}</option>`);
@@ -104,7 +108,8 @@ const TablePagerView = Marionette.ItemView.extend({
   onPageSelectorChange(e) {
     e.preventDefault();
 
-    this.collection.state.page = $(e.target).val();
+    const selectedPage = $(e.target).val();
+    this.collection.state.set('page', selectedPage);
     this.ui.pageSelectorSpinner.show();
     this.ui.pageSelectorContainer.empty();
 

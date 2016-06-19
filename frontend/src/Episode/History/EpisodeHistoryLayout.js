@@ -43,7 +43,7 @@ module.exports = Marionette.LayoutView.extend({
     this.model = options.model;
     this.series = options.series;
 
-    this.collection = new HistoryCollection({
+    this.collection = new HistoryCollection([], {
       tableName: 'episodeHistory'
     });
 
