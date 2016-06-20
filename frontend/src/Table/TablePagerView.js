@@ -70,19 +70,27 @@ const TablePagerView = Marionette.ItemView.extend({
   },
 
   onFirstPageClick(e) {
-    this._goToPage(e, 1);
+    const promise = this.collection.firstPage();
+
+    $(e.target).spinForPromise(promise);
   },
 
   onPreviousPageClick(e) {
-    this._goToPage(e, this.collection.state.get('page') - 1);
+    const promise = this.collection.previousPage();
+
+    $(e.target).spinForPromise(promise);
   },
 
   onNextPageClick(e) {
-    this._goToPage(e, this.collection.state.get('page') + 1);
+    const promise = this.collection.nextPage();
+
+    $(e.target).spinForPromise(promise);
   },
 
   onLastPageClick(e) {
-    this._goToPage(e, this.collection.state.get('totalPages'));
+    const promise = this.collection.lastPage();
+
+    $(e.target).spinForPromise(promise);
   },
 
   onPageInfoClick(e) {
@@ -109,11 +117,9 @@ const TablePagerView = Marionette.ItemView.extend({
     e.preventDefault();
 
     const selectedPage = $(e.target).val();
-    this.collection.state.set('page', selectedPage);
+    const promise = this.collection.page(selectedPage);
     this.ui.pageSelectorSpinner.show();
     this.ui.pageSelectorContainer.empty();
-
-    const promise = this.collection.fetch();
 
     promise.always(() => {
       this.ui.pageSelectorSpinner.hide();

@@ -21,7 +21,7 @@ const ServerSideCollection = Backbone.Collection.extend({
       }
 
       const sortKey = this._getStoredState('sortKey', this.initialState.sortKey);
-      const sortDirection = this._getStoredState('sortKey', this.initialState.sortDirection);
+      const sortDirection = this._getStoredState('sortDirection', this.initialState.sortDirection);
       const state = _.extend({}, this.initialState, { sortKey, sortDirection });
 
       this.state = new StateModel(state);
@@ -67,10 +67,38 @@ const ServerSideCollection = Backbone.Collection.extend({
     return this.fetch();
   },
 
+  firstPage() {
+    this.state.set('page', 1);
+    return this.fetch();
+  },
+
+  previousPage() {
+    this.state.set('page', this.state.get('page') - 1);
+    return this.fetch();},
+
+  nextPage() {
+    this.state.set('page', this.state.get('page') + 1);
+    return this.fetch();},
+
+  lastPage() {
+    this.state.set('page', this.state.get('totalPages'));
+    return this.fetch();},
+
+  page(pageNumber) {
+    this.state.set('page', pageNumber);
+    return this.fetch();},
+
   fetch(options = {}) {
     options.data = _.extend(options.data || {}, { page: 1 }, this.state.toData());
 
-    return Backbone.Collection.prototype.fetch.call(this, options);
+    // Ensure options is set and pass along any other arguments that we're passed nn
+    const args = [options];
+
+    for (let i = 1; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    return Backbone.Collection.prototype.fetch.apply(this, args);
   },
 
   parse(resp) {
