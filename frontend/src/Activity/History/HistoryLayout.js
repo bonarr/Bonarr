@@ -1,66 +1,47 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var HistoryCollection = require('./HistoryCollection');
-var EventTypeCell = require('Cells/EventTypeCell');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
-var HistoryQualityCell = require('./HistoryQualityCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var HistoryDetailsCell = require('./HistoryDetailsCell');
-var GridPager = require('Shared/Grid/Pager');
-var TablePagerView = require('Table/TablePagerView');
-var LoadingView = require('Shared/LoadingView');
+const vent = require('vent');
+const Marionette = require('marionette');
+const TableView = require('Table/TableView');
+const TablePagerView = require('Table/TablePagerView');
+const LoadingView = require('Shared/LoadingView');
+const HistoryCollection = require('./HistoryCollection');
+const HistoryRow = require('./HistoryRow');
 
-module.exports = Marionette.LayoutView.extend({
+const HistoryLayout = Marionette.LayoutView.extend({
   template: 'Activity/History/HistoryLayoutTemplate',
 
   regions: {
-    history: '#x-history',
-    pager: '#x-history-pager'
+    history: '.x-history',
+    pager: '.x-history-pager'
   },
 
-  columns: [
+  headers: [
     {
       name: 'eventType',
-      label: '',
-      cell: EventTypeCell,
-      cellValue: 'this'
+      label: ' '
     },
     {
-      name: 'series',
-      label: 'Series',
-      cell: SeriesTitleCell
+      name: 'seriesTitle',
+      label: 'Series'
     },
     {
-      name: 'episode',
-      label: 'Episode',
-      cell: EpisodeNumberCell,
+      name: 'episodeNumber',
       sortable: false
     },
     {
-      name: 'episode',
+      name: 'episodeTitle',
       label: 'Episode Title',
-      cell: EpisodeTitleCell,
       sortable: false
     },
     {
-      name: 'this',
-      label: 'Quality',
-      cell: HistoryQualityCell,
+      name: 'quality',
       sortable: false
     },
     {
-      name: 'date',
-      label: 'Date',
-      cell: RelativeDateCell
+      name: 'date'
     },
     {
-      name: 'this',
-      label: '',
-      cell: HistoryDetailsCell,
-      sortable: false
+      name: 'details',
+      label: ' '
     }
   ],
 
@@ -77,9 +58,10 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   _showTable(collection) {
-    this.history.show(new Backgrid.Grid({
-      columns: this.columns,
-      collection: collection,
+    this.history.show(new TableView({
+      collection: this.collection,
+      childView: HistoryRow,
+      headers: this.headers,
       className: 'table table-hover'
     }));
 
@@ -130,3 +112,5 @@ module.exports = Marionette.LayoutView.extend({
     });
   }
 });
+
+module.exports = HistoryLayout;

@@ -1,9 +1,9 @@
 const Handlebars = require('handlebars');
 
-function episodeStatus() {
-  const title = this.title || 'TBA';
+function episodeStatus(episode) {
+  const title = episode.title || 'TBA';
 
-  return new Handlebars.SafeString(`<a href="/episode/${this.id}" class="no-router">${title}</a>`);
+  return new Handlebars.SafeString(`<a href="/episode/${episode.id}" class="no-router">${title}</a>`);
 }
 
 module.exports = episodeStatus;
