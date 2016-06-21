@@ -232,10 +232,20 @@ namespace Sonarr.Http.REST
             {
                 pagingResource.SortKey = Request.Query.SortKey.ToString();
 
+                // For backwards compatibility with v2
                 if (Request.Query.SortDir != null)
                 {
                     pagingResource.SortDirection = Request.Query.SortDir.ToString()
                                                           .Equals("Asc", StringComparison.InvariantCultureIgnoreCase)
+                                                       ? SortDirection.Ascending
+                                                       : SortDirection.Descending;
+                }
+
+                // v3 uses SortDirection instead of SortDir to be consistent with every other use of it
+                if (Request.Query.SortDirection != null)
+                {
+                    pagingResource.SortDirection = Request.Query.SortDirection.ToString()
+                                                          .Equals("ascending", StringComparison.InvariantCultureIgnoreCase)
                                                        ? SortDirection.Ascending
                                                        : SortDirection.Descending;
                 }

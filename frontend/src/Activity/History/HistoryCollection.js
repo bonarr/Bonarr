@@ -11,7 +11,7 @@ var Collection = ServerSideCollection.extend({
   initialState: {
     pageSize: 15,
     sortKey: 'date',
-    sortDirection: 'desc'
+    sortDirection: 'descending'
   },
 
   filterModes: {
