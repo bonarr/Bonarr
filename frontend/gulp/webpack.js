@@ -80,7 +80,7 @@ const config = {
         exclude: /(node_modules|JsLibraries)/,
         loader: 'babel',
         query: {
-          presets: ['es2015']
+          presets: ['es2015', 'decorators-legacy', 'react', 'stage-2']
         }
       },
       // This is disabled until we drop the number of errors
@@ -93,7 +93,12 @@ const config = {
           helperDirs: handlebarsHelperDir,
           knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
         }
-      }]
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+      }
+    ]
   }
 };
 

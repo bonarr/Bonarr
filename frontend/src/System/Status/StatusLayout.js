@@ -1,24 +1,41 @@
-const Marionette = require('marionette');
-const AboutView = require('./About/AboutView');
-const DiskSpaceLayout = require('./DiskSpace/DiskSpaceLayout');
-const HealthLayout = require('./Health/HealthLayout');
-const MoreInfoView = require('./MoreInfo/MoreInfoView');
-const tpl = require('./StatusLayout.hbs');
+import Marionette from 'marionette';
+import tpl from'./StatusLayout.hbs';
 
-module.exports = Marionette.LayoutView.extend({
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import Status from './Status';
+
+const StatusLayout = Marionette.LayoutView.extend({
   template: tpl,
 
-  regions: {
-    about: '#about',
-    diskSpace: '#diskspace',
-    health: '#health',
-    moreInfo: '#more-info'
+  mountReact: function () {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <Status />
+      </Provider>,
+      this.el
+    );
+  },
+
+  unmountReact: function () {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    this.health.show(new HealthLayout());
-    this.diskSpace.show(new DiskSpaceLayout());
-    this.about.show(new AboutView());
-    this.moreInfo.show(new MoreInfoView());
+    this.mountReact();
+  },
+
+  onClose: function () {
+    this.unmountReact();
   }
 });
+
+export default StatusLayout;

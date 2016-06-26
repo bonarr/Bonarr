@@ -1,0 +1,21 @@
+.title {
+  line-height: 1.528571429;
+}
+
+.title {
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .title {
+    float: left;
+    width: 160px;
+    clear: left;
+    text-align: right;
+
+    /* Move to common location and use composes? */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
