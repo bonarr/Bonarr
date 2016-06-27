@@ -1,58 +1,41 @@
-const Marionette = require('marionette');
-const TableView = require('Table/TableView');
-const TaskRow = require('./TaskRow');
-const TaskCollection = require('./TaskCollection');
-const LoadingView = require('Shared/LoadingView');
-const tpl = require('./TaskLayout.hbs');
+import Marionette from 'marionette';
+import tpl from'./TaskLayout.hbs';
 
-module.exports = Marionette.LayoutView.extend({
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import TasksConnector from './TasksConnector';
+
+const StatusLayout = Marionette.LayoutView.extend({
   template: tpl,
 
-  regions: {
-    tasks: '#x-tasks'
+  mountReact: function () {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <TasksConnector />
+      </Provider>,
+      this.el
+    );
   },
 
-  headers: [
-    {
-      name: 'name',
-      label: 'Name'
-    },
-    {
-      name: 'interval',
-      label: 'Interval'
-    },
-    {
-      name: 'lastExecution',
-      label: 'Last Execution'
-    },
-    {
-      name: 'nextExecution',
-      label: 'Next Execution'
-    },
-    {
-      name: 'actions',
-      label: ''
+  unmountReact: function () {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
     }
-  ],
+  },
 
-  initialize() {
-    this.taskCollection = new TaskCollection();
-
-    this.taskCollection;
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    this.tasks.show(new LoadingView());
-
-    this.taskCollection.fetch().done(() => this._showTasks());
+    this.mountReact();
   },
 
-  _showTasks() {
-    this.tasks.show(new TableView({
-      headers: this.headers,
-      collection: this.taskCollection,
-      childView: TaskRow,
-      className: 'table table-hover'
-    }));
+  onClose: function () {
+    this.unmountReact();
   }
 });
+
+export default StatusLayout;

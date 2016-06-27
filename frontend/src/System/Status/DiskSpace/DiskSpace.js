@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-const FormatHelpers = require('Shared/FormatHelpers');
-import LoadingIndicator from 'Components/LoadingIndicator'
-import FieldSet from 'Components/FieldSet'
-import Table from 'Components/Table/Table'
-import TableBody from 'Components/Table/TableBody'
-import TableRow from 'Components/Table/TableRow'
-import TableRowCell from 'Components/Table/TableRowCell'
+import FormatHelpers from 'Shared/FormatHelpers';
+import LoadingIndicator from 'Components/LoadingIndicator';
+import FieldSet from 'Components/FieldSet';
+import Table from 'Components/Table/Table';
+import TableBody from 'Components/Table/TableBody';
+import TableRow from 'Components/Table/TableRow';
+import TableRowCell from 'Components/Table/TableRowCell';
 
 class DiskSpace extends Component {
 

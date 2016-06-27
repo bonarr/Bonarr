@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
+import styles from './Icon.css'
 
 class Icon extends Component {
 
@@ -13,7 +15,7 @@ class Icon extends Component {
 
     return (
       <i
-        className={className}
+        className={classNames(className, styles.icon)}
         title={title}
       >
 

@@ -1,0 +1,12 @@
+.interval {
+  width: 150px;
+}
+
+.lastExecution,
+.nextExecution {
+  width: 180px;
+}
+
+.actions {
+  width: 20px;
+}

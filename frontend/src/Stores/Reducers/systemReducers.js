@@ -13,8 +13,13 @@ const defaultState = {
     fetching: false,
     items: []
   },
-  
+
   diskSpace: {
+    fetching: false,
+    items: []
+  },
+
+  tasks: {
     fetching: false,
     items: []
   }

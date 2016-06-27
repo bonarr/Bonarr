@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import titleCase from 'Utilities/String/titleCase';
-import LoadingIndicator from 'Components/LoadingIndicator'
-import Icon from 'Components/Icon'
-import Link from 'Components/Link'
-import FieldSet from 'Components/FieldSet'
-import Table from 'Components/Table/Table'
-import TableBody from 'Components/Table/TableBody'
-import TableRow from 'Components/Table/TableRow'
-import TableRowCell from 'Components/Table/TableRowCell'
-import styles from './Health.css'
+import LoadingIndicator from 'Components/LoadingIndicator';
+import Icon from 'Components/Icon';
+import Link from 'Components/Link';
+import FieldSet from 'Components/FieldSet';
+import Table from 'Components/Table/Table';
+import TableBody from 'Components/Table/TableBody';
+import TableRow from 'Components/Table/TableRow';
+import TableRowCell from 'Components/Table/TableRowCell';
+import styles from './Health.css';
 
 class Health extends Component {
 

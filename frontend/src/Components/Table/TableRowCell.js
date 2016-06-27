@@ -7,11 +7,12 @@ class TableRowCell extends Component {
 
   render() {
     const {
-      children
+      children,
+      ...otherProps
     } = this.props;
 
     return (
-      <td>{children}</td>
+      <td {...otherProps}>{children}</td>
     );
   }
 

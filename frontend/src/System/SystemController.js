@@ -1,7 +1,7 @@
 var NzbDroneController = require('Shared/NzbDroneController');
 var StatusLayout = require('./Status/StatusLayout').default;
 var UpdateLayout = require('./Update/UpdateLayout');
-var TaskLayout = require('./Task/TaskLayout');
+var TaskLayout = require('./Task/TaskLayout').default;
 var BackupLayout = require('./Backup/BackupLayout');
 var LogLayout = require('./Logs/LogsLayout');
 

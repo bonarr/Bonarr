@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './FieldSet.css'
+import styles from './FieldSet.css';
 
 class FieldSet extends Component {
 

@@ -69,6 +69,29 @@ const systemActionHandlers = {
         dispatch(baseActions.fetchingCollection({ collection: 'diskSpace', fetching: false }));
       });
     };
+  },
+
+  [types.FETCH_TASKS](payload) {
+    return (dispatch, getState) => {
+      dispatch(baseActions.fetchingCollection({ collection: 'tasks', fetching: true }));
+
+      const promise = $.ajax({
+        url: '/system/task'
+      });
+
+      promise.done((data) => {
+        dispatch(baseActions.updateCollection({ collection: 'tasks', data }));
+
+      });
+
+      promise.fail(() => {
+        var f1 = 1;
+      });
+
+      promise.always(() => {
+        dispatch(baseActions.fetchingCollection({ collection: 'tasks', fetching: false }));
+      });
+    };
   }
 };
 
