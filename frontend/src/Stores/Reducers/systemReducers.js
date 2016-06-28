@@ -1,9 +1,10 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import fetching from './fetching';
-import fetchingCollection from './fetchingCollection';
-import update from './update';
-import updateCollection from './updateCollection';
+import createFetchingReducer from './createFetchingReducer';
+import createFetchingCollectionReducer from './createFetchingCollectionReducer';
+import createUpdateReducer from './createUpdateReducer';
+import createUpdateCollectionReducer from './createUpdateCollectionReducer';
+import createCollectionReducers from './createCollectionReducers';
 
 const defaultState = {
   fetchingStatus: false,
@@ -25,12 +26,18 @@ const defaultState = {
   }
 };
 
+const collectionNames = [
+  'health',
+  'diskSpace',
+  'tasks'
+];
+
 const systemReducers = handleActions({
 
-  [types.FETCHING]: fetching,
-  [types.FETCHING_COLLECTION]: fetchingCollection,
-  [types.UPDATE]: update,
-  [types.UPDATE_COLLECTION]: updateCollection
+  [types.FETCHING]: createFetchingReducer('status'),
+  [types.FETCHING_COLLECTION]: createCollectionReducers(collectionNames, createFetchingCollectionReducer),
+  [types.UPDATE]: createUpdateReducer('status'),
+  [types.UPDATE_COLLECTION]: createCollectionReducers(collectionNames, createUpdateCollectionReducer)
 
 }, defaultState);
 

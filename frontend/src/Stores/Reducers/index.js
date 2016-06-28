@@ -1,2 +1,4 @@
-export { default as system } from './systemReducers';
-// export * from './systemReducers';
+import { combineReducers } from 'redux';
+import system from './systemReducers';
+
+export default combineReducers({ system });
