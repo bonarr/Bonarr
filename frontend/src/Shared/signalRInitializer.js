@@ -1,6 +1,8 @@
-const $ = require('jquery');
-const vent = require('vent');
-const Messenger = require('Shared/Messenger');
+import $ from 'jquery';
+import vent from 'vent';
+import Messenger from 'Shared/Messenger';
+import appStore from 'Stores/appStore';
+import { updateCommand, finishCommand } from 'Stores/Actions/commandActions';
 
 require('signalR');
 
@@ -36,6 +38,12 @@ const signalRInitializer = {
     this.signalRconnection.received((message) => {
       console.debug('SignalR: received', message.name, message.body);
       vent.trigger(`server:${message.name}`, message.body);
+
+      const handler = this[message.name];
+
+      if (handler) {
+        handler(message.body.resource);
+      }
     });
 
     this.signalRconnection.reconnecting(() => {
@@ -72,7 +80,17 @@ const signalRInitializer = {
     });
 
     this.signalRconnection.start({ transport: ['longPolling'] });
+  },
+
+  command(resource) {
+    const state = resource.state;
+
+    if (state === 'completed') {
+      appStore.dispatch(finishCommand(resource));
+    } else {
+      appStore.dispatch(updateCommand(resource));
+    }
   }
 };
 
-module.exports = signalRInitializer;
+export default signalRInitializer;

@@ -1,26 +1,34 @@
+import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import CommandController from 'Commands/CommandController';
-import { fetchTasks } from 'Stores/Actions/systemActions'
+import { fetchTasks } from 'Stores/Actions/systemActions';
+import { executeCommand } from 'Stores/Actions/commandActions';
 import Tasks from './Tasks';
 
+// TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
-  // TODO: Get executing commands so we can show the spinner
-
   const {
     fetching,
     items
   } = state.system.tasks;
 
+  const commands = state.commands.items;
+
+  const tasks = items.map((task) => {
+    const executing = _.some(commands, { name: task.taskName });
+    return Object.assign({}, task, { executing })
+  });
+
   return {
     fetching,
-    items
+    items: tasks
   };
 }
 
 const mapDispatchToProps = {
-  fetchTasks
+  fetchTasks,
+  executeCommand
 };
 
 class TasksConnector extends Component {
@@ -36,8 +44,8 @@ class TasksConnector extends Component {
   // Listeners
 
   @autobind
-  onExecutePress(taskName) {
-    CommandController.execute(taskName, { name: taskName });
+  onExecutePress(name) {
+    this.props.executeCommand({ name });
   }
 
   //
@@ -54,7 +62,8 @@ class TasksConnector extends Component {
 }
 
 TasksConnector.propTypes = {
-  fetchTasks: PropTypes.func.isRequired
+  fetchTasks: PropTypes.func.isRequired,
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TasksConnector);
