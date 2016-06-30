@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import { handleActions } from 'redux-actions';
-import isSameCommand from 'Utilities/isSameCommand';
 import * as types from 'Stores/Actions/actionTypes';
 import createFetchingCollectionReducer from './createFetchingCollectionReducer';
 import createUpdateCollectionReducer from './createUpdateCollectionReducer';
@@ -25,7 +24,7 @@ const commandReducers = handleActions({
   },
   [types.UPDATE_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
-    const index = _.findIndex(newState.items, (command) => { return isSameCommand(command, payload) });
+    const index = _.findIndex(newState.items, { id: payload.id });
 
     if (index > -1) {
       newState.items[index] = payload;
@@ -38,7 +37,11 @@ const commandReducers = handleActions({
   [types.FINISH_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
 
-    newState.items = _.filter(newState.items, (command) => { return isSameCommand(command, payload) });
+    const index = _.findIndex(newState.items, { id: payload.id });
+
+    if (index > -1) {
+      newState.items.splice(index, 1);
+    }
 
     return newState;
   }

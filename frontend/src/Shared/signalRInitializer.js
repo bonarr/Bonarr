@@ -23,6 +23,18 @@ function getStatus(status) {
   }
 }
 
+const handlers = {
+  command(resource) {
+    const state = resource.state;
+
+    if (state === 'completed') {
+      appStore.dispatch(finishCommand(resource));
+    } else {
+      appStore.dispatch(updateCommand(resource));
+    }
+  }
+};
+
 const signalRInitializer = {
   init() {
     console.log('starting signalR');
@@ -39,7 +51,7 @@ const signalRInitializer = {
       console.debug('SignalR: received', message.name, message.body);
       vent.trigger(`server:${message.name}`, message.body);
 
-      const handler = this[message.name];
+      const handler = handlers[message.name];
 
       if (handler) {
         handler(message.body.resource);
@@ -80,16 +92,6 @@ const signalRInitializer = {
     });
 
     this.signalRconnection.start({ transport: ['longPolling'] });
-  },
-
-  command(resource) {
-    const state = resource.state;
-
-    if (state === 'completed') {
-      appStore.dispatch(finishCommand(resource));
-    } else {
-      appStore.dispatch(updateCommand(resource));
-    }
   }
 };
 
