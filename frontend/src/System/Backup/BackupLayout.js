@@ -1,15 +1,17 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var TableView = require('Table/TableView');
-var BackupRow = require('./BackupRow');
-var BackupCollection = require('./BackupCollection');
-var EmptyView = require('./BackupEmptyView');
-var LoadingView = require('Shared/LoadingView');
+import vent from 'vent';
+import Marionette from 'marionette';
+import tpl from './BackupLayout.hbs';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import BackupsConnector from './BackupsConnector';
 
 module.exports = Marionette.LayoutView.extend({
   template: 'System/Backup/BackupLayoutTemplate',
 
-  regions: {
+  ui: {
     backups: '#x-backups'
   },
 
@@ -45,30 +47,34 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   initialize() {
-    this.backupCollection = new BackupCollection();
-
-    this.listenTo(this.backupCollection, 'sync', this._showBackups);
-    this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
     this._showActionBar();
   },
 
-  onRender() {
-    this.backups.show(new LoadingView());
-
-    this.backupCollection.fetch();
+  mountReact: function () {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <BackupsConnector />
+      </Provider>,
+      this.ui.backups[0]
+    );
   },
 
-  _showBackups() {
-    if (this.backupCollection.length === 0) {
-      this.backups.show(new EmptyView());
-    } else {
-      this.backups.show(new TableView({
-        collection: this.backupCollection,
-        childView: BackupRow,
-        headers: this.headers,
-        className: 'table table-hover'
-      }));
+  unmountReact: function () {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.ui.backups[0]);
     }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
+  },
+
+  onRender() {
+    this.mountReact();
+  },
+
+  onClose: function () {
+    this.unmountReact();
   },
 
   _showActionBar() {
@@ -89,11 +95,5 @@ module.exports = Marionette.LayoutView.extend({
       parentView: this,
       actions: actions
     });
-  },
-
-  _commandComplete(options) {
-    if (options.command.get('name') === 'backup') {
-      this.backupCollection.fetch();
-    }
   }
 });

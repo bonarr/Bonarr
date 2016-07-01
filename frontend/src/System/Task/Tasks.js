@@ -12,6 +12,29 @@ import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
 import styles from './Tasks.css'
 
+const headers = [
+  {
+    name: 'name',
+    label: 'Name'
+  },
+  {
+    name: 'interval',
+    label: 'Interval'
+  },
+  {
+    name: 'lastExecution',
+    label: 'Last Execution'
+  },
+  {
+    name: 'nextExecution',
+    label: 'Next Execution'
+  },
+  {
+    name: 'actions',
+    label: ''
+  }
+];
+
 class Tasks extends Component {
 
   //
@@ -23,29 +46,6 @@ class Tasks extends Component {
       items,
       onExecutePress
     } = this.props;
-
-    const headers = [
-      {
-        name: 'name',
-        label: 'Name'
-      },
-      {
-        name: 'interval',
-        label: 'Interval'
-      },
-      {
-        name: 'lastExecution',
-        label: 'Last Execution'
-      },
-      {
-        name: 'nextExecution',
-        label: 'Next Execution'
-      },
-      {
-        name: 'actions',
-        label: ''
-      }
-    ];
 
     return (
       <div>

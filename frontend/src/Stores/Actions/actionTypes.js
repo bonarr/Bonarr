@@ -14,6 +14,7 @@ export const FETCH_STATUS = 'FETCH_STATUS';
 export const FETCH_HEALTH = 'FETCH_HEALTH';
 export const FETCH_DISK_SPACE = 'FETCH_DISK_SPACE';
 export const FETCH_TASKS = 'FETCH_TASKS';
+export const FETCH_BACKUPS = 'FETCH_BACKUPS';
 
 //
 // Commands
