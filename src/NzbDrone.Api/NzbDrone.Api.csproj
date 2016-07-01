@@ -93,11 +93,6 @@
     <Compile Include="Calendar\CalendarModule.cs" />
     <Compile Include="Commands\CommandModule.cs" />
     <Compile Include="Commands\CommandResource.cs" />
-    <Compile Include="Extensions\AccessControlHeaders.cs" />
-    <Compile Include="Extensions\Pipelines\CorsPipeline.cs" />
-    <Compile Include="Extensions\Pipelines\RequestLoggingPipeline.cs" />
-    <Compile Include="Frontend\Mappers\LoginHtmlMapper.cs" />
-    <Compile Include="Frontend\Mappers\RobotsTxtMapper.cs" />
     <Compile Include="Indexers\ReleaseModuleBase.cs" />
     <Compile Include="Indexers\ReleasePushModule.cs" />
     <Compile Include="NzbDroneFeedModule.cs" />

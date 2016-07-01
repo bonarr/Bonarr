@@ -88,6 +88,7 @@
     <Compile Include="Extensions\Pipelines\GZipPipeline.cs" />
     <Compile Include="Extensions\Pipelines\IfModifiedPipeline.cs" />
     <Compile Include="Extensions\Pipelines\IRegisterNancyPipeline.cs" />
+    <Compile Include="Extensions\Pipelines\RequestLoggingPipeline.cs" />
     <Compile Include="Extensions\Pipelines\SonarrVersionPipeline.cs" />
     <Compile Include="Extensions\ReqResExtensions.cs" />
     <Compile Include="Extensions\RequestExtensions.cs" />

@@ -6,6 +6,8 @@ using Nancy.Bootstrapper;
 using NLog;
 using NzbDrone.Api.ErrorManagement;
 using NzbDrone.Common.Extensions;
+using Sonarr.Http.Extensions;
+using Sonarr.Http.Extensions.Pipelines;
 
 namespace NzbDrone.Api.Extensions.Pipelines
 {

@@ -89,7 +89,7 @@ namespace Sonarr.Api.V3.Indexers
         {
             try
             {
-                var decisions = _nzbSearchService.EpisodeSearch(episodeId);
+                var decisions = _nzbSearchService.EpisodeSearch(episodeId, true);
                 var prioritizedDecisions = _prioritizeDownloadDecision.PrioritizeDecisions(decisions);
 
                 return MapDecisions(prioritizedDecisions);
