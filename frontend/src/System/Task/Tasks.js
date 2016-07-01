@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import longDateTime from 'Utilities/Date/longDateTime';
@@ -61,7 +62,6 @@ class Tasks extends Component {
               <TableBody>
                 {
                   items.map((item) => {
-                    console.log(`${item.taskName}: ${item.executing}`);
                     const disabled = item.interval === 0;
                     const executeNow = !disabled && moment().isAfter(item.nextExecution);
                     const hasNextExecutionTime = !disabled && !executeNow;
@@ -118,13 +118,11 @@ class Tasks extends Component {
                             data-task-name={item.taskName}
                           >
                             {
-                              item.executing &&
-                                <Icon className="icon-sonarr-refresh fa-spin"/>
-                            }
-
-                            {
-                              !item.executing &&
-                                <Icon className="icon-sonarr-refresh"/>
+                              <Icon className={classNames(
+                                  'icon-sonarr-refresh',
+                                  item.executing && 'fa-spin'
+                                )}
+                              />
                             }
                           </Link>
                         </TableRowCell>
