@@ -28,6 +28,11 @@ const defaultState = {
   backups: {
     fetching: false,
     items: []
+  },
+
+  updates: {
+    fetching: false,
+    items: []
   }
 };
 
@@ -35,7 +40,8 @@ const collectionNames = [
   'health',
   'diskSpace',
   'tasks',
-  'backups'
+  'backups',
+  'updates'
 ];
 
 const systemReducers = handleActions({
