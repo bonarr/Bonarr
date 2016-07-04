@@ -22,7 +22,7 @@ class Updates extends Component {
 
     const hasUpdates = !fetching && items.length > 0;
     const noUpdates = !fetching && !items.length;
-    const hasUpdateToInstall = _.some(items, { installable: true, latest: true });
+    const hasUpdateToInstall = hasUpdates && _.some(items, { installable: true, latest: true });
     const noUpdateToInstall = hasUpdates && !hasUpdateToInstall;
 
     return (
