@@ -41,10 +41,15 @@ class Link extends Component {
       linkProps.target = to.startsWith('http') ? '_blank' : '_self';
     }
 
+    if (el === 'button' || el === 'input') {
+      linkProps.type = otherProps.type || 'button';
+      linkProps.disabled = disabled;
+    }
+
     linkProps.className = classNames(
       className,
       styles.link,
-      disabled && styles.disabled
+      disabled && 'disabled'
     );
 
     return (

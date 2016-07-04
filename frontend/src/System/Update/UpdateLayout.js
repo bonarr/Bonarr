@@ -1,28 +1,38 @@
-var Marionette = require('marionette');
-var UpdateCollection = require('./UpdateCollection');
-var UpdateCollectionView = require('./UpdateCollectionView');
-var LoadingView = require('Shared/LoadingView');
+import Marionette from 'marionette';
+import tpl from './UpdateLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import UpdatesConnector from './UpdatesConnector';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Update/UpdateLayoutTemplate',
+  template: tpl,
 
-  regions: {
-    updates: '#x-updates'
+  mountReact: function () {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <UpdatesConnector />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.updateCollection = new UpdateCollection();
+  unmountReact: function () {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
 
-    this.listenTo(this.updateCollection, 'sync', this._showUpdates);
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    this.updates.show(new LoadingView());
-
-    this.updateCollection.fetch();
+    this.mountReact();
   },
 
-  _showUpdates() {
-    this.updates.show(new UpdateCollectionView({ collection: this.updateCollection }));
+  onClose: function () {
+    this.unmountReact();
   }
 });

@@ -9,13 +9,14 @@ class Icon extends Component {
 
   render() {
     const {
+      name,
       className,
       title
     } = this.props;
 
     return (
       <i
-        className={classNames(className, styles.icon)}
+        className={classNames(name, className, styles.icon)}
         title={title}
       >
 
@@ -26,7 +27,8 @@ class Icon extends Component {
 }
 
 Icon.propTypes = {
-  className: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string,
   title: PropTypes.string
 };
 

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import classNames from 'classnames';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import longDateTime from 'Utilities/Date/longDateTime';
@@ -118,10 +117,9 @@ class Tasks extends Component {
                             data-task-name={item.taskName}
                           >
                             {
-                              <Icon className={classNames(
-                                  'icon-sonarr-refresh',
-                                  item.executing && 'fa-spin'
-                                )}
+                              <Icon
+                                name="icon-sonarr-refresh"
+                                {...item.executing ? {className: 'fa-spin'} : {}}
                               />
                             }
                           </Link>

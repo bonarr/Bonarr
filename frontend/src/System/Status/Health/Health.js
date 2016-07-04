@@ -68,7 +68,7 @@ class Health extends Component {
                       >
                         <TableRowCell>
                           <Icon
-                            className={`icon-sonarr-health-${item.type.toLowerCase()}`}
+                            name={`icon-sonarr-health-${item.type.toLowerCase()}`}
                             title={titleCase(item.type)}
                           />
                         </TableRowCell>

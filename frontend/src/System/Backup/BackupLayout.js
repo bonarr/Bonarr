@@ -1,7 +1,6 @@
 import vent from 'vent';
 import Marionette from 'marionette';
 import tpl from './BackupLayout.hbs';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -9,7 +8,7 @@ import appStore from 'Stores/appStore';
 import BackupsConnector from './BackupsConnector';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Backup/BackupLayoutTemplate',
+  template: tpl,
 
   ui: {
     backups: '#x-backups'

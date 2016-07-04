@@ -31,20 +31,11 @@ class BackupsConnector extends Component {
   }
 
   //
-  // Listeners
-
-  @autobind
-  onExecutePress(name) {
-    this.props.executeCommand({ name });
-  }
-
-  //
   // Render
 
   render() {
     return (
       <Backups
-        onExecutePress={this.onExecutePress}
         {...this.props}
       />
     )

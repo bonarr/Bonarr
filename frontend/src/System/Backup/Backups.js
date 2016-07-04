@@ -36,7 +36,7 @@ class Backups extends Component {
       items
     } = this.props;
 
-    const hasBackups = !fetching && items.length;
+    const hasBackups = !fetching && items.length > 0;
     const noBackups = !fetching && !items.length;
 
     return (
@@ -76,7 +76,7 @@ class Backups extends Component {
                       iconClassName = 'icon-sonarr-backup-update';
                       iconTooltip = 'Before update';
                     }
-                    
+
                     return (
                       <TableRow
                         key={id}
@@ -85,7 +85,10 @@ class Backups extends Component {
                           className={styles.type}
                         >
                           {
-                            <Icon className={iconClassName} title={iconTooltip}/>
+                            <Icon
+                              name={iconClassName}
+                              title={iconTooltip}
+                            />
                           }
                         </TableRowCell>
 

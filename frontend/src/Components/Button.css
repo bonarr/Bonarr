@@ -1,0 +1,37 @@
+.button {
+  composes: link from './Link.css';
+
+  padding: 6px 16px;
+  overflow: hidden;
+  border: 1px solid ;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-align: center;
+  white-space: nowrap;
+
+  &:global(.disabled) {
+     opacity: .65;
+  }
+}
+
+.default {
+  color: $defaultColor;
+  background-color: $defaultBackgroundColor;
+  border-color: $defaultBorderColor;
+
+  &:hover {
+     background-color: $defaultHoverBackgroundColor;
+     border-color: $defaultHoverBorderColor;
+  }
+}
+
+.primary {
+  color: $white;
+  background-color: $primaryBackgroundColor;
+  border-color: $primaryBorderColor;
+
+  &:hover {
+     background-color: $primaryHoverBackgroundColor;
+     border-color: $primaryHoverBorderColor;
+  }
+}

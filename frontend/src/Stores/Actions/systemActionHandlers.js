@@ -29,7 +29,8 @@ const systemActionHandlers = {
   [types.FETCH_HEALTH]: createFetchCollectionHandler('health', '/health'),
   [types.FETCH_DISK_SPACE]: createFetchCollectionHandler('diskSpace', '/diskspace'),
   [types.FETCH_TASKS]: createFetchCollectionHandler('tasks', '/system/task'),
-  [types.FETCH_BACKUPS]: createFetchCollectionHandler('backups', '/system/backup')
+  [types.FETCH_BACKUPS]: createFetchCollectionHandler('backups', '/system/backup'),
+  [types.FETCH_UPDATES]: createFetchCollectionHandler('updates', '/update')
 };
 
 export default systemActionHandlers;
