@@ -34,10 +34,10 @@ namespace Sonarr.Api.V3.Episodes
             if (Request.Query.SeasonNumber.HasValue)
             {
                 var seasonNumber = (int)Request.Query.SeasonNumber;
-                return ToListResource(() => _renameEpisodeFileService.GetRenamePreviews(seriesId, seasonNumber));
+                return _renameEpisodeFileService.GetRenamePreviews(seriesId, seasonNumber).ToResource();
             }
 
-            return ToListResource(() => _renameEpisodeFileService.GetRenamePreviews(seriesId));
+            return _renameEpisodeFileService.GetRenamePreviews(seriesId).ToResource();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Sonarr.Api.V3.Health
 
         private List<HealthResource> GetHealth()
         {
-            return ToListResource(_healthCheckService.Results);
+            return _healthCheckService.Results().ToResource();
         }
 
         public void Handle(HealthCheckCompleteEvent message)

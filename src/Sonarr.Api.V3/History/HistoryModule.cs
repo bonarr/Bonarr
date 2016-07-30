@@ -4,6 +4,8 @@ using NzbDrone.Core.Datastore;
 using NzbDrone.Core.DecisionEngine;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.History;
+using Sonarr.Api.V3.Episodes;
+using Sonarr.Api.V3.Series;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
 
@@ -27,15 +29,16 @@ namespace Sonarr.Api.V3.History
             Post["/failed"] = x => MarkAsFailed();
         }
 
-        protected override HistoryResource ToResource<TModel>(TModel model)
+        protected HistoryResource MapToResource(NzbDrone.Core.History.History model)
         {
-            var resource = base.ToResource(model);
+            var resource = model.ToResource();
 
-            var history = model as NzbDrone.Core.History.History;
+            resource.Series = model.Series.ToResource();
+            resource.Episode = model.Episode.ToResource();
 
-            if (history != null && history.Series != null)
+            if (model.Series != null)
             {
-                resource.QualityCutoffNotMet = _qualityUpgradableSpecification.CutoffNotMet(history.Series.Profile.Value, history.Quality);
+                resource.QualityCutoffNotMet = _qualityUpgradableSpecification.CutoffNotMet(model.Series.Profile.Value, model.Quality);
             }
 
             return resource;
@@ -63,7 +66,7 @@ namespace Sonarr.Api.V3.History
                 pagingSpec.FilterExpression = h => h.EpisodeId == episodeId;
             }
 
-            return ApplyToPage(_historyService.Paged, pagingSpec);
+            return ApplyToPage(_historyService.Paged, pagingSpec, MapToResource);
         }
 
         private Response MarkAsFailed()

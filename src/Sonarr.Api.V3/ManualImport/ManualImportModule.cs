@@ -26,7 +26,7 @@ namespace Sonarr.Api.V3.ManualImport
             var downloadIdQuery = Request.Query.downloadId;
             var downloadId = (string)downloadIdQuery.Value;
 
-            return ToListResource(_manualImportService.GetMediaFiles(folder, downloadId)).Select(AddQualityWeight).ToList();
+            return _manualImportService.GetMediaFiles(folder, downloadId).ToResource().Select(AddQualityWeight).ToList();
         }
 
         private ManualImportResource AddQualityWeight(ManualImportResource item)

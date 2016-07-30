@@ -55,7 +55,7 @@ namespace Sonarr.Api.V3.Commands
 
         private List<CommandResource> GetStartedCommands()
         {
-            return ToListResource(_commandQueueManager.GetStarted());
+            return _commandQueueManager.GetStarted().ToResource();
         }
 
         public void Handle(CommandUpdatedEvent message)

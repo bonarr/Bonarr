@@ -41,7 +41,7 @@ namespace Sonarr.Api.V3.Wanted
                 pagingSpec.FilterExpression = v => v.Monitored == true && v.Series.Monitored == true;
             }
 
-            PagingResource<EpisodeResource> resource = ApplyToPage(_episodeCutoffService.EpisodesWhereCutoffUnmet, pagingSpec);
+            var resource = ApplyToPage(_episodeCutoffService.EpisodesWhereCutoffUnmet, pagingSpec, v => MapToResource(v, true, true));
 
             return resource;
         }

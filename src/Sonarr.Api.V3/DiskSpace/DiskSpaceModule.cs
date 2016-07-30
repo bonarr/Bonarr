@@ -17,7 +17,7 @@ namespace Sonarr.Api.V3.DiskSpace
 
         public List<DiskSpaceResource> GetFreeSpace()
         {
-            return ToListResource(_diskSpaceService.GetFreeSpace);
+            return _diskSpaceService.GetFreeSpace().ConvertAll(DiskSpaceResourceMapper.MapToResource);
         }
     }
 }

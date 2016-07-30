@@ -50,7 +50,8 @@ namespace Sonarr.Api.V3.Profiles.Delay
 
         private void Update(DelayProfileResource resource)
         {
-            GetNewId<DelayProfile>(_delayProfileService.Update, resource);
+            var model = resource.ToModel();
+            _delayProfileService.Update(model);
         }
 
         private DelayProfileResource GetById(int id)

@@ -1,5 +1,6 @@
 ﻿using NzbDrone.Core.Parser;
-using NzbDrone.Core.Parser.Model;
+using Sonarr.Api.V3.Episodes;
+using Sonarr.Api.V3.Series;
 using Sonarr.Http;
 
 namespace Sonarr.Api.V3.Parse
@@ -17,7 +18,7 @@ namespace Sonarr.Api.V3.Parse
 
         private ParseResource Parse()
         {
-            var title = Request.Query.Title.Value;
+            var title = Request.Query.Title.Value as string;
             var parsedEpisodeInfo = Parser.ParseTitle(title);
 
             if (parsedEpisodeInfo == null)
@@ -27,24 +28,24 @@ namespace Sonarr.Api.V3.Parse
 
             var remoteEpisode = _parsingService.Map(parsedEpisodeInfo, 0, 0);
 
-            if (remoteEpisode == null)
+            if (remoteEpisode != null)
             {
-                remoteEpisode = new RemoteEpisode
-                                {
-                                    ParsedEpisodeInfo = parsedEpisodeInfo
-                                };
-
                 return new ParseResource
-                       {
-                           Title = title,
-                           ParsedEpisodeInfo = parsedEpisodeInfo
-                       };
+                {
+                    Title = title,
+                    ParsedEpisodeInfo = remoteEpisode.ParsedEpisodeInfo,
+                    Series = remoteEpisode.Series.ToResource(),
+                    Episodes = remoteEpisode.Episodes.ToResource()
+                };
             }
-
-            var resource = ToResource(remoteEpisode);
-            resource.Title = title;
-
-            return resource;
+            else
+            {
+                return new ParseResource
+                {
+                    Title = title,
+                    ParsedEpisodeInfo = parsedEpisodeInfo
+                };
+            }
         }
     }
 }

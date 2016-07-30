@@ -43,14 +43,16 @@ namespace Sonarr.Api.V3.RemotePathMappings
             return _remotePathMappingService.Get(id).InjectTo<RemotePathMappingResource>();
         }
 
-        private int CreateMapping(RemotePathMappingResource rootFolderResource)
+        private int CreateMapping(RemotePathMappingResource resource)
         {
-            return GetNewId<RemotePathMapping>(_remotePathMappingService.Add, rootFolderResource);
+            var model = resource.ToModel();
+
+            return _remotePathMappingService.Add(model).Id;
         }
 
         private List<RemotePathMappingResource> GetMappings()
         {
-            return ToListResource(_remotePathMappingService.All);
+            return _remotePathMappingService.All().ToResource();
         }
 
         private void DeleteMapping(int id)

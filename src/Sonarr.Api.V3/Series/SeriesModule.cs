@@ -103,7 +103,7 @@ namespace Sonarr.Api.V3.Series
         private List<SeriesResource> AllSeries()
         {
             var seriesStats = _seriesStatisticsService.SeriesStatistics();
-            var seriesResources = ToListResource(_seriesService.GetAllSeries);
+            var seriesResources = _seriesService.GetAllSeries().ToResource();
 
             MapCoversToLocal(seriesResources.ToArray());
             LinkSeriesStatistics(seriesResources, seriesStats);
@@ -121,7 +121,9 @@ namespace Sonarr.Api.V3.Series
 
         private void UpdateSeries(SeriesResource seriesResource)
         {
-            GetNewId<NzbDrone.Core.Tv.Series>(_seriesService.UpdateSeries, seriesResource);
+            var model = seriesResource.ToModel(_seriesService.GetSeries(seriesResource.Id));
+
+            _seriesService.UpdateSeries(model);
 
             BroadcastResourceChange(ModelAction.Updated, seriesResource);
         }

@@ -6,7 +6,6 @@ using NzbDrone.Api.Series;
 using NzbDrone.Core.History;
 using NzbDrone.Core.Qualities;
 
-
 namespace NzbDrone.Api.History
 {
     public class HistoryResource : RestResource

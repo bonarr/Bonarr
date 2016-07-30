@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.DecisionEngine;
 using NzbDrone.Core.Download;
@@ -8,6 +9,7 @@ using NzbDrone.Core.MediaFiles.Events;
 using NzbDrone.Core.Messaging.Events;
 using NzbDrone.Core.Tv;
 using NzbDrone.SignalR;
+using Sonarr.Api.V3.EpisodeFiles;
 using Sonarr.Api.V3.Series;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
@@ -53,34 +55,58 @@ namespace Sonarr.Api.V3.Episodes
         protected EpisodeResource GetEpisode(int id)
         {
             var episode = _episodeService.GetEpisode(id);
-            episode.EpisodeFile.LazyLoad();
-            episode.Series = _seriesService.GetSeries(episode.SeriesId);
-            return ToResource(episode);
+            var resource = MapToResource(episode, true, true);
+            return resource;
         }
 
-        protected override EpisodeResource ToResource<TModel>(TModel model)
+        protected EpisodeResource MapToResource(Episode episode, bool includeSeries, bool includeEpisodeFile)
         {
-            var resource = base.ToResource(model);
+            var resource = episode.ToResource();
 
-            var episode = model as Episode;
-            if (episode != null)
+            if (includeSeries || includeEpisodeFile)
             {
-                if (episode.EpisodeFile.IsLoaded && episode.EpisodeFile.Value != null)
+                var series = episode.Series ?? _seriesService.GetSeries(episode.SeriesId);
+
+                if (includeSeries)
                 {
-                    resource.EpisodeFile.Path = Path.Combine(episode.Series.Path, episode.EpisodeFile.Value.RelativePath);
-                    resource.EpisodeFile.QualityCutoffNotMet = _qualityUpgradableSpecification.CutoffNotMet(episode.Series.Profile.Value, episode.EpisodeFile.Value.Quality);
+                    resource.Series = series.ToResource();
+                }
+                if (includeEpisodeFile && episode.EpisodeFileId != 0)
+                {
+                    resource.EpisodeFile = episode.EpisodeFile.Value.ToResource(series, _qualityUpgradableSpecification);
                 }
             }
 
             return resource;
         }
 
-        protected override List<EpisodeResource> ToListResource<TModel>(IEnumerable<TModel> modelList)
+        protected List<EpisodeResource> MapToResource(List<Episode> episodes, bool includeSeries, bool includeEpisodeFile)
         {
-            var resources =  base.ToListResource(modelList);
+            var result = episodes.ToResource();
 
-            return LoadSeries(resources);
+            if (includeSeries || includeEpisodeFile)
+            {
+                var seriesDict = new Dictionary<int, NzbDrone.Core.Tv.Series>();
+                for (var i = 0; i < episodes.Count; i++)
+                {
+                    var episode = episodes[i];
+                    var resource = result[i];
 
+                    var series = episode.Series ?? seriesDict.GetValueOrDefault(episodes[i].SeriesId) ?? _seriesService.GetSeries(episodes[i].SeriesId);
+                    seriesDict[series.Id] = series;
+
+                    if (includeSeries)
+                    {
+                        resource.Series = series.ToResource();
+                    }
+                    if (includeEpisodeFile && episodes[i].EpisodeFileId != 0)
+                    {
+                        resource.EpisodeFile = episodes[i].EpisodeFile.Value.ToResource(series, _qualityUpgradableSpecification);
+                    }
+                }
+            }
+
+            return result;
         }
 
         public void Handle(EpisodeGrabbedEvent message)

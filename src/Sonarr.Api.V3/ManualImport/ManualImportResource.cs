@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using NzbDrone.Common.Crypto;
 using NzbDrone.Core.DecisionEngine;
+using NzbDrone.Core.MediaFiles.EpisodeImport.Manual;
 using NzbDrone.Core.Qualities;
 using Sonarr.Api.V3.Episodes;
 using Sonarr.Api.V3.Series;
@@ -20,13 +23,34 @@ namespace Sonarr.Api.V3.ManualImport
         public int QualityWeight { get; set; }
         public string DownloadId { get; set; }
         public IEnumerable<Rejection> Rejections { get; set; }
+    }
 
-        public int Id
+    public static class ManualImportResourceMapper
+    {
+        public static ManualImportResource ToResource(this ManualImportItem model)
         {
-            get
+            if (model == null) return null;
+
+            return new ManualImportResource
             {
-                return Path.GetHashCode();
-            }
+                Id = HashConverter.GetHashInt31(model.Path),
+                Path = model.Path,
+                RelativePath = model.RelativePath,
+                Name = model.Name,
+                Size = model.Size,
+                Series = model.Series.ToResource(),
+                SeasonNumber = model.SeasonNumber,
+                Episodes = model.Episodes.ToResource(),
+                Quality = model.Quality,
+                //QualityWeight
+                DownloadId = model.DownloadId,
+                Rejections = model.Rejections
+            };
+        }
+
+        public static List<ManualImportResource> ToResource(this IEnumerable<ManualImportItem> models)
+        {
+            return models.Select(ToResource).ToList();
         }
     }
 }

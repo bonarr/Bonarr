@@ -25,7 +25,7 @@ namespace Sonarr.Api.V3.Queue
 
         private List<QueueResource> GetQueue()
         {
-            return ToListResource(GetQueueItems);
+            return GetQueueItems().ToResource();
         }
 
         private IEnumerable<NzbDrone.Core.Queue.Queue> GetQueueItems()

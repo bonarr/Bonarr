@@ -25,7 +25,7 @@ namespace Sonarr.Api.V3.Blacklist
                                      SortDirection = pagingResource.SortDirection
                                  };
 
-            return ApplyToPage(_blacklistService.Paged, pagingSpec);
+            return ApplyToPage(_blacklistService.Paged, pagingSpec, BlacklistResourceMapper.MapToResource);
         }
 
         private void DeleteBlacklist(int id)

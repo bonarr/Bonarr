@@ -49,7 +49,7 @@ namespace Sonarr.Api.V3.Logs
                 }
             }
 
-            var response = ApplyToPage(_logService.Paged, pageSpec);
+            var response = ApplyToPage(_logService.Paged, pageSpec, LogResourceMapper.ToResource);
             response.SortKey = pageSpec.SortKey;
 
             return response;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using NzbDrone.Core.Messaging.Commands;
 using Sonarr.Http.REST;
@@ -91,5 +93,38 @@ namespace Sonarr.Api.V3.Commands
         }
 
         public DateTime? LastExecutionTime { get; set; }
+    }
+
+    public static class CommandResourceMapper
+    {
+        public static CommandResource ToResource(this CommandModel model)
+        {
+            if (model == null) return null;
+
+            return new CommandResource
+            {
+                Id = model.Id,
+
+                Name = model.Name,
+                Message = model.Message,
+                Body = model.Body,
+                Priority = model.Priority,
+                Status = model.Status,
+                Queued = model.QueuedAt,
+                Started = model.StartedAt,
+                Ended = model.EndedAt,
+                Duration = model.Duration,
+                Exception = model.Exception,
+                Trigger = model.Trigger,
+
+                CompletionMessage = model.Body.CompletionMessage,
+                LastExecutionTime = model.Body.LastExecutionTime
+            };
+        }
+
+        public static List<CommandResource> ToResource(this IEnumerable<CommandModel> models)
+        {
+            return models.Select(ToResource).ToList();
+        }
     }
 }

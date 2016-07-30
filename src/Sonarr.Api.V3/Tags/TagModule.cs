@@ -32,7 +32,7 @@ namespace Sonarr.Api.V3.Tags
 
         private List<TagResource> GetAll()
         {
-            return ToListResource(_tagService.All);
+            return _tagService.All().ToResource();
         }
 
         private int Create(TagResource resource)

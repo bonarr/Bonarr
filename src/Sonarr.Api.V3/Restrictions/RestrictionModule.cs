@@ -40,7 +40,7 @@ namespace Sonarr.Api.V3.Restrictions
 
         private List<RestrictionResource> GetAll()
         {
-            return ToListResource(_restrictionService.All);
+            return _restrictionService.All().ToResource();
         }
 
         private int Create(RestrictionResource resource)

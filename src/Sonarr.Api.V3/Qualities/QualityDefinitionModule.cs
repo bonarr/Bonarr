@@ -33,7 +33,7 @@ namespace Sonarr.Api.V3.Qualities
 
         private List<QualityDefinitionResource> GetAll()
         {
-            return ToListResource(_qualityDefinitionService.All);
+            return _qualityDefinitionService.All().ToResource();
         }
     }
 }
