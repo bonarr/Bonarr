@@ -52,7 +52,7 @@ namespace Sonarr.Http
                 SortDirection = pagingSpec.SortDirection,
                 SortKey = pagingSpec.SortKey,
                 TotalRecords = pagingSpec.TotalRecords,
-                Records = ToListResource(pagingSpec.Records)
+                Records = pagingSpec.Records.ConvertAll(mapper)
             };
         }
     }
