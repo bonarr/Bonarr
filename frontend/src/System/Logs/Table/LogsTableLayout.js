@@ -1,16 +1,15 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var LogTimeCell = require('./LogTimeCell');
-var LogLevelCell = require('./LogLevelCell');
-var LogRow = require('./LogRow');
-var GridPager = require('Shared/Grid/Pager');
-var LogCollection = require('../LogsCollection');
-var LoadingView = require('Shared/LoadingView');
-require('jQuery/jquery.spin');
+import vent from 'vent';
+import Marionette from 'marionette';
+import tpl from './LogsTableLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import { fetchLogs } from 'Stores/Actions/systemActions';
+import LogsTableConnector from './LogsTableConnector';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Logs/Table/LogsTableLayoutTemplate',
+  template: tpl,
 
   regions: {
     grid: '#x-grid',
@@ -21,66 +20,41 @@ module.exports = Marionette.LayoutView.extend({
     id: 'logs-screen'
   },
 
-  columns: [
-    {
-      name: 'level',
-      label: '',
-      sortable: true,
-      cell: LogLevelCell
-    },
-    {
-      name: 'logger',
-      label: 'Component',
-      sortable: true,
-      cell: Backgrid.StringCell.extend({
-        className: 'log-logger-cell'
-      })
-    },
-    {
-      name: 'message',
-      label: 'Message',
-      sortable: false,
-      cell: Backgrid.StringCell.extend({
-        className: 'log-message-cell'
-      })
-    },
-    {
-      name: 'time',
-      label: 'Time',
-      cell: LogTimeCell
-    }
-  ],
-
   initialize() {
-    this.collection = new LogCollection();
-
-    this.listenTo(this.collection, 'sync', this._showTable);
     this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
 
     this._showActionBar();
   },
 
-  onRender() {
-    this.grid.show(new LoadingView());
-    this.collection.fetch();
+  mountReact() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <LogsTableConnector />
+      </Provider>,
+      this.el
+    );
   },
 
-  _showTable() {
-    this.grid.show(new Backgrid.Grid({
-      row: LogRow,
-      columns: this.columns,
-      collection: this.collection,
-      className: 'table table-hover'
-    }));
+  unmountReact() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
 
-    this.pager.show(new GridPager({
-      columns: this.columns,
-      collection: this.collection
-    }));
+  onBeforeRender() {
+    this.unmountReact();
+  },
+
+  onRender() {
+    this.mountReact();
+  },
+
+  onClose() {
+    this.unmountReact();
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       type: 'default',
       storeState: false,
       items: [
@@ -97,7 +71,7 @@ module.exports = Marionette.LayoutView.extend({
       ]
     };
 
-    var filteringOptions = {
+    const filteringOptions = {
       type: 'radio',
       storeState: true,
       menuKey: 'logs.filterMode',
@@ -129,18 +103,13 @@ module.exports = Marionette.LayoutView.extend({
     vent.trigger(vent.Commands.OpenActionBarCommand, {
       parentView: this,
       collection: this.collection,
-      actions: actions,
+      actions,
       filtering: filteringOptions
     });
   },
 
   _refreshTable(buttonContext) {
-    this.collection.state.currentPage = 1;
-    var promise = this.collection.fetch({ reset: true });
-
-    if (buttonContext) {
-      buttonContext.ui.icon.spinForPromise(promise);
-    }
+    appStore.dispatch(fetchLogs());
   },
 
   _commandComplete(options) {

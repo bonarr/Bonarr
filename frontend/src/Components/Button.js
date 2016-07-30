@@ -43,4 +43,4 @@ Button.defaultProps = {
   kind: kinds.DEFAULT
 };
 
-export default Button
+export default Button;

@@ -7,11 +7,16 @@ class TableRow extends Component {
 
   render() {
     const {
-      children
+      children,
+      ...otherProps
     } = this.props;
 
     return (
-      <tr>{children}</tr>
+      <tr
+        {...otherProps}
+      >
+        {children}
+      </tr>
     );
   }
 
@@ -21,4 +26,4 @@ TableRow.propTypes = {
   children: PropTypes.node
 };
 
-export default TableRow
+export default TableRow;

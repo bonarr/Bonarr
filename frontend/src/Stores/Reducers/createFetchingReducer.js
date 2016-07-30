@@ -4,8 +4,7 @@ function getFetchingPropertyName(property) {
   return `fetching${titleCase(property)}`;
 }
 
-
-const createFetchingReducer = (property) => {
+function createFetchingReducer(property) {
   const fetchingPropertyName = getFetchingPropertyName(property);
 
   return (state, { payload }) => {
@@ -18,6 +17,6 @@ const createFetchingReducer = (property) => {
 
     return state;
   };
-};
+}
 
 export default createFetchingReducer;

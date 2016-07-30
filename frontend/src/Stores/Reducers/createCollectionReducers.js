@@ -1,4 +1,4 @@
-const createReducers = (collectionNames, createReducer) => {
+function createCollectionReducers(collectionNames, createReducer) {
   const reducers = {};
 
   collectionNames.forEach((property) => {
@@ -15,6 +15,6 @@ const createReducers = (collectionNames, createReducer) => {
 
     return state;
   };
-};
+}
 
-export default createReducers;
+export default createCollectionReducers;

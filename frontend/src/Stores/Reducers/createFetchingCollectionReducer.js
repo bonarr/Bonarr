@@ -1,4 +1,4 @@
-const createFetchingCollectionReducer = (collection) => {
+function createFetchingCollectionReducer(collection) {
   return (state, { payload }) => {
     if (collection === payload.collection) {
       const newState = {};
@@ -10,6 +10,6 @@ const createFetchingCollectionReducer = (collection) => {
 
     return state;
   };
-};
+}
 
 export default createFetchingCollectionReducer;

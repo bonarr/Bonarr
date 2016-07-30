@@ -41,4 +41,4 @@ Table.propTypes = {
   children: PropTypes.node
 };
 
-export default Table
+export default Table;

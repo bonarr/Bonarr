@@ -1,0 +1,8 @@
+.modalScroller {
+  flex-grow: 1;
+  height: 425px;
+}
+
+.modalBody {
+  padding: 30px;
+}

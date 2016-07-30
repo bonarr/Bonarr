@@ -13,6 +13,9 @@ module.exports = {
   nzbdronePink: '#f43565',
   sonarrBlue: '#35c5f4',
 
+  // Accents
+  borderColor: '#e5e5e5',
+
   //
   // Buttons
 
@@ -39,5 +42,11 @@ module.exports = {
   dangerBackgroundColor: '#f05050',
   dangerBorderColor: '#f04b4b',
   dangerHoverBackgroundColor: '#ee3d3d',
-  dangerHoverBorderColor: '#ec2626;'
+  dangerHoverBorderColor: '#ec2626;',
+
+  //
+  // Modal
+
+  modalBackdropBackgroundColor: 'rgba(0, 0, 0, 0.6)',
+  modalBackgroundColor: '#fff'
 };

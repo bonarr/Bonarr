@@ -1,0 +1,13 @@
+.row {
+  composes: clickable from 'Styles/Mixins/clickable.css';
+
+  cursor: pointer;
+}
+
+.level {
+  width: 20px;
+}
+
+.time {
+  width: 180px;
+}

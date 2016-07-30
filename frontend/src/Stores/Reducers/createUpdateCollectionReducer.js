@@ -1,4 +1,4 @@
-const createUpdateCollectionReducer = (collection) => {
+function createUpdateCollectionReducer(collection) {
   return (state, { payload }) => {
     if (collection === payload.collection) {
       const newState = {};
@@ -10,6 +10,6 @@ const createUpdateCollectionReducer = (collection) => {
 
     return state;
   };
-};
+}
 
 export default createUpdateCollectionReducer;

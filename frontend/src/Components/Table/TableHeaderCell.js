@@ -8,14 +8,19 @@ class TableHeaderCell extends Component {
   render() {
     const {
       className,
-      label
+      label,
+      ...otherProps
     } = this.props;
 
     return (
-      <th className={className}>{label}</th>
+      <th
+        className={className}
+        {...otherProps}
+      >
+        {label}
+      </th>
     );
   }
-
 }
 
 TableHeaderCell.propTypes = {
@@ -23,4 +28,4 @@ TableHeaderCell.propTypes = {
   label: PropTypes.string
 };
 
-export default TableHeaderCell
+export default TableHeaderCell;

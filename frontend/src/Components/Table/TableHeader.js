@@ -24,4 +24,4 @@ TableHeader.propTypes = {
   children: PropTypes.node
 };
 
-export default TableHeader
+export default TableHeader;

@@ -21,4 +21,4 @@ TableBody.propTypes = {
   children: PropTypes.node
 };
 
-export default TableBody
+export default TableBody;

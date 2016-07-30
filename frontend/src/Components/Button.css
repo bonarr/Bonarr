@@ -1,37 +1,37 @@
 .button {
   composes: link from './Link.css';
 
-  padding: 6px 16px;
   overflow: hidden;
-  border: 1px solid ;
+  padding: 6px 16px;
+  border: 1px solid;
   border-radius: 4px;
   vertical-align: middle;
   text-align: center;
   white-space: nowrap;
 
   &:global(.disabled) {
-     opacity: .65;
+    opacity: 0.65;
   }
 }
 
 .default {
-  color: $defaultColor;
-  background-color: $defaultBackgroundColor;
   border-color: $defaultBorderColor;
+  background-color: $defaultBackgroundColor;
+  color: $defaultColor;
 
   &:hover {
-     background-color: $defaultHoverBackgroundColor;
-     border-color: $defaultHoverBorderColor;
+    border-color: $defaultHoverBorderColor;
+    background-color: $defaultHoverBackgroundColor;
   }
 }
 
 .primary {
-  color: $white;
-  background-color: $primaryBackgroundColor;
   border-color: $primaryBorderColor;
+  background-color: $primaryBackgroundColor;
+  color: $white;
 
   &:hover {
-     background-color: $primaryHoverBackgroundColor;
-     border-color: $primaryHoverBorderColor;
+    border-color: $primaryHoverBorderColor;
+    background-color: $primaryHoverBackgroundColor;
   }
 }

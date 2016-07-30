@@ -1,0 +1,25 @@
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.pageNumber {
+  line-height: 30px;
+}
+
+.pageLink {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.records {
+}

@@ -12,14 +12,17 @@ class TableRowCell extends Component {
     } = this.props;
 
     return (
-      <td {...otherProps}>{children}</td>
+      <td
+        {...otherProps}
+      >
+        {children}
+      </td>
     );
   }
-
 }
 
 TableRowCell.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
-export default TableRowCell
+export default TableRowCell;

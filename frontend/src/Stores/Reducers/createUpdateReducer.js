@@ -1,4 +1,4 @@
-const createUpdateReducer = (property) => {
+function createUpdateReducer(property) {
   return (state, { payload }) => {
     if (property === payload.property) {
       const newState = {};
@@ -9,6 +9,6 @@ const createUpdateReducer = (property) => {
 
     return state;
   };
-};
+}
 
 export default createUpdateReducer;

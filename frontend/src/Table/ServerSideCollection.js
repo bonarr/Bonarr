@@ -74,19 +74,23 @@ const ServerSideCollection = Backbone.Collection.extend({
 
   previousPage() {
     this.state.set('page', this.state.get('page') - 1);
-    return this.fetch();},
+    return this.fetch();
+  },
 
   nextPage() {
     this.state.set('page', this.state.get('page') + 1);
-    return this.fetch();},
+    return this.fetch();
+  },
 
   lastPage() {
     this.state.set('page', this.state.get('totalPages'));
-    return this.fetch();},
+    return this.fetch();
+  },
 
   page(pageNumber) {
     this.state.set('page', pageNumber);
-    return this.fetch();},
+    return this.fetch();
+  },
 
   fetch(options = {}) {
     options.data = _.extend(options.data || {}, { page: 1 }, this.state.toData());
