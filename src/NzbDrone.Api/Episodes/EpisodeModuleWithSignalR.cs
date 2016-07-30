@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Sonarr.Http.Extensions;
 using NzbDrone.Api.EpisodeFiles;
 using NzbDrone.Api.Series;
+using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.DecisionEngine;
 using NzbDrone.Core.Download;
@@ -12,7 +10,6 @@ using NzbDrone.Core.Messaging.Events;
 using NzbDrone.Core.Tv;
 using NzbDrone.SignalR;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.Episodes
 {

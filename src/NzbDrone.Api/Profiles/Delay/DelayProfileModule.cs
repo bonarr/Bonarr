@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using FluentValidation;
+using FluentValidation.Results;
 using Sonarr.Http.REST;
 using NzbDrone.Core.Profiles.Delay;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 using Sonarr.Http.Validation;
 
 namespace NzbDrone.Api.Profiles.Delay

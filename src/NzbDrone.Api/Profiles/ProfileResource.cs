@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Sonarr.Http.REST;
 using NzbDrone.Core.Parser;
 using NzbDrone.Core.Profiles;

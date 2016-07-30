@@ -1,5 +1,6 @@
 ﻿using System;
 using Nancy;
+using NzbDrone.Api.Episodes;
 using Sonarr.Http.Extensions;
 using NzbDrone.Api.Series;
 using NzbDrone.Core.Datastore;
