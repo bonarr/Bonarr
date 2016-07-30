@@ -79,6 +79,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.84.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Sqlite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="Omu.ValueInjecter">
       <HintPath>..\packages\ValueInjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
     </Reference>
@@ -102,7 +103,6 @@
     <Compile Include="ManualImport\ManualImportResource.cs" />
     <Compile Include="Profiles\Delay\DelayProfileModule.cs" />
     <Compile Include="Profiles\Delay\DelayProfileResource.cs" />
-    <Compile Include="Profiles\Delay\DelayProfileValidator.cs" />
     <Compile Include="ProviderModuleBase.cs" />
     <Compile Include="Queue\QueueActionModule.cs" />
     <Compile Include="RemotePathMappings\RemotePathMappingModule.cs" />
@@ -133,31 +133,6 @@
     <Compile Include="Episodes\EpisodeResource.cs" />
     <Compile Include="Episodes\RenameEpisodeModule.cs" />
     <Compile Include="Episodes\RenameEpisodeResource.cs" />
-    <Compile Include="ErrorManagement\ApiException.cs" />
-    <Compile Include="ErrorManagement\ErrorHandler.cs" />
-    <Compile Include="ErrorManagement\ErrorModel.cs" />
-    <Compile Include="ErrorManagement\NzbDroneErrorPipeline.cs" />
-    <Compile Include="Exceptions\InvalidApiKeyException.cs" />
-    <Compile Include="Extensions\NancyJsonSerializer.cs" />
-    <Compile Include="Extensions\Pipelines\CacheHeaderPipeline.cs" />
-    <Compile Include="Extensions\Pipelines\GZipPipeline.cs" />
-    <Compile Include="Extensions\Pipelines\IfModifiedPipeline.cs" />
-    <Compile Include="Extensions\Pipelines\IRegisterNancyPipeline.cs" />
-    <Compile Include="Extensions\Pipelines\NzbDroneVersionPipeline.cs" />
-    <Compile Include="Extensions\ReqResExtensions.cs" />
-    <Compile Include="Extensions\RequestExtensions.cs" />
-    <Compile Include="Frontend\CacheableSpecification.cs" />
-    <Compile Include="Frontend\Mappers\BackupFileMapper.cs" />
-    <Compile Include="Frontend\Mappers\CacheBreakerProvider.cs" />
-    <Compile Include="Frontend\Mappers\FaviconMapper.cs" />
-    <Compile Include="Frontend\Mappers\IMapHttpRequestsToDisk.cs" />
-    <Compile Include="Frontend\Mappers\IndexHtmlMapper.cs" />
-    <Compile Include="Frontend\Mappers\LogFileMapper.cs" />
-    <Compile Include="Frontend\Mappers\MediaCoverMapper.cs" />
-    <Compile Include="Frontend\Mappers\StaticResourceMapper.cs" />
-    <Compile Include="Frontend\Mappers\StaticResourceMapperBase.cs" />
-    <Compile Include="Frontend\Mappers\UpdateLogFileMapper.cs" />
-    <Compile Include="Frontend\StaticResourceModule.cs" />
     <Compile Include="Health\HealthModule.cs" />
     <Compile Include="Health\HealthResource.cs" />
     <Compile Include="History\HistoryModule.cs" />

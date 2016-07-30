@@ -11,11 +11,10 @@ using NzbDrone.Core.Tv;
 using NzbDrone.Core.DecisionEngine;
 using NzbDrone.SignalR;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.EpisodeFiles
 {
-    public class EpisodeModule : SonarrRestModuleWithSignalR<EpisodeFileResource, EpisodeFile>,
+    public class EpisodeFileModule : SonarrRestModuleWithSignalR<EpisodeFileResource, EpisodeFile>,
                                  IHandle<EpisodeFileAddedEvent>
     {
         private readonly IMediaFileService _mediaFileService;
