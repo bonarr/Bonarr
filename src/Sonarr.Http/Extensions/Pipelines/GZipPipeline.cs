@@ -63,20 +63,24 @@ namespace Sonarr.Http.Extensions.Pipelines
         private static bool ContentLengthIsTooSmall(Response response)
         {
             var contentLength = response.Headers.GetValueOrDefault("Content-Length");
+
             if (contentLength != null && long.Parse(contentLength) < 1024)
             {
                 return true;
             }
+
             return false;
         }
 
         private static bool AlreadyGzipEncoded(Response response)
         {
             var contentEncoding = response.Headers.GetValueOrDefault("Content-Encoding");
+
             if (contentEncoding == "gzip")
             {
                 return true;
             }
+
             return false;
         }
     }
