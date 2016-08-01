@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import classNames from 'classnames';
-import styles from './Link.css'
+import styles from './Link.css';
 
 class Link extends Component {
 
