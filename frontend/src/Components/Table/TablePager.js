@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
+import classNames from 'classNames';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import SelectInput from 'Components/Form/SelectInput';
@@ -57,19 +58,30 @@ class TablePager extends Component {
       return null;
     }
 
+    const isFirstPage = page === 1;
+    const isLastPage = page === totalPages;
+
     return (
       <div className={styles.pager}>
         <div>{/* I'm a placeholder so flexbox sets things where I want them */}</div>
         <div className={styles.controls}>
           <Link
-            className={styles.pageLink}
+            className={classNames(
+              styles.pageLink,
+              isFirstPage && styles.disabledPageButton
+            )}
+            disabled={isFirstPage}
             onPress={onFirstPagePress}
           >
             <Icon name="icon-sonarr-pager-first" />
           </Link>
 
           <Link
-            className={styles.pageLink}
+            className={classNames(
+              styles.pageLink,
+              isFirstPage && styles.disabledPageButton
+            )}
+            disabled={isFirstPage}
             onPress={onPreviousPagePress}
           >
             <Icon name="icon-sonarr-pager-previous" />
@@ -78,7 +90,10 @@ class TablePager extends Component {
           <div className={styles.pageNumber}>
             {
               !isShowingPageSelect &&
-                <Link onPress={this.onOpenPageSelectClick}>
+                <Link
+                  disabled={totalPages === 1}
+                  onPress={this.onOpenPageSelectClick}
+                >
                   {page} / {totalPages}
                 </Link>
             }
@@ -94,14 +109,22 @@ class TablePager extends Component {
           </div>
 
           <Link
-            className={styles.pageLink}
+            className={classNames(
+              styles.pageLink,
+              isLastPage && styles.disabledPageButton
+            )}
+            disabled={isLastPage}
             onPress={onNextPagePress}
           >
             <Icon name="icon-sonarr-pager-next" />
           </Link>
 
           <Link
-            className={styles.pageLink}
+            className={classNames(
+              styles.pageLink,
+              isLastPage && styles.disabledPageButton
+            )}
+            disabled={isLastPage}
             onPress={onLastPagePress}
           >
             <Icon name="icon-sonarr-pager-last" />

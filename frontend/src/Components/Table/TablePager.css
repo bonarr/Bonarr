@@ -22,4 +22,9 @@
 }
 
 .records {
+  color: $disabledColor;
+}
+
+.disabledPageButton {
+  color: $disabledColor;
 }
