@@ -1,6 +1,6 @@
 import { setServerSideCollectionFilter } from './baseActions';
 
-function createSetServerSideCollectionFilterHander(collection, page, getFromState, fetchHandler) {
+function createSetServerSideCollectionFilterHandler(collection, getFromState, fetchHandler) {
   return function(payload) {
     return function(dispatch, getState) {
       dispatch(setServerSideCollectionFilter({ collection, ...payload }));
@@ -9,4 +9,4 @@ function createSetServerSideCollectionFilterHander(collection, page, getFromStat
   };
 }
 
-export default createSetServerSideCollectionFilterHander;
+export default createSetServerSideCollectionFilterHandler;

@@ -1,7 +1,7 @@
 import { setServerSideCollectionPage } from './baseActions';
 import pages from 'Utilities/pages';
 
-function createSetServerSideCollectionPageHander(collection, page, getFromState, fetchHandler) {
+function createSetServerSideCollectionPageHandler(collection, page, getFromState, fetchHandler) {
   return function(payload) {
     return function(dispatch, getState) {
       const collectionState = getFromState(getState())[collection];
@@ -31,4 +31,4 @@ function createSetServerSideCollectionPageHander(collection, page, getFromState,
   };
 }
 
-export default createSetServerSideCollectionPageHander;
+export default createSetServerSideCollectionPageHandler;

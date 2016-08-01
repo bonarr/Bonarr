@@ -10,3 +10,4 @@ export const setError = createAction(types.SET_ERROR);
 export const setCollectionError = createAction(types.SET_COLLECTION_ERROR);
 export const setServerSideCollectionPage = createAction(types.SET_SERVER_SIDE_COLLECTION_PAGE);
 export const setServerSideCollectionSort = createAction(types.SET_SERVER_SIDE_COLLECTION_SORT);
+export const setServerSideCollectionFilter = createAction(types.SET_SERVER_SIDE_COLLECTION_FILTER);

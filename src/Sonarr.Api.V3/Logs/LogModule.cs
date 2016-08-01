@@ -50,7 +50,11 @@ namespace Sonarr.Api.V3.Logs
             }
 
             var response = ApplyToPage(_logService.Paged, pageSpec, LogResourceMapper.ToResource);
-            response.SortKey = pageSpec.SortKey;
+
+            if (pageSpec.SortKey == "id")
+            {
+                response.SortKey = "time";
+            }
 
             return response;
         }

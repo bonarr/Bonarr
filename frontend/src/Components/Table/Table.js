@@ -10,7 +10,8 @@ class Table extends Component {
   render() {
     const {
       headers,
-      children
+      children,
+      ...otherProps
     } = this.props;
 
     return (
@@ -24,6 +25,7 @@ class Table extends Component {
                 <TableHeaderCell
                   key={header.name}
                   {...header}
+                  {...otherProps}
                 />
               );
             })

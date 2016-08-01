@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
@@ -6,21 +7,15 @@ import LogsTable from './LogsTable';
 
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
-  const {
-    fetching,
-    items,
-    page,
-    totalPages,
-    totalRecords
-  } = state.system.logs;
-
-  return {
-    fetching,
-    items,
-    page,
-    totalPages,
-    totalRecords
-  };
+  return _.pick(state.system.logs, [
+    'fetching',
+    'items',
+    'page',
+    'totalPages',
+    'totalRecords',
+    'sortKey',
+    'sortDirection'
+  ]);
 }
 
 class LogsTableConnector extends Component {
@@ -60,6 +55,11 @@ class LogsTableConnector extends Component {
     this.props.gotoLogsPage({ page });
   }
 
+  @autobind
+  onSortPress(sortKey) {
+    this.props.setLogsSort({ sortKey });
+  }
+
   //
   // Render
 
@@ -71,6 +71,7 @@ class LogsTableConnector extends Component {
         onNextPagePress={this.onNextPagePress}
         onLastPagePress={this.onLastPagePress}
         onPageSelect={this.onPageSelect}
+        onSortPress={this.onSortPress}
         {...this.props}
       />
     );
@@ -83,7 +84,8 @@ LogsTableConnector.propTypes = {
   gotoLogsPreviousPage: PropTypes.func.isRequired,
   gotoLogsNextPage: PropTypes.func.isRequired,
   gotoLogsLastPage: PropTypes.func.isRequired,
-  gotoLogsPage: PropTypes.func.isRequired
+  gotoLogsPage: PropTypes.func.isRequired,
+  setLogsSort: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, systemActions)(LogsTableConnector);

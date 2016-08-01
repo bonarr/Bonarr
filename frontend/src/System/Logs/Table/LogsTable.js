@@ -7,11 +7,13 @@ import LogsTableRow from './LogsTableRow';
 
 const headers = [
   {
-    name: 'level'
+    name: 'level',
+    sortable: true
   },
   {
     name: 'logger',
-    label: 'Component'
+    label: 'Component',
+    sortable: true
   },
   {
     name: 'message',
@@ -19,7 +21,8 @@ const headers = [
   },
   {
     name: 'time',
-    label: 'Time'
+    label: 'Time',
+    sortable: true
   }
 ];
 
@@ -47,6 +50,7 @@ class LogsTable extends Component {
             <div>
               <Table
                 headers={headers}
+                {...otherProps}
               >
                 <TableBody>
                   {
