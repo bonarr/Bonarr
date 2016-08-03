@@ -14,7 +14,9 @@ function mapStateToProps(state) {
     'totalPages',
     'totalRecords',
     'sortKey',
-    'sortDirection'
+    'sortDirection',
+    'filterKey',
+    'filterValue'
   ]);
 }
 
@@ -60,6 +62,11 @@ class LogsTableConnector extends Component {
     this.props.setLogsSort({ sortKey });
   }
 
+  @autobind
+  onFilterSelect(filterKey, filterValue) {
+    this.props.setLogsFilter({ filterKey, filterValue });
+  }
+
   //
   // Render
 
@@ -72,6 +79,7 @@ class LogsTableConnector extends Component {
         onLastPagePress={this.onLastPagePress}
         onPageSelect={this.onPageSelect}
         onSortPress={this.onSortPress}
+        onFilterSelect={this.onFilterSelect}
         {...this.props}
       />
     );
@@ -85,7 +93,8 @@ LogsTableConnector.propTypes = {
   gotoLogsNextPage: PropTypes.func.isRequired,
   gotoLogsLastPage: PropTypes.func.isRequired,
   gotoLogsPage: PropTypes.func.isRequired,
-  setLogsSort: PropTypes.func.isRequired
+  setLogsSort: PropTypes.func.isRequired,
+  setLogsFilter: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, systemActions)(LogsTableConnector);

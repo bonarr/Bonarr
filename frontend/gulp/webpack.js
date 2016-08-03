@@ -109,9 +109,10 @@ const config = {
       simpleVars({
         variables: function () {
           const colors = require('../src/Styles/Variables/colors');
+          const dimensions = require('../src/Styles/Variables/dimensions');
           const fonts = require('../src/Styles/Variables/fonts');
 
-          return _.extend({}, colors, fonts);
+          return _.extend({}, colors, dimensions, fonts);
         }
       }),
       nested(),

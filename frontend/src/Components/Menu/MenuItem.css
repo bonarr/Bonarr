@@ -1,0 +1,12 @@
+.menuItem {
+  padding: 10px 20px;
+  min-width: 150px;
+  max-width: 250px;
+  background-color: $toolbarMenuItemBackgroundColor;
+  line-height: 20px;
+
+  &:hover,
+  &:focus {
+    background-color: $toolbarMenuItemHoverBackgroundColor;
+  }
+}

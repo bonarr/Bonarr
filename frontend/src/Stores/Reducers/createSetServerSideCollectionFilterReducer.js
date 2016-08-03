@@ -4,7 +4,7 @@ function createSetServerSideCollectionFilterReducer(collection) {
       const newState = {};
       newState[collection] = state[collection];
       newState[collection].filterKey = payload.filterKey;
-      newState[collection].filterDirection = payload.filterDirection;
+      newState[collection].filterValue = payload.filterValue;
 
       return Object.assign({}, state, newState);
     }

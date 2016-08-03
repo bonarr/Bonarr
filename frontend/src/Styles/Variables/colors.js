@@ -13,6 +13,12 @@ module.exports = {
   nzbdronePurple: '#7932ea',
   nzbdronePink: '#f43565',
   sonarrBlue: '#35c5f4',
+  sidebarColor: '#e1e2e3',
+  sidebarBackGroundColor: '#3a3f51',
+  toolbarColor: '#e1e2e3',
+  toolbarBackgroundColor: '#4f566f',
+  toolbarMenuItemBackgroundColor: '#454b60',
+  toolbarMenuItemHoverBackgroundColor: '#3a3f51',
 
   // Accents
   borderColor: '#e5e5e5',

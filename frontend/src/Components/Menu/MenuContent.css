@@ -1,0 +1,10 @@
+.menuContent {
+  position: absolute;
+  display: block;
+  line-height: 20px;
+}
+
+.right {
+  right: 0;
+  left: auto;
+}

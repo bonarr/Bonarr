@@ -1,0 +1,5 @@
+.contentBody {
+  flex: 1 1 auto;
+  /* Disabled until more of the UI is overhauled */
+  /* overflow-y: auto; */
+}
