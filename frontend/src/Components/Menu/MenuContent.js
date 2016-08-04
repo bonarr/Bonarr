@@ -30,7 +30,7 @@ class MenuContent extends Component {
 MenuContent.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool
 };
 
 MenuContent.defaultProps = {

@@ -12,6 +12,7 @@ import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import TableBody from 'Components/Table/TableBody';
 import TablePager from 'Components/Table/TablePager';
+import LogsNavMenu from '../LogsNavMenu';
 import LogsTableRow from './LogsTableRow';
 import styles from './LogsTable.css';
 
@@ -39,27 +40,10 @@ const headers = [
 class LogsTable extends Component {
 
   //
-  // Lifecycle
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      isShowingFilterMenu: false
-    };
-  }
-
-  //
   // Listeners
 
   @autobind
-  onFilterMenuButtonPress() {
-    this.setState({ isShowingFilterMenu: !this.state.isShowingFilterMenu });
-  }
-
-  @autobind
   onFilterMenuItemPress(filterKey, filterValue) {
-    this.setState({ isShowingFilterMenu: false });
     this.props.onFilterSelect(filterKey, filterValue);
   }
 
@@ -76,17 +60,14 @@ class LogsTable extends Component {
     return (
       <PageContent>
         <PageToolbar>
+          <LogsNavMenu current="Logs" />
           <Menu>
-            <MenuButton
-              onPress={this.onFilterMenuButtonPress}
-            >
+            <MenuButton>
               <Icon name="icon-sonarr-filter" />
               <span className={styles.filterMenuButtonText}>Filter</span>
             </MenuButton>
 
-            <MenuContent
-              isOpen={this.state.isShowingFilterMenu}
-            >
+            <MenuContent>
               <FilterMenuItem
                 {...otherProps}
                 onPress={this.onFilterMenuItemPress}

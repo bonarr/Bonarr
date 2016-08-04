@@ -28,7 +28,7 @@ class MenuButton extends Component {
 MenuButton.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func
 };
 
 MenuButton.defaultProps = {

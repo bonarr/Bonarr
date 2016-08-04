@@ -55,5 +55,11 @@ module.exports = {
   // Modal
 
   modalBackdropBackgroundColor: 'rgba(0, 0, 0, 0.6)',
-  modalBackgroundColor: '#fff'
+  modalBackgroundColor: '#fff',
+
+  //
+  // Menu
+  menuItemColor: '#e1e2e3',
+  menuItemHoverColor: '#fbfcfc'
+
 };
