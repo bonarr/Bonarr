@@ -1,5 +1,6 @@
 .contentBody {
   flex: 1 1 auto;
+  padding: 20px;
   /* Disabled until more of the UI is overhauled */
   /* overflow-y: auto; */
 }

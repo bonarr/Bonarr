@@ -1,35 +1,14 @@
 import $ from 'jquery';
 import isSameCommand from 'Utilities/isSameCommand';
 import * as types from './actionTypes';
-import { fetchingCollection, updateCollection } from './baseActions';
+import createFetchCollectionHandler from './createFetchCollectionHandler';
 import { addCommand } from './commandActions';
 
 let lastCommand = null;
 let lastCommandTimeout = null;
 
 const commandActionHandlers = {
-  [types.FETCH_COMMANDS](payload) {
-    return (dispatch, getState) => {
-      dispatch(fetchingCollection({ collection: 'commands', fetching: true }));
-
-      const promise = $.ajax({
-        url: '/command'
-      });
-
-      promise.done((data) => {
-        dispatch(updateCollection({ collection: 'commands', data }));
-
-      });
-
-      promise.fail(() => {
-        var f1 = 1;
-      });
-
-      promise.always(() => {
-        dispatch(fetchingCollection({ collection: 'commands', fetching: false }));
-      });
-    };
-  },
+  [types.FETCH_COMMANDS]: createFetchCollectionHandler('commands', '/command'),
 
   [types.EXECUTE_COMMAND](payload) {
     return (dispatch, getState) => {

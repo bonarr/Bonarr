@@ -1,64 +1,42 @@
-var Marionette = require('marionette');
-var LogsTableLayout = require('./Table/LogsTableLayout');
-var LogsFileLayout = require('./Files/LogFileLayout');
-var LogFileCollection = require('./Files/LogFileCollection');
-var UpdateLogFileCollection = require('./Updates/LogFileCollection');
+const Marionette = require('marionette');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import Logs from './Logs';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Logs/LogsLayoutTemplate',
+  template: 'System/Logs/LogsLayout',
 
-  ui: {
-    tableTab: '.x-table-tab',
-    filesTab: '.x-files-tab',
-    updateFilesTab: '.x-update-files-tab'
+  initialize({ view }) {
+    this.view = view;
   },
 
-  regions: {
-    table: '#table',
-    files: '#files',
-    updateFiles: '#update-files'
+  mountReact() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <Logs view={this.view} />
+      </Provider>,
+      this.el
+    );
   },
 
-  events: {
-    'click .x-table-tab': '_showTable',
-    'click .x-files-tab': '_showFiles',
-    'click .x-update-files-tab': '_showUpdateFiles'
-  },
-
-  onShow() {
-    this._showTable();
-  },
-
-  _showTable(e) {
-    if (e) {
-      e.preventDefault();
+  unmountReact() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
     }
-
-    this.ui.tableTab.tab('show');
-    this.table.show(new LogsTableLayout());
   },
 
-  _showFiles(e) {
-    if (e) {
-      e.preventDefault();
-    }
-
-    this.ui.filesTab.tab('show');
-    this.files.show(new LogsFileLayout({
-      collection: new LogFileCollection(),
-      deleteFilesCommand: 'deleteLogFiles'
-    }));
+  onBeforeRender() {
+    this.unmountReact();
   },
 
-  _showUpdateFiles(e) {
-    if (e) {
-      e.preventDefault();
-    }
+  onRender() {
+    this.mountReact();
+  },
 
-    this.ui.updateFilesTab.tab('show');
-    this.updateFiles.show(new LogsFileLayout({
-      collection: new UpdateLogFileCollection(),
-      deleteFilesCommand: 'deleteUpdateLogFiles'
-    }));
+  onClose() {
+    this.unmountReact();
   }
 });

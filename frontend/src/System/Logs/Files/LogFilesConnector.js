@@ -12,7 +12,8 @@ function mapStateToProps(state) {
 
   return {
     fetching,
-    items
+    items,
+    currentLogView: 'Log Files'
   };
 }
 

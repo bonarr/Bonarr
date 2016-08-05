@@ -4,6 +4,7 @@ import Menu from 'Components/Menu/Menu';
 import MenuButton from 'Components/Menu/MenuButton';
 import MenuContent from 'Components/Menu/MenuContent';
 import MenuItem from 'Components/Menu/MenuItem';
+import styles from './LogsNavMenu.css';
 
 class LogsNavMenu extends Component {
 
@@ -40,7 +41,7 @@ class LogsNavMenu extends Component {
     } = this.props;
 
     return (
-      <Menu>
+      <Menu className={styles.logsNavMenu}>
         <MenuButton
           onPress={this.onMenuButtonPress}
         >
@@ -64,7 +65,7 @@ class LogsNavMenu extends Component {
           <MenuItem
             to={'system/logs/update'}
           >
-            Update Logs
+            Update Log Files
           </MenuItem>
         </MenuContent>
       </Menu>

@@ -17,7 +17,7 @@ function mapStateToProps(state) {
 
   const tasks = items.map((task) => {
     const executing = _.some(commands, { name: task.taskName });
-    return Object.assign({}, task, { executing })
+    return Object.assign({}, task, { executing });
   });
 
   return {
@@ -57,7 +57,7 @@ class TasksConnector extends Component {
         onExecutePress={this.onExecutePress}
         {...this.props}
       />
-    )
+    );
   }
 }
 

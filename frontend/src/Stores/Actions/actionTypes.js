@@ -36,6 +36,7 @@ export const SET_LOGS_SORT = 'SET_LOGS_SORT';
 export const SET_LOGS_FILTER = 'SET_LOGS_FILTER';
 
 export const FETCH_LOG_FILES = 'FETCH_LOG_FILES';
+export const FETCH_UPDATE_LOG_FILES = 'FETCH_UPDATE_LOG_FILES';
 
 //
 // Commands

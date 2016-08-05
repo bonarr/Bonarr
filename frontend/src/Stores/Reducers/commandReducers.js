@@ -15,6 +15,7 @@ const commandReducers = handleActions({
 
   [types.FETCHING_COLLECTION]: createFetchingCollectionReducer(reducerCollection),
   [types.UPDATE_COLLECTION]: createUpdateCollectionReducer(reducerCollection),
+
   [types.ADD_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
 
@@ -22,6 +23,7 @@ const commandReducers = handleActions({
 
     return newState;
   },
+
   [types.UPDATE_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
     const index = _.findIndex(newState.items, { id: payload.id });
@@ -34,6 +36,7 @@ const commandReducers = handleActions({
 
     return newState;
   },
+
   [types.FINISH_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
 

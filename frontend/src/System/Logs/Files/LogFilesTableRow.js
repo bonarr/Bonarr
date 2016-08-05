@@ -33,6 +33,7 @@ class LogFilesTableRow extends Component {
           className={styles.download}
         >
           <Link
+            className="no-router"
             to={downloadUrl}
             target="_blank"
           >

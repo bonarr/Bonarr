@@ -9,7 +9,7 @@ import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
-import styles from './Tasks.css'
+import styles from './Tasks.css';
 
 const headers = [
   {
@@ -67,9 +67,10 @@ class Tasks extends Component {
                     const duration = moment.duration(item.interval, 'minutes').humanize().replace(/an?(?=\s)/, '1');
                     const lastExecution = item.lastExecution;
                     const nextExecution = item.nextExecution;
-                    const onExecuteTaskPress = function(event) {
+
+                    function onExecuteTaskPress(event) {
                       onExecutePress(item.taskName);
-                    };
+                    }
 
                     return (
                       <TableRow
@@ -79,7 +80,7 @@ class Tasks extends Component {
                         <TableRowCell
                           className={styles.interval}
                         >
-                          { disabled ? 'disabled' : duration }
+                          {disabled ? 'disabled' : duration}
                         </TableRowCell>
 
                         <TableRowCell
@@ -119,7 +120,7 @@ class Tasks extends Component {
                             {
                               <Icon
                                 name="icon-sonarr-refresh"
-                                {...item.executing ? {className: 'fa-spin'} : {}}
+                                {...item.executing ? { className: 'fa-spin' } : {}}
                               />
                             }
                           </Link>

@@ -12,7 +12,7 @@ module.exports = NzbDroneController.extend({
     this.route('system/updates', this.updates);
     this.route('system/tasks', this.tasks);
     this.route('system/backup', this.backup);
-    this.route('system/logs', this.logs);
+    this.route('system/logs(/:view)', this.logs);
 
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
@@ -37,8 +37,8 @@ module.exports = NzbDroneController.extend({
     this.showMainRegion(new BackupLayout());
   },
 
-  logs() {
+  logs(view) {
     this.setTitle('Logs');
-    this.showMainRegion(new LogLayout());
+    this.showMainRegion(new LogLayout({ view }));
   }
 });

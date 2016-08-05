@@ -1,0 +1,7 @@
+.toolbarButton {
+  composes: link from 'Components/Link.css';
+
+  width: 60px;
+  text-align: center;
+  font-size: 22px;
+}

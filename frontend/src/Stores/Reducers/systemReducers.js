@@ -58,6 +58,12 @@ const defaultState = {
     fetching: false,
     error: null,
     items: []
+  },
+
+  updateLogFiles: {
+    fetching: false,
+    error: null,
+    items: []
   }
 };
 
@@ -67,7 +73,8 @@ const collectionNames = [
   'tasks',
   'backups',
   'updates',
-  'logFiles'
+  'logFiles',
+  'updateLogFiles'
 ];
 
 const serverSideCollectionNames = [
@@ -78,6 +85,7 @@ const systemReducers = handleActions({
 
   [types.FETCHING]: createFetchingReducer('status'),
   [types.FETCHING_COLLECTION]: createCollectionReducers(collectionNames, createFetchingCollectionReducer),
+  [types.FETCHING_COLLECTION]: createCollectionReducers(serverSideCollectionNames, createFetchingCollectionReducer),
   [types.UPDATE]: createUpdateReducer('status'),
   [types.UPDATE_COLLECTION]: createCollectionReducers(collectionNames, createUpdateCollectionReducer),
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createCollectionReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),

@@ -6,6 +6,8 @@ import Table from 'Components/Table/Table';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/PageToolbar';
+import PageToolbarSeparator from 'Components/Page/PageToolbarSeparator';
+import PageToolbarButton from 'Components/Page/PageToolbarButton';
 import Menu from 'Components/Menu/Menu';
 import MenuButton from 'Components/Menu/MenuButton';
 import MenuContent from 'Components/Menu/MenuContent';
@@ -54,6 +56,9 @@ class LogsTable extends Component {
     const {
       fetching,
       items,
+      clearLogExecuting,
+      onRefreshPress,
+      onClearLogsPress,
       ...otherProps
     } = this.props;
 
@@ -103,6 +108,22 @@ class LogsTable extends Component {
               </FilterMenuItem>
             </MenuContent>
           </Menu>
+
+          <PageToolbarSeparator />
+
+          <PageToolbarButton
+            iconName="icon-sonarr-refresh"
+            animateIconName="icon-sonarr-refresh"
+            animate={fetching}
+            onPress={onRefreshPress}
+          />
+
+          <PageToolbarButton
+            iconName="icon-sonarr-clear"
+            animate={clearLogExecuting}
+            onPress={onClearLogsPress}
+          />
+
         </PageToolbar>
         <PageContentBody>
           {
@@ -144,7 +165,10 @@ class LogsTable extends Component {
 LogsTable.propTypes = {
   fetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
-  onFilterSelect: PropTypes.func.isRequired
+  clearLogExecuting: PropTypes.bool.isRequired,
+  onFilterSelect: PropTypes.func.isRequired,
+  onRefreshPress: PropTypes.func.isRequired,
+  onClearLogsPress: PropTypes.func.isRequired
 };
 
 export default LogsTable;

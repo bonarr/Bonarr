@@ -33,13 +33,14 @@ class LogFiles extends Component {
     const {
       fetching,
       items,
+      currentLogView,
       ...otherProps
     } = this.props;
 
     return (
       <PageContent>
         <PageToolbar>
-          <LogsNavMenu current="Log Files" />
+          <LogsNavMenu current={currentLogView} />
         </PageToolbar>
         <PageContentBody>
           {
@@ -80,7 +81,8 @@ class LogFiles extends Component {
 
 LogFiles.propTypes = {
   fetching: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  currentLogView: PropTypes.array.isRequired
 };
 
 export default LogFiles;

@@ -59,8 +59,7 @@ class Link extends Component {
     linkProps.className = classNames(
       className,
       styles.link,
-      disabled && 'disabled',
-      'no-router'
+      disabled && 'disabled'
     );
 
     return (
