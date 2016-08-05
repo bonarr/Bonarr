@@ -52,6 +52,12 @@ const defaultState = {
     sortDirection: 'descending',
     error: null,
     items: []
+  },
+
+  logFiles: {
+    fetching: false,
+    error: null,
+    items: []
   }
 };
 
@@ -60,7 +66,8 @@ const collectionNames = [
   'diskSpace',
   'tasks',
   'backups',
-  'updates'
+  'updates',
+  'logFiles'
 ];
 
 const serverSideCollectionNames = [

@@ -34,6 +34,7 @@ const systemActionHandlers = {
   [types.FETCH_TASKS]: createFetchCollectionHandler('tasks', '/system/task'),
   [types.FETCH_BACKUPS]: createFetchCollectionHandler('backups', '/system/backup'),
   [types.FETCH_UPDATES]: createFetchCollectionHandler('updates', '/update'),
+  [types.FETCH_LOG_FILES]: createFetchCollectionHandler('logFiles', '/log/file'),
 
   ...createServerSideCollectionHandlers('logs', '/log', (state) => state.system, {
     [serverSideCollectionHandlers.FETCH]: types.FETCH_LOGS,

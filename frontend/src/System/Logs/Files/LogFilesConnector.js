@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchBackups } from 'Stores/Actions/systemActions';
-import Backups from './Backups';
+import { fetchLogFiles } from 'Stores/Actions/systemActions';
+import LogFiles from './LogFiles';
 
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
   const {
     fetching,
     items
-  } = state.system.backups;
+  } = state.system.logFiles;
 
   return {
     fetching,
@@ -17,16 +17,16 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  fetchBackups
+  fetchLogFiles
 };
 
-class BackupsConnector extends Component {
+class LogFilesConnector extends Component {
 
   //
   // Lifecycle
 
   componentWillMount() {
-    this.props.fetchBackups();
+    this.props.fetchLogFiles();
   }
 
   //
@@ -34,15 +34,15 @@ class BackupsConnector extends Component {
 
   render() {
     return (
-      <Backups
+      <LogFiles
         {...this.props}
       />
     );
   }
 }
 
-BackupsConnector.propTypes = {
-  fetchBackups: PropTypes.func.isRequired
+LogFilesConnector.propTypes = {
+  fetchLogFiles: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BackupsConnector);
+export default connect(mapStateToProps, mapDispatchToProps)(LogFilesConnector);

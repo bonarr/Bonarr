@@ -1,62 +1,51 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var FilenameCell = require('./FilenameCell');
-var RelativeDateCell = require('Cells/RelativeDateCell');
-var DownloadLogCell = require('./DownloadLogCell');
-var LogFileRow = require('./Row');
-var ContentsView = require('./ContentsView');
-var ContentsModel = require('./ContentsModel');
-var LoadingView = require('Shared/LoadingView');
-require('jQuery/jquery.spin');
+const vent = require('vent');
+const Marionette = require('marionette');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import { fetchLogFiles } from 'Stores/Actions/systemActions';
+import LogFilesConnector from './LogFilesConnector';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'System/Logs/Files/LogFileLayoutTemplate',
-
-  regions: {
-    grid: '#x-grid',
-    contents: '#x-contents'
-  },
-
-  columns: [
-    {
-      name: 'filename',
-      label: 'Filename',
-      cell: FilenameCell,
-      sortable: false
-    },
-    {
-      name: 'lastWriteTime',
-      label: 'Last Write Time',
-      cell: RelativeDateCell,
-      sortable: false
-    },
-    {
-      name: 'downloadUrl',
-      label: '',
-      cell: DownloadLogCell,
-      sortable: false
-    }
-  ],
+  template: 'System/Logs/Files/LogFileLayout',
 
   initialize(options) {
-    this.collection = options.collection;
-    this.deleteFilesCommand = options.deleteFilesCommand;
-
-    this.listenTo(vent, vent.Commands.ShowLogFile, this._fetchLogFileContents);
     this.listenTo(vent, vent.Events.CommandComplete, this._commandComplete);
-    this.listenTo(this.collection, 'sync', this._collectionSynced);
 
     this._showActionBar();
-    this.collection.fetch();
   },
 
-  onShow() {
-    this._showTable();
+  mountReact() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <LogFilesConnector />
+      </Provider>,
+      this.el
+    );
+  },
+
+  unmountReact() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
+  },
+
+  onRender() {
+    this.mountReact();
+  },
+
+  onClose() {
+    this.unmountReact();
   },
 
   _showActionBar() {
-    var actions = {
+    const actions = {
       type: 'default',
       storeState: false,
       items: [
@@ -81,47 +70,8 @@ module.exports = Marionette.LayoutView.extend({
     });
   },
 
-  _showTable() {
-    this.grid.show(new Backgrid.Grid({
-      row: LogFileRow,
-      columns: this.columns,
-      collection: this.collection,
-      className: 'table table-hover'
-    }));
-  },
-
-  _collectionSynced() {
-    if (!this.collection.any()) {
-      return;
-    }
-
-    var model = this.collection.first();
-    this._fetchLogFileContents({ model });
-  },
-
-  _fetchLogFileContents(options) {
-    this.contents.show(new LoadingView());
-
-    var model = options.model;
-    var contentsModel = new ContentsModel(model.toJSON());
-
-    this.listenToOnce(contentsModel, 'sync', this._showDetails);
-
-    contentsModel.fetch({ dataType: 'text' });
-  },
-
-  _showDetails(model) {
-    this.contents.show(new ContentsView({ model }));
-  },
-
   _refreshTable(buttonContext) {
-    this.contents.empty();
-    var promise = this.collection.fetch();
-
-    // Would be nice to spin the icon on the refresh button
-    if (buttonContext) {
-      buttonContext.ui.icon.spinForPromise(promise);
-    }
+    appStore.dispatch(fetchLogFiles());
   },
 
   _commandComplete(options) {

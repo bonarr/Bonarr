@@ -28,17 +28,27 @@ class Link extends Component {
       className,
       component,
       to,
+      target,
       disabled,
       ...otherProps
     } = this.props;
 
-    const linkProps = {};
+    const linkProps = { target };
     let el = component;
 
     if (to) {
       el = 'a';
-      linkProps.href = to.startsWith('http') ? to : `${window.Sonarr.UrlBase}${to}`;
-      linkProps.target = to.startsWith('http') ? '_blank' : '_self';
+
+      if (to.startsWith('http')) {
+        linkProps.href = to;
+        linkProps.target = target || '_blank';
+      } else if (to.startsWith(window.Sonarr.UrlBase)) {
+        linkProps.href = to;
+        linkProps.target = target || '_self';
+      } else {
+        linkProps.href = `${window.Sonarr.UrlBase}/${to}`;
+        linkProps.target = target || '_self';
+      }
     }
 
     if (el === 'button' || el === 'input') {
@@ -49,7 +59,8 @@ class Link extends Component {
     linkProps.className = classNames(
       className,
       styles.link,
-      disabled && 'disabled'
+      disabled && 'disabled',
+      'no-router'
     );
 
     return (
@@ -66,6 +77,7 @@ Link.propTypes = {
   className: PropTypes.string,
   component: PropTypes.string,
   to: PropTypes.string,
+  target: PropTypes.string,
   disabled: PropTypes.bool,
   onPress: PropTypes.func
 };
