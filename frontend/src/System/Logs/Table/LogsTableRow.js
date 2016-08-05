@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import longDateTime from 'Utilities/Date/longDateTime';
-import relativeTime from 'Utilities/Date/relativeTime';
+import relativeDate from 'Utilities/Date/relativeDate';
 import Icon from 'Components/Icon';
 import Button from 'Components/Button';
 import TableRow from 'Components/Table/TableRow';
@@ -71,7 +71,7 @@ class LogsTableRow extends Component {
           className={styles.time}
           title={longDateTime(time)}
         >
-          {relativeTime(time)}
+          {relativeDate(time)}
         </TableRowCell>
 
         {
