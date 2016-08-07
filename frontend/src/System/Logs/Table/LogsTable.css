@@ -1,3 +1,8 @@
+.filterMenuButtonIcon {
+  vertical-align: text-bottom;
+  font-size: 22px;
+}
+
 .filterMenuButtonText {
   margin-left: 5px;
 }

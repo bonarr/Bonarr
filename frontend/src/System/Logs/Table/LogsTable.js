@@ -89,7 +89,7 @@ class LogsTable extends Component {
           <PageToolbarSection alignContent={align.RIGHT}>
             <Menu>
               <MenuButton>
-                <Icon name="icon-sonarr-filter" />
+                <Icon name="icon-sonarr-filter" className={styles.filterMenuButtonIcon} />
                 <span className={styles.filterMenuButtonText}>Filter</span>
               </MenuButton>
 
