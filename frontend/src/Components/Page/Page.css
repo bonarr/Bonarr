@@ -1,6 +1,3 @@
 .page {
-  flex: 0 0 auto;
-  height: 60px;
-  background-color: $toolbarBackgroundColor;
-  color: $toolbarColor;
+  height: 100%;
 }

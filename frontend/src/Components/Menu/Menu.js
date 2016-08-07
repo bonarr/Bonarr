@@ -16,30 +16,6 @@ class Menu extends Component {
     };
   }
 
-  componentDidMount() {
-    // if (this.props.isOpen) {
-    //   this._openMenu();
-    // }
-
-    //window.addEventListener('click', this.onWindowClick);
-  }
-
-  // componentDidUpdate(prevProps) {
-  //   if (!prevProps.isOpen && this.props.isOpen) {
-  //     this._openMenu();
-  //   } else if (prevProps.isOpen && !this.props.isOpen) {
-  //     this._closeMenu();
-  //   }
-  // }
-
-  componentWillUnmount() {
-    // if (this.props.isOpen) {
-    //   this._closeMenu();
-    // }
-
-    //window.removeEventListener('click', this.onWindowClick)
-  }
-
   //
   // Control
 
@@ -55,11 +31,11 @@ class Menu extends Component {
   // Listeners
 
   @autobind
-  onWindowClick (event) {
+  onWindowClick(event) {
     const menu = ReactDOM.findDOMNode(this.refs.menu);
     const menuContent = ReactDOM.findDOMNode(this.refs.menuContent);
 
-    if((!menu.contains(event.target) || menuContent.contains(event.target)) && this.state.isMenuOpen){
+    if ((!menu.contains(event.target) || menuContent.contains(event.target)) && this.state.isMenuOpen) {
       this.setState({ isMenuOpen: false });
       this._removeListener();
     }

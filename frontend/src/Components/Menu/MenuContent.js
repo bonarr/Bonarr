@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classNames';
+import align from 'Utilities/align';
 import styles from './MenuContent.css';
 
 class MenuContent extends Component {
@@ -10,6 +12,7 @@ class MenuContent extends Component {
     const {
       className,
       children,
+      alignMenu,
       isOpen
     } = this.props;
 
@@ -19,7 +22,10 @@ class MenuContent extends Component {
 
     return (
       <div
-        className={className}
+        className={classNames(
+          className,
+          styles[alignMenu]
+        )}
       >
         {children}
       </div>
@@ -30,11 +36,13 @@ class MenuContent extends Component {
 MenuContent.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  alignMenu: PropTypes.oneOf([align.LEFT, align.RIGHT]),
   isOpen: PropTypes.bool
 };
 
 MenuContent.defaultProps = {
-  className: styles.menuContent
+  className: styles.menuContent,
+  alignMenu: align.LEFT
 };
 
 export default MenuContent;

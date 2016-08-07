@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
+import align from 'Utilities/align';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import PageToolbar from 'Components/Page/PageToolbar';
-import PageToolbarSeparator from 'Components/Page/PageToolbarSeparator';
-import PageToolbarButton from 'Components/Page/PageToolbarButton';
+import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
+import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
+import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
+import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import Menu from 'Components/Menu/Menu';
 import MenuButton from 'Components/Menu/MenuButton';
 import MenuContent from 'Components/Menu/MenuContent';
@@ -65,64 +67,69 @@ class LogsTable extends Component {
     return (
       <PageContent>
         <PageToolbar>
-          <LogsNavMenu current="Logs" />
-          <Menu>
-            <MenuButton>
-              <Icon name="icon-sonarr-filter" />
-              <span className={styles.filterMenuButtonText}>Filter</span>
-            </MenuButton>
+          <PageToolbarSection>
+            <LogsNavMenu current="Logs" />
 
-            <MenuContent>
-              <FilterMenuItem
-                {...otherProps}
-                onPress={this.onFilterMenuItemPress}
-              >
-                All
-              </FilterMenuItem>
+            <PageToolbarSeparator />
 
-              <FilterMenuItem
-                name="level"
-                value="Info"
-                {...otherProps}
-                onPress={this.onFilterMenuItemPress}
-              >
-                Info
-              </FilterMenuItem>
+            <PageToolbarButton
+              iconName="icon-sonarr-refresh"
+              animateIconName="icon-sonarr-refresh"
+              animate={fetching}
+              onPress={onRefreshPress}
+            />
 
-              <FilterMenuItem
-                name="level"
-                value="Warn"
-                {...otherProps}
-                onPress={this.onFilterMenuItemPress}
-              >
-                Warn
-              </FilterMenuItem>
+            <PageToolbarButton
+              iconName="icon-sonarr-clear"
+              animate={clearLogExecuting}
+              onPress={onClearLogsPress}
+            />
+          </PageToolbarSection>
 
-              <FilterMenuItem
-                name="level"
-                value="Error"
-                {...otherProps}
-                onPress={this.onFilterMenuItemPress}
-              >
-                Error
-              </FilterMenuItem>
-            </MenuContent>
-          </Menu>
+          <PageToolbarSection alignContent={align.RIGHT}>
+            <Menu>
+              <MenuButton>
+                <Icon name="icon-sonarr-filter" />
+                <span className={styles.filterMenuButtonText}>Filter</span>
+              </MenuButton>
 
-          <PageToolbarSeparator />
+              <MenuContent alignMenu={align.RIGHT}>
+                <FilterMenuItem
+                  {...otherProps}
+                  onPress={this.onFilterMenuItemPress}
+                >
+                  All
+                </FilterMenuItem>
 
-          <PageToolbarButton
-            iconName="icon-sonarr-refresh"
-            animateIconName="icon-sonarr-refresh"
-            animate={fetching}
-            onPress={onRefreshPress}
-          />
+                <FilterMenuItem
+                  name="level"
+                  value="Info"
+                  {...otherProps}
+                  onPress={this.onFilterMenuItemPress}
+                >
+                  Info
+                </FilterMenuItem>
 
-          <PageToolbarButton
-            iconName="icon-sonarr-clear"
-            animate={clearLogExecuting}
-            onPress={onClearLogsPress}
-          />
+                <FilterMenuItem
+                  name="level"
+                  value="Warn"
+                  {...otherProps}
+                  onPress={this.onFilterMenuItemPress}
+                >
+                  Warn
+                </FilterMenuItem>
+
+                <FilterMenuItem
+                  name="level"
+                  value="Error"
+                  {...otherProps}
+                  onPress={this.onFilterMenuItemPress}
+                >
+                  Error
+                </FilterMenuItem>
+              </MenuContent>
+            </Menu>
+          </PageToolbarSection>
 
         </PageToolbar>
         <PageContentBody>

@@ -3,7 +3,7 @@ import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import PageToolbar from 'Components/Page/PageToolbar';
+import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import TableBody from 'Components/Table/TableBody';
 import TablePager from 'Components/Table/TablePager';
 import LogsNavMenu from '../LogsNavMenu';

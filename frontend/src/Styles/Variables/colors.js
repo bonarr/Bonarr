@@ -60,6 +60,10 @@ module.exports = {
   //
   // Menu
   menuItemColor: '#e1e2e3',
-  menuItemHoverColor: '#fbfcfc'
+  menuItemHoverColor: '#fbfcfc',
 
+  //
+  // Toolbar
+
+  toobarButtonHoverColor: '#35c5f4'
 };

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import classNames from 'classNames';
 import * as kinds from 'Helpers/kinds';
 import Link from './Link';
 import styles from './Button.css';

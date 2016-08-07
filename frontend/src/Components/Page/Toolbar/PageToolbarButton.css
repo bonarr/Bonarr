@@ -4,4 +4,8 @@
   width: 60px;
   text-align: center;
   font-size: 22px;
+
+  &:hover {
+    color: $toobarButtonHoverColor;
+  }
 }
