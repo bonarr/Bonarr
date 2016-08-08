@@ -2,8 +2,8 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import * as systemActions from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
+import * as systemActions from 'Stores/Actions/systemActions';
 import LogsTable from './LogsTable';
 
 const clearLogsTaskName = 'ClearLog';
