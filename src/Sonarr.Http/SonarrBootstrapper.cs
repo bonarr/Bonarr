@@ -38,7 +38,6 @@ namespace Sonarr.Http
 
             container.Resolve<DatabaseTarget>().Register();
             container.Resolve<IEventAggregator>().PublishEvent(new ApplicationStartedEvent());
-            ApplicationPipelines.OnError.AddItemToEndOfPipeline((Func<NancyContext, Exception, Response>) container.Resolve<SonarrErrorPipeline>().HandleException);
         }
 
         private void RegisterPipelines(IPipelines pipelines)

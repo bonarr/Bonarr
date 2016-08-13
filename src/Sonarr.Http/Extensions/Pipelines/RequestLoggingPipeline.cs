@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using Nancy;
 using Nancy.Bootstrapper;
 using NLog;
-using NzbDrone.Api.ErrorManagement;
 using NzbDrone.Common.Extensions;
+using Sonarr.Http.ErrorManagement;
 using Sonarr.Http.Extensions;
 using Sonarr.Http.Extensions.Pipelines;
 
@@ -18,9 +17,9 @@ namespace NzbDrone.Api.Extensions.Pipelines
 
         private static int _requestSequenceID;
 
-        private readonly NzbDroneErrorPipeline _errorPipeline;
+        private readonly SonarrErrorPipeline _errorPipeline;
 
-        public RequestLoggingPipeline(NzbDroneErrorPipeline errorPipeline)
+        public RequestLoggingPipeline(SonarrErrorPipeline errorPipeline)
         {
             _errorPipeline = errorPipeline;
         }
