@@ -9,7 +9,7 @@ function createUpdateServerSideCollectionReducer(collection) {
 
       const serverState = _.omit(data, ['records']);
       const calculatedState = {
-        totalPages: Math.ceil(data.totalRecords / data.pageSize),
+        totalPages: Math.max(Math.ceil(data.totalRecords / data.pageSize), 1),
         items: data.records
       };
 
