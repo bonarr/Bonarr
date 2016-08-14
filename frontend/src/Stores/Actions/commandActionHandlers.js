@@ -2,7 +2,7 @@ import $ from 'jquery';
 import isSameCommand from 'Utilities/isSameCommand';
 import * as types from './actionTypes';
 import createFetchCollectionHandler from './createFetchCollectionHandler';
-import { addCommand } from './commandActions';
+import { addCommand, removeCommand } from './commandActions';
 
 let lastCommand = null;
 let lastCommandTimeout = null;
@@ -38,7 +38,25 @@ const commandActionHandlers = {
         dispatch(addCommand(data));
       });
     };
+  },
+
+  [types.FINISH_COMMAND](payload) {
+    return (dispatch, getState) => {
+      const state = getState();
+      const handlers = state.commands.handlers;
+
+      Object.keys(handlers).forEach((key) => {
+        const handler = handlers[key];
+
+        if (handler.name === payload.name) {
+          dispatch(handler.handler(payload));
+        }
+      });
+
+      dispatch(removeCommand(payload));
+    };
   }
+
 };
 
 export default commandActionHandlers;

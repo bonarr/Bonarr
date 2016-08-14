@@ -6,7 +6,8 @@ import createUpdateCollectionReducer from './createUpdateCollectionReducer';
 
 const defaultState = {
   fetching: false,
-  items: []
+  items: [],
+  handlers: {}
 };
 
 const reducerCollection = 'commands';
@@ -37,7 +38,7 @@ const commandReducers = handleActions({
     return newState;
   },
 
-  [types.FINISH_COMMAND]: (state, { payload }) => {
+  [types.REMOVE_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
 
     const index = _.findIndex(newState.items, { id: payload.id });
@@ -45,6 +46,24 @@ const commandReducers = handleActions({
     if (index > -1) {
       newState.items.splice(index, 1);
     }
+
+    return newState;
+  },
+
+  [types.REGISTER_FINISH_COMMAND_HANDLER]: (state, { payload }) => {
+    const newState = Object.assign({}, state);
+
+    newState.handlers[payload.key] = {
+      name: payload.name,
+      handler: payload.handler
+    };
+
+    return newState;
+  },
+
+  [types.UNREGISTER_FINISH_COMMAND_HANDLER]: (state, { payload }) => {
+    const newState = Object.assign({}, state);
+    delete newState.handlers[payload.key];
 
     return newState;
   }
