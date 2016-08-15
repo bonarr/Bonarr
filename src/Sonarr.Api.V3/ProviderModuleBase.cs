@@ -11,7 +11,6 @@ using Omu.ValueInjecter;
 using Sonarr.Http;
 using Sonarr.Http.ClientSchema;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3
 {
@@ -29,7 +28,7 @@ namespace Sonarr.Api.V3
 
             Get["schema"] = x => GetTemplates();
             Post["test"] = x => Test(ReadResourceFromRequest(true));
-            Post["connectData/{stage}"] = x => ConnectData(x.stage, ReadResourceFromRequest(true));
+            Post["action/{action}"] = x => RequestAction(x.action, ReadResourceFromRequest(true));
 
             GetResourceAll = GetAll;
             GetResourceById = GetProviderById;
@@ -193,13 +192,13 @@ namespace Sonarr.Api.V3
         }
 
 
-        private Response ConnectData(string stage, TProviderResource providerResource)
+        private Response RequestAction(string action, TProviderResource providerResource)
         {
-            TProviderDefinition providerDefinition = GetDefinition(providerResource, true, false);
+            var providerDefinition = GetDefinition(providerResource, true, false);
 
-            if (!providerDefinition.Enable) return "{}";
+            var query = ((IDictionary<string, object>)Request.Query.ToDictionary()).ToDictionary(k => k.Key, k => k.Value.ToString());
 
-            object data = _providerFactory.ConnectData(providerDefinition, stage, (IDictionary<string, object>) Request.Query.ToDictionary());
+            var data = _providerFactory.RequestAction(providerDefinition, action, query);
             Response resp = JsonConvert.SerializeObject(data);
             resp.ContentType = "application/json";
             return resp;
