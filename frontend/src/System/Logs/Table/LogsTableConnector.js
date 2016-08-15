@@ -2,16 +2,16 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import * as systemActions from 'Stores/Actions/systemActions';
 import LogsTable from './LogsTable';
 
-const clearLogsTaskName = 'ClearLog';
+const clearLogsCommandName = 'ClearLog';
 
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
   const commands = state.commands.items;
-  const clearLogExecuting = _.some(commands, { name: clearLogsTaskName });
+  const clearLogExecuting = _.some(commands, { name: clearLogsCommandName });
 
   const result = _.pick(state.system.logs, [
     'fetching',
@@ -33,6 +33,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   executeCommand,
+  registerFinishCommandHandler,
+  unregisterFinishCommandHandler,
   ...systemActions
 };
 
@@ -42,7 +44,17 @@ class LogsTableConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
+    this.props.registerFinishCommandHandler({
+      key: 'logsTableClearLogs',
+      name: clearLogsCommandName,
+      handler: systemActions.fetchLogs
+    });
+
     this.props.fetchLogs();
+  }
+
+  componentWillUnmount() {
+    this.props.unregisterFinishCommandHandler({ key: 'logsTableClearLogs' });
   }
 
   //
@@ -90,7 +102,7 @@ class LogsTableConnector extends Component {
 
   @autobind
   onClearLogsPress() {
-    this.props.executeCommand({ name: clearLogsTaskName });
+    this.props.executeCommand({ name: clearLogsCommandName });
   }
 
   //
@@ -123,7 +135,9 @@ LogsTableConnector.propTypes = {
   gotoLogsPage: PropTypes.func.isRequired,
   setLogsSort: PropTypes.func.isRequired,
   setLogsFilter: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired,
+  registerFinishCommandHandler: PropTypes.func.isRequired,
+  unregisterFinishCommandHandler: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogsTableConnector);

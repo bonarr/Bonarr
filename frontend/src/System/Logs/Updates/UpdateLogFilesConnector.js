@@ -2,16 +2,16 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import { fetchUpdateLogFiles } from 'Stores/Actions/systemActions';
 import LogFiles from '../Files/LogFiles';
 
-const deleteFilesTaskName = 'DeleteUpdateLogFiles';
+const deleteFilesCommandName = 'DeleteUpdateLogFiles';
 
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
   const commands = state.commands.items;
-  const deleteFilesExecuting = _.some(commands, { name: deleteFilesTaskName });
+  const deleteFilesExecuting = _.some(commands, { name: deleteFilesCommandName });
 
   const {
     fetching,
@@ -28,7 +28,9 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   fetchUpdateLogFiles,
-  executeCommand
+  executeCommand,
+  registerFinishCommandHandler,
+  unregisterFinishCommandHandler
 };
 
 class UpdateLogFilesConnector extends Component {
@@ -37,7 +39,17 @@ class UpdateLogFilesConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
+    this.props.registerFinishCommandHandler({
+      key: 'updateLogFilesDeleteLogs',
+      name: deleteFilesCommandName,
+      handler: fetchUpdateLogFiles
+    });
+
     this.props.fetchUpdateLogFiles();
+  }
+
+  componentWillUnmount() {
+    this.props.unregisterFinishCommandHandler({ key: 'updateLogFilesDeleteLogs' });
   }
 
   //
@@ -50,7 +62,7 @@ class UpdateLogFilesConnector extends Component {
 
   @autobind
   onDeleteFilesPress() {
-    this.props.executeCommand({ name: deleteFilesTaskName });
+    this.props.executeCommand({ name: deleteFilesCommandName });
   }
 
   //
@@ -69,7 +81,9 @@ class UpdateLogFilesConnector extends Component {
 
 UpdateLogFilesConnector.propTypes = {
   fetchUpdateLogFiles: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired,
+  registerFinishCommandHandler: PropTypes.func.isRequired,
+  unregisterFinishCommandHandler: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateLogFilesConnector);
