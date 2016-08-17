@@ -34,25 +34,5 @@ module.exports = Marionette.LayoutView.extend({
 
   onClose: function() {
     this.unmountReact();
-  },
-
-  _showActionBar() {
-    var actions = {
-      items: [
-        {
-          tooltip: 'Backup',
-          icon: 'icon-sonarr-file-text',
-          command: 'backup',
-          properties: { type: 'manual' },
-          successMessage: 'Database and settings were backed up successfully',
-          errorMessage: 'Backup Failed!'
-        }
-      ]
-    };
-    //
-    // vent.trigger(vent.Commands.OpenActionBarCommand, {
-    //   parentView: this,
-    //   actions: actions
-    // });
   }
 });
