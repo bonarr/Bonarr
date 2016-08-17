@@ -24,7 +24,10 @@ namespace Sonarr.Api.V3.System.Tasks
 
         private List<TaskResource> GetAll()
         {
-            return _taskManager.GetAll().Select(ConvertToResource).ToList();
+            return _taskManager.GetAll()
+                               .Select(ConvertToResource)
+                               .OrderBy(t => t.Name)
+                               .ToList();
         }
 
         private static TaskResource ConvertToResource(ScheduledTask scheduledTask)

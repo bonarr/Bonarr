@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import React, { Component, PropTypes } from 'react';
 import longDateTime from 'Utilities/Date/longDateTime';
 import relativeTime from 'Utilities/Date/relativeTime';
+import Icon from 'Components/Icon';
+import Link from 'Components/Link';
+import PageContent from 'Components/Page/PageContent';
+import PageContentBody from 'Components/Page/PageContentBody';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -47,101 +49,103 @@ class Tasks extends Component {
     } = this.props;
 
     return (
-      <div>
-        {
-          fetching &&
-            <LoadingIndicator />
-        }
+      <PageContent>
+        <PageContentBody>
+          {
+            fetching &&
+              <LoadingIndicator />
+          }
 
-        {
-          !fetching &&
-            <Table
-              headers={headers}
-            >
-              <TableBody>
-                {
-                  items.map((item) => {
-                    const disabled = item.interval === 0;
-                    const executeNow = !disabled && moment().isAfter(item.nextExecution);
-                    const hasNextExecutionTime = !disabled && !executeNow;
-                    const duration = moment.duration(item.interval, 'minutes').humanize().replace(/an?(?=\s)/, '1');
-                    const lastExecution = item.lastExecution;
-                    const nextExecution = item.nextExecution;
+          {
+            !fetching &&
+              <Table
+                headers={headers}
+              >
+                <TableBody>
+                  {
+                    items.map((item) => {
+                      const disabled = item.interval === 0;
+                      const executeNow = !disabled && moment().isAfter(item.nextExecution);
+                      const hasNextExecutionTime = !disabled && !executeNow;
+                      const duration = moment.duration(item.interval, 'minutes').humanize().replace(/an?(?=\s)/, '1');
+                      const lastExecution = item.lastExecution;
+                      const nextExecution = item.nextExecution;
 
-                    function onExecuteTaskPress(event) {
-                      onExecutePress(item.taskName);
-                    }
+                      function onExecuteTaskPress(event) {
+                        onExecutePress(item.taskName);
+                      }
 
-                    return (
-                      <TableRow
-                        key={item.id}
-                      >
-                        <TableRowCell>{item.name}</TableRowCell>
-                        <TableRowCell
-                          className={styles.interval}
+                      return (
+                        <TableRow
+                          key={item.id}
                         >
-                          {disabled ? 'disabled' : duration}
-                        </TableRowCell>
-
-                        <TableRowCell
-                          className={styles.lastExecution}
-                          title={longDateTime(lastExecution)}
-                        >
-                          {relativeTime(lastExecution)}
-                        </TableRowCell>
-
-                        {
-                          disabled &&
-                            <TableRowCell className={styles.nextExecution}>-</TableRowCell>
-                        }
-
-                        {
-                          executeNow &&
-                            <TableRowCell className={styles.nextExecution}>now</TableRowCell>
-                        }
-
-                        {
-                          hasNextExecutionTime &&
-                            <TableRowCell
-                              className={styles.nextExecution}
-                              title={longDateTime(nextExecution)}
-                            >
-                              {relativeTime(nextExecution)}
-                            </TableRowCell>
-                        }
-
-                        <TableRowCell
-                          className={styles.actions}
-                        >
-                          <Link
-                            onPress={onExecuteTaskPress}
-                            data-task-name={item.taskName}
+                          <TableRowCell>{item.name}</TableRowCell>
+                          <TableRowCell
+                            className={styles.interval}
                           >
-                            {
-                              <Icon
-                                name="icon-sonarr-refresh"
-                                {...item.executing ? { className: 'fa-spin' } : {}}
-                              />
-                            }
-                          </Link>
-                        </TableRowCell>
-                      </TableRow>
-                    );
-                  })
-                }
-              </TableBody>
-            </Table>
-        }
-      </div>
+                            {disabled ? 'disabled' : duration}
+                          </TableRowCell>
+
+                          <TableRowCell
+                            className={styles.lastExecution}
+                            title={longDateTime(lastExecution)}
+                          >
+                            {relativeTime(lastExecution)}
+                          </TableRowCell>
+
+                          {
+                            disabled &&
+                              <TableRowCell className={styles.nextExecution}>-</TableRowCell>
+                          }
+
+                          {
+                            executeNow &&
+                              <TableRowCell className={styles.nextExecution}>now</TableRowCell>
+                          }
+
+                          {
+                            hasNextExecutionTime &&
+                              <TableRowCell
+                                className={styles.nextExecution}
+                                title={longDateTime(nextExecution)}
+                              >
+                                {relativeTime(nextExecution)}
+                              </TableRowCell>
+                          }
+
+                          <TableRowCell
+                            className={styles.actions}
+                          >
+                            <Link
+                              onPress={onExecuteTaskPress}
+                              data-task-name={item.taskName}
+                            >
+                              {
+                                <Icon
+                                  name="icon-sonarr-refresh"
+                                  {...item.executing ? { className: 'fa-spin' } : {}}
+                                />
+                              }
+                            </Link>
+                          </TableRowCell>
+                        </TableRow>
+                      );
+                    })
+                  }
+                </TableBody>
+              </Table>
+          }
+        </PageContentBody>
+      </PageContent>
     );
   }
 
 }
 
 Tasks.propTypes = {
-  fetching: PropTypes.bool,
-  items: PropTypes.array,
-  onExecutePress: PropTypes.func
+  fetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired,
+  onExecutePress: PropTypes.func.isRequired
 };
 
 export default Tasks;

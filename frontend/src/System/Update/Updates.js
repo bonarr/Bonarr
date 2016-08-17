@@ -5,6 +5,8 @@ import shortDate from 'Utilities/Date/shortDate';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
+import PageContent from 'Components/Page/PageContent';
+import PageContentBody from 'Components/Page/PageContentBody';
 import UpdateChanges from './UpdateChanges';
 import styles from './Updates.css';
 
@@ -26,99 +28,101 @@ class Updates extends Component {
     const noUpdateToInstall = hasUpdates && !hasUpdateToInstall;
 
     return (
-      <div>
-        {
-          fetching &&
-            <LoadingIndicator />
-        }
+      <PageContent>
+        <PageContentBody>
+          {
+            fetching &&
+              <LoadingIndicator />
+          }
 
-        {
-          noUpdates &&
-            <div>No updates are available</div>
-        }
+          {
+            noUpdates &&
+              <div>No updates are available</div>
+          }
 
-        {
-          hasUpdateToInstall &&
-            <Button
-              kind={kinds.PRIMARY}
-              className={styles.updateAvailable}
-              onPress={onInstallLatestPress}
-            >
-              Install Latest
-            </Button>
-        }
+          {
+            hasUpdateToInstall &&
+              <Button
+                kind={kinds.PRIMARY}
+                className={styles.updateAvailable}
+                onPress={onInstallLatestPress}
+              >
+                Install Latest
+              </Button>
+          }
 
-        {
-          noUpdateToInstall &&
-            <div className={styles.upToDate}>
-              <Icon
-                name="fa fa-check-circle"
-                className={styles.upToDateIcon}
-              />
-              <div className={styles.upToDateMessage}>
-                The latest version of Sonarr is already installed
+          {
+            noUpdateToInstall &&
+              <div className={styles.upToDate}>
+                <Icon
+                  name="fa fa-check-circle"
+                  className={styles.upToDateIcon}
+                />
+                <div className={styles.upToDateMessage}>
+                  The latest version of Sonarr is already installed
+                </div>
               </div>
-            </div>
-        }
+          }
 
-        {
-          hasUpdates &&
-            <div>
-              {
-                items.map((update) => {
-                  const hasChanges = !!update.changes;
+          {
+            hasUpdates &&
+              <div>
+                {
+                  items.map((update) => {
+                    const hasChanges = !!update.changes;
 
-                  return (
-                    <div
-                      key={update.version}
-                      className={styles.update}
-                    >
-                      <div className={styles.info}>
-                        <div className={styles.version}>{update.version}</div>
-                        <div className={styles.space}>&mdash;</div>
-                        <div className={styles.date}>{shortDate(update.releaseDate)}</div>
+                    return (
+                      <div
+                        key={update.version}
+                        className={styles.update}
+                      >
+                        <div className={styles.info}>
+                          <div className={styles.version}>{update.version}</div>
+                          <div className={styles.space}>&mdash;</div>
+                          <div className={styles.date}>{shortDate(update.releaseDate)}</div>
+
+                          {
+                            update.branch !== 'master' &&
+                              <div className={styles.branch}>{update.branch}</div>
+                          }
+                        </div>
 
                         {
-                          update.branch !== 'master' &&
-                            <div className={styles.branch}>{update.branch}</div>
+                          !hasChanges &&
+                            <div>Maintenance release</div>
+                        }
+
+                        {
+                          hasChanges &&
+                            <div className={styles.changes}>
+                              <UpdateChanges
+                                title="New"
+                                changes={update.changes.new}
+                              />
+
+                              <UpdateChanges
+                                title="Fixed"
+                                changes={update.changes.fixed}
+                              />
+                            </div>
                         }
                       </div>
-
-                      {
-                        !hasChanges &&
-                          <div>Maintenance release</div>
-                      }
-
-                      {
-                        hasChanges &&
-                          <div className={styles.changes}>
-                            <UpdateChanges
-                              title="New"
-                              changes={update.changes.new}
-                            />
-
-                            <UpdateChanges
-                              title="Fixed"
-                              changes={update.changes.fixed}
-                            />
-                          </div>
-                      }
-                    </div>
-                  );
-                })
-              }
-            </div>
-        }
-      </div>
+                    );
+                  })
+                }
+              </div>
+          }
+        </PageContentBody>
+      </PageContent>
     );
   }
 
 }
 
 Updates.propTypes = {
-  fetching: PropTypes.bool,
-  items: PropTypes.array,
+  fetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired,
   onInstallLatestPress: PropTypes.func.isRequired
 };
 
-export default Updates
+export default Updates;

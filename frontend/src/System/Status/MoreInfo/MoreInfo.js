@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Link from 'Components/Link';
 import FieldSet from 'Components/FieldSet';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
@@ -72,4 +72,4 @@ MoreInfo.propTypes = {
 
 };
 
-export default MoreInfo
+export default MoreInfo;

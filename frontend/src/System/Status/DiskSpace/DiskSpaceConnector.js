@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchDiskSpace } from 'Stores/Actions/systemActions'
+import { fetchDiskSpace } from 'Stores/Actions/systemActions';
 import DiskSpace from './DiskSpace';
 
 function mapStateToProps(state) {
@@ -36,7 +36,7 @@ class DiskSpaceConnector extends Component {
       <DiskSpace
         {...this.props}
       />
-    )
+    );
   }
 }
 

@@ -27,7 +27,9 @@ namespace Sonarr.Api.V3.System.Backup
                                            Path = b.Path,
                                            Type = b.Type,
                                            Time = b.Time
-                                       }).ToList();
+                                       })
+                                       .OrderByDescending(b => b.Time)
+                                       .ToList();
         }
     }
 }

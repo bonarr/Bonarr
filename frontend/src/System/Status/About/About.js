@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import FieldSet from 'Components/FieldSet'
+import FieldSet from 'Components/FieldSet';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
 
@@ -29,10 +29,10 @@ class About extends Component {
 
           {
             isMonoRuntime &&
-            <DescriptionListItem
-              title="Mono Version"
-              data={runtimeVersion}
-            />
+              <DescriptionListItem
+                title="Mono Version"
+                data={runtimeVersion}
+              />
           }
 
           <DescriptionListItem
@@ -52,12 +52,12 @@ class About extends Component {
 }
 
 About.propTypes = {
-  version: PropTypes.string,
-  isMonoRuntime: PropTypes.bool,
-  runtimeVersion: PropTypes.string,
-  appData: PropTypes.string,
-  startupPath: PropTypes.string,
-  fetchStatus: PropTypes.func
+  version: PropTypes.string.isRequired,
+  isMonoRuntime: PropTypes.bool.isRequired,
+  runtimeVersion: PropTypes.string.isRequired,
+  appData: PropTypes.string.isRequired,
+  startupPath: PropTypes.string.isRequired,
+  fetchStatus: PropTypes.func.isRequired
 };
 
 export default About;

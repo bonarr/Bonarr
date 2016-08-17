@@ -1,4 +1,3 @@
-import vent from 'vent';
 import Marionette from 'marionette';
 import tpl from './BackupLayout.hbs';
 import React from 'react';
@@ -10,57 +9,18 @@ import BackupsConnector from './BackupsConnector';
 module.exports = Marionette.LayoutView.extend({
   template: tpl,
 
-  ui: {
-    backups: '#x-backups'
-  },
-
-  headers: [
-    {
-      name: 'type',
-      label: ''
-    },
-    {
-      name: 'name',
-      label: 'Name'
-    },
-    {
-      name: 'time',
-      label: 'Time'
-    }
-  ],
-
-  leftSideButtons: {
-    type: 'default',
-    storeState: false,
-    collapse: false,
-    items: [
-      {
-        title: 'Backup',
-        icon: 'icon-sonarr-file-text',
-        command: 'backup',
-        properties: { type: 'manual' },
-        successMessage: 'Database and settings were backed up successfully',
-        errorMessage: 'Backup Failed!'
-      }
-    ]
-  },
-
-  initialize() {
-    this._showActionBar();
-  },
-
-  mountReact: function () {
+  mountReact: function() {
     ReactDOM.render(
       <Provider store={appStore}>
         <BackupsConnector />
       </Provider>,
-      this.ui.backups[0]
+      this.el
     );
   },
 
-  unmountReact: function () {
+  unmountReact: function() {
     if (this.isRendered) {
-      ReactDOM.unmountComponentAtNode(this.ui.backups[0]);
+      ReactDOM.unmountComponentAtNode(this.el);
     }
   },
 
@@ -72,7 +32,7 @@ module.exports = Marionette.LayoutView.extend({
     this.mountReact();
   },
 
-  onClose: function () {
+  onClose: function() {
     this.unmountReact();
   },
 
@@ -89,10 +49,10 @@ module.exports = Marionette.LayoutView.extend({
         }
       ]
     };
-
-    vent.trigger(vent.Commands.OpenActionBarCommand, {
-      parentView: this,
-      actions: actions
-    });
+    //
+    // vent.trigger(vent.Commands.OpenActionBarCommand, {
+    //   parentView: this,
+    //   actions: actions
+    // });
   }
 });

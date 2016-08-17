@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchHealth } from 'Stores/Actions/systemActions'
+import { fetchHealth } from 'Stores/Actions/systemActions';
 import Health from './Health';
 
 function mapStateToProps(state) {
@@ -36,7 +36,7 @@ class HealthConnector extends Component {
       <Health
         {...this.props}
       />
-    )
+    );
   }
 }
 

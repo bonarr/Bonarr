@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PageContent from 'Components/Page/PageContent';
+import PageContentBody from 'Components/Page/PageContentBody';
 import HealthConnector from './Health/HealthConnector';
 import DiskSpaceConnector from './DiskSpace/DiskSpaceConnector';
 import AboutConnector from './About/AboutConnector';
@@ -11,19 +13,17 @@ class Status extends Component {
 
   render() {
     return (
-      <div>
-        <HealthConnector />
-        <DiskSpaceConnector />
-        <AboutConnector />
-        <MoreInfo />
-      </div>
+      <PageContent>
+        <PageContentBody>
+          <HealthConnector />
+          <DiskSpaceConnector />
+          <AboutConnector />
+          <MoreInfo />
+        </PageContentBody>
+      </PageContent>
     );
   }
 
 }
 
-Status.propTypes = {
-
-};
-
-export default Status
+export default Status;

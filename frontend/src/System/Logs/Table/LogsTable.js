@@ -4,6 +4,8 @@ import align from 'Utilities/align';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';
+import TableBody from 'Components/Table/TableBody';
+import TablePager from 'Components/Table/TablePager';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
@@ -14,8 +16,6 @@ import Menu from 'Components/Menu/Menu';
 import MenuButton from 'Components/Menu/MenuButton';
 import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
-import TableBody from 'Components/Table/TableBody';
-import TablePager from 'Components/Table/TablePager';
 import LogsNavMenu from '../LogsNavMenu';
 import LogsTableRow from './LogsTableRow';
 import styles from './LogsTable.css';
@@ -130,8 +130,8 @@ class LogsTable extends Component {
               </MenuContent>
             </Menu>
           </PageToolbarSection>
-
         </PageToolbar>
+
         <PageContentBody>
           {
             fetching &&

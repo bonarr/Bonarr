@@ -95,8 +95,8 @@ class Health extends Component {
 }
 
 Health.propTypes = {
-  fetching: PropTypes.bool,
-  items: PropTypes.array
+  fetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
 };
 
 export default Health;

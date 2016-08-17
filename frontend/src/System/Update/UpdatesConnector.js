@@ -46,10 +46,10 @@ class UpdatesConnector extends Component {
   render() {
     return (
       <Updates
-        onInstallLatestPress={this.onInstallLatestPress }
+        onInstallLatestPress={this.onInstallLatestPress}
         {...this.props}
       />
-    )
+    );
   }
 }
 

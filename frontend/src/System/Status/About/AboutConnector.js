@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchStatus } from 'Stores/Actions/systemActions'
+import { fetchStatus } from 'Stores/Actions/systemActions';
 import About from './About';
 
 function mapStateToProps(state) {
@@ -30,7 +30,7 @@ class AboutConnector extends Component {
       <About
         {...this.props}
       />
-    )
+    );
   }
 }
 

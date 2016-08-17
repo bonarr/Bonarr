@@ -78,8 +78,8 @@ class DiskSpace extends Component {
 }
 
 DiskSpace.propTypes = {
-  fetching: PropTypes.bool,
-  items: PropTypes.array
+  fetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
 };
 
 export default DiskSpace;

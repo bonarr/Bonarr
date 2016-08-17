@@ -1,14 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import Icon from 'Components/Icon';
-import Link from 'Components/Link';
 import longDateTime from 'Utilities/Date/longDateTime';
 import relativeDate from 'Utilities/Date/relativeDate';
+import Icon from 'Components/Icon';
+import Link from 'Components/Link';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
-import styles from './Backups.css'
+import PageContent from 'Components/Page/PageContent';
+import PageContentBody from 'Components/Page/PageContentBody';
+import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
+import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
+import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
+import styles from './Backups.css';
 
 const headers = [
   {
@@ -33,96 +38,112 @@ class Backups extends Component {
   render() {
     const {
       fetching,
-      items
+      items,
+      backupExecuting,
+      onBackupPress
     } = this.props;
 
     const hasBackups = !fetching && items.length > 0;
     const noBackups = !fetching && !items.length;
 
     return (
-      <div>
-        {
-          fetching &&
-            <LoadingIndicator />
-        }
+      <PageContent>
+        <PageToolbar>
+          <PageToolbarSection>
+            <PageToolbarButton
+              iconName="icon-sonarr-file-text"
+              animate={backupExecuting}
+              onPress={onBackupPress}
+            />
+          </PageToolbarSection>
+        </PageToolbar>
 
-        {
-          noBackups &&
-            <div>No backups are available</div>
-        }
+        <PageContentBody>
+          {
+            fetching &&
+              <LoadingIndicator />
+          }
 
-        {
-          hasBackups &&
-            <Table
-              headers={headers}
-            >
-              <TableBody>
-                {
-                  items.map((item) => {
-                    const {
-                      id,
-                      type,
-                      name,
-                      time
-                    } = item;
+          {
+            noBackups &&
+              <div>No backups are available</div>
+          }
 
-                    let iconClassName = 'icon-sonarr-backup-scheduled';
-                    let iconTooltip = 'Scheduled';
+          {
+            hasBackups &&
+              <Table
+                headers={headers}
+              >
+                <TableBody>
+                  {
+                    items.map((item) => {
+                      const {
+                        id,
+                        type,
+                        name,
+                        time
+                      } = item;
 
-                    if (type === 'manual') {
-                      iconClassName = 'icon-sonarr-backup-manual';
-                      iconTooltip = 'Manual';
-                    } else if (item === 'update') {
-                      iconClassName = 'icon-sonarr-backup-update';
-                      iconTooltip = 'Before update';
-                    }
+                      let iconClassName = 'icon-sonarr-backup-scheduled';
+                      let iconTooltip = 'Scheduled';
 
-                    return (
-                      <TableRow
-                        key={id}
-                      >
-                        <TableRowCell
-                          className={styles.type}
+                      if (type === 'manual') {
+                        iconClassName = 'icon-sonarr-backup-manual';
+                        iconTooltip = 'Manual';
+                      } else if (item === 'update') {
+                        iconClassName = 'icon-sonarr-backup-update';
+                        iconTooltip = 'Before update';
+                      }
+
+                      return (
+                        <TableRow
+                          key={id}
                         >
-                          {
-                            <Icon
-                              name={iconClassName}
-                              title={iconTooltip}
-                            />
-                          }
-                        </TableRowCell>
-
-                        <TableRowCell>
-                          <Link
-                            className="no-router"
-                            to={`backup/${type}/${name}`}
+                          <TableRowCell
+                            className={styles.type}
                           >
-                            {name}
-                          </Link>
-                        </TableRowCell>
+                            {
+                              <Icon
+                                name={iconClassName}
+                                title={iconTooltip}
+                              />
+                            }
+                          </TableRowCell>
 
-                        <TableRowCell
-                          className={styles.time}
-                          title={longDateTime(time)}
-                        >
-                          {relativeDate(time)}
-                        </TableRowCell>
-                      </TableRow>
-                    );
-                  })
-                }
-              </TableBody>
-            </Table>
-        }
-      </div>
+                          <TableRowCell>
+                            <Link
+                              className="no-router"
+                              to={`backup/${type}/${name}`}
+                            >
+                              {name}
+                            </Link>
+                          </TableRowCell>
+
+                          <TableRowCell
+                            className={styles.time}
+                            title={longDateTime(time)}
+                          >
+                            {relativeDate(time)}
+                          </TableRowCell>
+                        </TableRow>
+                      );
+                    })
+                  }
+                </TableBody>
+              </Table>
+          }
+        </PageContentBody>
+      </PageContent>
     );
   }
 
 }
 
 Backups.propTypes = {
-  fetching: PropTypes.bool,
-  items: PropTypes.array
+  fetching: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired,
+  backupExecuting: PropTypes.bool.isRequired,
+  onBackupPress: PropTypes.func.isRequired
 };
 
 export default Backups;
