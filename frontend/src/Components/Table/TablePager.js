@@ -28,7 +28,7 @@ class TablePager extends Component {
   }
 
   @autobind
-  onPageSelect(page) {
+  onPageSelect({ value: page }) {
     this.setState({ isShowingPageSelect: false });
     this.props.onPageSelect(parseInt(page));
   }
@@ -101,6 +101,7 @@ class TablePager extends Component {
             {
               isShowingPageSelect &&
                 <SelectInput
+                  name="pageSelect"
                   value={page}
                   values={pages}
                   onChange={this.onPageSelect}

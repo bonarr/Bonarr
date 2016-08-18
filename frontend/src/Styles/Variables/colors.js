@@ -22,6 +22,7 @@ module.exports = {
 
   // Accents
   borderColor: '#e5e5e5',
+  inputBorderColor: '#dde6e9',
 
   //
   // Buttons

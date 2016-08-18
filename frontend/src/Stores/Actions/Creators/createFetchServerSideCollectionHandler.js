@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import { fetchingCollection, updateServerSideCollection, setCollectionError } from './baseActions';
+import { fetchingCollection, updateServerSideCollection, setCollectionError } from '../baseActions';
 
 function createFetchServerSideCollectionHandler(collection, url, getFromState) {
   return function(payload) {

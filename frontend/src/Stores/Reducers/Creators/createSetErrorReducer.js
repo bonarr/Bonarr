@@ -1,14 +1,14 @@
-function getFetchingPropertyName(property) {
+function getErrorPropertyName(property) {
   return `${property}Error`;
 }
 
 function createSetErrorReducer(property) {
-  const fetchingPropertyName = getFetchingPropertyName(property);
+  const errorPropertyName = getErrorPropertyName(property);
 
   return (state, { payload }) => {
-    if (fetchingPropertyName === getFetchingPropertyName(payload.property)) {
+    if (errorPropertyName === getErrorPropertyName(payload.property)) {
       const newState = {};
-      newState[fetchingPropertyName] = payload.fetching;
+      newState[errorPropertyName] = payload.error;
 
       return Object.assign({}, state, newState);
     }

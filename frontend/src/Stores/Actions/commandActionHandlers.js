@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import isSameCommand from 'Utilities/isSameCommand';
 import * as types from './actionTypes';
-import createFetchCollectionHandler from './createFetchCollectionHandler';
+import createFetchCollectionHandler from './Creators/createFetchCollectionHandler';
 import { addCommand, removeCommand } from './commandActions';
 
 let lastCommand = null;

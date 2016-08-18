@@ -1,4 +1,4 @@
-import { setServerSideCollectionFilter } from './baseActions';
+import { setServerSideCollectionFilter } from '../baseActions';
 
 function createSetServerSideCollectionFilterHandler(collection, getFromState, fetchHandler) {
   return function(payload) {

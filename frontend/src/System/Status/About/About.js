@@ -52,12 +52,11 @@ class About extends Component {
 }
 
 About.propTypes = {
-  version: PropTypes.string.isRequired,
-  isMonoRuntime: PropTypes.bool.isRequired,
-  runtimeVersion: PropTypes.string.isRequired,
-  appData: PropTypes.string.isRequired,
-  startupPath: PropTypes.string.isRequired,
-  fetchStatus: PropTypes.func.isRequired
+  version: PropTypes.string,
+  isMonoRuntime: PropTypes.bool,
+  runtimeVersion: PropTypes.string,
+  appData: PropTypes.string,
+  startupPath: PropTypes.string
 };
 
 export default About;

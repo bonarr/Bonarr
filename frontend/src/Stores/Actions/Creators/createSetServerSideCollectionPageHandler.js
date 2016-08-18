@@ -1,5 +1,5 @@
-import { setServerSideCollectionPage } from './baseActions';
 import pages from 'Utilities/pages';
+import { setServerSideCollectionPage } from '../baseActions';
 
 function createSetServerSideCollectionPageHandler(collection, page, getFromState, fetchHandler) {
   return function(payload) {

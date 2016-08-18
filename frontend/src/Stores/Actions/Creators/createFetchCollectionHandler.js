@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { fetchingCollection, updateCollection, setCollectionError } from './baseActions';
+import { fetchingCollection, updateCollection, setCollectionError } from '../baseActions';
 
 function createFetchCollectionHandler(collection, url) {
   return function(payload) {

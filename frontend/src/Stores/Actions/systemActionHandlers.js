@@ -1,33 +1,11 @@
-import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import * as types from './actionTypes';
-import { fetching, update, setError } from './baseActions';
-import createFetchCollectionHandler from './createFetchCollectionHandler';
-import createServerSideCollectionHandlers from './createServerSideCollectionHandlers';
+import createFetchHandler from './Creators/createFetchHandler';
+import createFetchCollectionHandler from './Creators/createFetchCollectionHandler';
+import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 
 const systemActionHandlers = {
-  [types.FETCH_STATUS](payload) {
-    return (dispatch, getState) => {
-      dispatch(fetching({ property: 'status', fetching: true }));
-
-      const promise = $.ajax({
-        url: '/system/status'
-      });
-
-      promise.done((data) => {
-        dispatch(update({ property: 'status', data }));
-        dispatch(setError({ property: 'status', error: null }));
-      });
-
-      promise.fail((xhr) => {
-        dispatch(setError({ property: 'status', error: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(fetching({ property: 'status', fetching: false }));
-      });
-    };
-  },
+  [types.FETCH_STATUS]: createFetchHandler('status', '/system/status'),
 
   [types.FETCH_HEALTH]: createFetchCollectionHandler('health', '/health'),
   [types.FETCH_DISK_SPACE]: createFetchCollectionHandler('diskSpace', '/diskspace'),

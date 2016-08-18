@@ -1,0 +1,6 @@
+.group {
+  display: flex;
+  margin-bottom: 20px;
+  max-width: 600px;
+  line-height: 35px;
+}

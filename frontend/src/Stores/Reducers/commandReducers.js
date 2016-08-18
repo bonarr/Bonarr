@@ -1,8 +1,8 @@
 import _ from 'underscore';
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingCollectionReducer from './createFetchingCollectionReducer';
-import createUpdateCollectionReducer from './createUpdateCollectionReducer';
+import createFetchingCollectionReducer from './Creators/createFetchingCollectionReducer';
+import createUpdateCollectionReducer from './Creators/createUpdateCollectionReducer';
 
 const defaultState = {
   fetching: false,

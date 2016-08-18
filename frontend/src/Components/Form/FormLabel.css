@@ -1,0 +1,11 @@
+.label {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1 35%;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.hasError {
+  color: $dangerColor;
+}

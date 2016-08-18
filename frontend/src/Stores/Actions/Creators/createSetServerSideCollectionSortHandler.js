@@ -1,5 +1,5 @@
-import { setServerSideCollectionSort } from './baseActions';
 import sortDirections from 'Utilities/sortDirections';
+import { setServerSideCollectionSort } from '../baseActions';
 
 function createSetServerSideCollectionSortHandler(collection, getFromState, fetchHandler) {
   return function(payload) {

@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './createFetchingReducer';
-import createFetchingCollectionReducer from './createFetchingCollectionReducer';
-import createUpdateReducer from './createUpdateReducer';
-import createUpdateCollectionReducer from './createUpdateCollectionReducer';
-import createUpdateServerSideCollectionReducer from './createUpdateServerSideCollectionReducer';
-import createSetServerSideCollectionPageReducer from './createSetServerSideCollectionPageReducer';
-import createSetServerSideCollectionSortReducer from './createSetServerSideCollectionSortReducer';
-import createSetServerSideCollectionFilterReducer from './createSetServerSideCollectionFilterReducer';
-import createCollectionReducers from './createCollectionReducers';
+import createFetchingReducer from './Creators/createFetchingReducer';
+import createFetchingCollectionReducer from './Creators/createFetchingCollectionReducer';
+import createUpdateReducer from './Creators/createUpdateReducer';
+import createUpdateCollectionReducer from './Creators/createUpdateCollectionReducer';
+import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
+import createSetServerSideCollectionPageReducer from './Creators/createSetServerSideCollectionPageReducer';
+import createSetServerSideCollectionSortReducer from './Creators/createSetServerSideCollectionSortReducer';
+import createSetServerSideCollectionFilterReducer from './Creators/createSetServerSideCollectionFilterReducer';
+import createCollectionReducers from './Creators/createCollectionReducers';
 
 const defaultState = {
   fetchingStatus: false,

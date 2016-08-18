@@ -10,7 +10,10 @@ class SelectInput extends Component {
 
   @autobind
   onChange(event) {
-    this.props.onChange(event.target.value);
+    this.props.onChange({
+      name: this.props.name,
+      value: event.target.value
+    });
   }
 
   //
@@ -43,6 +46,7 @@ class SelectInput extends Component {
 
 SelectInput.propTypes = {
   className: PropTypes.string,
+  name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired
