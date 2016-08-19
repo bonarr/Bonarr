@@ -6,7 +6,7 @@ module.exports = {
   selectedColor: '#f9be03',
   successColor: '#27c24c',
   dangerColor: '#f05050',
-  warningColor: 'orange',
+  warningColor: 'ffa500',
   infoColor: '#35c5f4',
   nzbdroneRed: '#c4273c',
   purple: '#7a43b6',
@@ -19,10 +19,18 @@ module.exports = {
   toolbarBackgroundColor: '#4f566f',
   toolbarMenuItemBackgroundColor: '#454b60',
   toolbarMenuItemHoverBackgroundColor: '#3a3f51',
+  helpTextColor: '#909293',
 
   // Accents
   borderColor: '#e5e5e5',
   inputBorderColor: '#dde6e9',
+  inputBoxShadowColor: 'rgba(0, 0, 0, 0.075)',
+  inputFocusBorderColor: '#66afe9',
+  inputFocusBoxShadowColor: 'rgba(102, 175, 233, 0.6)',
+  inputErrorBorderColor: '#f05050',
+  inputErrorBoxShadowColor: 'rgba(240, 80, 80, 0.6)',
+  inputWarningBorderColor: '#ffa500',
+  inputWarningBoxShadowColor: 'rgba(255, 165, 0, 0.6)',
 
   //
   // Buttons

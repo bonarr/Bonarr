@@ -1,0 +1,13 @@
+.helpText {
+  margin-top: 5px;
+  color: $helpTextColor;
+  line-height: 20px;
+}
+
+.isError {
+  color: $dangerColor;
+}
+
+.isWarning {
+  color: $warningColor;
+}

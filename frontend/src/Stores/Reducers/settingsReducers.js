@@ -5,6 +5,8 @@ import createSetSettingValueReducer from './Creators/createSetSettingValueReduce
 import createClearPendingChangesReducer from './Creators/createClearPendingChangesReducer';
 import createSavingReducer from './Creators/createSavingReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createSetErrorReducer from './Creators/createSetErrorReducer';
+import createSetSaveErrorReducer from './Creators/createSetSaveErrorReducer';
 import createReducers from './Creators/createReducers';
 
 const defaultState = {
@@ -12,7 +14,7 @@ const defaultState = {
   uiError: null,
   ui: {},
   uiPendingChanges: {},
-  uiSaving: false,
+  savingUi: false,
   uiSaveError: null
 };
 
@@ -23,10 +25,12 @@ const propertyNames = [
 const settingsReducers = handleActions({
 
   [types.FETCHING]: createReducers(propertyNames, createFetchingReducer),
-  [types.SAVING]: createReducers(propertyNames, createSavingReducer),
+  [types.SET_ERROR]: createReducers(propertyNames, createSetErrorReducer),
+  [types.UPDATE]: createReducers(propertyNames, createUpdateReducer),
   [types.SET_SETTING_VALUE]: createReducers(propertyNames, createSetSettingValueReducer),
-  [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer),
-  [types.UPDATE]: createReducers(propertyNames, createUpdateReducer)
+  [types.SAVING]: createReducers(propertyNames, createSavingReducer),
+  [types.SET_SAVE_ERROR]: createReducers(propertyNames, createSetSaveErrorReducer),
+  [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer)
 
 }, defaultState);
 

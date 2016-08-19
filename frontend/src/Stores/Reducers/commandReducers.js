@@ -2,6 +2,7 @@ import _ from 'underscore';
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
 import createFetchingCollectionReducer from './Creators/createFetchingCollectionReducer';
+import createSetCollectionErrorReducer from './Creators/createSetCollectionErrorReducer';
 import createUpdateCollectionReducer from './Creators/createUpdateCollectionReducer';
 
 const defaultState = {
@@ -15,6 +16,7 @@ const reducerCollection = 'commands';
 const commandReducers = handleActions({
 
   [types.FETCHING_COLLECTION]: createFetchingCollectionReducer(reducerCollection),
+  [types.SET_COLLECTION_ERROR]: createSetCollectionErrorReducer(reducerCollection),
   [types.UPDATE_COLLECTION]: createUpdateCollectionReducer(reducerCollection),
 
   [types.ADD_COMMAND]: (state, { payload }) => {

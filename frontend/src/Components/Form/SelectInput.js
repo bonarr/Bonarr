@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
+import classNames from 'classNames';
 import styles from './SelectInput.css';
 
 class SelectInput extends Component {
@@ -22,13 +23,21 @@ class SelectInput extends Component {
   render() {
     const {
       className,
+      name,
       value,
-      values
+      values,
+      hasError,
+      hasWarning
     } = this.props;
 
     return (
       <select
-        className={className}
+        className={classNames(
+          className,
+          hasError && styles.hasError,
+          hasWarning && styles.hasWarning
+        )}
+        name={name}
         value={value}
         onChange={this.onChange}
       >
@@ -49,6 +58,8 @@ SelectInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
+  hasError: PropTypes.bool,
+  hasWarning: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 

@@ -1,0 +1,47 @@
+.container {
+  position: relative;
+  display: flex;
+  flex: 1 1 65%;
+}
+
+.label {
+  display: flex;
+  margin-bottom: 0;
+  min-height: 21px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.styledContainer {
+  line-height: 35px;
+}
+
+.styled {
+  flex: 1 0 auto;
+  margin-top: 7px;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  color: $white;
+  text-align: center;
+  line-height: 20px;
+}
+
+.isChecked {
+  border-color: #5d9cec;
+  background-color: #5d9cec;
+}
+
+.helpText {
+  composes: helpText from 'Components/Form/FormInputHelpText.css';
+
+  margin-top: 8px;
+  margin-left: 5px;
+}

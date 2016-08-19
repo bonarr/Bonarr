@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
+import inputType from 'Utilities/inputType';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import PageContent from 'Components/Page/PageContent';
@@ -10,16 +11,6 @@ import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
-import SelectInput from 'Components/Form/SelectInput';
-import styles from './UISettings.css';
-
-function getSettingValue(settings, pending, property) {
-  if (pending.hasOwnProperty(property)) {
-    return pending[property];
-  }
-
-  return settings[property];
-}
 
 class UISettings extends Component {
 
@@ -42,21 +33,35 @@ class UISettings extends Component {
       fetching,
       error,
       settings,
-      pending,
       saving,
       saveError,
-      onSubmit,
       onInputChange
     } = this.props;
-
-    const firstDayOfWeek = getSettingValue(settings, pending, 'firstDayOfWeek');
-    const calendarWeekColumnHeader = getSettingValue(settings, pending, 'calendarWeekColumnHeader');
 
     const weekColumnOptions = [
       { 'ddd M/D': 'Tue 3/5' },
       { 'ddd MM/DD': 'Tue 03/05' },
       { 'ddd D/M': 'Tue 5/3' },
       { 'ddd DD/MM': 'Tue 05/03' }
+    ];
+
+    const shortDateFormatOptions = [
+      { 'MMM D YYYY': 'Mar 5 2014' },
+      { 'DD MMM YYYY': '5 Mar 2014' },
+      { 'MM/D/YYYY': '03/5/2014' },
+      { 'MM/DD/YYYY': '03/05/2014' },
+      { 'DD/MM/YYYY': '05/03/2014' },
+      { 'YYYY-MM-DD': '2014-03-05' }
+    ];
+
+    const longDateFormatOptions = [
+      { 'dddd, MMMM D YYYY': 'Tuesday, March 5, 2014' },
+      { 'dddd, D MMMM YYYY': 'Tuesday, 5 March, 2014' }
+    ];
+
+    const timeFormatOptions = [
+      { 'h(:mm)a': '5pm/5:30pm' },
+      { 'HH:mm': '17:00/17:30' }
     ];
 
     return (
@@ -90,28 +95,96 @@ class UISettings extends Component {
                 >
                   <FormGroup>
                     <FormLabel>First Day of Week</FormLabel>
-                    <FormInputGroup>
-                      <SelectInput
-                        name="firstDayOfWeek"
-                        value={firstDayOfWeek}
-                        values={[{ 0: 'Sunday' }, { 1: 'Monday' }]}
-                        onChange={onInputChange}
-                      />
-                    </FormInputGroup>
+
+                    <FormInputGroup
+                      type={inputType.SELECT}
+                      name="firstDayOfWeek"
+                      values={[{ 0: 'Sunday' }, { 1: 'Monday' }]}
+                      onChange={onInputChange}
+                      {...settings.firstDayOfWeek}
+                    />
                   </FormGroup>
 
                   <FormGroup>
                     <FormLabel>Week Column Header</FormLabel>
-                    <FormInputGroup>
-                      <SelectInput
-                        name="calendarWeekColumnHeader"
-                        value={calendarWeekColumnHeader}
-                        values={weekColumnOptions}
-                        onChange={onInputChange}
-                      />
-                    </FormInputGroup>
+
+                    <FormInputGroup
+                      type={inputType.SELECT}
+                      name="calendarWeekColumnHeader"
+                      values={weekColumnOptions}
+                      onChange={onInputChange}
+                      helpText="Shown above each column when week is the active view"
+                      {...settings.calendarWeekColumnHeader}
+                    />
                   </FormGroup>
                 </FieldSet>
+
+                <FieldSet
+                  legend="Dates"
+                >
+                  <FormGroup>
+                    <FormLabel>Short Date Format</FormLabel>
+
+                    <FormInputGroup
+                      type={inputType.SELECT}
+                      name="shortDateFormat"
+                      values={shortDateFormatOptions}
+                      onChange={onInputChange}
+                      {...settings.shortDateFormat}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormLabel>Long Date Format</FormLabel>
+
+                    <FormInputGroup
+                      type={inputType.SELECT}
+                      name="longDateFormat"
+                      values={longDateFormatOptions}
+                      onChange={onInputChange}
+                      {...settings.longDateFormat}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormLabel>Time Format</FormLabel>
+
+                    <FormInputGroup
+                      type={inputType.SELECT}
+                      name="timeFormat"
+                      values={timeFormatOptions}
+                      onChange={onInputChange}
+                      {...settings.timeFormat}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormLabel>Show Relative Dates</FormLabel>
+                    <FormInputGroup
+                      type={inputType.CHECK}
+                      name="showRelativeDates"
+                      helpText="Show relative (Today/Yesterday/etc) or absolute dates"
+                      onChange={onInputChange}
+                      {...settings.showRelativeDates}
+                    />
+                  </FormGroup>
+                </FieldSet>
+
+                <FieldSet
+                  legend="Style"
+                >
+                  <FormGroup>
+                    <FormLabel>Enable Color-Impaired mode</FormLabel>
+                    <FormInputGroup
+                      type={inputType.CHECK}
+                      name="enableColorImpairedMode"
+                      helpText="Altered style to allow color-impaired users to better distinguish color coded information"
+                      onChange={onInputChange}
+                      {...settings.enableColorImpairedMode}
+                    />
+                  </FormGroup>
+                </FieldSet>
+
                 <button type="submit">Save</button>
               </form>
           }
@@ -124,11 +197,10 @@ class UISettings extends Component {
 
 UISettings.propTypes = {
   fetching: PropTypes.bool.isRequired,
-  error: PropTypes.array.isRequired,
-  settings: PropTypes.bool.isRequired,
-  pending: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  settings: PropTypes.object.isRequired,
   saving: PropTypes.bool.isRequired,
-  saveError: PropTypes.bool.isRequired,
+  saveError: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired
 };
