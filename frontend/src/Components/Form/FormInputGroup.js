@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import inputType from 'Utilities/inputType';
+import inputTypes from 'Utilities/inputTypes';
 import Icon from 'Components/Icon';
 import CheckInput from './CheckInput';
 import SelectInput from './SelectInput';
@@ -8,9 +8,9 @@ import styles from './FormInputGroup.css';
 
 function getComponent(type) {
   switch (type) {
-    case inputType.CHECK:
+    case inputTypes.CHECK:
       return CheckInput;
-    case inputType.SELECT:
+    case inputTypes.SELECT:
       return SelectInput;
     default:
       return null;
@@ -30,7 +30,7 @@ function FormInputGroup(props) {
    } = props;
 
   const InputComponent = getComponent(type);
-  const checkInput = type === inputType.CHECK;
+  const checkInput = type === inputTypes.CHECK;
   const hasError = errors.length;
   const hasWarning = !hasError && warnings.length;
 
@@ -105,7 +105,7 @@ FormInputGroup.propTypes = {
 FormInputGroup.defaultProps = {
   className: styles.inputGroup,
   containerClassName: styles.inputGroupContainer,
-  type: inputType.TEXT,
+  type: inputTypes.TEXT,
   errors: [],
   warnings: []
 };

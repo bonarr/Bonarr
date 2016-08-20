@@ -1,8 +1,16 @@
-function createUpdateReducer(property) {
+function createUpdateReducer(section) {
   return (state, { payload }) => {
-    if (property === payload.property) {
+    if (section === payload.section) {
       const newState = {};
-      newState[property] = payload.data;
+      const newStateSection = state[section];
+
+      if (newStateSection.hasOwnProperty('item')) {
+        newStateSection.item = payload.data;
+      } else {
+        newStateSection.items = payload.data;
+      }
+
+      newState[section] = newStateSection;
 
       return Object.assign({}, state, newState);
     }

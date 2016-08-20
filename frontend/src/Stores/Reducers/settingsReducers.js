@@ -10,12 +10,14 @@ import createSetSaveErrorReducer from './Creators/createSetSaveErrorReducer';
 import createReducers from './Creators/createReducers';
 
 const defaultState = {
-  fetchingUi: false,
-  uiError: null,
-  ui: {},
-  uiPendingChanges: {},
-  savingUi: false,
-  uiSaveError: null
+  ui: {
+    fetching: false,
+    error: null,
+    pendingChanges: [],
+    saving: false,
+    saveError: null,
+    item: {}
+  }
 };
 
 const propertyNames = [

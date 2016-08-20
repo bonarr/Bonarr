@@ -1,16 +1,9 @@
-import titleCase from 'Utilities/String/titleCase';
-
-function getFetchingPropertyName(property) {
-  return `fetching${titleCase(property)}`;
-}
-
-function createFetchingReducer(property) {
-  const fetchingPropertyName = getFetchingPropertyName(property);
-
+function createFetchingReducer(section) {
   return (state, { payload }) => {
-    if (fetchingPropertyName === getFetchingPropertyName(payload.property)) {
+    if (section === payload.section) {
       const newState = {};
-      newState[fetchingPropertyName] = payload.fetching;
+      newState[section] = state[section];
+      newState[section].fetching = payload.fetching;
 
       return Object.assign({}, state, newState);
     }

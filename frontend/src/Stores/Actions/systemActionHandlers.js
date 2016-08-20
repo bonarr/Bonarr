@@ -1,19 +1,18 @@
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
-import createFetchCollectionHandler from './Creators/createFetchCollectionHandler';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 
 const systemActionHandlers = {
   [types.FETCH_STATUS]: createFetchHandler('status', '/system/status'),
 
-  [types.FETCH_HEALTH]: createFetchCollectionHandler('health', '/health'),
-  [types.FETCH_DISK_SPACE]: createFetchCollectionHandler('diskSpace', '/diskspace'),
-  [types.FETCH_TASKS]: createFetchCollectionHandler('tasks', '/system/task'),
-  [types.FETCH_BACKUPS]: createFetchCollectionHandler('backups', '/system/backup'),
-  [types.FETCH_UPDATES]: createFetchCollectionHandler('updates', '/update'),
-  [types.FETCH_LOG_FILES]: createFetchCollectionHandler('logFiles', '/log/file'),
-  [types.FETCH_UPDATE_LOG_FILES]: createFetchCollectionHandler('updateLogFiles', '/log/file/update'),
+  [types.FETCH_HEALTH]: createFetchHandler('health', '/health'),
+  [types.FETCH_DISK_SPACE]: createFetchHandler('diskSpace', '/diskspace'),
+  [types.FETCH_TASKS]: createFetchHandler('tasks', '/system/task'),
+  [types.FETCH_BACKUPS]: createFetchHandler('backups', '/system/backup'),
+  [types.FETCH_UPDATES]: createFetchHandler('updates', '/update'),
+  [types.FETCH_LOG_FILES]: createFetchHandler('logFiles', '/log/file'),
+  [types.FETCH_UPDATE_LOG_FILES]: createFetchHandler('updateLogFiles', '/log/file/update'),
 
   ...createServerSideCollectionHandlers('logs', '/log', (state) => state.system, {
     [serverSideCollectionHandlers.FETCH]: types.FETCH_LOGS,

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
-import inputType from 'Utilities/inputType';
+import inputTypes from 'Utilities/inputTypes';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import PageContent from 'Components/Page/PageContent';
@@ -97,7 +97,7 @@ class UISettings extends Component {
                     <FormLabel>First Day of Week</FormLabel>
 
                     <FormInputGroup
-                      type={inputType.SELECT}
+                      type={inputTypes.SELECT}
                       name="firstDayOfWeek"
                       values={[{ 0: 'Sunday' }, { 1: 'Monday' }]}
                       onChange={onInputChange}
@@ -109,7 +109,7 @@ class UISettings extends Component {
                     <FormLabel>Week Column Header</FormLabel>
 
                     <FormInputGroup
-                      type={inputType.SELECT}
+                      type={inputTypes.SELECT}
                       name="calendarWeekColumnHeader"
                       values={weekColumnOptions}
                       onChange={onInputChange}
@@ -126,7 +126,7 @@ class UISettings extends Component {
                     <FormLabel>Short Date Format</FormLabel>
 
                     <FormInputGroup
-                      type={inputType.SELECT}
+                      type={inputTypes.SELECT}
                       name="shortDateFormat"
                       values={shortDateFormatOptions}
                       onChange={onInputChange}
@@ -138,7 +138,7 @@ class UISettings extends Component {
                     <FormLabel>Long Date Format</FormLabel>
 
                     <FormInputGroup
-                      type={inputType.SELECT}
+                      type={inputTypes.SELECT}
                       name="longDateFormat"
                       values={longDateFormatOptions}
                       onChange={onInputChange}
@@ -150,7 +150,7 @@ class UISettings extends Component {
                     <FormLabel>Time Format</FormLabel>
 
                     <FormInputGroup
-                      type={inputType.SELECT}
+                      type={inputTypes.SELECT}
                       name="timeFormat"
                       values={timeFormatOptions}
                       onChange={onInputChange}
@@ -161,7 +161,7 @@ class UISettings extends Component {
                   <FormGroup>
                     <FormLabel>Show Relative Dates</FormLabel>
                     <FormInputGroup
-                      type={inputType.CHECK}
+                      type={inputTypes.CHECK}
                       name="showRelativeDates"
                       helpText="Show relative (Today/Yesterday/etc) or absolute dates"
                       onChange={onInputChange}
@@ -176,7 +176,7 @@ class UISettings extends Component {
                   <FormGroup>
                     <FormLabel>Enable Color-Impaired mode</FormLabel>
                     <FormInputGroup
-                      type={inputType.CHECK}
+                      type={inputTypes.CHECK}
                       name="enableColorImpairedMode"
                       helpText="Altered style to allow color-impaired users to better distinguish color coded information"
                       onChange={onInputChange}

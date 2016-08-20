@@ -1,9 +1,9 @@
 import _ from 'underscore';
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingCollectionReducer from './Creators/createFetchingCollectionReducer';
-import createSetCollectionErrorReducer from './Creators/createSetCollectionErrorReducer';
-import createUpdateCollectionReducer from './Creators/createUpdateCollectionReducer';
+import createFetchingReducer from './Creators/createFetchingReducer';
+import createSetErrorReducer from './Creators/createSetErrorReducer';
+import createUpdateReducer from './Creators/createUpdateReducer';
 
 const defaultState = {
   fetching: false,
@@ -15,9 +15,9 @@ const reducerCollection = 'commands';
 
 const commandReducers = handleActions({
 
-  [types.FETCHING_COLLECTION]: createFetchingCollectionReducer(reducerCollection),
-  [types.SET_COLLECTION_ERROR]: createSetCollectionErrorReducer(reducerCollection),
-  [types.UPDATE_COLLECTION]: createUpdateCollectionReducer(reducerCollection),
+  [types.FETCHING]: createFetchingReducer(reducerCollection),
+  [types.SET_ERROR]: createSetErrorReducer(reducerCollection),
+  [types.UPDATE]: createUpdateReducer(reducerCollection),
 
   [types.ADD_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);

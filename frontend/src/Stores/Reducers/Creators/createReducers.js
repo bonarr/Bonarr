@@ -1,13 +1,13 @@
-function createReducers(propertyNames, createReducer) {
+function createReducers(sections, createReducer) {
   const reducers = {};
 
-  propertyNames.forEach((property) => {
-    reducers[property] = createReducer(property);
+  sections.forEach((section) => {
+    reducers[section] = createReducer(section);
   });
 
   return (state, action) => {
-    const property = action.payload.property;
-    const reducer = reducers[property];
+    const section = action.payload.section;
+    const reducer = reducers[section];
 
     if (reducer) {
       return reducer(state, action);

@@ -1,21 +1,20 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
 import createFetchingReducer from './Creators/createFetchingReducer';
-import createFetchingCollectionReducer from './Creators/createFetchingCollectionReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
-import createUpdateCollectionReducer from './Creators/createUpdateCollectionReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
 import createSetErrorReducer from './Creators/createSetErrorReducer';
-import createSetCollectionErrorReducer from './Creators/createSetCollectionErrorReducer';
 import createSetServerSideCollectionPageReducer from './Creators/createSetServerSideCollectionPageReducer';
 import createSetServerSideCollectionSortReducer from './Creators/createSetServerSideCollectionSortReducer';
 import createSetServerSideCollectionFilterReducer from './Creators/createSetServerSideCollectionFilterReducer';
-import createCollectionReducers from './Creators/createCollectionReducers';
+import createReducers from './Creators/createReducers';
 
 const defaultState = {
-  fetchingStatus: false,
-  statusError: null,
-  status: {},
+  status: {
+    fetching: false,
+    error: null,
+    item: {}
+  },
 
   health: {
     fetching: false,
@@ -85,18 +84,13 @@ const serverSideCollectionNames = [
 
 const systemReducers = handleActions({
 
-  [types.FETCHING]: createFetchingReducer('status'),
-  [types.SET_ERROR]: createSetErrorReducer('status'),
-  [types.UPDATE]: createUpdateReducer('status'),
-  [types.FETCHING_COLLECTION]: createCollectionReducers(collectionNames, createFetchingCollectionReducer),
-  [types.FETCHING_COLLECTION]: createCollectionReducers(serverSideCollectionNames, createFetchingCollectionReducer),
-  [types.SET_COLLECTION_ERROR]: createCollectionReducers(collectionNames, createSetCollectionErrorReducer),
-  [types.SET_COLLECTION_ERROR]: createCollectionReducers(serverSideCollectionNames, createSetCollectionErrorReducer),
-  [types.UPDATE_COLLECTION]: createCollectionReducers(collectionNames, createUpdateCollectionReducer),
-  [types.UPDATE_SERVER_SIDE_COLLECTION]: createCollectionReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_PAGE]: createCollectionReducers(serverSideCollectionNames, createSetServerSideCollectionPageReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_SORT]: createCollectionReducers(serverSideCollectionNames, createSetServerSideCollectionSortReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_FILTER]: createCollectionReducers(serverSideCollectionNames, createSetServerSideCollectionFilterReducer)
+  [types.FETCHING]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createFetchingReducer),
+  [types.SET_ERROR]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createSetErrorReducer),
+  [types.UPDATE]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createUpdateReducer),
+  [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
+  [types.SET_SERVER_SIDE_COLLECTION_PAGE]: createReducers(serverSideCollectionNames, createSetServerSideCollectionPageReducer),
+  [types.SET_SERVER_SIDE_COLLECTION_SORT]: createReducers(serverSideCollectionNames, createSetServerSideCollectionSortReducer),
+  [types.SET_SERVER_SIDE_COLLECTION_FILTER]: createReducers(serverSideCollectionNames, createSetServerSideCollectionFilterReducer)
 
 }, defaultState);
 

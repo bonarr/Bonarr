@@ -1,14 +1,9 @@
-function getErrorPropertyName(property) {
-  return `${property}Error`;
-}
-
-function createSetErrorReducer(property) {
-  const errorPropertyName = getErrorPropertyName(property);
-
+function createSetErrorReducer(section) {
   return (state, { payload }) => {
-    if (errorPropertyName === getErrorPropertyName(payload.property)) {
+    if (section === payload.section) {
       const newState = {};
-      newState[errorPropertyName] = payload.error;
+      newState[section] = state[section];
+      newState[section].error = payload.error;
 
       return Object.assign({}, state, newState);
     }

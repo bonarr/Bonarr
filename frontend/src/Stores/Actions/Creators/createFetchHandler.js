@@ -1,26 +1,26 @@
 import $ from 'jquery';
 import { fetching, update, setError } from '../baseActions';
 
-function createFetchHandler(property, url) {
+function createFetchHandler(section, url) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(fetching({ property, fetching: true }));
+      dispatch(fetching({ section, fetching: true }));
 
       const promise = $.ajax({
         url
       });
 
       promise.done((data) => {
-        dispatch(update({ property, data }));
-        dispatch(setError({ property, error: null }));
+        dispatch(update({ section, data }));
+        dispatch(setError({ section, error: null }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ property, error: xhr }));
+        dispatch(setError({ section, error: xhr }));
       });
 
       promise.always(() => {
-        dispatch(fetching({ property, fetching: false }));
+        dispatch(fetching({ section, fetching: false }));
       });
     };
   };

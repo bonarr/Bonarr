@@ -16,20 +16,20 @@ function getValidationFailures(saveError, isWarning) {
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
   const {
-    fetchingUi: fetching,
-    uiError: error,
-    ui,
-    uiPendingChanges,
-    savingUi: saving,
-    uiSaveError: saveError
-  } = state.settings;
+    fetching,
+    error,
+    item,
+    pendingChanges,
+    saving,
+    saveError
+  } = state.settings.ui;
 
   const validationFailures = getValidationFailures(saveError);
 
-  const settings = _.reduce(Object.assign({}, ui, uiPendingChanges), (result, value, key) => {
+  const settings = _.reduce(Object.assign({}, item, pendingChanges), (result, value, key) => {
     const setting = {
       value,
-      pending: uiPendingChanges.hasOwnProperty(key),
+      pending: pendingChanges.hasOwnProperty(key),
       errors: _.filter(validationFailures, (failure) => {
         return failure.propertyName.toLowerCase() === key.toLowerCase() && !failure.isWarning;
       }),

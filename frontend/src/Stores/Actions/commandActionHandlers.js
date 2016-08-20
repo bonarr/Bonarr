@@ -1,14 +1,14 @@
 import $ from 'jquery';
 import isSameCommand from 'Utilities/isSameCommand';
 import * as types from './actionTypes';
-import createFetchCollectionHandler from './Creators/createFetchCollectionHandler';
+import createFetchHandler from './Creators/createFetchHandler';
 import { addCommand, removeCommand } from './commandActions';
 
 let lastCommand = null;
 let lastCommandTimeout = null;
 
 const commandActionHandlers = {
-  [types.FETCH_COMMANDS]: createFetchCollectionHandler('commands', '/command'),
+  [types.FETCH_COMMANDS]: createFetchHandler('commands', '/command'),
 
   [types.EXECUTE_COMMAND](payload) {
     return (dispatch, getState) => {

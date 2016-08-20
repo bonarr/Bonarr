@@ -1,11 +1,11 @@
 import { setSettingValue } from '../baseActions';
 
-function createSetSettingValueHandler(property, url) {
+function createSetSettingValueHandler(section, url) {
   return function(payload) {
     return function(dispatch, getState) {
       const { name, value } = payload;
 
-      dispatch(setSettingValue({ property, name, value }));
+      dispatch(setSettingValue({ section, name, value }));
     };
   };
 }
