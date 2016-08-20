@@ -13,7 +13,7 @@ const defaultState = {
   ui: {
     fetching: false,
     error: null,
-    pendingChanges: [],
+    pendingChanges: {},
     saving: false,
     saveError: null,
     item: {}

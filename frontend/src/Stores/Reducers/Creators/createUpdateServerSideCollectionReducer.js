@@ -5,7 +5,6 @@ function createUpdateServerSideCollectionReducer(section) {
     if (section === payload.section) {
       const data = payload.data;
       const newState = {};
-      newState[section] = state[section];
 
       const serverState = _.omit(data, ['records']);
       const calculatedState = {
@@ -13,7 +12,7 @@ function createUpdateServerSideCollectionReducer(section) {
         items: data.records
       };
 
-      newState[section] = Object.assign(newState[section], serverState, calculatedState);
+      newState[section] = Object.assign({}, serverState, calculatedState);
 
       return Object.assign({}, state, newState);
     }

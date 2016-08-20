@@ -1,20 +1,15 @@
 import _ from 'underscore';
 
-function getSetSettingValuePropertyName(property) {
-  return `${property}PendingChanges`;
-}
-
-function createSetSettingValueReducer(property) {
-  const setSettingValuePropertyName = getSetSettingValuePropertyName(property);
-
+function createSetSettingValueReducer(section) {
   return (state, { payload }) => {
-    if (setSettingValuePropertyName === getSetSettingValuePropertyName(payload.property)) {
+    if (section === payload.section) {
       const { name, value } = payload;
-      const newState = Object.assign({}, state);
-      newState[setSettingValuePropertyName] = Object.assign({}, state[setSettingValuePropertyName]);
+      const newState = {};
+      newState[section] = Object.assign({}, state[section]);
+      newState[section].pendingChanges = Object.assign({}, state[section].pendingChanges);
 
-      const currentValue = state[property][name];
-      const pendingState = newState[setSettingValuePropertyName];
+      const currentValue = state[section].item[name];
+      const pendingState = newState[section].pendingChanges;
 
       if (_.isNumber(currentValue)) {
         pendingState[name] = parseInt(value);
@@ -22,9 +17,7 @@ function createSetSettingValueReducer(property) {
         pendingState[name] = value;
       }
 
-      newState.pendingState = pendingState;
-
-      return newState;
+      return Object.assign({}, state, newState);
     }
 
     return state;

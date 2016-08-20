@@ -1,17 +1,11 @@
-function getPendingChangesPropertyName(property) {
-  return `${property}PendingChanges`;
-}
-
-function createClearPendingChangesReducer(property) {
-  const pendingChangesPropertyName = getPendingChangesPropertyName(property);
-
+function createClearPendingChangesReducer(section) {
   return (state, { payload }) => {
-    if (pendingChangesPropertyName === getPendingChangesPropertyName(payload.property)) {
-      const newState = Object.assign({}, state);
+    if (section === payload.section) {
+      const newState = {};
+      newState[section] = Object.assign({}, state[section]);
+      newState[section].pendingChanges = {};
 
-      newState[pendingChangesPropertyName] = {};
-
-      return newState;
+      return Object.assign({}, state, newState);
     }
 
     return state;

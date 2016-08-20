@@ -2,7 +2,7 @@ function createUpdateReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
       const newState = {};
-      const newStateSection = state[section];
+      const newStateSection = Object.assign({}, state[section]);
 
       if (newStateSection.hasOwnProperty('item')) {
         newStateSection.item = payload.data;

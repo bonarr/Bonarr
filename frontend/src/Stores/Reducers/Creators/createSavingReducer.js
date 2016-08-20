@@ -1,16 +1,9 @@
-import titleCase from 'Utilities/String/titleCase';
-
-function getSavingPropertyName(property) {
-  return `saving${titleCase(property)}`;
-}
-
-function createSavingReducer(property) {
-  const savingPropertyName = getSavingPropertyName(property);
-
+function createSavingReducer(section) {
   return (state, { payload }) => {
-    if (savingPropertyName === getSavingPropertyName(payload.property)) {
+    if (section === payload.section) {
       const newState = {};
-      newState[savingPropertyName] = payload.saving;
+      newState[section] = Object.assign({}, state[section]);
+      newState[section].saving = payload.saving;
 
       return Object.assign({}, state, newState);
     }

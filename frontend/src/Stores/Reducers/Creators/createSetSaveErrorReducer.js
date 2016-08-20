@@ -1,14 +1,9 @@
-function getSaveErrorPropertyName(property) {
-  return `${property}SaveError`;
-}
-
-function createSetSaveErrorReducer(property) {
-  const saveErrorPropertyName = getSaveErrorPropertyName(property);
-
+function createSetSaveErrorReducer(section) {
   return (state, { payload }) => {
-    if (saveErrorPropertyName === getSaveErrorPropertyName(payload.property)) {
+    if (section === payload.section) {
       const newState = {};
-      newState[saveErrorPropertyName] = payload.error;
+      newState[section] = Object.assign({}, state[section]);
+      newState[section].saveError = payload.saveError;
 
       return Object.assign({}, state, newState);
     }

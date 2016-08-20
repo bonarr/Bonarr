@@ -1,17 +1,13 @@
 import $ from 'jquery';
 import { saving, update, clearPendingChanges, setSaveError } from '../baseActions';
 
-function getPendingChangesPropertyName(property) {
-  return `${property}PendingChanges`;
-}
-
-function createSaveHandler(property, url, getFromState) {
+function createSaveHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(saving({ property, fetching: true }));
+      dispatch(saving({ section, saving: true }));
 
       const state = getFromState(getState());
-      const saveData = Object.assign({}, state[property], state[getPendingChangesPropertyName(property)]);
+      const saveData = Object.assign({}, state.item, state.pendingChanges);
 
       const promise = $.ajax({
         url,
@@ -21,17 +17,17 @@ function createSaveHandler(property, url, getFromState) {
       });
 
       promise.done((data) => {
-        dispatch(update({ property, data }));
-        dispatch(clearPendingChanges({ property }));
-        dispatch(setSaveError({ property, error: null }));
+        dispatch(update({ section, data }));
+        dispatch(clearPendingChanges({ section }));
+        dispatch(setSaveError({ section, saveError: null }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setSaveError({ property, error: xhr }));
+        dispatch(setSaveError({ section, saveError: xhr }));
       });
 
       promise.always(() => {
-        dispatch(saving({ property, fetching: false }));
+        dispatch(saving({ section, saving: false }));
       });
     };
   };
