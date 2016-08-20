@@ -1,10 +1,10 @@
-function createSetServerSideCollectionSortReducer(collection) {
+function createSetServerSideCollectionSortReducer(section) {
   return (state, { payload }) => {
-    if (collection === payload.collection) {
+    if (section === payload.section) {
       const newState = {};
-      newState[collection] = state[collection];
-      newState[collection].sortKey = payload.sortKey;
-      newState[collection].sortDirection = payload.sortDirection;
+      newState[section] = state[section];
+      newState[section].sortKey = payload.sortKey;
+      newState[section].sortDirection = payload.sortDirection;
 
       return Object.assign({}, state, newState);
     }

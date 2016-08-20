@@ -1,9 +1,9 @@
-function createSetServerSideCollectionPageReducer(collection) {
+function createSetServerSideCollectionPageReducer(section) {
   return (state, { payload }) => {
-    if (collection === payload.collection) {
+    if (section === payload.section) {
       const newState = {};
-      newState[collection] = state[collection];
-      newState[collection].page = payload.page;
+      newState[section] = state[section];
+      newState[section].page = payload.page;
 
       return Object.assign({}, state, newState);
     }

@@ -1,10 +1,10 @@
-function createSetServerSideCollectionFilterReducer(collection) {
+function createSetServerSideCollectionFilterReducer(section) {
   return (state, { payload }) => {
-    if (collection === payload.collection) {
+    if (section === payload.section) {
       const newState = {};
-      newState[collection] = state[collection];
-      newState[collection].filterKey = payload.filterKey;
-      newState[collection].filterValue = payload.filterValue;
+      newState[section] = state[section];
+      newState[section].filterKey = payload.filterKey;
+      newState[section].filterValue = payload.filterValue;
 
       return Object.assign({}, state, newState);
     }

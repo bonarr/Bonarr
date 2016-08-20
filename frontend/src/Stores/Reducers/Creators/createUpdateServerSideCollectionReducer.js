@@ -1,11 +1,11 @@
 import _ from 'underscore';
 
-function createUpdateServerSideCollectionReducer(collection) {
+function createUpdateServerSideCollectionReducer(section) {
   return (state, { payload }) => {
-    if (collection === payload.collection) {
+    if (section === payload.section) {
       const data = payload.data;
       const newState = {};
-      newState[collection] = state[collection];
+      newState[section] = state[section];
 
       const serverState = _.omit(data, ['records']);
       const calculatedState = {
@@ -13,7 +13,7 @@ function createUpdateServerSideCollectionReducer(collection) {
         items: data.records
       };
 
-      newState[collection] = Object.assign(newState[collection], serverState, calculatedState);
+      newState[section] = Object.assign(newState[section], serverState, calculatedState);
 
       return Object.assign({}, state, newState);
     }

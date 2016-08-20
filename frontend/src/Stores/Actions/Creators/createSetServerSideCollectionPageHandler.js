@@ -1,11 +1,11 @@
 import pages from 'Utilities/pages';
 import { setServerSideCollectionPage } from '../baseActions';
 
-function createSetServerSideCollectionPageHandler(collection, page, getFromState, fetchHandler) {
+function createSetServerSideCollectionPageHandler(section, page, getFromState, fetchHandler) {
   return function(payload) {
     return function(dispatch, getState) {
-      const collectionState = getFromState(getState())[collection];
-      const currentPage = collectionState.page || 1;
+      const sectionState = getFromState(getState())[section];
+      const currentPage = sectionState.page || 1;
       let nextPage = 0;
 
       switch (page) {
@@ -19,13 +19,13 @@ function createSetServerSideCollectionPageHandler(collection, page, getFromState
           nextPage = currentPage + 1;
           break;
         case pages.LAST:
-          nextPage = collectionState.totalPages;
+          nextPage = sectionState.totalPages;
           break;
         default:
           nextPage = payload.page;
       }
 
-      dispatch(setServerSideCollectionPage({ collection, page: nextPage }));
+      dispatch(setServerSideCollectionPage({ section, page: nextPage }));
       dispatch(fetchHandler());
     };
   };

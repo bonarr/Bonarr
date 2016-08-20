@@ -2,12 +2,12 @@ import _ from 'underscore';
 import $ from 'jquery';
 import { fetching, updateServerSideCollection, setError } from '../baseActions';
 
-function createFetchServerSideCollectionHandler(collection, url, getFromState) {
+function createFetchServerSideCollectionHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(fetching({ section: collection, fetching: true }));
+      dispatch(fetching({ section, fetching: true }));
 
-      const collectionState = getFromState(getState())[collection];
+      const collectionState = getFromState(getState())[section];
 
       const data = Object.assign({ page: 1 },
         _.pick(collectionState, [
@@ -25,16 +25,16 @@ function createFetchServerSideCollectionHandler(collection, url, getFromState) {
       });
 
       promise.done((response) => {
-        dispatch(updateServerSideCollection({ collection, data: response }));
-        dispatch(setError({ section: collection, error: null }));
+        dispatch(updateServerSideCollection({ section, data: response }));
+        dispatch(setError({ section, error: null }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ section: collection, error: xhr }));
+        dispatch(setError({ section, error: xhr }));
       });
 
       promise.always(() => {
-        dispatch(fetching({ section: collection, fetching: false }));
+        dispatch(fetching({ section, fetching: false }));
       });
     };
   };
