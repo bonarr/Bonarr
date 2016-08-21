@@ -70,7 +70,7 @@ class TablePager extends Component {
               styles.pageLink,
               isFirstPage && styles.disabledPageButton
             )}
-            disabled={isFirstPage}
+            isDisabled={isFirstPage}
             onPress={onFirstPagePress}
           >
             <Icon name="icon-sonarr-pager-first" />
@@ -81,7 +81,7 @@ class TablePager extends Component {
               styles.pageLink,
               isFirstPage && styles.disabledPageButton
             )}
-            disabled={isFirstPage}
+            isDisabled={isFirstPage}
             onPress={onPreviousPagePress}
           >
             <Icon name="icon-sonarr-pager-previous" />
@@ -91,7 +91,7 @@ class TablePager extends Component {
             {
               !isShowingPageSelect &&
                 <Link
-                  disabled={totalPages === 1}
+                  isDisabled={totalPages === 1}
                   onPress={this.onOpenPageSelectClick}
                 >
                   {page} / {totalPages}
@@ -114,7 +114,7 @@ class TablePager extends Component {
               styles.pageLink,
               isLastPage && styles.disabledPageButton
             )}
-            disabled={isLastPage}
+            isDisabled={isLastPage}
             onPress={onNextPagePress}
           >
             <Icon name="icon-sonarr-pager-next" />
@@ -125,7 +125,7 @@ class TablePager extends Component {
               styles.pageLink,
               isLastPage && styles.disabledPageButton
             )}
-            disabled={isLastPage}
+            isDisabled={isLastPage}
             onPress={onLastPagePress}
           >
             <Icon name="icon-sonarr-pager-last" />

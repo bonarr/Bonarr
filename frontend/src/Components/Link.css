@@ -9,6 +9,7 @@
   cursor: pointer;
 }
 
-:global(.disabled) {
+.isDisabled {
+  color: $disabledColor;
   pointer-events: none;
 }

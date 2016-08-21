@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import autobind from 'autobind-decorator';
@@ -30,10 +30,10 @@ function mapStateToProps(state) {
     const setting = {
       value,
       pending: pendingChanges.hasOwnProperty(key),
-      errors: _.filter(validationFailures, (failure) => {
+      errors: _.remove(validationFailures, (failure) => {
         return failure.propertyName.toLowerCase() === key.toLowerCase() && !failure.isWarning;
       }),
-      warnings: _.filter(validationFailures, (failure) => {
+      warnings: _.remove(validationFailures, (failure) => {
         return failure.propertyName.toLowerCase() === key.toLowerCase() && failure.isWarning;
       })
     };
@@ -42,12 +42,22 @@ function mapStateToProps(state) {
     return result;
   }, {});
 
+  const validationErrors = _.filter(validationFailures, (failure) => {
+    return !failure.isWarning;
+  });
+
+  const validationWarnings = _.filter(validationFailures, (failure) => {
+    return failure.isWarning;
+  });
+
   return {
     fetching,
     error,
     settings,
     saving,
-    saveError
+    validationErrors,
+    validationWarnings,
+    hasPendingChanges: !_.isEmpty(pendingChanges)
   };
 }
 
@@ -71,7 +81,7 @@ class UISettingsConnector extends Component {
 
   @autobind
   onInputChange({ name, value }) {
-    this.props.setUISettingsValue({ property: 'ui', name, value });
+    this.props.setUISettingsValue({ name, value });
   }
 
   @autobind

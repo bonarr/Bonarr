@@ -8,6 +8,7 @@ import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
+import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -34,8 +35,9 @@ class UISettings extends Component {
       error,
       settings,
       saving,
-      saveError,
-      onInputChange
+      hasPendingChanges,
+      onInputChange,
+      ...otherProps
     } = this.props;
 
     const weekColumnOptions = [
@@ -66,15 +68,16 @@ class UISettings extends Component {
 
     return (
       <PageContent>
-        {/* <PageToolbar>
+        <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
               iconName="icon-sonarr-save"
-              animate={backupExecuting}
-              onPress={onSavePress}
+              animate={saving}
+              isDisabled={!hasPendingChanges}
+              onPress={this.onSubmit}
             />
           </PageToolbarSection>
-        </PageToolbar> */}
+        </PageToolbar>
 
         <PageContentBody>
           {
@@ -89,7 +92,11 @@ class UISettings extends Component {
 
           {
             !fetching && !error &&
-              <form onSubmit={this.onSubmit}>
+              <Form
+                id="uiSettings"
+                {...otherProps}
+                onSubmit={this.onSubmit}
+              >
                 <FieldSet
                   legend="Calendar"
                 >
@@ -184,9 +191,7 @@ class UISettings extends Component {
                     />
                   </FormGroup>
                 </FieldSet>
-
-                <button type="submit">Save</button>
-              </form>
+              </Form>
           }
         </PageContentBody>
       </PageContent>
@@ -200,7 +205,7 @@ UISettings.propTypes = {
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   saving: PropTypes.bool.isRequired,
-  saveError: PropTypes.object,
+  hasPendingChanges: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired
 };

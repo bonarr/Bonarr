@@ -38,7 +38,7 @@ class TableHeaderCell extends Component {
       <Link
         component="th"
         className={className}
-        disabled={!sortable}
+        isDisabled={!sortable}
         onPress={this.onPress}
         {...otherProps}
       >

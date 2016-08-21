@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 import styles from './FormGroup.css';
 
-function FormGroup({ children, ...otherProps }) {
+function FormGroup({ className, children }) {
   return (
-    <div {...otherProps}>
+    <div className={className}>
       {children}
     </div>
   );
 }
 
 FormGroup.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired
 };
 

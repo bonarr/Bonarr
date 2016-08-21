@@ -11,11 +11,11 @@ class Link extends Component {
   @autobind
   onClick(event) {
     const {
-      disabled,
+      isDisabled,
       onPress
     } = this.props;
 
-    if (!disabled && onPress) {
+    if (!isDisabled && onPress) {
       onPress(event);
     }
   }
@@ -29,7 +29,7 @@ class Link extends Component {
       component,
       to,
       target,
-      disabled,
+      isDisabled,
       ...otherProps
     } = this.props;
 
@@ -53,13 +53,13 @@ class Link extends Component {
 
     if (el === 'button' || el === 'input') {
       linkProps.type = otherProps.type || 'button';
-      linkProps.disabled = disabled;
+      linkProps.isDisabled = isDisabled;
     }
 
     linkProps.className = classNames(
       className,
       styles.link,
-      disabled && 'disabled'
+      isDisabled && styles.isDisabled
     );
 
     return (
@@ -77,7 +77,7 @@ Link.propTypes = {
   component: PropTypes.string,
   to: PropTypes.string,
   target: PropTypes.string,
-  disabled: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   onPress: PropTypes.func
 };
 
