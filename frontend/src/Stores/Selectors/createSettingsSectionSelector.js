@@ -56,7 +56,8 @@ function createSettingsSectionSelector() {
         saving,
         validationErrors,
         validationWarnings,
-        hasPendingChanges: !_.isEmpty(pendingChanges)
+        hasPendingChanges: !_.isEmpty(pendingChanges),
+        hasSettings: !_.isEmpty(sectionSettings)
       };
     }
   );

@@ -5,9 +5,7 @@ import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
-import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
-import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
+import SettingsToolbar from 'Settings/SettingsToolbarConnector';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
@@ -19,11 +17,11 @@ class UISettings extends Component {
   // Listeners
 
   @autobind
-  onSubmit(event) {
+  onSavePress(event) {
     event.preventDefault();
     event.nativeEvent.preventDefault();
 
-    this.props.onSubmit();
+    this.props.onSavePress();
   }
 
   //
@@ -34,8 +32,7 @@ class UISettings extends Component {
       fetching,
       error,
       settings,
-      saving,
-      hasPendingChanges,
+      hasSettings,
       onInputChange,
       ...otherProps
     } = this.props;
@@ -68,16 +65,10 @@ class UISettings extends Component {
 
     return (
       <PageContent>
-        <PageToolbar>
-          <PageToolbarSection>
-            <PageToolbarButton
-              iconName="icon-sonarr-save"
-              animate={saving}
-              isDisabled={!hasPendingChanges}
-              onPress={this.onSubmit}
-            />
-          </PageToolbarSection>
-        </PageToolbar>
+        <SettingsToolbar
+          {...otherProps}
+          onSavePress={this.onSavePress}
+        />
 
         <PageContentBody>
           {
@@ -91,7 +82,7 @@ class UISettings extends Component {
           }
 
           {
-            !fetching && !error &&
+            hasSettings && !error &&
               <Form
                 id="uiSettings"
                 {...otherProps}
@@ -204,9 +195,8 @@ UISettings.propTypes = {
   fetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
-  saving: PropTypes.bool.isRequired,
-  hasPendingChanges: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  hasSettings: PropTypes.bool.isRequired,
+  onSavePress: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired
 };
 

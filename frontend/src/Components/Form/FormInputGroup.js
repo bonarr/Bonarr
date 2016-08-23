@@ -31,8 +31,8 @@ function FormInputGroup(props) {
 
   const InputComponent = getComponent(type);
   const checkInput = type === inputTypes.CHECK;
-  const hasError = errors.length;
-  const hasWarning = !hasError && warnings.length;
+  const hasError = !!errors.length;
+  const hasWarning = !hasError && !!warnings.length;
 
   return (
     <div className={containerClassName}>

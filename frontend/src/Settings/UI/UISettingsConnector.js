@@ -8,9 +8,11 @@ import UISettings from './UISettings';
 
 function createMapStateToProps() {
   return createSelector(
+    (state) => state.settings.advancedSettings,
     createSettingsSectionSelector(),
-    (sectionSettings) => {
+    (advancedSettings, sectionSettings) => {
       return {
+        advancedSettings,
         ...sectionSettings
       };
     }
@@ -37,11 +39,11 @@ class UISettingsConnector extends Component {
 
   @autobind
   onInputChange({ name, value }) {
-    this.props.setUISettingsValue({ name, value });
+    this.props.setUISettingsValue({ section: 'ui', name, value });
   }
 
   @autobind
-  onSubmit() {
+  onSavePress() {
     this.props.saveUISettings();
   }
 
@@ -52,7 +54,7 @@ class UISettingsConnector extends Component {
     return (
       <UISettings
         onInputChange={this.onInputChange}
-        onSubmit={this.onSubmit}
+        onSavePress={this.onSavePress}
         {...this.props}
       />
     );

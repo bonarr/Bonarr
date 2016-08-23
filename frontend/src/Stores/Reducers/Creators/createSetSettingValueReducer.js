@@ -11,10 +11,18 @@ function createSetSettingValueReducer(section) {
       const currentValue = state[section].item[name];
       const pendingState = newState[section].pendingChanges;
 
+      let parsedValue = null;
+
       if (_.isNumber(currentValue)) {
-        pendingState[name] = parseInt(value);
+        parsedValue = parseInt(value);
       } else {
-        pendingState[name] = value;
+        parsedValue = value;
+      }
+
+      if (currentValue === parsedValue) {
+        delete pendingState[name];
+      } else {
+        pendingState[name] = parsedValue;
       }
 
       return Object.assign({}, state, newState);

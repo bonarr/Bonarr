@@ -17,7 +17,9 @@ const defaultState = {
     saving: false,
     saveError: null,
     item: {}
-  }
+  },
+
+  advancedSettings: false
 };
 
 const propertyNames = [
@@ -26,13 +28,18 @@ const propertyNames = [
 
 const settingsReducers = handleActions({
 
+  [types.TOGGLE_ADVANCED_SETTINGS]: (state, { payload }) => {
+    return Object.assign({}, state, { advancedSettings: !state.advancedSettings });
+  },
+
   [types.FETCHING]: createReducers(propertyNames, createFetchingReducer),
   [types.SET_ERROR]: createReducers(propertyNames, createSetErrorReducer),
   [types.UPDATE]: createReducers(propertyNames, createUpdateReducer),
-  [types.SET_SETTING_VALUE]: createReducers(propertyNames, createSetSettingValueReducer),
   [types.SAVING]: createReducers(propertyNames, createSavingReducer),
   [types.SET_SAVE_ERROR]: createReducers(propertyNames, createSetSaveErrorReducer),
-  [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer)
+  [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer),
+
+  [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui')
 
 }, defaultState);
 
