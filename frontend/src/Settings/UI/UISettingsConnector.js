@@ -39,7 +39,7 @@ class UISettingsConnector extends Component {
 
   @autobind
   onInputChange({ name, value }) {
-    this.props.setUISettingsValue({ section: 'ui', name, value });
+    this.props.setUISettingsValue({ name, value });
   }
 
   @autobind
