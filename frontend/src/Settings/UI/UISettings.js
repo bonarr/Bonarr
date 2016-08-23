@@ -82,7 +82,7 @@ class UISettings extends Component {
           }
 
           {
-            hasSettings && !error &&
+            hasSettings && !fetching && !error &&
               <Form
                 id="uiSettings"
                 {...otherProps}
