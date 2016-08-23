@@ -1,18 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { fetchHealth } from 'Stores/Actions/systemActions';
 import Health from './Health';
 
-function mapStateToProps(state) {
-  const {
-    fetching,
-    items
-  } = state.system.health;
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.health,
+    (health) => {
+      const {
+        fetching,
+        items
+      } = health;
 
-  return {
-    fetching,
-    items
-  };
+      return {
+        fetching,
+        items
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -44,4 +50,4 @@ HealthConnector.propTypes = {
   fetchHealth: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HealthConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(HealthConnector);

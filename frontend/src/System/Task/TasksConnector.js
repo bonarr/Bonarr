@@ -1,29 +1,33 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
+import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { fetchTasks } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import Tasks from './Tasks';
 
-// TODO: use reselect for perfomance improvements
-function mapStateToProps(state) {
-  const {
-    fetching,
-    items
-  } = state.system.tasks;
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.tasks,
+    createCommandsSelector(),
+    (tasks, commands) => {
+      const {
+        fetching
+      } = tasks;
 
-  const commands = state.commands.items;
+      const items = tasks.items.map((task) => {
+        const executing = _.some(commands, { name: task.taskName });
+        return Object.assign({}, task, { executing });
+      });
 
-  const tasks = items.map((task) => {
-    const executing = _.some(commands, { name: task.taskName });
-    return Object.assign({}, task, { executing });
-  });
-
-  return {
-    fetching,
-    items: tasks
-  };
+      return {
+        fetching,
+        items
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -66,4 +70,4 @@ TasksConnector.propTypes = {
   executeCommand: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(TasksConnector);

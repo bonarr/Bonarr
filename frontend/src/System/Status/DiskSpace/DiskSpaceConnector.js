@@ -1,18 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { fetchDiskSpace } from 'Stores/Actions/systemActions';
 import DiskSpace from './DiskSpace';
 
-function mapStateToProps(state) {
-  const {
-    fetching,
-    items
-  } = state.system.diskSpace;
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.diskSpace,
+    (diskSpace) => {
+      const {
+        fetching,
+        items
+      } = diskSpace;
 
-  return {
-    fetching,
-    items
-  };
+      return {
+        fetching,
+        items
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -44,4 +50,4 @@ DiskSpaceConnector.propTypes = {
   fetchDiskSpace: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiskSpaceConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(DiskSpaceConnector);

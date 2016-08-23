@@ -1,21 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
 import { fetchUpdates } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import Updates from './Updates';
 
-// TODO: use reselect for perfomance improvements
-function mapStateToProps(state) {
-  const {
-    fetching,
-    items
-  } = state.system.updates;
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.updates,
+    (updates) => {
+      const {
+        fetching,
+        items
+      } = updates;
 
-  return {
-    fetching,
-    items
-  };
+      return {
+        fetching,
+        items
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -58,4 +63,4 @@ UpdatesConnector.propTypes = {
   executeCommand: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdatesConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(UpdatesConnector);

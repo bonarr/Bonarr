@@ -11,7 +11,7 @@ class Table extends Component {
     const {
       headers,
       children,
-      ...otherProps
+      onSortPress
     } = this.props;
 
     return (
@@ -24,8 +24,8 @@ class Table extends Component {
               return (
                 <TableHeaderCell
                   key={header.name}
+                  onSortPress={onSortPress}
                   {...header}
-                  {...otherProps}
                 />
               );
             })

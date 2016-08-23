@@ -1,29 +1,35 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
+import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import { fetchUpdateLogFiles } from 'Stores/Actions/systemActions';
 import LogFiles from '../Files/LogFiles';
 
 const deleteFilesCommandName = 'DeleteUpdateLogFiles';
 
-// TODO: use reselect for perfomance improvements
-function mapStateToProps(state) {
-  const commands = state.commands.items;
-  const deleteFilesExecuting = _.some(commands, { name: deleteFilesCommandName });
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.updateLogFiles,
+    createCommandsSelector(),
+    (updateLogFiles, commands) => {
+      const {
+        fetching,
+        items
+      } = updateLogFiles;
 
-  const {
-    fetching,
-    items
-  } = state.system.updateLogFiles;
+      const deleteFilesExecuting = _.some(commands, { name: deleteFilesCommandName });
 
-  return {
-    fetching,
-    items,
-    deleteFilesExecuting,
-    currentLogView: 'Update Log Files'
-  };
+      return {
+        fetching,
+        items,
+        deleteFilesExecuting,
+        currentLogView: 'Update Log Files'
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -86,4 +92,4 @@ UpdateLogFilesConnector.propTypes = {
   unregisterFinishCommandHandler: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateLogFilesConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(UpdateLogFilesConnector);

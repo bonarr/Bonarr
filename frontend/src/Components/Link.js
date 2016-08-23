@@ -30,6 +30,7 @@ class Link extends Component {
       to,
       target,
       isDisabled,
+      onPress,
       ...otherProps
     } = this.props;
 
@@ -53,7 +54,7 @@ class Link extends Component {
 
     if (el === 'button' || el === 'input') {
       linkProps.type = otherProps.type || 'button';
-      linkProps.isDisabled = isDisabled;
+      linkProps.disabled = isDisabled;
     }
 
     linkProps.className = classNames(

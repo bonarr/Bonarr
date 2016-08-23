@@ -1,28 +1,34 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
+import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import { fetchBackups } from 'Stores/Actions/systemActions';
 import Backups from './Backups';
 
 const backupCommandName = 'Backup';
 
-// TODO: use reselect for perfomance improvements
-function mapStateToProps(state) {
-  const commands = state.commands.items;
-  const backupExecuting = _.some(commands, { name: backupCommandName });
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.backups,
+    createCommandsSelector(),
+    (backups, commands) => {
+      const {
+        fetching,
+        items
+      } = backups;
 
-  const {
-    fetching,
-    items
-  } = state.system.backups;
+      const backupExecuting = _.some(commands, { name: backupCommandName });
 
-  return {
-    fetching,
-    items,
-    backupExecuting
-  };
+      return {
+        fetching,
+        items,
+        backupExecuting
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -79,4 +85,4 @@ BackupsConnector.propTypes = {
   fetchBackups: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BackupsConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(BackupsConnector);

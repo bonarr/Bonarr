@@ -1,12 +1,41 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
+import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import * as systemActions from 'Stores/Actions/systemActions';
 import LogsTable from './LogsTable';
 
 const clearLogsCommandName = 'ClearLog';
+
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.logs,
+    createCommandsSelector(),
+    (logs, commands) => {
+      const result = _.pick(logs, [
+        'fetching',
+        'items',
+        'page',
+        'totalPages',
+        'totalRecords',
+        'sortKey',
+        'sortDirection',
+        'filterKey',
+        'filterValue'
+      ]);
+
+      const clearLogExecuting = _.some(commands, { name: clearLogsCommandName });
+
+      return {
+        clearLogExecuting,
+        ...result
+      };
+    }
+  );
+}
 
 // TODO: use reselect for perfomance improvements
 function mapStateToProps(state) {
@@ -140,4 +169,4 @@ LogsTableConnector.propTypes = {
   unregisterFinishCommandHandler: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogsTableConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(LogsTableConnector);

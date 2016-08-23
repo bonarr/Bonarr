@@ -12,7 +12,7 @@ function createUpdateServerSideCollectionReducer(section) {
         items: data.records
       };
 
-      newState[section] = Object.assign({}, serverState, calculatedState);
+      newState[section] = Object.assign({}, state[section], serverState, calculatedState);
 
       return Object.assign({}, state, newState);
     }

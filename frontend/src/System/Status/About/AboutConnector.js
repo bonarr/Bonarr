@@ -1,12 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { fetchStatus } from 'Stores/Actions/systemActions';
 import About from './About';
 
-function mapStateToProps(state) {
-  return {
-    ...state.system.status
-  };
+function createMapStateToProps() {
+  return createSelector(
+    (state) => state.system.status,
+    (status) => {
+      return {
+        ...status
+      };
+    }
+  );
 }
 
 const mapDispatchToProps = {
@@ -38,4 +44,4 @@ AboutConnector.propTypes = {
   fetchStatus: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(AboutConnector);
