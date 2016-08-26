@@ -84,9 +84,9 @@ const serverSideCollectionNames = [
 
 const systemReducers = handleActions({
 
-  [types.FETCHING]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createFetchingReducer),
-  [types.SET_ERROR]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createSetErrorReducer),
-  [types.UPDATE]: createReducers([status, ...collectionNames, ...serverSideCollectionNames], createUpdateReducer),
+  [types.FETCHING]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createFetchingReducer),
+  [types.SET_ERROR]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createSetErrorReducer),
+  [types.UPDATE]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createUpdateReducer),
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
   [types.SET_SERVER_SIDE_COLLECTION_PAGE]: createReducers(serverSideCollectionNames, createSetServerSideCollectionPageReducer),
   [types.SET_SERVER_SIDE_COLLECTION_SORT]: createReducers(serverSideCollectionNames, createSetServerSideCollectionSortReducer),

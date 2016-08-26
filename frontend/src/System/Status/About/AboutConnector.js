@@ -9,7 +9,7 @@ function createMapStateToProps() {
     (state) => state.system.status,
     (status) => {
       return {
-        ...status
+        ...status.item
       };
     }
   );

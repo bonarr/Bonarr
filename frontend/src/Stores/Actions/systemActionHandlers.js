@@ -5,7 +5,6 @@ import createServerSideCollectionHandlers from './Creators/createServerSideColle
 
 const systemActionHandlers = {
   [types.FETCH_STATUS]: createFetchHandler('status', '/system/status'),
-
   [types.FETCH_HEALTH]: createFetchHandler('health', '/health'),
   [types.FETCH_DISK_SPACE]: createFetchHandler('diskSpace', '/diskspace'),
   [types.FETCH_TASKS]: createFetchHandler('tasks', '/system/task'),

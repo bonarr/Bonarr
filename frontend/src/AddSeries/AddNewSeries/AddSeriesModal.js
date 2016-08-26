@@ -147,7 +147,8 @@ const AddSeriesModal = Marionette.ItemView.extend({
       profileId,
       rootFolderPath,
       seasonFolder,
-      seriesType
+      seriesType,
+      monitored: true
     }, {
       silent: true
     });
