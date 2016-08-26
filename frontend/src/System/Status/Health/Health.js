@@ -22,7 +22,7 @@ class Health extends Component {
     } = this.props;
 
     const healthOk = !fetching && items.length === 0;
-    const healthIssues = !fetching && items.length;
+    const healthIssues = !fetching && !!items.length;
 
     const headers = [
       {
