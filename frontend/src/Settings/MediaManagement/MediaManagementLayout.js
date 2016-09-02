@@ -1,43 +1,38 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Marionette = require('marionette');
-var SettingsLayoutBase = require('../SettingsLayoutBase');
-var NamingView = require('./Naming/NamingView');
-var SortingView = require('./Sorting/SortingView');
-var FileManagementView = require('./FileManagement/FileManagementView');
-var PermissionsView = require('./Permissions/PermissionsView');
-var MediaManagementSettingsModel = require('./MediaManagementSettingsModel');
-var NamingModel = require('./Naming/NamingModel');
+import Marionette from 'marionette';
+import tpl from './MediaManagementLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import MediaManagementConnector from './MediaManagementConnector';
 
-module.exports = SettingsLayoutBase.extend({
-  template: 'Settings/MediaManagement/MediaManagementLayoutTemplate',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
 
-  regions: {
-    loading: '#loading-region',
-    episodeNaming: '#episode-naming',
-    sorting: '#sorting',
-    fileManagement: '#file-management',
-    permissions: '#permissions'
+  mountReact: function() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <MediaManagementConnector section="mediaManagement" />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.model = new MediaManagementSettingsModel();
-    this.namingModel = new NamingModel();
-    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  unmountReact: function() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    var promise = $.when(this.model.fetch(), this.namingModel.fetch());
+    this.mountReact();
+  },
 
-    promise.done(_.bind(function() {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.episodeNaming.show(new NamingView({ model: this.namingModel }));
-      this.sorting.show(new SortingView({ model: this.model }));
-      this.fileManagement.show(new FileManagementView({ model: this.model }));
-      this.permissions.show(new PermissionsView({ model: this.model }));
-    }, this));
+  onClose: function() {
+    this.unmountReact();
   }
 });

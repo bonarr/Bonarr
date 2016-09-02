@@ -1,3 +1,3 @@
 var Backbone = require('backbone');
 
-module.exports = Backbone.Model.extend({ url: '/config/naming/samples' });
+module.exports = Backbone.Model.extend({ url: '/config/naming/examples' });

@@ -6,7 +6,7 @@ module.exports = {
   selectedColor: '#f9be03',
   successColor: '#27c24c',
   dangerColor: '#f05050',
-  warningColor: 'ffa500',
+  warningColor: '#ffa500',
   infoColor: '#35c5f4',
   nzbdroneRed: '#c4273c',
   purple: '#7a43b6',

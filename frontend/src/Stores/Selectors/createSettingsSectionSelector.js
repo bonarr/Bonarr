@@ -29,12 +29,12 @@ function createSettingsSectionSelector() {
         const setting = {
           value,
           pending: pendingChanges.hasOwnProperty(key),
-          errors: _.remove(validationFailures, (failure) => {
+          errors: _.map(_.remove(validationFailures, (failure) => {
             return failure.propertyName.toLowerCase() === key.toLowerCase() && !failure.isWarning;
-          }),
-          warnings: _.remove(validationFailures, (failure) => {
+          }), (failure) => failure.errorMessage),
+          warnings: _.map(_.remove(validationFailures, (failure) => {
             return failure.propertyName.toLowerCase() === key.toLowerCase() && failure.isWarning;
-          })
+          }), (failure) => failure.errorMessage)
         };
 
         result[key] = setting;

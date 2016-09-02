@@ -34,7 +34,7 @@ namespace Sonarr.Api.V3.Config
             GetResourceById = GetNamingConfig;
             UpdateResource = UpdateNamingConfig;
 
-            Get["/samples"] = x => GetExamples(this.Bind<NamingConfigResource>());
+            Get["/examples"] = x => GetExamples(this.Bind<NamingConfigResource>());
 
             SharedValidator.RuleFor(c => c.MultiEpisodeStyle).InclusiveBetween(0, 5);
             SharedValidator.RuleFor(c => c.StandardEpisodeFormat).ValidEpisodeFormat();

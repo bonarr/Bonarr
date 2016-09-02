@@ -11,3 +11,7 @@
 .isWarning {
   color: $warningColor;
 }
+
+.isCheckInput {
+  padding-left: 30px;
+}

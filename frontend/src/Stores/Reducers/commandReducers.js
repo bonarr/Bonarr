@@ -11,13 +11,13 @@ const defaultState = {
   handlers: {}
 };
 
-const reducerCollection = 'commands';
+const reducerSection = 'commands';
 
 const commandReducers = handleActions({
 
-  [types.FETCHING]: createFetchingReducer(reducerCollection),
-  [types.SET_ERROR]: createSetErrorReducer(reducerCollection),
-  [types.UPDATE]: createUpdateReducer(reducerCollection),
+  [types.FETCHING]: createFetchingReducer(reducerSection),
+  [types.SET_ERROR]: createSetErrorReducer(reducerSection),
+  [types.UPDATE]: createUpdateReducer(reducerSection),
 
   [types.ADD_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);

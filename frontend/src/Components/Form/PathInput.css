@@ -1,0 +1,37 @@
+.path {
+  composes: input from 'Components/Form/Input.css';
+}
+
+.hasError {
+  composes: hasError from 'Components/Form/Input.css';
+}
+
+.hasWarning {
+  composes: hasWarning from 'Components/Form/Input.css';
+}
+
+.pathInputContainerOpen {
+  .pathContainer {
+    border: 1px solid $inputBorderColor;
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: inset 0 1px 1px $inputBoxShadowColor;
+  }
+}
+
+.pathList {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.pathListItem {
+  padding: 0 16px;
+}
+
+.pathMatch {
+  font-weight: bold;
+}
+
+.pathFocused {
+  background-color: $menuItemHoverColor;
+}

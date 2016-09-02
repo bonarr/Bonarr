@@ -3,7 +3,7 @@ import styles from './Form.css';
 
 function Form({ children, validationErrors, validationWarnings, ...otherProps }) {
   return (
-    <form>
+    <div>
       <div>
         {
           validationErrors.map((error, index) => {
@@ -33,7 +33,7 @@ function Form({ children, validationErrors, validationWarnings, ...otherProps })
       </div>
 
       {children}
-    </form>
+    </div>
   );
 }
 

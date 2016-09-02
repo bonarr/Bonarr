@@ -1,4 +1,4 @@
-''.select {
+.text {
   composes: input from 'Components/Form/Input.css';
 }
 

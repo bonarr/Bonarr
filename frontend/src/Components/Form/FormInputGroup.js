@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
 import Icon from 'Components/Icon';
 import CheckInput from './CheckInput';
+import PathInputConnector from './PathInputConnector';
 import SelectInput from './SelectInput';
+import TextInput from './TextInput';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './FormInputGroup.css';
 
@@ -12,8 +14,10 @@ function getComponent(type) {
       return CheckInput;
     case inputTypes.SELECT:
       return SelectInput;
+    case inputTypes.PATH:
+      return PathInputConnector;
     default:
-      return null;
+      return TextInput;
   }
 }
 
@@ -70,8 +74,9 @@ function FormInputGroup(props) {
           return (
             <FormInputHelpText
               key={index}
-              text={error.errorMessage}
+              text={error}
               isError={true}
+              isCheckInput={checkInput}
             />
           );
         })
@@ -82,8 +87,9 @@ function FormInputGroup(props) {
           return (
             <FormInputHelpText
               key={index}
-              text={warning.errorMessage}
+              text={warning}
               isWarning={true}
+              isCheckInput={checkInput}
             />
           );
         })
@@ -98,8 +104,8 @@ FormInputGroup.propTypes = {
   type: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   pending: PropTypes.bool,
-  errors: PropTypes.arrayOf(PropTypes.object),
-  warnings: PropTypes.arrayOf(PropTypes.object)
+  errors: PropTypes.arrayOf(PropTypes.string),
+  warnings: PropTypes.arrayOf(PropTypes.string)
 };
 
 FormInputGroup.defaultProps = {
