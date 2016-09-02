@@ -108,7 +108,6 @@ class PathInput extends Component {
 
     return (
       <Autosuggest
-        ref="autosuggest"
         id={name}
         inputProps={inputProps}
         theme={theme}
