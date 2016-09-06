@@ -9,3 +9,7 @@
 .hasWarning {
   composes: hasWarning from 'Components/Form/Input.css';
 }
+
+.hasButton {
+  composes: hasButton from 'Components/Form/Input.css';
+}

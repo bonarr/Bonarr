@@ -74,5 +74,11 @@ module.exports = {
   //
   // Toolbar
 
-  toobarButtonHoverColor: '#35c5f4'
+  toobarButtonHoverColor: '#35c5f4',
+
+  //
+  // scroller
+
+  scrollbarBackgroundColor: '#9ea4b9',
+  scrollbarHoverBackgroundColor: '#656d8c'
 };

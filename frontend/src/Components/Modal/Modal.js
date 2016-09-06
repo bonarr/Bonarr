@@ -120,32 +120,34 @@ class Modal extends Component {
       <Portal
         isOpened={isOpen}
       >
-        {
-          isOpen &&
-            <div
-              className={styles.modalContainer}
-            >
+        <div>
+          {
+            isOpen &&
               <div
-                className={backdropClassName}
-                onMouseDown={this.onBackdropBeginPress}
-                onMouseUp={this.onBackdropEndPress}
+                className={styles.modalContainer}
               >
                 <div
-                  ref="modal"
-                  className={className}
+                  className={backdropClassName}
+                  onMouseDown={this.onBackdropBeginPress}
+                  onMouseUp={this.onBackdropEndPress}
                 >
-                  <Link
-                    className={styles.closeButton}
-                    onPress={this.onClosePress}
+                  <div
+                    ref="modal"
+                    className={className}
                   >
-                    <Icon name="icon-sonarr-close-modal" />
-                  </Link>
+                    <Link
+                      className={styles.closeButton}
+                      onPress={this.onClosePress}
+                    >
+                      <Icon name="icon-sonarr-close-modal" />
+                    </Link>
 
-                  {children}
+                    {children}
+                  </div>
                 </div>
               </div>
-            </div>
-        }
+          }
+        </div>
       </Portal>
     );
   }

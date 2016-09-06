@@ -19,15 +19,6 @@ const defaultState = {
     item: {}
   },
 
-  naming: {
-    fetching: false,
-    error: null,
-    pendingChanges: {},
-    saving: false,
-    saveError: null,
-    item: {}
-  },
-
   mediaManagement: {
     fetching: false,
     error: null,
@@ -37,13 +28,29 @@ const defaultState = {
     item: {}
   },
 
-  advancedSettings: true
+  naming: {
+    fetching: false,
+    error: null,
+    pendingChanges: {},
+    saving: false,
+    saveError: null,
+    item: {}
+  },
+
+  namingExamples: {
+    fetching: false,
+    error: null,
+    item: {}
+  },
+
+  advancedSettings: false
 };
 
 const propertyNames = [
   'ui',
+  'mediaManagement',
   'naming',
-  'mediaManagement'
+  'namingExamples'
 ];
 
 const settingsReducers = handleActions({
@@ -60,8 +67,8 @@ const settingsReducers = handleActions({
   [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
-  [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
-  [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement')
+  [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),
+  [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming')
 
 }, defaultState);
 

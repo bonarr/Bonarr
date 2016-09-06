@@ -1,6 +1,6 @@
 ﻿namespace Sonarr.Api.V3.Config
 {
-    public class NamingSampleResource
+    public class NamingExampleResource
     {
         public string SingleEpisodeExample { get; set; }
         public string MultiEpisodeExample { get; set; }

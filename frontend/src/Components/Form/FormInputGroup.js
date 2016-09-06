@@ -26,7 +26,9 @@ function FormInputGroup(props) {
     className,
     containerClassName,
     type,
+    button,
     helpText,
+    helpTexts,
     pending,
     errors,
     warnings,
@@ -37,6 +39,7 @@ function FormInputGroup(props) {
   const checkInput = type === inputTypes.CHECK;
   const hasError = !!errors.length;
   const hasWarning = !hasError && !!warnings.length;
+  const hasButton = !!button;
 
   return (
     <div className={containerClassName}>
@@ -46,9 +49,12 @@ function FormInputGroup(props) {
             helpText={helpText}
             hasError={hasError}
             hasWarning={hasWarning}
+            hasButton={hasButton}
             {...otherProps}
           />
         </div>
+
+        {button}
 
         {/* <div className={styles.pendingChangesContainer}>
           {
@@ -67,6 +73,23 @@ function FormInputGroup(props) {
           <FormInputHelpText
             text={helpText}
           />
+      }
+
+      {
+        !checkInput && helpTexts &&
+          <div>
+            {
+              helpTexts.map((text, index) => {
+                return (
+                  <FormInputHelpText
+                    key={index}
+                    text={text}
+                    isCheckInput={checkInput}
+                  />
+                );
+              })
+            }
+          </div>
       }
 
       {
@@ -102,7 +125,9 @@ FormInputGroup.propTypes = {
   className: PropTypes.string.isRequired,
   containerClassName: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  button: PropTypes.node,
   helpText: PropTypes.string,
+  helpTexts: PropTypes.arrayOf(PropTypes.string),
   pending: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.string),
   warnings: PropTypes.arrayOf(PropTypes.string)
@@ -112,6 +137,7 @@ FormInputGroup.defaultProps = {
   className: styles.inputGroup,
   containerClassName: styles.inputGroupContainer,
   type: inputTypes.TEXT,
+  helpTexts: [],
   errors: [],
   warnings: []
 };

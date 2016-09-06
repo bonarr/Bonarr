@@ -1,0 +1,47 @@
+.scroller {
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroller::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  min-height: 50px;
+  border: 3px solid transparent;
+  border-radius: 4px;
+  background-color: $scrollbarBackgroundColor;
+  background-clip: padding-box;
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+  background-color: $scrollbarHoverBackgroundColor;
+}
+
+.none {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.vertical {
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &.auto {
+    overflow-y: auto;
+  }
+}
+
+.horizontal {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  &.auto {
+    overflow-x: auto;
+  }
+}

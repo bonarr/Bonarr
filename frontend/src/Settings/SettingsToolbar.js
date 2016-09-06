@@ -32,7 +32,6 @@ function SettingsToolbar(props) {
           )}
           iconName="icon-sonarr-advanced-settings"
           title="Advanced Settings"
-          animate={saving}
           onPress={onAdvancedSettingsPress}
         />
       </PageToolbarSection>

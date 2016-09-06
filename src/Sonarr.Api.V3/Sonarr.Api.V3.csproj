@@ -110,7 +110,7 @@
     <Compile Include="Config\MediaManagementConfigResource.cs" />
     <Compile Include="Config\NamingConfigModule.cs" />
     <Compile Include="Config\NamingConfigResource.cs" />
-    <Compile Include="Config\NamingSampleResource.cs" />
+    <Compile Include="Config\NamingExampleResource.cs" />
     <Compile Include="Config\SonarrConfigModule.cs" />
     <Compile Include="FileSystem\FileSystemModule.cs" />
     <Compile Include="DiskSpace\DiskSpaceModule.cs" />

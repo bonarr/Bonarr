@@ -1,9 +1,10 @@
 .label {
   display: flex;
   justify-content: flex-end;
-  flex: 1 1 35%;
+  flex: 0 0 250px;
   margin-right: 20px;
   font-weight: bold;
+  line-height: 35px;
 }
 
 .hasError {

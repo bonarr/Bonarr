@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import longDateTime from 'Utilities/Date/longDateTime';
 import relativeDate from 'Utilities/Date/relativeDate';
+import scrollDirections from 'Utilities/scrollDirections';
 import Icon from 'Components/Icon';
 import Button from 'Components/Button';
+import Scroller from 'Components/Scroller';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
 import Modal from 'Components/Modal/Modal';
@@ -74,38 +76,46 @@ class LogsTableRow extends Component {
           {relativeDate(time)}
         </TableRowCell>
 
-        {
-          this.state.isDetailsModalOpen &&
-            <Modal
-              isOpen={true}
-              onModalClose={this.onModalClose}
+        <Modal
+          isOpen={this.state.isDetailsModalOpen}
+          onModalClose={this.onModalClose}
+        >
+          <ModalHeader>
+            Details
+          </ModalHeader>
+
+          <ModalBody>
+            <div>Message</div>
+
+            <Scroller
+              className={styles.detailsText}
+              scrollDirection={scrollDirections.HORIZONTAL}
             >
-              <ModalHeader>
-                Details
-              </ModalHeader>
+              {message}
+            </Scroller>
 
-              <ModalBody>
-                <div>Message</div>
-                <pre>{message}</pre>
+            {
+              !!exception &&
+                <div>
+                  <div>Exception</div>
+                  <Scroller
+                    className={styles.detailsText}
+                    scrollDirection={scrollDirections.HORIZONTAL}
+                  >
+                    {exception}
+                  </Scroller>
+                </div>
+            }
+          </ModalBody>
 
-                {
-                  !!exception &&
-                    <div>
-                      <div>Exception</div>
-                      <pre>{exception}</pre>
-                    </div>
-                }
-              </ModalBody>
-
-              <ModalFooter>
-                <Button
-                  onPress={this.onModalClose}
-                >
-                  Close
-                </Button>
-              </ModalFooter>
-            </Modal>
-        }
+          <ModalFooter>
+            <Button
+              onPress={this.onModalClose}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </Modal>
       </TableRow>
     );
   }

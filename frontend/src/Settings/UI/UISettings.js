@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import inputTypes from 'Utilities/inputTypes';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
@@ -14,17 +13,6 @@ import FormInputGroup from 'Components/Form/FormInputGroup';
 class UISettings extends Component {
 
   //
-  // Listeners
-
-  @autobind
-  onSavePress(event) {
-    event.preventDefault();
-    event.nativeEvent.preventDefault();
-
-    this.props.onSavePress();
-  }
-
-  //
   // Render
 
   render() {
@@ -34,6 +22,7 @@ class UISettings extends Component {
       settings,
       hasSettings,
       onInputChange,
+      onSavePress,
       ...otherProps
     } = this.props;
 
@@ -67,7 +56,7 @@ class UISettings extends Component {
       <PageContent>
         <SettingsToolbar
           {...otherProps}
-          onSavePress={this.onSavePress}
+          onSavePress={onSavePress}
         />
 
         <PageContentBody>
@@ -86,7 +75,6 @@ class UISettings extends Component {
               <Form
                 id="uiSettings"
                 {...otherProps}
-                onSubmit={this.onSubmit}
               >
                 <FieldSet
                   legend="Calendar"

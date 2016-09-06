@@ -25,7 +25,8 @@ class TextInput extends Component {
       name,
       value,
       hasError,
-      hasWarning
+      hasWarning,
+      hasButton
     } = this.props;
 
     return (
@@ -33,7 +34,8 @@ class TextInput extends Component {
         className={classNames(
           className,
           hasError && styles.hasError,
-          hasWarning && styles.hasWarning
+          hasWarning && styles.hasWarning,
+          hasButton && styles.hasButton
         )}
         name={name}
         value={value}
@@ -49,6 +51,7 @@ TextInput.propTypes = {
   value: PropTypes.string.isRequired,
   hasError: PropTypes.bool,
   hasWarning: PropTypes.bool,
+  hasButton: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 

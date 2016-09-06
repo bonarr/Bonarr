@@ -73,10 +73,15 @@ namespace Sonarr.Api.V3.Config
             return GetNamingConfig();
         }
 
-        private JsonResponse<NamingSampleResource> GetExamples(NamingConfigResource config)
+        private JsonResponse<NamingExampleResource> GetExamples(NamingConfigResource config)
         {
+            if (config.Id == 0)
+            {
+                config = GetNamingConfig();
+            }
+
             var nameSpec = config.InjectTo<NamingConfig>();
-            var sampleResource = new NamingSampleResource();
+            var sampleResource = new NamingExampleResource();
             
             var singleEpisodeSampleResult = _filenameSampleService.GetStandardSample(nameSpec);
             var multiEpisodeSampleResult = _filenameSampleService.GetMultiEpisodeSample(nameSpec);
@@ -85,31 +90,31 @@ namespace Sonarr.Api.V3.Config
             var animeMultiEpisodeSampleResult = _filenameSampleService.GetAnimeMultiEpisodeSample(nameSpec);
 
             sampleResource.SingleEpisodeExample = _filenameValidationService.ValidateStandardFilename(singleEpisodeSampleResult) != null
-                    ? "Invalid format"
+                    ? null
                     : singleEpisodeSampleResult.FileName;
 
             sampleResource.MultiEpisodeExample = _filenameValidationService.ValidateStandardFilename(multiEpisodeSampleResult) != null
-                    ? "Invalid format"
+                    ? null
                     : multiEpisodeSampleResult.FileName;
 
             sampleResource.DailyEpisodeExample = _filenameValidationService.ValidateDailyFilename(dailyEpisodeSampleResult) != null
-                    ? "Invalid format"
+                    ? null
                     : dailyEpisodeSampleResult.FileName;
 
             sampleResource.AnimeEpisodeExample = _filenameValidationService.ValidateAnimeFilename(animeEpisodeSampleResult) != null
-                    ? "Invalid format"
+                    ? null
                     : animeEpisodeSampleResult.FileName;
 
             sampleResource.AnimeMultiEpisodeExample = _filenameValidationService.ValidateAnimeFilename(animeMultiEpisodeSampleResult) != null
-                    ? "Invalid format"
+                    ? null
                     : animeMultiEpisodeSampleResult.FileName;
 
             sampleResource.SeriesFolderExample = nameSpec.SeriesFolderFormat.IsNullOrWhiteSpace()
-                ? "Invalid format"
+                ? null
                 : _filenameSampleService.GetSeriesFolderSample(nameSpec);
 
             sampleResource.SeasonFolderExample = nameSpec.SeasonFolderFormat.IsNullOrWhiteSpace()
-                ? "Invalid format"
+                ? null
                 : _filenameSampleService.GetSeasonFolderSample(nameSpec);
 
             return sampleResource.AsResponse();

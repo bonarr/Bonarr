@@ -1,6 +1,7 @@
 .modalScroller {
+  composes: scroller from 'Components/Scroller.css';
+
   flex-grow: 1;
-  height: 425px;
 }
 
 .modalBody {

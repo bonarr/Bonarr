@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import inputTypes from 'Utilities/inputTypes';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
@@ -10,19 +9,9 @@ import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
+import NamingConnector from './Naming/NamingConnector';
 
 class MediaManagement extends Component {
-
-  //
-  // Listeners
-
-  @autobind
-  onSavePress(event) {
-    event.preventDefault();
-    event.nativeEvent.preventDefault();
-
-    this.props.onSavePress();
-  }
 
   //
   // Render
@@ -35,6 +24,7 @@ class MediaManagement extends Component {
       settings,
       hasSettings,
       onInputChange,
+      onSavePress,
       ...otherProps
     } = this.props;
 
@@ -49,7 +39,7 @@ class MediaManagement extends Component {
         <SettingsToolbar
           advancedSettings={advancedSettings}
           {...otherProps}
-          onSavePress={this.onSavePress}
+          onSavePress={onSavePress}
         />
 
         <PageContentBody>
@@ -68,13 +58,8 @@ class MediaManagement extends Component {
               <Form
                 id="mediaManagementSettings"
                 {...otherProps}
-                onSubmit={this.onSubmit}
               >
-                <FieldSet
-                  legend="Episode Naming"
-                >
-
-                </FieldSet>
+                <NamingConnector section="naming" />
 
                 {
                   advancedSettings &&

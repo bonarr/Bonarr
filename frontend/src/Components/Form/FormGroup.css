@@ -2,5 +2,18 @@
   display: flex;
   margin-bottom: 20px;
   max-width: 600px;
-  line-height: 35px;
+}
+
+/* Sizes */
+
+.small {
+  max-width: 650px;
+}
+
+.medium {
+  max-width: 800px;
+}
+
+.large {
+  max-width: 1200px;
 }

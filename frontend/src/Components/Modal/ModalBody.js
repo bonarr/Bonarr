@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
+import Scroller from 'Components/Scroller';
 import styles from './ModalBody.css';
 
 class ModalBody extends Component {
@@ -15,16 +15,14 @@ class ModalBody extends Component {
     } = this.props;
 
     return (
-      <div className={styles.modalScroller}>
-        <Scrollbars
-          className={styles.modalScroller}
-          {...otherProps}
-        >
-          <div className={bodyClassName}>
-            {children}
-          </div>
-        </Scrollbars>
-      </div>
+      <Scroller
+        className={styles.modalScroller}
+        {...otherProps}
+      >
+        <div className={bodyClassName}>
+          {children}
+        </div>
+      </Scroller>
     );
   }
 

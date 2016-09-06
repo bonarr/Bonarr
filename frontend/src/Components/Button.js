@@ -21,7 +21,6 @@ class Button extends Component {
       <Link
         className={classNames(
         className,
-        styles.button,
         styles[kind]
       )}
         {...otherProps}
@@ -34,12 +33,13 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
   kind: PropTypes.oneOf(kinds.all),
   children: PropTypes.node
 };
 
 Button.defaultProps = {
+  className: styles.button,
   kind: kinds.DEFAULT
 };
 

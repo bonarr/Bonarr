@@ -1,0 +1,34 @@
+.option {
+  display: flex;
+  margin: 3px;
+  border: 1px solid $borderColor;
+}
+
+.small {
+  width: 420px;
+}
+
+.large {
+  width: 840px;
+}
+
+.token {
+  flex: 0 0 50%;
+  padding: 6px 16px;
+  background-color: #eee;
+  font-family: $monoSpaceFontFamily;
+}
+
+.example {
+  flex: 0 0 50%;
+  padding: 6px 16px;
+  background-color: #ddd;
+}
+
+.lower {
+  text-transform: lowercase;
+}
+
+.upper {
+  text-transform: uppercase;
+}
