@@ -5,6 +5,7 @@ import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Button';
 import SelectInput from 'Components/Form/SelectInput';
 import Modal from 'Components/Modal/Modal';
+import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
@@ -135,259 +136,261 @@ class NamingModal extends Component {
         isOpen={isOpen}
         onModalClose={onModalClose}
       >
-        <ModalHeader>
-          File Name Tokens
-        </ModalHeader>
+        <ModalContent>
+          <ModalHeader>
+            File Name Tokens
+          </ModalHeader>
 
-        <ModalBody>
-          <div className={styles.namingSelectContainer}>
-            <SelectInput
-              className={styles.namingSelect}
-              name="namingSelect"
-              value={this.state.case}
-              values={namingOptions}
-              onChange={this.onNamingCaseChange}
-            />
-          </div>
-
-          <FieldSet legend="Series">
-            <div className={styles.groups}>
-              {
-                  seriesTokens.map(({ token, example }) => {
-                    return (
-                      <NamingOption
-                        key={token}
-                        name={name}
-                        setting={setting}
-                        token={token}
-                        example={example}
-                        tokenCase={this.state.case}
-                        onInputChange={onInputChange}
-                      />
-                    );
-                  }
-                )
-              }
+          <ModalBody>
+            <div className={styles.namingSelectContainer}>
+              <SelectInput
+                className={styles.namingSelect}
+                name="namingSelect"
+                value={this.state.case}
+                values={namingOptions}
+                onChange={this.onNamingCaseChange}
+              />
             </div>
-          </FieldSet>
 
-          {
-            season &&
-              <FieldSet legend="Season">
-                <div className={styles.groups}>
-                  {
-                      seasonTokens.map(({ token, example }) => {
-                        return (
-                          <NamingOption
-                            key={token}
-                            name={name}
-                            setting={setting}
-                            token={token}
-                            example={example}
-                            tokenCase={this.state.case}
-                            onInputChange={onInputChange}
-                          />
-                        );
+            <FieldSet legend="Series">
+              <div className={styles.groups}>
+                {
+                    seriesTokens.map(({ token, example }) => {
+                      return (
+                        <NamingOption
+                          key={token}
+                          name={name}
+                          setting={setting}
+                          token={token}
+                          example={example}
+                          tokenCase={this.state.case}
+                          onInputChange={onInputChange}
+                        />
+                      );
+                    }
+                  )
+                }
+              </div>
+            </FieldSet>
+
+            {
+              season &&
+                <FieldSet legend="Season">
+                  <div className={styles.groups}>
+                    {
+                        seasonTokens.map(({ token, example }) => {
+                          return (
+                            <NamingOption
+                              key={token}
+                              name={name}
+                              setting={setting}
+                              token={token}
+                              example={example}
+                              tokenCase={this.state.case}
+                              onInputChange={onInputChange}
+                            />
+                          );
+                        }
+                      )
+                    }
+                  </div>
+                </FieldSet>
+            }
+
+            {
+              episode &&
+                <div>
+                  <FieldSet legend="Episode">
+                    <div className={styles.groups}>
+                      {
+                          episodeTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
                       }
-                    )
+                    </div>
+                  </FieldSet>
+
+                  {
+                    daily &&
+                      <FieldSet legend="Air-Date">
+                        <div className={styles.groups}>
+                          {
+                              airDateTokens.map(({ token, example }) => {
+                                return (
+                                  <NamingOption
+                                    key={token}
+                                    name={name}
+                                    setting={setting}
+                                    token={token}
+                                    example={example}
+                                    tokenCase={this.state.case}
+                                    onInputChange={onInputChange}
+                                  />
+                                );
+                              }
+                            )
+                          }
+                        </div>
+                      </FieldSet>
+                  }
+
+                  {
+                    anime &&
+                      <FieldSet legend="Absolute Episode Number">
+                        <div className={styles.groups}>
+                          {
+                              absoluteTokens.map(({ token, example }) => {
+                                return (
+                                  <NamingOption
+                                    key={token}
+                                    name={name}
+                                    setting={setting}
+                                    token={token}
+                                    example={example}
+                                    tokenCase={this.state.case}
+                                    onInputChange={onInputChange}
+                                  />
+                                );
+                              }
+                            )
+                          }
+                        </div>
+                      </FieldSet>
                   }
                 </div>
-              </FieldSet>
-          }
+            }
 
-          {
-            episode &&
-              <div>
-                <FieldSet legend="Episode">
-                  <div className={styles.groups}>
-                    {
-                        episodeTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
+            {
+              additional &&
+                <div>
+                  <FieldSet legend="Episode Title">
+                    <div className={styles.groups}>
+                      {
+                          episodeTitleTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
+                      }
+                    </div>
+                  </FieldSet>
 
-                {
-                  daily &&
-                    <FieldSet legend="Air-Date">
-                      <div className={styles.groups}>
-                        {
-                            airDateTokens.map(({ token, example }) => {
-                              return (
-                                <NamingOption
-                                  key={token}
-                                  name={name}
-                                  setting={setting}
-                                  token={token}
-                                  example={example}
-                                  tokenCase={this.state.case}
-                                  onInputChange={onInputChange}
-                                />
-                              );
-                            }
-                          )
-                        }
-                      </div>
-                    </FieldSet>
-                }
+                  <FieldSet legend="Quality">
+                    <div className={styles.groups}>
+                      {
+                          qualityTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
+                      }
+                    </div>
+                  </FieldSet>
 
-                {
-                  anime &&
-                    <FieldSet legend="Absolute Episode Number">
-                      <div className={styles.groups}>
-                        {
-                            absoluteTokens.map(({ token, example }) => {
-                              return (
-                                <NamingOption
-                                  key={token}
-                                  name={name}
-                                  setting={setting}
-                                  token={token}
-                                  example={example}
-                                  tokenCase={this.state.case}
-                                  onInputChange={onInputChange}
-                                />
-                              );
-                            }
-                          )
-                        }
-                      </div>
-                    </FieldSet>
-                }
-              </div>
-          }
+                  <FieldSet legend="Media Info">
+                    <div className={styles.groups}>
+                      {
+                          mediaInfoTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
+                      }
+                    </div>
+                  </FieldSet>
 
-          {
-            additional &&
-              <div>
-                <FieldSet legend="Episode Title">
-                  <div className={styles.groups}>
-                    {
-                        episodeTitleTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
+                  <FieldSet legend="Release Group">
+                    <div className={styles.groups}>
+                      {
+                          releaseGroupTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
+                      }
+                    </div>
+                  </FieldSet>
 
-                <FieldSet legend="Quality">
-                  <div className={styles.groups}>
-                    {
-                        qualityTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
+                  <FieldSet legend="Original">
+                    <div className={styles.groups}>
+                      {
+                          originalTokens.map(({ token, example }) => {
+                            return (
+                              <NamingOption
+                                key={token}
+                                name={name}
+                                setting={setting}
+                                token={token}
+                                example={example}
+                                tokenCase={this.state.case}
+                                size={sizes.LARGE}
+                                onInputChange={onInputChange}
+                              />
+                            );
+                          }
+                        )
+                      }
+                    </div>
+                  </FieldSet>
+                </div>
+            }
+          </ModalBody>
 
-                <FieldSet legend="Media Info">
-                  <div className={styles.groups}>
-                    {
-                        mediaInfoTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
-
-                <FieldSet legend="Release Group">
-                  <div className={styles.groups}>
-                    {
-                        releaseGroupTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
-
-                <FieldSet legend="Original">
-                  <div className={styles.groups}>
-                    {
-                        originalTokens.map(({ token, example }) => {
-                          return (
-                            <NamingOption
-                              key={token}
-                              name={name}
-                              setting={setting}
-                              token={token}
-                              example={example}
-                              tokenCase={this.state.case}
-                              size={sizes.LARGE}
-                              onInputChange={onInputChange}
-                            />
-                          );
-                        }
-                      )
-                    }
-                  </div>
-                </FieldSet>
-              </div>
-          }
-        </ModalBody>
-
-        <ModalFooter>
-          <Button
-            onPress={onModalClose}
-          >
-            Close
-          </Button>
-        </ModalFooter>
+          <ModalFooter>
+            <Button
+              onPress={onModalClose}
+            >
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     );
   }

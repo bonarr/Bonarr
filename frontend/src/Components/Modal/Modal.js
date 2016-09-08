@@ -135,13 +135,6 @@ class Modal extends Component {
                     ref="modal"
                     className={className}
                   >
-                    <Link
-                      className={styles.closeButton}
-                      onPress={this.onClosePress}
-                    >
-                      <Icon name="icon-sonarr-close-modal" />
-                    </Link>
-
                     {children}
                   </div>
                 </div>

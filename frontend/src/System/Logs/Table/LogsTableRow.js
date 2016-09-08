@@ -9,6 +9,7 @@ import Scroller from 'Components/Scroller';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
 import Modal from 'Components/Modal/Modal';
+import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
@@ -80,41 +81,43 @@ class LogsTableRow extends Component {
           isOpen={this.state.isDetailsModalOpen}
           onModalClose={this.onModalClose}
         >
-          <ModalHeader>
-            Details
-          </ModalHeader>
+          <ModalContent>
+            <ModalHeader>
+              Details
+            </ModalHeader>
 
-          <ModalBody>
-            <div>Message</div>
+            <ModalBody>
+              <div>Message</div>
 
-            <Scroller
-              className={styles.detailsText}
-              scrollDirection={scrollDirections.HORIZONTAL}
-            >
-              {message}
-            </Scroller>
+              <Scroller
+                className={styles.detailsText}
+                scrollDirection={scrollDirections.HORIZONTAL}
+              >
+                {message}
+              </Scroller>
 
-            {
-              !!exception &&
-                <div>
-                  <div>Exception</div>
-                  <Scroller
-                    className={styles.detailsText}
-                    scrollDirection={scrollDirections.HORIZONTAL}
-                  >
-                    {exception}
-                  </Scroller>
-                </div>
-            }
-          </ModalBody>
+              {
+                !!exception &&
+                  <div>
+                    <div>Exception</div>
+                    <Scroller
+                      className={styles.detailsText}
+                      scrollDirection={scrollDirections.HORIZONTAL}
+                    >
+                      {exception}
+                    </Scroller>
+                  </div>
+              }
+            </ModalBody>
 
-          <ModalFooter>
-            <Button
-              onPress={this.onModalClose}
-            >
-              Close
-            </Button>
-          </ModalFooter>
+            <ModalFooter>
+              <Button
+                onPress={this.onModalClose}
+              >
+                Close
+              </Button>
+            </ModalFooter>`
+          </ModalContent>
         </Modal>
       </TableRow>
     );

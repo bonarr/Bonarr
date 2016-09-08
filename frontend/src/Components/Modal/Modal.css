@@ -23,18 +23,5 @@
   max-height: 90%;
   width: 1080px;
   border-radius: 6px;
-  background-color: $modalBackgroundColor;
   opacity: 1;
-}
-
-.closeButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  width: 60px;
-  height: 60px;
-  text-align: center;
-  font-size: 18px;
-  line-height: 60px;
 }

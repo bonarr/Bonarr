@@ -9,7 +9,7 @@ const defaultState = {
   error: null,
   directories: [],
   files: [],
-  parent: ''
+  parent: null
 };
 
 const reducerSection = 'paths';

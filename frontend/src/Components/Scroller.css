@@ -32,7 +32,7 @@
   overflow-x: hidden;
   overflow-y: scroll;
 
-  &.auto {
+  &.autoScroll {
     overflow-y: auto;
   }
 }
@@ -41,7 +41,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
 
-  &.auto {
+  &.autoScroll {
     overflow-x: auto;
   }
 }

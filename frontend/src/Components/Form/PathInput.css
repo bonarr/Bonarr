@@ -10,8 +10,26 @@
   composes: hasWarning from 'Components/Form/Input.css';
 }
 
+.hasFileBrowser {
+  composes: hasButton from 'Components/Form/Input.css';
+}
+
+.pathInputWrapper {
+  display: flex;
+}
+
+.pathInputContainer {
+  position: relative;
+  flex-grow: 1;
+}
+
 .pathInputContainerOpen {
   .pathContainer {
+    position: absolute;
+    z-index: 1;
+    overflow-y: auto;
+    max-height: 200px;
+    width: 100%;
     border: 1px solid $inputBorderColor;
     border-radius: 4px;
     background-color: $white;
@@ -34,4 +52,10 @@
 
 .pathFocused {
   background-color: $menuItemHoverColor;
+}
+
+.fileBrowserButton {
+  composes: button from './FormInputButton.css';
+
+  height: 35px;
 }

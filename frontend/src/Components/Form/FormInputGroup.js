@@ -39,7 +39,7 @@ function FormInputGroup(props) {
   const checkInput = type === inputTypes.CHECK;
   const hasError = !!errors.length;
   const hasWarning = !hasError && !!warnings.length;
-  const hasButton = !!button;
+  const hasButton = hasButton || !!button;
 
   return (
     <div className={containerClassName}>

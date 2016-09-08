@@ -1,9 +1,14 @@
-.modalScroller {
-  composes: scroller from 'Components/Scroller.css';
+$modalBodyPadding: 30px;
 
+.modalBody {
+  flex-grow: 1;
+  padding: $modalBodyPadding;
+}
+
+.modalScroller {
   flex-grow: 1;
 }
 
-.modalBody {
-  padding: 30px;
+.innerModalBody {
+  padding: $modalBodyPadding;
 }

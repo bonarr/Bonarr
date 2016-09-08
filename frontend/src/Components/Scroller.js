@@ -12,6 +12,7 @@ class Scroller extends Component {
     const {
       className,
       scrollDirection,
+      autoScroll,
       children
     } = this.props;
 
@@ -19,7 +20,9 @@ class Scroller extends Component {
       <div
         className={classNames(
           className,
-          styles[scrollDirection]
+          styles.scroller,
+          styles[scrollDirection],
+          autoScroll && styles.autoScroll
         )}
       >
         {children}
@@ -30,14 +33,13 @@ class Scroller extends Component {
 }
 
 Scroller.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   scrollDirection: PropTypes.oneOf([scrollDirections.NONE, scrollDirections.HORIZONTAL, scrollDirections.VERTICAL]).isRequired,
   autoScroll: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired
 };
 
 Scroller.defaultProps = {
-  className: styles.scroller,
   scrollDirection: scrollDirections.VERTICAL,
   autoScroll: true
 };

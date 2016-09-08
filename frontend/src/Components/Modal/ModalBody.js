@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import scrollDirections from 'Utilities/scrollDirections';
 import Scroller from 'Components/Scroller';
 import styles from './ModalBody.css';
 
@@ -9,19 +10,32 @@ class ModalBody extends Component {
 
   render() {
     const {
-      bodyClassName,
+      innerClassName,
+      scrollDirection,
       children,
       ...otherProps
     } = this.props;
 
+    let className = this.props.className;
+    const hasScroller = scrollDirection !== scrollDirections.NONE;
+
+    if (!className) {
+      className = hasScroller ? styles.modalScroller : styles.modalBody;
+    }
+
     return (
       <Scroller
-        className={styles.modalScroller}
+        className={className}
+        scrollDirection={scrollDirection}
         {...otherProps}
       >
-        <div className={bodyClassName}>
-          {children}
-        </div>
+      {
+        hasScroller ?
+          <div className={innerClassName}>
+            {children}
+          </div> :
+          children
+      }
       </Scroller>
     );
   }
@@ -29,13 +43,15 @@ class ModalBody extends Component {
 }
 
 ModalBody.propTypes = {
+  className: PropTypes.string,
+  innerClassName: PropTypes.string,
   children: PropTypes.node,
-  bodyClassName: PropTypes.string
+  scrollDirection: PropTypes.oneOf([scrollDirections.NONE, scrollDirections.HORIZONTAL, scrollDirections.VERTICAL])
 };
 
 ModalBody.defaultProps = {
-  className: styles.scroller,
-  bodyClassName: styles.modalBody
+  innerClassName: styles.innerModalBody,
+  scrollDirection: scrollDirections.VERTICAL
 };
 
 export default ModalBody;

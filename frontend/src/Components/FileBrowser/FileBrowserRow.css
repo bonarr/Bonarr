@@ -1,0 +1,9 @@
+.row {
+  composes: clickable from 'Styles/Mixins/clickable.css';
+
+  cursor: pointer;
+}
+
+.type {
+  width: 32px;
+}
