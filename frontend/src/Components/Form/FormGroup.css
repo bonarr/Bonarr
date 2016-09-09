@@ -17,3 +17,9 @@
 .large {
   max-width: 1200px;
 }
+
+@media only screen and (max-width: $breakpointLarge) {
+  .group {
+    display: block;
+  }
+}
