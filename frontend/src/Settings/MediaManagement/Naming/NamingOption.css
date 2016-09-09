@@ -1,7 +1,19 @@
 .option {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   margin: 3px;
   border: 1px solid $borderColor;
+
+  &:hover {
+    .token {
+      background-color: #ddd;
+    }
+
+    .example {
+      background-color: #ccc;
+    }
+  }
 }
 
 .small {
@@ -9,7 +21,7 @@
 }
 
 .large {
-  width: 840px;
+  width: 100%;
 }
 
 .token {
@@ -31,4 +43,24 @@
 
 .upper {
   text-transform: uppercase;
+}
+
+.isFullFilename {
+  .token,
+  .example {
+    flex: 1 0 auto;
+  }
+}
+
+@media only screen and (max-width: $breakpointSmall) {
+  .option.small {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: $breakpointExtraSmall) {
+  .token,
+  .example {
+    flex: 1 0 auto;
+  }
 }

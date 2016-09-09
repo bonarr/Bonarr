@@ -25,6 +25,7 @@ function FormInputGroup(props) {
   const {
     className,
     containerClassName,
+    inputClassName,
     type,
     button,
     helpText,
@@ -39,13 +40,14 @@ function FormInputGroup(props) {
   const checkInput = type === inputTypes.CHECK;
   const hasError = !!errors.length;
   const hasWarning = !hasError && !!warnings.length;
-  const hasButton = hasButton || !!button;
+  const hasButton = !!button;
 
   return (
     <div className={containerClassName}>
       <div className={className}>
         <div className={styles.inputContainer}>
           <InputComponent
+            className={inputClassName}
             helpText={helpText}
             hasError={hasError}
             hasWarning={hasWarning}
@@ -124,6 +126,7 @@ function FormInputGroup(props) {
 FormInputGroup.propTypes = {
   className: PropTypes.string.isRequired,
   containerClassName: PropTypes.string.isRequired,
+  inputClassName: PropTypes.string,
   type: PropTypes.string.isRequired,
   button: PropTypes.node,
   helpText: PropTypes.string,

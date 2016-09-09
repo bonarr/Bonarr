@@ -9,6 +9,7 @@ import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
 import NamingModal from './NamingModal';
+import styles from './Naming.css';
 
 class Naming extends Component {
 
@@ -233,6 +234,7 @@ class Naming extends Component {
                       <FormLabel>Standard Episode Format</FormLabel>
 
                       <FormInputGroup
+                        inputClassName={styles.namingInput}
                         type={inputTypes.TEXT}
                         name="standardEpisodeFormat"
                         button={<FormInputButton onPress={this.onStandardNamingModalOpenClick}>?</FormInputButton>}
@@ -247,6 +249,7 @@ class Naming extends Component {
                       <FormLabel>Daily Episode Format</FormLabel>
 
                       <FormInputGroup
+                        inputClassName={styles.namingInput}
                         type={inputTypes.TEXT}
                         name="dailyEpisodeFormat"
                         button={<FormInputButton onPress={this.onDailyNamingModalOpenClick}>?</FormInputButton>}
@@ -261,6 +264,7 @@ class Naming extends Component {
                       <FormLabel>Anime Episode Format</FormLabel>
 
                       <FormInputGroup
+                        inputClassName={styles.namingInput}
                         type={inputTypes.TEXT}
                         name="animeEpisodeFormat"
                         button={<FormInputButton onPress={this.onAnimeNamingModalOpenClick}>?</FormInputButton>}
@@ -279,6 +283,7 @@ class Naming extends Component {
                     <FormLabel>Series Folder Format</FormLabel>
 
                     <FormInputGroup
+                      inputClassName={styles.namingInput}
                       type={inputTypes.TEXT}
                       name="seriesFolderFormat"
                       button={<FormInputButton onPress={this.onSeriesFolderNamingModalOpenClick}>?</FormInputButton>}
@@ -294,6 +299,7 @@ class Naming extends Component {
                 <FormLabel>Season Folder Format</FormLabel>
 
                 <FormInputGroup
+                  inputClassName={styles.namingInput}
                   type={inputTypes.TEXT}
                   name="seasonFolderFormat"
                   button={<FormInputButton onPress={this.onSeasonFolderNamingModalOpenClick}>?</FormInputButton>}
@@ -321,6 +327,7 @@ class Naming extends Component {
                 namingModalOptions &&
                   <NamingModal
                     isOpen={isNamingModalOpen}
+                    advancedSettings={advancedSettings}
                     {...namingModalOptions}
                     name="standardEpisodeFormat"
                     onInputChange={onInputChange}

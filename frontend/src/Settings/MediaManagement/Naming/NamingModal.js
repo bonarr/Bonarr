@@ -41,6 +41,7 @@ class NamingModal extends Component {
       name,
       setting,
       isOpen,
+      advancedSettings,
       season,
       episode,
       daily,
@@ -54,6 +55,21 @@ class NamingModal extends Component {
       { title: 'Default Case' },
       { lower: 'Lower Case' },
       { upper: 'Upper Case' }
+    ];
+
+    const fileNameTokens = [
+      {
+        token: '{Series Title} - S{season:00}E{episode:00} - {Episode Title} {Quality Full}',
+        example: 'Series Title (2010) - S01E01 - Episode Title HDTV-720p Proper'
+      },
+      {
+        token: '{Series Title} - {season:0}x{episode:00} - {Episode Title} {Quality Full}',
+        example: 'Series Title (2010) - 1x01 - Episode Title HDTV-720p Proper'
+      },
+      {
+        token: '{Series.Title}.S{season:00}E{episode:00}.{EpisodeClean.Title}.{Quality.Full}',
+        example: 'Series.Title.(2010).S01E01.Episode.Title.HDTV-720p'
+      }
     ];
 
     const seriesTokens = [
@@ -136,7 +152,7 @@ class NamingModal extends Component {
         isOpen={isOpen}
         onModalClose={onModalClose}
       >
-        <ModalContent>
+        <ModalContent onModalClose={onModalClose}>
           <ModalHeader>
             File Name Tokens
           </ModalHeader>
@@ -151,6 +167,32 @@ class NamingModal extends Component {
                 onChange={this.onNamingCaseChange}
               />
             </div>
+
+            {
+              !advancedSettings &&
+                <FieldSet legend="File Names">
+                  <div className={styles.groups}>
+                    {
+                        fileNameTokens.map(({ token, example }) => {
+                          return (
+                            <NamingOption
+                              key={token}
+                              name={name}
+                              setting={setting}
+                              token={token}
+                              example={example}
+                              isFullFilename={true}
+                              tokenCase={this.state.case}
+                              size={sizes.LARGE}
+                              onInputChange={onInputChange}
+                            />
+                          );
+                        }
+                      )
+                    }
+                  </div>
+                </FieldSet>
+            }
 
             <FieldSet legend="Series">
               <div className={styles.groups}>
@@ -400,6 +442,7 @@ NamingModal.propTypes = {
   name: PropTypes.string.isRequired,
   setting: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  advancedSettings: PropTypes.bool.isRequired,
   season: PropTypes.bool.isRequired,
   episode: PropTypes.bool.isRequired,
   daily: PropTypes.bool.isRequired,

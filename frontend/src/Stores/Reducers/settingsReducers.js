@@ -43,7 +43,7 @@ const defaultState = {
     item: {}
   },
 
-  advancedSettings: true
+  advancedSettings: false
 };
 
 const propertyNames = [

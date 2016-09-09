@@ -25,3 +25,23 @@
   border-radius: 6px;
   opacity: 1;
 }
+
+@media only screen and (max-width: $breakpointLarge) {
+  .modal {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: $breakpointMedium) {
+  .modal {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: $breakpointSmall) {
+  .modal {
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+  }
+}
