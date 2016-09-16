@@ -1,37 +1,38 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Marionette = require('marionette');
-var SettingsLayoutBase = require('../SettingsLayoutBase');
-var profileCollection = require('Profile/profileCollection');
-var ProfileCollectionView = require('./ProfileCollectionView');
-var DelayProfileLayout = require('./Delay/DelayProfileLayout');
-var DelayProfileCollection = require('./Delay/DelayProfileCollection');
-require('./Language/LanguageCollection');
+import Marionette from 'marionette';
+import tpl from './ProfileLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import Profiles from './Profiles';
 
-module.exports = SettingsLayoutBase.extend({
-  template: 'Settings/Profile/ProfileLayoutTemplate',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
 
-  regions: {
-    profile: '#profile',
-    delayProfile: '#delay-profile'
+  mountReact: function() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <Profiles />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.delayProfileCollection = new DelayProfileCollection();
-    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  unmountReact: function() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    var promise = $.when(profileCollection.fetch(),
-      this.delayProfileCollection.fetch());
+    this.mountReact();
+  },
 
-    promise.done(_.bind(function() {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.profile.show(new ProfileCollectionView({ collection: profileCollection }));
-      this.delayProfile.show(new DelayProfileLayout({ collection: this.delayProfileCollection }));
-    }, this));
+  onClose: function() {
+    this.unmountReact();
   }
 });

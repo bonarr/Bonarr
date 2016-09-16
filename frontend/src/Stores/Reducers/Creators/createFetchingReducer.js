@@ -1,11 +1,13 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createFetchingReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      newState[section] = Object.assign({}, state[section]);
-      newState[section].fetching = payload.fetching;
+      const newState = getSectionState(state, section);
+      newState.fetching = payload.fetching;
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

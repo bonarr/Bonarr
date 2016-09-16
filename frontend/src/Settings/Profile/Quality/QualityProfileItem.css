@@ -1,0 +1,40 @@
+.qualityProfileItem {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.checkContainer {
+  position: relative;
+  margin-bottom: 7px;
+  margin-left: 8px;
+}
+
+.qualityName {
+  margin-bottom: 0;
+  margin-left: 2px;
+  font-weight: normal;
+  line-height: 36px;
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  width: $dragHandleWidth;
+  text-align: center;
+  cursor: grab;
+}
+
+.dragIcon {
+  top: 0;
+}
+
+.isDragging {
+  opacity: 0.25;
+}

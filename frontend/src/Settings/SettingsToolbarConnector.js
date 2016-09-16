@@ -45,7 +45,7 @@ class SettingsToolbarConnector extends Component {
 }
 
 SettingsToolbarConnector.propTypes = {
-  onSavePress: PropTypes.func.isRequired,
+  onSavePress: PropTypes.func,
   toggleAdvancedSettings: PropTypes.func.isRequired
 };
 

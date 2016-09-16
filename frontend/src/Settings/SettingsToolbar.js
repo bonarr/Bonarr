@@ -8,6 +8,7 @@ import styles from './SettingsToolbar.css';
 function SettingsToolbar(props) {
   const {
     advancedSettings,
+    showSave,
     saving,
     hasPendingChanges,
     onSavePress,
@@ -18,14 +19,6 @@ function SettingsToolbar(props) {
     <PageToolbar>
       <PageToolbarSection>
         <PageToolbarButton
-          iconName="icon-sonarr-save"
-          title="Save"
-          animate={saving}
-          isDisabled={!hasPendingChanges}
-          onPress={onSavePress}
-        />
-
-        <PageToolbarButton
           className={classNames(
             styles.advancedSettings,
             advancedSettings && styles.advancedSettingsEnabled
@@ -34,6 +27,17 @@ function SettingsToolbar(props) {
           title="Advanced Settings"
           onPress={onAdvancedSettingsPress}
         />
+
+        {
+          showSave &&
+            <PageToolbarButton
+              iconName="icon-sonarr-save"
+              title="Save"
+              animate={saving}
+              isDisabled={!hasPendingChanges}
+              onPress={onSavePress}
+            />
+        }
       </PageToolbarSection>
     </PageToolbar>
   );
@@ -41,10 +45,15 @@ function SettingsToolbar(props) {
 
 SettingsToolbar.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
-  hasPendingChanges: PropTypes.bool.isRequired,
-  onSavePress: PropTypes.func.isRequired,
+  showSave: PropTypes.bool.isRequired,
+  saving: PropTypes.bool,
+  hasPendingChanges: PropTypes.bool,
+  onSavePress: PropTypes.func,
   onAdvancedSettingsPress: PropTypes.func.isRequired
+};
+
+SettingsToolbar.defaultProps = {
+  showSave: true
 };
 
 export default SettingsToolbar;

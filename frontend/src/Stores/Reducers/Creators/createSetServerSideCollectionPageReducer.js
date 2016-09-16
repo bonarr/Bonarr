@@ -1,11 +1,13 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createSetServerSideCollectionPageReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      newState[section] = state[section];
-      newState[section].page = payload.page;
+      const newState = getSectionState(state, section);
+      newState.page = payload.page;
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

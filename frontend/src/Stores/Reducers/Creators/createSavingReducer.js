@@ -1,11 +1,13 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createSavingReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      newState[section] = Object.assign({}, state[section]);
-      newState[section].saving = payload.saving;
+      const newState = getSectionState(state, section);
+      newState.saving = payload.saving;
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

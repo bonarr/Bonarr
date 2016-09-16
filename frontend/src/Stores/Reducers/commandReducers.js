@@ -7,6 +7,7 @@ import createUpdateReducer from './Creators/createUpdateReducer';
 
 const defaultState = {
   fetching: false,
+  error: null,
   items: [],
   handlers: {}
 };

@@ -1,18 +1,18 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createUpdateReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      const newStateSection = Object.assign({}, state[section]);
+      const newState = getSectionState(state, section);
 
-      if (newStateSection.hasOwnProperty('item')) {
-        newStateSection.item = payload.data;
+      if (newState.hasOwnProperty('item')) {
+        newState.item = payload.data;
       } else {
-        newStateSection.items = payload.data;
+        newState.items = payload.data;
       }
 
-      newState[section] = newStateSection;
-
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

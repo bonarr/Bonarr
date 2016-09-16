@@ -13,13 +13,19 @@ module.exports = {
   nzbdronePurple: '#7932ea',
   nzbdronePink: '#f43565',
   sonarrBlue: '#35c5f4',
+  helpTextColor: '#909293',
+  gray: '#adadad',
+
+  // Sidebar
+
   sidebarColor: '#e1e2e3',
   sidebarBackGroundColor: '#3a3f51',
+
+  // Toolbar
   toolbarColor: '#e1e2e3',
   toolbarBackgroundColor: '#4f566f',
   toolbarMenuItemBackgroundColor: '#454b60',
   toolbarMenuItemHoverBackgroundColor: '#3a3f51',
-  helpTextColor: '#909293',
 
   // Accents
   borderColor: '#e5e5e5',
@@ -77,8 +83,14 @@ module.exports = {
   toobarButtonHoverColor: '#35c5f4',
 
   //
-  // scroller
+  // Scroller
 
   scrollbarBackgroundColor: '#9ea4b9',
-  scrollbarHoverBackgroundColor: '#656d8c'
+  scrollbarHoverBackgroundColor: '#656d8c',
+
+  //
+  // Card
+
+  cardShadowColor: '#e1e1e1',
+  cardAlternateBackgroundColor: '#f5f5f5'
 };

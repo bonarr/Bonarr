@@ -1,0 +1,36 @@
+.label {
+  display: inline-block;
+  margin: 2px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: $white;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.default {
+  background-color: $defaultColor;
+}
+
+.primary {
+  background-color: $primaryColor;
+}
+
+.success {
+  background-color: $successColor;
+}
+
+.warning {
+  background-color: $warningColor;
+}
+
+.danger {
+  background-color: $dangerColor;
+}
+
+.info {
+  background-color: $infoColor;
+}

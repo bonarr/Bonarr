@@ -4,7 +4,7 @@ import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import SettingsToolbar from 'Settings/SettingsToolbarConnector';
+import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
@@ -54,7 +54,7 @@ class UISettings extends Component {
 
     return (
       <PageContent>
-        <SettingsToolbar
+        <SettingsToolbarConnector
           {...otherProps}
           onSavePress={onSavePress}
         />

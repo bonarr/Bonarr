@@ -35,3 +35,14 @@
     background-color: $primaryHoverBackgroundColor;
   }
 }
+
+.danger {
+  border-color: $dangerBorderColor;
+  background-color: $dangerBackgroundColor;
+  color: $white;
+
+  &:hover {
+    border-color: $dangerHoverBorderColor;
+    background-color: $dangerHoverBackgroundColor;
+  }
+}

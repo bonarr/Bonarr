@@ -23,13 +23,14 @@ class CheckInput extends Component {
 
   render() {
     const {
+      containerClassName,
       name,
       value,
       helpText
     } = this.props;
 
     return (
-      <div className={styles.container}>
+      <div className={containerClassName}>
         <label
           className={styles.label}
         >
@@ -67,6 +68,7 @@ class CheckInput extends Component {
 }
 
 CheckInput.propTypes = {
+  containerClassName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.bool.isRequired,
   helpText: PropTypes.string,
@@ -74,7 +76,7 @@ CheckInput.propTypes = {
 };
 
 CheckInput.defaultProps = {
-  className: styles.select
+  containerClassName: styles.container
 };
 
 export default CheckInput;

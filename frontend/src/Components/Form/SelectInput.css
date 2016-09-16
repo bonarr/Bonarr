@@ -1,5 +1,8 @@
-''.select {
+.select {
   composes: input from 'Components/Form/Input.css';
+
+  padding-right: 11px;
+  padding-left: 11px;
 }
 
 .hasError {

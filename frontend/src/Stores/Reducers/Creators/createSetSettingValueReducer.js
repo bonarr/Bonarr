@@ -1,15 +1,16 @@
 import _ from 'underscore';
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
 
 function createSetSettingValueReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
       const { name, value } = payload;
-      const newState = {};
-      newState[section] = Object.assign({}, state[section]);
-      newState[section].pendingChanges = Object.assign({}, state[section].pendingChanges);
+      const newState = getSectionState(state, section);
+      newState.pendingChanges = Object.assign({}, newState.pendingChanges);
 
-      const currentValue = state[section].item[name];
-      const pendingState = newState[section].pendingChanges;
+      const currentValue = newState.item[name];
+      const pendingState = newState.pendingChanges;
 
       let parsedValue = null;
 
@@ -25,7 +26,7 @@ function createSetSettingValueReducer(section) {
         pendingState[name] = parsedValue;
       }
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

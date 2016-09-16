@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using NzbDrone.Core.Parser;
 using NzbDrone.Core.Profiles;
 using NzbDrone.Core.Qualities;
@@ -17,10 +16,10 @@ namespace Sonarr.Api.V3.Profiles
         {
             _qualityDefinitionService = qualityDefinitionService;
 
-            GetResourceAll = GetAll;
+            GetResourceSingle = GetSchema;
         }
 
-        private List<ProfileResource> GetAll()
+        private ProfileResource GetSchema()
         {
             var items = _qualityDefinitionService.All()
                 .OrderBy(v => v.Weight)
@@ -32,7 +31,7 @@ namespace Sonarr.Api.V3.Profiles
             profile.Items = items;
             profile.Language = Language.English;
 
-            return new List<ProfileResource> { profile.InjectTo<ProfileResource>() };
+            return profile.InjectTo<ProfileResource>();
         }
     }
 }

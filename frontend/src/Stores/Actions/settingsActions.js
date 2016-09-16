@@ -32,3 +32,15 @@ export const setNamingSettingsValue = createAction(types.SET_NAMING_SETTINGS_VAL
 });
 
 export const fetchNamingExamples = settingsActionHandlers[types.FETCH_NAMING_EXAMPLES];
+
+export const fetchQualityProfiles = settingsActionHandlers[types.FETCH_QUALITY_PROFILES];
+export const fetchQualityProfileSchema = settingsActionHandlers[types.FETCH_QUALITY_PROFILE_SCHEMA];
+export const saveQualityProfile = settingsActionHandlers[types.SAVE_QUALITY_PROFILE];
+export const deleteQualityProfile = settingsActionHandlers[types.DELETE_QUALITY_PROFILE];
+
+export const setQualityProfileValue = createAction(types.SET_QUALITY_PROFILE_VALUE, (payload) => {
+  return {
+    section: 'qualityProfileSchema',
+    ...payload
+  };
+});

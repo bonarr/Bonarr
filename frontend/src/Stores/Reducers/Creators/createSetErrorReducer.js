@@ -1,11 +1,13 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createSetErrorReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      newState[section] = Object.assign({}, state[section]);
-      newState[section].error = payload.error;
+      const newState = getSectionState(state, section);
+      newState.error = payload.error;
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;

@@ -2,6 +2,7 @@ import $ from 'jquery';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import createSaveHandler from './Creators/createSaveHandler';
+import createSaveThingyHandler from './Creators/createSaveThingyHandler';
 import { fetching, update, setError } from './baseActions';
 
 const settingsActionHandlers = {
@@ -40,7 +41,16 @@ const settingsActionHandlers = {
         dispatch(fetching({ section, fetching: false }));
       });
     };
-  }
+  },
+
+  [types.FETCH_QUALITY_PROFILES]: createFetchHandler('qualityProfiles', '/profile'),
+  [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
+
+  [types.SAVE_QUALITY_PROFILE]: createSaveThingyHandler('qualityProfileSchema',
+                                                    'qualityProfiles',
+                                                    '/profile',
+                                                    (state) => state.settings.qualityProfileSchema,
+                                                    (state) => state.settings.qualityProfiles)
 };
 
 export default settingsActionHandlers;

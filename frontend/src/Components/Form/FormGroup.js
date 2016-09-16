@@ -3,12 +3,15 @@ import classNames from 'classNames';
 import sizes from 'Utilities/sizes';
 import styles from './FormGroup.css';
 
-function FormGroup({ className, children, size }) {
+function FormGroup({ className, children, size, ...otherProps }) {
   return (
-    <div className={classNames(
-      className,
-      styles[size]
-    )}>
+    <div
+      className={classNames(
+        className,
+        styles[size]
+      )}
+      {...otherProps}
+    >
       {children}
     </div>
   );

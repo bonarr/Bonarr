@@ -1,12 +1,14 @@
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
+
 function createSetServerSideCollectionFilterReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = {};
-      newState[section] = state[section];
-      newState[section].filterKey = payload.filterKey;
-      newState[section].filterValue = payload.filterValue;
+      const newState = getSectionState(state, section);
+      newState.filterKey = payload.filterKey;
+      newState.filterValue = payload.filterValue;
 
-      return Object.assign({}, state, newState);
+      return updateSectionState(state, section, newState);
     }
 
     return state;
