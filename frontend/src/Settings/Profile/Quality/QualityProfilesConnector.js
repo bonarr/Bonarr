@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
-import { fetchQualityProfiles } from 'Stores/Actions/settingsActions';
+import { fetchQualityProfiles, deleteQualityProfile } from 'Stores/Actions/settingsActions';
 import { fetchLanguages } from 'Stores/Actions/languageActions';
 import QualityProfiles from './QualityProfiles';
 
@@ -21,6 +21,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   fetchQualityProfiles,
+  deleteQualityProfile,
   fetchLanguages
 };
 
@@ -39,7 +40,7 @@ class QualityProfilesConnector extends Component {
 
   @autobind
   onConfirmDeleteQualityProfile(id) {
-    // Actually delete it
+    this.props.deleteQualityProfile({ id });
   }
 
   //
@@ -57,6 +58,7 @@ class QualityProfilesConnector extends Component {
 
 QualityProfilesConnector.propTypes = {
   fetchQualityProfiles: PropTypes.func.isRequired,
+  deleteQualityProfile: PropTypes.func.isRequired,
   fetchLanguages: PropTypes.func.isRequired
 };
 

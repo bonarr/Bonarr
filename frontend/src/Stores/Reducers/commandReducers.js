@@ -1,12 +1,12 @@
 import _ from 'underscore';
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './Creators/createFetchingReducer';
-import createSetErrorReducer from './Creators/createSetErrorReducer';
+import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 
 const defaultState = {
   fetching: false,
+  populated: false,
   error: null,
   items: [],
   handlers: {}
@@ -16,8 +16,7 @@ const reducerSection = 'commands';
 
 const commandReducers = handleActions({
 
-  [types.FETCHING]: createFetchingReducer(reducerSection),
-  [types.SET_ERROR]: createSetErrorReducer(reducerSection),
+  [types.SET]: createSetReducer(reducerSection),
   [types.UPDATE]: createUpdateReducer(reducerSection),
 
   [types.ADD_COMMAND]: (state, { payload }) => {

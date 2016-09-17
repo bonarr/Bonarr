@@ -3,7 +3,8 @@ import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import createSaveHandler from './Creators/createSaveHandler';
 import createSaveThingyHandler from './Creators/createSaveThingyHandler';
-import { fetching, update, setError } from './baseActions';
+import createDeleteThingyHandler from './Creators/createDeleteThingyHandler';
+import { set, update } from './baseActions';
 
 const settingsActionHandlers = {
   [types.FETCH_UI_SETTINGS]: createFetchHandler('ui', '/config/ui'),
@@ -19,7 +20,7 @@ const settingsActionHandlers = {
     const section = 'namingExamples';
 
     return function(dispatch, getState) {
-      dispatch(fetching({ section, fetching: true }));
+      dispatch(set({ section, fetching: true }));
 
       const naming = getState().settings.naming;
 
@@ -30,15 +31,22 @@ const settingsActionHandlers = {
 
       promise.done((data) => {
         dispatch(update({ section, data }));
-        dispatch(setError({ section, error: null }));
+
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: true,
+          error: null
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ section, error: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(fetching({ section, fetching: false }));
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: false,
+          error: xhr
+        }));
       });
     };
   },
@@ -47,6 +55,12 @@ const settingsActionHandlers = {
   [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
 
   [types.SAVE_QUALITY_PROFILE]: createSaveThingyHandler('qualityProfileSchema',
+                                                    'qualityProfiles',
+                                                    '/profile',
+                                                    (state) => state.settings.qualityProfileSchema,
+                                                    (state) => state.settings.qualityProfiles),
+
+  [types.DELETE_QUALITY_PROFILE]: createDeleteThingyHandler('qualityProfileSchema',
                                                     'qualityProfiles',
                                                     '/profile',
                                                     (state) => state.settings.qualityProfileSchema,

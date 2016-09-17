@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import { saving, updateThingy, clearPendingChanges, setSaveError } from '../baseActions';
+import { set, updateThingy } from '../baseActions';
 
 function createSaveThingyHandler(section, thingySection, url, getFromState, getThingiesFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(saving({ section, saving: true }));
+      dispatch(set({ section, saving: true }));
 
       const id = payload.id;
       const state = getFromState(getState());
@@ -28,16 +28,21 @@ function createSaveThingyHandler(section, thingySection, url, getFromState, getT
 
       promise.done((data) => {
         dispatch(updateThingy({ section: thingySection, data }));
-        dispatch(clearPendingChanges({ section }));
-        dispatch(setSaveError({ section, saveError: null }));
+
+        dispatch(set({
+          section,
+          saving: false,
+          saveError: null,
+          pendingChanges: {}
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setSaveError({ section, saveError: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(saving({ section, saving: false }));
+        dispatch(set({
+          section,
+          saving: false,
+          saveError: xhr
+        }));
       });
     };
   };

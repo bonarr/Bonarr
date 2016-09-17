@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './Creators/createFetchingReducer';
-import createSetErrorReducer from './Creators/createSetErrorReducer';
+import createSetReducer from './Creators/createSetReducer';
 
 const defaultState = {
   currentPath: '',
+  populated: false,
   fetching: false,
   error: null,
   directories: [],
@@ -16,8 +16,7 @@ const reducerSection = 'paths';
 
 const pathReducers = handleActions({
 
-  [types.FETCHING]: createFetchingReducer(reducerSection),
-  [types.SET_ERROR]: createSetErrorReducer(reducerSection),
+  [types.SET]: createSetReducer(reducerSection),
 
   [types.UPDATE_PATHS]: (state, { payload }) => {
     const newState = Object.assign({}, state);

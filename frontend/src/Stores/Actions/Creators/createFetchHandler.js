@@ -1,10 +1,10 @@
 import $ from 'jquery';
-import { fetching, update, setError } from '../baseActions';
+import { set, update } from '../baseActions';
 
 function createFetchHandler(section, url) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(fetching({ section, fetching: true }));
+      dispatch(set({ section, fetching: true }));
 
       const promise = $.ajax({
         url
@@ -12,15 +12,22 @@ function createFetchHandler(section, url) {
 
       promise.done((data) => {
         dispatch(update({ section, data }));
-        dispatch(setError({ section, error: null }));
+
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: true,
+          error: null
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ section, error: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(fetching({ section, fetching: false }));
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: false,
+          error: xhr
+        }));
       });
     };
   };

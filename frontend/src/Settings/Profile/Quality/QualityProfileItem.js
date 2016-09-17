@@ -39,16 +39,15 @@ class QualityProfileItem extends Component {
           isDragging && styles.isDragging,
         )}
       >
-        <CheckInput
-          containerClassName={styles.checkContainer}
-          name={name}
-          value={allowed}
-          onChange={this.onAllowedChange}
-        />
         <label
           className={styles.qualityName}
-          htmlFor={name}
         >
+          <CheckInput
+            containerClassName={styles.checkContainer}
+            name={name}
+            value={allowed}
+            onChange={this.onAllowedChange}
+          />
           {name}
         </label>
 

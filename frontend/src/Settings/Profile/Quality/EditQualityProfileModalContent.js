@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
 import * as kinds from 'Helpers/kinds';
 import Button from 'Components/Button';
+import LoadingIndicator from 'Components/LoadingIndicator';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
-import PageSectionContent from 'Components/Page/PageSectionContent';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
@@ -21,6 +21,8 @@ class EditQualityProfileModalContent extends Component {
 
   render() {
     const {
+      fetching,
+      error,
       languages,
       qualities,
       item,
@@ -53,64 +55,66 @@ class EditQualityProfileModalContent extends Component {
         </ModalHeader>
 
         <ModalBody>
-          <PageSectionContent
-            errorMessage="Unable to add a new quality profile, please try again."
-            {...otherProps}
-          >
-            <Form
-              validationWarnings={[]}
-              validationErrors={[]}
-            >
-              <FormGroup>
-                <FormLabel>Name</FormLabel>
+          {
+            fetching &&
+              <LoadingIndicator />
+          }
 
-                <FormInputGroup
-                  type={inputTypes.TEXT}
-                  name="name"
-                  value={name}
-                  validationWarnings={[]}
-                  validationErrors={[]}
-                  onChange={onInputChange}
-                />
-              </FormGroup>
+          {
+            !fetching && !!error &&
+              <div>Unable to add a new quality profile, please try again.</div>
+          }
 
-              <FormGroup>
-                <FormLabel>Language</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.SELECT}
-                  name="language"
-                  value={language}
-                  values={languageOptions}
-                  helpText="Series assigned this profile will look for episodes with the selected language"
-                  validationWarnings={[]}
-                  validationErrors={[]}
-                  onChange={onInputChange}
-                />
-              </FormGroup>
-
-              <FormGroup>
-                <FormLabel>Cutoff</FormLabel>
-
-                <FormInputGroup
-                  type={inputTypes.SELECT}
-                  name="cutoff"
-                  value={cutoff ? cutoff.id : 0}
-                  values={qualities}
-                  helpText="Once this quality is reached Sonarr will no longer download episodes"
-                  validationWarnings={[]}
-                  validationErrors={[]}
-                  onChange={onCutoffChange}
-                />
-              </FormGroup>
-
-              <QualityProfileItems
-                qualityProfileItems={items}
+          {
+            !fetching && !error &&
+              <Form
                 {...otherProps}
-              />
+              >
+                <FormGroup>
+                  <FormLabel>Name</FormLabel>
 
-            </Form>
-          </PageSectionContent>
+                  <FormInputGroup
+                    type={inputTypes.TEXT}
+                    name="name"
+                    {...name}
+                    onChange={onInputChange}
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormLabel>Language</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.SELECT}
+                    name="language"
+                    values={languageOptions}
+                    helpText="Series assigned this profile will look for episodes with the selected language"
+                    {...language}
+                    onChange={onInputChange}
+                  />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormLabel>Cutoff</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.SELECT}
+                    name="cutoff"
+                    {...cutoff}
+                    value={cutoff ? cutoff.value.id : 0}
+                    values={qualities}
+                    helpText="Once this quality is reached Sonarr will no longer download episodes"
+                    onChange={onCutoffChange}
+                  />
+                </FormGroup>
+
+                <QualityProfileItems
+                  qualityProfileItems={items.value}
+                  {...otherProps}
+                />
+
+              </Form>
+          }
         </ModalBody>
         <ModalFooter>
           {
@@ -142,6 +146,8 @@ class EditQualityProfileModalContent extends Component {
 }
 
 EditQualityProfileModalContent.propTypes = {
+  fetching: PropTypes.bool.isRequired,
+  error: PropTypes.object,
   languages: PropTypes.arrayOf(PropTypes.object).isRequired,
   qualities: PropTypes.arrayOf(PropTypes.object).isRequired,
   saving: PropTypes.bool.isRequired,
@@ -151,7 +157,7 @@ EditQualityProfileModalContent.propTypes = {
   onCutoffChange: PropTypes.func.isRequired,
   onSavePress: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired,
-  onDeleteQualityProfilePress: PropTypes.func.isRequired
+  onDeleteQualityProfilePress: PropTypes.func
 };
 
 export default EditQualityProfileModalContent;

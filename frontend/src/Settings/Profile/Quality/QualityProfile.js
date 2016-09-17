@@ -62,8 +62,7 @@ class QualityProfile extends Component {
       name,
       language,
       cutoff,
-      items,
-      onConfirmDeleteQualityProfile
+      items
     } = this.props;
 
     return (
@@ -114,7 +113,7 @@ class QualityProfile extends Component {
           title="Delete Quality Profile"
           message={`Are you sure you want to delete the quality profile '${name}'?`}
           confirmLabel="Delete"
-          onConfirm={onConfirmDeleteQualityProfile}
+          onConfirm={this.onConfirmDeleteQualityProfile}
           onCancel={this.onDeleteQualityProfileModalClose}
         />
       </Card>

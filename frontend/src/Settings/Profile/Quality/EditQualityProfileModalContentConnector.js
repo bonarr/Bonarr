@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
+import selectSettings from 'Stores/Selectors/selectSettings';
 import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
 import EditQualityProfileModalContent from './EditQualityProfileModalContent';
 
@@ -13,9 +14,13 @@ function createQualityProfileSelector() {
     (state) => state.settings.qualityProfileSchema,
     (id, qualityProfiles, schema) => {
       if (!id) {
+        const item = Object.assign({ name: '' }, schema.item);
+        const settings = selectSettings(item, schema.pendingChanges, schema.saveError);
+
         return {
           ...schema,
-          item: Object.assign({}, schema.item, schema.pendingChanges)
+          ...settings,
+          item: settings.settings
         };
       }
 
@@ -27,14 +32,15 @@ function createQualityProfileSelector() {
         pendingChanges
       } = schema;
 
-      const item = Object.assign({}, _.find(qualityProfiles.items, { id }), pendingChanges);
+      const settings = selectSettings(_.find(qualityProfiles.items, { id }), pendingChanges, saveError);
 
       return {
         fetching,
         error,
         saving,
         saveError,
-        item
+        item: settings.settings,
+        ...settings
       };
     }
   );
@@ -44,7 +50,12 @@ function createQualitiesSelector() {
   return createSelector(
     createQualityProfileSelector(),
     (qualityProfile) => {
-      return _.reduceRight(qualityProfile.item.items, (result, { allowed, quality }) => {
+      const items = qualityProfile.item.items;
+      if (!items || !items.value) {
+        return [];
+      }
+
+      return _.reduceRight(items.value, (result, { allowed, quality }) => {
         if (allowed) {
           result.push({ [quality.id]: quality.name });
         }
@@ -129,19 +140,19 @@ class EditQualityProfileModalContentConnector extends Component {
   onQualityProfileItemAllowedChange(id, allowed) {
     const qualityProfile = _.cloneDeep(this.props.item);
 
-    const item = _.find(qualityProfile.items, (i) => i.quality.id === id);
+    const item = _.find(qualityProfile.items.value, (i) => i.quality.id === id);
     item.allowed = allowed;
 
     this.props.setQualityProfileValue({
       name: 'items',
-      value: qualityProfile.items
+      value: qualityProfile.items.value
     });
 
-    const cutoff = qualityProfile.cutoff;
+    const cutoff = qualityProfile.cutoff.value;
 
     // If the cutoff isn't allowed anymore or there isn't a cutoff set one
-    if (!cutoff || !_.find(qualityProfile.items, (i) => i.quality.id === cutoff.id).allowed) {
-      const firstAllowed = _.find(qualityProfile.items, { allowed: true });
+    if (!cutoff || !_.find(qualityProfile.items.value, (i) => i.quality.id === cutoff.id).allowed) {
+      const firstAllowed = _.find(qualityProfile.items.value, { allowed: true });
 
       this.props.setQualityProfileValue({ name: 'cutoff', value: firstAllowed ? firstAllowed.quality : null });
     }
@@ -192,7 +203,7 @@ class EditQualityProfileModalContentConnector extends Component {
       dropIndex
     } = this.state;
 
-    if (_.isEmpty(this.props.item) && !this.props.fetching) {
+    if (_.isEmpty(this.props.item.items) && !this.props.fetching) {
       return null;
     }
 

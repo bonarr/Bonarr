@@ -1,53 +1,56 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './Creators/createFetchingReducer';
+import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
-import createSetErrorReducer from './Creators/createSetErrorReducer';
-import createSetServerSideCollectionPageReducer from './Creators/createSetServerSideCollectionPageReducer';
-import createSetServerSideCollectionSortReducer from './Creators/createSetServerSideCollectionSortReducer';
-import createSetServerSideCollectionFilterReducer from './Creators/createSetServerSideCollectionFilterReducer';
 import createReducers from './Creators/createReducers';
 
 const defaultState = {
   status: {
     fetching: false,
+    populated: false,
     error: null,
     item: {}
   },
 
   health: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   diskSpace: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   tasks: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   backups: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   updates: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   logs: {
     fetching: false,
+    populated: false,
     pageSize: 50,
     sortKey: 'time',
     sortDirection: 'descending',
@@ -57,12 +60,14 @@ const defaultState = {
 
   logFiles: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   updateLogFiles: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   }
@@ -84,13 +89,9 @@ const serverSideCollectionNames = [
 
 const systemReducers = handleActions({
 
-  [types.FETCHING]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createFetchingReducer),
-  [types.SET_ERROR]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createSetErrorReducer),
+  [types.SET]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createSetReducer),
   [types.UPDATE]: createReducers(['status', ...collectionNames, ...serverSideCollectionNames], createUpdateReducer),
-  [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_PAGE]: createReducers(serverSideCollectionNames, createSetServerSideCollectionPageReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_SORT]: createReducers(serverSideCollectionNames, createSetServerSideCollectionSortReducer),
-  [types.SET_SERVER_SIDE_COLLECTION_FILTER]: createReducers(serverSideCollectionNames, createSetServerSideCollectionFilterReducer)
+  [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer)
 
 }, defaultState);
 

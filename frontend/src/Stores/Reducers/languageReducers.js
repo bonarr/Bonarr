@@ -1,11 +1,11 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './Creators/createFetchingReducer';
-import createSetErrorReducer from './Creators/createSetErrorReducer';
+import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 
 const defaultState = {
   fetching: false,
+  populated: false,
   error: null,
   items: []
 };
@@ -14,8 +14,7 @@ const reducerSection = 'languages';
 
 const languageReducers = handleActions({
 
-  [types.FETCHING]: createFetchingReducer(reducerSection),
-  [types.SET_ERROR]: createSetErrorReducer(reducerSection),
+  [types.SET]: createSetReducer(reducerSection),
   [types.UPDATE]: createUpdateReducer(reducerSection)
 
 }, defaultState);

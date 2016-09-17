@@ -1,18 +1,17 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
-import createFetchingReducer from './Creators/createFetchingReducer';
+import createSetReducer from './Creators/createSetReducer';
 import createSetSettingValueReducer from './Creators/createSetSettingValueReducer';
 import createClearPendingChangesReducer from './Creators/createClearPendingChangesReducer';
-import createSavingReducer from './Creators/createSavingReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateThingyReducer from './Creators/createUpdateThingyReducer';
-import createSetErrorReducer from './Creators/createSetErrorReducer';
-import createSetSaveErrorReducer from './Creators/createSetSaveErrorReducer';
+import createDeleteThingyReducer from './Creators/createDeleteThingyReducer';
 import createReducers from './Creators/createReducers';
 
 const defaultState = {
   ui: {
     fetching: false,
+    populated: false,
     error: null,
     pendingChanges: {},
     saving: false,
@@ -22,6 +21,7 @@ const defaultState = {
 
   mediaManagement: {
     fetching: false,
+    populated: false,
     error: null,
     pendingChanges: {},
     saving: false,
@@ -31,6 +31,7 @@ const defaultState = {
 
   naming: {
     fetching: false,
+    populated: false,
     error: null,
     pendingChanges: {},
     saving: false,
@@ -40,18 +41,21 @@ const defaultState = {
 
   namingExamples: {
     fetching: false,
+    populated: false,
     error: null,
     item: {}
   },
 
   qualityProfiles: {
     fetching: false,
+    populated: false,
     error: null,
     items: []
   },
 
   qualityProfileSchema: {
     fetching: false,
+    populated: false,
     error: null,
     saving: false,
     saveError: null,
@@ -80,13 +84,12 @@ const settingsReducers = handleActions({
     return Object.assign({}, state, { advancedSettings: !state.advancedSettings });
   },
 
-  [types.FETCHING]: createReducers([...propertyNames, ...thingyPropertyNames], createFetchingReducer),
-  [types.SET_ERROR]: createReducers([...propertyNames, ...thingyPropertyNames], createSetErrorReducer),
+  [types.SET]: createReducers([...propertyNames, ...thingyPropertyNames], createSetReducer),
   [types.UPDATE]: createReducers([...propertyNames, ...thingyPropertyNames], createUpdateReducer),
   [types.UPDATE_THINGY]: createReducers(thingyPropertyNames, createUpdateThingyReducer),
-  [types.SAVING]: createReducers(propertyNames, createSavingReducer),
-  [types.SET_SAVE_ERROR]: createReducers(propertyNames, createSetSaveErrorReducer),
   [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer),
+
+  [types.DELETE_THINGY]: createReducers(thingyPropertyNames, createDeleteThingyReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),

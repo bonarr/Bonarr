@@ -1,11 +1,11 @@
 import _ from 'underscore';
 import $ from 'jquery';
-import { fetching, updateServerSideCollection, setError } from '../baseActions';
+import { set, updateServerSideCollection } from '../baseActions';
 
 function createFetchServerSideCollectionHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(fetching({ section, fetching: true }));
+      dispatch(set({ section, fetching: true }));
 
       const collectionState = getFromState(getState())[section];
 
@@ -26,15 +26,22 @@ function createFetchServerSideCollectionHandler(section, url, getFromState) {
 
       promise.done((response) => {
         dispatch(updateServerSideCollection({ section, data: response }));
-        dispatch(setError({ section, error: null }));
+
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: true,
+          error: null
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ section, error: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(fetching({ section, fetching: false }));
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: false,
+          error: xhr
+        }));
       });
     };
   };

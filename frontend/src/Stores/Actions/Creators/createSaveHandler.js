@@ -1,10 +1,10 @@
 import $ from 'jquery';
-import { saving, update, clearPendingChanges, setSaveError } from '../baseActions';
+import { set, update } from '../baseActions';
 
 function createSaveHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(saving({ section, saving: true }));
+      dispatch(set({ section, saving: true }));
 
       const state = getFromState(getState());
       const saveData = Object.assign({}, state.item, state.pendingChanges);
@@ -18,16 +18,21 @@ function createSaveHandler(section, url, getFromState) {
 
       promise.done((data) => {
         dispatch(update({ section, data }));
-        dispatch(clearPendingChanges({ section }));
-        dispatch(setSaveError({ section, saveError: null }));
+
+        dispatch(set({
+          section,
+          saving: false,
+          saveError: null,
+          pendingChanges: {}
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setSaveError({ section, saveError: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(saving({ section, saving: false }));
+        dispatch(set({
+          section,
+          saving: false,
+          saveError: xhr
+        }));
       });
     };
   };

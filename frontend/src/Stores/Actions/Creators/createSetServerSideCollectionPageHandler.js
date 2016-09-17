@@ -1,5 +1,5 @@
 import pages from 'Utilities/pages';
-import { setServerSideCollectionPage } from '../baseActions';
+import { set } from '../baseActions';
 
 function createSetServerSideCollectionPageHandler(section, page, getFromState, fetchHandler) {
   return function(payload) {
@@ -25,7 +25,7 @@ function createSetServerSideCollectionPageHandler(section, page, getFromState, f
           nextPage = payload.page;
       }
 
-      dispatch(setServerSideCollectionPage({ section, page: nextPage }));
+      dispatch(set({ section, page: nextPage }));
       dispatch(fetchHandler());
     };
   };
