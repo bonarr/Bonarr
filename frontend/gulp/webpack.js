@@ -84,7 +84,12 @@ const config = {
         exclude: /(node_modules|JsLibraries)/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'decorators-legacy', 'react', 'stage-2']
+          presets: ['es2015', 'decorators-legacy', 'react', 'stage-2'],
+          env: {
+            development: {
+              plugins: ['transform-react-jsx-source']
+            }
+          }
         }
       },
       // This is disabled until we drop the number of errors
