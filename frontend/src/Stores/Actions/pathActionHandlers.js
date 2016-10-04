@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import * as types from './actionTypes';
-import { fetching, setError } from './baseActions';
+import { set } from './baseActions';
 import { updatePaths } from './pathActions';
 
 const section = 'paths';
@@ -8,7 +8,7 @@ const section = 'paths';
 const pathActionHandlers = {
   [types.FETCH_PATHS](payload) {
     return (dispatch, getState) => {
-      dispatch(fetching({ section, fetching: true }));
+      dispatch(set({ section, fetching: true }));
 
       const promise = $.ajax({
         url: '/filesystem',
@@ -19,15 +19,22 @@ const pathActionHandlers = {
 
       promise.done((data) => {
         dispatch(updatePaths({ path: payload.path, ...data }));
-        dispatch(setError({ section, error: null }));
+
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: true,
+          error: null
+        }));
       });
 
       promise.fail((xhr) => {
-        dispatch(setError({ section, error: xhr }));
-      });
-
-      promise.always(() => {
-        dispatch(fetching({ section, fetching: false }));
+        dispatch(set({
+          section,
+          fetching: false,
+          populated: false,
+          error: xhr
+        }));
       });
     };
   }
