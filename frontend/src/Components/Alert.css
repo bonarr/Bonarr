@@ -1,0 +1,33 @@
+.label {
+  display: block;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.default {
+  background-color: $defaultColor;
+}
+
+.primary {
+  background-color: $primaryColor;
+}
+
+.success {
+  background-color: $successColor;
+}
+
+.warning {
+  background-color: $warningColor;
+}
+
+.danger {
+  background-color: $dangerColor;
+}
+
+.info {
+  border-color: $alertInfoBorderColor;
+  background-color: $alertInfoBackgroundColor;
+  color: $alertInfoColor;
+}

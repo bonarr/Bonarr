@@ -3,7 +3,9 @@ const inputTypes = {
   SELECT: 'select',
   TEXT: 'text',
   PATH: 'path',
-  PASSWORD: 'password'
+  PASSWORD: 'password',
+  NUMBER: 'password',
+  TAG: 'tag'
 };
 
 export default inputTypes;

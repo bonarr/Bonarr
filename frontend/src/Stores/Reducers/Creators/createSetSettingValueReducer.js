@@ -9,7 +9,7 @@ function createSetSettingValueReducer(section) {
       const newState = getSectionState(state, section);
       newState.pendingChanges = Object.assign({}, newState.pendingChanges);
 
-      const currentValue = newState.item[name];
+      const currentValue = newState.item ? newState.item[name] : '';
       const pendingState = newState.pendingChanges;
 
       let parsedValue = null;

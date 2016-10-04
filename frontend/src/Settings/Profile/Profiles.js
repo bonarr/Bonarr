@@ -3,6 +3,7 @@ import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import QualityProfilesConnector from './Quality/QualityProfilesConnector';
+import DelayProfilesConnector from './DelayReact/DelayProfilesConnector';
 
 function Profiles(props) {
   return (
@@ -13,7 +14,7 @@ function Profiles(props) {
 
       <PageContentBody>
         <QualityProfilesConnector />
-        <div>Delay Profiles</div>
+        <DelayProfilesConnector />
       </PageContentBody>
     </PageContent>
   );

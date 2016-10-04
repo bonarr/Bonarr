@@ -1,0 +1,18 @@
+.delayProfilesHeader {
+  display: flex;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.column {
+  flex: 0 0 200px;
+}
+
+.tags {
+  flex: 1 0 auto;
+}
+
+.addDelayProfile {
+  display: flex;
+  justify-content: flex-end;
+}

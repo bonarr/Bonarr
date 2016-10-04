@@ -1,7 +1,15 @@
 import React, { PropTypes } from 'react';
 import LoadingIndicator from 'Components/LoadingIndicator';
 
-function PageSectionContent({ fetching, error, errorMessage, children }) {
+function PageSectionContent(props) {
+  const {
+    fetching,
+    populated,
+    error,
+    errorMessage,
+    children
+  } = props;
+
   if (fetching) {
     return (
       <LoadingIndicator />
@@ -10,15 +18,18 @@ function PageSectionContent({ fetching, error, errorMessage, children }) {
     return (
       <div>{errorMessage}</div>
     );
+  } else if (populated && !error) {
+    return (
+      <div>{children}</div>
+    );
   }
 
-  return (
-    <div>{children}</div>
-  );
+  return null;
 }
 
 PageSectionContent.propTypes = {
   fetching: PropTypes.bool.isRequired,
+  populated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   errorMessage: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired

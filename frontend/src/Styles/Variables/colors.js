@@ -92,5 +92,12 @@ module.exports = {
   // Card
 
   cardShadowColor: '#e1e1e1',
-  cardAlternateBackgroundColor: '#f5f5f5'
+  cardAlternateBackgroundColor: '#f5f5f5',
+
+  //
+  // Alert
+
+  alertInfoColor: '#31708f',
+  alertInfoBackgroundColor: '#d9edf7',
+  alertInfoBorderColor: '#bce8f1'
 };

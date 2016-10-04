@@ -64,7 +64,21 @@ const settingsActionHandlers = {
                                                     'qualityProfiles',
                                                     '/profile',
                                                     (state) => state.settings.qualityProfileSchema,
-                                                    (state) => state.settings.qualityProfiles)
+                                                    (state) => state.settings.qualityProfiles),
+
+  [types.FETCH_DELAY_PROFILES]: createFetchHandler('delayProfiles', '/delayprofile'),
+
+  [types.SAVE_DELAY_PROFILE]: createSaveThingyHandler('delayProfiles',
+                                                    'delayProfiles',
+                                                    '/delayprofile',
+                                                    (state) => state.settings.delayProfiles,
+                                                    (state) => state.settings.delayProfiles),
+
+  [types.DELETE_DELAY_PROFILE]: createDeleteThingyHandler('delayProfiles',
+                                                    'delayProfiles',
+                                                    '/delayprofile',
+                                                    (state) => state.settings.delayProfiles,
+                                                    (state) => state.settings.delayProfiles)
 };
 
 export default settingsActionHandlers;

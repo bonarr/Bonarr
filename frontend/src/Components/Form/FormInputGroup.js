@@ -5,6 +5,8 @@ import CheckInput from './CheckInput';
 import PathInputConnector from './PathInputConnector';
 import SelectInput from './SelectInput';
 import TextInput from './TextInput';
+import NumberInput from './NumberInput';
+import TagInputConnector from './TagInputConnector';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './FormInputGroup.css';
 
@@ -16,6 +18,10 @@ function getComponent(type) {
       return SelectInput;
     case inputTypes.PATH:
       return PathInputConnector;
+    case inputTypes.NUMBER:
+      return NumberInput;
+    case inputTypes.TAG:
+      return TagInputConnector;
     default:
       return TextInput;
   }

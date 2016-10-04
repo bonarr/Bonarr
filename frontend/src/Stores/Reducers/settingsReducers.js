@@ -63,6 +63,16 @@ const defaultState = {
     pendingChanges: {}
   },
 
+  delayProfiles: {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: [],
+    saving: false,
+    saveError: null,
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -75,7 +85,8 @@ const propertyNames = [
 ];
 
 const thingyPropertyNames = [
-  'qualityProfiles'
+  'qualityProfiles',
+  'delayProfiles'
 ];
 
 const settingsReducers = handleActions({
@@ -87,14 +98,15 @@ const settingsReducers = handleActions({
   [types.SET]: createReducers([...propertyNames, ...thingyPropertyNames], createSetReducer),
   [types.UPDATE]: createReducers([...propertyNames, ...thingyPropertyNames], createUpdateReducer),
   [types.UPDATE_THINGY]: createReducers(thingyPropertyNames, createUpdateThingyReducer),
-  [types.CLEAR_PENDING_CHANGES]: createReducers(propertyNames, createClearPendingChangesReducer),
+  [types.CLEAR_PENDING_CHANGES]: createReducers([...propertyNames, ...thingyPropertyNames], createClearPendingChangesReducer),
 
   [types.DELETE_THINGY]: createReducers(thingyPropertyNames, createDeleteThingyReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
-  [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema')
+  [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema'),
+  [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles')
 
 }, defaultState);
 
