@@ -161,7 +161,6 @@ class EditQualityProfileModalContentConnector extends Component {
   @autobind
   onQualityProfileItemDragMove(dragIndex, dropIndex) {
     if (this.state.dragIndex !== dragIndex || this.state.dropIndex !== dropIndex) {
-      console.log(dropIndex);
       this.setState({
         dragIndex,
         dropIndex
@@ -179,12 +178,12 @@ class EditQualityProfileModalContentConnector extends Component {
     if (didDrop && dropIndex !== null) {
       const qualityProfile = _.cloneDeep(this.props.item);
 
-      const items = qualityProfile.items.splice(dragIndex, 1);
-      qualityProfile.items.splice(dropIndex, 0, items[0]);
+      const items = qualityProfile.items.value.splice(dragIndex, 1);
+      qualityProfile.items.value.splice(dropIndex, 0, items[0]);
 
       this.props.setQualityProfileValue({
         name: 'items',
-        value: qualityProfile.items
+        value: qualityProfile.items.value
       });
     }
 
@@ -198,19 +197,13 @@ class EditQualityProfileModalContentConnector extends Component {
   // Render
 
   render() {
-    const {
-      dragIndex,
-      dropIndex
-    } = this.state;
-
     if (_.isEmpty(this.props.item.items) && !this.props.fetching) {
       return null;
     }
 
     return (
       <EditQualityProfileModalContent
-        dragIndex={dragIndex}
-        dropIndex={dropIndex}
+        {...this.state}
         {...this.props}
         onSavePress={this.onSavePress}
         onInputChange={this.onInputChange}
