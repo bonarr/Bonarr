@@ -31,7 +31,7 @@
   "rules": {
     "filenames/match-exported": ["error"],
 
-    // ECMAScript 6
+    # ECMAScript 6
 
     arrow-body-style: [0],
     arrow-parens: ["error", "always"],
@@ -60,7 +60,7 @@
     template-curly-spacing: ["error", "never"],
     yield-star-spacing: "off",
 
-    // Possible Errors
+    # Possible Errors
 
     "comma-dangle": "error",
     "no-cond-assign": "error",
@@ -92,8 +92,8 @@
     "valid-jsdoc": "off",
     "valid-typeof": "error",
 
+    # Best Practices
 
-    // Best Practices
     "accessor-pairs": "off",
     "array-callback-return": "warn",
     "block-scoped-var": "warn",
