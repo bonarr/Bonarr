@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentValidation;
+using Nancy;
 using NzbDrone.Core.Profiles.Delay;
 using Sonarr.Http;
+using Sonarr.Http.Extensions;
 using Sonarr.Http.Mapping;
 using Sonarr.Http.REST;
 using Sonarr.Http.Validation;
@@ -21,6 +24,7 @@ namespace Sonarr.Api.V3.Profiles.Delay
             UpdateResource = Update;
             CreateResource = Create;
             DeleteResource = DeleteProfile;
+            Put[@"/reorder/(?<id>[\d]{1,10})"] = options => Reorder(options.Id);
 
             SharedValidator.RuleFor(d => d.Tags).NotEmpty().When(d => d.Id != 1);
             SharedValidator.RuleFor(d => d.Tags).EmptyCollection<DelayProfileResource, int>().When(d => d.Id == 1);
@@ -62,6 +66,16 @@ namespace Sonarr.Api.V3.Profiles.Delay
         private List<DelayProfileResource> GetAll()
         {
             return _delayProfileService.All().InjectTo<List<DelayProfileResource>>();
+        }
+
+        private Response Reorder(int id)
+        {
+            ValidateId(id);
+
+            var afterIdQuery = Request.Query.After;
+            int? afterId = afterIdQuery.HasValue ? Convert.ToInt32(afterIdQuery.Value) : null;
+
+            return _delayProfileService.Reorder(id, afterId).InjectTo<List<DelayProfileResource>>().AsResponse();
         }
     }
 }

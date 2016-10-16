@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import QualityProfilesConnector from './Quality/QualityProfilesConnector';
-import DelayProfilesConnector from './DelayReact/DelayProfilesConnector';
+import DelayProfilesConnector from './Delay/DelayProfilesConnector';
 
-function Profiles(props) {
-  return (
-    <PageContent>
-      <SettingsToolbarConnector
-        showSave={false}
-      />
+class Profiles extends Component {
 
-      <PageContentBody>
-        <QualityProfilesConnector />
-        <DelayProfilesConnector />
-      </PageContentBody>
-    </PageContent>
-  );
+  //
+  // Render
+
+  render() {
+    return (
+      <PageContent>
+        <SettingsToolbarConnector
+          showSave={false}
+        />
+
+        <PageContentBody>
+          <QualityProfilesConnector />
+          <DelayProfilesConnector />
+        </PageContentBody>
+      </PageContent>
+    );
+  }
 }
 
-export default Profiles;
+// Only a single DragDropContext can exist so it's done here to allow editing
+// quality profiles and reordering delay profiles to work.
+
+export default DragDropContext(HTML5Backend)(Profiles);

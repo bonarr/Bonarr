@@ -514,6 +514,11 @@
       "from": "base64-js@0.0.8",
       "resolved": "https://registry.npmjs.org/base64-js/-/base64-js-0.0.8.tgz"
     },
+    "batch-processor": {
+      "version": "1.0.0",
+      "from": "batch-processor@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/batch-processor/-/batch-processor-1.0.0.tgz"
+    },
     "beeper": {
       "version": "1.1.0",
       "from": "beeper@>=1.0.0 <2.0.0",
@@ -1078,6 +1083,11 @@
       "from": "ee-first@1.1.1",
       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
     },
+    "element-resize-detector": {
+      "version": "1.1.9",
+      "from": "element-resize-detector@>=1.1.9 <2.0.0",
+      "resolved": "https://registry.npmjs.org/element-resize-detector/-/element-resize-detector-1.1.9.tgz"
+    },
     "emojis-list": {
       "version": "2.0.1",
       "from": "emojis-list@>=2.0.0 <3.0.0",
@@ -1468,6 +1478,11 @@
       "version": "1.2.0",
       "from": "generate-object-property@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/generate-object-property/-/generate-object-property-1.2.0.tgz"
+    },
+    "get-node-dimensions": {
+      "version": "1.1.0",
+      "from": "get-node-dimensions@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/get-node-dimensions/-/get-node-dimensions-1.1.0.tgz"
     },
     "get-stdin": {
       "version": "4.0.1",
@@ -3338,6 +3353,11 @@
       "version": "15.3.1",
       "from": "react-dom@15.3.1",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.3.1.tgz"
+    },
+    "react-measure": {
+      "version": "1.1.0",
+      "from": "react-measure@latest",
+      "resolved": "https://registry.npmjs.org/react-measure/-/react-measure-1.1.0.tgz"
     },
     "react-portal": {
       "version": "2.2.1",

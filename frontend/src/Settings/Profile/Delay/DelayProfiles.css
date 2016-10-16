@@ -16,3 +16,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.addButton {
+  width: $dragHandleWidth;
+  text-align: center;
+}

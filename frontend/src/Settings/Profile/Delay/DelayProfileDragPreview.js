@@ -1,14 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { DragLayer } from 'react-dnd';
 import dimensions from 'Styles/Variables/dimensions.js';
-import { QUALITY_PROFILE_ITEM } from 'Helpers/dragTypes';
+import { DELAY_PROFILE } from 'Helpers/dragTypes';
 import DragPreviewLayer from 'Components/DragPreviewLayer';
-import QualityProfileItem from './QualityProfileItem';
-import styles from './QualityProfileItemDragPreview.css';
+import DelayProfile from './DelayProfile';
+import styles from './DelayProfileDragPreview.css';
 
-const formGroupSmallWidth = parseInt(dimensions.formGroupSmallWidth);
-const formLabelWidth = parseInt(dimensions.formLabelWidth);
-const formLabelRightMarginWidth = parseInt(dimensions.formLabelRightMarginWidth);
 const dragHandleWidth = parseInt(dimensions.dragHandleWidth);
 
 function collectDragLayer(monitor) {
@@ -19,19 +16,20 @@ function collectDragLayer(monitor) {
   };
 }
 
-class QualityProfileItemDragPreview extends Component {
+class DelayProfileDragPreview extends Component {
 
   //
   // Render
 
   render() {
     const {
+      width,
       item,
       itemType,
       currentOffset
     } = this.props;
 
-    if (!currentOffset || itemType !== QUALITY_PROFILE_ITEM) {
+    if (!currentOffset || itemType !== DELAY_PROFILE) {
       return null;
     }
 
@@ -39,22 +37,16 @@ class QualityProfileItemDragPreview extends Component {
     // list item and the preview is wider than the drag handle.
 
     const { x, y } = currentOffset;
-    const handleOffset = formGroupSmallWidth - formLabelWidth - formLabelRightMarginWidth - dragHandleWidth;
+    const handleOffset = width - dragHandleWidth;
     const transform = `translate3d(${x - handleOffset}px, ${y}px, 0)`;
 
     const style = {
+      width,
       position: 'absolute',
       WebkitTransform: transform,
       msTransform: transform,
       transform
     };
-
-    const {
-      qualityId,
-      name,
-      allowed,
-      sortIndex
-    } = item;
 
     return (
       <DragPreviewLayer>
@@ -62,12 +54,9 @@ class QualityProfileItemDragPreview extends Component {
           className={styles.dragPreview}
           style={style}
         >
-          <QualityProfileItem
-            qualityId={qualityId}
-            name={name}
-            allowed={allowed}
-            sortIndex={sortIndex}
+          <DelayProfile
             isDragging={false}
+            {...item}
           />
         </div>
       </DragPreviewLayer>
@@ -75,7 +64,8 @@ class QualityProfileItemDragPreview extends Component {
   }
 }
 
-QualityProfileItemDragPreview.propTypes = {
+DelayProfileDragPreview.propTypes = {
+  width: PropTypes.number.isRequired,
   item: PropTypes.object,
   itemType: PropTypes.string,
   currentOffset: PropTypes.shape({
@@ -84,4 +74,4 @@ QualityProfileItemDragPreview.propTypes = {
   })
 };
 
-export default DragLayer(collectDragLayer)(QualityProfileItemDragPreview);
+export default DragLayer(collectDragLayer)(DelayProfileDragPreview);

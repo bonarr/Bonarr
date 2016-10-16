@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputHelpText from 'Components/Form/FormInputHelpText';
@@ -66,4 +64,4 @@ QualityProfileItems.propTypes = {
   qualityProfileItems: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default DragDropContext(HTML5Backend)(QualityProfileItems);
+export default QualityProfileItems;

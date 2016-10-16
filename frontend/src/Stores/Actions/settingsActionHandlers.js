@@ -51,6 +51,34 @@ const settingsActionHandlers = {
     };
   },
 
+  [types.REORDER_DELAY_PROFILE]: function(payload) {
+    const section = 'delayProfiles';
+
+    return function(dispatch, getState) {
+      const { id, moveIndex } = payload;
+      const moveOrder = moveIndex + 1;
+      const delayProfiles = getState().settings.delayProfiles.items;
+      const moving = _.find(delayProfiles, { id });
+
+      // Don't move if the order hasn't changed
+      if (moving.order === moveOrder) {
+        return;
+      }
+
+      const after = moveIndex > 0 ? _.find(delayProfiles, { order: moveIndex }) : null;
+      const afterQueryParam = after ? `after=${after.id}` : '';
+
+      const promise = $.ajax({
+        type: 'PUT',
+        url: `/delayprofile/reorder/${id}?${afterQueryParam}`
+      });
+
+      promise.done((data) => {
+        dispatch(update({ section, data }));
+      });
+    };
+  },
+
   [types.FETCH_QUALITY_PROFILES]: createFetchHandler('qualityProfiles', '/profile'),
   [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
 

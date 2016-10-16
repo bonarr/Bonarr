@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
-import { fetchDelayProfiles, deleteDelayProfile } from 'Stores/Actions/settingsActions';
+import { fetchDelayProfiles, deleteDelayProfile, reorderDelayProfile } from 'Stores/Actions/settingsActions';
 import { fetchTags } from 'Stores/Actions/tagActions';
 import DelayProfiles from './DelayProfiles';
 
@@ -28,6 +28,7 @@ function createMapStateToProps() {
 const mapDispatchToProps = {
   fetchDelayProfiles,
   deleteDelayProfile,
+  reorderDelayProfile,
   fetchTags
 };
 
@@ -35,6 +36,15 @@ class DelayProfilesConnector extends Component {
 
   //
   // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      dragIndex: null,
+      dropIndex: null
+    };
+  }
 
   componentWillMount() {
     this.props.fetchDelayProfiles();
@@ -49,14 +59,45 @@ class DelayProfilesConnector extends Component {
     this.props.deleteDelayProfile({ id });
   }
 
+  @autobind
+  onDelayProfileDragMove(dragIndex, dropIndex) {
+    if (this.state.dragIndex !== dragIndex || this.state.dropIndex !== dropIndex) {
+      console.log(dropIndex);
+      this.setState({
+        dragIndex,
+        dropIndex
+      });
+    }
+  }
+
+  @autobind
+  onDelayProfileDragEnd({ id }, didDrop) {
+    const {
+      dragIndex,
+      dropIndex
+    } = this.state;
+
+    if (didDrop && dropIndex !== null) {
+      this.props.reorderDelayProfile({ id, moveIndex: dropIndex - 1 });
+    }
+
+    this.setState({
+      dragIndex: null,
+      dropIndex: null
+    });
+  }
+
   //
   // Render
 
   render() {
     return (
       <DelayProfiles
-        onConfirmDeleteDelayProfile={this.onConfirmDeleteDelayProfile}
+        {...this.state}
         {...this.props}
+        onConfirmDeleteDelayProfile={this.onConfirmDeleteDelayProfile}
+        onDelayProfileDragMove={this.onDelayProfileDragMove}
+        onDelayProfileDragEnd={this.onDelayProfileDragEnd}
       />
     );
   }
@@ -65,6 +106,7 @@ class DelayProfilesConnector extends Component {
 DelayProfilesConnector.propTypes = {
   fetchDelayProfiles: PropTypes.func.isRequired,
   deleteDelayProfile: PropTypes.func.isRequired,
+  reorderDelayProfile: PropTypes.func.isRequired,
   fetchTags: PropTypes.func.isRequired
 };
 

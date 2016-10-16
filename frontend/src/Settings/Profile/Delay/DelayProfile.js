@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
+import classNames from 'classNames';
 import titleCase from 'Utilities/String/titleCase';
 import * as kinds from 'Helpers/kinds';
 import Icon from 'Components/Icon';
@@ -85,7 +86,9 @@ class DelayProfile extends Component {
       torrentDelay,
       order,
       tags,
-      tagList
+      tagList,
+      isDragging,
+      connectDragSource
     } = this.props;
 
     let preferred = titleCase(preferredProtocol);
@@ -97,7 +100,12 @@ class DelayProfile extends Component {
     }
 
     return (
-      <div className={styles.delayProfile}>
+      <div
+        className={classNames(
+          styles.delayProfile,
+          isDragging && styles.isDragging,
+        )}
+      >
         <div className={styles.column}>{preferred}</div>
         <div className={styles.column}>{getDelay(enableUsenet, usenetDelay)}</div>
         <div className={styles.column}>{getDelay(enableTorrent, torrentDelay)}</div>
@@ -121,11 +129,25 @@ class DelayProfile extends Component {
             })
           }
         </div>
-        <div>
-          <Link onPress={this.onEditDelayProfilePress}>
+        <div className={styles.actions}>
+          <Link
+            className={id === 1 ? styles.editButton : undefined}
+            onPress={this.onEditDelayProfilePress}
+          >
             <Icon name="icon-sonarr-edit" />
           </Link>
-         | Drag
+
+          {
+            id !== 1 &&
+              connectDragSource(
+                <div className={styles.dragHandle}>
+                  <Icon
+                    className={styles.dragIcon}
+                    name="icon-sonarr-reorder"
+                  />
+                </div>
+              )
+          }
         </div>
 
         <EditDelayProfileModalConnector
@@ -159,7 +181,14 @@ DelayProfile.propTypes = {
   order: PropTypes.number.isRequired,
   tags: PropTypes.arrayOf(PropTypes.number).isRequired,
   tagList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  connectDragSource: PropTypes.func,
   onConfirmDeleteDelayProfile: PropTypes.func.isRequired
+};
+
+DelayProfile.defaultProps = {
+  // The drag preview will not connect the drag handle.
+  connectDragSource: (node) => node
 };
 
 export default DelayProfile;

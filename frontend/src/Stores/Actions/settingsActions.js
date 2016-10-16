@@ -48,6 +48,7 @@ export const setQualityProfileValue = createAction(types.SET_QUALITY_PROFILE_VAL
 export const fetchDelayProfiles = settingsActionHandlers[types.FETCH_DELAY_PROFILES];
 export const saveDelayProfile = settingsActionHandlers[types.SAVE_DELAY_PROFILE];
 export const deleteDelayProfile = settingsActionHandlers[types.DELETE_DELAY_PROFILE];
+export const reorderDelayProfile = settingsActionHandlers[types.REORDER_DELAY_PROFILE];
 
 export const setDelayProfileValue = createAction(types.SET_DELAY_PROFILE_VALUE, (payload) => {
   return {
