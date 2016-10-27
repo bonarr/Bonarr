@@ -84,6 +84,7 @@ const config = {
         exclude: /(node_modules|JsLibraries)/,
         loader: 'babel',
         query: {
+          plugins: ['transform-class-properties'],
           presets: ['es2015', 'decorators-legacy', 'react', 'stage-2'],
           env: {
             development: {

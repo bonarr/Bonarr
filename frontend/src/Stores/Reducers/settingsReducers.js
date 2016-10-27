@@ -1,4 +1,7 @@
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
+import getSectionState from 'Utilities/State/getSectionState';
+import updateSectionState from 'Utilities/State/updateSectionState';
 import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createSetSettingValueReducer from './Creators/createSetSettingValueReducer';
@@ -73,6 +76,16 @@ const defaultState = {
     pendingChanges: {}
   },
 
+  qualityDefinitions: {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: [],
+    saving: false,
+    saveError: null,
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -81,7 +94,8 @@ const propertyNames = [
   'mediaManagement',
   'naming',
   'namingExamples',
-  'qualityProfileSchema'
+  'qualityProfileSchema',
+  'qualityDefinitions'
 ];
 
 const thingyPropertyNames = [
@@ -106,7 +120,31 @@ const settingsReducers = handleActions({
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
   [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema'),
-  [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles')
+  [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
+
+  [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
+    const section = 'qualityDefinitions';
+    const { id, name, value } = payload;
+    const newState = getSectionState(state, section);
+    newState.pendingChanges = _.cloneDeep(newState.pendingChanges);
+
+    const pendingState = newState.pendingChanges[id] || {};
+    const currentValue = _.find(newState.items, { id })[name];
+
+    if (currentValue === value) {
+      delete pendingState[name];
+    } else {
+      pendingState[name] = value;
+    }
+
+    if (_.isEmpty(pendingState)) {
+      delete newState.pendingChanges[id];
+    } else {
+      newState.pendingChanges[id] = pendingState;
+    }
+
+    return updateSectionState(state, section, newState);
+  }
 
 }, defaultState);
 

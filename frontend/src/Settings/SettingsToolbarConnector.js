@@ -1,19 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
 import { toggleAdvancedSettings } from 'Stores/Actions/settingsActions';
 import SettingsToolbar from './SettingsToolbar';
 
-function createMapStateToProps() {
-  return createSelector(
-    (state) => state.settings.advancedSettings,
-    (advancedSettings) => {
-      return {
-        advancedSettings
-      };
-    }
-  );
+function mapStateToProps(state) {
+  return {
+    advancedSettings: state.settings.advancedSettings
+  };
 }
 
 const mapDispatchToProps = {
@@ -49,4 +43,4 @@ SettingsToolbarConnector.propTypes = {
   toggleAdvancedSettings: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps, mapDispatchToProps)(SettingsToolbarConnector);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsToolbarConnector);

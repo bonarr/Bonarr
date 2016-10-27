@@ -99,5 +99,10 @@ module.exports = {
 
   alertInfoColor: '#31708f',
   alertInfoBackgroundColor: '#d9edf7',
-  alertInfoBorderColor: '#bce8f1'
+  alertInfoBorderColor: '#bce8f1',
+
+  //
+  // Slider
+
+  sliderAccentColor: '#5d9cec'
 };

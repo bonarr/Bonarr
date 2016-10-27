@@ -8,4 +8,4 @@ function titleCase(input) {
   });
 }
 
-module.exports = titleCase;
+export default titleCase;

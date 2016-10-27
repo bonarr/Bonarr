@@ -56,3 +56,8 @@ export const setDelayProfileValue = createAction(types.SET_DELAY_PROFILE_VALUE, 
     ...payload
   };
 });
+
+export const fetchQualityDefinitions = settingsActionHandlers[types.FETCH_QUALITY_DEFINITIONS];
+export const saveQualityDefinitions = settingsActionHandlers[types.SAVE_QUALITY_DEFINITIONS];
+
+export const setQualityDefinitionValue = createAction(types.SET_QUALITY_DEFINITION_VALUE);

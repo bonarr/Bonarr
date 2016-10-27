@@ -106,7 +106,41 @@ const settingsActionHandlers = {
                                                     'delayProfiles',
                                                     '/delayprofile',
                                                     (state) => state.settings.delayProfiles,
-                                                    (state) => state.settings.delayProfiles)
+                                                    (state) => state.settings.delayProfiles),
+
+  [types.FETCH_QUALITY_DEFINITIONS]: createFetchHandler('qualityDefinitions', '/qualitydefinition'),
+  [types.SAVE_QUALITY_DEFINITIONS]: createSaveHandler('qualityDefinitions', '/qualitydefinition', (state) => state.settings.qualitydefinitions),
+
+  [types.SAVE_QUALITY_DEFINITIONS]: function() {
+    const section = 'qualityDefinitions';
+
+    return function(dispatch, getState) {
+      const qualityDefinitions = getState().settings.qualityDefinitions;
+
+      const data = Object.keys(qualityDefinitions.pendingChanges).map((key) => {
+        const id = parseInt(key);
+        const pendingChanges = qualityDefinitions.pendingChanges[id] || {};
+        const item = _.find(qualityDefinitions.items, { id });
+
+        return Object.assign({}, item, pendingChanges);
+      });
+
+      // If there is nothing to save don't bother saving
+      if (!data || !data.length) {
+        return;
+      }
+
+      const promise = $.ajax({
+        type: 'PUT',
+        url: '/qualityDefinition/update',
+        data: JSON.stringify(data)
+      });
+
+      promise.done((data) => {
+        dispatch(update({ section, data }));
+      });
+    };
+  },
 };
 
 export default settingsActionHandlers;
