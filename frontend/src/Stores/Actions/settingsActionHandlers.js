@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import $ from 'jquery';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
@@ -117,7 +118,7 @@ const settingsActionHandlers = {
     return function(dispatch, getState) {
       const qualityDefinitions = getState().settings.qualityDefinitions;
 
-      const data = Object.keys(qualityDefinitions.pendingChanges).map((key) => {
+      const upatedDefinitions = Object.keys(qualityDefinitions.pendingChanges).map((key) => {
         const id = parseInt(key);
         const pendingChanges = qualityDefinitions.pendingChanges[id] || {};
         const item = _.find(qualityDefinitions.items, { id });
@@ -126,21 +127,21 @@ const settingsActionHandlers = {
       });
 
       // If there is nothing to save don't bother saving
-      if (!data || !data.length) {
+      if (!upatedDefinitions || !upatedDefinitions.length) {
         return;
       }
 
       const promise = $.ajax({
         type: 'PUT',
         url: '/qualityDefinition/update',
-        data: JSON.stringify(data)
+        data: JSON.stringify(upatedDefinitions)
       });
 
       promise.done((data) => {
         dispatch(update({ section, data }));
       });
     };
-  },
+  }
 };
 
 export default settingsActionHandlers;
