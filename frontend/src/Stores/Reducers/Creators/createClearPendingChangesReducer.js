@@ -1,6 +1,5 @@
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
-import createSetReducer from './createSetReducer';
 
 function createClearPendingChangesReducer(section) {
   return (state, { payload }) => {

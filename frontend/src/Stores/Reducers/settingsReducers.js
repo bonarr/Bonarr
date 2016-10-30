@@ -86,6 +86,16 @@ const defaultState = {
     pendingChanges: {}
   },
 
+  indexerSettings: {
+    fetching: false,
+    populated: false,
+    error: null,
+    pendingChanges: {},
+    saving: false,
+    saveError: null,
+    item: {}
+  },
+
   advancedSettings: false
 };
 
@@ -95,7 +105,8 @@ const propertyNames = [
   'naming',
   'namingExamples',
   'qualityProfileSchema',
-  'qualityDefinitions'
+  'qualityDefinitions',
+  'indexerSettings'
 ];
 
 const thingyPropertyNames = [
@@ -121,6 +132,7 @@ const settingsReducers = handleActions({
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
   [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema'),
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
+  [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),
 
   [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
     const section = 'qualityDefinitions';

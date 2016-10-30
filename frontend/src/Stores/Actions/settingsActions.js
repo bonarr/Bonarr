@@ -61,3 +61,12 @@ export const fetchQualityDefinitions = settingsActionHandlers[types.FETCH_QUALIT
 export const saveQualityDefinitions = settingsActionHandlers[types.SAVE_QUALITY_DEFINITIONS];
 
 export const setQualityDefinitionValue = createAction(types.SET_QUALITY_DEFINITION_VALUE);
+
+export const fetchIndexerSettings = settingsActionHandlers[types.FETCH_INDEXER_SETTINGS];
+export const saveIndexerSettings = settingsActionHandlers[types.SAVE_INDEXER_SETTINGS];
+export const setIndexerSettingsValue = createAction(types.SET_INDEXER_SETTINGS_VALUE, (payload) => {
+  return {
+    section: 'indexerSettings',
+    ...payload
+  };
+});

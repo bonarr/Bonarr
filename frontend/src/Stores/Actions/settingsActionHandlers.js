@@ -142,7 +142,10 @@ const settingsActionHandlers = {
         dispatch(clearPendingChanges({ section: 'qualityDefinitions' }));
       });
     };
-  }
+  },
+
+  [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
+  [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings)
 };
 
 export default settingsActionHandlers;

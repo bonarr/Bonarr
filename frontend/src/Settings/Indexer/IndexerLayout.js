@@ -1,43 +1,38 @@
-var _ = require('underscore');
-var $ = require('jquery');
-var Marionette = require('marionette');
-var SettingsLayoutBase = require('../SettingsLayoutBase');
-var IndexerCollection = require('./IndexerCollection');
-var CollectionView = require('./IndexerCollectionView');
-var OptionsView = require('./Options/IndexerOptionsView');
-var RestrictionCollection = require('./Restriction/RestrictionCollection');
-var RestrictionCollectionView = require('./Restriction/RestrictionCollectionView');
-var IndexerSettingsModel = require('./IndexerSettingsModel');
+import Marionette from 'marionette';
+import tpl from './IndexerLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import IndexerSettings from './IndexerSettings';
 
-module.exports = SettingsLayoutBase.extend({
-  template: 'Settings/Indexer/IndexerLayoutTemplate',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
 
-  regions: {
-    indexers: '#x-indexers-region',
-    indexerOptions: '#x-indexer-options-region',
-    restriction: '#x-restriction-region'
+  mountReact: function() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <IndexerSettings />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.model = new IndexerSettingsModel();
-    this.indexersCollection = new IndexerCollection();
-    this.restrictionCollection = new RestrictionCollection();
-    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  unmountReact: function() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    var promise = $.when(this.model.fetch(),
-      this.indexersCollection.fetch(),
-      this.restrictionCollection.fetch());
+    this.mountReact();
+  },
 
-    promise.done(_.bind(function() {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.indexers.show(new CollectionView({ collection: this.indexersCollection }));
-      this.indexerOptions.show(new OptionsView({ model: this.model }));
-      this.restriction.show(new RestrictionCollectionView({ collection: this.restrictionCollection }));
-    }, this));
+  onClose: function() {
+    this.unmountReact();
   }
 });
