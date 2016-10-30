@@ -43,4 +43,9 @@ Form.propTypes = {
   validationWarnings: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
+Form.defaultProps = {
+  validationErrors: [],
+  validationWarnings: []
+};
+
 export default Form;

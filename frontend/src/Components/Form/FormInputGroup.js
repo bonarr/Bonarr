@@ -36,6 +36,7 @@ function FormInputGroup(props) {
     button,
     helpText,
     helpTexts,
+    helpTextWarning,
     pending,
     errors,
     warnings,
@@ -101,6 +102,14 @@ function FormInputGroup(props) {
       }
 
       {
+        helpTextWarning &&
+          <FormInputHelpText
+            text={helpText}
+            isWarning={true}
+          />
+      }
+
+      {
         errors.map((error, index) => {
           return (
             <FormInputHelpText
@@ -137,6 +146,7 @@ FormInputGroup.propTypes = {
   button: PropTypes.node,
   helpText: PropTypes.string,
   helpTexts: PropTypes.arrayOf(PropTypes.string),
+  helpTextWarning: PropTypes.string,
   pending: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.string),
   warnings: PropTypes.arrayOf(PropTypes.string)

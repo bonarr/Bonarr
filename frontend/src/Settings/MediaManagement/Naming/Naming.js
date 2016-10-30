@@ -5,6 +5,7 @@ import sizes from 'Utilities/sizes';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FormInputButton from 'Components/Form/FormInputButton';
 import FieldSet from 'Components/FieldSet';
+import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
@@ -202,7 +203,7 @@ class Naming extends Component {
 
         {
           hasSettings && !fetching && !error &&
-            <div>
+            <Form>
               <FormGroup>
                 <FormLabel>Rename Episodes</FormLabel>
 
@@ -334,7 +335,7 @@ class Naming extends Component {
                     onModalClose={this.onNamingModalClose}
                   />
               }
-            </div>
+            </Form>
         }
       </FieldSet>
     );

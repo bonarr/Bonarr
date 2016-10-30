@@ -104,9 +104,9 @@ class MediaManagement extends Component {
                           type={inputTypes.CHECK}
                           name="copyUsingHardlinks"
                           helpText="Use Hardlinks when trying to copy files from torrents that are still being seeded"
+                          helpTextWarning="Occasionally, file locks may prevent renaming files that are being seeded. You may temporarily disable seeding and use Sonarr's rename function as a work around."
                           onChange={onInputChange}
                           {...settings.copyUsingHardlinks}
-                          warnings={['Occasionally, file locks may prevent renaming files that are being seeded. You may temporarily disable seeding and use Sonarr\'s rename function as a work around.', ...settings.copyUsingHardlinks.warnings]}
                         />
                       </FormGroup>
                     </FieldSet>
@@ -201,9 +201,9 @@ class MediaManagement extends Component {
                           type={inputTypes.CHECK}
                           name="setPermissionsLinux"
                           helpText="Should chmod/chown be run when files are imported/renamed?"
+                          helpTextWarning="If you're unsure what these settings do, do not alter them."
                           onChange={onInputChange}
                           {...settings.setPermissionsLinux}
-                          warnings={['If you\'re unsure what these settings do, do not alter them.', ...settings.setPermissionsLinux.warnings]}
                         />
                       </FormGroup>
 
