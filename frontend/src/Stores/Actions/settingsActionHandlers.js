@@ -5,7 +5,7 @@ import createFetchHandler from './Creators/createFetchHandler';
 import createSaveHandler from './Creators/createSaveHandler';
 import createSaveThingyHandler from './Creators/createSaveThingyHandler';
 import createDeleteThingyHandler from './Creators/createDeleteThingyHandler';
-import { set, update } from './baseActions';
+import { set, update, clearPendingChanges } from './baseActions';
 
 const settingsActionHandlers = {
   [types.FETCH_UI_SETTINGS]: createFetchHandler('ui', '/config/ui'),
@@ -139,6 +139,7 @@ const settingsActionHandlers = {
 
       promise.done((data) => {
         dispatch(update({ section, data }));
+        dispatch(clearPendingChanges({ section: 'qualityDefinitions' }));
       });
     };
   }

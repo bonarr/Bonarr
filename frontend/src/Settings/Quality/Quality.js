@@ -7,10 +7,27 @@ import QualityDefinitionsConnector from './Definition/QualityDefinitionsConnecto
 class Quality extends Component {
 
   //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      hasPendingChanges: false
+    };
+  }
+
+  //
   // Listeners
 
   setQualityDefinitionsRef = (ref) => {
     this._qualityDefinitions = ref;
+  }
+
+  onHasPendingChange = (hasPendingChanges) => {
+    this.setState({
+      hasPendingChanges
+    });
   }
 
   onSavePress = () => {
@@ -24,13 +41,14 @@ class Quality extends Component {
     return (
       <PageContent>
         <SettingsToolbarConnector
-          hasPendingChanges={true}
+          hasPendingChanges={this.state.hasPendingChanges}
           onSavePress={this.onSavePress}
         />
 
         <PageContentBody>
           <QualityDefinitionsConnector
             ref={this.setQualityDefinitionsRef}
+            onHasPendingChange={this.onHasPendingChange}
           />
         </PageContentBody>
       </PageContent>
