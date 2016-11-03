@@ -56,7 +56,6 @@ class EditIndexerModalContentConnector extends Component {
   render() {
     return (
       <EditIndexerModalContent
-        {...this.state}
         {...this.props}
         onSavePress={this.onSavePress}
         onInputChange={this.onInputChange}
