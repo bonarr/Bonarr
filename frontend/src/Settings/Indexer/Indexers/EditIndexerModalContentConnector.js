@@ -54,10 +54,6 @@ class EditIndexerModalContentConnector extends Component {
   // Render
 
   render() {
-    // if (_.isEmpty(this.props.item.items) && !this.props.fetching) {
-    //   return null;
-    // }
-
     return (
       <EditIndexerModalContent
         {...this.state}
