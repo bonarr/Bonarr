@@ -57,7 +57,8 @@ NumberInput.propTypes = {
 };
 
 NumberInput.defaultProps = {
-  className: styles.number
+  className: styles.number,
+  value: 0
 };
 
 export default NumberInput;

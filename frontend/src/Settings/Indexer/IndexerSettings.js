@@ -3,6 +3,7 @@ import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import IndexerOptionsConnector from './Options/IndexerOptionsConnector';
+import IndexersConnector from './Indexers/IndexersConnector';
 
 class IndexerSettings extends Component {
 
@@ -46,9 +47,10 @@ class IndexerSettings extends Component {
         />
 
         <PageContentBody>
+          <IndexersConnector />
+
           <IndexerOptionsConnector
             ref={this.setIndexerOptionsRef}
-            section="indexerSettings"
             onHasPendingChange={this.onHasPendingChange}
           />
         </PageContentBody>

@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchNamingSettings, setNamingSettingsValue, fetchNamingExamples } from 'Stores/Actions/settingsActions';
+import connectSettingsSection from 'Settings/connectSettingsSection';
 import Naming from './Naming';
 
 function createMapStateToProps() {
@@ -87,4 +87,10 @@ NamingConnector.propTypes = {
   fetchNamingExamples: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps, mapDispatchToProps)(NamingConnector);
+export default connectSettingsSection(
+                createMapStateToProps,
+                mapDispatchToProps,
+                undefined,
+                undefined,
+                { section: 'naming' }
+               )(NamingConnector);

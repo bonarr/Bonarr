@@ -1,54 +1,15 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
-import selectSettings from 'Stores/Selectors/selectSettings';
+import createThingySettingsSelector from 'Stores/Selectors/createThingySettingsSelector';
 import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
+import connectSettingsSection from 'Settings/connectSettingsSection';
 import EditQualityProfileModalContent from './EditQualityProfileModalContent';
-
-function createQualityProfileSelector() {
-  return createSelector(
-    (state, { id }) => id,
-    (state) => state.settings.qualityProfiles,
-    (state) => state.settings.qualityProfileSchema,
-    (id, qualityProfiles, schema) => {
-      if (!id) {
-        const item = Object.assign({ name: '' }, schema.item);
-        const settings = selectSettings(item, schema.pendingChanges, schema.saveError);
-
-        return {
-          ...schema,
-          ...settings,
-          item: settings.settings
-        };
-      }
-
-      const {
-        fetching,
-        error,
-        saving,
-        saveError,
-        pendingChanges
-      } = schema;
-
-      const settings = selectSettings(_.find(qualityProfiles.items, { id }), pendingChanges, saveError);
-
-      return {
-        fetching,
-        error,
-        saving,
-        saveError,
-        item: settings.settings,
-        ...settings
-      };
-    }
-  );
-}
 
 function createQualitiesSelector() {
   return createSelector(
-    createQualityProfileSelector(),
+    createThingySettingsSelector(),
     (qualityProfile) => {
       const items = qualityProfile.item.items;
       if (!items || !items.value) {
@@ -70,7 +31,7 @@ function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.advancedSettings,
     (state) => state.languages.items,
-    createQualityProfileSelector(),
+    createThingySettingsSelector(),
     createQualitiesSelector(),
     (advancedSettings, languages, qualityProfile, qualities) => {
       return {
@@ -228,4 +189,10 @@ EditQualityProfileModalContentConnector.propTypes = {
   onModalClose: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps, mapDispatchToProps)(EditQualityProfileModalContentConnector);
+export default connectSettingsSection(
+  createMapStateToProps,
+  mapDispatchToProps,
+  undefined,
+  undefined,
+  { section: 'qualityProfiles', schemaSection: 'qualityProfileSchema' }
+)(EditQualityProfileModalContentConnector);

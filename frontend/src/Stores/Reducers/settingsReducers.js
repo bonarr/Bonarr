@@ -5,6 +5,7 @@ import updateSectionState from 'Utilities/State/updateSectionState';
 import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createSetSettingValueReducer from './Creators/createSetSettingValueReducer';
+import createSetThingyFieldValueReducer from './Creators/createSetThingyFieldValueReducer';
 import createClearPendingChangesReducer from './Creators/createClearPendingChangesReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateThingyReducer from './Creators/createUpdateThingyReducer';
@@ -86,6 +87,23 @@ const defaultState = {
     pendingChanges: {}
   },
 
+  indexers: {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: []
+  },
+
+  indexerSchema: {
+    fetching: false,
+    populated: false,
+    error: null,
+    saving: false,
+    saveError: null,
+    item: {},
+    pendingChanges: {}
+  },
+
   indexerSettings: {
     fetching: false,
     populated: false,
@@ -106,12 +124,14 @@ const propertyNames = [
   'namingExamples',
   'qualityProfileSchema',
   'qualityDefinitions',
+  'indexerSchema',
   'indexerSettings'
 ];
 
 const thingyPropertyNames = [
   'qualityProfiles',
-  'delayProfiles'
+  'delayProfiles',
+  'indexers'
 ];
 
 const settingsReducers = handleActions({
@@ -132,6 +152,8 @@ const settingsReducers = handleActions({
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
   [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema'),
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
+  [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexerSchema'),
+  [types.SET_INDEXER_FIELD_VALUE]: createSetThingyFieldValueReducer('indexerSchema'),
   [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),
 
   [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {

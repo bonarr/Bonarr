@@ -10,7 +10,28 @@ function createSaveThingyHandler(section, thingySection, url, getFromState, getT
       const id = payload.id;
       const state = getFromState(getState());
       const thingiesState = getThingiesFromState(getState());
-      const saveData = Object.assign({}, id ? _.find(thingiesState.items, { id }) : state.item, state.pendingChanges);
+      const pendingChanges = Object.assign({}, state.pendingChanges);
+      const pendingFields = state.pendingChanges.fields || {};
+      delete pendingChanges.fields;
+
+      const item = id ? _.find(thingiesState.items, { id }) : state.item;
+
+      if (item.fields) {
+        pendingChanges.fields = _.reduce(item.fields, (result, field) => {
+          const value = pendingFields.hasOwnProperty(field.name) ?
+            pendingFields[field.name] :
+            field.value;
+
+          result.push({
+            ...field,
+            value
+          });
+
+          return result;
+        }, []);
+      }
+
+      const saveData = Object.assign({}, item, pendingChanges);
 
       const ajaxOptions = {
         url,

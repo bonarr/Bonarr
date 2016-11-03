@@ -56,7 +56,8 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
-  className: styles.text
+  className: styles.text,
+  value: ''
 };
 
 export default TextInput;

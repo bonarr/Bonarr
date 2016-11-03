@@ -62,6 +62,24 @@ export const saveQualityDefinitions = settingsActionHandlers[types.SAVE_QUALITY_
 
 export const setQualityDefinitionValue = createAction(types.SET_QUALITY_DEFINITION_VALUE);
 
+export const fetchIndexers = settingsActionHandlers[types.FETCH_INDEXERS];
+export const saveIndexer = settingsActionHandlers[types.SAVE_INDEXER];
+export const deleteIndexer = settingsActionHandlers[types.DELETE_INDEXER];
+
+export const setIndexerValue = createAction(types.SET_INDEXER_VALUE, (payload) => {
+  return {
+    section: 'indexerSchema',
+    ...payload
+  };
+});
+
+export const setIndexerFieldValue = createAction(types.SET_INDEXER_FIELD_VALUE, (payload) => {
+  return {
+    section: 'indexerSchema',
+    ...payload
+  };
+});
+
 export const fetchIndexerSettings = settingsActionHandlers[types.FETCH_INDEXER_SETTINGS];
 export const saveIndexerSettings = settingsActionHandlers[types.SAVE_INDEXER_SETTINGS];
 export const setIndexerSettingsValue = createAction(types.SET_INDEXER_SETTINGS_VALUE, (payload) => {

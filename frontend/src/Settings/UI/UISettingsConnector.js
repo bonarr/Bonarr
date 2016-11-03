@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { setUISettingsValue, saveUISettings, fetchUISettings } from 'Stores/Actions/settingsActions';
+import connectSettingsSection from 'Settings/connectSettingsSection';
 import UISettings from './UISettings';
 
 function createMapStateToProps() {
@@ -67,4 +67,10 @@ UISettingsConnector.propTypes = {
   fetchUISettings: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps, mapDispatchToProps)(UISettingsConnector);
+export default connectSettingsSection(
+                createMapStateToProps,
+                mapDispatchToProps,
+                undefined,
+                undefined,
+                { section: 'ui' }
+               )(UISettingsConnector);

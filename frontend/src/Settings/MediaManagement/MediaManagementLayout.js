@@ -12,7 +12,7 @@ module.exports = Marionette.LayoutView.extend({
   mountReact: function() {
     ReactDOM.render(
       <Provider store={appStore}>
-        <MediaManagementConnector section="mediaManagement" />
+        <MediaManagementConnector />
       </Provider>,
       this.el
     );

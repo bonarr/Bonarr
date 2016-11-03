@@ -84,30 +84,30 @@ const settingsActionHandlers = {
   [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
 
   [types.SAVE_QUALITY_PROFILE]: createSaveThingyHandler('qualityProfileSchema',
-                                                    'qualityProfiles',
-                                                    '/profile',
-                                                    (state) => state.settings.qualityProfileSchema,
-                                                    (state) => state.settings.qualityProfiles),
+                                                        'qualityProfiles',
+                                                        '/profile',
+                                                        (state) => state.settings.qualityProfileSchema,
+                                                        (state) => state.settings.qualityProfiles),
 
   [types.DELETE_QUALITY_PROFILE]: createDeleteThingyHandler('qualityProfileSchema',
-                                                    'qualityProfiles',
-                                                    '/profile',
-                                                    (state) => state.settings.qualityProfileSchema,
-                                                    (state) => state.settings.qualityProfiles),
+                                                            'qualityProfiles',
+                                                            '/profile',
+                                                            (state) => state.settings.qualityProfileSchema,
+                                                            (state) => state.settings.qualityProfiles),
 
   [types.FETCH_DELAY_PROFILES]: createFetchHandler('delayProfiles', '/delayprofile'),
 
   [types.SAVE_DELAY_PROFILE]: createSaveThingyHandler('delayProfiles',
-                                                    'delayProfiles',
-                                                    '/delayprofile',
-                                                    (state) => state.settings.delayProfiles,
-                                                    (state) => state.settings.delayProfiles),
+                                                      'delayProfiles',
+                                                      '/delayprofile',
+                                                      (state) => state.settings.delayProfiles,
+                                                      (state) => state.settings.delayProfiles),
 
   [types.DELETE_DELAY_PROFILE]: createDeleteThingyHandler('delayProfiles',
-                                                    'delayProfiles',
-                                                    '/delayprofile',
-                                                    (state) => state.settings.delayProfiles,
-                                                    (state) => state.settings.delayProfiles),
+                                                          'delayProfiles',
+                                                          '/delayprofile',
+                                                          (state) => state.settings.delayProfiles,
+                                                          (state) => state.settings.delayProfiles),
 
   [types.FETCH_QUALITY_DEFINITIONS]: createFetchHandler('qualityDefinitions', '/qualitydefinition'),
   [types.SAVE_QUALITY_DEFINITIONS]: createSaveHandler('qualityDefinitions', '/qualitydefinition', (state) => state.settings.qualitydefinitions),
@@ -143,6 +143,19 @@ const settingsActionHandlers = {
       });
     };
   },
+
+  [types.FETCH_INDEXERS]: createFetchHandler('indexers', '/indexer'),
+  [types.SAVE_INDEXER]: createSaveThingyHandler('indexerSchema',
+                                                'indexers',
+                                                '/indexer',
+                                                (state) => state.settings.indexerSchema,
+                                                (state) => state.settings.indexers),
+
+  [types.DELETE_INDEXER]: createDeleteThingyHandler('indexerSchema',
+                                                    'indexers',
+                                                    '/indexer',
+                                                    (state) => state.settings.indexerSchema,
+                                                    (state) => state.settings.indexers),
 
   [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
   [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings)

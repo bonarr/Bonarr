@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchIndexerSettings, setIndexerSettingsValue, saveIndexerSettings } from 'Stores/Actions/settingsActions';
+import connectSettingsSection from 'Settings/connectSettingsSection';
 import IndexerOptions from './IndexerOptions';
 
 function createMapStateToProps() {
@@ -74,4 +74,10 @@ IndexerOptionsConnector.propTypes = {
   onHasPendingChange: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps, mapDispatchToProps, null, { withRef: true })(IndexerOptionsConnector);
+export default connectSettingsSection(
+                createMapStateToProps,
+                mapDispatchToProps,
+                undefined,
+                { withRef: true },
+                { section: 'indexerSettings' }
+               )(IndexerOptionsConnector);

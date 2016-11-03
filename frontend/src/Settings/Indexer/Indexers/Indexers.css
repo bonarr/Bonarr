@@ -1,10 +1,10 @@
-.qualityProfiles {
+.indexers {
   display: flex;
   flex-wrap: wrap;
 }
 
-.addQualityProfile {
-  composes: qualityProfile from './QualityProfile.css';
+.addIndexer {
+  composes: indexer from './Indexer.css';
 
   background-color: $cardAlternateBackgroundColor;
   color: $gray;

@@ -73,7 +73,6 @@ class DelayProfilesConnector extends Component {
   @autobind
   onDelayProfileDragEnd({ id }, didDrop) {
     const {
-      dragIndex,
       dropIndex
     } = this.state;
 

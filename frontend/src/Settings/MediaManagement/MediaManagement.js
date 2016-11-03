@@ -59,7 +59,7 @@ class MediaManagement extends Component {
                 id="mediaManagementSettings"
                 {...otherProps}
               >
-                <NamingConnector section="naming" />
+                <NamingConnector />
 
                 {
                   advancedSettings &&
