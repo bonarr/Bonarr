@@ -29,15 +29,6 @@ class EditIndexerModalContentConnector extends Component {
   //
   // Lifecycle
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      dragIndex: null,
-      dropIndex: null
-    };
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.saving && !this.props.saving && !this.props.saveError) {
       this.props.onModalClose();
