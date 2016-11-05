@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import align from 'Utilities/align';
+import { align } from 'Helpers/Props';
 import styles from './MenuContent.css';
 
 class MenuContent extends Component {

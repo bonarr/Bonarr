@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classNames';
-import sizes from 'Utilities/sizes';
+import { sizes } from 'Helpers/Props';
 import styles from './FormGroup.css';
 
 function FormGroup({ className, children, size, ...otherProps }) {

@@ -35,6 +35,10 @@ class Menu extends Component {
     const menu = ReactDOM.findDOMNode(this.refs.menu);
     const menuContent = ReactDOM.findDOMNode(this.refs.menuContent);
 
+    if (!menu) {
+      return;
+    }
+
     if ((!menu.contains(event.target) || menuContent.contains(event.target)) && this.state.isMenuOpen) {
       this.setState({ isMenuOpen: false });
       this._removeListener();

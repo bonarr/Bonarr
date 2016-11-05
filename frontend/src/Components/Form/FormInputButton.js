@@ -1,31 +1,35 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Button from 'Components/Button';
-import * as kinds from 'Helpers/kinds';
+import SpinnerButton from 'Components/SpinnerButton';
+import { kinds } from 'Helpers/Props';
 import styles from './FormInputButton.css';
 
-class FormInputButton extends Component {
-
-  //
-  // Render
-
-  render() {
+function FormInputButton({ canSpin, ...otherProps }) {
+  if (canSpin) {
     return (
-      <Button
+      <SpinnerButton
         kind={kinds.PRIMARY}
-        {...this.props}
+        {...otherProps}
       />
     );
   }
 
+  return (
+    <Button
+      kind={kinds.PRIMARY}
+      {...otherProps}
+    />
+  );
 }
 
 FormInputButton.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.node
+  canSpin: PropTypes.bool.isRequired
 };
 
 FormInputButton.defaultProps = {
-  className: styles.button
+  className: styles.button,
+  canSpin: false
 };
 
 export default FormInputButton;

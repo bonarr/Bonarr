@@ -16,6 +16,9 @@ module.exports = {
   helpTextColor: '#909293',
   gray: '#adadad',
 
+  // Links
+  defaultLinkHoverColor: '#fff',
+
   // Sidebar
 
   sidebarColor: '#e1e2e3',

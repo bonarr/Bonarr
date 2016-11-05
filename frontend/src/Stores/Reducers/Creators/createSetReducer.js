@@ -8,6 +8,7 @@ const whitelistedProperties = [
   'error',
   'saving',
   'saveError',
+  'testing',
   'deleting',
   'deleteError',
   'pendingChanges',

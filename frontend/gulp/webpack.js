@@ -117,8 +117,9 @@ const config = {
           const colors = require('../src/Styles/Variables/colors');
           const dimensions = require('../src/Styles/Variables/dimensions');
           const fonts = require('../src/Styles/Variables/fonts');
+          const animations = require('../src/Styles/Variables/animations');
 
-          return _.extend({}, colors, dimensions, fonts);
+          return _.extend({}, colors, dimensions, fonts, animations);
         }
       }),
       nested(),

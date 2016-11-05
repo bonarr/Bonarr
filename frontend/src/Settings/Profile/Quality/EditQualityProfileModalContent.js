@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props'; 
 import Button from 'Components/Button';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import ModalContent from 'Components/Modal/ModalContent';

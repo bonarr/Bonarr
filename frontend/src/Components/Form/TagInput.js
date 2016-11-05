@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactTags from 'react-tag-autocomplete';
 import classNames from 'classNames';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props'; 
 import styles from './TagInput.css';
 
 class TagInput extends Component {

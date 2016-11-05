@@ -100,7 +100,9 @@ const defaultState = {
     error: null,
     saving: false,
     saveError: null,
+    testing: false,
     item: {},
+    items: [],
     pendingChanges: {}
   },
 
@@ -152,6 +154,7 @@ const settingsReducers = handleActions({
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
   [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfileSchema'),
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
+  [types.SELECT_INDEXER_SCHEMA]: createUpdateReducer('indexerSchema'),
   [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexerSchema'),
   [types.SET_INDEXER_FIELD_VALUE]: createSetThingyFieldValueReducer('indexerSchema'),
   [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),

@@ -4,7 +4,8 @@ import Card from 'Components/Card';
 import Icon from 'Components/Icon';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import Indexer from './Indexer';
-// import EditIndexerModalConnector from './EditIndexerModalConnector';
+import AddIndexerModal from './AddIndexerModal';
+import EditIndexerModalConnector from './EditIndexerModalConnector';
 import styles from './Indexers.css';
 
 class Indexers extends Component {
@@ -16,19 +17,27 @@ class Indexers extends Component {
     super(props, context);
 
     this.state = {
-      isIndexerModalOpen: false
+      isAddIndexerModalOpen: false,
+      isEditIndexerModalOpen: false
     };
   }
 
   //
   // Listeners
 
-  onEditIndexerPress = () => {
-    this.setState({ isIndexerModalOpen: true });
+  onAddIndexerPress = () => {
+    this.setState({ isAddIndexerModalOpen: true });
   }
 
-  onModalClose = () => {
-    this.setState({ isIndexerModalOpen: false });
+  onAddIndexerModalClose = ({ indexerSelected = false } = {}) => {
+    this.setState({
+      isAddIndexerModalOpen: false,
+      isEditIndexerModalOpen: indexerSelected
+    });
+  }
+
+  onEditIndexerModalClose = () => {
+    this.setState({ isEditIndexerModalOpen: false });
   }
 
   //
@@ -41,6 +50,11 @@ class Indexers extends Component {
       ...otherProps
     } = this.props;
 
+    const {
+      isAddIndexerModalOpen,
+      isEditIndexerModalOpen
+    } = this.state;
+
     return (
       <FieldSet
         legend="Indexers"
@@ -52,7 +66,7 @@ class Indexers extends Component {
           <div className={styles.indexers}>
             <Card
               className={styles.addIndexer}
-              onPress={this.onEditIndexerPress}
+              onPress={this.onAddIndexerPress}
             >
               <div className={styles.center}>
                 <Icon name="icon-sonarr-add" />
@@ -72,10 +86,15 @@ class Indexers extends Component {
             }
           </div>
 
-          {/* <EditIndexerModalConnector
-            isOpen={this.state.isIndexerModalOpen}
-            onModalClose={this.onModalClose}
-          /> */}
+          <AddIndexerModal
+            isOpen={isAddIndexerModalOpen}
+            onModalClose={this.onAddIndexerModalClose}
+          />
+
+          <EditIndexerModalConnector
+            isOpen={isEditIndexerModalOpen}
+            onModalClose={this.onEditIndexerModalClose}
+          />
         </PageSectionContent>
       </FieldSet>
     );

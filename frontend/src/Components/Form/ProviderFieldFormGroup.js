@@ -22,12 +22,14 @@ function getType(type) {
       return inputTypes.TEXT;
     case 'checkbox':
       return inputTypes.CHECK;
+    case 'captcha':
+      return inputTypes.CAPTCHA;
     default:
       return inputTypes.TEXT;
   }
 }
 
-function ThingyFormGroup(props) {
+function ProviderFieldFormGroup(props) {
   const {
     advancedSettings,
     name,
@@ -40,7 +42,8 @@ function ThingyFormGroup(props) {
     pending,
     errors,
     warnings,
-    onChange
+    onChange,
+    ...otherProps
   } = props;
 
   if (!advancedSettings && advanced) {
@@ -60,18 +63,19 @@ function ThingyFormGroup(props) {
         warnings={warnings}
         pending={pending}
         onChange={onChange}
+        {...otherProps}
       />
     </FormGroup>
   );
 }
 
-ThingyFormGroup.propTypes = {
+ProviderFieldFormGroup.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   helpText: PropTypes.string,
   helpLink: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
+  value: PropTypes.any,
   type: PropTypes.string.isRequired,
   advanced: PropTypes.bool.isRequired,
   pending: PropTypes.bool.isRequired,
@@ -80,4 +84,4 @@ ThingyFormGroup.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-export default ThingyFormGroup;
+export default ProviderFieldFormGroup;

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props';
 import Card from 'Components/Card';
 import Label from 'Components/Label';
 import ConfirmModal from 'Components/Modal/ConfirmModal';

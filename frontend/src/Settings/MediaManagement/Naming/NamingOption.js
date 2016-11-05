@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import classNames from 'classNames';
-import sizes from 'Utilities/sizes';
+import { sizes } from 'Helpers/Props';
 import Link from 'Components/Link';
 import styles from './NamingOption.css';
 

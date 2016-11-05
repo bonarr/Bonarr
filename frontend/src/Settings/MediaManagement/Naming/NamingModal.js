@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
-import sizes from 'Utilities/sizes';
+import { sizes } from 'Helpers/Props';
 import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Button';
 import SelectInput from 'Components/Form/SelectInput';

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import titleCase from 'Utilities/String/titleCase';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props'; 
 import Icon from 'Components/Icon';
 import Label from 'Components/Label';
 import Link from 'Components/Link';

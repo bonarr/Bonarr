@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props';
 import Button from 'Components/Button';
+import SpinnerButton from 'Components/SpinnerButton';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
@@ -11,7 +12,7 @@ import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
-import ThingyFieldFormGroup from 'Components/Form/ThingyFieldFormGroup';
+import ProviderFieldFormGroup from 'Components/Form/ProviderFieldFormGroup';
 import styles from './EditIndexerModalContent.css';
 
 class EditIndexerModalContent extends Component {
@@ -24,11 +25,14 @@ class EditIndexerModalContent extends Component {
       advancedSettings,
       fetching,
       error,
+      saving,
+      testing,
       item,
       onInputChange,
       onFieldChange,
-      onSavePress,
       onModalClose,
+      onSavePress,
+      onTestPress,
       onDeleteIndexerPress,
       ...otherProps
     } = this.props;
@@ -105,9 +109,11 @@ class EditIndexerModalContent extends Component {
                 {
                   fields.map((field) => {
                     return (
-                      <ThingyFieldFormGroup
+                      <ProviderFieldFormGroup
                         key={field.name}
                         advancedSettings={advancedSettings}
+                        provider="indexer"
+                        providerData={item}
                         {...field}
                         onChange={onFieldChange}
                       />
@@ -130,17 +136,25 @@ class EditIndexerModalContent extends Component {
               </Button>
           }
 
+          <SpinnerButton
+            isSpinning={testing}
+            onPress={onTestPress}
+          >
+            Test
+          </SpinnerButton>
+
           <Button
             onPress={onModalClose}
           >
             Cancel
           </Button>
 
-          <Button
+          <SpinnerButton
+            isSpinning={saving}
             onPress={onSavePress}
           >
             Save
-          </Button>
+          </SpinnerButton>
         </ModalFooter>
       </ModalContent>
     );
@@ -153,11 +167,13 @@ EditIndexerModalContent.propTypes = {
   error: PropTypes.object,
   saving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
+  testing: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onFieldChange: PropTypes.func.isRequired,
-  onSavePress: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired,
+  onSavePress: PropTypes.func.isRequired,
+  onTestPress: PropTypes.func.isRequired,
   onDeleteIndexerPress: PropTypes.func
 };
 

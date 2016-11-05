@@ -4,6 +4,7 @@ import Icon from 'Components/Icon';
 import CheckInput from './CheckInput';
 import PathInputConnector from './PathInputConnector';
 import SelectInput from './SelectInput';
+import CaptchaInputConnector from './CaptchaInputConnector';
 import TextInput from './TextInput';
 import NumberInput from './NumberInput';
 import TagInputConnector from './TagInputConnector';
@@ -22,6 +23,8 @@ function getComponent(type) {
       return NumberInput;
     case inputTypes.TAG:
       return TagInputConnector;
+    case inputTypes.CAPTCHA:
+      return CaptchaInputConnector;
     default:
       return TextInput;
   }
@@ -56,6 +59,7 @@ function FormInputGroup(props) {
           <InputComponent
             className={inputClassName}
             helpText={helpText}
+            helpTextWarning={helpTextWarning}
             hasError={hasError}
             hasWarning={hasWarning}
             hasButton={hasButton}
@@ -102,9 +106,9 @@ function FormInputGroup(props) {
       }
 
       {
-        helpTextWarning &&
+        !checkInput && helpTextWarning &&
           <FormInputHelpText
-            text={helpText}
+            text={helpTextWarning}
             isWarning={true}
           />
       }

@@ -11,13 +11,15 @@ class MenuButton extends Component {
     const {
       className,
       children,
-      onPress
+      onPress,
+      ...otherProps
     } = this.props;
 
     return (
       <Link
         className={className}
         onPress={onPress}
+        {...otherProps}
       >
         {children}
       </Link>

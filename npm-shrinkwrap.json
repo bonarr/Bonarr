@@ -3395,6 +3395,23 @@
       "from": "react@15.3.1",
       "resolved": "https://registry.npmjs.org/react/-/react-15.3.1.tgz"
     },
+    "react-async-script": {
+      "version": "0.5.1",
+      "from": "react-async-script@>=0.5.0 <0.6.0",
+      "resolved": "https://registry.npmjs.org/react-async-script/-/react-async-script-0.5.1.tgz",
+      "dependencies": {
+        "babel-runtime": {
+          "version": "5.8.38",
+          "from": "babel-runtime@^5.8.0",
+          "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-5.8.38.tgz"
+        },
+        "core-js": {
+          "version": "1.2.7",
+          "from": "core-js@^1.0.0",
+          "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
+        }
+      }
+    },
     "react-autosuggest": {
       "version": "6.0.2",
       "from": "react-autosuggest@latest",
@@ -3419,6 +3436,23 @@
       "version": "15.3.1",
       "from": "react-dom@15.3.1",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.3.1.tgz"
+    },
+    "react-google-recaptcha": {
+      "version": "0.5.4",
+      "from": "react-google-recaptcha@latest",
+      "resolved": "https://registry.npmjs.org/react-google-recaptcha/-/react-google-recaptcha-0.5.4.tgz",
+      "dependencies": {
+        "babel-runtime": {
+          "version": "5.8.38",
+          "from": "babel-runtime@>=5.8.0 <6.0.0",
+          "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-5.8.38.tgz"
+        },
+        "core-js": {
+          "version": "1.2.7",
+          "from": "core-js@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
+        }
+      }
     },
     "react-measure": {
       "version": "1.1.0",

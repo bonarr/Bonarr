@@ -5,6 +5,7 @@ import commands from './commandReducers';
 import paths from './pathReducers';
 import languages from './languageReducers';
 import tags from './tagReducers';
+import captcha from './captchaReducers';
 
 export default combineReducers({
   settings,
@@ -12,5 +13,6 @@ export default combineReducers({
   commands,
   paths,
   languages,
-  tags
+  tags,
+  captcha
 });

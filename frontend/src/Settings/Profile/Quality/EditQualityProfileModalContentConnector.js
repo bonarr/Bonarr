@@ -2,14 +2,14 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import autobind from 'autobind-decorator';
-import createThingySettingsSelector from 'Stores/Selectors/createThingySettingsSelector';
+import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
 import EditQualityProfileModalContent from './EditQualityProfileModalContent';
 
 function createQualitiesSelector() {
   return createSelector(
-    createThingySettingsSelector(),
+    createProviderSettingsSelector(),
     (qualityProfile) => {
       const items = qualityProfile.item.items;
       if (!items || !items.value) {
@@ -31,7 +31,7 @@ function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.advancedSettings,
     (state) => state.languages.items,
-    createThingySettingsSelector(),
+    createProviderSettingsSelector(),
     createQualitiesSelector(),
     (advancedSettings, languages, qualityProfile, qualities) => {
       return {

@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createThingySettingsSelector from 'Stores/Selectors/createThingySettingsSelector';
-import { setIndexerValue, setIndexerFieldValue, saveIndexer } from 'Stores/Actions/settingsActions';
+import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
+import { setIndexerValue, setIndexerFieldValue, saveIndexer, testIndexer } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
 import EditIndexerModalContent from './EditIndexerModalContent';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.advancedSettings,
-    createThingySettingsSelector(),
+    createProviderSettingsSelector(),
     (advancedSettings, indexer) => {
       return {
         advancedSettings,
@@ -21,7 +21,8 @@ function createMapStateToProps() {
 const mapDispatchToProps = {
   setIndexerValue,
   setIndexerFieldValue,
-  saveIndexer
+  saveIndexer,
+  testIndexer
 };
 
 class EditIndexerModalContentConnector extends Component {
@@ -50,6 +51,10 @@ class EditIndexerModalContentConnector extends Component {
     this.props.saveIndexer({ id: this.props.id });
   }
 
+  onTestPress = () => {
+    this.props.testIndexer({ id: this.props.id });
+  }
+
   //
   // Render
 
@@ -58,6 +63,7 @@ class EditIndexerModalContentConnector extends Component {
       <EditIndexerModalContent
         {...this.props}
         onSavePress={this.onSavePress}
+        onTestPress={this.onTestPress}
         onInputChange={this.onInputChange}
         onFieldChange={this.onFieldChange}
       />
@@ -74,6 +80,7 @@ EditIndexerModalContentConnector.propTypes = {
   setIndexerValue: PropTypes.func.isRequired,
   setIndexerFieldValue: PropTypes.func.isRequired,
   saveIndexer: PropTypes.func.isRequired,
+  testIndexer: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
 

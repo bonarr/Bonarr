@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
-import align from 'Utilities/align';
+import { align } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';

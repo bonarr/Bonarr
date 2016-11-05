@@ -5,7 +5,8 @@ const inputTypes = {
   PATH: 'path',
   PASSWORD: 'password',
   NUMBER: 'password',
-  TAG: 'tag'
+  TAG: 'tag',
+  CAPTCHA: 'captcha'
 };
 
 export default inputTypes;

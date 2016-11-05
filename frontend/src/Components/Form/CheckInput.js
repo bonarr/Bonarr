@@ -26,7 +26,8 @@ class CheckInput extends Component {
       containerClassName,
       name,
       value,
-      helpText
+      helpText,
+      helpTextWarning
     } = this.props;
 
     return (
@@ -61,6 +62,15 @@ class CheckInput extends Component {
                 text={helpText}
               />
           }
+
+          {
+            !helpText && helpTextWarning &&
+              <FormInputHelpText
+                className={styles.helpText}
+                text={helpTextWarning}
+                isWarning={true}
+              />
+          }
         </label>
       </div>
     );
@@ -72,6 +82,7 @@ CheckInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.bool.isRequired,
   helpText: PropTypes.string,
+  helpTextWarning: PropTypes.string,
   onChange: PropTypes.func.isRequired
 };
 

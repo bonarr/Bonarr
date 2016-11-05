@@ -48,7 +48,7 @@ class TextInput extends Component {
 TextInput.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
   hasError: PropTypes.bool,
   hasWarning: PropTypes.bool,
   hasButton: PropTypes.bool,

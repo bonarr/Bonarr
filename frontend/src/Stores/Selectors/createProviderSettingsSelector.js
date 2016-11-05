@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import selectSettings from 'Stores/Selectors/selectSettings';
 
-function createThingySettingsSelector() {
+function createProviderSettingsSelector() {
   return createSelector(
     (state, { id }) => id,
     (state, { section }) => state.settings[section],
@@ -24,6 +24,7 @@ function createThingySettingsSelector() {
         error,
         saving,
         saveError,
+        testing,
         pendingChanges
       } = schema;
 
@@ -34,6 +35,7 @@ function createThingySettingsSelector() {
         error,
         saving,
         saveError,
+        testing,
         item: settings.settings,
         ...settings
       };
@@ -41,4 +43,4 @@ function createThingySettingsSelector() {
   );
 }
 
-export default createThingySettingsSelector;
+export default createProviderSettingsSelector;

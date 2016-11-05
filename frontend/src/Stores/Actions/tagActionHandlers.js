@@ -15,7 +15,6 @@ const tagActionHandlers = {
       });
 
       promise.done((data) => {
-        const state = getState();
         const tags = getState().tags.items.slice();
         tags.push(data);
 

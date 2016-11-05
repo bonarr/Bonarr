@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { set, deleteThingy } from '../baseActions';
 
-function createDeleteThingyHandler(section, thingySection, url, getFromState, getThingiesFromState) {
+function createDeleteProviderHandler(section, thingySection, url, getFromState, getThingiesFromState) {
   return function(payload) {
     return function(dispatch, getState) {
       dispatch(set({ section, deleting: true }));
@@ -36,4 +36,4 @@ function createDeleteThingyHandler(section, thingySection, url, getFromState, ge
   };
 }
 
-export default createDeleteThingyHandler;
+export default createDeleteProviderHandler;

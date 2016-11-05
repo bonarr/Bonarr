@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classNames';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props'; 
 import styles from './Label.css';
 
 function Label({ className, kind, children, ...otherProps }) {

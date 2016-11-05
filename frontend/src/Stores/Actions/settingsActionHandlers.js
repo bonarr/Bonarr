@@ -3,8 +3,9 @@ import $ from 'jquery';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import createSaveHandler from './Creators/createSaveHandler';
-import createSaveThingyHandler from './Creators/createSaveThingyHandler';
-import createDeleteThingyHandler from './Creators/createDeleteThingyHandler';
+import createSaveProviderHandler from './Creators/createSaveProviderHandler';
+import createDeleteProviderHandler from './Creators/createDeleteProviderHandler';
+import createTestProviderHandler from './Creators/createTestProviderHandler';
 import { set, update, clearPendingChanges } from './baseActions';
 
 const settingsActionHandlers = {
@@ -83,13 +84,13 @@ const settingsActionHandlers = {
   [types.FETCH_QUALITY_PROFILES]: createFetchHandler('qualityProfiles', '/profile'),
   [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
 
-  [types.SAVE_QUALITY_PROFILE]: createSaveThingyHandler('qualityProfileSchema',
+  [types.SAVE_QUALITY_PROFILE]: createSaveProviderHandler('qualityProfileSchema',
                                                         'qualityProfiles',
                                                         '/profile',
                                                         (state) => state.settings.qualityProfileSchema,
                                                         (state) => state.settings.qualityProfiles),
 
-  [types.DELETE_QUALITY_PROFILE]: createDeleteThingyHandler('qualityProfileSchema',
+  [types.DELETE_QUALITY_PROFILE]: createDeleteProviderHandler('qualityProfileSchema',
                                                             'qualityProfiles',
                                                             '/profile',
                                                             (state) => state.settings.qualityProfileSchema,
@@ -97,13 +98,13 @@ const settingsActionHandlers = {
 
   [types.FETCH_DELAY_PROFILES]: createFetchHandler('delayProfiles', '/delayprofile'),
 
-  [types.SAVE_DELAY_PROFILE]: createSaveThingyHandler('delayProfiles',
+  [types.SAVE_DELAY_PROFILE]: createSaveProviderHandler('delayProfiles',
                                                       'delayProfiles',
                                                       '/delayprofile',
                                                       (state) => state.settings.delayProfiles,
                                                       (state) => state.settings.delayProfiles),
 
-  [types.DELETE_DELAY_PROFILE]: createDeleteThingyHandler('delayProfiles',
+  [types.DELETE_DELAY_PROFILE]: createDeleteProviderHandler('delayProfiles',
                                                           'delayProfiles',
                                                           '/delayprofile',
                                                           (state) => state.settings.delayProfiles,
@@ -145,17 +146,25 @@ const settingsActionHandlers = {
   },
 
   [types.FETCH_INDEXERS]: createFetchHandler('indexers', '/indexer'),
-  [types.SAVE_INDEXER]: createSaveThingyHandler('indexerSchema',
-                                                'indexers',
-                                                '/indexer',
-                                                (state) => state.settings.indexerSchema,
-                                                (state) => state.settings.indexers),
+  [types.FETCH_INDEXER_SCHEMA]: createFetchHandler('indexerSchema', '/indexer/schema'),
 
-  [types.DELETE_INDEXER]: createDeleteThingyHandler('indexerSchema',
+  [types.SAVE_INDEXER]: createSaveProviderHandler('indexerSchema',
+                                                  'indexers',
+                                                  '/indexer',
+                                                  (state) => state.settings.indexerSchema,
+                                                  (state) => state.settings.indexers),
+
+  [types.DELETE_INDEXER]: createDeleteProviderHandler('indexerSchema',
                                                     'indexers',
                                                     '/indexer',
                                                     (state) => state.settings.indexerSchema,
                                                     (state) => state.settings.indexers),
+
+  [types.TEST_INDEXER]: createTestProviderHandler('indexerSchema',
+                                                  'indexers',
+                                                  '/indexer',
+                                                  (state) => state.settings.indexerSchema,
+                                                  (state) => state.settings.indexers),
 
   [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
   [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings)

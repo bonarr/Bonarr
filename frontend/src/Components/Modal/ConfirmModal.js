@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import * as kinds from 'Helpers/kinds';
+import { kinds } from 'Helpers/Props'; 
 import Button from 'Components/Button';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';
