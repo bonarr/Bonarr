@@ -104,3 +104,14 @@ export const setIndexerSettingsValue = createAction(types.SET_INDEXER_SETTINGS_V
     ...payload
   };
 });
+
+export const fetchRestrictions = settingsActionHandlers[types.FETCH_RESTRICTIONS];
+export const saveRestriction = settingsActionHandlers[types.SAVE_RESTRICTION];
+export const deleteRestriction = settingsActionHandlers[types.DELETE_RESTRICTION];
+
+export const setRestrictionValue = createAction(types.SET_RESTRICTION_VALUE, (payload) => {
+  return {
+    section: 'restrictions',
+    ...payload
+  };
+});

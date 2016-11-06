@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
-import { kinds } from 'Helpers/Props'; 
+import { kinds } from 'Helpers/Props';
 import titleCase from 'Utilities/String/titleCase';
 import Card from 'Components/Card';
 import Label from 'Components/Label';

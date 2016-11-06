@@ -3,10 +3,10 @@ import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import titleCase from 'Utilities/String/titleCase';
-import { kinds } from 'Helpers/Props'; 
+import { kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Label from 'Components/Label';
 import Link from 'Components/Link';
+import TagList from 'Components/TagList';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import EditDelayProfileModalConnector from './EditDelayProfileModalConnector';
 import styles from './DelayProfile.css';
@@ -109,26 +109,12 @@ class DelayProfile extends Component {
         <div className={styles.column}>{preferred}</div>
         <div className={styles.column}>{getDelay(enableUsenet, usenetDelay)}</div>
         <div className={styles.column}>{getDelay(enableTorrent, torrentDelay)}</div>
-        <div className={styles.tags}>
-          {
-            tags.map((t) => {
-              const tag = _.find(tagList, { id: t });
 
-              if (!tag) {
-                return null;
-              }
+        <TagList
+          tags={tags}
+          tagList={tagList}
+        />
 
-              return (
-                <Label
-                  key={tag.id}
-                  kind={kinds.INFO}
-                >
-                  {tag.label}
-                </Label>
-              );
-            })
-          }
-        </div>
         <div className={styles.actions}>
           <Link
             className={id === 1 ? styles.editButton : undefined}

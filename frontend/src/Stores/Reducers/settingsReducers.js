@@ -116,6 +116,16 @@ const defaultState = {
     item: {}
   },
 
+  restrictions: {
+    fetching: false,
+    populated: false,
+    error: null,
+    saving: false,
+    saveError: null,
+    items: [],
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -133,7 +143,8 @@ const propertyNames = [
 const thingyPropertyNames = [
   'qualityProfiles',
   'delayProfiles',
-  'indexers'
+  'indexers',
+  'restrictions'
 ];
 
 const settingsReducers = handleActions({
@@ -158,6 +169,7 @@ const settingsReducers = handleActions({
   [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexerSchema'),
   [types.SET_INDEXER_FIELD_VALUE]: createSetProviderFieldValueReducer('indexerSchema'),
   [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),
+  [types.SET_RESTRICTION_VALUE]: createSetSettingValueReducer('restrictions'),
 
   [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
     const section = 'qualityDefinitions';

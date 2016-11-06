@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactSlider from 'react-slider';
 import formatBytes from 'Utilities/Number/formatBytes';
-import { kinds } from 'Helpers/Props'; 
+import { kinds } from 'Helpers/Props';
 import Label from 'Components/Label';
 import TextInput from 'Components/Form/TextInput';
 import styles from './QualityDefinition.css';

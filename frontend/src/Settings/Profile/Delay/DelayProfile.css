@@ -11,10 +11,6 @@
   flex: 0 0 200px;
 }
 
-.tags {
-  flex: 1 0 auto;
-}
-
 .actions {
   display: flex;
 }

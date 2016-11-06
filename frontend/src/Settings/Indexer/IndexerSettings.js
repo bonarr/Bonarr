@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
-import IndexerOptionsConnector from './Options/IndexerOptionsConnector';
 import IndexersConnector from './Indexers/IndexersConnector';
+import IndexerOptionsConnector from './Options/IndexerOptionsConnector';
+import RestrictionsConnector from './Restrictions/RestrictionsConnector';
 
 class IndexerSettings extends Component {
 
@@ -53,6 +54,8 @@ class IndexerSettings extends Component {
             ref={this.setIndexerOptionsRef}
             onHasPendingChange={this.onHasPendingChange}
           />
+
+          <RestrictionsConnector />
         </PageContentBody>
       </PageContent>
     );

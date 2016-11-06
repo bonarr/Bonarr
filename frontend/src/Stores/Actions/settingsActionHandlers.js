@@ -167,7 +167,21 @@ const settingsActionHandlers = {
                                                   (state) => state.settings.indexers),
 
   [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
-  [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings)
+  [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings),
+
+  [types.FETCH_RESTRICTIONS]: createFetchHandler('restrictions', '/restriction'),
+
+  [types.SAVE_RESTRICTION]: createSaveProviderHandler('restrictions',
+                                                      'restrictions',
+                                                      '/restriction',
+                                                      (state) => state.settings.restrictions,
+                                                      (state) => state.settings.restrictions),
+
+  [types.DELETE_RESTRICTION]: createDeleteProviderHandler('restrictions',
+                                                          'restrictions',
+                                                          '/restriction',
+                                                          (state) => state.settings.restrictions,
+                                                          (state) => state.settings.restrictions)
 };
 
 export default settingsActionHandlers;

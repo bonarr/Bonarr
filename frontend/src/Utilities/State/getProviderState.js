@@ -8,7 +8,7 @@ function getProviderState(payload, getState, getFromState, getProvidersFromState
   const pendingFields = state.pendingChanges.fields || {};
   delete pendingChanges.fields;
 
-  const item = id ? _.find(providersState.items, { id }) : state.item;
+  const item = id ? _.find(providersState.items, { id }) : state.item || {};
 
   if (item.fields) {
     pendingChanges.fields = _.reduce(item.fields, (result, field) => {

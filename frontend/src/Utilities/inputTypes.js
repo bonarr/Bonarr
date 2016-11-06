@@ -6,6 +6,7 @@ const inputTypes = {
   PASSWORD: 'password',
   NUMBER: 'password',
   TAG: 'tag',
+  TEXT_TAG: 'textTag',
   CAPTCHA: 'captcha'
 };
 

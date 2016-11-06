@@ -8,6 +8,7 @@ import CaptchaInputConnector from './CaptchaInputConnector';
 import TextInput from './TextInput';
 import NumberInput from './NumberInput';
 import TagInputConnector from './TagInputConnector';
+import TextTagInputConnector from './TextTagInputConnector';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './FormInputGroup.css';
 
@@ -23,6 +24,8 @@ function getComponent(type) {
       return NumberInput;
     case inputTypes.TAG:
       return TagInputConnector;
+    case inputTypes.TEXT_TAG:
+      return TextTagInputConnector;
     case inputTypes.CAPTCHA:
       return CaptchaInputConnector;
     default:

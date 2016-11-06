@@ -4,7 +4,7 @@ import classNames from 'classNames';
 import { kinds } from 'Helpers/Props';
 import styles from './TagInput.css';
 
-class TagInput extends Component {
+class TextTagInput extends Component {
 
   //
   // Render
@@ -12,9 +12,9 @@ class TagInput extends Component {
   render() {
     const {
       tags,
-      tagList,
       allowNew,
       kind,
+      placeholder,
       onTagAdd,
       onTagDelete
     } = this.props;
@@ -35,9 +35,9 @@ class TagInput extends Component {
       <ReactTags
         classNames={tagInputClassNames}
         tags={tags}
-        suggestions={tagList}
         allowNew={allowNew}
         minQueryLength={1}
+        placeholder={placeholder}
         handleAddition={onTagAdd}
         handleDelete={onTagDelete}
       />
@@ -46,22 +46,22 @@ class TagInput extends Component {
 }
 
 const tagShape = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
 };
 
-TagInput.propTypes = {
+TextTagInput.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.shape(tagShape)).isRequired,
-  tagList: PropTypes.arrayOf(PropTypes.shape(tagShape)).isRequired,
   allowNew: PropTypes.bool.isRequired,
   kind: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   onTagAdd: PropTypes.func.isRequired,
   onTagDelete: PropTypes.func.isRequired
 };
 
-TagInput.defaultProps = {
+TextTagInput.defaultProps = {
   allowNew: true,
   kind: kinds.INFO
 };
 
-export default TagInput;
+export default TextTagInput;

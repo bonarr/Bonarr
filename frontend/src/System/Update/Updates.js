@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
-import { kinds } from 'Helpers/Props'; 
+import { kinds } from 'Helpers/Props';
 import shortDate from 'Utilities/Date/shortDate';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Button from 'Components/Button';
