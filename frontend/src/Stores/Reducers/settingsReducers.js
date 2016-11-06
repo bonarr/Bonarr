@@ -5,11 +5,11 @@ import updateSectionState from 'Utilities/State/updateSectionState';
 import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createSetSettingValueReducer from './Creators/createSetSettingValueReducer';
-import createSetThingyFieldValueReducer from './Creators/createSetThingyFieldValueReducer';
+import createSetProviderFieldValueReducer from './Creators/createSetProviderFieldValueReducer';
 import createClearPendingChangesReducer from './Creators/createClearPendingChangesReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
-import createUpdateThingyReducer from './Creators/createUpdateThingyReducer';
-import createDeleteThingyReducer from './Creators/createDeleteThingyReducer';
+import createUpdateProviderReducer from './Creators/createUpdateProviderReducer';
+import createDeleteProviderReducer from './Creators/createDeleteProviderReducer';
 import createReducers from './Creators/createReducers';
 
 const defaultState = {
@@ -144,10 +144,10 @@ const settingsReducers = handleActions({
 
   [types.SET]: createReducers([...propertyNames, ...thingyPropertyNames], createSetReducer),
   [types.UPDATE]: createReducers([...propertyNames, ...thingyPropertyNames], createUpdateReducer),
-  [types.UPDATE_THINGY]: createReducers(thingyPropertyNames, createUpdateThingyReducer),
+  [types.UPDATE_PROVIDER]: createReducers(thingyPropertyNames, createUpdateProviderReducer),
   [types.CLEAR_PENDING_CHANGES]: createReducers([...propertyNames, ...thingyPropertyNames], createClearPendingChangesReducer),
 
-  [types.DELETE_THINGY]: createReducers(thingyPropertyNames, createDeleteThingyReducer),
+  [types.DELETE_PROVIDER]: createReducers(thingyPropertyNames, createDeleteProviderReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),
@@ -156,7 +156,7 @@ const settingsReducers = handleActions({
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
   [types.SELECT_INDEXER_SCHEMA]: createUpdateReducer('indexerSchema'),
   [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexerSchema'),
-  [types.SET_INDEXER_FIELD_VALUE]: createSetThingyFieldValueReducer('indexerSchema'),
+  [types.SET_INDEXER_FIELD_VALUE]: createSetProviderFieldValueReducer('indexerSchema'),
   [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),
 
   [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {

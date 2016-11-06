@@ -1,7 +1,7 @@
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 
-function createSetThingyFieldValueReducer(section) {
+function createSetProviderFieldValueReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
       const { name, value } = payload;
@@ -20,4 +20,4 @@ function createSetThingyFieldValueReducer(section) {
   };
 }
 
-export default createSetThingyFieldValueReducer;
+export default createSetProviderFieldValueReducer;

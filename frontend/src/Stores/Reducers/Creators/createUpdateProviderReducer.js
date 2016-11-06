@@ -2,7 +2,7 @@ import _ from 'lodash';
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 
-function createUpdateThingyReducer(section) {
+function createUpdateProviderReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
       const newState = _.cloneDeep(getSectionState(state, section));
@@ -21,4 +21,4 @@ function createUpdateThingyReducer(section) {
   };
 }
 
-export default createUpdateThingyReducer;
+export default createUpdateProviderReducer;

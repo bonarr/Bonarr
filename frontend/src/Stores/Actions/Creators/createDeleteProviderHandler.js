@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { set, deleteThingy } from '../baseActions';
+import { set, deleteProvider } from '../baseActions';
 
 function createDeleteProviderHandler(section, thingySection, url, getFromState, getThingiesFromState) {
   return function(payload) {
@@ -16,7 +16,7 @@ function createDeleteProviderHandler(section, thingySection, url, getFromState, 
       const promise = $.ajax(ajaxOptions);
 
       promise.done((data) => {
-        dispatch(deleteThingy({ section: thingySection, id }));
+        dispatch(deleteProvider({ section: thingySection, id }));
 
         dispatch(set({
           section,
