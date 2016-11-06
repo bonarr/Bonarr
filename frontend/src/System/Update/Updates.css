@@ -22,8 +22,8 @@
   display: flex;
   margin-bottom: 10px;
   padding-bottom: 5px;
-  line-height: 21px;
   border-bottom: 1px solid #e5e5e5;
+  line-height: 21px;
 }
 
 .version {
@@ -39,5 +39,8 @@
 }
 
 .branch {
+  composes: label from 'Components/Label.css';
+
+  margin-left: 10px;
   font-size: 14px;
 }

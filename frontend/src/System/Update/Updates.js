@@ -5,6 +5,7 @@ import shortDate from 'Utilities/Date/shortDate';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
+import Label from 'Components/Label';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import UpdateChanges from './UpdateChanges';
@@ -83,7 +84,11 @@ class Updates extends Component {
 
                           {
                             update.branch !== 'master' &&
-                              <div className={styles.branch}>{update.branch}</div>
+                              <Label
+                                className={styles.branch}
+                              >
+                                {update.branch}
+                              </Label>
                           }
                         </div>
 
