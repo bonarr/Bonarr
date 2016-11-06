@@ -2,6 +2,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
+import createFetchSchemaHandler from './Creators/createFetchSchemaHandler';
 import createSaveHandler from './Creators/createSaveHandler';
 import createSaveProviderHandler from './Creators/createSaveProviderHandler';
 import createDeleteProviderHandler from './Creators/createDeleteProviderHandler';
@@ -82,33 +83,25 @@ const settingsActionHandlers = {
   },
 
   [types.FETCH_QUALITY_PROFILES]: createFetchHandler('qualityProfiles', '/profile'),
-  [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchHandler('qualityProfileSchema', '/profile/schema'),
+  [types.FETCH_QUALITY_PROFILE_SCHEMA]: createFetchSchemaHandler('qualityProfiles', '/profile/schema'),
 
-  [types.SAVE_QUALITY_PROFILE]: createSaveProviderHandler('qualityProfileSchema',
-                                                        'qualityProfiles',
-                                                        '/profile',
-                                                        (state) => state.settings.qualityProfileSchema,
-                                                        (state) => state.settings.qualityProfiles),
+  [types.SAVE_QUALITY_PROFILE]: createSaveProviderHandler('qualityProfiles',
+                                                          '/profile',
+                                                          (state) => state.settings.qualityProfiles),
 
-  [types.DELETE_QUALITY_PROFILE]: createDeleteProviderHandler('qualityProfileSchema',
-                                                            'qualityProfiles',
-                                                            '/profile',
-                                                            (state) => state.settings.qualityProfileSchema,
-                                                            (state) => state.settings.qualityProfiles),
+  [types.DELETE_QUALITY_PROFILE]: createDeleteProviderHandler('qualityProfiles',
+                                                              '/profile',
+                                                              (state) => state.settings.qualityProfiles),
 
   [types.FETCH_DELAY_PROFILES]: createFetchHandler('delayProfiles', '/delayprofile'),
 
   [types.SAVE_DELAY_PROFILE]: createSaveProviderHandler('delayProfiles',
-                                                      'delayProfiles',
-                                                      '/delayprofile',
-                                                      (state) => state.settings.delayProfiles,
-                                                      (state) => state.settings.delayProfiles),
+                                                        '/delayprofile',
+                                                        (state) => state.settings.delayProfiles),
 
   [types.DELETE_DELAY_PROFILE]: createDeleteProviderHandler('delayProfiles',
-                                                          'delayProfiles',
-                                                          '/delayprofile',
-                                                          (state) => state.settings.delayProfiles,
-                                                          (state) => state.settings.delayProfiles),
+                                                            '/delayprofile',
+                                                            (state) => state.settings.delayProfiles),
 
   [types.FETCH_QUALITY_DEFINITIONS]: createFetchHandler('qualityDefinitions', '/qualitydefinition'),
   [types.SAVE_QUALITY_DEFINITIONS]: createSaveHandler('qualityDefinitions', '/qualitydefinition', (state) => state.settings.qualitydefinitions),
@@ -146,24 +139,18 @@ const settingsActionHandlers = {
   },
 
   [types.FETCH_INDEXERS]: createFetchHandler('indexers', '/indexer'),
-  [types.FETCH_INDEXER_SCHEMA]: createFetchHandler('indexerSchema', '/indexer/schema'),
+  [types.FETCH_INDEXER_SCHEMA]: createFetchSchemaHandler('indexers', '/indexer/schema'),
 
-  [types.SAVE_INDEXER]: createSaveProviderHandler('indexerSchema',
-                                                  'indexers',
+  [types.SAVE_INDEXER]: createSaveProviderHandler('indexers',
                                                   '/indexer',
-                                                  (state) => state.settings.indexerSchema,
                                                   (state) => state.settings.indexers),
 
-  [types.DELETE_INDEXER]: createDeleteProviderHandler('indexerSchema',
-                                                    'indexers',
-                                                    '/indexer',
-                                                    (state) => state.settings.indexerSchema,
-                                                    (state) => state.settings.indexers),
+  [types.DELETE_INDEXER]: createDeleteProviderHandler('indexers',
+                                                      '/indexer',
+                                                      (state) => state.settings.indexers),
 
-  [types.TEST_INDEXER]: createTestProviderHandler('indexerSchema',
-                                                  'indexers',
+  [types.TEST_INDEXER]: createTestProviderHandler('indexers',
                                                   '/indexer',
-                                                  (state) => state.settings.indexerSchema,
                                                   (state) => state.settings.indexers),
 
   [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
@@ -172,15 +159,11 @@ const settingsActionHandlers = {
   [types.FETCH_RESTRICTIONS]: createFetchHandler('restrictions', '/restriction'),
 
   [types.SAVE_RESTRICTION]: createSaveProviderHandler('restrictions',
-                                                      'restrictions',
                                                       '/restriction',
-                                                      (state) => state.settings.restrictions,
                                                       (state) => state.settings.restrictions),
 
   [types.DELETE_RESTRICTION]: createDeleteProviderHandler('restrictions',
-                                                          'restrictions',
                                                           '/restriction',
-                                                          (state) => state.settings.restrictions,
                                                           (state) => state.settings.restrictions)
 };
 

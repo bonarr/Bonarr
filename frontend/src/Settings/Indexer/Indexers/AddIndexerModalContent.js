@@ -60,7 +60,7 @@ class AddIndexerModalContent extends Component {
                         return (
                           <AddIndexerItem
                             key={indexer.name}
-                            indexer={indexer}
+                            implementation={indexer.implementation}
                             {...indexer}
                             onIndexerSelect={onIndexerSelect}
                           />
@@ -77,7 +77,7 @@ class AddIndexerModalContent extends Component {
                         return (
                           <AddIndexerItem
                             key={indexer.name}
-                            indexer={indexer}
+                            implementation={indexer.implementation}
                             {...indexer}
                             onIndexerSelect={onIndexerSelect}
                           />

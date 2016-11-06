@@ -6,14 +6,27 @@ function createProviderSettingsSelector() {
   return createSelector(
     (state, { id }) => id,
     (state, { section }) => state.settings[section],
-    (state, { schemaSection }) => state.settings[schemaSection],
-    (id, section, schema) => {
+    (id, section) => {
       if (!id) {
-        const item = Object.assign({ name: '' }, schema.item);
-        const settings = selectSettings(item, schema.pendingChanges, schema.saveError);
+        const item = _.isArray(section.schema) ? section.selectedSchema : section.schema;
+        const settings = selectSettings(Object.assign({ name: '' }, item), section.pendingChanges, section.saveError);
+
+        const {
+          fetchingSchema: fetching,
+          schemaError: error,
+          saving,
+          saveError,
+          testing,
+          pendingChanges
+        } = section;
 
         return {
-          ...schema,
+          fetching,
+          error,
+          saving,
+          saveError,
+          testing,
+          pendingChanges,
           ...settings,
           item: settings.settings
         };
@@ -26,7 +39,7 @@ function createProviderSettingsSelector() {
         saveError,
         testing,
         pendingChanges
-      } = schema;
+      } = section;
 
       const settings = selectSettings(_.find(section.items, { id }), pendingChanges, saveError);
 

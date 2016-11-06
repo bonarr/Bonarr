@@ -194,5 +194,5 @@ export default connectSettingsSection(
   mapDispatchToProps,
   undefined,
   undefined,
-  { section: 'qualityProfiles', schemaSection: 'qualityProfileSchema' }
+  { section: 'qualityProfiles' }
 )(EditQualityProfileModalContentConnector);

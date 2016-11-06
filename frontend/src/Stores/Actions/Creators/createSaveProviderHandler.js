@@ -2,13 +2,13 @@ import $ from 'jquery';
 import getProviderState from 'Utilities/State/getProviderState';
 import { set, updateProvider } from '../baseActions';
 
-function createSaveProviderHandler(section, providerSection, url, getFromState, getProvidersFromState) {
+function createSaveProviderHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
       dispatch(set({ section, saving: true }));
 
       const id = payload.id;
-      const saveData = getProviderState(payload, getState, getFromState, getProvidersFromState);
+      const saveData = getProviderState(payload, getState, getFromState);
 
       const ajaxOptions = {
         url,
@@ -25,7 +25,7 @@ function createSaveProviderHandler(section, providerSection, url, getFromState, 
       const promise = $.ajax(ajaxOptions);
 
       promise.done((data) => {
-        dispatch(updateProvider({ section: providerSection, data }));
+        dispatch(updateProvider({ section, data }));
 
         dispatch(set({
           section,

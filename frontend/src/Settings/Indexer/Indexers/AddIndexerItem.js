@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { align, sizes } from 'Helpers/Props';
+import { sizes } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Link from 'Components/Link';
 import Menu from 'Components/Menu/Menu';
@@ -13,7 +13,11 @@ class AddIndexerItem extends Component {
   // Listeners
 
   onIndexerSelect = () => {
-    this.props.onIndexerSelect(this.props.indexer);
+    const {
+      implementation
+    } = this.props;
+
+    this.props.onIndexerSelect({ implementation });
   }
 
   //
@@ -21,6 +25,7 @@ class AddIndexerItem extends Component {
 
   render() {
     const {
+      implementation,
       implementationName,
       infoLink,
       presets,
@@ -32,7 +37,6 @@ class AddIndexerItem extends Component {
     return (
       <div
         className={styles.indexer}
-        // onPress={this.onIndexerSelect}
       >
         <Link
           className={styles.underlay}
@@ -70,7 +74,7 @@ class AddIndexerItem extends Component {
                             <AddIndexerPresetMenuItem
                               key={preset.name}
                               name={preset.name}
-                              preset={preset}
+                              implementation={implementation}
                               onPress={onIndexerSelect}
                             />
                           );
@@ -95,7 +99,7 @@ class AddIndexerItem extends Component {
 }
 
 AddIndexerItem.propTypes = {
-  indexer: PropTypes.object.isRequired,
+  implementation: PropTypes.string.isRequired,
   implementationName: PropTypes.string.isRequired,
   infoLink: PropTypes.string.isRequired,
   presets: PropTypes.arrayOf(PropTypes.object),

@@ -1,14 +1,13 @@
 import _ from 'lodash';
 
-function getProviderState(payload, getState, getFromState, getProvidersFromState) {
+function getProviderState(payload, getState, getFromState) {
   const id = payload.id;
   const state = getFromState(getState());
-  const providersState = getProvidersFromState(getState());
   const pendingChanges = Object.assign({}, state.pendingChanges);
   const pendingFields = state.pendingChanges.fields || {};
   delete pendingChanges.fields;
 
-  const item = id ? _.find(providersState.items, { id }) : state.item || {};
+  const item = id ? _.find(state.items, { id }) : state.item || {};
 
   if (item.fields) {
     pendingChanges.fields = _.reduce(item.fields, (result, field) => {

@@ -19,7 +19,7 @@ class EditQualityProfileModalConnector extends Component {
 
   @autobind
   onModalClose() {
-    this.props.clearPendingChanges({ section: 'qualityProfileSchema' });
+    this.props.clearPendingChanges({ section: 'qualityProfiles' });
     this.props.onModalClose();
   }
 

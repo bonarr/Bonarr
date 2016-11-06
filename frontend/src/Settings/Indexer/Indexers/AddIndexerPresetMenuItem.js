@@ -7,7 +7,15 @@ class AddIndexerPresetMenuItem extends Component {
   // Listeners
 
   onPress = () => {
-    this.props.onPress(this.props.preset);
+    const {
+      name,
+      implementation
+    } = this.props;
+
+    this.props.onPress({
+      name,
+      implementation
+    });
   }
 
   //
@@ -16,7 +24,7 @@ class AddIndexerPresetMenuItem extends Component {
   render() {
     const {
       name,
-      preset,
+      implementation,
       ...otherProps
     } = this.props;
 
@@ -33,7 +41,7 @@ class AddIndexerPresetMenuItem extends Component {
 
 AddIndexerPresetMenuItem.propTypes = {
   name: PropTypes.string.isRequired,
-  preset: PropTypes.object.isRequired,
+  implementation: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 };
 

@@ -89,5 +89,5 @@ export default connectSettingsSection(
   mapDispatchToProps,
   undefined,
   undefined,
-  { section: 'indexers', schemaSection: 'indexerSchema' }
+  { section: 'indexers' }
 )(EditIndexerModalContentConnector);

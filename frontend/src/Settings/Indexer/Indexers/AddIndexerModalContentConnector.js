@@ -7,17 +7,17 @@ import AddIndexerModalContent from './AddIndexerModalContent';
 
 function createMapStateToProps() {
   return createSelector(
-    (state) => state.settings.indexerSchema,
-    (indexerSchema) => {
+    (state) => state.settings.indexers,
+    (indexers) => {
       const {
         fetching,
         error,
         populated,
-        items
-      } = indexerSchema;
+        schema
+      } = indexers;
 
-      const usenetIndexers = _.filter(items, { protocol: 'usenet' });
-      const torrentIndexers = _.filter(items, { protocol: 'torrent' });
+      const usenetIndexers = _.filter(schema, { protocol: 'usenet' });
+      const torrentIndexers = _.filter(schema, { protocol: 'torrent' });
 
       return {
         fetching,
@@ -47,8 +47,8 @@ class AddIndexerModalContentConnector extends Component {
   //
   // Listeners
 
-  onIndexerSelect = (indexer) => {
-    this.props.selectIndexerSchema({ indexer });
+  onIndexerSelect = ({ implementation, name }) => {
+    this.props.selectIndexerSchema({ implementation, presetName: name });
     this.props.onModalClose({ indexerSelected: true });
   }
 

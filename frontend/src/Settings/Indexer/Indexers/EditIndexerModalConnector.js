@@ -13,7 +13,7 @@ class EditIndexerModalConnector extends Component {
   // Listeners
 
   onModalClose = () => {
-    this.props.clearPendingChanges({ section: 'indexerSchema' });
+    this.props.clearPendingChanges({ section: 'indexers' });
     this.props.onModalClose();
   }
 

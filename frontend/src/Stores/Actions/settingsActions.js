@@ -40,7 +40,7 @@ export const deleteQualityProfile = settingsActionHandlers[types.DELETE_QUALITY_
 
 export const setQualityProfileValue = createAction(types.SET_QUALITY_PROFILE_VALUE, (payload) => {
   return {
-    section: 'qualityProfileSchema',
+    section: 'qualityProfiles',
     ...payload
   };
 });
@@ -64,19 +64,7 @@ export const setQualityDefinitionValue = createAction(types.SET_QUALITY_DEFINITI
 
 export const fetchIndexers = settingsActionHandlers[types.FETCH_INDEXERS];
 export const fetchIndexerSchema = settingsActionHandlers[types.FETCH_INDEXER_SCHEMA];
-
-export const selectIndexerSchema = createAction(types.SELECT_INDEXER_SCHEMA, (payload) => {
-  const indexer = payload.indexer;
-
-  return {
-    section: 'indexerSchema',
-    data: {
-      ...indexer,
-      enableRss: indexer.supportsRss,
-      enableSearch: indexer.supportsSearch
-    }
-  };
-});
+export const selectIndexerSchema = createAction(types.SELECT_INDEXER_SCHEMA);
 
 export const saveIndexer = settingsActionHandlers[types.SAVE_INDEXER];
 export const deleteIndexer = settingsActionHandlers[types.DELETE_INDEXER];
@@ -84,14 +72,14 @@ export const testIndexer = settingsActionHandlers[types.TEST_INDEXER];
 
 export const setIndexerValue = createAction(types.SET_INDEXER_VALUE, (payload) => {
   return {
-    section: 'indexerSchema',
+    section: 'indexers',
     ...payload
   };
 });
 
 export const setIndexerFieldValue = createAction(types.SET_INDEXER_FIELD_VALUE, (payload) => {
   return {
-    section: 'indexerSchema',
+    section: 'indexers',
     ...payload
   };
 });
