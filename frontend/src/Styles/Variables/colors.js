@@ -74,6 +74,7 @@ module.exports = {
 
   modalBackdropBackgroundColor: 'rgba(0, 0, 0, 0.6)',
   modalBackgroundColor: '#fff',
+  modalCloseButtonHoverColor: '#888',
 
   //
   // Menu

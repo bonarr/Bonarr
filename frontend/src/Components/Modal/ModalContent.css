@@ -17,4 +17,8 @@
   text-align: center;
   font-size: 18px;
   line-height: 60px;
+
+  &:hover {
+    color: $modalCloseButtonHoverColor;
+  }
 }
