@@ -1,9 +1,23 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classNames';
+import { map } from 'Helpers/elementChildren';
 import { sizes } from 'Helpers/Props';
 import styles from './FormGroup.css';
 
-function FormGroup({ className, children, size, ...otherProps }) {
+function FormGroup(props) {
+  const {
+    className,
+    children,
+    size,
+    advancedSettings,
+    isAdvanced,
+    ...otherProps
+  } = props;
+
+  if (!advancedSettings && isAdvanced) {
+    return null;
+  }
+
   return (
     <div
       className={classNames(
@@ -12,7 +26,11 @@ function FormGroup({ className, children, size, ...otherProps }) {
       )}
       {...otherProps}
     >
-      {children}
+      {
+        map(children, (child) => {
+          return React.cloneElement(child, { isAdvanced });
+        })
+      }
     </div>
   );
 }
@@ -20,12 +38,16 @@ function FormGroup({ className, children, size, ...otherProps }) {
 FormGroup.propTypes = {
   className: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  size: PropTypes.string.isRequired
+  size: PropTypes.string.isRequired,
+  advancedSettings: PropTypes.bool.isRequired,
+  isAdvanced: PropTypes.bool.isRequired
 };
 
 FormGroup.defaultProps = {
   className: styles.group,
-  size: sizes.SMALL
+  size: sizes.SMALL,
+  advancedSettings: false,
+  isAdvanced: false
 };
 
 export default FormGroup;

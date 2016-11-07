@@ -58,21 +58,21 @@ function IndexerOptions(props) {
               />
             </FormGroup>
 
-            {
-              advancedSettings &&
-                <FormGroup>
-                  <FormLabel>RSS Sync Interval</FormLabel>
+            <FormGroup
+              advancedSettings={advancedSettings}
+              isAdvanced={true}
+            >
+              <FormLabel>RSS Sync Interval</FormLabel>
 
-                  <FormInputGroup
-                    type={inputTypes.NUMBER}
-                    name="rssSyncInterval"
-                    helpText="Interval in minutes. Set to zero to disable (this will stop all automatic release grabbing)"
-                    helpTextWarning="This will apply to all indexers, please follow the rules set forth by them"
-                    onChange={onInputChange}
-                    {...settings.rssSyncInterval}
-                  />
-                </FormGroup>
-            }
+              <FormInputGroup
+                type={inputTypes.NUMBER}
+                name="rssSyncInterval"
+                helpText="Interval in minutes. Set to zero to disable (this will stop all automatic release grabbing)"
+                helpTextWarning="This will apply to all indexers, please follow the rules set forth by them"
+                onChange={onInputChange}
+                {...settings.rssSyncInterval}
+              />
+            </FormGroup>
           </Form>
       }
     </FieldSet>

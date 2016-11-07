@@ -108,5 +108,10 @@ module.exports = {
   //
   // Slider
 
-  sliderAccentColor: '#5d9cec'
+  sliderAccentColor: '#5d9cec',
+
+  //
+  // Form
+
+  advancedFormLabelColor: '#ff902b'
 };

@@ -278,23 +278,23 @@ class Naming extends Component {
                   </div>
               }
 
-              {
-                advancedSettings &&
-                  <FormGroup>
-                    <FormLabel>Series Folder Format</FormLabel>
+              <FormGroup
+                advancedSettings={advancedSettings}
+                isAdvanced={true}
+              >
+                <FormLabel>Series Folder Format</FormLabel>
 
-                    <FormInputGroup
-                      inputClassName={styles.namingInput}
-                      type={inputTypes.TEXT}
-                      name="seriesFolderFormat"
-                      button={<FormInputButton onPress={this.onSeriesFolderNamingModalOpenClick}>?</FormInputButton>}
-                      onChange={onInputChange}
-                      {...settings.seriesFolderFormat}
-                      helpTexts={['Only used when adding a new series', ...seriesFolderFormatHelpTexts]}
-                      errors={[...seriesFolderFormatErrors, ...settings.seriesFolderFormat.errors]}
-                    />
-                  </FormGroup>
-              }
+                <FormInputGroup
+                  inputClassName={styles.namingInput}
+                  type={inputTypes.TEXT}
+                  name="seriesFolderFormat"
+                  button={<FormInputButton onPress={this.onSeriesFolderNamingModalOpenClick}>?</FormInputButton>}
+                  onChange={onInputChange}
+                  {...settings.seriesFolderFormat}
+                  helpTexts={['Only used when adding a new series', ...seriesFolderFormatHelpTexts]}
+                  errors={[...seriesFolderFormatErrors, ...settings.seriesFolderFormat.errors]}
+                />
+              </FormGroup>
 
               <FormGroup>
                 <FormLabel>Season Folder Format</FormLabel>

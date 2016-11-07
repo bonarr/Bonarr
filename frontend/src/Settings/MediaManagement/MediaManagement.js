@@ -66,7 +66,10 @@ class MediaManagement extends Component {
                     <FieldSet
                       legend="Folders"
                     >
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>Create empty series folders</FormLabel>
 
                         <FormInputGroup
@@ -85,7 +88,10 @@ class MediaManagement extends Component {
                     <FieldSet
                       legend="Importing"
                     >
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>Skip Free Space Check (mono only)</FormLabel>
 
                         <FormInputGroup
@@ -97,7 +103,10 @@ class MediaManagement extends Component {
                         />
                       </FormGroup>
 
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>Use Hardlinks instead of Copy</FormLabel>
 
                         <FormInputGroup
@@ -127,66 +136,66 @@ class MediaManagement extends Component {
                     />
                   </FormGroup>
 
-                  {
-                    advancedSettings &&
-                      <FormGroup>
-                        <FormLabel>Download Propers</FormLabel>
+                  <FormGroup
+                    advancedSettings={advancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>Download Propers</FormLabel>
 
-                        <FormInputGroup
-                          type={inputTypes.CHECK}
-                          name="autoDownloadPropers"
-                          helpText="Should Sonarr automatically upgrade to propers when available?"
-                          onChange={onInputChange}
-                          {...settings.autoDownloadPropers}
-                        />
-                      </FormGroup>
-                  }
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="autoDownloadPropers"
+                      helpText="Should Sonarr automatically upgrade to propers when available?"
+                      onChange={onInputChange}
+                      {...settings.autoDownloadPropers}
+                    />
+                  </FormGroup>
 
-                  {
-                    advancedSettings &&
-                      <FormGroup>
-                        <FormLabel>Analyse video files</FormLabel>
+                  <FormGroup
+                    advancedSettings={advancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>Analyse video files</FormLabel>
 
-                        <FormInputGroup
-                          type={inputTypes.CHECK}
-                          name="enableMediaInfo"
-                          helpText="Extract video information such as resolution, runtime and codec information from files. This requires Sonarr to read parts of the file which may cause high disk or network activity during scans."
-                          onChange={onInputChange}
-                          {...settings.enableMediaInfo}
-                        />
-                      </FormGroup>
-                  }
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="enableMediaInfo"
+                      helpText="Extract video information such as resolution, runtime and codec information from files. This requires Sonarr to read parts of the file which may cause high disk or network activity during scans."
+                      onChange={onInputChange}
+                      {...settings.enableMediaInfo}
+                    />
+                  </FormGroup>
 
-                  {
-                    advancedSettings &&
-                      <FormGroup>
-                        <FormLabel>Change File Date</FormLabel>
+                  <FormGroup
+                    advancedSettings={advancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>Change File Date</FormLabel>
 
-                        <FormInputGroup
-                          type={inputTypes.SELECT}
-                          name="fileDate"
-                          helpText="Change file date on import/rescan"
-                          values={fileDateOptions}
-                          onChange={onInputChange}
-                          {...settings.fileDate}
-                        />
-                      </FormGroup>
-                  }
+                    <FormInputGroup
+                      type={inputTypes.SELECT}
+                      name="fileDate"
+                      helpText="Change file date on import/rescan"
+                      values={fileDateOptions}
+                      onChange={onInputChange}
+                      {...settings.fileDate}
+                    />
+                  </FormGroup>
 
-                  {
-                    advancedSettings &&
-                      <FormGroup>
-                        <FormLabel>Recycling Bin</FormLabel>
+                  <FormGroup
+                    advancedSettings={advancedSettings}
+                    isAdvanced={true}
+                  >
+                    <FormLabel>Recycling Bin</FormLabel>
 
-                        <FormInputGroup
-                          type={inputTypes.PATH}
-                          name="recycleBin"
-                          helpText="Episode files will go here when deleted instead of being permanently deleted"
-                          onChange={onInputChange}
-                          {...settings.recycleBin}
-                        />
-                      </FormGroup>
-                  }
+                    <FormInputGroup
+                      type={inputTypes.PATH}
+                      name="recycleBin"
+                      helpText="Episode files will go here when deleted instead of being permanently deleted"
+                      onChange={onInputChange}
+                      {...settings.recycleBin}
+                    />
+                  </FormGroup>
                 </FieldSet>
 
                 {
@@ -194,7 +203,10 @@ class MediaManagement extends Component {
                     <FieldSet
                       legend="Permissions (mono only)"
                     >
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>Set Permissions</FormLabel>
 
                         <FormInputGroup
@@ -207,7 +219,10 @@ class MediaManagement extends Component {
                         />
                       </FormGroup>
 
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>File chmod mask</FormLabel>
 
                         <FormInputGroup
@@ -219,7 +234,10 @@ class MediaManagement extends Component {
                         />
                       </FormGroup>
 
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>Folder chmod mask</FormLabel>
 
                         <FormInputGroup
@@ -232,7 +250,10 @@ class MediaManagement extends Component {
                         />
                       </FormGroup>
 
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>chown User</FormLabel>
 
                         <FormInputGroup
@@ -245,7 +266,10 @@ class MediaManagement extends Component {
                         />
                       </FormGroup>
 
-                      <FormGroup>
+                      <FormGroup
+                        advancedSettings={advancedSettings}
+                        isAdvanced={true}
+                      >
                         <FormLabel>chown Group</FormLabel>
 
                         <FormInputGroup

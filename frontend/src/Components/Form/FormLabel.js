@@ -8,12 +8,17 @@ function FormLabel({
   errorClassName,
   name,
   hasError,
+  isAdvanced,
   ...otherProps
 }) {
   return (
     <label
       {...otherProps}
-      className={classNames(className, hasError && errorClassName)}
+      className={classNames(
+        className,
+        hasError && errorClassName,
+        isAdvanced && styles.isAdvanced
+      )}
       htmlFor={name}
     >
       {children}
@@ -26,12 +31,14 @@ FormLabel.propTypes = {
   className: PropTypes.string,
   errorClassName: PropTypes.string,
   name: PropTypes.string,
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
+  isAdvanced: PropTypes.bool.isRequired
 };
 
 FormLabel.defaultProps = {
   className: styles.label,
-  errorClassName: styles.hasError
+  errorClassName: styles.hasError,
+  isAdvanced: false
 };
 
 export default FormLabel;
