@@ -52,7 +52,9 @@ function selectSettings(item, pendingChanges, saveError) {
     return result;
   }, []);
 
-  settings.fields = fields;
+  if (fields.length) {
+    settings.fields = fields;
+  }
 
   const validationErrors = _.filter(validationFailures, (failure) => {
     return !failure.isWarning;
