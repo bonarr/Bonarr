@@ -13,7 +13,7 @@ import createUpdateProviderReducer from './Creators/createUpdateProviderReducer'
 import createDeleteProviderReducer from './Creators/createDeleteProviderReducer';
 import createReducers from './Creators/createReducers';
 
-const defaultState = {
+export const defaultState = {
   ui: {
     fetching: false,
     populated: false,
@@ -124,6 +124,10 @@ const defaultState = {
 
   advancedSettings: false
 };
+
+export const persistState = [
+  'settings.advancedSettings'
+];
 
 const propertyNames = [
   'ui',

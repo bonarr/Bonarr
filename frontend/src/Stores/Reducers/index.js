@@ -1,11 +1,21 @@
 import { combineReducers } from 'redux';
-import settings from './settingsReducers';
-import system from './systemReducers';
-import commands from './commandReducers';
-import paths from './pathReducers';
-import languages from './languageReducers';
-import tags from './tagReducers';
-import captcha from './captchaReducers';
+import settings, { defaultState as defaultSettingsState } from './settingsReducers';
+import system, { defaultState as defaultSystemState } from './systemReducers';
+import commands, { defaultState as defaultCommandsState } from './commandReducers';
+import paths, { defaultState as defaultPathsState } from './pathReducers';
+import languages, { defaultState as defaultLanguagesState } from './languageReducers';
+import tags, { defaultState as defaultTagsState } from './tagReducers';
+import captcha, { defaultState as defaultCaptchaState } from './captchaReducers';
+
+export const defaultState = {
+  settings: defaultSettingsState,
+  system: defaultSystemState,
+  commands: defaultCommandsState,
+  paths: defaultPathsState,
+  languages: defaultLanguagesState,
+  tags: defaultTagsState,
+  captcha: defaultCaptchaState
+};
 
 export default combineReducers({
   settings,

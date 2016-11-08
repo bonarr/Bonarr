@@ -3575,6 +3575,11 @@
       "from": "redux-actions@0.10.0",
       "resolved": "https://registry.npmjs.org/redux-actions/-/redux-actions-0.10.0.tgz"
     },
+    "redux-localstorage": {
+      "version": "0.4.1",
+      "from": "redux-localstorage@>=0.4.1 <0.5.0",
+      "resolved": "https://registry.npmjs.org/redux-localstorage/-/redux-localstorage-0.4.1.tgz"
+    },
     "redux-thunk": {
       "version": "2.1.0",
       "from": "redux-thunk@2.1.0",

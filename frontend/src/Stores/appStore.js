@@ -1,15 +1,17 @@
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import reducers from 'Stores/Reducers';
+import reducers, { defaultState } from 'Stores/Reducers';
+import persistState from 'Stores/Middleware/persistState';
 
-const defaultState = {
-
-};
+const middlewares = compose(
+  applyMiddleware(thunk),
+  persistState
+);
 
 const appStore = createStore(
   reducers,
   defaultState,
-  applyMiddleware(thunk)
+  middlewares
 );
 
 export default appStore;
