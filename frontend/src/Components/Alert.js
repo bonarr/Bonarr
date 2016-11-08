@@ -24,7 +24,7 @@ Alert.propTypes = {
 };
 
 Alert.defaultProps = {
-  className: styles.label,
+  className: styles.alert,
   kind: kinds.INFO
 };
 

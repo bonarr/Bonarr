@@ -21,6 +21,7 @@ class TextInput extends Component {
 
   render() {
     const {
+      type,
       className,
       name,
       value,
@@ -31,6 +32,7 @@ class TextInput extends Component {
 
     return (
       <input
+        type={type}
         className={classNames(
           className,
           hasError && styles.hasError,
@@ -46,9 +48,10 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
-  className: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.string)]).isRequired,
   hasError: PropTypes.bool,
   hasWarning: PropTypes.bool,
   hasButton: PropTypes.bool,
@@ -56,6 +59,7 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
+  type: 'text',
   className: styles.text,
   value: ''
 };

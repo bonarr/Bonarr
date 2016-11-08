@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
 import FormGroup from 'Components/Form/FormGroup';
@@ -18,15 +19,35 @@ function getType(type) {
   // Captcha
 
   switch (type) {
-    case 'textbox':
-      return inputTypes.TEXT;
-    case 'checkbox':
-      return inputTypes.CHECK;
     case 'captcha':
       return inputTypes.CAPTCHA;
+    case 'checkbox':
+      return inputTypes.CHECK;
+    case 'password':
+      return inputTypes.PASSWORD;
+    case 'path':
+      return inputTypes.PATH;
+    case 'select':
+      return inputTypes.SELECT;
+    case 'textbox':
+      return inputTypes.TEXT;
     default:
       return inputTypes.TEXT;
   }
+}
+
+function getSelectValues(selectOptions) {
+  if (!selectOptions) {
+    return;
+  }
+
+  return _.reduce(selectOptions, (result, option) => {
+    result.push({
+      [option.value]: option.name
+    });
+
+    return result;
+  }, []);
 }
 
 function ProviderFieldFormGroup(props) {
@@ -42,6 +63,7 @@ function ProviderFieldFormGroup(props) {
     pending,
     errors,
     warnings,
+    selectOptions,
     onChange,
     ...otherProps
   } = props;
@@ -59,15 +81,22 @@ function ProviderFieldFormGroup(props) {
         name={name}
         helpText={helpText}
         value={value}
+        values={getSelectValues(selectOptions)}
         errors={errors}
         warnings={warnings}
         pending={pending}
+        hasFileBrowser={false}
         onChange={onChange}
         {...otherProps}
       />
     </FormGroup>
   );
 }
+
+const selectOptionsShape = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired
+};
 
 ProviderFieldFormGroup.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
@@ -81,6 +110,7 @@ ProviderFieldFormGroup.propTypes = {
   pending: PropTypes.bool.isRequired,
   errors: PropTypes.arrayOf(PropTypes.string).isRequired,
   warnings: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectOptions: PropTypes.arrayOf(PropTypes.shape(selectOptionsShape)),
   onChange: PropTypes.func.isRequired
 };
 

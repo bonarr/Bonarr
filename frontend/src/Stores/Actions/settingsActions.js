@@ -103,3 +103,25 @@ export const setRestrictionValue = createAction(types.SET_RESTRICTION_VALUE, (pa
     ...payload
   };
 });
+
+export const fetchDownloadClients = settingsActionHandlers[types.FETCH_DOWNLOAD_CLIENTS];
+export const fetchDownloadClientSchema = settingsActionHandlers[types.FETCH_DOWNLOAD_CLIENT_SCHEMA];
+export const selectDownloadClientSchema = createAction(types.SELECT_DOWNLOAD_CLIENT_SCHEMA);
+
+export const saveDownloadClient = settingsActionHandlers[types.SAVE_DOWNLOAD_CLIENT];
+export const deleteDownloadClient = settingsActionHandlers[types.DELETE_DOWNLOAD_CLIENT];
+export const testDownloadClient = settingsActionHandlers[types.TEST_DOWNLOAD_CLIENT];
+
+export const setDownloadClientValue = createAction(types.SET_DOWNLOAD_CLIENT_VALUE, (payload) => {
+  return {
+    section: 'downloadClients',
+    ...payload
+  };
+});
+
+export const setDownloadClientFieldValue = createAction(types.SET_DOWNLOAD_CLIENT_FIELD_VALUE, (payload) => {
+  return {
+    section: 'downloadClients',
+    ...payload
+  };
+});

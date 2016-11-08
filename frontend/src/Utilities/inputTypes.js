@@ -4,7 +4,7 @@ const inputTypes = {
   TEXT: 'text',
   PATH: 'path',
   PASSWORD: 'password',
-  NUMBER: 'password',
+  NUMBER: 'number',
   TAG: 'tag',
   TEXT_TAG: 'textTag',
   CAPTCHA: 'captcha'

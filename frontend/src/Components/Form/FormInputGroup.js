@@ -1,33 +1,44 @@
 import React, { PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
 import Icon from 'Components/Icon';
+import CaptchaInputConnector from './CaptchaInputConnector';
 import CheckInput from './CheckInput';
+import NumberInput from './NumberInput';
+import PasswordInput from './PasswordInput';
 import PathInputConnector from './PathInputConnector';
 import SelectInput from './SelectInput';
-import CaptchaInputConnector from './CaptchaInputConnector';
-import TextInput from './TextInput';
-import NumberInput from './NumberInput';
 import TagInputConnector from './TagInputConnector';
 import TextTagInputConnector from './TextTagInputConnector';
+import TextInput from './TextInput';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './FormInputGroup.css';
 
 function getComponent(type) {
   switch (type) {
-    case inputTypes.CHECK:
-      return CheckInput;
-    case inputTypes.SELECT:
-      return SelectInput;
-    case inputTypes.PATH:
-      return PathInputConnector;
-    case inputTypes.NUMBER:
-      return NumberInput;
-    case inputTypes.TAG:
-      return TagInputConnector;
-    case inputTypes.TEXT_TAG:
-      return TextTagInputConnector;
     case inputTypes.CAPTCHA:
       return CaptchaInputConnector;
+
+    case inputTypes.CHECK:
+      return CheckInput;
+
+    case inputTypes.NUMBER:
+      return NumberInput;
+
+    case inputTypes.PASSWORD:
+      return PasswordInput;
+
+    case inputTypes.PATH:
+      return PathInputConnector;
+
+    case inputTypes.SELECT:
+      return SelectInput;
+
+    case inputTypes.TAG:
+      return TagInputConnector;
+
+    case inputTypes.TEXT_TAG:
+      return TextTagInputConnector;
+
     default:
       return TextInput;
   }
@@ -74,7 +85,7 @@ function FormInputGroup(props) {
 
         {/* <div className={styles.pendingChangesContainer}>
           {
-            pending &&
+          pending &&
               <Icon
                 name="icon-sonarr-unsaved-setting"
                 className={styles.pendingChangesIcon}

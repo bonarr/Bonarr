@@ -8,10 +8,10 @@ import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
-import AddIndexerItem from './AddIndexerItem';
-import styles from './AddIndexerModalContent.css';
+import AddDownloadClientItem from './AddDownloadClientItem';
+import styles from './AddDownloadClientModalContent.css';
 
-class AddIndexerModalContent extends Component {
+class AddDownloadClientModalContent extends Component {
 
   //
   // Render
@@ -21,16 +21,16 @@ class AddIndexerModalContent extends Component {
       fetching,
       error,
       populated,
-      usenetIndexers,
-      torrentIndexers,
-      onIndexerSelect,
+      usenetDownloadClients,
+      torrentDownloadClients,
+      onDownloadClientSelect,
       onModalClose
     } = this.props;
 
     return (
       <ModalContent onModalClose={onModalClose}>
         <ModalHeader>
-          Add Indexer
+          Add DownloadClient
         </ModalHeader>
 
         <ModalBody>
@@ -41,7 +41,7 @@ class AddIndexerModalContent extends Component {
 
           {
             !fetching && !!error &&
-              <div>Unable to add a new indexer, please try again.</div>
+              <div>Unable to add a new downloadClient, please try again.</div>
           }
 
           {
@@ -49,20 +49,20 @@ class AddIndexerModalContent extends Component {
               <div>
 
                 <Alert kind={kinds.INFO}>
-                  <div>Sonarr supports any indexer that uses the Newznab standard, as well as other indexers listed below.</div>
-                  <div>For more information on the individual indexers, clink on the info buttons.</div>
+                  <div>Sonarr supports any downloadClient that uses the Newznab standard, as well as other downloadClients listed below.</div>
+                  <div>For more information on the individual downloadClients, clink on the info buttons.</div>
                 </Alert>
 
                 <FieldSet legend="Usenet">
-                  <div className={styles.indexers}>
+                  <div className={styles.downloadClients}>
                     {
-                      usenetIndexers.map((indexer) => {
+                      usenetDownloadClients.map((downloadClient) => {
                         return (
-                          <AddIndexerItem
-                            key={indexer.implementation}
-                            implementation={indexer.implementation}
-                            {...indexer}
-                            onIndexerSelect={onIndexerSelect}
+                          <AddDownloadClientItem
+                            key={downloadClient.implementation}
+                            implementation={downloadClient.implementation}
+                            {...downloadClient}
+                            onDownloadClientSelect={onDownloadClientSelect}
                           />
                         );
                       })
@@ -71,15 +71,15 @@ class AddIndexerModalContent extends Component {
                 </FieldSet>
 
                 <FieldSet legend="Torrents">
-                  <div className={styles.indexers}>
+                  <div className={styles.downloadClients}>
                     {
-                      torrentIndexers.map((indexer) => {
+                      torrentDownloadClients.map((downloadClient) => {
                         return (
-                          <AddIndexerItem
-                            key={indexer.implementation}
-                            implementation={indexer.implementation}
-                            {...indexer}
-                            onIndexerSelect={onIndexerSelect}
+                          <AddDownloadClientItem
+                            key={downloadClient.implementation}
+                            implementation={downloadClient.implementation}
+                            {...downloadClient}
+                            onDownloadClientSelect={onDownloadClientSelect}
                           />
                         );
                       })
@@ -101,14 +101,14 @@ class AddIndexerModalContent extends Component {
   }
 }
 
-AddIndexerModalContent.propTypes = {
+AddDownloadClientModalContent.propTypes = {
   fetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   populated: PropTypes.bool.isRequired,
-  usenetIndexers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  torrentIndexers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onIndexerSelect: PropTypes.func.isRequired,
+  usenetDownloadClients: PropTypes.arrayOf(PropTypes.object).isRequired,
+  torrentDownloadClients: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onDownloadClientSelect: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
 
-export default AddIndexerModalContent;
+export default AddDownloadClientModalContent;

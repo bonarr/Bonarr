@@ -197,6 +197,7 @@ PathInput.propTypes = {
 PathInput.defaultProps = {
   className: styles.pathInputWrapper,
   inputClassName: styles.path,
+  value: '',
   hasFileBrowser: true
 };
 

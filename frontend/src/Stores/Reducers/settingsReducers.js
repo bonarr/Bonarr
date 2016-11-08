@@ -97,7 +97,6 @@ export const defaultState = {
     saving: false,
     saveError: null,
     testing: false,
-    item: {},
     items: [],
     pendingChanges: {}
   },
@@ -122,6 +121,22 @@ export const defaultState = {
     pendingChanges: {}
   },
 
+  downloadClients: {
+    fetching: false,
+    populated: false,
+    error: null,
+    fetchingSchema: false,
+    schemaPopulated: false,
+    schemaError: null,
+    schema: [],
+    selectedSchema: {},
+    saving: false,
+    saveError: null,
+    testing: false,
+    items: [],
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -135,7 +150,6 @@ const propertyNames = [
   'naming',
   'namingExamples',
   'qualityDefinitions',
-  'indexers',
   'indexerSettings'
 ];
 
@@ -143,7 +157,8 @@ const thingyPropertyNames = [
   'qualityProfiles',
   'delayProfiles',
   'indexers',
-  'restrictions'
+  'restrictions',
+  'downloadClients'
 ];
 
 const settingsReducers = handleActions({
@@ -173,6 +188,17 @@ const settingsReducers = handleActions({
     return selectProviderSchema(state, 'indexers', payload, (selectedSchema) => {
       selectedSchema.enableRss = selectedSchema.supportsRss;
       selectedSchema.enableSearch = selectedSchema.supportsSearch;
+
+      return selectedSchema;
+    });
+  },
+
+  [types.SET_DOWNLOAD_CLIENT_VALUE]: createSetSettingValueReducer('downloadClients'),
+  [types.SET_DOWNLOAD_CLIENT_FIELD_VALUE]: createSetProviderFieldValueReducer('downloadClients'),
+
+  [types.SELECT_DOWNLOAD_CLIENT_SCHEMA]: function(state, { payload }) {
+    return selectProviderSchema(state, 'downloadClients', payload, (selectedSchema) => {
+      selectedSchema.enable = true;
 
       return selectedSchema;
     });

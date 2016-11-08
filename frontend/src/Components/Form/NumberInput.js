@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
-import classNames from 'classNames';
-import styles from './NumberInput.css';
+import TextInput from './TextInput';
 
 class NumberInput extends Component {
 
   //
   // Listeners
 
-  @autobind
-  onChange(event) {
+  onChange = (event) => {
     this.props.onChange({
       name: this.props.name,
       value: parseInt(event.target.value)
@@ -21,25 +18,13 @@ class NumberInput extends Component {
 
   render() {
     const {
-      className,
-      name,
-      value,
-      hasError,
-      hasWarning,
-      hasButton
+      ...otherProps
     } = this.props;
 
     return (
-      <input
-        className={classNames(
-          className,
-          hasError && styles.hasError,
-          hasWarning && styles.hasWarning,
-          hasButton && styles.hasButton
-        )}
+      <TextInput
         type="number"
-        name={name}
-        value={value}
+        {...otherProps}
         onChange={this.onChange}
       />
     );
@@ -47,17 +32,12 @@ class NumberInput extends Component {
 }
 
 NumberInput.propTypes = {
-  className: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-  hasError: PropTypes.bool,
-  hasWarning: PropTypes.bool,
-  hasButton: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 
 NumberInput.defaultProps = {
-  className: styles.number,
   value: 0
 };
 

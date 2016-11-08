@@ -164,7 +164,22 @@ const settingsActionHandlers = {
 
   [types.DELETE_RESTRICTION]: createDeleteProviderHandler('restrictions',
                                                           '/restriction',
-                                                          (state) => state.settings.restrictions)
+                                                          (state) => state.settings.restrictions),
+
+  [types.FETCH_DOWNLOAD_CLIENTS]: createFetchHandler('downloadClients', '/downloadClient'),
+  [types.FETCH_DOWNLOAD_CLIENT_SCHEMA]: createFetchSchemaHandler('downloadClients', '/downloadClient/schema'),
+
+  [types.SAVE_DOWNLOAD_CLIENT]: createSaveProviderHandler('downloadClients',
+                                                          '/downloadClient',
+                                                          (state) => state.settings.downloadClients),
+
+  [types.DELETE_DOWNLOAD_CLIENT]: createDeleteProviderHandler('downloadClients',
+                                                                '/downloadClient',
+                                                              (state) => state.settings.downloadClients),
+
+  [types.TEST_DOWNLOAD_CLIENT]: createTestProviderHandler('downloadClients',
+                                                          '/downloadClient',
+                                                          (state) => state.settings.downloadClients)
 };
 
 export default settingsActionHandlers;
