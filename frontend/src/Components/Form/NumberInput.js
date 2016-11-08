@@ -6,10 +6,10 @@ class NumberInput extends Component {
   //
   // Listeners
 
-  onChange = (event) => {
+  onChange = ({ name, value }) => {
     this.props.onChange({
-      name: this.props.name,
-      value: parseInt(event.target.value)
+      name,
+      value: value ? (value) : null
     });
   }
 
@@ -32,13 +32,12 @@ class NumberInput extends Component {
 }
 
 NumberInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   onChange: PropTypes.func.isRequired
 };
 
 NumberInput.defaultProps = {
-  value: 0
+  value: null
 };
 
 export default NumberInput;

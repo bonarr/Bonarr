@@ -137,6 +137,16 @@ export const defaultState = {
     pendingChanges: {}
   },
 
+  downloadClientOptions: {
+    fetching: false,
+    populated: false,
+    error: null,
+    pendingChanges: {},
+    saving: false,
+    saveError: null,
+    item: {}
+  },
+
   advancedSettings: false
 };
 
@@ -150,7 +160,8 @@ const propertyNames = [
   'naming',
   'namingExamples',
   'qualityDefinitions',
-  'indexerOptions'
+  'indexerOptions',
+  'downloadClientOptions'
 ];
 
 const thingyPropertyNames = [
@@ -203,6 +214,8 @@ const settingsReducers = handleActions({
       return selectedSchema;
     });
   },
+
+  [types.SET_DOWNLOAD_CLIENT_OPTIONS_VALUE]: createSetSettingValueReducer('downloadClientOptions'),
 
   [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
     const section = 'qualityDefinitions';

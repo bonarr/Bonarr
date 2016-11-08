@@ -57,7 +57,7 @@ class DownloadClients extends Component {
 
     return (
       <FieldSet
-        legend="DownloadClients"
+        legend="Download Clients"
       >
         <PageSectionContent
           errorMessage="Unable to load download clients"

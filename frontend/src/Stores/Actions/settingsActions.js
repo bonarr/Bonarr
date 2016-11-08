@@ -125,3 +125,12 @@ export const setDownloadClientFieldValue = createAction(types.SET_DOWNLOAD_CLIEN
     ...payload
   };
 });
+
+export const fetchDownloadClientOptions = settingsActionHandlers[types.FETCH_DOWNLOAD_CLIENT_OPTIONS];
+export const saveDownloadClientOptions = settingsActionHandlers[types.SAVE_DOWNLOAD_CLIENT_OPTIONS];
+export const setDownloadClientOptionsValue = createAction(types.SET_DOWNLOAD_CLIENT_OPTIONS_VALUE, (payload) => {
+  return {
+    section: 'downloadClientOptions',
+    ...payload
+  };
+});

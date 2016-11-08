@@ -1,0 +1,6 @@
+.droneFactoryAlert {
+  composes: alert from 'Components/Alert.css';
+
+  margin-bottom: 20px;
+  width: 650px;
+}

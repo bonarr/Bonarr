@@ -179,7 +179,10 @@ const settingsActionHandlers = {
 
   [types.TEST_DOWNLOAD_CLIENT]: createTestProviderHandler('downloadClients',
                                                           '/downloadClient',
-                                                          (state) => state.settings.downloadClients)
+                                                          (state) => state.settings.downloadClients),
+
+  [types.FETCH_DOWNLOAD_CLIENT_OPTIONS]: createFetchHandler('downloadClientOptions', '/config/downloadClient'),
+  [types.SAVE_DOWNLOAD_CLIENT_OPTIONS]: createSaveHandler('downloadClientOptions', '/config/downloadClient', (state) => state.settings.downloadClientOptions)
 };
 
 export default settingsActionHandlers;
