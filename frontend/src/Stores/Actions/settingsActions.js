@@ -84,11 +84,11 @@ export const setIndexerFieldValue = createAction(types.SET_INDEXER_FIELD_VALUE, 
   };
 });
 
-export const fetchIndexerSettings = settingsActionHandlers[types.FETCH_INDEXER_SETTINGS];
-export const saveIndexerSettings = settingsActionHandlers[types.SAVE_INDEXER_SETTINGS];
-export const setIndexerSettingsValue = createAction(types.SET_INDEXER_SETTINGS_VALUE, (payload) => {
+export const fetchIndexerSettings = settingsActionHandlers[types.FETCH_INDEXER_OPTIONS];
+export const saveIndexerSettings = settingsActionHandlers[types.SAVE_INDEXER_OPTIONS];
+export const setIndexerSettingsValue = createAction(types.SET_INDEXER_OPTIONS_VALUE, (payload) => {
   return {
-    section: 'indexerSettings',
+    section: 'indexerOptions',
     ...payload
   };
 });

@@ -79,5 +79,5 @@ export default connectSettingsSection(
                 mapDispatchToProps,
                 undefined,
                 { withRef: true },
-                { section: 'indexerSettings' }
+                { section: 'indexerOptions' }
                )(IndexerOptionsConnector);

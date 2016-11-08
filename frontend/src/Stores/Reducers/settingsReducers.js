@@ -101,7 +101,7 @@ export const defaultState = {
     pendingChanges: {}
   },
 
-  indexerSettings: {
+  indexerOptions: {
     fetching: false,
     populated: false,
     error: null,
@@ -150,7 +150,7 @@ const propertyNames = [
   'naming',
   'namingExamples',
   'qualityDefinitions',
-  'indexerSettings'
+  'indexerOptions'
 ];
 
 const thingyPropertyNames = [
@@ -181,7 +181,7 @@ const settingsReducers = handleActions({
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
   [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexers'),
   [types.SET_INDEXER_FIELD_VALUE]: createSetProviderFieldValueReducer('indexers'),
-  [types.SET_INDEXER_SETTINGS_VALUE]: createSetSettingValueReducer('indexerSettings'),
+  [types.SET_INDEXER_OPTIONS_VALUE]: createSetSettingValueReducer('indexerOptions'),
   [types.SET_RESTRICTION_VALUE]: createSetSettingValueReducer('restrictions'),
 
   [types.SELECT_INDEXER_SCHEMA]: function(state, { payload }) {

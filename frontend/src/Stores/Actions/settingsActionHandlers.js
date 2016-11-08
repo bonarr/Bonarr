@@ -153,8 +153,8 @@ const settingsActionHandlers = {
                                                   '/indexer',
                                                   (state) => state.settings.indexers),
 
-  [types.FETCH_INDEXER_SETTINGS]: createFetchHandler('indexerSettings', '/config/indexer'),
-  [types.SAVE_INDEXER_SETTINGS]: createSaveHandler('indexerSettings', '/config/indexer', (state) => state.settings.indexerSettings),
+  [types.FETCH_INDEXER_OPTIONS]: createFetchHandler('indexerOptions', '/config/indexer'),
+  [types.SAVE_INDEXER_OPTIONS]: createSaveHandler('indexerOptions', '/config/indexer', (state) => state.settings.indexerOptions),
 
   [types.FETCH_RESTRICTIONS]: createFetchHandler('restrictions', '/restriction'),
 
