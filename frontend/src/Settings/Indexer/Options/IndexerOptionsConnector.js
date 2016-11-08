@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
-import { fetchIndexerSettings, setIndexerSettingsValue, saveIndexerSettings } from 'Stores/Actions/settingsActions';
+import { fetchIndexerOptions, setIndexerOptionsValue, saveIndexerOptions } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
 import IndexerOptions from './IndexerOptions';
 
@@ -19,9 +19,9 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  fetchIndexerSettings,
-  setIndexerSettingsValue,
-  saveIndexerSettings
+  fetchIndexerOptions,
+  setIndexerOptionsValue,
+  saveIndexerOptions
 };
 
 class IndexerOptionsConnector extends Component {
@@ -30,7 +30,7 @@ class IndexerOptionsConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    this.props.fetchIndexerSettings();
+    this.props.fetchIndexerOptions();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,14 +43,14 @@ class IndexerOptionsConnector extends Component {
   // Control
 
   save = () => {
-    this.props.saveIndexerSettings();
+    this.props.saveIndexerOptions();
   }
 
   //
   // Listeners
 
   onInputChange = ({ name, value }) => {
-    this.props.setIndexerSettingsValue({ name, value });
+    this.props.setIndexerOptionsValue({ name, value });
   }
 
   //
@@ -68,9 +68,9 @@ class IndexerOptionsConnector extends Component {
 
 IndexerOptionsConnector.propTypes = {
   hasPendingChanges: PropTypes.bool.isRequired,
-  fetchIndexerSettings: PropTypes.func.isRequired,
-  setIndexerSettingsValue: PropTypes.func.isRequired,
-  saveIndexerSettings: PropTypes.func.isRequired,
+  fetchIndexerOptions: PropTypes.func.isRequired,
+  setIndexerOptionsValue: PropTypes.func.isRequired,
+  saveIndexerOptions: PropTypes.func.isRequired,
   onHasPendingChange: PropTypes.func.isRequired
 };
 
