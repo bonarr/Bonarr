@@ -1,3 +1,9 @@
+.body {
+  composes: body from 'Components/Modal/ModalBody.css';
+
+  min-height: 430px;
+}
+
 .deleteButton {
   composes: button from 'Components/Button.css';
 

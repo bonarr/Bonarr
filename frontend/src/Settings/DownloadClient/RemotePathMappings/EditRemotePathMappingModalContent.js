@@ -44,7 +44,7 @@ class EditRemotePathMappingModalContent extends Component {
           {id ? 'Edit Remote Path Mapping' : 'Add Remote Path Mapping'}
         </ModalHeader>
 
-        <ModalBody>
+        <ModalBody className={styles.body}>
           {
             fetching &&
               <LoadingIndicator />
@@ -88,7 +88,7 @@ class EditRemotePathMappingModalContent extends Component {
                   <FormLabel>Local Path</FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.TEXT}
+                    type={inputTypes.PATH}
                     name="localPath"
                     helpText="Path that Sonarr should use to access the remote path locally"
                     {...localPath}
