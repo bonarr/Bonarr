@@ -134,3 +134,14 @@ export const setDownloadClientOptionsValue = createAction(types.SET_DOWNLOAD_CLI
     ...payload
   };
 });
+
+export const fetchRemotePathMappings = settingsActionHandlers[types.FETCH_REMOTE_PATH_MAPPINGS];
+export const saveRemotePathMapping = settingsActionHandlers[types.SAVE_REMOTE_PATH_MAPPING];
+export const deleteRemotePathMapping = settingsActionHandlers[types.DELETE_REMOTE_PATH_MAPPING];
+
+export const setRemotePathMappingValue = createAction(types.SET_REMOTE_PATH_MAPPING_VALUE, (payload) => {
+  return {
+    section: 'remotePathMappings',
+    ...payload
+  };
+});

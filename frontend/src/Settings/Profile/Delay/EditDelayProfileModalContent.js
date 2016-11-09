@@ -115,17 +115,17 @@ class EditDelayProfileModalContent extends Component {
                       This is the default profile. It applies to all series that don't have an explicit profile.
                     </Alert> :
 
-                    <FormGroup>
-                      <FormLabel>Tags</FormLabel>
+                  <FormGroup>
+                    <FormLabel>Tags</FormLabel>
 
-                      <FormInputGroup
-                        type={inputTypes.TAG}
-                        name="tags"
-                        {...tags}
-                        helpText="Delay in minutes to wait before grabbing a torrent"
-                        onChange={onInputChange}
-                      />
-                    </FormGroup>
+                    <FormInputGroup
+                      type={inputTypes.TAG}
+                      name="tags"
+                      {...tags}
+                      helpText="Delay in minutes to wait before grabbing a torrent"
+                      onChange={onInputChange}
+                    />
+                  </FormGroup>
                 }
               </Form>
           }

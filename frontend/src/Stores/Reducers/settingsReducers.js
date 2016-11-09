@@ -147,6 +147,16 @@ export const defaultState = {
     item: {}
   },
 
+  remotePathMappings: {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: [],
+    saving: false,
+    saveError: null,
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -169,7 +179,8 @@ const thingyPropertyNames = [
   'delayProfiles',
   'indexers',
   'restrictions',
-  'downloadClients'
+  'downloadClients',
+  'remotePathMappings'
 ];
 
 const settingsReducers = handleActions({
@@ -190,6 +201,31 @@ const settingsReducers = handleActions({
   [types.SET_NAMING_SETTINGS_VALUE]: createSetSettingValueReducer('naming'),
   [types.SET_QUALITY_PROFILE_VALUE]: createSetSettingValueReducer('qualityProfiles'),
   [types.SET_DELAY_PROFILE_VALUE]: createSetSettingValueReducer('delayProfiles'),
+
+  [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
+    const section = 'qualityDefinitions';
+    const { id, name, value } = payload;
+    const newState = getSectionState(state, section);
+    newState.pendingChanges = _.cloneDeep(newState.pendingChanges);
+
+    const pendingState = newState.pendingChanges[id] || {};
+    const currentValue = _.find(newState.items, { id })[name];
+
+    if (currentValue === value) {
+      delete pendingState[name];
+    } else {
+      pendingState[name] = value;
+    }
+
+    if (_.isEmpty(pendingState)) {
+      delete newState.pendingChanges[id];
+    } else {
+      newState.pendingChanges[id] = pendingState;
+    }
+
+    return updateSectionState(state, section, newState);
+  },
+
   [types.SET_INDEXER_VALUE]: createSetSettingValueReducer('indexers'),
   [types.SET_INDEXER_FIELD_VALUE]: createSetProviderFieldValueReducer('indexers'),
   [types.SET_INDEXER_OPTIONS_VALUE]: createSetSettingValueReducer('indexerOptions'),
@@ -216,30 +252,7 @@ const settingsReducers = handleActions({
   },
 
   [types.SET_DOWNLOAD_CLIENT_OPTIONS_VALUE]: createSetSettingValueReducer('downloadClientOptions'),
-
-  [types.SET_QUALITY_DEFINITION_VALUE]: function(state, { payload }) {
-    const section = 'qualityDefinitions';
-    const { id, name, value } = payload;
-    const newState = getSectionState(state, section);
-    newState.pendingChanges = _.cloneDeep(newState.pendingChanges);
-
-    const pendingState = newState.pendingChanges[id] || {};
-    const currentValue = _.find(newState.items, { id })[name];
-
-    if (currentValue === value) {
-      delete pendingState[name];
-    } else {
-      pendingState[name] = value;
-    }
-
-    if (_.isEmpty(pendingState)) {
-      delete newState.pendingChanges[id];
-    } else {
-      newState.pendingChanges[id] = pendingState;
-    }
-
-    return updateSectionState(state, section, newState);
-  }
+  [types.SET_REMOTE_PATH_MAPPING_VALUE]: createSetSettingValueReducer('remotePathMappings')
 
 }, defaultState);
 

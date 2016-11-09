@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import autobind from 'autobind-decorator';
 import classNames from 'classNames';

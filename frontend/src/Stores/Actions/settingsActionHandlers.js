@@ -166,23 +166,33 @@ const settingsActionHandlers = {
                                                           '/restriction',
                                                           (state) => state.settings.restrictions),
 
-  [types.FETCH_DOWNLOAD_CLIENTS]: createFetchHandler('downloadClients', '/downloadClient'),
-  [types.FETCH_DOWNLOAD_CLIENT_SCHEMA]: createFetchSchemaHandler('downloadClients', '/downloadClient/schema'),
+  [types.FETCH_DOWNLOAD_CLIENTS]: createFetchHandler('downloadClients', '/downloadclient'),
+  [types.FETCH_DOWNLOAD_CLIENT_SCHEMA]: createFetchSchemaHandler('downloadClients', '/downloadclient/schema'),
 
   [types.SAVE_DOWNLOAD_CLIENT]: createSaveProviderHandler('downloadClients',
-                                                          '/downloadClient',
+                                                          '/downloadclient',
                                                           (state) => state.settings.downloadClients),
 
   [types.DELETE_DOWNLOAD_CLIENT]: createDeleteProviderHandler('downloadClients',
-                                                                '/downloadClient',
+                                                                '/downloadclient',
                                                               (state) => state.settings.downloadClients),
 
   [types.TEST_DOWNLOAD_CLIENT]: createTestProviderHandler('downloadClients',
-                                                          '/downloadClient',
+                                                          '/downloadclient',
                                                           (state) => state.settings.downloadClients),
 
-  [types.FETCH_DOWNLOAD_CLIENT_OPTIONS]: createFetchHandler('downloadClientOptions', '/config/downloadClient'),
-  [types.SAVE_DOWNLOAD_CLIENT_OPTIONS]: createSaveHandler('downloadClientOptions', '/config/downloadClient', (state) => state.settings.downloadClientOptions)
+  [types.FETCH_DOWNLOAD_CLIENT_OPTIONS]: createFetchHandler('downloadClientOptions', '/config/downloadclient'),
+  [types.SAVE_DOWNLOAD_CLIENT_OPTIONS]: createSaveHandler('downloadClientOptions', '/config/downloadclient', (state) => state.settings.downloadClientOptions),
+
+  [types.FETCH_REMOTE_PATH_MAPPINGS]: createFetchHandler('remotePathMappings', '/remotepathmapping'),
+
+  [types.SAVE_REMOTE_PATH_MAPPING]: createSaveProviderHandler('remotePathMappings',
+                                                              '/remotepathmapping',
+                                                              (state) => state.settings.remotePathMappings),
+
+  [types.DELETE_REMOTE_PATH_MAPPING]: createDeleteProviderHandler('remotePathMappings',
+                                                                  '/remotepathmapping',
+                                                                  (state) => state.settings.remotePathMappings)
 };
 
 export default settingsActionHandlers;

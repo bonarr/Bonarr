@@ -2,8 +2,8 @@ import { PropTypes } from 'react';
 
 const settingShape = {
   value: PropTypes.oneOf([PropTypes.bool, PropTypes.number, PropTypes.string]),
-  warnings: PropTypes.arrayOf(PropTypes.object).isRequired,
-  errors: PropTypes.arrayOf(PropTypes.object).isRequired
+  warnings: PropTypes.arrayOf(PropTypes.string).isRequired,
+  errors: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export const arraySettingShape = {

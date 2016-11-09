@@ -4,7 +4,7 @@ import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
 import DownloadClientsConnector from './DownloadClients/DownloadClientsConnector';
 import DownloadClientOptionsConnector from './Options/DownloadClientOptionsConnector';
-// import RemotePathMappingsConnector from './RemotePathMappings/RemotePathMappingsConnector';
+import RemotePathMappingsConnector from './RemotePathMappings/RemotePathMappingsConnector';
 
 class DownloadClientSettings extends Component {
 
@@ -55,7 +55,7 @@ class DownloadClientSettings extends Component {
             onHasPendingChange={this.onHasPendingChange}
           />
 
-          {/* <RemotePathMappingsConnector /> */}
+          <RemotePathMappingsConnector />
         </PageContentBody>
       </PageContent>
     );
