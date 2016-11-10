@@ -167,3 +167,20 @@ export const setNotificationFieldValue = createAction(types.SET_NOTIFICATION_FIE
     ...payload
   };
 });
+
+export const fetchMetadata = settingsActionHandlers[types.FETCH_METADATA];
+export const saveMetadata = settingsActionHandlers[types.SAVE_METADATA];
+
+export const setMetadataValue = createAction(types.SET_METADATA_VALUE, (payload) => {
+  return {
+    section: 'metadata',
+    ...payload
+  };
+});
+
+export const setMetadataFieldValue = createAction(types.SET_METADATA_FIELD_VALUE, (payload) => {
+  return {
+    section: 'metadata',
+    ...payload
+  };
+});

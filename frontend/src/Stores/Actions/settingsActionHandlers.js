@@ -207,7 +207,13 @@ const settingsActionHandlers = {
 
   [types.TEST_NOTIFICATION]: createTestProviderHandler('notifications',
                                                        '/notification',
-                                                       (state) => state.settings.notifications)
+                                                       (state) => state.settings.notifications),
+
+  [types.FETCH_METADATA]: createFetchHandler('metadata', '/metadata'),
+
+  [types.SAVE_METADATA]: createSaveProviderHandler('metadata',
+                                                   '/metadata',
+                                                   (state) => state.settings.metadata)
 };
 
 export default settingsActionHandlers;

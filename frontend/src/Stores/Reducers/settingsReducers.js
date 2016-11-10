@@ -173,6 +173,16 @@ export const defaultState = {
     pendingChanges: {}
   },
 
+  metadata: {
+    fetching: false,
+    populated: false,
+    error: null,
+    saving: false,
+    saveError: null,
+    items: [],
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -197,7 +207,8 @@ const providerPropertyNames = [
   'restrictions',
   'downloadClients',
   'remotePathMappings',
-  'notifications'
+  'notifications',
+  'metadata'
 ];
 
 const settingsReducers = handleActions({
@@ -283,7 +294,10 @@ const settingsReducers = handleActions({
 
       return selectedSchema;
     });
-  }
+  },
+
+  [types.SET_METADATA_VALUE]: createSetSettingValueReducer('metadata'),
+  [types.SET_METADATA_FIELD_VALUE]: createSetProviderFieldValueReducer('metadata')
 
 }, defaultState);
 

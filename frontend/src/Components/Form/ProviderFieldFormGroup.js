@@ -118,4 +118,8 @@ ProviderFieldFormGroup.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
+ProviderFieldFormGroup.defaultProps = {
+  advancedSettings: false
+};
+
 export default ProviderFieldFormGroup;
