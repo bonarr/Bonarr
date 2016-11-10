@@ -48,4 +48,5 @@
 
 .isDisabled {
   background-color: $disabledCheckInputColor;
+  cursor: not-allowed;
 }
