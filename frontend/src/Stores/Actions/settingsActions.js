@@ -145,3 +145,25 @@ export const setRemotePathMappingValue = createAction(types.SET_REMOTE_PATH_MAPP
     ...payload
   };
 });
+
+export const fetchNotifications = settingsActionHandlers[types.FETCH_NOTIFICATIONS];
+export const fetchNotificationSchema = settingsActionHandlers[types.FETCH_NOTIFICATION_SCHEMA];
+export const selectNotificationSchema = createAction(types.SELECT_NOTIFICATION_SCHEMA);
+
+export const saveNotification = settingsActionHandlers[types.SAVE_NOTIFICATION];
+export const deleteNotification = settingsActionHandlers[types.DELETE_NOTIFICATION];
+export const testNotification = settingsActionHandlers[types.TEST_NOTIFICATION];
+
+export const setNotificationValue = createAction(types.SET_NOTIFICATION_VALUE, (payload) => {
+  return {
+    section: 'notifications',
+    ...payload
+  };
+});
+
+export const setNotificationFieldValue = createAction(types.SET_NOTIFICATION_FIELD_VALUE, (payload) => {
+  return {
+    section: 'notifications',
+    ...payload
+  };
+});

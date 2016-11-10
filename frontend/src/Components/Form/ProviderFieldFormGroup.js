@@ -17,6 +17,7 @@ function getType(type) {
   // Action,
   // Url,
   // Captcha
+  // OAuth
 
   switch (type) {
     case 'captcha':
@@ -31,6 +32,8 @@ function getType(type) {
       return inputTypes.SELECT;
     case 'textbox':
       return inputTypes.TEXT;
+    case 'oauth':
+      return inputTypes.OAUTH;
     default:
       return inputTypes.TEXT;
   }
@@ -80,6 +83,7 @@ function ProviderFieldFormGroup(props) {
         type={getType(type)}
         name={name}
         helpText={helpText}
+        helpLink={helpLink}
         value={value}
         values={getSelectValues(selectOptions)}
         errors={errors}

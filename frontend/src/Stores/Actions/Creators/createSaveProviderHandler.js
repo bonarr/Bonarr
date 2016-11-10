@@ -13,6 +13,7 @@ function createSaveProviderHandler(section, url, getFromState) {
       const ajaxOptions = {
         url,
         method: 'POST',
+        contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(saveData)
       };

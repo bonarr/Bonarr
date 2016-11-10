@@ -1,29 +1,38 @@
-var _ = require('underscore');
-var SettingsLayoutBase = require('../SettingsLayoutBase');
-var NotificationCollectionView = require('./NotificationCollectionView');
-var NotificationCollection = require('./NotificationCollection');
+import Marionette from 'marionette';
+import tpl from './NotificationLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import NotificationSettings from './NotificationSettings';
 
-module.exports = SettingsLayoutBase.extend({
-  template: 'Settings/Notification/NotificationLayoutTemplate',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
 
-  regions: {
-    notification: '#notification'
+  mountReact: function() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <NotificationSettings />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.collection = new NotificationCollection();
-    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  unmountReact: function() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    var promise = this.collection.fetch();
+    this.mountReact();
+  },
 
-    promise.done(_.bind(function() {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.notification.show(new NotificationCollectionView({ collection: this.collection }));
-    }, this));
+  onClose: function() {
+    this.unmountReact();
   }
 });

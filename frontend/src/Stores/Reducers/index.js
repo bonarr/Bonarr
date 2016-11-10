@@ -6,6 +6,7 @@ import paths, { defaultState as defaultPathsState } from './pathReducers';
 import languages, { defaultState as defaultLanguagesState } from './languageReducers';
 import tags, { defaultState as defaultTagsState } from './tagReducers';
 import captcha, { defaultState as defaultCaptchaState } from './captchaReducers';
+import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 
 export const defaultState = {
   settings: defaultSettingsState,
@@ -14,7 +15,8 @@ export const defaultState = {
   paths: defaultPathsState,
   languages: defaultLanguagesState,
   tags: defaultTagsState,
-  captcha: defaultCaptchaState
+  captcha: defaultCaptchaState,
+  oAuth: defaultOAuthState,
 };
 
 export default combineReducers({
@@ -24,5 +26,6 @@ export default combineReducers({
   paths,
   languages,
   tags,
-  captcha
+  captcha,
+  oAuth
 });

@@ -192,7 +192,22 @@ const settingsActionHandlers = {
 
   [types.DELETE_REMOTE_PATH_MAPPING]: createDeleteProviderHandler('remotePathMappings',
                                                                   '/remotepathmapping',
-                                                                  (state) => state.settings.remotePathMappings)
+                                                                  (state) => state.settings.remotePathMappings),
+
+  [types.FETCH_NOTIFICATIONS]: createFetchHandler('notifications', '/notification'),
+  [types.FETCH_NOTIFICATION_SCHEMA]: createFetchSchemaHandler('notifications', '/notification/schema'),
+
+  [types.SAVE_NOTIFICATION]: createSaveProviderHandler('notifications',
+                                                       '/notification',
+                                                       (state) => state.settings.notifications),
+
+  [types.DELETE_NOTIFICATION]: createDeleteProviderHandler('notifications',
+                                                           '/notification',
+                                                           (state) => state.settings.notifications),
+
+  [types.TEST_NOTIFICATION]: createTestProviderHandler('notifications',
+                                                       '/notification',
+                                                       (state) => state.settings.notifications)
 };
 
 export default settingsActionHandlers;

@@ -7,7 +7,8 @@ const inputTypes = {
   NUMBER: 'number',
   TAG: 'tag',
   TEXT_TAG: 'textTag',
-  CAPTCHA: 'captcha'
+  CAPTCHA: 'captcha',
+  OAUTH: 'oauth'
 };
 
 export default inputTypes;

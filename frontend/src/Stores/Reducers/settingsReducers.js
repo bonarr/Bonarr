@@ -157,6 +157,22 @@ export const defaultState = {
     pendingChanges: {}
   },
 
+  notifications: {
+    fetching: false,
+    populated: false,
+    error: null,
+    fetchingSchema: false,
+    schemaPopulated: false,
+    schemaError: null,
+    schema: [],
+    selectedSchema: {},
+    saving: false,
+    saveError: null,
+    testing: false,
+    items: [],
+    pendingChanges: {}
+  },
+
   advancedSettings: false
 };
 
@@ -174,13 +190,14 @@ const propertyNames = [
   'downloadClientOptions'
 ];
 
-const thingyPropertyNames = [
+const providerPropertyNames = [
   'qualityProfiles',
   'delayProfiles',
   'indexers',
   'restrictions',
   'downloadClients',
-  'remotePathMappings'
+  'remotePathMappings',
+  'notifications'
 ];
 
 const settingsReducers = handleActions({
@@ -189,12 +206,12 @@ const settingsReducers = handleActions({
     return Object.assign({}, state, { advancedSettings: !state.advancedSettings });
   },
 
-  [types.SET]: createReducers([...propertyNames, ...thingyPropertyNames], createSetReducer),
-  [types.UPDATE]: createReducers([...propertyNames, ...thingyPropertyNames], createUpdateReducer),
-  [types.UPDATE_PROVIDER]: createReducers(thingyPropertyNames, createUpdateProviderReducer),
-  [types.CLEAR_PENDING_CHANGES]: createReducers([...propertyNames, ...thingyPropertyNames], createClearPendingChangesReducer),
+  [types.SET]: createReducers([...propertyNames, ...providerPropertyNames], createSetReducer),
+  [types.UPDATE]: createReducers([...propertyNames, ...providerPropertyNames], createUpdateReducer),
+  [types.UPDATE_PROVIDER]: createReducers(providerPropertyNames, createUpdateProviderReducer),
+  [types.CLEAR_PENDING_CHANGES]: createReducers([...propertyNames, ...providerPropertyNames], createClearPendingChangesReducer),
 
-  [types.DELETE_PROVIDER]: createReducers(thingyPropertyNames, createDeleteProviderReducer),
+  [types.DELETE_PROVIDER]: createReducers(providerPropertyNames, createDeleteProviderReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),
@@ -252,7 +269,21 @@ const settingsReducers = handleActions({
   },
 
   [types.SET_DOWNLOAD_CLIENT_OPTIONS_VALUE]: createSetSettingValueReducer('downloadClientOptions'),
-  [types.SET_REMOTE_PATH_MAPPING_VALUE]: createSetSettingValueReducer('remotePathMappings')
+  [types.SET_REMOTE_PATH_MAPPING_VALUE]: createSetSettingValueReducer('remotePathMappings'),
+
+  [types.SET_NOTIFICATION_VALUE]: createSetSettingValueReducer('notifications'),
+  [types.SET_NOTIFICATION_FIELD_VALUE]: createSetProviderFieldValueReducer('notifications'),
+
+  [types.SELECT_NOTIFICATION_SCHEMA]: function(state, { payload }) {
+    return selectProviderSchema(state, 'notifications', payload, (selectedSchema) => {
+      selectedSchema.onGrab = selectedSchema.supportsOnGrab;
+      selectedSchema.onDownload = selectedSchema.supportsOnDownload;
+      selectedSchema.onUpgrade = selectedSchema.supportsOnUpgrade;
+      selectedSchema.onRename = selectedSchema.supportsOnRename;
+
+      return selectedSchema;
+    });
+  }
 
 }, defaultState);
 

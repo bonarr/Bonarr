@@ -27,7 +27,8 @@ class CheckInput extends Component {
       name,
       value,
       helpText,
-      helpTextWarning
+      helpTextWarning,
+      isDisabled
     } = this.props;
 
     return (
@@ -40,13 +41,15 @@ class CheckInput extends Component {
             type="checkbox"
             name={name}
             checked={value}
+            disabled={isDisabled}
             onChange={this.onChange}
           />
           <div className={styles.styledContainer}>
             <div
               className={classNames(
                 styles.styled,
-                value && styles.isChecked
+                value && styles.isChecked,
+                isDisabled && styles.isDisabled
               )}
             >
               {
@@ -83,11 +86,13 @@ CheckInput.propTypes = {
   value: PropTypes.bool.isRequired,
   helpText: PropTypes.string,
   helpTextWarning: PropTypes.string,
+  isDisabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 
 CheckInput.defaultProps = {
-  containerClassName: styles.container
+  containerClassName: styles.container,
+  isDisabled: false
 };
 
 export default CheckInput;

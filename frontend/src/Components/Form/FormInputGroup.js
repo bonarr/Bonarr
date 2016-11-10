@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
 import Icon from 'Components/Icon';
+import Link from 'Components/Link';
 import CaptchaInputConnector from './CaptchaInputConnector';
 import CheckInput from './CheckInput';
 import NumberInput from './NumberInput';
+import OAuthInputConnector from './OAuthInputConnector';
 import PasswordInput from './PasswordInput';
 import PathInputConnector from './PathInputConnector';
 import SelectInput from './SelectInput';
@@ -23,6 +25,9 @@ function getComponent(type) {
 
     case inputTypes.NUMBER:
       return NumberInput;
+
+    case inputTypes.OAUTH:
+      return OAuthInputConnector;
 
     case inputTypes.PASSWORD:
       return PasswordInput;
@@ -54,6 +59,7 @@ function FormInputGroup(props) {
     helpText,
     helpTexts,
     helpTextWarning,
+    helpLink,
     pending,
     errors,
     warnings,
@@ -86,11 +92,11 @@ function FormInputGroup(props) {
         {/* <div className={styles.pendingChangesContainer}>
           {
           pending &&
-              <Icon
-                name="icon-sonarr-unsaved-setting"
-                className={styles.pendingChangesIcon}
-                title="Change has not been saved yet"
-              />
+          <Icon
+          name="icon-sonarr-unsaved-setting"
+          className={styles.pendingChangesIcon}
+          title="Change has not been saved yet"
+          />
           }
         </div> */}
       </div>
@@ -125,6 +131,15 @@ function FormInputGroup(props) {
             text={helpTextWarning}
             isWarning={true}
           />
+      }
+
+      {
+        helpLink &&
+          <Link
+            to={helpLink}
+          >
+            More Info
+          </Link>
       }
 
       {
@@ -165,6 +180,7 @@ FormInputGroup.propTypes = {
   helpText: PropTypes.string,
   helpTexts: PropTypes.arrayOf(PropTypes.string),
   helpTextWarning: PropTypes.string,
+  helpLink: PropTypes.string,
   pending: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.string),
   warnings: PropTypes.arrayOf(PropTypes.string)

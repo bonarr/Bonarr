@@ -113,5 +113,6 @@ module.exports = {
   //
   // Form
 
-  advancedFormLabelColor: '#ff902b'
+  advancedFormLabelColor: '#ff902b',
+  disabledCheckInputColor: '#ddd'
 };

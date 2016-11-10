@@ -12,6 +12,7 @@ function createTestProviderHandler(section, url, getFromState) {
       const ajaxOptions = {
         url: `${url}/test`,
         method: 'POST',
+        contentType: 'application/json',
         dataType: 'json',
         data: JSON.stringify(testData)
       };
