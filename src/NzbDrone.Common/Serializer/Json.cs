@@ -37,10 +37,9 @@ namespace NzbDrone.Common.Serializer
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 NullValueHandling = NullValueHandling.Include,
                 Formatting = Formatting.Indented,
-                DefaultValueHandling = DefaultValueHandling.Populate,
+                DefaultValueHandling = DefaultValueHandling.Include,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
-
 
             DeserializerSetting.Converters.Add(new StringEnumConverter { CamelCaseText = true });
             DeserializerSetting.Converters.Add(new VersionConverter());
