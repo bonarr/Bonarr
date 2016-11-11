@@ -1,6 +1,6 @@
 import _ from 'underscore';
 
-const isSameCommand = (commandA, commandB) => {
+function isSameCommand(commandA, commandB) {
   if (commandA.name.toLocaleLowerCase() !== commandB.name.toLocaleLowerCase()) {
     return false;
   }
@@ -19,6 +19,6 @@ const isSameCommand = (commandA, commandB) => {
   }
 
   return true;
-};
+}
 
 export default isSameCommand;

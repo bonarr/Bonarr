@@ -7,6 +7,7 @@ function createSettingsSectionSelector() {
     (sectionSettings) => {
       const {
         fetching,
+        populated,
         error,
         item,
         pendingChanges,
@@ -18,6 +19,7 @@ function createSettingsSectionSelector() {
 
       return {
         fetching,
+        populated,
         error,
         saving,
         ...settings

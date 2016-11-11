@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import inputTypes from 'Utilities/inputTypes';
+import { kinds } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
+import Icon from 'Components/Icon';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import SettingsToolbarConnector from 'Settings/SettingsToolbarConnector';
@@ -9,8 +11,37 @@ import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';
 import FormInputGroup from 'Components/Form/FormInputGroup';
+import FormInputButton from 'Components/Form/FormInputButton';
+import ConfirmModal from 'Components/Modal/ConfirmModal';
 
 class GeneralSettings extends Component {
+
+  //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isConfirmApiKeyResetModalOpen: false
+    };
+  }
+
+  //
+  // Listeners
+
+  onResetApiKeyPress = () => {
+    this.setState({ isConfirmApiKeyResetModalOpen: true });
+  }
+
+  onConfirmResetApiKey = () => {
+    this.setState({ isConfirmApiKeyResetModalOpen: false });
+    this.props.onConfirmResetApiKey();
+  }
+
+  onCloseResetApiKeyModal = () => {
+    this.setState({ isConfirmApiKeyResetModalOpen: false });
+  }
 
   //
   // Render
@@ -19,9 +50,11 @@ class GeneralSettings extends Component {
     const {
       advancedSettings,
       fetching,
+      populated,
       error,
       settings,
       hasSettings,
+      isResettingApiKey,
       onInputChange,
       onSavePress,
       ...otherProps
@@ -75,7 +108,7 @@ class GeneralSettings extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            fetching && !populated &&
               <LoadingIndicator />
           }
 
@@ -85,7 +118,7 @@ class GeneralSettings extends Component {
           }
 
           {
-            hasSettings && !fetching && !error &&
+            hasSettings && populated && !error &&
               <Form
                 id="generalSettings"
                 {...otherProps}
@@ -254,6 +287,14 @@ class GeneralSettings extends Component {
                       name="apiKey"
                       readOnly={true}
                       helpTextWarning="Requires restart to take effect"
+                      button={
+                        <FormInputButton
+                          kind={kinds.DANGER}
+                          onPress={this.onResetApiKeyPress}
+                        >
+                          <Icon name={isResettingApiKey ? 'icon-sonarr-refresh fa-spin' : 'icon-sonarr-refresh'} />
+                        </FormInputButton>
+                      }
                       onChange={onInputChange}
                       {...apiKey}
                     />
@@ -270,7 +311,7 @@ class GeneralSettings extends Component {
                       type={inputTypes.SELECT}
                       name="logLevel"
                       values={logLevelOptions}
-                      helpTextWarning={logLevel.value === 'trace' && 'Trace logging should only be enabled temporarily'}
+                      helpTextWarning={logLevel.value === 'trace' ? 'Trace logging should only be enabled temporarily' : undefined}
                       onChange={onInputChange}
                       {...logLevel}
                     />
@@ -329,8 +370,8 @@ class GeneralSettings extends Component {
                         type={inputTypes.CHECK}
                         name="updateAutomatically"
                         helpText="Automatically download and install updates. You will still be able to install from System: Updates"
-                        onChange={updateAutomatically}
-                        {...analyticsEnabled}
+                        onChange={onInputChange}
+                        {...updateAutomatically}
                       />
                     </FormGroup>
                 }
@@ -375,6 +416,16 @@ class GeneralSettings extends Component {
               </Form>
           }
         </PageContentBody>
+
+        <ConfirmModal
+          isOpen={this.state.isConfirmApiKeyResetModalOpen}
+          kind={kinds.DANGER}
+          title="Reset API Key"
+          message="Are you sure you want to reset your API Key?"
+          confirmLabel="Reset"
+          onConfirm={this.onConfirmResetApiKey}
+          onCancel={this.onCloseResetApiKeyModal}
+        />
       </PageContent>
     );
   }
@@ -384,11 +435,14 @@ class GeneralSettings extends Component {
 GeneralSettings.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
   fetching: PropTypes.bool.isRequired,
+  populated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
+  isResettingApiKey: PropTypes.bool.isRequired,
   hasSettings: PropTypes.bool.isRequired,
   onSavePress: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired
+  onInputChange: PropTypes.func.isRequired,
+  onConfirmResetApiKey: PropTypes.func.isRequired
 };
 
 export default GeneralSettings;

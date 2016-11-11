@@ -18,8 +18,6 @@ class Icon extends Component {
         className={classNames(name, className)}
         title={title}
       >
-
-
       </icon>
     );
   }

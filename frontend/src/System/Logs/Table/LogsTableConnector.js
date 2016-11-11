@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -35,29 +35,6 @@ function createMapStateToProps() {
       };
     }
   );
-}
-
-// TODO: use reselect for perfomance improvements
-function mapStateToProps(state) {
-  const commands = state.commands.items;
-  const clearLogExecuting = _.some(commands, { name: clearLogsCommandName });
-
-  const result = _.pick(state.system.logs, [
-    'fetching',
-    'items',
-    'page',
-    'totalPages',
-    'totalRecords',
-    'sortKey',
-    'sortDirection',
-    'filterKey',
-    'filterValue'
-  ]);
-
-  return {
-    clearLogExecuting,
-    ...result
-  };
 }
 
 const mapDispatchToProps = {

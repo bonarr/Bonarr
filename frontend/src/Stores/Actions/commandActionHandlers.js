@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import isSameCommand from 'Utilities/isSameCommand';
+import isSameCommand from 'Utilities/Command/isSameCommand';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import { addCommand, removeCommand } from './commandActions';
