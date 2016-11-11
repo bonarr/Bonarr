@@ -183,6 +183,16 @@ export const defaultState = {
     pendingChanges: {}
   },
 
+  general: {
+    fetching: false,
+    populated: false,
+    error: null,
+    pendingChanges: {},
+    saving: false,
+    saveError: null,
+    item: {}
+  },
+
   advancedSettings: false
 };
 
@@ -197,7 +207,8 @@ const propertyNames = [
   'namingExamples',
   'qualityDefinitions',
   'indexerOptions',
-  'downloadClientOptions'
+  'downloadClientOptions',
+  'general'
 ];
 
 const providerPropertyNames = [
@@ -297,7 +308,9 @@ const settingsReducers = handleActions({
   },
 
   [types.SET_METADATA_VALUE]: createSetSettingValueReducer('metadata'),
-  [types.SET_METADATA_FIELD_VALUE]: createSetProviderFieldValueReducer('metadata')
+  [types.SET_METADATA_FIELD_VALUE]: createSetProviderFieldValueReducer('metadata'),
+
+  [types.SET_GENERAL_SETTINGS_VALUE]: createSetSettingValueReducer('general')
 
 }, defaultState);
 

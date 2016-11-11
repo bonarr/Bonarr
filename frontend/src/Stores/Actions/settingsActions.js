@@ -184,3 +184,12 @@ export const setMetadataFieldValue = createAction(types.SET_METADATA_FIELD_VALUE
     ...payload
   };
 });
+
+export const fetchGeneralSettings = settingsActionHandlers[types.FETCH_GENERAL_SETTINGS];
+export const saveGeneralSettings = settingsActionHandlers[types.SAVE_GENERAL_SETTINGS];
+export const setGeneralSettingsValue = createAction(types.SET_GENERAL_SETTINGS_VALUE, (payload) => {
+  return {
+    section: 'general',
+    ...payload
+  };
+});

@@ -1,29 +1,38 @@
-var _ = require('underscore');
-var SettingsLayoutBase = require('../SettingsLayoutBase');
-var GeneralView = require('./GeneralView');
-var GeneralSettingsModel = require('./GeneralSettingsModel');
+import Marionette from 'marionette';
+import tpl from './GeneralLayout.hbs';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import GeneralSettingsConnector from './GeneralSettingsConnector';
 
-module.exports = SettingsLayoutBase.extend({
-  template: 'Settings/General/GeneralLayoutTemplate',
+module.exports = Marionette.LayoutView.extend({
+  template: tpl,
 
-  regions: {
-    general: '#general'
+  mountReact: function() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <GeneralSettingsConnector />
+      </Provider>,
+      this.el
+    );
   },
 
-  initialize() {
-    this.model = new GeneralSettingsModel();
-    SettingsLayoutBase.prototype.initialize.apply(this, arguments);
+  unmountReact: function() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
+    }
+  },
+
+  onBeforeRender() {
+    this.unmountReact();
   },
 
   onRender() {
-    var promise = this.model.fetch();
+    this.mountReact();
+  },
 
-    promise.done(_.bind(function() {
-      if (this.isDestroyed) {
-        return;
-      }
-
-      this.general.show(new GeneralView({ model: this.model }));
-    }, this));
+  onClose: function() {
+    this.unmountReact();
   }
 });
