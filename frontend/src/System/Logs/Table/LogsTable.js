@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { align } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
-import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TablePager from 'Components/Table/TablePager';
@@ -11,13 +10,11 @@ import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
-import Menu from 'Components/Menu/Menu';
-import MenuButton from 'Components/Menu/MenuButton';
-import MenuContent from 'Components/Menu/MenuContent';
+import FilterMenu from 'Components/Menu/FilterMenu';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
+import MenuContent from 'Components/Menu/MenuContent';
 import LogsNavMenu from '../LogsNavMenu';
 import LogsTableRow from './LogsTableRow';
-import styles from './LogsTable.css';
 
 const headers = [
   {
@@ -56,6 +53,8 @@ class LogsTable extends Component {
     const {
       fetching,
       items,
+      filterKey,
+      filterValue,
       clearLogExecuting,
       onRefreshPress,
       onClearLogsPress,
@@ -85,15 +84,11 @@ class LogsTable extends Component {
           </PageToolbarSection>
 
           <PageToolbarSection alignContent={align.RIGHT}>
-            <Menu>
-              <MenuButton>
-                <Icon name="icon-sonarr-filter" className={styles.filterMenuButtonIcon} />
-                <span className={styles.filterMenuButtonText}>Filter</span>
-              </MenuButton>
-
+            <FilterMenu>
               <MenuContent alignMenu={align.RIGHT}>
                 <FilterMenuItem
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   All
@@ -102,7 +97,8 @@ class LogsTable extends Component {
                 <FilterMenuItem
                   name="level"
                   value="Info"
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Info
@@ -111,7 +107,8 @@ class LogsTable extends Component {
                 <FilterMenuItem
                   name="level"
                   value="Warn"
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Warn
@@ -120,13 +117,14 @@ class LogsTable extends Component {
                 <FilterMenuItem
                   name="level"
                   value="Error"
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Error
                 </FilterMenuItem>
               </MenuContent>
-            </Menu>
+            </FilterMenu>
           </PageToolbarSection>
         </PageToolbar>
 
@@ -170,6 +168,8 @@ class LogsTable extends Component {
 LogsTable.propTypes = {
   fetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
+  filterKey: PropTypes.string,
+  filterValue: PropTypes.string,
   clearLogExecuting: PropTypes.bool.isRequired,
   onFilterSelect: PropTypes.func.isRequired,
   onRefreshPress: PropTypes.func.isRequired,

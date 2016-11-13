@@ -58,4 +58,9 @@ FilterMenuItem.propTypes = {
   onPress: PropTypes.func.isRequired
 };
 
+FilterMenuItem.defaultProps = {
+  name: null,
+  value: null
+};
+
 export default FilterMenuItem;
