@@ -1,7 +1,5 @@
-const align = {
-  LEFT: 'left',
-  CENTER: 'center',
-  RIGHT: 'right'
-};
+export const LEFT = 'left';
+export const CENTER = 'center';
+export const RIGHT = 'right';
 
-export default align;
+export const all = [LEFT, CENTER, RIGHT];
