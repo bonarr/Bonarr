@@ -71,12 +71,11 @@ function ProviderFieldFormGroup(props) {
     ...otherProps
   } = props;
 
-  if (!advancedSettings && advanced) {
-    return null;
-  }
-
   return (
-    <FormGroup>
+    <FormGroup
+      advancedSettings={advancedSettings}
+      isAdvanced={advanced}
+    >
       <FormLabel>{label}</FormLabel>
 
       <FormInputGroup
