@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { fetchPaths, clearPaths } from 'Stores/Actions/pathActions';
 import PathInput from './PathInput';
 
@@ -37,13 +36,11 @@ class PathInputConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onFetchPaths(path) {
+  onFetchPaths = (path) => {
     this.props.fetchPaths({ path });
   }
 
-  @autobind
-  onClearPaths() {
+  onClearPaths = () => {
     this.props.clearPaths();
   }
 

@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Measure from 'react-measure';
-import autobind from 'autobind-decorator';
 import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
@@ -26,18 +24,15 @@ class RemotePathMappings extends Component {
   //
   // Listeners
 
-  @autobind
-  onAddRemotePathMappingPress() {
+  onAddRemotePathMappingPress = () => {
     this.setState({ isAddRemotePathMappingModalOpen: true });
   }
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.setState({ isAddRemotePathMappingModalOpen: false });
   }
 
-  @autobind
-  onMeasure({ width }) {
+  onMeasure = ({ width }) => {
     this.setState({ width });
   }
 

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import scrollDirections from 'Utilities/scrollDirections';
 import Button from 'Components/Button';
 import Scroller from 'Components/Scroller';
@@ -46,19 +45,16 @@ class FileBrowserModalContent extends Component {
   //
   // Listeners
 
-  @autobind
-  onPathInputChange({ value }) {
+  onPathInputChange = ({ value }) => {
     this.setState({ currentPath: value });
   }
 
-  @autobind
-  onRowClick(path) {
+  onRowClick = (path) => {
     this.setState({ currentPath: path });
     this.props.onFetchPaths(path);
   }
 
-  @autobind
-  onOkPress() {
+  onOkPress = () => {
     this.props.onChange({
       name: this.props.name,
       value: this.state.currentPath

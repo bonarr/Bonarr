@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import inputTypes from 'Utilities/inputTypes';
 import { sizes } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
@@ -29,8 +28,7 @@ class Naming extends Component {
   //
   // Listeners
 
-  @autobind
-  onStandardNamingModalOpenClick() {
+  onStandardNamingModalOpenClick = () => {
     this.setState({
       isNamingModalOpen: true,
       namingModalOptions: {
@@ -43,8 +41,7 @@ class Naming extends Component {
     });
   }
 
-  @autobind
-  onDailyNamingModalOpenClick() {
+  onDailyNamingModalOpenClick = () => {
     this.setState({
       isNamingModalOpen: true,
       namingModalOptions: {
@@ -58,8 +55,7 @@ class Naming extends Component {
     });
   }
 
-  @autobind
-  onAnimeNamingModalOpenClick() {
+  onAnimeNamingModalOpenClick = () => {
     this.setState({
       isNamingModalOpen: true,
       namingModalOptions: {
@@ -73,8 +69,7 @@ class Naming extends Component {
     });
   }
 
-  @autobind
-  onSeriesFolderNamingModalOpenClick() {
+  onSeriesFolderNamingModalOpenClick = () => {
     this.setState({
       isNamingModalOpen: true,
       namingModalOptions: {
@@ -84,8 +79,7 @@ class Naming extends Component {
     });
   }
 
-  @autobind
-  onSeasonFolderNamingModalOpenClick() {
+  onSeasonFolderNamingModalOpenClick = () => {
     this.setState({
       isNamingModalOpen: true,
       namingModalOptions: {
@@ -96,8 +90,7 @@ class Naming extends Component {
     });
   }
 
-  @autobind
-  onNamingModalClose() {
+  onNamingModalClose = () => {
     this.setState({ isNamingModalOpen: false });
   }
 

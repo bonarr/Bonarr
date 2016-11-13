@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import Icon from 'Components/Icon';
 import FileBrowserModal from 'Components/FileBrowser/FileBrowserModal';
@@ -49,16 +48,14 @@ class PathInput extends Component {
   //
   // Listeners
 
-  @autobind
-  onChange(event, { newValue }) {
+  onChange = (event, { newValue }) => {
     this.props.onChange({
       name: this.props.name,
       value: newValue
     });
   }
 
-  @autobind
-  onKeyDown(event) {
+  onKeyDown = (event) => {
     if (event.key === 'Tab') {
       event.preventDefault();
       const path = this.props.paths[0];
@@ -74,28 +71,23 @@ class PathInput extends Component {
     }
   }
 
-  @autobind
-  onSuggestionsFetchRequested({ value }) {
+  onSuggestionsFetchRequested = ({ value }) => {
     this.props.onFetchPaths(value);
   }
 
-  @autobind
-  onSuggestionsClearRequested() {
+  onSuggestionsClearRequested = () => {
     this.props.onClearPaths();
   }
 
-  @autobind
-  onSuggestionSelected(event, { suggestionValue }) {
+  onSuggestionSelected = (event, { suggestionValue }) => {
     this.props.onFetchPaths(suggestionValue);
   }
 
-  @autobind
-  onFileBrowserOpenPress() {
+  onFileBrowserOpenPress = () => {
     this.setState({ isFileBrowserModalOpen: true });
   }
 
-  @autobind
-  onFileBrowserModalClose() {
+  onFileBrowserModalClose = () => {
     this.setState({ isFileBrowserModalOpen: false });
   }
 

@@ -1,6 +1,5 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import styles from './SelectInput.css';
 
@@ -9,8 +8,7 @@ class SelectInput extends Component {
   //
   // Listeners
 
-  @autobind
-  onChange(event) {
+  onChange = (event) => {
     this.props.onChange({
       name: this.props.name,
       value: event.target.value

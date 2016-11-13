@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import { sizes } from 'Helpers/Props';
 import FieldSet from 'Components/FieldSet';
 import Button from 'Components/Button';
@@ -28,8 +27,7 @@ class NamingModal extends Component {
   //
   // Listeners
 
-  @autobind
-  onNamingCaseChange(event) {
+  onNamingCaseChange = (event) => {
     this.setState({ case: event.value });
   }
 

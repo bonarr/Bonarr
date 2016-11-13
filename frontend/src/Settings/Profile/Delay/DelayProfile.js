@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import titleCase from 'Utilities/String/titleCase';
 import { kinds } from 'Helpers/Props';
@@ -44,31 +43,26 @@ class DelayProfile extends Component {
   //
   // Listeners
 
-  @autobind
-  onEditDelayProfilePress() {
+  onEditDelayProfilePress = () => {
     this.setState({ isEditDelayProfileModalOpen: true });
   }
 
-  @autobind
-  onEditDelayProfileModalClose() {
+  onEditDelayProfileModalClose = () => {
     this.setState({ isEditDelayProfileModalOpen: false });
   }
 
-  @autobind
-  onDeleteDelayProfilePress() {
+  onDeleteDelayProfilePress = () => {
     this.setState({
       isEditDelayProfileModalOpen: false,
       isDeleteDelayProfileModalOpen: true
     });
   }
 
-  @autobind
-  onDeleteDelayProfileModalClose() {
+  onDeleteDelayProfileModalClose = () => {
     this.setState({ isDeleteDelayProfileModalOpen: false });
   }
 
-  @autobind
-  onConfirmDeleteDelayProfile() {
+  onConfirmDeleteDelayProfile = () => {
     this.props.onConfirmDeleteDelayProfile(this.props.id);
   }
 

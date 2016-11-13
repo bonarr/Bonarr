@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import longDateTime from 'Utilities/Date/longDateTime';
 import relativeDate from 'Utilities/Date/relativeDate';
 import scrollDirections from 'Utilities/scrollDirections';
@@ -31,13 +30,11 @@ class LogsTableRow extends Component {
   //
   // Listeners
 
-  @autobind
-  onClick() {
+  onClick = () => {
     this.setState({ isDetailsModalOpen: true });
   }
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.setState({ isDetailsModalOpen: false });
   }
 

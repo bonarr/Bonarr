@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import styles from './TextInput.css';
 
@@ -8,8 +7,7 @@ class TextInput extends Component {
   //
   // Listeners
 
-  @autobind
-  onChange(event) {
+  onChange = (event) => {
     this.props.onChange({
       name: this.props.name,
       value: event.target.value

@@ -1,7 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
-import longDateTime from 'Utilities/Date/longDateTime';
-import relativeDate from 'Utilities/Date/relativeDate';
 import Icon from 'Components/Icon';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/TableRowCell';
@@ -12,8 +9,7 @@ class FileBrowserRow extends Component {
   //
   // Listeners
 
-  @autobind
-  onClick() {
+  onClick = () => {
     this.props.onClick(this.props.path);
   }
 
@@ -23,8 +19,7 @@ class FileBrowserRow extends Component {
   render() {
     const {
       type,
-      name,
-      path
+      name
     } = this.props;
 
     return (

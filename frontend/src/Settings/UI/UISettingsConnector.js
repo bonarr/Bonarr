@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { setUISettingsValue, saveUISettings, fetchUISettings } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
@@ -37,13 +36,11 @@ class UISettingsConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onInputChange({ name, value }) {
+  onInputChange = ({ name, value }) => {
     this.props.setUISettingsValue({ name, value });
   }
 
-  @autobind
-  onSavePress() {
+  onSavePress = () => {
     this.props.saveUISettings();
   }
 

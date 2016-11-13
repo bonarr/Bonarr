@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import { align } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
@@ -46,8 +45,7 @@ class LogsTable extends Component {
   //
   // Listeners
 
-  @autobind
-  onFilterMenuItemPress(filterKey, filterValue) {
+  onFilterMenuItemPress = (filterKey, filterValue) => {
     this.props.onFilterSelect(filterKey, filterValue);
   }
 

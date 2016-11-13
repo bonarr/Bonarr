@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import Icon from 'Components/Icon';
 import MenuItem from './MenuItem';
 import styles from './FilterMenuItem.css';
@@ -9,8 +8,7 @@ class FilterMenuItem extends Component {
   //
   // Listeners
 
-  @autobind
-  onPress() {
+  onPress = () => {
     const {
       name,
       value,

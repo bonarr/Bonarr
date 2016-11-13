@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import autobind from 'autobind-decorator';
 import { clearPendingChanges } from 'Stores/Actions/baseActions';
 import EditQualityProfileModal from './EditQualityProfileModal';
 
@@ -17,8 +16,7 @@ class EditQualityProfileModalConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.props.clearPendingChanges({ section: 'qualityProfiles' });
     this.props.onModalClose();
   }

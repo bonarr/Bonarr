@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import Menu from 'Components/Menu/Menu';
 import MenuButton from 'Components/Menu/MenuButton';
 import MenuContent from 'Components/Menu/MenuContent';
@@ -22,13 +21,11 @@ class LogsNavMenu extends Component {
   //
   // Listeners
 
-  @autobind
-  onMenuButtonPress() {
+  onMenuButtonPress = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen });
   }
 
-  @autobind
-  onMenuItemPress() {
+  onMenuItemPress = () => {
     this.setState({ isMenuOpen: false });
   }
 

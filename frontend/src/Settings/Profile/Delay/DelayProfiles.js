@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Measure from 'react-measure';
-import autobind from 'autobind-decorator';
 import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
@@ -28,18 +27,15 @@ class DelayProfiles extends Component {
   //
   // Listeners
 
-  @autobind
-  onAddDelayProfilePress() {
+  onAddDelayProfilePress = () => {
     this.setState({ isAddDelayProfileModalOpen: true });
   }
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.setState({ isAddDelayProfileModalOpen: false });
   }
 
-  @autobind
-  onMeasure({ width }) {
+  onMeasure = ({ width }) => {
     this.setState({ width });
   }
 

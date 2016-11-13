@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import FieldSet from 'Components/FieldSet';
 import Card from 'Components/Card';
 import Icon from 'Components/Icon';
@@ -24,13 +23,11 @@ class QualityProfiles extends Component {
   //
   // Listeners
 
-  @autobind
-  onEditQualityProfilePress() {
+  onEditQualityProfilePress = () => {
     this.setState({ isQualityProfileModalOpen: true });
   }
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.setState({ isQualityProfileModalOpen: false });
   }
 

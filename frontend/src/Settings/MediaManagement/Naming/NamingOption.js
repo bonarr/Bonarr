@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import { sizes } from 'Helpers/Props';
 import Link from 'Components/Link';
@@ -9,8 +8,8 @@ class NamingOption extends Component {
 
   //
   // Listeners
-  @autobind
-  onPress() {
+
+  onPress = () => {
     const {
       name,
       setting,

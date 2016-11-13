@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchMediaManagementSettings, setMediaManagementSettingsValue, saveMediaManagementSettings, saveNamingSettings } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
@@ -41,13 +40,11 @@ class MediaManagementConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onInputChange({ name, value }) {
+  onInputChange = ({ name, value }) => {
     this.props.setMediaManagementSettingsValue({ name, value });
   }
 
-  @autobind
-  onSavePress() {
+  onSavePress = () => {
     this.props.saveMediaManagementSettings();
     this.props.saveNamingSettings();
   }

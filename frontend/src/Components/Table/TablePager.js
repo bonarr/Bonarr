@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
@@ -22,13 +21,11 @@ class TablePager extends Component {
   //
   // Listeners
 
-  @autobind
-  onOpenPageSelectClick() {
+  onOpenPageSelectClick = () => {
     this.setState({ isShowingPageSelect: true });
   }
 
-  @autobind
-  onPageSelect({ value: page }) {
+  onPageSelect = ({ value: page }) => {
     this.setState({ isShowingPageSelect: false });
     this.props.onPageSelect(parseInt(page));
   }

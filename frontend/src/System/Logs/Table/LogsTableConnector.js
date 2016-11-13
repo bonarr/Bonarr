@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import * as systemActions from 'Stores/Actions/systemActions';
@@ -66,48 +65,39 @@ class LogsTableConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onFirstPagePress() {
+  onFirstPagePress = () => {
     this.props.gotoLogsFirstPage();
   }
 
-  @autobind
-  onPreviousPagePress() {
+  onPreviousPagePress = () => {
     this.props.gotoLogsPreviousPage();
   }
 
-  @autobind
-  onNextPagePress() {
+  onNextPagePress = () => {
     this.props.gotoLogsNextPage();
   }
 
-  @autobind
-  onLastPagePress() {
+  onLastPagePress = () => {
     this.props.gotoLogsLastPage();
   }
 
-  @autobind
-  onPageSelect(page) {
+  onPageSelect = (page) => {
     this.props.gotoLogsPage({ page });
   }
 
-  @autobind
-  onSortPress(sortKey) {
+  onSortPress = (sortKey) => {
     this.props.setLogsSort({ sortKey });
   }
 
-  @autobind
-  onFilterSelect(filterKey, filterValue) {
+  onFilterSelect = (filterKey, filterValue) => {
     this.props.setLogsFilter({ filterKey, filterValue });
   }
 
-  @autobind
-  onRefreshPress() {
+  onRefreshPress = () => {
     this.props.gotoLogsFirstPage();
   }
 
-  @autobind
-  onClearLogsPress() {
+  onClearLogsPress = () => {
     this.props.executeCommand({ name: clearLogsCommandName });
   }
 

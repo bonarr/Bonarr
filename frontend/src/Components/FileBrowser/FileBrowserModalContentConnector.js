@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { fetchPaths, clearPaths } from 'Stores/Actions/pathActions';
 import FileBrowserModalContent from './FileBrowserModalContent';
 
@@ -48,18 +47,15 @@ class FileBrowserModalContentConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onFetchPaths(path) {
+  onFetchPaths = (path) => {
     this.props.fetchPaths({ path });
   }
 
-  @autobind
-  onClearPaths() {
+  onClearPaths = () => {
     // this.props.clearPaths();
   }
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.props.clearPaths();
     this.props.onModalClose();
   }

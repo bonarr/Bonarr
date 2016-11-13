@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { addTag } from 'Stores/Actions/tagActions';
 import TagInput from './TagInput';
 
@@ -43,8 +42,7 @@ class TagInputConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onTagAdd(tag) {
+  onTagAdd = (tag) => {
     if (!tag.id) {
       this.props.addTag({
         tag: { label: tag.name },
@@ -65,8 +63,7 @@ class TagInputConnector extends Component {
     this.props.onChange({ name, value: newValue });
   }
 
-  @autobind
-  onTagDelete(index) {
+  onTagDelete = (index) => {
     const {
       name,
       value
@@ -81,8 +78,7 @@ class TagInputConnector extends Component {
     });
   }
 
-  @autobind
-  onTagCreated(tag) {
+  onTagCreated = (tag) => {
     const {
       name,
       value

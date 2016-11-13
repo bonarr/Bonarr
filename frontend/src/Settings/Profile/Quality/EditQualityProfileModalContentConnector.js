@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
@@ -79,26 +78,22 @@ class EditQualityProfileModalContentConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onInputChange({ name, value }) {
+  onInputChange = ({ name, value }) => {
     this.props.setQualityProfileValue({ name, value });
   }
 
-  @autobind
-  onCutoffChange({ name, value }) {
+  onCutoffChange = ({ name, value }) => {
     const id = parseInt(value);
     const item = _.find(this.props.item.items, (i) => i.quality.id === id);
 
     this.props.setQualityProfileValue({ name, value: item.quality });
   }
 
-  @autobind
-  onSavePress() {
+  onSavePress = () => {
     this.props.saveQualityProfile({ id: this.props.id });
   }
 
-  @autobind
-  onQualityProfileItemAllowedChange(id, allowed) {
+  onQualityProfileItemAllowedChange = (id, allowed) => {
     const qualityProfile = _.cloneDeep(this.props.item);
 
     const item = _.find(qualityProfile.items.value, (i) => i.quality.id === id);
@@ -119,8 +114,7 @@ class EditQualityProfileModalContentConnector extends Component {
     }
   }
 
-  @autobind
-  onQualityProfileItemDragMove(dragIndex, dropIndex) {
+  onQualityProfileItemDragMove = (dragIndex, dropIndex) => {
     if (this.state.dragIndex !== dragIndex || this.state.dropIndex !== dropIndex) {
       this.setState({
         dragIndex,
@@ -129,8 +123,7 @@ class EditQualityProfileModalContentConnector extends Component {
     }
   }
 
-  @autobind
-  onQualityProfileItemDragEnd({ id }, didDrop) {
+  onQualityProfileItemDragEnd = ({ id }, didDrop) => {
     const {
       dragIndex,
       dropIndex

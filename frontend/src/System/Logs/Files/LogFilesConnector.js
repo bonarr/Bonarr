@@ -2,7 +2,6 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import { fetchLogFiles } from 'Stores/Actions/systemActions';
@@ -61,13 +60,11 @@ class LogFilesConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onRefreshPress() {
+  onRefreshPress = () => {
     this.props.fetchLogFiles();
   }
 
-  @autobind
-  onDeleteFilesPress() {
+  onDeleteFilesPress = () => {
     this.props.executeCommand({ name: deleteFilesCommandName });
   }
 

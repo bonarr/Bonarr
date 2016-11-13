@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import autobind from 'autobind-decorator';
 import { toggleAdvancedSettings } from 'Stores/Actions/settingsActions';
 import SettingsToolbar from './SettingsToolbar';
 
@@ -19,8 +18,7 @@ class SettingsToolbarConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onAdvancedSettingsPress() {
+  onAdvancedSettingsPress = () => {
     this.props.toggleAdvancedSettings();
   }
 

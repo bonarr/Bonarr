@@ -1,32 +1,11 @@
-import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
-import titleCase from 'Utilities/String/titleCase';
 import { kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
-import TagList from 'Components/TagList';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import EditRemotePathMappingModalConnector from './EditRemotePathMappingModalConnector';
 import styles from './RemotePathMapping.css';
-
-function getDelay(enabled, delay) {
-  if (!enabled) {
-    return '-';
-  }
-
-  if (!delay) {
-    return 'No Delay';
-  }
-
-  if (delay === 1) {
-    return '1 Minute';
-  }
-
-  // TODO: use better units of time than just minutes
-  return `${delay} Minutes`;
-}
 
 class RemotePathMapping extends Component {
 
@@ -45,31 +24,26 @@ class RemotePathMapping extends Component {
   //
   // Listeners
 
-  @autobind
-  onEditRemotePathMappingPress() {
+  onEditRemotePathMappingPress = () => {
     this.setState({ isEditRemotePathMappingModalOpen: true });
   }
 
-  @autobind
-  onEditRemotePathMappingModalClose() {
+  onEditRemotePathMappingModalClose = () => {
     this.setState({ isEditRemotePathMappingModalOpen: false });
   }
 
-  @autobind
-  onDeleteRemotePathMappingPress() {
+  onDeleteRemotePathMappingPress = () => {
     this.setState({
       isEditRemotePathMappingModalOpen: false,
       isDeleteRemotePathMappingModalOpen: true
     });
   }
 
-  @autobind
-  onDeleteRemotePathMappingModalClose() {
+  onDeleteRemotePathMappingModalClose = () => {
     this.setState({ isDeleteRemotePathMappingModalOpen: false });
   }
 
-  @autobind
-  onConfirmDeleteRemotePathMapping() {
+  onConfirmDeleteRemotePathMapping = () => {
     this.props.onConfirmDeleteRemotePathMapping(this.props.id);
   }
 

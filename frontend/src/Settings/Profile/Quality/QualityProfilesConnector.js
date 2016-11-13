@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { fetchQualityProfiles, deleteQualityProfile } from 'Stores/Actions/settingsActions';
 import { fetchLanguages } from 'Stores/Actions/languageActions';
 import QualityProfiles from './QualityProfiles';
@@ -38,8 +37,7 @@ class QualityProfilesConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onConfirmDeleteQualityProfile(id) {
+  onConfirmDeleteQualityProfile = (id) => {
     this.props.deleteQualityProfile({ id });
   }
 

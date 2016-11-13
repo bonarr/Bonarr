@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import autobind from 'autobind-decorator';
 import styles from './Menu.css';
 
 class Menu extends Component {
@@ -30,8 +29,7 @@ class Menu extends Component {
   //
   // Listeners
 
-  @autobind
-  onWindowClick(event) {
+  onWindowClick = (event) => {
     const menu = ReactDOM.findDOMNode(this.refs.menu);
     const menuContent = ReactDOM.findDOMNode(this.refs.menuContent);
 
@@ -45,8 +43,7 @@ class Menu extends Component {
     }
   }
 
-  @autobind
-  onMenuButtonPress() {
+  onMenuButtonPress = () => {
     if (this.state.isMenuOpen) {
       this._removeListener();
     } else {

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import Icon from 'Components/Icon';
 import FormInputHelpText from './FormInputHelpText';
@@ -10,8 +9,7 @@ class CheckInput extends Component {
   //
   // Listeners
 
-  @autobind
-  onChange(event) {
+  onChange = (event) => {
     this.props.onChange({
       name: this.props.name,
       value: event.target.checked

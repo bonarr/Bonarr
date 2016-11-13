@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import selectSettings from 'Stores/Selectors/selectSettings';
 import { setDelayProfileValue, saveDelayProfile } from 'Stores/Actions/settingsActions';
 import EditDelayProfileModalContent from './EditDelayProfileModalContent';
@@ -115,13 +114,11 @@ class EditDelayProfileModalContentConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onInputChange({ name, value }) {
+  onInputChange = ({ name, value }) => {
     this.props.setDelayProfileValue({ name, value });
   }
 
-  @autobind
-  onProtocolChange({ value }) {
+  onProtocolChange = ({ value }) => {
     switch (value) {
       case 'preferUsenet':
         this.props.setDelayProfileValue({ name: 'enableUsenet', value: true });
@@ -148,8 +145,7 @@ class EditDelayProfileModalContentConnector extends Component {
     }
   }
 
-  @autobind
-  onSavePress() {
+  onSavePress = () => {
     this.props.saveDelayProfile({ id: this.props.id });
   }
 

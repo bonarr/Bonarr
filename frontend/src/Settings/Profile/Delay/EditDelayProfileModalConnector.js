@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import autobind from 'autobind-decorator';
 import { clearPendingChanges } from 'Stores/Actions/baseActions';
 import EditDelayProfileModal from './EditDelayProfileModal';
 
@@ -17,8 +16,7 @@ class EditDelayProfileModalConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onModalClose() {
+  onModalClose = () => {
     this.props.clearPendingChanges({ section: 'delayProfiles' });
     this.props.onModalClose();
   }

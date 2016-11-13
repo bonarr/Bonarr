@@ -2,7 +2,6 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
 import { fetchBackups } from 'Stores/Actions/systemActions';
@@ -60,8 +59,7 @@ class BackupsConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onBackupPress() {
+  onBackupPress = () => {
     this.props.executeCommand({ name: backupCommandName });
   }
 

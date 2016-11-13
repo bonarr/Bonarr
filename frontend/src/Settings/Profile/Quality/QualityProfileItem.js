@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import classNames from 'classNames';
 import Icon from 'Components/Icon';
 import CheckInput from 'Components/Form/CheckInput';
@@ -10,8 +9,7 @@ class QualityProfileItem extends Component {
   //
   // Listeners
 
-  @autobind
-  onAllowedChange({ value }) {
+  onAllowedChange = ({ value }) => {
     const {
       qualityId,
       onQualityProfileItemAllowedChange

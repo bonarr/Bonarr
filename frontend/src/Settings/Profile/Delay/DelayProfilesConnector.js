@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { fetchDelayProfiles, deleteDelayProfile, reorderDelayProfile } from 'Stores/Actions/settingsActions';
 import { fetchTags } from 'Stores/Actions/tagActions';
 import DelayProfiles from './DelayProfiles';
@@ -54,13 +53,11 @@ class DelayProfilesConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onConfirmDeleteDelayProfile(id) {
+  onConfirmDeleteDelayProfile = (id) => {
     this.props.deleteDelayProfile({ id });
   }
 
-  @autobind
-  onDelayProfileDragMove(dragIndex, dropIndex) {
+  onDelayProfileDragMove = (dragIndex, dropIndex) => {
     if (this.state.dragIndex !== dragIndex || this.state.dropIndex !== dropIndex) {
       console.log(dropIndex);
       this.setState({
@@ -70,8 +67,7 @@ class DelayProfilesConnector extends Component {
     }
   }
 
-  @autobind
-  onDelayProfileDragEnd({ id }, didDrop) {
+  onDelayProfileDragEnd = ({ id }, didDrop) => {
     const {
       dropIndex
     } = this.state;

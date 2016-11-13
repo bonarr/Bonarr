@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import sortDirections from 'Utilities/sortDirections';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
@@ -10,8 +9,7 @@ class TableHeaderCell extends Component {
   //
   // Listeners
 
-  @autobind
-  onPress() {
+  onPress = () => {
     this.props.onSortPress(this.props.name);
   }
 
@@ -26,7 +24,6 @@ class TableHeaderCell extends Component {
       sortable,
       sortKey,
       sortDirection,
-      onSortPress,
       ...otherProps
     } = this.props;
 

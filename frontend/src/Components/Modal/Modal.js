@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Portal from 'react-portal';
-import autobind from 'autobind-decorator';
 import * as keyCodes from 'Utilities/keyCodes';
-import Link from '../Link';
-import Icon from '../Icon';
 import styles from './Modal.css';
 
 class Modal extends Component {
@@ -74,13 +71,11 @@ class Modal extends Component {
   //
   // Listeners
 
-  @autobind
-  onBackdropBeginPress(event) {
+  onBackdropBeginPress = (event) => {
     this._isBackdropPressed = this._isBackdropTarget(event);
   }
 
-  @autobind
-  onBackdropEndPress(event) {
+  onBackdropEndPress = (event) => {
     if (this._isBackdropPressed && this._isBackdropTarget(event)) {
       this.props.onModalClose();
     }
@@ -88,8 +83,7 @@ class Modal extends Component {
     this._isBackdropPressed = false;
   }
 
-  @autobind
-  onKeyDown(event) {
+  onKeyDown = (event) => {
     const keyCode = event.keyCode;
 
     if (keyCode === keyCodes.ESCAPE) {
@@ -100,8 +94,7 @@ class Modal extends Component {
     }
   }
 
-  @autobind
-  onClosePress(event) {
+  onClosePress = (event) => {
     this.props.onModalClose();
   }
 

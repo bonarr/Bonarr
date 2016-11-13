@@ -2,7 +2,6 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { fetchTasks } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
@@ -47,8 +46,7 @@ class TasksConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onExecutePress(name) {
+  onExecutePress = (name) => {
     this.props.executeCommand({ name });
   }
 

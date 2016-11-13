@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import { fetchUpdates } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import Updates from './Updates';
@@ -40,8 +39,7 @@ class UpdatesConnector extends Component {
   //
   // Listeners
 
-  @autobind
-  onInstallLatestPress() {
+  onInstallLatestPress = () => {
     this.props.executeCommand({ name: 'applicationUpdate' });
   }
 

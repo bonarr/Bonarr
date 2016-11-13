@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import autobind from 'autobind-decorator';
 import { kinds } from 'Helpers/Props';
 import titleCase from 'Utilities/String/titleCase';
 import Card from 'Components/Card';
@@ -25,31 +24,26 @@ class QualityProfile extends Component {
   //
   // Listeners
 
-  @autobind
-  onEditQualityProfilePress() {
+  onEditQualityProfilePress = () => {
     this.setState({ isEditQualityProfileModalOpen: true });
   }
 
-  @autobind
-  onEditQualityProfileModalClose() {
+  onEditQualityProfileModalClose = () => {
     this.setState({ isEditQualityProfileModalOpen: false });
   }
 
-  @autobind
-  onDeleteQualityProfilePress() {
+  onDeleteQualityProfilePress = () => {
     this.setState({
       isEditQualityProfileModalOpen: false,
       isDeleteQualityProfileModalOpen: true
     });
   }
 
-  @autobind
-  onDeleteQualityProfileModalClose() {
+  onDeleteQualityProfileModalClose = () => {
     this.setState({ isDeleteQualityProfileModalOpen: false });
   }
 
-  @autobind
-  onConfirmDeleteQualityProfile() {
+  onConfirmDeleteQualityProfile = () => {
     this.props.onConfirmDeleteQualityProfile(this.props.id);
   }
 

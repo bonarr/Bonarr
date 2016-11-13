@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import autobind from 'autobind-decorator';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchNamingSettings, setNamingSettingsValue, fetchNamingExamples } from 'Stores/Actions/settingsActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
@@ -48,16 +47,14 @@ class NamingConnector extends Component {
   //
   // Control
 
-  @autobind
-  _fetchNamingExamples() {
+  _fetchNamingExamples = () => {
     this.props.fetchNamingExamples();
   }
 
   //
   // Listeners
 
-  @autobind
-  onInputChange({ name, value }) {
+  onInputChange = ({ name, value }) => {
     this.props.setNamingSettingsValue({ name, value });
 
     if (this._namingExampleTimeout) {
