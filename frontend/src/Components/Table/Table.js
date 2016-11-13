@@ -9,6 +9,8 @@ class Table extends Component {
 
   render() {
     const {
+      className,
+      selectAll,
       headers,
       children,
       onSortPress
@@ -16,9 +18,17 @@ class Table extends Component {
 
     return (
       <table
-        className="table table-hover"
+        className={className}
       >
         <TableHeader>
+          {
+            selectAll &&
+              <TableHeaderCell
+                key="selectAll"
+                name="selectAll"
+              />
+          }
+
           {
             headers.map((header) => {
               return (
@@ -39,8 +49,15 @@ class Table extends Component {
 
 Table.propTypes = {
   className: PropTypes.string,
+  selectAll: PropTypes.bool.isRequired,
   headers: PropTypes.array,
-  children: PropTypes.node
+  children: PropTypes.node,
+  onSortPress: PropTypes.func
+};
+
+Table.defaultProps = {
+  className: 'table table-hover',
+  selectAll: false
 };
 
 export default Table;

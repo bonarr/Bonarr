@@ -34,23 +34,27 @@ class TableHeaderCell extends Component {
                      'icon-sonarr-sort-desc';
 
     return (
-      <Link
-        component="th"
-        className={className}
-        isDisabled={!sortable}
-        onPress={this.onPress}
-        {...otherProps}
-      >
-        {label}
+      sortable ?
+        <Link
+          component="th"
+          className={className}
+          onPress={this.onPress}
+          {...otherProps}
+        >
+          {label}
 
-        {
-          isSorting &&
-            <Icon
-              name={sortIcon}
-              className={styles.sortIcon}
-            />
-        }
-      </Link>
+          {
+            isSorting &&
+              <Icon
+                name={sortIcon}
+                className={styles.sortIcon}
+              />
+          }
+        </Link> :
+
+        <th className={className}>
+          {label}
+        </th>
     );
   }
 }
