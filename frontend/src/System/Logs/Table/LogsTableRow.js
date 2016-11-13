@@ -115,7 +115,7 @@ class LogsTableRow extends Component {
               >
                 Close
               </Button>
-            </ModalFooter>`
+            </ModalFooter>
           </ModalContent>
         </Modal>
       </TableRow>
