@@ -76,7 +76,6 @@ export const defaultState = {
 };
 
 export const persistState = [
-  // 'system.logs'
   'system.logs.sortKey',
   'system.logs.sortDirection',
   'system.logs.filterKey',
