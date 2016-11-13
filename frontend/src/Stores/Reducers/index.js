@@ -16,7 +16,7 @@ export const defaultState = {
   languages: defaultLanguagesState,
   tags: defaultTagsState,
   captcha: defaultCaptchaState,
-  oAuth: defaultOAuthState,
+  oAuth: defaultOAuthState
 };
 
 export default combineReducers({

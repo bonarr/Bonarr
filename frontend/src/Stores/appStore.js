@@ -8,6 +8,7 @@ const middlewares = compose(
   persistState
 );
 
+const test =  defaultState;
 const appStore = createStore(
   reducers,
   defaultState,

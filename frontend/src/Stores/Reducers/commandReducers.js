@@ -4,7 +4,7 @@ import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 
-const defaultState = {
+export const defaultState = {
   fetching: false,
   populated: false,
   error: null,

@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 
-const defaultState = {
+export const defaultState = {
   currentPath: '',
   populated: false,
   fetching: false,

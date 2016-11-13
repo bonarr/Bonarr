@@ -3,7 +3,7 @@ import * as types from 'Stores/Actions/actionTypes';
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 
-const defaultState = {
+export const defaultState = {
   authorizing: false,
   accessToken: null,
   accessTokenSecret: null

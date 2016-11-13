@@ -78,7 +78,9 @@ class LogsTableRow extends Component {
           isOpen={this.state.isDetailsModalOpen}
           onModalClose={this.onModalClose}
         >
-          <ModalContent>
+          <ModalContent
+            onModalClose={this.onModalClose}
+          >
             <ModalHeader>
               Details
             </ModalHeader>

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import persistState from 'redux-localstorage';
 import { persistState as settingsPersistState } from 'Stores/Reducers/settingsReducers';
+import { persistState as systemPersistState } from 'Stores/Reducers/systemReducers';
 
 function slicer(paths) {
   return (state) => {
@@ -21,12 +22,14 @@ function merge(initialState, persistedState) {
 }
 
 const paths = [
-  ...settingsPersistState
+  ...settingsPersistState,
+  ...systemPersistState
 ];
 
 const config = {
   slicer,
-  merge
+  merge,
+  key: 'sonarr'
 };
 
 export default persistState(paths, config);

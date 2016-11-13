@@ -24,6 +24,7 @@ class TableHeaderCell extends Component {
       sortable,
       sortKey,
       sortDirection,
+      onSortPress,
       ...otherProps
     } = this.props;
 

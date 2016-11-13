@@ -5,7 +5,7 @@ import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
 import createReducers from './Creators/createReducers';
 
-const defaultState = {
+export const defaultState = {
   status: {
     fetching: false,
     populated: false,
@@ -54,6 +54,8 @@ const defaultState = {
     pageSize: 50,
     sortKey: 'time',
     sortDirection: 'descending',
+    filterKey: null,
+    filterValue: null,
     error: null,
     items: []
   },
@@ -72,6 +74,14 @@ const defaultState = {
     items: []
   }
 };
+
+export const persistState = [
+  // 'system.logs'
+  'system.logs.sortKey',
+  'system.logs.sortDirection',
+  'system.logs.filterKey',
+  'system.logs.filterValue'
+];
 
 const collectionNames = [
   'health',
