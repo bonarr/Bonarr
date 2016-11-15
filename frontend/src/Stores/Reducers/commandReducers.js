@@ -21,8 +21,7 @@ const commandReducers = handleActions({
 
   [types.ADD_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
-
-    newState.items.push(payload);
+    newState.items = [...state.items, payload];
 
     return newState;
   },
@@ -30,6 +29,8 @@ const commandReducers = handleActions({
   [types.UPDATE_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
     const index = _.findIndex(newState.items, { id: payload.id });
+
+    newState.items = [...state.items];
 
     if (index > -1) {
       newState.items[index] = payload;
@@ -42,6 +43,7 @@ const commandReducers = handleActions({
 
   [types.REMOVE_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
+    newState.items = [...state.items];
 
     const index = _.findIndex(newState.items, { id: payload.id });
 

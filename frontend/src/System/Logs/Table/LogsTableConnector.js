@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
+import { executeCommand } from 'Stores/Actions/commandActions';
 import * as systemActions from 'Stores/Actions/systemActions';
 import LogsTable from './LogsTable';
 
@@ -38,8 +38,6 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   executeCommand,
-  registerFinishCommandHandler,
-  unregisterFinishCommandHandler,
   ...systemActions
 };
 
@@ -49,17 +47,13 @@ class LogsTableConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    this.props.registerFinishCommandHandler({
-      key: 'logsTableClearLogs',
-      name: clearLogsCommandName,
-      handler: systemActions.fetchLogs
-    });
-
     this.props.fetchLogs();
   }
 
-  componentWillUnmount() {
-    this.props.unregisterFinishCommandHandler({ key: 'logsTableClearLogs' });
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.clearLogExecuting && this.props.clearLogExecuting) {
+      this.props.gotoLogsFirstPage();
+    }
   }
 
   //
@@ -123,6 +117,7 @@ class LogsTableConnector extends Component {
 }
 
 LogsTableConnector.propTypes = {
+  clearLogExecuting: PropTypes.bool.isRequired,
   fetchLogs: PropTypes.func.isRequired,
   gotoLogsFirstPage: PropTypes.func.isRequired,
   gotoLogsPreviousPage: PropTypes.func.isRequired,
@@ -131,9 +126,7 @@ LogsTableConnector.propTypes = {
   gotoLogsPage: PropTypes.func.isRequired,
   setLogsSort: PropTypes.func.isRequired,
   setLogsFilter: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired,
-  registerFinishCommandHandler: PropTypes.func.isRequired,
-  unregisterFinishCommandHandler: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(LogsTableConnector);
