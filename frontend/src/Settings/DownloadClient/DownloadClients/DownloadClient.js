@@ -69,7 +69,7 @@ class DownloadClient extends Component {
           <Label
             kind={enable ? kinds.SUCCESS : kinds.DANGER}
           >
-            RSS
+            Enabled
           </Label>
         </div>
 
