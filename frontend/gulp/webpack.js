@@ -28,7 +28,7 @@ console.log('ROOT:', root);
 const config = {
   devtool: '#source-map',
   watchOptions: {
-    poll: true
+    ignored: /node_modules/
   },
   entry: {
     vendor: 'vendor.js',
