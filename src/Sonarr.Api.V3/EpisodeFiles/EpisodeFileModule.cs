@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NLog;
@@ -53,17 +54,36 @@ namespace Sonarr.Api.V3.EpisodeFiles
 
         private List<EpisodeFileResource> GetEpisodeFiles()
         {
-            var seriesId = (int?)Request.Query.SeriesId;
+            var seriesIdQuery = Request.Query.SeriesId;
+            var episodeFileIdsQuery = Request.Query.EpisodeFileIds;
 
-            if (seriesId == null)
+            if (!seriesIdQuery.HasValue && !episodeFileIdsQuery.HasValue)
             {
-                throw new BadRequestException("seriesId is missing");
+                throw new BadRequestException("seriesId or episodeIds must be used");
             }
 
-            var series = _seriesService.GetSeries(seriesId.Value);
+            if (seriesIdQuery.HasValue)
+            {
+                var seriesId = (int)seriesIdQuery.Value;
 
-            return _mediaFileService.GetFilesBySeries(seriesId.Value)
-                                    .Select(f => MapToResource(series, f)).ToList();
+                var series = _seriesService.GetSeries(seriesId);
+
+                return _mediaFileService.GetFilesBySeries(seriesId)
+                                        .Select(f => MapToResource(series, f)).ToList();
+            }
+
+            string episodeFileIdsValue = episodeFileIdsQuery.Value.ToString();
+
+            var episodeFileIds = episodeFileIdsValue.Split(new []{ ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(e => Convert.ToInt32(e))
+                                            .ToList();
+
+            var episodeFiles = _mediaFileService.GetFiles(episodeFileIds);
+            var seriesIds = episodeFiles.Select(e => e.SeriesId).Distinct();
+            var matchingSeries = _seriesService.GetSeries(seriesIds);
+            
+            return _mediaFileService.GetFiles(episodeFileIds)
+                                    .Select(f => MapToResource(matchingSeries.Single(s => s.Id == f.SeriesId), f)).ToList();
         }
 
         private void SetQuality(EpisodeFileResource episodeFileResource)
