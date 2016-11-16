@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.Download.Pending;
@@ -25,15 +26,30 @@ namespace Sonarr.Api.V3.Queue
 
         private List<QueueResource> GetQueue()
         {
-            return GetQueueItems().ToResource();
-        }
-
-        private IEnumerable<NzbDrone.Core.Queue.Queue> GetQueueItems()
-        {
             var queue = _queueService.GetQueue();
             var pending = _pendingReleaseService.GetPendingQueue();
+            var fullQueue = queue.Concat(pending);
 
-            return queue.Concat(pending);
+            var seriesIdQuery = Request.Query.SeriesId;
+            var episodeIdsQuery = Request.Query.EpisodeIds;
+
+            if (seriesIdQuery.HasValue)
+            {
+                return fullQueue.Where(q => q.Series.Id == (int)seriesIdQuery).ToResource();
+            }
+
+            if (episodeIdsQuery.HasValue)
+            {
+                string episodeIdsValue = episodeIdsQuery.Value.ToString();
+
+                var episodeIds = episodeIdsValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                .Select(e => Convert.ToInt32(e))
+                                                .ToList();
+
+                return fullQueue.Where(q => episodeIds.Contains(q.Episode.Id)).ToResource();
+            }
+
+            return queue.Concat(pending).ToResource();
         }
 
         public void Handle(QueueUpdatedEvent message)
