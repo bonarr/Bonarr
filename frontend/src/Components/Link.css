@@ -9,6 +9,15 @@
   cursor: pointer;
 }
 
+.to {
+  color: $linkColor;
+
+  &:hover {
+    color: $linkHoverColor;
+    text-decoration: underline;
+  }
+}
+
 .isDisabled {
   color: $disabledColor;
   pointer-events: none;

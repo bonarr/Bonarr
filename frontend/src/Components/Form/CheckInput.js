@@ -7,13 +7,65 @@ import styles from './CheckInput.css';
 class CheckInput extends Component {
 
   //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this._checkbox = null;
+  }
+
+  componentDidMount() {
+    this.setIndeterminate();
+  }
+
+  componentDidUpdate() {
+    this.setIndeterminate();
+  }
+
+  //
+  // Control
+
+  setIndeterminate() {
+    if (!this._checkbox) {
+      return;
+    }
+
+    const {
+      value,
+      uncheckedValue,
+      checkedValue
+    } = this.props;
+
+    this._checkbox.indeterminate = value !== uncheckedValue && value !== checkedValue;
+  }
+
+  //
   // Listeners
 
+  setRef = (ref) => {
+    this._checkbox = ref;
+  }
+
   onChange = (event) => {
-    this.props.onChange({
-      name: this.props.name,
-      value: event.target.checked
-    });
+    const {
+      name,
+      value,
+      checkedValue,
+      uncheckedValue
+    } = this.props;
+
+    const shiftKey = event.nativeEvent.shiftKey;
+    const checked = event.target.checked;
+    const newValue = checked ? checkedValue : uncheckedValue;
+
+    if (value !== newValue) {
+      this.props.onChange({
+        name,
+        value: newValue,
+        shiftKey
+      });
+    }
   }
 
   //
@@ -21,13 +73,20 @@ class CheckInput extends Component {
 
   render() {
     const {
+      className,
       containerClassName,
       name,
       value,
+      checkedValue,
+      uncheckedValue,
       helpText,
       helpTextWarning,
       isDisabled
     } = this.props;
+
+    const isChecked = value === checkedValue;
+    const isUnchecked = value === uncheckedValue;
+    const isIndeterminate = !isChecked && !isUnchecked;
 
     return (
       <div className={containerClassName}>
@@ -35,27 +94,34 @@ class CheckInput extends Component {
           className={styles.label}
         >
           <input
+            ref={this.setRef}
             className={styles.checkbox}
             type="checkbox"
             name={name}
-            checked={value}
+            checked={isChecked}
             disabled={isDisabled}
             onChange={this.onChange}
           />
-          <div className={styles.styledContainer}>
-            <div
-              className={classNames(
-                styles.styled,
-                value && styles.isChecked,
-                isDisabled && styles.isDisabled
-              )}
-            >
-              {
-                value &&
-                  <Icon name="icon-sonarr-check" />
-              }
-            </div>
+
+          <div
+            className={classNames(
+              className,
+              isChecked && styles.isChecked,
+              isIndeterminate && styles.isIndeterminate,
+              isDisabled && styles.isDisabled
+            )}
+          >
+            {
+              isChecked &&
+                <Icon name="icon-sonarr-check" />
+            }
+
+            {
+              isIndeterminate &&
+                <Icon name="icon-sonarr-indeterminate" />
+            }
           </div>
+
           {
             helpText &&
               <FormInputHelpText
@@ -79,9 +145,12 @@ class CheckInput extends Component {
 }
 
 CheckInput.propTypes = {
+  className: PropTypes.string.isRequired,
   containerClassName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  value: PropTypes.bool.isRequired,
+  checkedValue: PropTypes.bool,
+  uncheckedValue: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   helpText: PropTypes.string,
   helpTextWarning: PropTypes.string,
   isDisabled: PropTypes.bool,
@@ -89,8 +158,10 @@ CheckInput.propTypes = {
 };
 
 CheckInput.defaultProps = {
+  className: styles.input,
   containerClassName: styles.container,
-  isDisabled: false
+  checkedValue: true,
+  uncheckedValue: false
 };
 
 export default CheckInput;

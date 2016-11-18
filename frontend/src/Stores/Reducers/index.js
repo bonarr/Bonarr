@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import queue, { defaultState as defaultQueueState } from './queueReducers';
+import episodeFiles, { defaultState as defaultEpisodeFilesState } from './episodeFileReducers';
+import wanted, { defaultState as defaultWantedState } from './wantedReducers';
 import settings, { defaultState as defaultSettingsState } from './settingsReducers';
 import system, { defaultState as defaultSystemState } from './systemReducers';
 import commands, { defaultState as defaultCommandsState } from './commandReducers';
@@ -9,6 +12,9 @@ import captcha, { defaultState as defaultCaptchaState } from './captchaReducers'
 import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 
 export const defaultState = {
+  queue: defaultQueueState,
+  episodeFiles: defaultEpisodeFilesState,
+  wanted: defaultWantedState,
   settings: defaultSettingsState,
   system: defaultSystemState,
   commands: defaultCommandsState,
@@ -20,6 +26,9 @@ export const defaultState = {
 };
 
 export default combineReducers({
+  queue,
+  episodeFiles,
+  wanted,
   settings,
   system,
   commands,

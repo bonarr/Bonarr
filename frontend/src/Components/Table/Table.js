@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TableHeader from './TableHeader';
 import TableHeaderCell from './TableHeaderCell';
+import TableSelectAllHeaderCell from './TableSelectAllHeaderCell';
 
 class Table extends Component {
 
@@ -13,7 +14,8 @@ class Table extends Component {
       selectAll,
       headers,
       children,
-      onSortPress
+      onSortPress,
+      ...otherProps
     } = this.props;
 
     return (
@@ -23,10 +25,7 @@ class Table extends Component {
         <TableHeader>
           {
             selectAll &&
-              <TableHeaderCell
-                key="selectAll"
-                name="selectAll"
-              />
+              <TableSelectAllHeaderCell {...otherProps} />
           }
 
           {
@@ -36,7 +35,9 @@ class Table extends Component {
                   key={header.name}
                   onSortPress={onSortPress}
                   {...header}
-                />
+                >
+                  {header.label}
+                </TableHeaderCell>
               );
             })
           }

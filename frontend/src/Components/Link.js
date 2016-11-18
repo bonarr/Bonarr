@@ -45,7 +45,7 @@ class Link extends Component {
         linkProps.href = to;
         linkProps.target = target || '_self';
       } else {
-        linkProps.href = `${window.Sonarr.UrlBase}/${to}`;
+        linkProps.href = `${window.Sonarr.UrlBase}/${to.replace(/^\//, '')}`;
         linkProps.target = target || '_self';
       }
     }
@@ -58,6 +58,7 @@ class Link extends Component {
     linkProps.className = classNames(
       className,
       styles.link,
+      to && styles.to,
       isDisabled && styles.isDisabled
     );
 

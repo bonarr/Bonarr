@@ -34,3 +34,8 @@
 .info {
   background-color: $infoColor;
 }
+
+.inverse {
+  background-color: $white;
+  color: $defaultColor;
+}

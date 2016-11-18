@@ -52,9 +52,9 @@ class FilterMenuItem extends Component {
 FilterMenuItem.propTypes = {
   children: PropTypes.node.isRequired,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   filterKey: PropTypes.string,
-  filterValue: PropTypes.string,
+  filterValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   onPress: PropTypes.func.isRequired
 };
 

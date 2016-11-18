@@ -20,10 +20,10 @@ class TableHeaderCell extends Component {
     const {
       className,
       name,
-      label,
       sortable,
       sortKey,
       sortDirection,
+      children,
       onSortPress,
       ...otherProps
     } = this.props;
@@ -41,7 +41,7 @@ class TableHeaderCell extends Component {
           onPress={this.onPress}
           {...otherProps}
         >
-          {label}
+          {children}
 
           {
             isSorting &&
@@ -53,7 +53,7 @@ class TableHeaderCell extends Component {
         </Link> :
 
         <th className={className}>
-          {label}
+          {children}
         </th>
     );
   }
@@ -62,14 +62,15 @@ class TableHeaderCell extends Component {
 TableHeaderCell.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string,
   sortable: PropTypes.bool,
   sortKey: PropTypes.string,
   sortDirection: PropTypes.string,
+  children: PropTypes.node.isRequired,
   onSortPress: PropTypes.func
 };
 
 TableHeaderCell.defaultProps = {
+  className: styles.headerCell,
   sortable: false
 };
 

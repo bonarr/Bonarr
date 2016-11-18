@@ -1,0 +1,9 @@
+.selectCell {
+  width: 30px;
+}
+
+.input {
+  composes: input from 'Components/Form/CheckInput.css';
+
+  margin: 0;
+}

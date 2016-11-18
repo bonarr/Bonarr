@@ -1,3 +1,7 @@
+.headerCell {
+  border: none !important;
+}
+
 .sortIcon {
   margin-left: 10px;
 }

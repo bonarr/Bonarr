@@ -64,8 +64,7 @@ namespace Sonarr.Api.V3.EpisodeFiles
 
             if (seriesIdQuery.HasValue)
             {
-                var seriesId = (int)seriesIdQuery.Value;
-
+                int seriesId = Convert.ToInt32(seriesIdQuery.Value);
                 var series = _seriesService.GetSeries(seriesId);
 
                 return _mediaFileService.GetFilesBySeries(seriesId)

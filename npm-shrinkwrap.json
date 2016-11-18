@@ -3469,6 +3469,11 @@
       "from": "react-slider@0.7.0",
       "resolved": "https://registry.npmjs.org/react-slider/-/react-slider-0.7.0.tgz"
     },
+    "react-tabs-redux": {
+      "version": "1.4.0",
+      "from": "react-tabs-redux@latest",
+      "resolved": "https://registry.npmjs.org/react-tabs-redux/-/react-tabs-redux-1.4.0.tgz"
+    },
     "react-tag-autocomplete": {
       "version": "5.0.3",
       "from": "react-tag-autocomplete@latest",

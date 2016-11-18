@@ -18,6 +18,8 @@ module.exports = {
 
   // Links
   defaultLinkHoverColor: '#fff',
+  linkColor: '#5d9cec',
+  linkHoverColor: '#1b72e2',
 
   // Sidebar
 

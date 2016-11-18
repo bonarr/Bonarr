@@ -17,11 +17,7 @@
   opacity: 0;
 }
 
-.styledContainer {
-  line-height: 35px;
-}
-
-.styled {
+.input {
   flex: 1 0 auto;
   margin-top: 7px;
   margin-right: 5px;
@@ -35,8 +31,13 @@
 }
 
 .isChecked {
-  border-color: #5d9cec;
-  background-color: #5d9cec;
+  border-color: $primaryColor;
+  background-color: $primaryColor;
+}
+
+.isIndeterminate {
+  border-color: $gray;
+  background-color: $gray;
 }
 
 .helpText {

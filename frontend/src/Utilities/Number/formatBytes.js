@@ -1,7 +1,7 @@
 import filesize from 'filesize';
 
 function formatBytes(input) {
-  var size = Number(input);
+  const size = Number(input);
 
   if (isNaN(size)) {
     return '';
