@@ -40,7 +40,7 @@ class EpisodeSummary extends Component {
   //
   // Render
 
-  render () {
+  render() {
     const {
       qualityProfileId,
       network,
