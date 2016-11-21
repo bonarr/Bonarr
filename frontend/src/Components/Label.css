@@ -1,13 +1,11 @@
 .label {
   display: inline-block;
   margin: 2px;
-  padding: 2px 4px;
   border-radius: 2px;
   color: $white;
   text-align: center;
   white-space: nowrap;
   font-weight: bold;
-  font-size: 11px;
   line-height: 1;
 }
 
@@ -38,4 +36,19 @@
 .inverse {
   background-color: $white;
   color: $defaultColor;
+}
+
+.small {
+  padding: 2px 4px;
+  font-size: 11px;
+}
+
+.medium {
+  padding: 3px 6px;
+  font-size: 12px;
+}
+
+.large {
+  padding: 4px 8px;
+  font-size: 14px;
 }

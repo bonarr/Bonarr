@@ -180,9 +180,10 @@ class Missing extends Component {
       totalRecords,
       isSearchingForEpisodes,
       isSearchingForMissingEpisodes,
-      onUnmonitorSelectedPress,
+      isSaving,
       onRescanDroneFactoryPress,
       onManualImportPress,
+      onMonitorEpisodePress,
       ...otherProps
     } = this.props;
 
@@ -207,7 +208,8 @@ class Missing extends Component {
             <PageToolbarButton
               iconName="icon-sonarr-monitored"
               title="Unmonitor selected"
-              onPress={onUnmonitorSelectedPress}
+              animate={isSaving}
+              onPress={this.onUnmonitorSelectedPress}
             />
 
             <PageToolbarSeparator />
@@ -286,6 +288,7 @@ class Missing extends Component {
                             isSelected={selectedState[item.id]}
                             {...item}
                             onSelectedChange={this.onSelectedChange}
+                            onMonitorEpisodePress={onMonitorEpisodePress}
                           />
                         );
                       })
@@ -321,12 +324,14 @@ Missing.propTypes = {
   totalRecords: PropTypes.number,
   isSearchingForEpisodes: PropTypes.bool.isRequired,
   isSearchingForMissingEpisodes: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   onFilterSelect: PropTypes.func.isRequired,
   onSearchSelectedPress: PropTypes.func.isRequired,
   onUnmonitorSelectedPress: PropTypes.func.isRequired,
   onSearchAllMissingPress: PropTypes.func.isRequired,
   onRescanDroneFactoryPress: PropTypes.func.isRequired,
-  onManualImportPress: PropTypes.func.isRequired
+  onManualImportPress: PropTypes.func.isRequired,
+  onMonitorEpisodePress: PropTypes.func.isRequired
 };
 
 export default Missing;

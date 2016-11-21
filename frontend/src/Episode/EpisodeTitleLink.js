@@ -1,11 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Button from 'Components/Button';
 import Link from 'Components/Link.js';
-import Modal from 'Components/Modal/Modal';
-import ModalContent from 'Components/Modal/ModalContent';
-import ModalHeader from 'Components/Modal/ModalHeader';
-import ModalBody from 'Components/Modal/ModalBody';
-import ModalFooter from 'Components/Modal/ModalFooter';
+import EpisodeDetailsModal from 'Episode/EpisodeDetailsModal';
 import styles from './EpisodeTitleLink.css';
 
 class EpisodeTitleLink extends Component {
@@ -37,7 +32,8 @@ class EpisodeTitleLink extends Component {
 
   render() {
     const {
-      title
+      episodeTitle,
+      ...otherProps
     } = this.props;
 
     return (
@@ -46,50 +42,22 @@ class EpisodeTitleLink extends Component {
           className={styles.link}
           onPress={this.onLinkPress}
         >
-          {title}
+          {episodeTitle}
         </Link>
 
-        <Modal
+        <EpisodeDetailsModal
           isOpen={this.state.isDetailsModalOpen}
+          episodeTitle={episodeTitle}
+          {...otherProps}
           onModalClose={this.onModalClose}
-        >
-          <ModalContent
-            onModalClose={this.onModalClose}
-          >
-            <ModalHeader>
-              Details
-            </ModalHeader>
-
-            <ModalBody>
-              details go here
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                onPress={this.onModalClose}
-              >
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+        />
       </div>
     );
   }
 }
 
 EpisodeTitleLink.propTypes = {
-  // id: PropTypes.number.isRequired,
-  // seriesId: PropTypes.number.isRequired,
-  // seasonNumber: PropTypes.number.isRequired,
-  // episodeNumber: PropTypes.number.isRequired,
-  // absoluteEpisodeNumber: PropTypes.number.isRequired,
-  // airDate: PropTypes.string.isRequired,
-  // airDateUtc: PropTypes.string.isRequired,
-  // summary: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  // monitored: PropTypes.bool.isRequired,
-  // showSeriesButton: PropTypes.bool.isRequired
+  episodeTitle: PropTypes.string.isRequired
 };
 
 EpisodeTitleLink.defaultProps = {

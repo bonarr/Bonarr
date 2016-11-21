@@ -1,22 +1,28 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
 import createQueueItemSelector from 'Stores/Selectors/createQueueItemSelector';
 import createEpisodeFileSelector from 'Stores/Selectors/createEpisodeFileSelector';
 import EpisodeStatus from './EpisodeStatus';
 
-// TODO: Get item from Queue
-// TODO: Get episode file
-
 function createMapStateToProps() {
   return createSelector(
+    createEpisodeSelector(),
     createQueueItemSelector(),
     createEpisodeFileSelector(),
-    (queueItem, episodeFile) => {
-      return {
-        queueItem,
-        episodeFile
-      };
+    (episode, queueItem, episodeFile) => {
+      const result = _.pick(episode, [
+        'airDateUtc',
+        'monitored',
+        'grabbed'
+      ]);
+
+      result.queueItem = queueItem;
+      result.episodeFile = episodeFile;
+
+      return result;
     }
   );
 }

@@ -1,0 +1,7 @@
+.button {
+  composes: link from 'Components/Link.css';
+
+  margin: 0 2px;
+  padding: 0 5px;
+  font-size: inherit;
+}

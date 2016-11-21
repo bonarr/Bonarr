@@ -33,6 +33,7 @@ function createMapStateToProps() {
 
       result.isSearchingForEpisodes = isSearchingForEpisodes;
       result.isSearchingForMissingEpisodes = isSearchingForMissingEpisodes;
+      result.isSaving = _.some(result.items, { isSaving: true });
 
       return result;
     }
@@ -55,7 +56,7 @@ class MissingConnector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.items !== this.props.items) {
+    if (_.differenceBy(nextProps.items, this.props.items, ({ id }) => id).length) {
       const episodeIds = _.uniq(_.reduce(nextProps.items, (result, item) => {
         const id = item.id;
 
@@ -109,7 +110,9 @@ class MissingConnector extends Component {
   }
 
   onUnmonitorSelectedPress = (selected) => {
-
+    this.props.unmonitorMissingEpisodes({
+      episodeIds: selected
+    });
   }
 
   onSearchAllMissingPress = () => {
@@ -124,6 +127,10 @@ class MissingConnector extends Component {
 
   onManualImportPress = () => {
 
+  }
+
+  onMonitorEpisodePress = (episodeId, monitored) => {
+    this.props.monitorMissingEpisode({ episodeId, monitored });
   }
 
   //
@@ -144,6 +151,7 @@ class MissingConnector extends Component {
         onSearchAllMissingPress={this.onSearchAllMissingPress}
         onRescanDroneFactoryPress={this.onRescanDroneFactoryPress}
         onManualImportPress={this.onManualImportPress}
+        onMonitorEpisodePress={this.onMonitorEpisodePress}
         {...this.props}
       />
     );
@@ -160,6 +168,8 @@ MissingConnector.propTypes = {
   gotoMissingPage: PropTypes.func.isRequired,
   setMissingSort: PropTypes.func.isRequired,
   setMissingFilter: PropTypes.func.isRequired,
+  monitorMissingEpisode: PropTypes.func.isRequired,
+  unmonitorMissingEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired
 };

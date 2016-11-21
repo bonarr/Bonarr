@@ -2280,6 +2280,11 @@
       "from": "js-base64@>=2.1.9 <3.0.0",
       "resolved": "https://registry.npmjs.org/js-base64/-/js-base64-2.1.9.tgz"
     },
+    "js-stylesheet": {
+      "version": "0.0.1",
+      "from": "js-stylesheet@>=0.0.1 <0.0.2",
+      "resolved": "https://registry.npmjs.org/js-stylesheet/-/js-stylesheet-0.0.1.tgz"
+    },
     "js-tokens": {
       "version": "1.0.3",
       "from": "js-tokens@>=1.0.2 <2.0.0",
@@ -3469,10 +3474,10 @@
       "from": "react-slider@0.7.0",
       "resolved": "https://registry.npmjs.org/react-slider/-/react-slider-0.7.0.tgz"
     },
-    "react-tabs-redux": {
-      "version": "1.4.0",
-      "from": "react-tabs-redux@latest",
-      "resolved": "https://registry.npmjs.org/react-tabs-redux/-/react-tabs-redux-1.4.0.tgz"
+    "react-tabs": {
+      "version": "0.8.2",
+      "from": "react-tabs@latest",
+      "resolved": "https://registry.npmjs.org/react-tabs/-/react-tabs-0.8.2.tgz"
     },
     "react-tag-autocomplete": {
       "version": "5.0.3",

@@ -1,14 +1,23 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classNames';
-import { kinds } from 'Helpers/Props';
+import { kinds, sizes } from 'Helpers/Props';
 import styles from './Label.css';
 
-function Label({ className, kind, children, ...otherProps }) {
+function Label(props) {
+  const {
+    className,
+    kind,
+    size,
+    children,
+    ...otherProps
+  } = props;
+
   return (
     <div
       className={classNames(
         className,
-        styles[kind]
+        styles[kind],
+        styles[size]
       )}
       {...otherProps}
     >
@@ -20,12 +29,14 @@ function Label({ className, kind, children, ...otherProps }) {
 Label.propTypes = {
   className: PropTypes.string.isRequired,
   kind: PropTypes.oneOf(kinds.all).isRequired,
+  size: PropTypes.oneOf(sizes.all).isRequired,
   children: PropTypes.node.isRequired
 };
 
 Label.defaultProps = {
   className: styles.label,
-  kind: kinds.DEFAULT
+  kind: kinds.DEFAULT,
+  size: kinds.SMALL
 };
 
 export default Label;

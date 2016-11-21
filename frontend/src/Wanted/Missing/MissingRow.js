@@ -50,7 +50,8 @@ class MissingRow extends Component {
       airDateUtc,
       title,
       isSelected,
-      onSelectedChange
+      onSelectedChange,
+      onMonitorEpisodePress
     } = this.props;
 
     return (
@@ -86,7 +87,12 @@ class MissingRow extends Component {
 
         <TableRowCell>
           <EpisodeTitleLink
-            title={title}
+            episodeId={id}
+            seriesId={series.id}
+            episodeEntity="wanted.missing"
+            episodeTitle={title}
+            showOpenSeriesButton={true}
+            onMonitorEpisodePress={onMonitorEpisodePress}
           />
         </TableRowCell>
 
@@ -101,7 +107,7 @@ class MissingRow extends Component {
           <EpisodeStatusConnector
             episodeId={id}
             episodeFileId={episodeFileId}
-            airDateUtc={airDateUtc}
+            episodeEntity="wanted.missing"
           />
         </TableRowCell>
       </TableRow>
@@ -123,7 +129,8 @@ MissingRow.propTypes = {
   airDateUtc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
-  onSelectedChange: PropTypes.func.isRequired
+  onSelectedChange: PropTypes.func.isRequired,
+  onMonitorEpisodePress: PropTypes.func.isRequired
 };
 
 export default MissingRow;

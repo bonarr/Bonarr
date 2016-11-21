@@ -1,0 +1,34 @@
+.toggleButton {
+  composes: toggleButton from 'Components/MonitorToggleButton.css';
+
+  margin-right: 10px;
+}
+
+.separator {
+  margin: 0 5px;
+}
+
+.tabs: {
+  display: inline-block;
+  margin-right: 30px;
+  width: 400px;
+  vertical-align: top;
+}
+
+.tabLink {
+  position: relative;
+  top: -6px;
+  left: -1px;
+  display: inline-block;
+  padding: 0 15px;
+  height: 40px;
+  border: 1px solid transparent;
+  line-height: 41px;
+  cursor: pointer;
+}
+
+.openSeriesButton {
+  composes: button from 'Components/Button.css';
+
+  margin-right: auto;
+}

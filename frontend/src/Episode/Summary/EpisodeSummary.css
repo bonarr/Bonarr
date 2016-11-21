@@ -1,0 +1,39 @@
+.infoTitle {
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+}
+
+.overview,
+.files {
+  margin-top: 20px;
+}
+
+.filesHeader {
+  display: flex;
+  font-weight: bold;
+}
+
+.filesHeader {
+  display: flex;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $borderColor;
+}
+
+.fileRow {
+  display: flex;
+}
+
+.path {
+  flex: 1 0 auto;
+}
+
+.size,
+.quality {
+  flex: 0 0 200px;
+}
+
+.actions {
+  flex: 0 0 20px;
+  text-align: center;
+}

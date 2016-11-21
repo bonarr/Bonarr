@@ -1,0 +1,6 @@
+.toggleButton {
+  composes: link from 'Components/Link.css';
+
+  padding: 0;
+  font-size: inherit;
+}

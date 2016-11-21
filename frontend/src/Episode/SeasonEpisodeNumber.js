@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import padNumber from 'Utilities/Number/padNumber';
+import styles from './SeasonEpisodeNumber.css';
 
 function SeasonEpisodeNumber(props) {
   const {
@@ -23,7 +24,9 @@ function SeasonEpisodeNumber(props) {
 
         {
           absoluteEpisodeNumber &&
-            <span>({absoluteEpisodeNumber})</span>
+            <span className={styles.absoluteEpisodeNumber}>
+              ({absoluteEpisodeNumber})
+            </span>
         }
       </span>
     );

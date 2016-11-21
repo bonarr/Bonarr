@@ -1,0 +1,76 @@
+import moment from 'moment';
+import React, { PropTypes } from 'react';
+import isSameWeek from 'Utilities/Date/isSameWeek';
+import isToday from 'Utilities/Date/isToday';
+import isTomorrow from 'Utilities/Date/isTomorrow';
+import { kinds, sizes } from 'Helpers/Props';
+import Label from 'Components/Label';
+
+function EpisodeAiring(props) {
+  const {
+    airDateUtc,
+    network,
+    shortDateFormat,
+    showRelativeDates,
+    timeFormat
+  } = props;
+
+  const networkLabel = (
+    <Label
+      kind={kinds.INFO}
+      size={sizes.MEDIUM}
+    >
+      {network}
+    </Label>
+  );
+
+  if (!airDateUtc) {
+    return (
+      <span>
+        TBA on {networkLabel}
+      </span>
+    );
+  }
+
+  const time = moment(airDateUtc).format(timeFormat.replace('(:mm)', ''));
+
+  if (isToday(airDateUtc)) {
+    return (
+      <span>
+        {time} on {networkLabel}
+      </span>
+    );
+  }
+
+  if (isTomorrow(airDateUtc)) {
+    return (
+      <span>
+        Tomorrow at {time} on {networkLabel}
+      </span>
+    );
+  }
+
+  if (showRelativeDates && isSameWeek(airDateUtc)) {
+    return (
+      <span>
+        {moment(airDateUtc).format('dddd')} at {time} on {networkLabel}
+      </span>
+    );
+  }
+
+  return (
+    <span>
+      {moment(airDateUtc).format(shortDateFormat)} at {time} on {networkLabel}
+    </span>
+  );
+}
+
+EpisodeAiring.propTypes = {
+  airDateUtc: PropTypes.string.isRequired,
+  network: PropTypes.string.isRequired,
+  shortDateFormat: PropTypes.string.isRequired,
+  showRelativeDates: PropTypes.bool.isRequired,
+  timeFormat: PropTypes.string.isRequired
+};
+
+export default EpisodeAiring;

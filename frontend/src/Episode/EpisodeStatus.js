@@ -30,6 +30,7 @@ function getEpisodeFIleTooltip(episodeFile, quality) {
 function EpisodeStatus(props) {
   const {
     airDateUtc,
+    monitored,
     grabbed,
     queueItem,
     episodeFile
@@ -103,6 +104,17 @@ function EpisodeStatus(props) {
     );
   }
 
+  if (!monitored) {
+    return (
+      <div className={styles.center}>
+        <Icon
+          name="icon-sonarr-unmonitored"
+          title="Episode is not monitored"
+        />
+      </div>
+    );
+  }
+
   if (hasAired) {
     return (
       <div className={styles.center}>
@@ -126,6 +138,7 @@ function EpisodeStatus(props) {
 
 EpisodeStatus.propTypes = {
   airDateUtc: PropTypes.string.isRequired,
+  monitored: PropTypes.bool.isRequired,
   grabbed: PropTypes.bool,
   queueItem: PropTypes.object,
   episodeFile: PropTypes.object

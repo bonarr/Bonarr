@@ -9,3 +9,6 @@ export const gotoMissingLastPage = wantedActionHandlers[types.GOTO_LAST_MISSING_
 export const gotoMissingPage = wantedActionHandlers[types.GOTO_MISSING_PAGE];
 export const setMissingSort = wantedActionHandlers[types.SET_MISSING_SORT];
 export const setMissingFilter = wantedActionHandlers[types.SET_MISSING_FILTER];
+
+export const monitorMissingEpisode = wantedActionHandlers[types.MONITOR_MISSING_EPISODE];
+export const unmonitorMissingEpisodes = wantedActionHandlers[types.UNMONITOR_MISSING_EPISODES];
