@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Stores/Actions/settingsActions';
-import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
+import { executeCommand } from 'Stores/Actions/commandActions';
 import connectSettingsSection from 'Settings/connectSettingsSection';
 import GeneralSettings from './GeneralSettings';
 
@@ -31,9 +31,7 @@ const mapDispatchToProps = {
   setGeneralSettingsValue,
   saveGeneralSettings,
   fetchGeneralSettings,
-  executeCommand,
-  registerFinishCommandHandler,
-  unregisterFinishCommandHandler
+  executeCommand
 };
 
 class GeneralSettingsConnector extends Component {
@@ -42,17 +40,13 @@ class GeneralSettingsConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    this.props.registerFinishCommandHandler({
-      key: 'fetchGeneralSettings',
-      name: resetApiKeyCommandName,
-      handler: fetchGeneralSettings
-    });
-
     this.props.fetchGeneralSettings();
   }
 
-  componentWillUnmount() {
-    this.props.unregisterFinishCommandHandler({ key: 'fetchGeneralSettings' });
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isResettingApiKey && this.props.isResettingApiKey) {
+      this.props.fetchGeneralSettings();
+    }
   }
 
   //
@@ -86,12 +80,11 @@ class GeneralSettingsConnector extends Component {
 }
 
 GeneralSettingsConnector.propTypes = {
+  isResettingApiKey: PropTypes.bool.isRequired,
   setGeneralSettingsValue: PropTypes.func.isRequired,
   saveGeneralSettings: PropTypes.func.isRequired,
   fetchGeneralSettings: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired,
-  registerFinishCommandHandler: PropTypes.func.isRequired,
-  unregisterFinishCommandHandler: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connectSettingsSection(

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { executeCommand, registerFinishCommandHandler, unregisterFinishCommandHandler } from 'Stores/Actions/commandActions';
+import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchUpdateLogFiles } from 'Stores/Actions/systemActions';
 import LogFiles from '../Files/LogFiles';
 
@@ -33,9 +33,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   fetchUpdateLogFiles,
-  executeCommand,
-  registerFinishCommandHandler,
-  unregisterFinishCommandHandler
+  executeCommand
 };
 
 class UpdateLogFilesConnector extends Component {
@@ -44,17 +42,13 @@ class UpdateLogFilesConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    this.props.registerFinishCommandHandler({
-      key: 'updateLogFilesDeleteLogs',
-      name: deleteFilesCommandName,
-      handler: fetchUpdateLogFiles
-    });
-
     this.props.fetchUpdateLogFiles();
   }
 
-  componentWillUnmount() {
-    this.props.unregisterFinishCommandHandler({ key: 'updateLogFilesDeleteLogs' });
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.deleteFilesExecuting && this.props.deleteFilesExecuting) {
+      this.props.fetchUpdateLogFiles();
+    }
   }
 
   //
@@ -83,6 +77,7 @@ class UpdateLogFilesConnector extends Component {
 }
 
 UpdateLogFilesConnector.propTypes = {
+  deleteFilesExecuting: PropTypes.bool.isRequired,
   fetchUpdateLogFiles: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   registerFinishCommandHandler: PropTypes.func.isRequired,
