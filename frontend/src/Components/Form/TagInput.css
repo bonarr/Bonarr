@@ -2,6 +2,9 @@
   composes: input from 'Components/Form/Input.css';
 
   display: flex;
+  flex-wrap: wrap;
+  min-height: 35px;
+  height: auto;
 }
 
 .containerFocused {
@@ -11,7 +14,7 @@
 }
 
 .selectedTagContainer {
-  /*flex: 0 0 auto;*/
+  flex: 0 0 auto;
 }
 
 .selectedTag {

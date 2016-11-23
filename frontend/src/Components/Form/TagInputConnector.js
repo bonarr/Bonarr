@@ -5,6 +5,16 @@ import { createSelector } from 'reselect';
 import { addTag } from 'Stores/Actions/tagActions';
 import TagInput from './TagInput';
 
+const validTagRegex = new RegExp('[^-_a-z0-9]', 'i');
+
+function isValidTag(tagName) {
+  try {
+    return !validTagRegex.test(tagName);
+  } catch (e) {
+    return false;
+  }
+}
+
 function createMapStateToProps() {
   return createSelector(
     (state, { value }) => value,
@@ -44,10 +54,12 @@ class TagInputConnector extends Component {
 
   onTagAdd = (tag) => {
     if (!tag.id) {
-      this.props.addTag({
-        tag: { label: tag.name },
-        onTagCreated: this.onTagCreated
-      });
+      if (isValidTag(tag.name)) {
+        this.props.addTag({
+          tag: { label: tag.name },
+          onTagCreated: this.onTagCreated
+        });
+      }
 
       return;
     }
