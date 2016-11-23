@@ -115,7 +115,7 @@ class EditNotificationModalContent extends Component {
                   onDownload.value &&
                     <FormGroup>
                       <FormLabel>On Upgrade</FormLabel>
-                      
+
                       <FormInputGroup
                         type={inputTypes.CHECK}
                         name="onUpgrade"
@@ -146,7 +146,7 @@ class EditNotificationModalContent extends Component {
                   <FormInputGroup
                     type={inputTypes.TAG}
                     name="tags"
-                    helpText="Only send notifications for series with matching tags"
+                    helpText="Only send notifications for series with at least one matching tag"
                     {...tags}
                     onChange={onInputChange}
                   />

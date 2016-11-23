@@ -80,7 +80,7 @@ class EditRestrictionModalContent extends Component {
               <FormInputGroup
                 type={inputTypes.TAG}
                 name="tags"
-                helpText="Restrictions will apply to series with more or more matching tags. Leave blank to apply to all series"
+                helpText="Restrictions will apply to series at least one matching tag. Leave blank to apply to all series"
                 {...tags}
                 onChange={onInputChange}
               />
