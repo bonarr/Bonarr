@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import classNames from 'classNames';
 import Button from 'Components/Button';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
@@ -32,6 +33,7 @@ class EpisodeDetailsModalContent extends Component {
 
   componentWillMount() {
     this.setState({ selectedTab: this.props.selectedTab });
+    Tabs.setUseDefaultStyles(false);
   }
 
   //
@@ -103,13 +105,24 @@ class EpisodeDetailsModalContent extends Component {
             selectedIndex={tabs.indexOf(this.state.selectedTab)}
             onSelect={this.onTabSelect}
           >
-            <TabList>
-              <Tab>Details</Tab>
-              <Tab>History</Tab>
-              <Tab>Search</Tab>
+            <TabList
+              className={styles.tabList}
+              activeTabClassName={styles.selectedTab}
+            >
+              <Tab className={styles.tab}>
+                Details
+              </Tab>
+
+              <Tab className={styles.tab}>
+                History
+              </Tab>
+
+              <Tab className={styles.tab}>
+                Search
+              </Tab>
             </TabList>
 
-            <TabPanel>
+            <TabPanel className={styles.tabPanel}>
               <EpisodeSummaryConnector
                 episodeId={episodeId}
                 episodeEntity={episodeEntity}
@@ -118,13 +131,13 @@ class EpisodeDetailsModalContent extends Component {
               />
             </TabPanel>
 
-            <TabPanel>
+            <TabPanel className={styles.tabPanel}>
               <EpisodeHistoryConnector
                 episodeId={episodeId}
               />
             </TabPanel>
 
-            <TabPanel>
+            <TabPanel className={styles.tabPanel}>
               <h2>Search goes here</h2>
             </TabPanel>
           </Tabs>

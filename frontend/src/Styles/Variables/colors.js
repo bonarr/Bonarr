@@ -1,6 +1,7 @@
 module.exports = {
   defaultColor: '#333',
   disabledColor: '#999',
+  black: '#000',
   white: '#fff',
   primaryColor: '#5d9cec',
   selectedColor: '#f9be03',

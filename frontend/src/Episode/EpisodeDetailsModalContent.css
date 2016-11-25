@@ -8,23 +8,36 @@
   margin: 0 5px;
 }
 
-.tabs: {
-  display: inline-block;
-  margin-right: 30px;
-  width: 400px;
-  vertical-align: top;
+.tabs {
+  margin-top: -32px;
 }
 
-.tabLink {
+.tabList {
+  margin: 0 0 10px;
+  padding: 0;
+  /*border-bottom: 1px solid $borderColor;*/
+}
+
+.tab {
   position: relative;
-  top: -6px;
-  left: -1px;
+  bottom: -1px;
   display: inline-block;
-  padding: 0 15px;
-  height: 40px;
+  padding: 6px 12px;
   border: 1px solid transparent;
-  line-height: 41px;
+  border-top: none;
+  list-style: none;
   cursor: pointer;
+}
+
+.selectedTab {
+  border-color: $borderColor;
+  border-radius: 0 0 5px 5px;
+  background: $white;
+  color: $black;
+}
+
+.tabPanel {
+  margin-top: 20px;
 }
 
 .openSeriesButton {
