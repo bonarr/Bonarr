@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Icon from 'Components/Icon';
 import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './FileBrowserRow.css';
 
 class FileBrowserRow extends Component {

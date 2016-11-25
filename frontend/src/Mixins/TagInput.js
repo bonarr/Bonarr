@@ -22,7 +22,7 @@ var testTag = function(item) {
   var tagLimitations = new RegExp('[^-_a-z0-9]', 'i');
   try {
     return !tagLimitations.test(item);
-  } catch (e) {
+  } catch (e) {6
     return false;
   }
 };

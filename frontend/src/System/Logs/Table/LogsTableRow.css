@@ -8,10 +8,6 @@
   width: 20px;
 }
 
-.time {
-  width: 180px;
-}
-
 .detailsText {
   composes: scroller from 'Components/Scroller.css';
 

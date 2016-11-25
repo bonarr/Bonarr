@@ -7,6 +7,7 @@ import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
 import EpisodeSummaryConnector from './Summary/EpisodeSummaryConnector';
+import EpisodeHistoryConnector from './History/EpisodeHistoryConnector';
 import SeasonEpisodeNumber from './SeasonEpisodeNumber';
 import styles from './EpisodeDetailsModalContent.css';
 
@@ -118,7 +119,9 @@ class EpisodeDetailsModalContent extends Component {
             </TabPanel>
 
             <TabPanel>
-              <h2>History goes here</h2>
+              <EpisodeHistoryConnector
+                episodeId={episodeId}
+              />
             </TabPanel>
 
             <TabPanel>

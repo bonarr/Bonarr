@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import longDateTime from 'Utilities/Date/longDateTime';
-import relativeDate from 'Utilities/Date/relativeDate';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import LoadingIndicator from 'Components/LoadingIndicator';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
@@ -119,12 +118,10 @@ class Backups extends Component {
                             </Link>
                           </TableRowCell>
 
-                          <TableRowCell
+                          <RelativeDateCellConnector
                             className={styles.time}
-                            title={longDateTime(time)}
-                          >
-                            {relativeDate(time)}
-                          </TableRowCell>
+                            date={time}
+                          />
                         </TableRow>
                       );
                     })

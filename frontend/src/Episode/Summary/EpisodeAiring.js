@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { PropTypes } from 'react';
+import formatTime from 'Utilities/Date/formatTime';
 import isSameWeek from 'Utilities/Date/isSameWeek';
 import isToday from 'Utilities/Date/isToday';
 import isTomorrow from 'Utilities/Date/isTomorrow';
@@ -32,7 +33,15 @@ function EpisodeAiring(props) {
     );
   }
 
-  const time = moment(airDateUtc).format(timeFormat.replace('(:mm)', ''));
+  const time = formatTime(airDateUtc, timeFormat);
+
+  if (!showRelativeDates) {
+    return (
+      <span>
+        {moment(airDateUtc).format(shortDateFormat)} at {time} on {networkLabel}
+      </span>
+    );
+  }
 
   if (isToday(airDateUtc)) {
     return (
@@ -50,7 +59,7 @@ function EpisodeAiring(props) {
     );
   }
 
-  if (showRelativeDates && isSameWeek(airDateUtc)) {
+  if (isSameWeek(airDateUtc)) {
     return (
       <span>
         {moment(airDateUtc).format('dddd')} at {time} on {networkLabel}

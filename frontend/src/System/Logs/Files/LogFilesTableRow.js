@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import longDateTime from 'Utilities/Date/longDateTime';
-import relativeDate from 'Utilities/Date/relativeDate';
 import Link from 'Components/Link';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './LogFilesTableRow.css';
 
 class LogFilesTableRow extends Component {
@@ -22,12 +21,9 @@ class LogFilesTableRow extends Component {
       <TableRow>
         <TableRowCell>{filename}</TableRowCell>
 
-        <TableRowCell
-          className={styles.time}
-          title={longDateTime(lastWriteTime)}
-        >
-          {relativeDate(lastWriteTime)}
-        </TableRowCell>
+        <RelativeDateCellConnector
+          date={lastWriteTime}
+        />
 
         <TableRowCell
           className={styles.download}

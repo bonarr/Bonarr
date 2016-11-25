@@ -63,6 +63,7 @@
     "react-slider": "0.7.0",
     "react-tabs": "0.8.2",
     "react-tag-autocomplete": "5.0.3",
+    "react-tether": "^0.5.2",
     "redux": "3.5.2",
     "redux-actions": "0.10.0",
     "redux-localstorage": "0.4.1",

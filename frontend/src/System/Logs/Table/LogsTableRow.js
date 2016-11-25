@@ -1,17 +1,16 @@
 import React, { Component, PropTypes } from 'react';
-import longDateTime from 'Utilities/Date/longDateTime';
-import relativeDate from 'Utilities/Date/relativeDate';
 import scrollDirections from 'Utilities/scrollDirections';
 import Icon from 'Components/Icon';
 import Button from 'Components/Button';
 import Scroller from 'Components/Scroller';
-import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
+import TableRow from 'Components/Table/TableRow';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './LogsTableRow.css';
 
 class LogsTableRow extends Component {
@@ -67,12 +66,9 @@ class LogsTableRow extends Component {
         <TableRowCell>{logger}</TableRowCell>
         <TableRowCell>{message}</TableRowCell>
 
-        <TableRowCell
-          className={styles.time}
-          title={longDateTime(time)}
-        >
-          {relativeDate(time)}
-        </TableRowCell>
+        <RelativeDateCellConnector
+          date={time}
+        />
 
         <Modal
           isOpen={this.state.isDetailsModalOpen}

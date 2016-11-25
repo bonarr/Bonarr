@@ -153,8 +153,4 @@ EpisodeSummary.propTypes = {
   onDeleteEpisodeFilePress: PropTypes.func.isRequired
 };
 
-EpisodeSummary.defaultProps = {
-  selectedTab: 'details'
-};
-
 export default EpisodeSummary;

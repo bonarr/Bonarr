@@ -46,13 +46,7 @@ namespace Sonarr.Api.V3.History
 
         private PagingResource<HistoryResource> GetHistory(PagingResource<HistoryResource> pagingResource)
         {
-            var pagingSpec = new PagingSpec<NzbDrone.Core.History.History>
-                                 {
-                                     Page = pagingResource.Page,
-                                     PageSize = pagingResource.PageSize,
-                                     SortKey = pagingResource.SortKey,
-                                     SortDirection = pagingResource.SortDirection
-                                 };
+            var pagingSpec = pagingResource.MapToPagingSpec<HistoryResource, NzbDrone.Core.History.History>("date", SortDirection.Descending);
 
             if (pagingResource.FilterKey == "eventType")
             {
@@ -60,9 +54,9 @@ namespace Sonarr.Api.V3.History
                 pagingSpec.FilterExpression = v => v.EventType == filterValue;
             }
 
-            else if (pagingResource.FilterKey == "episodeId")
+            if (pagingResource.FilterKey == "episodeId")
             {
-                var episodeId = Convert.ToInt32(pagingResource.FilterValue);
+                int episodeId = Convert.ToInt32(pagingResource.FilterValue);
                 pagingSpec.FilterExpression = h => h.EpisodeId == episodeId;
             }
 

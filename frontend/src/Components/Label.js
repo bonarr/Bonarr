@@ -36,7 +36,7 @@ Label.propTypes = {
 Label.defaultProps = {
   className: styles.label,
   kind: kinds.DEFAULT,
-  size: kinds.SMALL
+  size: sizes.SMALL
 };
 
 export default Label;

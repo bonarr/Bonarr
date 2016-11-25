@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createUiSettingsSelector from 'Stores/Selectors/createUiSettingsSelector';
-import EpisodeAiring from './EpisodeAiring';
+import HistoryDetails from './HistoryDetails';
 
 function createMapStateToProps() {
   return createSelector(
@@ -10,11 +10,10 @@ function createMapStateToProps() {
     (uiSettings) => {
       return _.pick(uiSettings, [
         'shortDateFormat',
-        'showRelativeDates',
         'timeFormat'
       ]);
     }
   );
 }
 
-export default connect(createMapStateToProps)(EpisodeAiring);
+export default connect(createMapStateToProps)(HistoryDetails);

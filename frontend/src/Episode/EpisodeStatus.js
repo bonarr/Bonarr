@@ -1,31 +1,10 @@
 import React, { PropTypes } from 'react';
 import isBefore from 'Utilities/Date/isBefore';
-import formatBytes from 'Utilities/Number/formatBytes';
 import { kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Label from 'Components/Label';
 import ProgressBar from 'Components/ProgressBar';
+import EpisodeQuality from './EpisodeQuality';
 import styles from './EpisodeStatus.css';
-
-function getEpisodeFIleTooltip(episodeFile, quality) {
-  const revision = quality.revision;
-  const size = formatBytes(episodeFile.size);
-  let title = 'Episode downloaded';
-
-  if (revision.real && revision.real > 0) {
-    title += '[REAL]';
-  }
-
-  if (revision.version && revision.version > 1) {
-    title += ' [PROPER]';
-  }
-
-  if (size !== '') {
-    title += ' - {0}'.format(size);
-  }
-
-  return title;
-}
 
 function EpisodeStatus(props) {
   const {
@@ -45,14 +24,11 @@ function EpisodeStatus(props) {
     const isCutoffNotMet = episodeFile.qualityCutoffNotMet;
 
     return (
-      <div className={styles.center}>
-        <Label
-          kind={isCutoffNotMet ? kinds.INVERSE : kinds.DEFAULT}
-          title={getEpisodeFIleTooltip(episodeFile, quality)}
-        >
-          {quality.quality.name}
-        </Label>
-      </div>
+      <EpisodeQuality
+        quality={quality}
+        size={episodeFile.size}
+        isCutoffNotMet={isCutoffNotMet}
+      />
     );
   }
 

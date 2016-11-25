@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import longDateTime from 'Utilities/Date/longDateTime';
-import relativeDate from 'Utilities/Date/relativeDate';
-import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
-import TableSelectCell from 'Components/Table/TableSelectCell';
 import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
-import styles from './MissingRow.css';
 import EpisodeStatusConnector from 'Episode/EpisodeStatusConnector';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
 import SeriesTitleLink from 'Series/SeriesTitleLink';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
+import TableRow from 'Components/Table/TableRow';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
 class MissingRow extends Component {
 
   //
@@ -55,18 +53,14 @@ class MissingRow extends Component {
     } = this.props;
 
     return (
-      <TableRow
-        className={styles.row}
-      >
+      <TableRow>
         <TableSelectCell
           id={id}
           isSelected={isSelected}
           onSelectedChange={onSelectedChange}
         />
 
-        <TableRowCell
-          className={styles.seriesTitle}
-        >
+        <TableRowCell>
           <SeriesTitleLink
             titleSlug={series.titleSlug}
             title={series.title}
@@ -96,12 +90,9 @@ class MissingRow extends Component {
           />
         </TableRowCell>
 
-        <TableRowCell
-          className={styles.airDate}
-          title={longDateTime(airDateUtc)}
-        >
-          {relativeDate(airDateUtc)}
-        </TableRowCell>
+        <RelativeDateCellConnector
+          date={airDateUtc}
+        />
 
         <TableRowCell>
           <EpisodeStatusConnector

@@ -5,7 +5,7 @@ import FieldSet from 'Components/FieldSet';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/TableRowCell';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
 
 class DiskSpace extends Component {
 
