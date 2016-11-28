@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchNamingSettings, setNamingSettingsValue, fetchNamingExamples } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import Naming from './Naming';
 
 function createMapStateToProps() {
@@ -84,7 +84,7 @@ NamingConnector.propTypes = {
   fetchNamingExamples: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
                 createMapStateToProps,
                 mapDispatchToProps,
                 undefined,

@@ -1,7 +1,23 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import TableHeader from './TableHeader';
 import TableHeaderCell from './TableHeaderCell';
 import TableSelectAllHeaderCell from './TableSelectAllHeaderCell';
+
+const tableHeaderCellProps = [
+  'sortKey',
+  'sortDirection'
+];
+
+function getTableHeaderCellProps(props) {
+  return _.reduce(tableHeaderCellProps, (result, key) => {
+    if (props.hasOwnProperty(key)) {
+      result[key] = props[key];
+    }
+
+    return result;
+  }, {});
+}
 
 class Table extends Component {
 
@@ -34,6 +50,7 @@ class Table extends Component {
                 <TableHeaderCell
                   key={header.name}
                   onSortPress={onSortPress}
+                  {...getTableHeaderCellProps(otherProps)}
                   {...header}
                 >
                   {header.label}

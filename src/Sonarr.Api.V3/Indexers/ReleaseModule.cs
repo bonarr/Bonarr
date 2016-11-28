@@ -59,7 +59,7 @@ namespace Sonarr.Api.V3.Indexers
             {
                 _logger.Debug("Couldn't find requested release in cache, cache timeout probably expired.");
 
-                return new NotFoundResponse();
+                throw new NzbDroneClientException(HttpStatusCode.NotFound, "Couldn't find requested release in cache, try searching again");
             }
 
             try

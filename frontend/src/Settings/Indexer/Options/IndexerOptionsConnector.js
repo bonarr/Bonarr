@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchIndexerOptions, setIndexerOptionsValue, saveIndexerOptions } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import IndexerOptions from './IndexerOptions';
 
 function createMapStateToProps() {
@@ -74,7 +74,7 @@ IndexerOptionsConnector.propTypes = {
   onHasPendingChange: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
                 createMapStateToProps,
                 mapDispatchToProps,
                 undefined,

@@ -1,24 +1,11 @@
 import React, { PropTypes } from 'react';
 import formatDateTime from 'Utilities/Date/formatDateTime';
+import formatAge from 'Utilities/Number/formatAge';
 import Link from 'Components/Link';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
 import DescriptionListItemTitle from 'Components/DescriptionList/DescriptionListItemTitle';
 import DescriptionListItemDescription from 'Components/DescriptionList/DescriptionListItemDescription';
-
-function grabbedAge(age, ageHours, ageMinutes) {
-  age = Math.round(age);
-  ageHours = parseFloat(ageHours);
-  ageMinutes = ageMinutes && parseFloat(ageMinutes);
-
-  if (age < 2 && ageMinutes) {
-    return `${ageMinutes.toFixed(1)} ${ageHours === 1 ? 'minute' : 'minutes'}`;
-  } else if (age < 2) {
-    return `${ageHours.toFixed(1)} ${ageHours === 1 ? 'hour' : 'hours'}`;
-  }
-
-  return `${age} ${age === 1 ? 'day' : 'days'}`;
-}
 
 function HistoryDetails(props) {
   const {
@@ -98,7 +85,7 @@ function HistoryDetails(props) {
           !!indexer &&
             <DescriptionListItem
               title="Age (when grabbed)"
-              data={grabbedAge(age, ageHours, ageMinutes)}
+              data={formatAge(age, ageHours, ageMinutes)}
             />
         }
 

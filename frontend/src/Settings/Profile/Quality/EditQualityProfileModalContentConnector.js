@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import EditQualityProfileModalContent from './EditQualityProfileModalContent';
 
 function createQualitiesSelector() {
@@ -182,7 +182,7 @@ EditQualityProfileModalContentConnector.propTypes = {
   onModalClose: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
   createMapStateToProps,
   mapDispatchToProps,
   undefined,

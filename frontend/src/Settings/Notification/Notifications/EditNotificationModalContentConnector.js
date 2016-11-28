@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { setNotificationValue, setNotificationFieldValue, saveNotification, testNotification } from 'Stores/Actions/settingsActions';
 import { fetchTags } from 'Stores/Actions/tagActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import EditNotificationModalContent from './EditNotificationModalContent';
 
 function createMapStateToProps() {
@@ -91,7 +91,7 @@ EditNotificationModalContentConnector.propTypes = {
   onModalClose: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
   createMapStateToProps,
   mapDispatchToProps,
   undefined,

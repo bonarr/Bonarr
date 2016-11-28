@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getDisplayName from 'Helpers/getDisplayName';
 
-function connectSettingsSection(mapStateToProps, mapDispatchToProps, mergeProps, options = {}, sectionOptions = {}) {
+function connectSection(mapStateToProps, mapDispatchToProps, mergeProps, options = {}, sectionOptions = {}) {
   return function wrap(WrappedComponent) {
     const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps, mergeProps, options)(WrappedComponent);
 
-    class SettingsSection extends Component {
+    class Section extends Component {
 
       //
       // Control
@@ -47,11 +47,11 @@ function connectSettingsSection(mapStateToProps, mapDispatchToProps, mergeProps,
       }
     }
 
-    SettingsSection.displayName = `SettingsSection(${getDisplayName(WrappedComponent)})`;
-    SettingsSection.WrappedComponent = WrappedComponent;
+    Section.displayName = `Section(${getDisplayName(WrappedComponent)})`;
+    Section.WrappedComponent = WrappedComponent;
 
-    return SettingsSection;
+    return Section;
   };
 }
 
-export default connectSettingsSection;
+export default connectSection;

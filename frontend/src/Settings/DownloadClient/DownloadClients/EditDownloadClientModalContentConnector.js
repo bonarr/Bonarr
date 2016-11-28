@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { setDownloadClientValue, setDownloadClientFieldValue, saveDownloadClient, testDownloadClient } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import EditDownloadClientModalContent from './EditDownloadClientModalContent';
 
 function createMapStateToProps() {
@@ -84,7 +84,7 @@ EditDownloadClientModalContentConnector.propTypes = {
   onModalClose: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
   createMapStateToProps,
   mapDispatchToProps,
   undefined,

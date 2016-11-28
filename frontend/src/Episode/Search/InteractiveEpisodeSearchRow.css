@@ -1,0 +1,15 @@
+.torrent {
+  composes: label from 'Components/Label.css';
+
+  background-color: #00853d;
+}
+
+.usenet {
+  composes: label from 'Components/Label.css';
+
+  background-color: #17b1d9;
+}
+
+.quality {
+  text-align: center;
+}

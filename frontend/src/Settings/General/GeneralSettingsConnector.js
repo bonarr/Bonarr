@@ -5,7 +5,7 @@ import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectio
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Stores/Actions/settingsActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import GeneralSettings from './GeneralSettings';
 
 const resetApiKeyCommandName = 'ResetApiKey';
@@ -87,7 +87,7 @@ GeneralSettingsConnector.propTypes = {
   executeCommand: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
                 createMapStateToProps,
                 mapDispatchToProps,
                 undefined,

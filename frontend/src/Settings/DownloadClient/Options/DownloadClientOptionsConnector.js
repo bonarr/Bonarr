@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchDownloadClientOptions, setDownloadClientOptionsValue, saveDownloadClientOptions } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import DownloadClientOptions from './DownloadClientOptions';
 
 function createMapStateToProps() {
@@ -74,7 +74,7 @@ DownloadClientOptionsConnector.propTypes = {
   onHasPendingChange: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
                 createMapStateToProps,
                 mapDispatchToProps,
                 undefined,

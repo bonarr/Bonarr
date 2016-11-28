@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
 import { setIndexerValue, setIndexerFieldValue, saveIndexer, testIndexer } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import EditIndexerModalContent from './EditIndexerModalContent';
 
 function createMapStateToProps() {
@@ -84,7 +84,7 @@ EditIndexerModalContentConnector.propTypes = {
   onModalClose: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
   createMapStateToProps,
   mapDispatchToProps,
   undefined,

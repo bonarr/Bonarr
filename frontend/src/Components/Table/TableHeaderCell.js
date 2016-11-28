@@ -10,7 +10,17 @@ class TableHeaderCell extends Component {
   // Listeners
 
   onPress = () => {
-    this.props.onSortPress(this.props.name);
+    const {
+      name,
+      fixedSortDirection,
+      sortPredicate
+    } = this.props;
+
+    if (fixedSortDirection) {
+      this.props.onSortPress(name, fixedSortDirection, sortPredicate);
+    } else {
+      this.props.onSortPress(name, null, sortPredicate);
+    }
   }
 
   //
@@ -20,9 +30,12 @@ class TableHeaderCell extends Component {
     const {
       className,
       name,
+      label,
       sortable,
       sortKey,
       sortDirection,
+      fixedSortDirection,
+      sortPredicate,
       children,
       onSortPress,
       ...otherProps
@@ -62,9 +75,12 @@ class TableHeaderCell extends Component {
 TableHeaderCell.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   sortable: PropTypes.bool,
   sortKey: PropTypes.string,
+  fixedSortDirection: PropTypes.string,
   sortDirection: PropTypes.string,
+  sortPredicate: PropTypes.func,
   children: PropTypes.node.isRequired,
   onSortPress: PropTypes.func
 };

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import queue, { defaultState as defaultQueueState } from './queueReducers';
 import episodeFiles, { defaultState as defaultEpisodeFilesState } from './episodeFileReducers';
 import episodeHistory, { defaultState as defaultEpisodeHistoryState } from './episodeHistoryReducers';
+import releases, { defaultState as defaultReleasesState } from './releaseReducers';
 import wanted, { defaultState as defaultWantedState } from './wantedReducers';
 import settings, { defaultState as defaultSettingsState } from './settingsReducers';
 import system, { defaultState as defaultSystemState } from './systemReducers';
@@ -16,6 +17,7 @@ export const defaultState = {
   queue: defaultQueueState,
   episodeFiles: defaultEpisodeFilesState,
   episodeHistory: defaultEpisodeHistoryState,
+  releases: defaultReleasesState,
   wanted: defaultWantedState,
   settings: defaultSettingsState,
   system: defaultSystemState,
@@ -31,6 +33,7 @@ export default combineReducers({
   queue,
   episodeFiles,
   episodeHistory,
+  releases,
   wanted,
   settings,
   system,

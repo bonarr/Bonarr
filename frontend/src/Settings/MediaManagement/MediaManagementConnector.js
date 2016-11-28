@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
 import { fetchMediaManagementSettings, setMediaManagementSettingsValue, saveMediaManagementSettings, saveNamingSettings } from 'Stores/Actions/settingsActions';
-import connectSettingsSection from 'Settings/connectSettingsSection';
+import connectSection from 'Stores/connectSection';
 import MediaManagement from './MediaManagement';
 
 function createMapStateToProps() {
@@ -70,7 +70,7 @@ MediaManagementConnector.propTypes = {
   saveNamingSettings: PropTypes.func.isRequired
 };
 
-export default connectSettingsSection(
+export default connectSection(
                 createMapStateToProps,
                 mapDispatchToProps,
                 undefined,

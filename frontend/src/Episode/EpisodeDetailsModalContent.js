@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import classNames from 'classNames';
 import Button from 'Components/Button';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
@@ -9,6 +8,7 @@ import ModalFooter from 'Components/Modal/ModalFooter';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
 import EpisodeSummaryConnector from './Summary/EpisodeSummaryConnector';
 import EpisodeHistoryConnector from './History/EpisodeHistoryConnector';
+import EpisodeSearchConnector from './Search/EpisodeSearchConnector';
 import SeasonEpisodeNumber from './SeasonEpisodeNumber';
 import styles from './EpisodeDetailsModalContent.css';
 
@@ -138,7 +138,10 @@ class EpisodeDetailsModalContent extends Component {
             </TabPanel>
 
             <TabPanel className={styles.tabPanel}>
-              <h2>Search goes here</h2>
+              <EpisodeSearchConnector
+                episodeId={episodeId}
+                onModalClose={onModalClose}
+              />
             </TabPanel>
           </Tabs>
         </ModalBody>
