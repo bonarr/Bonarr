@@ -4,11 +4,18 @@ namespace NzbDrone.Core.Messaging.Commands
 {
     public abstract class Command
     {
+        private bool _sendUpdatesToClient = false;
+
         public virtual bool SendUpdatesToClient
         {
             get
             {
-                return false;
+                return _sendUpdatesToClient;
+            }
+
+            set
+            {
+                _sendUpdatesToClient = value;
             }
         }
 
