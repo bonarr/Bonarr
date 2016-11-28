@@ -5,9 +5,8 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { fetchBackups } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
+import commandNames from 'Commands/commandNames';
 import Backups from './Backups';
-
-const backupCommandName = 'Backup';
 
 function createMapStateToProps() {
   return createSelector(
@@ -19,7 +18,7 @@ function createMapStateToProps() {
         items
       } = backups;
 
-      const backupExecuting = _.some(commands, { name: backupCommandName });
+      const backupExecuting = _.some(commands, { name: commandNames.BACKUP });
 
       return {
         fetching,
@@ -54,7 +53,7 @@ class BackupsConnector extends Component {
   // Listeners
 
   onBackupPress = () => {
-    this.props.executeCommand({ name: backupCommandName });
+    this.props.executeCommand({ name: commandNames.BACKUP });
   }
 
   //

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import inputTypes from 'Utilities/inputTypes';
-import { kinds } from 'Helpers/Props';
+import { inputTypes, kinds } from 'Helpers/Props';
 import Button from 'Components/Button';
 import SpinnerButton from 'Components/SpinnerButton';
 import ModalContent from 'Components/Modal/ModalContent';

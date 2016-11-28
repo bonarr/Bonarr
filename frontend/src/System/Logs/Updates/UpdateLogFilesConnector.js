@@ -5,9 +5,8 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchUpdateLogFiles } from 'Stores/Actions/systemActions';
+import commandNames from 'Commands/commandNames';
 import LogFiles from '../Files/LogFiles';
-
-const deleteFilesCommandName = 'DeleteUpdateLogFiles';
 
 function createMapStateToProps() {
   return createSelector(
@@ -19,7 +18,7 @@ function createMapStateToProps() {
         items
       } = updateLogFiles;
 
-      const deleteFilesExecuting = _.some(commands, { name: deleteFilesCommandName });
+      const deleteFilesExecuting = _.some(commands, { name: commandNames.DELETE_UPDATE_LOG_FILES });
 
       return {
         fetching,
@@ -59,7 +58,7 @@ class UpdateLogFilesConnector extends Component {
   }
 
   onDeleteFilesPress = () => {
-    this.props.executeCommand({ name: deleteFilesCommandName });
+    this.props.executeCommand({ name: commandNames.DELETE_UPDATE_LOG_FILES });
   }
 
   //

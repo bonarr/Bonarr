@@ -1,4 +1,4 @@
-import sortDirections from 'Utilities/sortDirections';
+import { sortDirections } from 'Helpers/Props';
 import { set } from '../baseActions';
 
 function createSetClientSideCollectionSortHandler(section, getFromState) {

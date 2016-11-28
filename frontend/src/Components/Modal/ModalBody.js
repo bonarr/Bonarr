@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import scrollDirections from 'Utilities/scrollDirections';
+import { scrollDirections } from 'Helpers/Props';
 import Scroller from 'Components/Scroller';
 import styles from './ModalBody.css';
 

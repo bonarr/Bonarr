@@ -6,9 +6,8 @@ import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Stores/Actions/settingsActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import connectSection from 'Stores/connectSection';
+import commandNames from 'Commands/commandNames';
 import GeneralSettings from './GeneralSettings';
-
-const resetApiKeyCommandName = 'ResetApiKey';
 
 function createMapStateToProps() {
   return createSelector(
@@ -16,7 +15,7 @@ function createMapStateToProps() {
     createSettingsSectionSelector(),
     createCommandsSelector(),
     (advancedSettings, sectionSettings, commands) => {
-      const isResettingApiKey = _.some(commands, { name: resetApiKeyCommandName });
+      const isResettingApiKey = _.some(commands, { name: commandNames.RESET_API_KEY });
 
       return {
         advancedSettings,
@@ -61,7 +60,7 @@ class GeneralSettingsConnector extends Component {
   }
 
   onConfirmResetApiKey = () => {
-    this.props.executeCommand({ name: 'resetApiKey' });
+    this.props.executeCommand({ name: commandNames.RESET_API_KEY });
   }
 
   //

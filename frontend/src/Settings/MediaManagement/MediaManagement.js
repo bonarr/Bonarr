@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import inputTypes from 'Utilities/inputTypes';
+import { inputTypes } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import PageContent from 'Components/Page/PageContent';

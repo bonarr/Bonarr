@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import inputTypes from 'Utilities/inputTypes';
+import { inputTypes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import CaptchaInputConnector from './CaptchaInputConnector';

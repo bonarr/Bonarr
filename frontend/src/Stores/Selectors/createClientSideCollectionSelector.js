@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import sortDirections from 'Utilities/sortDirections';
+import { sortDirections } from 'Helpers/Props';
 
 function createClientSideCollectionSelector() {
   return createSelector(

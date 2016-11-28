@@ -178,6 +178,7 @@ class Missing extends Component {
       fetching,
       items,
       totalRecords,
+      isScanningDroneFactory,
       isSearchingForEpisodes,
       isSearchingForMissingEpisodes,
       isSaving,
@@ -226,6 +227,7 @@ class Missing extends Component {
             <PageToolbarButton
               iconName="icon-sonarr-refresh"
               title="Rescan Drone Factory folder"
+              animate={isScanningDroneFactory}
               onPress={onRescanDroneFactoryPress}
             />
 
@@ -322,6 +324,7 @@ Missing.propTypes = {
   fetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,
+  isScanningDroneFactory: PropTypes.bool.isRequired,
   isSearchingForEpisodes: PropTypes.bool.isRequired,
   isSearchingForMissingEpisodes: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,

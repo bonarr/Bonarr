@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { executeCommand } from 'Stores/Actions/commandActions';
+import commandNames from 'Commands/commandNames';
 import EpisodeSearch from './EpisodeSearch';
 import InteractiveEpisodeSearchConnector from './InteractiveEpisodeSearchConnector';
 
@@ -44,7 +45,7 @@ class EpisodeSearchConnector extends Component {
 
   onQuickSearchPress = () => {
     this.props.executeCommand({
-      name: 'EpisodeSearch',
+      name: commandNames.EPISODE_SEARCH,
       episodeIds: [this.props.episodeId]
     });
 

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import inputTypes from 'Utilities/inputTypes';
-import { kinds } from 'Helpers/Props';
+import { inputTypes, kinds } from 'Helpers/Props';
 import { boolSettingShape, numberSettingShape, tagSettingShape } from 'Helpers/Props/settingShape';
 import Button from 'Components/Button';
 import LoadingIndicator from 'Components/LoadingIndicator';

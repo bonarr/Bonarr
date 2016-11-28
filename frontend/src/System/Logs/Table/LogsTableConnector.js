@@ -5,9 +5,8 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import * as systemActions from 'Stores/Actions/systemActions';
+import commandNames from 'Commands/commandNames';
 import LogsTable from './LogsTable';
-
-const clearLogsCommandName = 'ClearLog';
 
 function createMapStateToProps() {
   return createSelector(
@@ -26,7 +25,7 @@ function createMapStateToProps() {
         'filterValue'
       ]);
 
-      const clearLogExecuting = _.some(commands, { name: clearLogsCommandName });
+      const clearLogExecuting = _.some(commands, { name: commandNames.CLEAR_LOGS });
 
       return {
         clearLogExecuting,
@@ -92,7 +91,7 @@ class LogsTableConnector extends Component {
   }
 
   onClearLogsPress = () => {
-    this.props.executeCommand({ name: clearLogsCommandName });
+    this.props.executeCommand({ name: commandNames.CLEAR_LOGS });
   }
 
   //

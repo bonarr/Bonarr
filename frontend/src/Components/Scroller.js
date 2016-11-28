@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import scrollDirections from 'Utilities/scrollDirections';
+import { scrollDirections } from 'Helpers/Props';
 import styles from './Scroller.css';
 
 class Scroller extends Component {

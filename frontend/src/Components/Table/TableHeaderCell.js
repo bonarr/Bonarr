@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import sortDirections from 'Utilities/sortDirections';
+import { sortDirections } from 'Helpers/Props';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import styles from './TableHeaderCell.css';

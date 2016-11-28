@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { fetchUpdates } from 'Stores/Actions/systemActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
+import commandNames from 'Commands/commandNames';
 import Updates from './Updates';
 
 function createMapStateToProps() {
@@ -40,7 +41,7 @@ class UpdatesConnector extends Component {
   // Listeners
 
   onInstallLatestPress = () => {
-    this.props.executeCommand({ name: 'applicationUpdate' });
+    this.props.executeCommand({ name: commandNames.APPLICATION_UPDATE });
   }
 
   //

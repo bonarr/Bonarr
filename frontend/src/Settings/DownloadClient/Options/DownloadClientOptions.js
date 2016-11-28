@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import inputTypes from 'Utilities/inputTypes';
-import { kinds } from 'Helpers/Props';
+import { inputTypes, kinds } from 'Helpers/Props';
 import Alert from 'Components/Alert';
 import FieldSet from 'Components/FieldSet';
 import LoadingIndicator from 'Components/LoadingIndicator';

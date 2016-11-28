@@ -6,18 +6,17 @@ import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import * as wantedActions from 'Stores/Actions/wantedActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchQueueDetails } from 'Stores/Actions/queueActions';
+import commandNames from 'Commands/commandNames';
 import Missing from './Missing';
-
-const episodeSearchCommandName = 'EpisodeSearch';
-const missingEpisodeSearchCommandName = 'MissingEpisodeSearch';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.wanted.missing,
     createCommandsSelector(),
     (missing, commands) => {
-      const isSearchingForEpisodes = _.some(commands, { name: episodeSearchCommandName });
-      const isSearchingForMissingEpisodes = _.some(commands, { name: missingEpisodeSearchCommandName });
+      const isScanningDroneFactory = _.some(commands, { name: commandNames.DOWNLOADED_EPSIODES_SCAN });
+      const isSearchingForEpisodes = _.some(commands, { name: commandNames.EPISODE_SEARCH });
+      const isSearchingForMissingEpisodes = _.some(commands, { name: commandNames.MISSING_EPISODE_SEARCH });
 
       const result = _.pick(missing, [
         'fetching',
@@ -31,6 +30,7 @@ function createMapStateToProps() {
         'filterValue'
       ]);
 
+      result.isScanningDroneFactory = isScanningDroneFactory;
       result.isSearchingForEpisodes = isSearchingForEpisodes;
       result.isSearchingForMissingEpisodes = isSearchingForMissingEpisodes;
       result.isSaving = _.some(result.items, { isSaving: true });
@@ -104,7 +104,7 @@ class MissingConnector extends Component {
 
   onSearchSelectedPress = (selected) => {
     this.props.executeCommand({
-      name: episodeSearchCommandName,
+      name: commandNames.EPISODE_SEARCH,
       episodeIds: selected
     });
   }
@@ -117,12 +117,14 @@ class MissingConnector extends Component {
 
   onSearchAllMissingPress = () => {
     this.props.executeCommand({
-      name: missingEpisodeSearchCommandName
+      name: commandNames.MISSING_EPISODE_SEARCH
     });
   }
 
   onRescanDroneFactoryPress = () => {
-
+    this.props.executeCommand({
+      name: commandNames.DOWNLOADED_EPSIODES_SCAN
+    });
   }
 
   onManualImportPress = () => {

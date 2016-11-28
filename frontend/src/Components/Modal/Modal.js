@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Portal from 'react-portal';
-import * as keyCodes from 'Utilities/keyCodes';
+import * as keyCodes from 'Utilities/Constants/keyCodes';
 import styles from './Modal.css';
 
 class Modal extends Component {

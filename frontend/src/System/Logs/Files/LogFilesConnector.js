@@ -5,9 +5,8 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchLogFiles } from 'Stores/Actions/systemActions';
+import commandNames from 'Commands/commandNames';
 import LogFiles from './LogFiles';
-
-const deleteFilesCommandName = 'DeleteLogFiles';
 
 function createMapStateToProps() {
   return createSelector(
@@ -19,7 +18,7 @@ function createMapStateToProps() {
         items
       } = logFiles;
 
-      const deleteFilesExecuting = _.some(commands, { name: deleteFilesCommandName });
+      const deleteFilesExecuting = _.some(commands, { name: commandNames.DELETE_LOG_FILES });
 
       return {
         fetching,
@@ -59,7 +58,7 @@ class LogFilesConnector extends Component {
   }
 
   onDeleteFilesPress = () => {
-    this.props.executeCommand({ name: deleteFilesCommandName });
+    this.props.executeCommand({ name: commandNames.DELETE_LOG_FILES });
   }
 
   //
