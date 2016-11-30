@@ -26,7 +26,7 @@ module.exports = NzbDroneController.extend({
       this.setTitle(series.get('title'));
       this.showMainRegion(new SeriesDetailsLayout({ model: series }));
     } else {
-      console.want(`Series ${query} not found.`, series);
+      console.warn(`Series ${query} not found.`, series);
       this.showNotFound();
     }
   }
