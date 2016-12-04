@@ -21,25 +21,49 @@
   display: flex;
   flex-direction: column;
   max-height: 90%;
-  width: 1080px;
   border-radius: 6px;
   opacity: 1;
 }
 
+/*
+ * Sizes
+ */
+
+.small {
+  composes: modal;
+
+  width: 480px;
+}
+
+.medium {
+  composes: modal;
+
+  width: 720px;
+}
+
+.large {
+  composes: modal;
+
+  width: 1080px;
+}
+
 @media only screen and (max-width: $breakpointLarge) {
-  .modal {
+  .modal.large {
     width: 90%;
   }
 }
 
 @media only screen and (max-width: $breakpointMedium) {
-  .modal {
+  .modal.small,
+  .modal.medium {
     width: 90%;
   }
 }
 
 @media only screen and (max-width: $breakpointSmall) {
-  .modal {
+  .modal.small,
+  .modal.medium,
+  .modal.large {
     max-height: 100%;
     width: 100%;
     height: 100%;

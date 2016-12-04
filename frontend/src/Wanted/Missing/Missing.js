@@ -1,5 +1,7 @@
-import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
+import getSelectedIds from 'Utilities/Table/getSelectedIds';
+import selectAll from 'Utilities/Table/selectAll';
+import toggleSelected from 'Utilities/Table/toggleSelected';
 import { align, kinds } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
@@ -15,6 +17,7 @@ import FilterMenu from 'Components/Menu/FilterMenu';
 import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
+import ManualImportModal from 'ManualImport/ManualImportModal';
 import MissingRow from './MissingRow';
 
 const headers = [
@@ -56,7 +59,8 @@ class Missing extends Component {
       allUnselected: false,
       lastToggled: null,
       selectedState: {},
-      isConfirmSearchAllMissingModalOpen: false
+      isConfirmSearchAllMissingModalOpen: false,
+      isManualImportModalOpen: false
     };
   }
 
@@ -64,15 +68,7 @@ class Missing extends Component {
   // Control
 
   getSelectedIds = () => {
-    const selectedState = this.state.selectedState;
-
-    return _.reduce(selectedState, (result, value, id) => {
-      if (value) {
-        result.push(parseInt(id));
-      }
-
-      return result;
-    }, []);
+    return getSelectedIds(this.state.selectedState);
   }
 
   //
@@ -83,65 +79,12 @@ class Missing extends Component {
   }
 
   onSelectAllChange = ({ value }) => {
-    const selectedState = _.reduce(Object.keys(this.state.selectedState), (result, item) => {
-      result[item] = value;
-      return result;
-    }, {});
-
-    this.setState({
-      allSelected: value,
-      allUnselected: !value,
-      lastToggled: null,
-      selectedState
-    });
+    this.setState(selectAll(this.state.selectedState, value));
   }
 
-  onSelectedChange = ({ id, value, shiftKey }) => {
+  onSelectedChange = ({ id, value, shiftKey = false }) => {
     this.setState((state) => {
-      let allSelected = true;
-      let allUnselected = true;
-
-      const lastToggled = state.lastToggled;
-      const selectedState = {
-        ...state.selectedState,
-        [id]: value
-      };
-
-      if (shiftKey && state.lastToggled) {
-        const items = this.props.items;
-
-        const lastToggledIndex = _.findIndex(items, { id: lastToggled });
-        const changedIndex = _.findIndex(items, { id });
-        let lower = 0;
-        let upper = 0;
-
-        if (lastToggledIndex > changedIndex) {
-          lower = changedIndex;
-          upper = lastToggledIndex + 1;
-        } else {
-          lower = lastToggledIndex;
-          upper = changedIndex;
-        }
-
-        for (let i = lower; i < upper; i++) {
-          selectedState[items[i].id] = value;
-        }
-      }
-
-      Object.keys(selectedState).forEach((key) => {
-        if (selectedState[key]) {
-          allUnselected = false;
-        } else {
-          allSelected = false;
-        }
-      });
-
-      return {
-        allSelected,
-        allUnselected,
-        lastToggled: id,
-        selectedState
-      };
+      return toggleSelected(state, id, value, shiftKey);
     });
   }
 
@@ -166,8 +109,16 @@ class Missing extends Component {
     this.setState({ isConfirmSearchAllMissingModalOpen: false });
   }
 
-  onConfirmSearchAllMissingClose = () => {
+  onConfirmSearchAllMissingModalClose = () => {
     this.setState({ isConfirmSearchAllMissingModalOpen: false });
+  }
+
+  onManualImportPress = () => {
+    this.setState({ isManualImportModalOpen: true });
+  }
+
+  onManualImportModalClose = () => {
+    this.setState({ isManualImportModalOpen: false });
   }
 
   //
@@ -183,7 +134,6 @@ class Missing extends Component {
       isSearchingForMissingEpisodes,
       isSaving,
       onRescanDroneFactoryPress,
-      onManualImportPress,
       onMonitorEpisodePress,
       ...otherProps
     } = this.props;
@@ -192,7 +142,8 @@ class Missing extends Component {
       allSelected,
       allUnselected,
       selectedState,
-      isConfirmSearchAllMissingModalOpen
+      isConfirmSearchAllMissingModalOpen,
+      isManualImportModalOpen
     } = this.state;
 
     return (
@@ -234,7 +185,7 @@ class Missing extends Component {
             <PageToolbarButton
               iconName="icon-sonarr-import-manual"
               title="Manual Import"
-              onPress={onManualImportPress}
+              onPress={this.onManualImportPress}
             />
 
           </PageToolbarSection>
@@ -307,10 +258,24 @@ class Missing extends Component {
                   isOpen={isConfirmSearchAllMissingModalOpen}
                   kind={kinds.DANGER}
                   title="Search for all missing episodes"
-                  message={`Are you sure you want to search for all ${totalRecords} missing episodes? One API request to each indexer will be used for each epiosde. This cannot be stopped once started, without restarting down Sonarr.`}
+                  message={
+                    <div>
+                      <div>
+                        Are you sure you want to search for all {totalRecords} missing episodes?
+                      </div>
+                      <div>
+                        This cannot be cancelled once started without restarting Sonarr.
+                      </div>
+                    </div>
+                  }
                   confirmLabel="Search"
                   onConfirm={this.onSearchAllMissingConfirmed}
-                  onCancel={this.onConfirmSearchAllMissingClose}
+                  onCancel={this.onConfirmSearchAllMissingModalClose}
+                />
+
+                <ManualImportModal
+                  isOpen={isManualImportModalOpen}
+                  onModalClose={this.onManualImportModalClose}
                 />
               </div>
           }
@@ -333,7 +298,6 @@ Missing.propTypes = {
   onUnmonitorSelectedPress: PropTypes.func.isRequired,
   onSearchAllMissingPress: PropTypes.func.isRequired,
   onRescanDroneFactoryPress: PropTypes.func.isRequired,
-  onManualImportPress: PropTypes.func.isRequired,
   onMonitorEpisodePress: PropTypes.func.isRequired
 };
 

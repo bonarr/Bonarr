@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
+import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 
@@ -10,7 +11,26 @@ export const defaultState = {
   error: null,
   items: [],
   sortKey: 'releaseWeight',
-  sortDirection: 'ascending'
+  sortDirection: sortDirections.ASCENDING,
+  sortPredicates: {
+    peers: function(item, direction) {
+      const seeders = item.seeders || 0;
+      const leechers = item.leechers || 0;
+
+      return seeders * 1000000 + leechers;
+    },
+
+    rejections: function(item, direction) {
+      const rejections = item.rejections;
+      const releaseWeight = item.releaseWeight;
+
+      if (rejections.length !== 0) {
+        return releaseWeight + 1000000;
+      }
+
+      return releaseWeight;
+    }
+  }
 };
 
 const reducerSection = 'releases';
@@ -28,10 +48,11 @@ const releaseReducers = handleActions({
     const guid = payload.guid;
     const newState = Object.assign({}, state);
     const items = newState.items;
-    const item = Object.assign({}, _.find(items, { guid }), payload);
+    const index = _.findIndex(items, { guid });
+    const item = Object.assign({}, items[index], payload);
 
-    newState.items = _.filter(items, (i) => i.guid !== guid);
-    newState.items.push(item);
+    newState.items = [...items];
+    newState.items.splice(index, 1, item);
 
     return newState;
   }

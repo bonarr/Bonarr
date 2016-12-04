@@ -22,6 +22,7 @@ class TextInput extends Component {
       type,
       readOnly,
       className,
+      placeholder,
       name,
       value,
       hasError,
@@ -33,6 +34,7 @@ class TextInput extends Component {
       <input
         type={type}
         readOnly={readOnly}
+        placeholder={placeholder}
         className={classNames(
           className,
           hasError && styles.hasError,
@@ -51,6 +53,7 @@ TextInput.propTypes = {
   type: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
   className: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.string)]).isRequired,
   hasError: PropTypes.bool,

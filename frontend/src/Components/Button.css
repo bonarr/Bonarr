@@ -9,12 +9,24 @@
   white-space: nowrap;
   line-height: normal;
 
-  &:global(.disabled) {
+  &:global(.isDisabled) {
     opacity: 0.65;
   }
 
   &:hover {
     text-decoration: none;
+  }
+}
+
+.danger {
+  border-color: $dangerBorderColor;
+  background-color: $dangerBackgroundColor;
+  color: $white;
+
+  &:hover {
+    border-color: $dangerHoverBorderColor;
+    background-color: $dangerHoverBackgroundColor;
+    color: $white;
   }
 }
 
@@ -42,14 +54,14 @@
   }
 }
 
-.danger {
-  border-color: $dangerBorderColor;
-  background-color: $dangerBackgroundColor;
+.success {
+  border-color: $successBorderColor;
+  background-color: $successBackgroundColor;
   color: $white;
 
   &:hover {
-    border-color: $dangerHoverBorderColor;
-    background-color: $dangerHoverBackgroundColor;
+    border-color: $successHoverBorderColor;
+    background-color: $successHoverBackgroundColor;
     color: $white;
   }
 }

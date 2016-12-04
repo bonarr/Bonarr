@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { sortDirections } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';
@@ -34,13 +35,7 @@ const headers = [
   {
     name: 'peers',
     label: 'Peers',
-    sortable: true,
-    sortPredicate: (item, direction) => {
-      const seeders = item.seeders || 0;
-      const leechers = item.leechers || 0;
-
-      return seeders * 1000000 + leechers;
-    }
+    sortable: true
   },
   {
     name: 'qualityWeight',
@@ -51,23 +46,13 @@ const headers = [
     name: 'rejections',
     label: React.createElement(Icon, { name: 'icon-sonarr-header-rejections' }),
     sortable: true,
-    fixedSortDirection: 'ascending',
-    sortPredicate: (item, direction) => {
-      const rejections = item.rejections;
-      const releaseWeight = item.releaseWeight;
-
-      if (rejections.length !== 0) {
-        return releaseWeight + 1000000;
-      }
-
-      return releaseWeight;
-    }
+    fixedSortDirection: sortDirections.ASCENDING
   },
   {
     name: 'releaseWeight',
     label: React.createElement(Icon, { name: 'icon-sonarr-download' }),
     sortable: true,
-    fixedSortDirection: 'ascending'
+    fixedSortDirection: sortDirections.ASCENDING
   }
 ];
 

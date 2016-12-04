@@ -7,6 +7,11 @@
   text-align: inherit;
   text-decoration: none;
   cursor: pointer;
+
+  &:global(.isDisabled) {
+    /*color: $disabledColor;*/
+    pointer-events: none;
+  }
 }
 
 .to {
@@ -16,9 +21,4 @@
     color: $linkHoverColor;
     text-decoration: underline;
   }
-}
-
-.isDisabled {
-  color: $disabledColor;
-  pointer-events: none;
 }

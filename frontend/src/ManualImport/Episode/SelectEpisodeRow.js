@@ -1,33 +1,66 @@
-const Marionette = require('marionette');
-const tableRowMixin = require('Table/tableRowMixin');
-const tpl = require('./SelectEpisodeRow.hbs');
+import React, { Component, PropTypes } from 'react';
+import TableRowButton from 'Components/Table/TableRowButton';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
 
-const SelectEpisodeTableRow = Marionette.ItemView.extend({
+class SelectEpisodeRow extends Component {
 
-  className: 'select-episode-row',
-  template: tpl,
+  //
+  // Listeners
 
-  ui: {
-    selectCheckbox: '.select-checkbox'
-  },
+  onPress = () => {
+    const {
+      id,
+      isSelected
+    } = this.props;
 
-  events: {
-    'click': '_toggle'
-  },
-
-  _toggle(e) {
-    if (e.target.type === 'checkbox') {
-      return;
-    }
-
-    e.preventDefault();
-
-    var checked = this.ui.selectCheckbox.prop('checked');
-    this.ui.selectCheckbox.prop('checked', !checked);
-    this.ui.selectCheckbox.trigger('change');
+    this.props.onSelectedChange({ id, value: !isSelected });
   }
-});
 
-tableRowMixin.apply(SelectEpisodeTableRow);
+  //
+  // Render
 
-module.exports = SelectEpisodeTableRow;
+  render() {
+    const {
+      id,
+      episodeNumber,
+      title,
+      airDate,
+      isSelected,
+      onSelectedChange
+    } = this.props;
+
+    return (
+      <TableRowButton onPress={this.onPress}>
+        <TableSelectCell
+          id={id}
+          isSelected={isSelected}
+          onSelectedChange={onSelectedChange}
+        />
+
+        <TableRowCell>
+          {episodeNumber}
+        </TableRowCell>
+
+        <TableRowCell>
+          {title}
+        </TableRowCell>
+
+        <TableRowCell>
+          {airDate}
+        </TableRowCell>
+      </TableRowButton>
+    );
+  }
+}
+
+SelectEpisodeRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  episodeNumber: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  airDate: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+  onSelectedChange: PropTypes.func.isRequired
+};
+
+export default SelectEpisodeRow;

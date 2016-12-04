@@ -59,7 +59,7 @@ class Link extends Component {
       className,
       styles.link,
       to && styles.to,
-      isDisabled && styles.isDisabled
+      isDisabled && 'isDisabled'
     );
 
     return (
@@ -74,7 +74,7 @@ class Link extends Component {
 
 Link.propTypes = {
   className: PropTypes.string,
-  component: PropTypes.string,
+  component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   to: PropTypes.string,
   target: PropTypes.string,
   isDisabled: PropTypes.bool,

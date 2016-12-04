@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
+import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
@@ -11,7 +12,7 @@ export const defaultState = {
     populated: false,
     pageSize: 20,
     sortKey: 'airDateUtc',
-    sortDirection: 'descending',
+    sortDirection: sortDirections.DESCENDING,
     filterKey: 'monitored',
     filterValue: true,
     error: null,

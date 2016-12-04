@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import queue, { defaultState as defaultQueueState } from './queueReducers';
+import episodes, { defaultState as defaultEpisodesState } from './episodeReducers';
 import episodeFiles, { defaultState as defaultEpisodeFilesState } from './episodeFileReducers';
 import episodeHistory, { defaultState as defaultEpisodeHistoryState } from './episodeHistoryReducers';
 import releases, { defaultState as defaultReleasesState } from './releaseReducers';
@@ -12,9 +13,11 @@ import languages, { defaultState as defaultLanguagesState } from './languageRedu
 import tags, { defaultState as defaultTagsState } from './tagReducers';
 import captcha, { defaultState as defaultCaptchaState } from './captchaReducers';
 import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
+import manualImport, { defaultState as defaultManualImportState } from './manualImportReducers';
 
 export const defaultState = {
   queue: defaultQueueState,
+  episodes: defaultEpisodesState,
   episodeFiles: defaultEpisodeFilesState,
   episodeHistory: defaultEpisodeHistoryState,
   releases: defaultReleasesState,
@@ -26,11 +29,13 @@ export const defaultState = {
   languages: defaultLanguagesState,
   tags: defaultTagsState,
   captcha: defaultCaptchaState,
-  oAuth: defaultOAuthState
+  oAuth: defaultOAuthState,
+  manualImport: defaultManualImportState
 };
 
 export default combineReducers({
   queue,
+  episodes,
   episodeFiles,
   episodeHistory,
   releases,
@@ -42,5 +47,6 @@ export default combineReducers({
   languages,
   tags,
   captcha,
-  oAuth
+  oAuth,
+  manualImport
 });

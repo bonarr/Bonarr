@@ -7,29 +7,8 @@ import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellCo
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
+
 class MissingRow extends Component {
-
-  //
-  // Lifecycle
-
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      isDetailsModalOpen: false
-    };
-  }
-
-  //
-  // Listeners
-
-  onClick = () => {
-    this.setState({ isDetailsModalOpen: true });
-  }
-
-  onModalClose = () => {
-    this.setState({ isDetailsModalOpen: false });
-  }
 
   //
   // Render

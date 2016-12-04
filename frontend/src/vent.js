@@ -20,7 +20,6 @@ vent.Commands = {
   SaveSettings: 'saveSettings',
   ShowLogFile: 'showLogFile',
   ShowRenamePreview: 'showRenamePreview',
-  ShowManualImport: 'showManualImport',
   OpenFooter: 'OpenFooter',
   OpenActionBarCommand: 'OpenActionBarCommand',
   CloseActionBarCommand: 'CloseActionBarCommand'

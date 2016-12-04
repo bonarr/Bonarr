@@ -1,0 +1,10 @@
+.importMode {
+  composes: select from 'Components/Form/SelectInput.css';
+
+  margin-right: auto;
+  width: auto;
+}
+
+.errorMessage {
+  color: $dangerColor;
+}

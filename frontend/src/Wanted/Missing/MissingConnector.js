@@ -127,10 +127,6 @@ class MissingConnector extends Component {
     });
   }
 
-  onManualImportPress = () => {
-
-  }
-
   onMonitorEpisodePress = (episodeId, monitored) => {
     this.props.monitorMissingEpisode({ episodeId, monitored });
   }
@@ -152,7 +148,6 @@ class MissingConnector extends Component {
         onUnmonitorSelectedPress={this.onUnmonitorSelectedPress}
         onSearchAllMissingPress={this.onSearchAllMissingPress}
         onRescanDroneFactoryPress={this.onRescanDroneFactoryPress}
-        onManualImportPress={this.onManualImportPress}
         onMonitorEpisodePress={this.onMonitorEpisodePress}
         {...this.props}
       />

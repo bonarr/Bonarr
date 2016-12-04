@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Nancy;
 using NzbDrone.Core.DecisionEngine;
 using NzbDrone.Core.Tv;
@@ -30,10 +29,14 @@ namespace Sonarr.Api.V3.Episodes
             }
 
             var seriesId = (int)Request.Query.SeriesId;
+            var seasonNumber = Request.Query.SeasonNumber.HasValue ? (int)Request.Query.SeasonNumber : (int?)null;
 
-            var resources = MapToResource(_episodeService.GetEpisodeBySeries(seriesId), false, false);
+            if (seasonNumber.HasValue)
+            {
+                return MapToResource(_episodeService.GetEpisodesBySeason(seriesId, seasonNumber.Value), false, false);
+            }
 
-            return resources;
+            return MapToResource(_episodeService.GetEpisodeBySeries(seriesId), false, false);
         }
 
         private Response SetEpisodeMonitored(int id)

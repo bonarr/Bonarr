@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
+import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
@@ -53,7 +54,7 @@ export const defaultState = {
     populated: false,
     pageSize: 50,
     sortKey: 'time',
-    sortDirection: 'descending',
+    sortDirection: sortDirections.DESCENDING,
     filterKey: null,
     filterValue: null,
     error: null,

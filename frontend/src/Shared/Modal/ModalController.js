@@ -8,7 +8,6 @@ var DeleteSeriesView = require('Series/Delete/DeleteSeriesView');
 var EpisodeDetailsLayout = require('../../Episode/EpisodeDetailsLayout');
 var HistoryDetailsLayout = require('Activity/History/Details/HistoryDetailsLayout');
 var RenamePreviewLayout = require('../../Rename/RenamePreviewLayout');
-var ManualImportLayout = require('../../ManualImport/ManualImportLayout');
 var FileBrowserLayout = require('../FileBrowser/FileBrowserLayout');
 
 module.exports = Marionette.AppRouter.extend({
@@ -23,7 +22,6 @@ module.exports = Marionette.AppRouter.extend({
     vent.on(vent.Commands.ShowEpisodeDetails, this._showEpisode, this);
     vent.on(vent.Commands.ShowHistoryDetails, this._showHistory, this);
     vent.on(vent.Commands.ShowRenamePreview, this._showRenamePreview, this);
-    vent.on(vent.Commands.ShowManualImport, this._showManualImport, this);
 
     reqres.setHandler(reqres.selectPath, this._selectPath, this);
   },
@@ -66,11 +64,6 @@ module.exports = Marionette.AppRouter.extend({
 
   _showRenamePreview(options) {
     var view = new RenamePreviewLayout(options);
-    appLayout.fullscreenModalRegion.show(view);
-  },
-
-  _showManualImport(options) {
-    var view = new ManualImportLayout(options);
     appLayout.fullscreenModalRegion.show(view);
   },
 

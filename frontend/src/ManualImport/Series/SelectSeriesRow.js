@@ -1,16 +1,36 @@
-var Marionette = require('marionette');
-var tpl = require('./SelectSeriesRow.hbs');
+import React, { Component, PropTypes } from 'react';
+import Link from 'Components/Link';
+import styles from './SelectSeriesRow.css';
 
-module.exports = Marionette.ItemView.extend({
-  template: tpl,
+class SelectSeriesRow extends Component {
 
-  className: 'select-row select-series-row',
+  //
+  // Listeners
 
-  events: {
-    'click': 'onClick'
-  },
-
-  onClick() {
-    this.model.collection.trigger('modelselected', this.model);
+  onPress = () => {
+    this.props.onSeriesSelect(this.props.id);
   }
-});
+
+  //
+  // Render
+
+  render() {
+    return (
+      <Link
+        className={styles.series}
+        component="div"
+        onPress={this.onPress}
+      >
+        {this.props.title}
+      </Link>
+    );
+  }
+}
+
+SelectSeriesRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  onSeriesSelect: PropTypes.func.isRequired
+};
+
+export default SelectSeriesRow;

@@ -12,15 +12,15 @@ function createClientSideCollectionSelector() {
         filterValue,
         sortKey,
         sortDirection,
-        sortPredicate
+        sortPredicates
       } = sectionState;
 
       // Filter items
       // Sort items
 
       const sorted = _.orderBy(items, (item) => {
-        if (sortPredicate) {
-          return sortPredicate(item, sortDirection);
+        if (sortPredicates && sortPredicates.hasOwnProperty(sortKey)) {
+          return sortPredicates[sortKey](item, sortDirection);
         }
 
         return item[sortKey];

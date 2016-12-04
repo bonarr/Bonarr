@@ -28,6 +28,7 @@ function EpisodeStatus(props) {
         quality={quality}
         size={episodeFile.size}
         isCutoffNotMet={isCutoffNotMet}
+        title="Episode Downloaded"
       />
     );
   }

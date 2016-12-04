@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { kinds } from 'Helpers/Props';
+import { kinds, sizes } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';
@@ -11,6 +11,7 @@ function ConfirmModal(props) {
   const {
     isOpen,
     kind,
+    size,
     title,
     message,
     confirmLabel,
@@ -23,6 +24,7 @@ function ConfirmModal(props) {
   return (
     <Modal
       isOpen={isOpen}
+      size={size}
       onModalClose={onCancel}
     >
       <ModalContent onModalClose={onCancel}>
@@ -60,8 +62,9 @@ ConfirmModal.propTypes = {
   className: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   kind: PropTypes.oneOf(kinds.all),
+  size: PropTypes.oneOf(sizes.all),
   title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   confirmLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   hideCancelButton: PropTypes.bool,
@@ -71,6 +74,7 @@ ConfirmModal.propTypes = {
 
 ConfirmModal.defaultProps = {
   kind: kinds.PRIMARY,
+  size: sizes.MEDIUM,
   confirmLabel: 'OK',
   cancelLabel: 'Cancel'
 };

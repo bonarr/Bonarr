@@ -29,11 +29,11 @@ module.exports = TemplatedCell.extend({
   },
 
   _manualImport() {
-    vent.trigger(vent.Commands.ShowManualImport,
-      {
-        downloadId: this.model.get('downloadId'),
-        title: this.model.get('title')
-      });
+    // vent.trigger(vent.Commands.ShowManualImport,
+    //   {
+    //     downloadId: this.model.get('downloadId'),
+    //     title: this.model.get('title')
+    //   });
   },
 
   _grab() {

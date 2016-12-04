@@ -3,12 +3,11 @@ import formatBytes from 'Utilities/Number/formatBytes';
 import { kinds } from 'Helpers/Props';
 import Label from 'Components/Label';
 
-function getTooltip(quality, size) {
+function getTooltip(title, quality, size) {
   const revision = quality.revision;
-  let title = 'Episode downloaded';
 
   if (revision.real && revision.real > 0) {
-    title += '[REAL]';
+    title += ' [REAL]';
   }
 
   if (revision.version && revision.version > 1) {
@@ -22,11 +21,11 @@ function getTooltip(quality, size) {
   return title;
 }
 
-function EpisodeQuality({ quality, size, isCutoffNotMet }) {
+function EpisodeQuality({ title, quality, size, isCutoffNotMet }) {
   return (
     <Label
       kind={isCutoffNotMet ? kinds.INVERSE : kinds.DEFAULT}
-      title={getTooltip(quality, size)}
+      title={getTooltip(title, quality, size)}
     >
       {quality.quality.name}
     </Label>
@@ -34,9 +33,14 @@ function EpisodeQuality({ quality, size, isCutoffNotMet }) {
 }
 
 EpisodeQuality.propTypes = {
+  title: PropTypes.string,
   quality: PropTypes.object.isRequired,
   size: PropTypes.number,
   isCutoffNotMet: PropTypes.bool
+};
+
+EpisodeQuality.defaultProps = {
+  title: ''
 };
 
 export default EpisodeQuality;

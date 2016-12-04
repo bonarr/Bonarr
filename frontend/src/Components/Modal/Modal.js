@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Portal from 'react-portal';
+import classNames from 'classNames';
+import { sizes } from 'Helpers/Props';
 import * as keyCodes from 'Utilities/Constants/keyCodes';
 import styles from './Modal.css';
 
@@ -105,6 +107,7 @@ class Modal extends Component {
     const {
       className,
       backdropClassName,
+      size,
       children,
       isOpen
     } = this.props;
@@ -126,7 +129,10 @@ class Modal extends Component {
                 >
                   <div
                     ref="modal"
-                    className={className}
+                    className={classNames(
+                      className,
+                      styles[size]
+                    )}
                   >
                     {children}
                   </div>
@@ -149,7 +155,8 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   className: styles.modal,
-  backdropClassName: styles.modalBackdrop
+  backdropClassName: styles.modalBackdrop,
+  size: sizes.LARGE
 };
 
 export default Modal;
