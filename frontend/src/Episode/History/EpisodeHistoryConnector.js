@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchEpisodeHistory, clearEpisodeHistory } from 'Stores/Actions/episodeHistoryActions';
+import { fetchEpisodeHistory, clearEpisodeHistory, episodeHistoryMarkAsFailed } from 'Stores/Actions/episodeHistoryActions';
 import EpisodeHistory from './EpisodeHistory';
 
 function createMapStateToProps() {
@@ -15,7 +15,8 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   fetchEpisodeHistory,
-  clearEpisodeHistory
+  clearEpisodeHistory,
+  episodeHistoryMarkAsFailed
 };
 
 class EpisodeHistoryConnector extends Component {
@@ -34,10 +35,8 @@ class EpisodeHistoryConnector extends Component {
   //
   // Listeners
 
-  onMarkAsFailedPress = () => {
-    // TODO: Wire up release failure/blacklisting
-
-    //historyActions.failed?blacklist:
+  onMarkAsFailedPress = (historyId) => {
+    this.props.episodeHistoryMarkAsFailed({ historyId, episodeId: this.props.episodeId });
   }
 
   //
@@ -56,7 +55,8 @@ class EpisodeHistoryConnector extends Component {
 EpisodeHistoryConnector.propTypes = {
   episodeId: PropTypes.number.isRequired,
   fetchEpisodeHistory: PropTypes.func.isRequired,
-  clearEpisodeHistory: PropTypes.func.isRequired
+  clearEpisodeHistory: PropTypes.func.isRequired,
+  episodeHistoryMarkAsFailed: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(EpisodeHistoryConnector);

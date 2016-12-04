@@ -1,6 +1,8 @@
 import $ from 'jquery';
+import { sortDirections } from 'Helpers/Props';
 import * as types from './actionTypes';
 import { set, update } from './baseActions';
+import { fetchEpisodeHistory } from './episodeHistoryActions';
 
 const episodeHistoryActionHandlers = {
   [types.FETCH_EPISODE_HISTORY]: function(payload) {
@@ -15,7 +17,7 @@ const episodeHistoryActionHandlers = {
         filterKey: 'episodeId',
         filterValue: payload.episodeId,
         sortKey: 'date',
-        sortValue: 'descending'
+        sortDirection: sortDirections.DESCENDING
       };
 
       const promise = $.ajax({
@@ -41,6 +43,27 @@ const episodeHistoryActionHandlers = {
           populated: false,
           error: xhr
         }));
+      });
+    };
+  },
+
+  [types.EPISODE_HISTORY_MARK_AS_FAILED]: function(payload) {
+    return function(dispatch, getState) {
+      const {
+        historyId,
+        episodeId
+      } = payload;
+
+      const promise = $.ajax({
+        url: '/history/failed',
+        type: 'POST',
+        data: {
+          id: historyId
+        }
+      });
+
+      promise.done(() => {
+        dispatch(fetchEpisodeHistory({ episodeId }));
       });
     };
   }
