@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import updateEpisodes from 'Utilities/Episode/updateEpisodes';
 
-function createToggleEpisodeMonitoredHandler(section, getFromState) {
+function createBatchToggleEpisodeMonitoredHandler(section, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
       const {
@@ -9,7 +9,9 @@ function createToggleEpisodeMonitoredHandler(section, getFromState) {
         monitored
       } = payload;
 
-      updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
+      const state = getFromState(getState());
+
+      updateEpisodes(dispatch, section, state.items, episodeIds, {
         isSaving: true
       });
 
@@ -21,14 +23,14 @@ function createToggleEpisodeMonitoredHandler(section, getFromState) {
       });
 
       promise.done(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
+        updateEpisodes(dispatch, section, state.items, episodeIds, {
           isSaving: false,
           monitored
         });
       });
 
       promise.fail(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
+        updateEpisodes(dispatch, section, state.items, episodeIds, {
           isSaving: false
         });
       });
@@ -36,4 +38,4 @@ function createToggleEpisodeMonitoredHandler(section, getFromState) {
   };
 }
 
-export default createToggleEpisodeMonitoredHandler;
+export default createBatchToggleEpisodeMonitoredHandler;

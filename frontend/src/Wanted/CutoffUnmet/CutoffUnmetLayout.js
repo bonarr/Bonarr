@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import appStore from 'Stores/appStore';
-import MissingConnector from './MissingConnector';
-import tpl from './MissingLayout.hbs';
+import CutoffUnmetConnector from './CutoffUnmetConnector';
+import tpl from './CutoffUnmetLayout.hbs';
 
 module.exports = Marionette.LayoutView.extend({
   template: tpl,
@@ -12,7 +12,7 @@ module.exports = Marionette.LayoutView.extend({
   mountReact() {
     ReactDOM.render(
       <Provider store={appStore}>
-        <MissingConnector />
+        <CutoffUnmetConnector />
       </Provider>,
       this.el
     );

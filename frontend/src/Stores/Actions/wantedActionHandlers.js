@@ -19,7 +19,7 @@ const wantedActionHandlers = {
   [types.TOGGLE_MISSING_EPISODE_MONITORED]: createToggleEpisodeMonitoredHandler('missing', (state) => state.wanted.missing),
   [types.BATCH_UNMONITOR_MISSING_EPISODES]: createBatchToggleEpisodeMonitoredHandler('missing', (state) => state.wanted.missing),
 
-  ...createServerSideCollectionHandlers('cutoffUnmet', '/wanted/cutoffunmet', (state) => state.wanted, {
+  ...createServerSideCollectionHandlers('cutoffUnmet', '/wanted/cutoff', (state) => state.wanted, {
     [serverSideCollectionHandlers.FETCH]: types.FETCH_CUTOFF_UNMET,
     [serverSideCollectionHandlers.FIRST_PAGE]: types.GOTO_FIRST_CUTOFF_UNMET_PAGE,
     [serverSideCollectionHandlers.PREVIOUS_PAGE]: types.GOTO_PREVIOUS_CUTOFF_UNMET_PAGE,

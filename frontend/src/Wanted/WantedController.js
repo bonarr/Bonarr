@@ -1,12 +1,12 @@
 var NzbDroneController = require('Shared/NzbDroneController');
 var MissingLayout = require('./Missing/MissingLayout');
-var CutoffUnmetLayout = require('./Cutoff/CutoffUnmetLayout');
+var CutoffUnmetLayout = require('./CutoffUnmet/CutoffUnmetLayout');
 
 module.exports = NzbDroneController.extend({
   initialize() {
     this.route('wanted', this.missing);
     this.route('wanted/missing', this.missing);
-    this.route('wanted/cutoff', this.cutoff);
+    this.route('wanted/cutoff', this.cutoffUnmet);
 
     NzbDroneController.prototype.initialize.apply(this, arguments);
   },
@@ -16,8 +16,8 @@ module.exports = NzbDroneController.extend({
     this.showMainRegion(new MissingLayout());
   },
 
-  cutoff() {
-    this.setTitle('Cutoff Unment');
+  cutoffUnmet() {
+    this.setTitle('Cutoff Unmet');
     this.showMainRegion(new CutoffUnmetLayout());
   }
 });

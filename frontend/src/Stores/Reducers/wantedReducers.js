@@ -17,6 +17,18 @@ export const defaultState = {
     filterValue: true,
     error: null,
     items: []
+  },
+
+  cutoffUnmet: {
+    fetching: false,
+    populated: false,
+    pageSize: 20,
+    sortKey: 'airDateUtc',
+    sortDirection: sortDirections.DESCENDING,
+    filterKey: 'monitored',
+    filterValue: true,
+    error: null,
+    items: []
   }
 };
 
@@ -24,11 +36,16 @@ export const persistState = [
   'wanted.missing.sortKey',
   'wanted.missing.sortDirection',
   'wanted.missing.filterKey',
-  'wanted.missing.filterValue'
+  'wanted.missing.filterValue',
+  'wanted.cutoffUnmet.sortKey',
+  'wanted.cutoffUnmet.sortDirection',
+  'wanted.cutoffUnmet.filterKey',
+  'wanted.cutoffUnmet.filterValue'
 ];
 
 const serverSideCollectionNames = [
-  'missing'
+  'missing',
+  'cutoffUnmet'
 ];
 
 const wantedReducers = handleActions({
