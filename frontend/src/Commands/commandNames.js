@@ -1,5 +1,6 @@
 export const APPLICATION_UPDATE = 'ApplicationUpdate';
 export const BACKUP = 'Backup';
+export const CLEAR_BLACKLIST = 'ClearBlacklist';
 export const CLEAR_LOGS = 'ClearLog';
 export const CUTOFF_UNMET_EPISODE_SEARCH = 'CutoffUnmetEpisodeSearch';
 export const DELETE_LOG_FILES = 'DeleteLogFiles';
@@ -13,6 +14,7 @@ export const RESET_API_KEY = 'ResetApiKey';
 export default {
   APPLICATION_UPDATE,
   BACKUP,
+  CLEAR_BLACKLIST,
   CLEAR_LOGS,
   DELETE_LOG_FILES,
   DELETE_UPDATE_LOG_FILES,

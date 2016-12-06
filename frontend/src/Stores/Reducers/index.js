@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import queue, { defaultState as defaultQueueState } from './queueReducers';
+import blacklist, { defaultState as defaultBlacklistState } from './blacklistReducers';
 import episodes, { defaultState as defaultEpisodesState } from './episodeReducers';
 import episodeFiles, { defaultState as defaultEpisodeFilesState } from './episodeFileReducers';
 import episodeHistory, { defaultState as defaultEpisodeHistoryState } from './episodeHistoryReducers';
@@ -17,6 +18,7 @@ import manualImport, { defaultState as defaultManualImportState } from './manual
 
 export const defaultState = {
   queue: defaultQueueState,
+  blacklist: defaultBlacklistState,
   episodes: defaultEpisodesState,
   episodeFiles: defaultEpisodeFilesState,
   episodeHistory: defaultEpisodeHistoryState,
@@ -35,6 +37,7 @@ export const defaultState = {
 
 export default combineReducers({
   queue,
+  blacklist,
   episodes,
   episodeFiles,
   episodeHistory,

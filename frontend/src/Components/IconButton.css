@@ -3,5 +3,7 @@
 
   margin: 0 2px;
   padding: 0 5px;
+  border-radius: 4px;
+  background-color: transparent;
   font-size: inherit;
 }
