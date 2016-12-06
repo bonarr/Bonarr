@@ -1,26 +1,8 @@
-import _ from 'lodash';
-import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import * as types from './actionTypes';
+import createBatchToggleEpisodeMonitoredHandler from './Creators/createBatchToggleEpisodeMonitoredHandler';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
-import { update } from './baseActions';
-
-function updateEpisodes(dispatch, section, episodes, episodeIds, options) {
-  const data = _.reduce(episodes, (result, item) => {
-    if (episodeIds.indexOf(item.id) > -1) {
-      result.push({
-        ...item,
-        ...options
-      });
-    } else {
-      result.push(item);
-    }
-
-    return result;
-  }, []);
-
-  dispatch(update({ section, data }));
-}
+import createToggleEpisodeMonitoredHandler from './Creators/createToggleEpisodeMonitoredHandler';
 
 const wantedActionHandlers = {
   ...createServerSideCollectionHandlers('missing', '/wanted/missing', (state) => state.wanted, {
@@ -34,75 +16,22 @@ const wantedActionHandlers = {
     [serverSideCollectionHandlers.FILTER]: types.SET_MISSING_FILTER
   }),
 
-  [types.MONITOR_MISSING_EPISODE]: function(payload) {
-    return (dispatch, getState) => {
-      const section = 'missing';
+  [types.TOGGLE_MISSING_EPISODE_MONITORED]: createToggleEpisodeMonitoredHandler('missing', (state) => state.wanted.missing),
+  [types.BATCH_UNMONITOR_MISSING_EPISODES]: createBatchToggleEpisodeMonitoredHandler('missing', (state) => state.wanted.missing),
 
-      const {
-        episodeId,
-        monitored
-      } = payload;
+  ...createServerSideCollectionHandlers('cutoffUnmet', '/wanted/cutoffunmet', (state) => state.wanted, {
+    [serverSideCollectionHandlers.FETCH]: types.FETCH_CUTOFF_UNMET,
+    [serverSideCollectionHandlers.FIRST_PAGE]: types.GOTO_FIRST_CUTOFF_UNMET_PAGE,
+    [serverSideCollectionHandlers.PREVIOUS_PAGE]: types.GOTO_PREVIOUS_CUTOFF_UNMET_PAGE,
+    [serverSideCollectionHandlers.NEXT_PAGE]: types.GOTO_NEXT_CUTOFF_UNMET_PAGE,
+    [serverSideCollectionHandlers.LAST_PAGE]: types.GOTO_LAST_CUTOFF_UNMET_PAGE,
+    [serverSideCollectionHandlers.EXACT_PAGE]: types.GOTO_CUTOFF_UNMET_PAGE,
+    [serverSideCollectionHandlers.SORT]: types.SET_CUTOFF_UNMET_SORT,
+    [serverSideCollectionHandlers.FILTER]: types.SET_CUTOFF_UNMET_FILTER
+  }),
 
-      updateEpisodes(dispatch, section, getState().wanted.missing.items, [episodeId], {
-        isSaving: true
-      });
-
-      const promise = $.ajax({
-        url: `/episode/${episodeId}`,
-        method: 'PUT',
-        data: JSON.stringify({ monitored }),
-        dataType: 'json'
-      });
-
-      promise.done(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, [episodeId], {
-          isSaving: false,
-          monitored
-        });
-      });
-
-      promise.fail(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, [episodeId], {
-          isSaving: false
-        });
-      });
-    };
-  },
-
-  [types.UNMONITOR_MISSING_EPISODES]: function(payload) {
-    return (dispatch, getState) => {
-      const section = 'missing';
-      const monitored = false;
-
-      const {
-        episodeIds
-      } = payload;
-
-      updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
-        isSaving: true
-      });
-
-      const promise = $.ajax({
-        url: '/episode/monitor',
-        method: 'PUT',
-        data: JSON.stringify({ episodeIds, monitored }),
-        dataType: 'json'
-      });
-
-      promise.done(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
-          isSaving: false,
-          monitored
-        });
-      });
-
-      promise.fail(() => {
-        updateEpisodes(dispatch, section, getState().wanted.missing.items, episodeIds, {
-          isSaving: false
-        });
-      });
-    };
-  }
+  [types.TOGGLE_CUTOFF_UNMET_EPISODE_MONITORED]: createToggleEpisodeMonitoredHandler('cutoffUnmet', (state) => state.wanted.cutoffUnmet),
+  [types.BATCH_UNMONITOR_CUTOFF_UNMET_EPISODES]: createBatchToggleEpisodeMonitoredHandler('cutoffUnmet', (state) => state.wanted.cutoffUnmet)
 };
 
 export default wantedActionHandlers;

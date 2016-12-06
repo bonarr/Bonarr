@@ -110,8 +110,9 @@ class MissingConnector extends Component {
   }
 
   onUnmonitorSelectedPress = (selected) => {
-    this.props.unmonitorMissingEpisodes({
-      episodeIds: selected
+    this.props.batchUnmonitorMissingEpisodes({
+      episodeIds: selected,
+      monitored: false
     });
   }
 
@@ -128,7 +129,7 @@ class MissingConnector extends Component {
   }
 
   onMonitorEpisodePress = (episodeId, monitored) => {
-    this.props.monitorMissingEpisode({ episodeId, monitored });
+    this.props.toggleMissingEpisodeMonitored({ episodeId, monitored });
   }
 
   //
@@ -165,8 +166,8 @@ MissingConnector.propTypes = {
   gotoMissingPage: PropTypes.func.isRequired,
   setMissingSort: PropTypes.func.isRequired,
   setMissingFilter: PropTypes.func.isRequired,
-  monitorMissingEpisode: PropTypes.func.isRequired,
-  unmonitorMissingEpisodes: PropTypes.func.isRequired,
+  toggleMissingEpisodeMonitored: PropTypes.func.isRequired,
+  batchUnmonitorMissingEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired
 };
