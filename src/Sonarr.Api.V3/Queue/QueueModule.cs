@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NzbDrone.Common.Extensions;
+using NzbDrone.Core.Datastore;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.Download.Pending;
 using NzbDrone.Core.Messaging.Events;
@@ -21,35 +23,64 @@ namespace Sonarr.Api.V3.Queue
         {
             _queueService = queueService;
             _pendingReleaseService = pendingReleaseService;
-            GetResourceAll = GetQueue;
+            GetResourcePaged = GetQueue;
+
         }
 
-        private List<QueueResource> GetQueue()
+        private PagingResource<QueueResource> GetQueue(PagingResource<QueueResource> pagingResource)
         {
+            var pagingSpec = pagingResource.MapToPagingSpec<QueueResource, NzbDrone.Core.Queue.Queue>("timeleft", SortDirection.Ascending);
+            return ApplyToPage(GetQueue, pagingSpec, MapToResource);
+        }
+
+        private PagingSpec<NzbDrone.Core.Queue.Queue> GetQueue(PagingSpec<NzbDrone.Core.Queue.Queue> pagingSpec)
+        {
+            var ascending = pagingSpec.SortDirection == SortDirection.Ascending;
+            var orderByFunc = GetOrderByFunc(pagingSpec);
+
             var queue = _queueService.GetQueue();
             var pending = _pendingReleaseService.GetPendingQueue();
-            var fullQueue = queue.Concat(pending);
+            var fullQueue = queue.Concat(pending).ToList();
+            IOrderedEnumerable<NzbDrone.Core.Queue.Queue> ordered;
 
-            var seriesIdQuery = Request.Query.SeriesId;
-            var episodeIdsQuery = Request.Query.EpisodeIds;
-
-            if (seriesIdQuery.HasValue)
+            if (pagingSpec.SortKey == "timeleft")
             {
-                return fullQueue.Where(q => q.Series.Id == (int)seriesIdQuery).ToResource();
+                ordered = ascending ? fullQueue.OrderBy(q => q.Timeleft, new TimeleftComparer()) : fullQueue.OrderByDescending(q => q.Timeleft, new TimeleftComparer());
             }
 
-            if (episodeIdsQuery.HasValue)
+            else
             {
-                string episodeIdsValue = episodeIdsQuery.Value.ToString();
-
-                var episodeIds = episodeIdsValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                                .Select(e => Convert.ToInt32(e))
-                                                .ToList();
-
-                return fullQueue.Where(q => episodeIds.Contains(q.Episode.Id)).ToResource();
+                ordered = ascending ? fullQueue.OrderBy(orderByFunc) : fullQueue.OrderByDescending(orderByFunc);
             }
 
-            return queue.Concat(pending).ToResource();
+            pagingSpec.Records = ordered.Skip((pagingSpec.Page - 1) * pagingSpec.PageSize).Take(pagingSpec.PageSize).ToList();
+            pagingSpec.TotalRecords = fullQueue.Count;
+
+            return pagingSpec;
+        }
+
+        private Func<NzbDrone.Core.Queue.Queue, Object> GetOrderByFunc(PagingSpec<NzbDrone.Core.Queue.Queue> pagingSpec)
+        {
+            switch (pagingSpec.SortKey)
+            {
+                case "series.sortTitle":
+                    return q => q.Series.SortTitle;
+                case "episode":
+                    return q => q.Episode;
+                case "episode.title":
+                    return q => q.Episode.Title;
+                case "quality":
+                    return q => q.Quality;
+                case "progress":
+                    return q => q.Size / q.Sizeleft;
+                default:
+                    return q => q.Timeleft;
+            }
+        }
+
+        private QueueResource MapToResource(NzbDrone.Core.Queue.Queue queueItem)
+        {
+            return queueItem.ToResource();
         }
 
         public void Handle(QueueUpdatedEvent message)
