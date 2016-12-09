@@ -56,7 +56,7 @@ const queueReducers = handleActions({
 
   [types.SET]: createReducers([...propertyNames, paged], createSetReducer),
   [types.UPDATE]: createReducers([...propertyNames, paged], createUpdateReducer),
-  [types.UPDATE_ITEM]: createUpdateItemReducer(paged),
+  [types.UPDATE_ITEM]: createReducers(['episodes', paged], createUpdateItemReducer),
 
   [types.CLEAR_QUEUE_DETAILS]: function(state) {
     const section = 'details';

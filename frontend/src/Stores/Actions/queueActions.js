@@ -16,6 +16,5 @@ export const gotoQueuePage = queueActionHandlers[types.GOTO_QUEUE_PAGE];
 export const setQueueSort = queueActionHandlers[types.SET_QUEUE_SORT];
 
 export const setQueueEpisodes = createAction(types.SET_QUEUE_EPISODES);
-export const toggleQueueEpisodeMonitored = queueActionHandlers[types.TOGGLE_QUEUE_EPISODE_MONITORED];
 export const grabQueueItem = queueActionHandlers[types.GRAB_QUEUE_ITEM];
 export const removeQueueItem = queueActionHandlers[types.REMOVE_QUEUE_ITEM];

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import episodeEntities from 'Episode/episodeEntities';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -102,7 +103,7 @@ class Queue extends Component {
                           <QueueRowConnector
                             key={item.id}
                             episodeId={item.episode.id}
-                            episodeEntity="queue.episodes"
+                            episodeEntity={episodeEntities.QUEUE_EPISODES}
                             {...item}
                           />
                         );

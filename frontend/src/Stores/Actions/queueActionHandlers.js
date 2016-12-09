@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
-import createToggleEpisodeMonitoredHandler from './Creators/createToggleEpisodeMonitoredHandler';
 import * as types from './actionTypes';
 import { set, update, updateItem } from './baseActions';
 import { fetchQueue } from './queueActions';
@@ -82,8 +81,6 @@ const queueActionHandlers = {
     [serverSideCollectionHandlers.EXACT_PAGE]: types.GOTO_QUEUE_PAGE,
     [serverSideCollectionHandlers.SORT]: types.SET_QUEUE_SORT
   }),
-
-  [types.TOGGLE_QUEUE_EPISODE_MONITORED]: createToggleEpisodeMonitoredHandler('episodes', (state) => state.queue.episodes),
 
   [types.REMOVE_QUEUE_ITEM]: function(payload) {
     const section = 'paged';

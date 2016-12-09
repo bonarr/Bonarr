@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import episodeEntities from 'Episode/episodeEntities';
 import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
 import EpisodeStatusConnector from 'Episode/EpisodeStatusConnector';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
@@ -62,7 +63,7 @@ class MissingRow extends Component {
           <EpisodeTitleLink
             episodeId={id}
             seriesId={series.id}
-            episodeEntity="wanted.missing"
+            episodeEntity={episodeEntities.WANTED_MISSING}
             episodeTitle={title}
             showOpenSeriesButton={true}
             onMonitorEpisodePress={onMonitorEpisodePress}
@@ -77,7 +78,7 @@ class MissingRow extends Component {
           <EpisodeStatusConnector
             episodeId={id}
             episodeFileId={episodeFileId}
-            episodeEntity="wanted.missing"
+            episodeEntity={episodeEntities.WANTED_MISSING}
           />
         </TableRowCell>
       </TableRow>

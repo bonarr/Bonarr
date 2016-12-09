@@ -13,7 +13,6 @@ export const gotoMissingPage = wantedActionHandlers[types.GOTO_MISSING_PAGE];
 export const setMissingSort = wantedActionHandlers[types.SET_MISSING_SORT];
 export const setMissingFilter = wantedActionHandlers[types.SET_MISSING_FILTER];
 
-export const toggleMissingEpisodeMonitored = wantedActionHandlers[types.TOGGLE_MISSING_EPISODE_MONITORED];
 export const batchUnmonitorMissingEpisodes = wantedActionHandlers[types.BATCH_UNMONITOR_MISSING_EPISODES];
 
 //
@@ -28,5 +27,4 @@ export const gotoCutoffUnmetPage = wantedActionHandlers[types.GOTO_CUTOFF_UNMET_
 export const setCutoffUnmetSort = wantedActionHandlers[types.SET_CUTOFF_UNMET_SORT];
 export const setCutoffUnmetFilter = wantedActionHandlers[types.SET_CUTOFF_UNMET_FILTER];
 
-export const toggleCutoffUnmetEpisodeMonitored = wantedActionHandlers[types.TOGGLE_CUTOFF_UNMET_EPISODE_MONITORED];
 export const batchUnmonitorCutoffUnmetEpisodes = wantedActionHandlers[types.BATCH_UNMONITOR_CUTOFF_UNMET_EPISODES];

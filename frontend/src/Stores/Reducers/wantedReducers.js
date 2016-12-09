@@ -3,6 +3,7 @@ import * as types from 'Stores/Actions/actionTypes';
 import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
 import createReducers from './Creators/createReducers';
 
@@ -52,6 +53,7 @@ const wantedReducers = handleActions({
 
   [types.SET]: createReducers(serverSideCollectionNames, createSetReducer),
   [types.UPDATE]: createReducers(serverSideCollectionNames, createUpdateReducer),
+  [types.UPDATE_ITEM]: createReducers(serverSideCollectionNames, createUpdateItemReducer),
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer)
 
 }, defaultState);

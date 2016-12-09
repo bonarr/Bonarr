@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import episodeEntities from 'Episode/episodeEntities';
 import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
 import EpisodeStatusConnector from 'Episode/EpisodeStatusConnector';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
@@ -62,7 +63,7 @@ class CutoffUnmetRow extends Component {
           <EpisodeTitleLink
             episodeId={id}
             seriesId={series.id}
-            episodeEntity="wanted.cutoffUnmet"
+            episodeEntity={episodeEntities.WANTED_CUTOFF_UNMET}
             episodeTitle={title}
             showOpenSeriesButton={true}
             onMonitorEpisodePress={onMonitorEpisodePress}
@@ -77,7 +78,7 @@ class CutoffUnmetRow extends Component {
           <EpisodeStatusConnector
             episodeId={id}
             episodeFileId={episodeFileId}
-            episodeEntity="wanted.cutoffUnmet"
+            episodeEntity={episodeEntities.WANTED_CUTOFF_UNMET}
           />
         </TableRowCell>
       </TableRow>

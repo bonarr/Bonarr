@@ -59,6 +59,7 @@ class QueueRow extends Component {
   render() {
     const {
       downloadId,
+      episodeEntity,
       title,
       status,
       trackedDownloadStatus,
@@ -110,7 +111,7 @@ class QueueRow extends Component {
             episodeId={episode.id}
             seriesId={series.id}
             episodeFileId={episode.episodeFileId}
-            episodeEntity="queue.episodes"
+            episodeEntity={episodeEntity}
             episodeTitle={episode.title}
             showOpenSeriesButton={true}
             onMonitorEpisodePress={onMonitorEpisodePress}
@@ -208,6 +209,7 @@ class QueueRow extends Component {
 
 QueueRow.propTypes = {
   downloadId: PropTypes.string,
+  episodeEntity: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   trackedDownloadStatus: PropTypes.string,
