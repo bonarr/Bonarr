@@ -1,81 +1,109 @@
-var Marionette = require('marionette');
-var NzbDroneCell = require('Cells/NzbDroneCell');
+import React, { PropTypes } from 'react'
+import { tooltipPositions } from 'Helpers/Props';
+import Icon from 'Components/Icon';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import Popover from 'Components/Tooltip/Popover';
+import styles from './QueueStatusCell.css';
 
-module.exports = NzbDroneCell.extend({
-  className: 'queue-status-cell',
-  template: 'Activity/Queue/QueueStatusCellTemplate',
-
-  render() {
-    this.$el.empty();
-
-    if (this.cellValue) {
-      var status = this.cellValue.get('status').toLowerCase();
-      var trackedDownloadStatus = this.cellValue.has('trackedDownloadStatus') ? this.cellValue.get('trackedDownloadStatus').toLowerCase() : 'ok';
-      var icon = 'icon-sonarr-downloading';
-      var title = 'Downloading';
-      var itemTitle = this.cellValue.get('title');
-      var content = itemTitle;
-
-      if (status === 'paused') {
-        icon = 'icon-sonarr-paused';
-        title = 'Paused';
+function getDetailedPopoverBody(statusMessages) {
+  return (
+    <div>
+      {
+        statusMessages.map(({ title, messages }) => {
+          return (
+            <div key={title}>
+              {title}
+              <ul>
+                {
+                  messages.map((message) => {
+                    return (
+                      <li key={message}>
+                        {message}
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+            </div>
+          );
+        })
       }
+    </div>
+  );
+}
 
-      if (status === 'queued') {
-        icon = 'icon-sonarr-queued';
-        title = 'Queued';
-      }
+function QueueStatusCell(props) {
+  const {
+    sourceTitle,
+    status,
+    trackedDownloadStatus = 'ok',
+    statusMessages
+  } = props;
 
-      if (status === 'completed') {
-        icon = 'icon-sonarr-downloaded';
-        title = 'Downloaded';
-      }
+  const hasWarning = trackedDownloadStatus === 'warning';
+  const hasError = trackedDownloadStatus === 'error';
 
-      if (status === 'pending') {
-        icon = 'icon-sonarr-pending';
-        title = 'Pending';
-      }
+  // status === 'downloading'
+  let iconName = 'icon-sonarr-downloading';
+  let title = 'Downloading';
 
-      if (status === 'failed') {
-        icon = 'icon-sonarr-download-failed';
-        title = 'Download failed';
-      }
-
-      if (status === 'warning') {
-        icon = 'icon-sonarr-download-warning';
-        title = 'Download warning: check download client for more details';
-      }
-
-      if (trackedDownloadStatus === 'warning') {
-        icon += ' icon-sonarr-warning';
-
-        this.templateFunction = Marionette.TemplateCache.get(this.template);
-        content = this.templateFunction(this.cellValue.toJSON());
-      }
-
-      if (trackedDownloadStatus === 'error') {
-        if (status === 'completed') {
-          icon = 'icon-sonarr-import-failed';
-          title = 'Import failed: ' + itemTitle;
-        } else {
-          icon = 'icon-sonarr-download-failed';
-          title = 'Download failed';
-        }
-
-        this.templateFunction = Marionette.TemplateCache.get(this.template);
-        content = this.templateFunction(this.cellValue.toJSON());
-      }
-
-      this.$el.html('<i class="{0}"></i>'.format(icon));
-      this.$el.popover({
-        content: content,
-        html: true,
-        trigger: 'hover',
-        title: title,
-        placement: 'right',
-        container: this.$el
-      });
-    }
-    return this;
+  if (status === 'queued') {
+    iconName = 'icon-sonarr-queued';
+    title = 'Queued';
   }
-});
+
+  if (status === 'completed') {
+    iconName = 'icon-sonarr-downloaded';
+    title = 'Downloaded';
+  }
+
+  if (status === 'pending') {
+    iconName = 'icon-sonarr-pending';
+    title = 'Pending';
+  }
+
+  if (status === 'failed') {
+    iconName = 'icon-sonarr-download-failed';
+    title = 'Download failed';
+  }
+
+  if (status === 'warning') {
+    iconName = 'icon-sonarr-download-warning';
+    title = 'Download warning: check download client for more details';
+  }
+
+  if (hasError) {
+    if (status === 'completed') {
+      iconName = 'icon-sonarr-import-failed';
+      title = `Import failed: ${sourceTitle}`;
+    } else {
+      iconName = 'icon-sonarr-download-failed';
+      title = 'Download failed';
+    }
+  }
+
+  return (
+    <TableRowCell className={styles.status}>
+      <Popover
+        anchor={
+          <Icon
+            className={hasWarning ? styles.warning : null}
+            name={iconName}
+          />
+        }
+        title={title}
+        body={hasWarning || hasError ? getDetailedPopoverBody(statusMessages) : sourceTitle}
+        position={tooltipPositions.RIGHT}
+      />
+    </TableRowCell>
+  );
+}
+
+QueueStatusCell.propTypes = {
+  sourceTitle: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  trackedDownloadStatus: PropTypes.string,
+  statusMessages: PropTypes.arrayOf(PropTypes.object)
+};
+
+export default QueueStatusCell;

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Datastore;
 using NzbDrone.Core.Datastore.Events;
 using NzbDrone.Core.Download.Pending;
@@ -45,13 +43,22 @@ namespace Sonarr.Api.V3.Queue
 
             if (pagingSpec.SortKey == "timeleft")
             {
-                ordered = ascending ? fullQueue.OrderBy(q => q.Timeleft, new TimeleftComparer()) : fullQueue.OrderByDescending(q => q.Timeleft, new TimeleftComparer());
+                ordered = ascending ? fullQueue.OrderBy(q => q.Timeleft, new TimeleftComparer()) :
+                                      fullQueue.OrderByDescending(q => q.Timeleft, new TimeleftComparer());
+            }
+
+            else if (pagingSpec.SortKey == "estimatedCompletionTime")
+            {
+                ordered = ascending ? fullQueue.OrderBy(q => q.EstimatedCompletionTime, new EstimatedCompletionTimeComparer()) :
+                                      fullQueue.OrderByDescending(q => q.EstimatedCompletionTime, new EstimatedCompletionTimeComparer());
             }
 
             else
             {
                 ordered = ascending ? fullQueue.OrderBy(orderByFunc) : fullQueue.OrderByDescending(orderByFunc);
             }
+
+            ordered = ordered.ThenByDescending(q => 100 - q.Sizeleft / q.Size * 100);
 
             pagingSpec.Records = ordered.Skip((pagingSpec.Page - 1) * pagingSpec.PageSize).Take(pagingSpec.PageSize).ToList();
             pagingSpec.TotalRecords = fullQueue.Count;
@@ -72,7 +79,7 @@ namespace Sonarr.Api.V3.Queue
                 case "quality":
                     return q => q.Quality;
                 case "progress":
-                    return q => q.Size / q.Sizeleft;
+                    return q => 100 - q.Sizeleft / q.Size * 100;
                 default:
                     return q => q.Timeleft;
             }

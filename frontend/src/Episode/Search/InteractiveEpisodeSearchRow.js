@@ -10,6 +10,7 @@ import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import Popover from 'Components/Tooltip/Popover';
 import EpisodeQuality from 'Episode/EpisodeQuality';
+import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import styles from './InteractiveEpisodeSearchRow.css';
 
 function getDownloadIcon(grabbing, grabbed, grabError) {
@@ -68,14 +69,12 @@ class InteractiveEpisodeSearchRow extends Component {
       grabError
     } = this.props;
 
-    const protocolName = protocol === 'usenet' ? 'nzb' : protocol;
-
     return (
       <TableRow>
         <TableRowCell>
-          <Label className={styles[protocol]}>
-            {protocolName}
-          </Label>
+          <ProtocolLabel
+            protocol={protocol}
+          />
         </TableRowCell>
 
         <TableRowCell>

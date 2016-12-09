@@ -9,8 +9,8 @@ import createSetSettingValueReducer from './Creators/createSetSettingValueReduce
 import createSetProviderFieldValueReducer from './Creators/createSetProviderFieldValueReducer';
 import createClearPendingChangesReducer from './Creators/createClearPendingChangesReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
-import createUpdateProviderReducer from './Creators/createUpdateProviderReducer';
-import createDeleteProviderReducer from './Creators/createDeleteProviderReducer';
+import createUpdateItemReducer from './Creators/createUpdateItemReducer';
+import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 import createReducers from './Creators/createReducers';
 
 export const defaultState = {
@@ -230,10 +230,10 @@ const settingsReducers = handleActions({
 
   [types.SET]: createReducers([...propertyNames, ...providerPropertyNames], createSetReducer),
   [types.UPDATE]: createReducers([...propertyNames, ...providerPropertyNames], createUpdateReducer),
-  [types.UPDATE_PROVIDER]: createReducers(providerPropertyNames, createUpdateProviderReducer),
+  [types.UPDATE_ITEM]: createReducers(providerPropertyNames, createUpdateItemReducer),
   [types.CLEAR_PENDING_CHANGES]: createReducers([...propertyNames, ...providerPropertyNames], createClearPendingChangesReducer),
 
-  [types.DELETE_PROVIDER]: createReducers(providerPropertyNames, createDeleteProviderReducer),
+  [types.REMOVE_ITEM]: createReducers(providerPropertyNames, createRemoveItemReducer),
 
   [types.SET_UI_SETTINGS_VALUE]: createSetSettingValueReducer('ui'),
   [types.SET_MEDIA_MANAGEMENT_SETTINGS_VALUE]: createSetSettingValueReducer('mediaManagement'),

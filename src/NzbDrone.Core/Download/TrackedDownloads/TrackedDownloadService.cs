@@ -4,6 +4,7 @@ using NLog;
 using NzbDrone.Common.Cache;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Core.History;
+using NzbDrone.Core.Messaging.Events;
 using NzbDrone.Core.Parser;
 using NzbDrone.Core.Parser.Model;
 
@@ -12,6 +13,7 @@ namespace NzbDrone.Core.Download.TrackedDownloads
     public interface ITrackedDownloadService
     {
         TrackedDownload Find(string downloadId);
+        void StopTracking(string downloadId);
         TrackedDownload TrackDownload(DownloadClientDefinition downloadClient, DownloadClientItem downloadItem);
     }
 
@@ -19,16 +21,19 @@ namespace NzbDrone.Core.Download.TrackedDownloads
     {
         private readonly IParsingService _parsingService;
         private readonly IHistoryService _historyService;
+        private readonly IEventAggregator _eventAggregator;
         private readonly Logger _logger;
         private readonly ICached<TrackedDownload> _cache;
 
         public TrackedDownloadService(IParsingService parsingService,
             ICacheManager cacheManager,
             IHistoryService historyService,
+            IEventAggregator eventAggregator,
             Logger logger)
         {
             _parsingService = parsingService;
             _historyService = historyService;
+            _eventAggregator = eventAggregator;
             _cache = cacheManager.GetCache<TrackedDownload>(GetType());
             _logger = logger;
         }
@@ -36,6 +41,14 @@ namespace NzbDrone.Core.Download.TrackedDownloads
         public TrackedDownload Find(string downloadId)
         {
             return _cache.Find(downloadId);
+        }
+
+        public void StopTracking(string downloadId)
+        {
+            _cache.Remove(downloadId);
+
+            var values = _cache.Values.ToList();
+            _eventAggregator.PublishEvent(new TrackedDownloadRefreshedEvent(values));
         }
 
         public TrackedDownload TrackDownload(DownloadClientDefinition downloadClient, DownloadClientItem downloadItem)

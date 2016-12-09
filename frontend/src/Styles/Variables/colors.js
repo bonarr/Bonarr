@@ -17,6 +17,9 @@ module.exports = {
   helpTextColor: '#909293',
   gray: '#adadad',
 
+  torrentColor: '#00853d',
+  usenetColor: '#17b1d9',
+
   // Links
   defaultLinkHoverColor: '#fff',
   linkColor: '#5d9cec',

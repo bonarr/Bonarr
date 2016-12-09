@@ -2,10 +2,12 @@ import _ from 'lodash';
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 
-function createDeleteProviderReducer(section) {
+function createRemoveItemReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
-      const newState = _.cloneDeep(getSectionState(state, section));
+      const newState = getSectionState(state, section);
+
+      newState.items = [...newState.items];
       _.remove(newState.items, { id: payload.id });
 
       return updateSectionState(state, section, newState);
@@ -15,4 +17,4 @@ function createDeleteProviderReducer(section) {
   };
 }
 
-export default createDeleteProviderReducer;
+export default createRemoveItemReducer;

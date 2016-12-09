@@ -5,7 +5,7 @@ import createFetchHandler from './Creators/createFetchHandler';
 import createFetchSchemaHandler from './Creators/createFetchSchemaHandler';
 import createSaveHandler from './Creators/createSaveHandler';
 import createSaveProviderHandler from './Creators/createSaveProviderHandler';
-import createDeleteProviderHandler from './Creators/createDeleteProviderHandler';
+import createRemoveItemHandler from './Creators/createRemoveItemHandler';
 import createTestProviderHandler from './Creators/createTestProviderHandler';
 import { set, update, clearPendingChanges } from './baseActions';
 
@@ -89,7 +89,7 @@ const settingsActionHandlers = {
                                                           '/profile',
                                                           (state) => state.settings.qualityProfiles),
 
-  [types.DELETE_QUALITY_PROFILE]: createDeleteProviderHandler('qualityProfiles',
+  [types.DELETE_QUALITY_PROFILE]: createRemoveItemHandler('qualityProfiles',
                                                               '/profile',
                                                               (state) => state.settings.qualityProfiles),
 
@@ -99,7 +99,7 @@ const settingsActionHandlers = {
                                                         '/delayprofile',
                                                         (state) => state.settings.delayProfiles),
 
-  [types.DELETE_DELAY_PROFILE]: createDeleteProviderHandler('delayProfiles',
+  [types.DELETE_DELAY_PROFILE]: createRemoveItemHandler('delayProfiles',
                                                             '/delayprofile',
                                                             (state) => state.settings.delayProfiles),
 
@@ -145,7 +145,7 @@ const settingsActionHandlers = {
                                                   '/indexer',
                                                   (state) => state.settings.indexers),
 
-  [types.DELETE_INDEXER]: createDeleteProviderHandler('indexers',
+  [types.DELETE_INDEXER]: createRemoveItemHandler('indexers',
                                                       '/indexer',
                                                       (state) => state.settings.indexers),
 
@@ -162,7 +162,7 @@ const settingsActionHandlers = {
                                                       '/restriction',
                                                       (state) => state.settings.restrictions),
 
-  [types.DELETE_RESTRICTION]: createDeleteProviderHandler('restrictions',
+  [types.DELETE_RESTRICTION]: createRemoveItemHandler('restrictions',
                                                           '/restriction',
                                                           (state) => state.settings.restrictions),
 
@@ -173,7 +173,7 @@ const settingsActionHandlers = {
                                                           '/downloadclient',
                                                           (state) => state.settings.downloadClients),
 
-  [types.DELETE_DOWNLOAD_CLIENT]: createDeleteProviderHandler('downloadClients',
+  [types.DELETE_DOWNLOAD_CLIENT]: createRemoveItemHandler('downloadClients',
                                                                 '/downloadclient',
                                                               (state) => state.settings.downloadClients),
 
@@ -190,7 +190,7 @@ const settingsActionHandlers = {
                                                               '/remotepathmapping',
                                                               (state) => state.settings.remotePathMappings),
 
-  [types.DELETE_REMOTE_PATH_MAPPING]: createDeleteProviderHandler('remotePathMappings',
+  [types.DELETE_REMOTE_PATH_MAPPING]: createRemoveItemHandler('remotePathMappings',
                                                                   '/remotepathmapping',
                                                                   (state) => state.settings.remotePathMappings),
 
@@ -201,7 +201,7 @@ const settingsActionHandlers = {
                                                        '/notification',
                                                        (state) => state.settings.notifications),
 
-  [types.DELETE_NOTIFICATION]: createDeleteProviderHandler('notifications',
+  [types.DELETE_NOTIFICATION]: createRemoveItemHandler('notifications',
                                                            '/notification',
                                                            (state) => state.settings.notifications),
 

@@ -1,8 +1,8 @@
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
-import * as types from './actionTypes';
 import createBatchToggleEpisodeMonitoredHandler from './Creators/createBatchToggleEpisodeMonitoredHandler';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 import createToggleEpisodeMonitoredHandler from './Creators/createToggleEpisodeMonitoredHandler';
+import * as types from './actionTypes';
 
 const wantedActionHandlers = {
   ...createServerSideCollectionHandlers('missing', '/wanted/missing', (state) => state.wanted, {

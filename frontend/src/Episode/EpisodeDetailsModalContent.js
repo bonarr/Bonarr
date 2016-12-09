@@ -172,7 +172,7 @@ class EpisodeDetailsModalContent extends Component {
 EpisodeDetailsModalContent.propTypes = {
   episodeId: PropTypes.number.isRequired,
   episodeEntity: PropTypes.string.isRequired,
-  episodeFileId: PropTypes.number.isRequired,
+  episodeFileId: PropTypes.number,
   seriesId: PropTypes.number.isRequired,
   seriesTitle: PropTypes.string.isRequired,
   titleSlug: PropTypes.string.isRequired,

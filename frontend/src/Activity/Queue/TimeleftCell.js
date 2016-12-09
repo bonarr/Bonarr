@@ -1,34 +1,89 @@
-var NzbDroneCell = require('Cells/NzbDroneCell');
-var fileSize = require('filesize');
-var moment = require('moment');
-var UiSettingsModel = require('Shared/UiSettingsModel');
-var FormatHelpers = require('Shared/FormatHelpers');
+import moment from 'moment';
+import React, { PropTypes } from 'react';
+import formatTime from 'Utilities/Date/formatTime';
+import isSameWeek from 'Utilities/Date/isSameWeek';
+import isToday from 'Utilities/Date/isToday';
+import isTomorrow from 'Utilities/Date/isTomorrow';
+import formatBytes from 'Utilities/Number/formatBytes';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import styles from './TimeleftCell.css';
 
-module.exports = NzbDroneCell.extend({
-  className: 'timeleft-cell',
-
-  render() {
-    this.$el.empty();
-
-    if (this.cellValue) {
-      if (this.cellValue.get('status').toLowerCase() === 'pending') {
-        var ect = this.cellValue.get('estimatedCompletionTime');
-        var time = '{0} at {1}'.format(FormatHelpers.relativeDate(ect), moment(ect).format(UiSettingsModel.time(true, false)));
-        this.$el.html('<div title="Delaying download till {0}">-</div>'.format(time));
-        return this;
-      }
-
-      var timeleft = this.cellValue.get('timeleft');
-      var totalSize = fileSize(this.cellValue.get('size'), 1, false);
-      var remainingSize = fileSize(this.cellValue.get('sizeleft') || 0, 1, false);
-
-      if (timeleft === undefined) {
-        this.$el.html('-');
-      } else {
-        this.$el.html('<span title="{1} / {2}">{0}</span>'.format(timeleft, remainingSize, totalSize));
-      }
-    }
-
-    return this;
+function getDate(date, shortDateFormat, showRelativeDates) {
+  if (!showRelativeDates) {
+    return moment(date).format(shortDateFormat);
   }
-});
+
+  if (isToday(date)) {
+    return 'Today';
+  }
+
+  if (isTomorrow(date)) {
+    return 'Tomorrow';
+  }
+
+  if (isSameWeek(date)) {
+    return moment(date).format('dddd');
+  }
+
+  return moment(date).format(shortDateFormat);
+}
+
+function TimeleftCell(props) {
+  const {
+    estimatedCompletionTime,
+    timeleft,
+    status,
+    size,
+    sizeleft,
+    showRelativeDates,
+    shortDateFormat,
+    timeFormat
+  } = props;
+
+  if (status === 'pending') {
+    const date = getDate(estimatedCompletionTime, shortDateFormat, showRelativeDates);
+    const time = formatTime(estimatedCompletionTime, timeFormat, { includeMinuteZero: true });
+
+    return (
+      <TableRowCell
+        className={styles.timeleft}
+        title={`Delaying download until ${date} at ${time}`}
+      >
+        -
+      </TableRowCell>
+    );
+  }
+
+  if (!timeleft) {
+    return (
+      <TableRowCell className={styles.timeleft}>
+        -
+      </TableRowCell>
+    );
+  }
+
+  const totalSize = formatBytes(size);
+  const remainingSize = formatBytes(sizeleft);
+
+  return (
+    <TableRowCell
+      className={styles.timeleft}
+      title={`${remainingSize} / ${totalSize}`}
+    >
+      {timeleft}
+    </TableRowCell>
+  );
+}
+
+TimeleftCell.propTypes = {
+  estimatedCompletionTime: PropTypes.string,
+  timeleft: PropTypes.string,
+  status: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  sizeleft: PropTypes.number.isRequired,
+  showRelativeDates: PropTypes.bool.isRequired,
+  shortDateFormat: PropTypes.string.isRequired,
+  timeFormat: PropTypes.string.isRequired
+};
+
+export default TimeleftCell;

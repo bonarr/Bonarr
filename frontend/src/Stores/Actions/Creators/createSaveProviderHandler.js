@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import getProviderState from 'Utilities/State/getProviderState';
-import { set, updateProvider } from '../baseActions';
+import { set, updateItem } from '../baseActions';
 
 function createSaveProviderHandler(section, url, getFromState) {
   return function(payload) {
@@ -26,7 +26,7 @@ function createSaveProviderHandler(section, url, getFromState) {
       const promise = $.ajax(ajaxOptions);
 
       promise.done((data) => {
-        dispatch(updateProvider({ section, data }));
+        dispatch(updateItem({ section, ...data }));
 
         dispatch(set({
           section,

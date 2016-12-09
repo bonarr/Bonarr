@@ -3,5 +3,19 @@ import * as types from './actionTypes';
 import queueActionHandlers from './queueActionHandlers';
 
 export const fetchQueueStatus = queueActionHandlers[types.FETCH_QUEUE_STATUS];
+
 export const fetchQueueDetails = queueActionHandlers[types.FETCH_QUEUE_DETAILS];
 export const clearQueueDetails = createAction(types.CLEAR_QUEUE_DETAILS);
+
+export const fetchQueue = queueActionHandlers[types.FETCH_QUEUE];
+export const gotoQueueFirstPage = queueActionHandlers[types.GOTO_FIRST_QUEUE_PAGE];
+export const gotoQueuePreviousPage = queueActionHandlers[types.GOTO_PREVIOUS_QUEUE_PAGE];
+export const gotoQueueNextPage = queueActionHandlers[types.GOTO_NEXT_QUEUE_PAGE];
+export const gotoQueueLastPage = queueActionHandlers[types.GOTO_LAST_QUEUE_PAGE];
+export const gotoQueuePage = queueActionHandlers[types.GOTO_QUEUE_PAGE];
+export const setQueueSort = queueActionHandlers[types.SET_QUEUE_SORT];
+
+export const setQueueEpisodes = createAction(types.SET_QUEUE_EPISODES);
+export const toggleQueueEpisodeMonitored = queueActionHandlers[types.TOGGLE_QUEUE_EPISODE_MONITORED];
+export const grabQueueItem = queueActionHandlers[types.GRAB_QUEUE_ITEM];
+export const removeQueueItem = queueActionHandlers[types.REMOVE_QUEUE_ITEM];

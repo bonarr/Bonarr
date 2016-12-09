@@ -17,7 +17,6 @@ import FilterMenu from 'Components/Menu/FilterMenu';
 import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
-import ManualImportModal from 'ManualImport/ManualImportModal';
 import CutoffUnmetRow from './CutoffUnmetRow';
 
 const headers = [
@@ -255,11 +254,6 @@ class CutoffUnmet extends Component {
                   confirmLabel="Search"
                   onConfirm={this.onSearchAllCutoffUnmetConfirmed}
                   onCancel={this.onConfirmSearchAllCutoffUnmetModalClose}
-                />
-
-                <ManualImportModal
-                  isOpen={isManualImportModalOpen}
-                  onModalClose={this.onManualImportModalClose}
                 />
               </div>
           }

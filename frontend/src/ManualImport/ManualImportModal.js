@@ -36,6 +36,7 @@ class ManualImportModal extends Component {
     const {
       isOpen,
       folder,
+      downloadId,
       onModalClose,
       ...otherProps
     } = this.props;
@@ -48,9 +49,10 @@ class ManualImportModal extends Component {
         onModalClose={onModalClose}
       >
         {
-          folderPath ?
+          folderPath || downloadId ?
             <InteractiveImportModalContentConnector
               folder={folderPath}
+              downloadId={downloadId}
               {...otherProps}
               onModalClose={onModalClose}
             /> :
@@ -68,6 +70,7 @@ class ManualImportModal extends Component {
 ManualImportModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   folder: PropTypes.string,
+  downloadId: PropTypes.string,
   onModalClose: PropTypes.func.isRequired
 };
 

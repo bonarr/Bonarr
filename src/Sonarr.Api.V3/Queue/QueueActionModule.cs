@@ -1,6 +1,5 @@
 ﻿using System;
 using Nancy;
-using Nancy.Responses;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.Download.Pending;
 using NzbDrone.Core.Download.TrackedDownloads;
@@ -15,7 +14,6 @@ namespace Sonarr.Api.V3.Queue
     {
         private readonly IQueueService _queueService;
         private readonly ITrackedDownloadService _trackedDownloadService;
-        private readonly ICompletedDownloadService _completedDownloadService;
         private readonly IFailedDownloadService _failedDownloadService;
         private readonly IProvideDownloadClient _downloadClientProvider;
         private readonly IPendingReleaseService _pendingReleaseService;
@@ -23,7 +21,6 @@ namespace Sonarr.Api.V3.Queue
 
         public QueueActionModule(IQueueService queueService,
                                  ITrackedDownloadService trackedDownloadService,
-                                 ICompletedDownloadService completedDownloadService,
                                  IFailedDownloadService failedDownloadService,
                                  IProvideDownloadClient downloadClientProvider,
                                  IPendingReleaseService pendingReleaseService,
@@ -31,15 +28,13 @@ namespace Sonarr.Api.V3.Queue
         {
             _queueService = queueService;
             _trackedDownloadService = trackedDownloadService;
-            _completedDownloadService = completedDownloadService;
             _failedDownloadService = failedDownloadService;
             _downloadClientProvider = downloadClientProvider;
             _pendingReleaseService = pendingReleaseService;
             _downloadService = downloadService;
 
             Delete[@"/(?<id>[\d]{1,10})"] = x => Remove((int)x.Id);
-            Post["/import"] = x => Import();
-            Post["/grab"] = x => Grab();
+            Post[@"/grab/(?<id>[\d]{1,10})"] = x => Grab((int)x.Id);
         }
 
         private Response Remove(int id)
@@ -76,6 +71,7 @@ namespace Sonarr.Api.V3.Queue
             }
 
             downloadClient.RemoveItem(trackedDownload.DownloadItem.DownloadId, true);
+            _trackedDownloadService.StopTracking(trackedDownload.DownloadItem.DownloadId);
 
             if (blacklist)
             {
@@ -85,21 +81,9 @@ namespace Sonarr.Api.V3.Queue
             return new object().AsResponse();
         }
 
-        private JsonResponse<QueueResource> Import()
+        private Response Grab(int queueId)
         {
-            var resource = Request.Body.FromJson<QueueResource>();
-            var trackedDownload = GetTrackedDownload(resource.Id);
-                
-            _completedDownloadService.Process(trackedDownload, true);
-
-            return resource.AsResponse();
-        }
-
-        private JsonResponse<QueueResource> Grab()
-        {
-            var resource = Request.Body.FromJson<QueueResource>();
-
-            var pendingRelease = _pendingReleaseService.FindPendingQueueItem(resource.Id);
+            var pendingRelease = _pendingReleaseService.FindPendingQueueItem(queueId);
 
             if (pendingRelease == null)
             {
@@ -108,7 +92,7 @@ namespace Sonarr.Api.V3.Queue
 
             _downloadService.DownloadReport(pendingRelease.RemoteEpisode);
 
-            return resource.AsResponse();
+            return new object().AsResponse();
         }
 
         private TrackedDownload GetTrackedDownload(int queueId)

@@ -1,0 +1,16 @@
+.quality {
+  width: 150px;
+}
+
+.protocol {
+  width: 100px;
+}
+
+.progress {
+  width: 150px;
+}
+
+.actions {
+  width: 70px;
+  text-align: right;
+}

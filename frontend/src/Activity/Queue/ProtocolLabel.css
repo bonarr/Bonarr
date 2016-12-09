@@ -1,0 +1,11 @@
+.torrent {
+  composes: label from 'Components/Label.css';
+
+  background-color: $torrentColor;
+}
+
+.usenet {
+  composes: label from 'Components/Label.css';
+
+  background-color: $usenetColor;
+}

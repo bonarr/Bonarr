@@ -84,7 +84,7 @@ class EditQualityProfileModalContentConnector extends Component {
 
   onCutoffChange = ({ name, value }) => {
     const id = parseInt(value);
-    const item = _.find(this.props.item.items, (i) => i.quality.id === id);
+    const item = _.find(this.props.item.items.value, (i) => i.quality.id === id);
 
     this.props.setQualityProfileValue({ name, value: item.quality });
   }

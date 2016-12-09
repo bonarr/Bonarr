@@ -1,119 +1,38 @@
-var vent = require('vent');
-var Marionette = require('marionette');
-var Backgrid = require('backgrid');
-var QueueCollection = require('./QueueCollection');
-var SeriesTitleCell = require('Cells/SeriesTitleCell');
-var EpisodeNumberCell = require('Cells/EpisodeNumberCell');
-var EpisodeTitleCell = require('Cells/EpisodeTitleCell');
-var QualityCell = require('Cells/QualityCell');
-var QueueStatusCell = require('./QueueStatusCell');
-var QueueActionsCell = require('./QueueActionsCell');
-var TimeleftCell = require('./TimeleftCell');
-var ProgressCell = require('./ProgressCell');
-var ProtocolCell = require('Release/ProtocolCell');
-var GridPager = require('Shared/Grid/Pager');
+const Marionette = require('marionette');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import appStore from 'Stores/appStore';
+import QueueConnector from './QueueConnector';
+import tpl from './QueueLayout.hbs';
 
 module.exports = Marionette.LayoutView.extend({
-  template: 'Activity/Queue/QueueLayoutTemplate',
+  template: tpl,
 
-  regions: {
-    table: '#x-queue',
-    pager: '#x-queue-pager'
+  mountReact() {
+    ReactDOM.render(
+      <Provider store={appStore}>
+        <QueueConnector />
+      </Provider>,
+      this.el
+    );
   },
 
-  columns: [
-    {
-      name: 'status',
-      label: '',
-      cell: QueueStatusCell,
-      cellValue: 'this'
-    },
-    {
-      name: 'series',
-      label: 'Series',
-      cell: SeriesTitleCell
-    },
-    {
-      name: 'episode',
-      label: 'Episode',
-      cell: EpisodeNumberCell
-    },
-    {
-      name: 'episodeTitle',
-      label: 'Episode Title',
-      cell: EpisodeTitleCell,
-      cellValue: 'episode'
-    },
-    {
-      name: 'quality',
-      label: 'Quality',
-      cell: QualityCell,
-      sortable: false
-    },
-    {
-      name: 'protocol',
-      label: 'Protocol',
-      cell: ProtocolCell
-    },
-    {
-      name: 'timeleft',
-      label: 'Time Left',
-      cell: TimeleftCell,
-      cellValue: 'this'
-    },
-    {
-      name: 'sizeleft',
-      label: 'Progress',
-      cell: ProgressCell,
-      cellValue: 'this'
-    },
-    {
-      name: 'status',
-      label: '',
-      cell: QueueActionsCell,
-      cellValue: 'this'
+  unmountReact() {
+    if (this.isRendered) {
+      ReactDOM.unmountComponentAtNode(this.el);
     }
-  ],
-
-  initialize() {
-    this.listenTo(QueueCollection, 'sync', this._showTable);
-    QueueCollection.fetch();
-
-    this._showActionBar();
   },
 
-  onShow() {
-    this._showTable();
+  onBeforeRender() {
+    this.unmountReact();
   },
 
-  _showTable() {
-    this.table.show(new Backgrid.Grid({
-      columns: this.columns,
-      collection: QueueCollection,
-      className: 'table table-hover'
-    }));
-
-    this.pager.show(new GridPager({
-      columns: this.columns,
-      collection: QueueCollection
-    }));
+  onRender() {
+    this.mountReact();
   },
 
-  _showActionBar() {
-    var actions = {
-      items: [
-        {
-          tooltip: 'Refresh Queue',
-          icon: 'icon-sonarr-refresh',
-          command: 'checkForFinishedDownload',
-          properties: { sendUpdates: true }
-        }
-      ]
-    };
-
-    vent.trigger(vent.Commands.OpenActionBarCommand, {
-      parentView: this,
-      actions: actions
-    });
+  onClose() {
+    this.unmountReact();
   }
 });
