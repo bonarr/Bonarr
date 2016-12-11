@@ -75,6 +75,8 @@ module.exports = {
   dangerHoverBackgroundColor: '#ee3d3d',
   dangerHoverBorderColor: '#ec2626;',
 
+  iconButtonHoverColor: '#666',
+
   //
   // Modal
 

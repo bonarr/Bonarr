@@ -6,4 +6,10 @@
   border-radius: 4px;
   background-color: transparent;
   font-size: inherit;
+
+  &:hover {
+    border: nome;
+    background-color: inherit;
+    color: $iconButtonHoverColor;
+  }
 }

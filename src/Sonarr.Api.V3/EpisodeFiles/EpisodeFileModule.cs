@@ -59,7 +59,7 @@ namespace Sonarr.Api.V3.EpisodeFiles
 
             if (!seriesIdQuery.HasValue && !episodeFileIdsQuery.HasValue)
             {
-                throw new BadRequestException("seriesId or episodeFileIds must be used");
+                throw new BadRequestException("seriesId or episodeFileIds must be provided");
             }
 
             if (seriesIdQuery.HasValue)

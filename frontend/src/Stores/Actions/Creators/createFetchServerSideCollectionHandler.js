@@ -7,10 +7,11 @@ function createFetchServerSideCollectionHandler(section, url, getFromState) {
     return function(dispatch, getState) {
       dispatch(set({ section, fetching: true }));
 
-      const collectionState = getFromState(getState())[section];
+      const state = getFromState(getState());
+      const sectionState = state.hasOwnProperty(section) ? state[section] : state;
 
       const data = Object.assign({ page: 1 },
-        _.pick(collectionState, [
+        _.pick(sectionState, [
           'page',
           'pageSize',
           'sortDirection',

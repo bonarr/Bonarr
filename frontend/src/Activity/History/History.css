@@ -1,0 +1,5 @@
+.toolbar {
+  composes: toolbar from 'Components/Page/Toolbar/PageToolbar.css';
+
+  justify-content: flex-end;
+}

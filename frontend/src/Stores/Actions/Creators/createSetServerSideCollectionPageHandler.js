@@ -4,7 +4,8 @@ import { set } from '../baseActions';
 function createSetServerSideCollectionPageHandler(section, page, getFromState, fetchHandler) {
   return function(payload) {
     return function(dispatch, getState) {
-      const sectionState = getFromState(getState())[section];
+      const state = getFromState(getState());
+      const sectionState = state.hasOwnProperty(section) ? state[section] : state;
       const currentPage = sectionState.page || 1;
       let nextPage = 0;
 

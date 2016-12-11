@@ -13,7 +13,7 @@ function Label(props) {
   } = props;
 
   return (
-    <div
+    <span
       className={classNames(
         className,
         styles[kind],
@@ -22,7 +22,7 @@ function Label(props) {
       {...otherProps}
     >
       {children}
-    </div>
+    </span>
   );
 }
 

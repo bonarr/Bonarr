@@ -4,17 +4,18 @@ import { set } from '../baseActions';
 function createSetClientSideCollectionSortHandler(section, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      const state = getFromState(getState())[section];
-      const sortKey = payload.sortKey || state.sortKey;
+      const state = getFromState(getState());
+      const sectionState = state.hasOwnProperty(section) ? state[section] : state;
+      const sortKey = payload.sortKey || sectionState.sortKey;
       let sortDirection = payload.sortDirection;
 
       if (!sortDirection) {
-        if (payload.sortKey === state.sortKey) {
-          sortDirection = state.sortDirection === sortDirections.ASCENDING ?
+        if (payload.sortKey === sectionState.sortKey) {
+          sortDirection = sectionState.sortDirection === sortDirections.ASCENDING ?
                           sortDirections.DESCENDING :
                           sortDirections.ASCENDING;
         } else {
-          sortDirection = state.sortDirection;
+          sortDirection = sectionState.sortDirection;
         }
       }
 

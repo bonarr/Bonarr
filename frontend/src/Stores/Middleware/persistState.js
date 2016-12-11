@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import persistState from 'redux-localstorage';
+import { persistState as historyPersistState } from 'Stores/Reducers/historyReducers';
 import { persistState as blacklistPersistState } from 'Stores/Reducers/blacklistReducers';
 import { persistState as wantedPersistState } from 'Stores/Reducers/wantedReducers';
 import { persistState as settingsPersistState } from 'Stores/Reducers/settingsReducers';
@@ -25,6 +26,7 @@ function merge(initialState, persistedState) {
 }
 
 const paths = [
+  ...historyPersistState,
   ...blacklistPersistState,
   ...wantedPersistState,
   ...settingsPersistState,
