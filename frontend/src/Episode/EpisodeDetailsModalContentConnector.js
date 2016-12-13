@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { clearReleases } from 'Stores/Actions/releaseActions';
+import { toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
 import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
 import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
 import EpisodeDetailsModalContent from './EpisodeDetailsModalContent';
@@ -28,7 +29,8 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  clearReleases
+  clearReleases,
+  toggleEpisodeMonitored
 };
 
 class EpisodeDetailsModalContentConnector extends Component {
@@ -44,20 +46,40 @@ class EpisodeDetailsModalContentConnector extends Component {
   }
 
   //
+  // Listeners
+
+  onMonitorEpisodePress = (monitored) => {
+    const {
+      episodeId,
+      episodeEntity
+    } = this.props;
+
+    this.props.toggleEpisodeMonitored({
+      episodeEntity,
+      episodeId,
+      monitored
+    });
+  }
+
+  //
   // Render
 
   render() {
     return (
       <EpisodeDetailsModalContent
         {...this.props}
+        onMonitorEpisodePress={this.onMonitorEpisodePress}
       />
     );
   }
 }
 
 EpisodeDetailsModalContentConnector.propTypes = {
+  episodeId: PropTypes.number.isRequired,
+  episodeEntity: PropTypes.string.isRequired,
   seriesId: PropTypes.number.isRequired,
-  clearReleases: PropTypes.func.isRequired
+  clearReleases: PropTypes.func.isRequired,
+  toggleEpisodeMonitored: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(EpisodeDetailsModalContentConnector);

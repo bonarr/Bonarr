@@ -28,8 +28,7 @@ class MissingRow extends Component {
       airDateUtc,
       title,
       isSelected,
-      onSelectedChange,
-      onMonitorEpisodePress
+      onSelectedChange
     } = this.props;
 
     return (
@@ -66,7 +65,6 @@ class MissingRow extends Component {
             episodeEntity={episodeEntities.WANTED_MISSING}
             episodeTitle={title}
             showOpenSeriesButton={true}
-            onMonitorEpisodePress={onMonitorEpisodePress}
           />
         </TableRowCell>
 
@@ -100,8 +98,7 @@ MissingRow.propTypes = {
   airDateUtc: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
-  onSelectedChange: PropTypes.func.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired
+  onSelectedChange: PropTypes.func.isRequired
 };
 
 export default MissingRow;

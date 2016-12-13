@@ -77,7 +77,6 @@ class QueueRow extends Component {
       timeFormat,
       grabbing,
       removing,
-      onMonitorEpisodePress,
       onGrabPress
     } = this.props;
 
@@ -114,7 +113,6 @@ class QueueRow extends Component {
             episodeEntity={episodeEntity}
             episodeTitle={episode.title}
             showOpenSeriesButton={true}
-            onMonitorEpisodePress={onMonitorEpisodePress}
           />
         </TableRowCell>
 
@@ -227,7 +225,6 @@ QueueRow.propTypes = {
   timeFormat: PropTypes.string.isRequired,
   grabbing: PropTypes.bool.isRequired,
   removing: PropTypes.bool.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired,
   onGrabPress: PropTypes.func.isRequired,
   onRemoveQueueItemPress: PropTypes.func.isRequired
 };

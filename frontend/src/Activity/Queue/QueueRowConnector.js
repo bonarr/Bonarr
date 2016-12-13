@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { grabQueueItem, removeQueueItem } from 'Stores/Actions/queueActions';
-import { toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
 import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
 import createUiSettingsSelector from 'Stores/Selectors/createUiSettingsSelector';
 import QueueRow from './QueueRow';
@@ -27,7 +26,6 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  toggleEpisodeMonitored,
   grabQueueItem,
   removeQueueItem
 };
@@ -36,10 +34,6 @@ class QueueRowConnector extends Component {
 
   //
   // Listeners
-
-  onMonitorEpisodePress = (episodeId, monitored) => {
-    this.props.toggleEpisodeMonitored({ episodeEntity: this.props.episodeEntity, episodeId, monitored });
-  }
 
   onGrabPress = (blacklist) => {
     this.props.grabQueueItem({ id: this.props.id, blacklist });
@@ -56,7 +50,6 @@ class QueueRowConnector extends Component {
     return (
       <QueueRow
         {...this.props}
-        onMonitorEpisodePress={this.onMonitorEpisodePress}
         onGrabPress={this.onGrabPress}
         onRemoveQueueItemPress={this.onRemoveQueueItemPress}
       />
@@ -67,7 +60,6 @@ class QueueRowConnector extends Component {
 QueueRowConnector.propTypes = {
   id: PropTypes.number.isRequired,
   episodeEntity: PropTypes.string.isRequired,
-  toggleEpisodeMonitored: PropTypes.func.isRequired,
   grabQueueItem: PropTypes.func.isRequired,
   removeQueueItem: PropTypes.func.isRequired
 };

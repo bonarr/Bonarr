@@ -2,10 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import episodeEntities from 'Episode/episodeEntities';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import * as wantedActions from 'Stores/Actions/wantedActions';
-import { toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchQueueDetails } from 'Stores/Actions/queueActions';
 import commandNames from 'Commands/commandNames';
@@ -44,7 +42,6 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   ...wantedActions,
-  toggleEpisodeMonitored,
   executeCommand,
   fetchQueueDetails
 };
@@ -131,14 +128,6 @@ class MissingConnector extends Component {
     });
   }
 
-  onMonitorEpisodePress = (episodeId, monitored) => {
-    this.props.toggleEpisodeMonitored({
-      episodeEntity: episodeEntities.WANTED_MISSING,
-      episodeId,
-      monitored
-    });
-  }
-
   //
   // Render
 
@@ -156,7 +145,6 @@ class MissingConnector extends Component {
         onUnmonitorSelectedPress={this.onUnmonitorSelectedPress}
         onSearchAllMissingPress={this.onSearchAllMissingPress}
         onRescanDroneFactoryPress={this.onRescanDroneFactoryPress}
-        onMonitorEpisodePress={this.onMonitorEpisodePress}
         {...this.props}
       />
     );
@@ -173,7 +161,6 @@ MissingConnector.propTypes = {
   gotoMissingPage: PropTypes.func.isRequired,
   setMissingSort: PropTypes.func.isRequired,
   setMissingFilter: PropTypes.func.isRequired,
-  toggleEpisodeMonitored: PropTypes.func.isRequired,
   batchUnmonitorMissingEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired

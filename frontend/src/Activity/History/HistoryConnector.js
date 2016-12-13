@@ -2,9 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import episodeEntities from 'Episode/episodeEntities';
 import * as historyActions from 'Stores/Actions/historyActions';
-import { fetchEpisodes, toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
+import { fetchEpisodes } from 'Stores/Actions/episodeActions';
 import History from './History';
 
 function createMapStateToProps() {
@@ -37,8 +36,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   ...historyActions,
-  fetchEpisodes,
-  toggleEpisodeMonitored
+  fetchEpisodes
 };
 
 class HistoryConnector extends Component {
@@ -93,14 +91,6 @@ class HistoryConnector extends Component {
     this.props.setHistoryFilter({ filterKey, filterValue });
   }
 
-  onMonitorEpisodePress = (episodeId, monitored) => {
-    this.props.toggleEpisodeMonitored({
-      episodeEntity: episodeEntities.EPISODES,
-      episodeId,
-      monitored
-    });
-  }
-
   //
   // Render
 
@@ -114,7 +104,6 @@ class HistoryConnector extends Component {
         onPageSelect={this.onPageSelect}
         onSortPress={this.onSortPress}
         onFilterSelect={this.onFilterSelect}
-        onMonitorEpisodePress={this.onMonitorEpisodePress}
         {...this.props}
       />
     );
@@ -131,8 +120,7 @@ HistoryConnector.propTypes = {
   gotoHistoryPage: PropTypes.func.isRequired,
   setHistorySort: PropTypes.func.isRequired,
   setHistoryFilter: PropTypes.func.isRequired,
-  fetchEpisodes: PropTypes.func.isRequired,
-  toggleEpisodeMonitored: PropTypes.func.isRequired
+  fetchEpisodes: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(HistoryConnector);

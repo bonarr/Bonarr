@@ -112,14 +112,6 @@ class CutoffUnmet extends Component {
     this.setState({ isConfirmSearchAllCutoffUnmetModalOpen: false });
   }
 
-  onManualImportPress = () => {
-    this.setState({ isManualImportModalOpen: true });
-  }
-
-  onManualImportModalClose = () => {
-    this.setState({ isManualImportModalOpen: false });
-  }
-
   //
   // Render
 
@@ -131,7 +123,6 @@ class CutoffUnmet extends Component {
       isSearchingForEpisodes,
       isSearchingForCutoffUnmetEpisodes,
       isSaving,
-      onMonitorEpisodePress,
       ...otherProps
     } = this.props;
 
@@ -139,8 +130,7 @@ class CutoffUnmet extends Component {
       allSelected,
       allUnselected,
       selectedState,
-      isConfirmSearchAllCutoffUnmetModalOpen,
-      isManualImportModalOpen
+      isConfirmSearchAllCutoffUnmetModalOpen
     } = this.state;
 
     return (
@@ -224,7 +214,6 @@ class CutoffUnmet extends Component {
                             isSelected={selectedState[item.id]}
                             {...item}
                             onSelectedChange={this.onSelectedChange}
-                            onMonitorEpisodePress={onMonitorEpisodePress}
                           />
                         );
                       })
@@ -273,8 +262,7 @@ CutoffUnmet.propTypes = {
   onFilterSelect: PropTypes.func.isRequired,
   onSearchSelectedPress: PropTypes.func.isRequired,
   onUnmonitorSelectedPress: PropTypes.func.isRequired,
-  onSearchAllCutoffUnmetPress: PropTypes.func.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired
+  onSearchAllCutoffUnmetPress: PropTypes.func.isRequired
 };
 
 export default CutoffUnmet;

@@ -65,7 +65,6 @@ class History extends Component {
       episodesPopulated,
       episodesError,
       onFilterSelect,
-      onMonitorEpisodePress,
       ...otherProps
     } = this.props;
 
@@ -156,7 +155,6 @@ class History extends Component {
                           <HistoryRowConnector
                             key={item.id}
                             {...item}
-                            onMonitorEpisodePress={onMonitorEpisodePress}
                           />
                         );
                       })
@@ -187,8 +185,7 @@ History.propTypes = {
   episodesFetching: PropTypes.bool.isRequired,
   episodesPopulated: PropTypes.bool.isRequired,
   episodesError: PropTypes.object,
-  onFilterSelect: PropTypes.func.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired
+  onFilterSelect: PropTypes.func.isRequired
 };
 
 export default History;

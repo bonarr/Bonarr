@@ -134,7 +134,6 @@ class Missing extends Component {
       isSearchingForMissingEpisodes,
       isSaving,
       onRescanDroneFactoryPress,
-      onMonitorEpisodePress,
       ...otherProps
     } = this.props;
 
@@ -241,7 +240,6 @@ class Missing extends Component {
                             isSelected={selectedState[item.id]}
                             {...item}
                             onSelectedChange={this.onSelectedChange}
-                            onMonitorEpisodePress={onMonitorEpisodePress}
                           />
                         );
                       })
@@ -297,8 +295,7 @@ Missing.propTypes = {
   onSearchSelectedPress: PropTypes.func.isRequired,
   onUnmonitorSelectedPress: PropTypes.func.isRequired,
   onSearchAllMissingPress: PropTypes.func.isRequired,
-  onRescanDroneFactoryPress: PropTypes.func.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired
+  onRescanDroneFactoryPress: PropTypes.func.isRequired
 };
 
 export default Missing;

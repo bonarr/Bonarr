@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import episodeEntities from 'Episode/episodeEntities';
 import IconButton from 'Components/IconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
@@ -54,8 +55,7 @@ class HistoryRow extends Component {
       date,
       data,
       shortDateFormat,
-      timeFormat,
-      onMonitorEpisodePress
+      timeFormat
     } = this.props;
 
     return (
@@ -87,10 +87,10 @@ class HistoryRow extends Component {
         <TableRowCell>
           <EpisodeTitleLink
             episodeId={episodeId}
+            episodeEntity={episodeEntities.EPISODES}
             seriesId={series.id}
             episodeTitle={episode.title}
             showOpenSeriesButton={true}
-            onMonitorEpisodePress={onMonitorEpisodePress}
           />
         </TableRowCell>
 
@@ -138,7 +138,6 @@ HistoryRow.propTypes = {
   data: PropTypes.object.isRequired,
   shortDateFormat: PropTypes.string.isRequired,
   timeFormat: PropTypes.string.isRequired,
-  onMonitorEpisodePress: PropTypes.func.isRequired,
   onMarkAsFailedPress: PropTypes.func.isRequired
 };
 

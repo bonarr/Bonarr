@@ -9,12 +9,7 @@ class MonitorToggleButton extends Component {
   // Listeners
 
   onPress = () => {
-    const {
-      id,
-      monitored
-    } = this.props;
-
-    this.props.onPress(id, !monitored);
+    this.props.onPress(!this.props.monitored);
   }
 
   //

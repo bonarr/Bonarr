@@ -5,7 +5,6 @@ import { createSelector } from 'reselect';
 import episodeEntities from 'Episode/episodeEntities';
 import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
 import * as wantedActions from 'Stores/Actions/wantedActions';
-import { toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
 import { executeCommand } from 'Stores/Actions/commandActions';
 import { fetchQueueDetails } from 'Stores/Actions/queueActions';
 import commandNames from 'Commands/commandNames';
@@ -42,7 +41,6 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   ...wantedActions,
-  toggleEpisodeMonitored,
   executeCommand,
   fetchQueueDetails
 };
@@ -123,14 +121,6 @@ class CutoffUnmetConnector extends Component {
     });
   }
 
-  onMonitorEpisodePress = (episodeId, monitored) => {
-    this.props.toggleEpisodeMonitored({
-      episodeEntity: episodeEntities.WANTED_CUTOFF_UNMET,
-      episodeId,
-      monitored
-    });
-  }
-
   //
   // Render
 
@@ -147,7 +137,6 @@ class CutoffUnmetConnector extends Component {
         onSearchSelectedPress={this.onSearchSelectedPress}
         onUnmonitorSelectedPress={this.onUnmonitorSelectedPress}
         onSearchAllCutoffUnmetPress={this.onSearchAllCutoffUnmetPress}
-        onMonitorEpisodePress={this.onMonitorEpisodePress}
         {...this.props}
       />
     );
@@ -164,7 +153,6 @@ CutoffUnmetConnector.propTypes = {
   gotoCutoffUnmetPage: PropTypes.func.isRequired,
   setCutoffUnmetSort: PropTypes.func.isRequired,
   setCutoffUnmetFilter: PropTypes.func.isRequired,
-  toggleEpisodeMonitored: PropTypes.func.isRequired,
   batchUnmonitorCutoffUnmetEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired
