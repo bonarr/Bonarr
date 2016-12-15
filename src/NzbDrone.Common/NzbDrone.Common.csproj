@@ -88,6 +88,7 @@
     <Compile Include="Disk\RelativeFileSystemModel.cs" />
     <Compile Include="Disk\FileSystemModel.cs" />
     <Compile Include="Disk\FileSystemResult.cs" />
+    <Compile Include="EnvironmentInfo\RuntimeMode.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Disk\OsPath.cs" />
     <Compile Include="Disk\DiskProviderBase.cs" />

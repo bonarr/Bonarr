@@ -61,8 +61,9 @@ namespace Sonarr.Api.V3.System
                     SqliteVersion = _database.Version,
                     UrlBase = _configFileProvider.UrlBase,
                     RuntimeVersion = _runtimeInfo.RuntimeVersion,
-                    StartTime = _runtimeInfo.StartTime
-                }.AsResponse();
+                    StartTime = _runtimeInfo.StartTime,
+                    Mode = _runtimeInfo.Mode
+            }.AsResponse();
         }
 
         private Response GetRoutes()
