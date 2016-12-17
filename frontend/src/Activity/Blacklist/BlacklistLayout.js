@@ -32,7 +32,7 @@ module.exports = Marionette.LayoutView.extend({
     this.mountReact();
   },
 
-  onClose() {
+  onDestroy() {
     this.unmountReact();
   }
 });
