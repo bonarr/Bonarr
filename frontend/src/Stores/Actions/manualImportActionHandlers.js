@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import createSetClientSideCollectionSortHandler from 'Stores/Actions/Creators/createSetClientSideCollectionSortHandler';
 import * as types from './actionTypes';
 import { set, update } from './baseActions';
 
@@ -40,9 +39,7 @@ const manualImportActionHandlers = {
         }));
       });
     };
-  },
-
-  [types.SET_MANUAL_IMPORT_SORT]: createSetClientSideCollectionSortHandler(section, (state) => state)
+  }
 };
 
 export default manualImportActionHandlers;

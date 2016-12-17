@@ -4,6 +4,7 @@ import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateItemReducer from './Creators/createUpdateItemReducer';
+import createSetClientSideCollectionSortReducer from './Creators/createSetClientSideCollectionSortReducer';
 
 export const defaultState = {
   fetching: false,
@@ -24,7 +25,9 @@ const episodeReducers = handleActions({
 
   [types.CLEAR_EPISODES]: (state) => {
     return Object.assign({}, state, defaultState);
-  }
+  },
+
+  [types.SET_EPISODES_SORT]: createSetClientSideCollectionSortReducer(reducerSection)
 
 }, defaultState);
 

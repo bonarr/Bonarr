@@ -5,6 +5,7 @@ import * as types from 'Stores/Actions/actionTypes';
 import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createSetClientSideCollectionSortReducer from './Creators/createSetClientSideCollectionSortReducer';
 
 export const defaultState = {
   fetching: false,
@@ -80,7 +81,9 @@ const manualImportReducers = handleActions({
     };
 
     return newState;
-  }
+  },
+
+  [types.SET_MANUAL_IMPORT_SORT]: createSetClientSideCollectionSortReducer(reducerSection)
 
 }, defaultState);
 

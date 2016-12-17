@@ -4,6 +4,7 @@ import * as types from 'Stores/Actions/actionTypes';
 import { sortDirections } from 'Helpers/Props';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createSetClientSideCollectionSortReducer from './Creators/createSetClientSideCollectionSortReducer';
 
 export const defaultState = {
   fetching: false,
@@ -55,7 +56,9 @@ const releaseReducers = handleActions({
     newState.items.splice(index, 1, item);
 
     return newState;
-  }
+  },
+
+  [types.SET_RELEASES_SORT]: createSetClientSideCollectionSortReducer(reducerSection)
 
 }, defaultState);
 

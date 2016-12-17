@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import createSetClientSideCollectionSortHandler from 'Stores/Actions/Creators/createSetClientSideCollectionSortHandler';
 import * as types from './actionTypes';
 import { set, update, updateItem } from './baseActions';
 
@@ -38,8 +37,6 @@ const episodeActionHandlers = {
       });
     };
   },
-
-  [types.SET_EPISODES_SORT]: createSetClientSideCollectionSortHandler(section, (state) => state),
 
   [types.TOGGLE_EPISODE_MONITORED]: function(payload) {
     return function(dispatch, getState) {

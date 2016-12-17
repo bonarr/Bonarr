@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import createSetClientSideCollectionSortHandler from 'Stores/Actions/Creators/createSetClientSideCollectionSortHandler';
 import * as types from './actionTypes';
 import { set, update } from './baseActions';
 import { updateRelease } from './releaseActions';
@@ -72,9 +71,7 @@ const releaseActionHandlers = {
         }));
       });
     };
-  },
-
-  [types.SET_RELEASES_SORT]: createSetClientSideCollectionSortHandler(section, (state) => state)
+  }
 };
 
 export default releaseActionHandlers;
