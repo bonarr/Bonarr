@@ -81,7 +81,7 @@ class InteractiveEpisodeSearchRow extends Component {
           {formatAge(age, ageHours, ageMinutes)}
         </TableRowCell>
 
-        <TableRowCell>
+        <TableRowCell className={styles.title}>
           <Link to={infoUrl}>
             {title}
           </Link>

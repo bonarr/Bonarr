@@ -24,11 +24,16 @@ const whitelistedProperties = [
   'sortDirection'
 ];
 
+const blacklistedProperties = [
+  'section',
+  'id'
+];
+
 function createSetReducer(section) {
   return (state, { payload }) => {
     if (section === payload.section) {
       const newState = Object.assign(getSectionState(state, section),
-                                     _.pick(payload, whitelistedProperties));
+                                     _.omit(payload, blacklistedProperties));
 
       return updateSectionState(state, section, newState);
     }

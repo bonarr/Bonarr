@@ -1,0 +1,5 @@
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  border-right: 1px solid $borderColor;
+}

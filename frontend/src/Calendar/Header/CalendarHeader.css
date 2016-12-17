@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+}
+
+.navigationButtons {
+  flex: 1 1 33%;
+  text-align: left;
+}
+
+.todayButton {
+  composes: button from 'Components/Button.css';
+
+  margin-left: 5px;
+}
+
+.title {
+  flex: 1 1 33%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.viewButtonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1 33%;
+}
+
+.loadingContainer {
+  composes: container from 'Components/LoadingIndicator.css';
+
+  margin-top: 5px;
+  margin-right: 10px;
+}

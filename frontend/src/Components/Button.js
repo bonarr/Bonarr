@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import { kinds, sizes } from 'Helpers/Props';
+import { align, kinds, sizes } from 'Helpers/Props';
 import Link from './Link';
 import styles from './Button.css';
 
@@ -12,6 +12,7 @@ class Button extends Component {
   render() {
     const {
       className,
+      buttonGroupPosition,
       kind,
       size,
       children,
@@ -23,7 +24,8 @@ class Button extends Component {
         className={classNames(
           className,
           styles[kind],
-          styles[size]
+          styles[size],
+          buttonGroupPosition && styles[buttonGroupPosition]
         )}
         {...otherProps}
       >
@@ -36,6 +38,7 @@ class Button extends Component {
 
 Button.propTypes = {
   className: PropTypes.string.isRequired,
+  buttonGroupPosition: PropTypes.oneOf(align.all),
   kind: PropTypes.oneOf(kinds.all),
   size: PropTypes.oneOf(sizes.all),
   children: PropTypes.node

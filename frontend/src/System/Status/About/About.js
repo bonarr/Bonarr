@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import titleCase from 'Utilities/String/titleCase';
 import FieldSet from 'Components/FieldSet';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
@@ -14,7 +15,8 @@ class About extends Component {
       isMonoRuntime,
       runtimeVersion,
       appData,
-      startupPath
+      startupPath,
+      mode
     } = this.props;
 
     return (
@@ -44,6 +46,11 @@ class About extends Component {
             title="Startup directory"
             data={startupPath}
           />
+
+          <DescriptionListItem
+            title="Mode"
+            data={titleCase(mode)}
+          />
         </DescriptionList>
       </FieldSet>
     );
@@ -56,7 +63,8 @@ About.propTypes = {
   isMonoRuntime: PropTypes.bool,
   runtimeVersion: PropTypes.string,
   appData: PropTypes.string,
-  startupPath: PropTypes.string
+  startupPath: PropTypes.string,
+  mode: PropTypes.string
 };
 
 export default About;

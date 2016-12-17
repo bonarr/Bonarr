@@ -1,0 +1,8 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  padding: 3px 0;
+  height: 70px;
+  list-style: none;
+}

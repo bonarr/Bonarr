@@ -84,3 +84,24 @@
   padding: 10px 20px;
   font-size: $largeFontSize;
 }
+
+/*
+ * Sizes
+*/
+
+.left {
+  margin-left: -1px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.center {
+  margin-left: -1px;
+  border-radius: 0;
+}
+
+.right {
+  margin-left: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

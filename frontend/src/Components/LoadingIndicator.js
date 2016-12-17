@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './LoadingIndicator.css'
+import styles from './LoadingIndicator.css';
 
 class LoadingIndicator extends Component {
 
@@ -12,7 +12,7 @@ class LoadingIndicator extends Component {
       containerClassName
     } = this.props;
 
-    const sizeInPx = size + 'px';
+    const sizeInPx = `${size}px`;
     const width = sizeInPx;
     const height = sizeInPx;
 
@@ -21,7 +21,10 @@ class LoadingIndicator extends Component {
         className={containerClassName}
         style={{ height }}
       >
-        <div className={styles.rippleContainer}>
+        <div
+          className={styles.rippleContainer}
+          style={{ width, height }}
+        >
           <div
             className={styles.ripple}
             style={{ width, height }}
@@ -53,4 +56,4 @@ LoadingIndicator.defaultProps = {
   containerClassName: styles.container
 };
 
-export default LoadingIndicator
+export default LoadingIndicator;

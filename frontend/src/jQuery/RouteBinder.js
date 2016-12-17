@@ -61,7 +61,9 @@ var routeBinder = {
   },
 
   _shouldHandle($element) {
-    if ($element.hasClass('no-router') || $element.is('[data-toggle="dropdown"]')) {
+    if ($element.hasClass('no-router') ||
+        $element.is('[data-toggle="dropdown"]') ||
+        $element.attr('data-no-router')) {
       return false;
     }
 

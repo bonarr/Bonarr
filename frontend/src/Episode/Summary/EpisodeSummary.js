@@ -148,7 +148,7 @@ EpisodeSummary.propTypes = {
   overview: PropTypes.string,
   airDateUtc: PropTypes.string.isRequired,
   path: PropTypes.string,
-  size: PropTypes.string,
+  size: PropTypes.number,
   quality: PropTypes.object,
   onDeleteEpisodeFilePress: PropTypes.func.isRequired
 };

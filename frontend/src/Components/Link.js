@@ -38,7 +38,7 @@ class Link extends Component {
     if (to) {
       el = 'a';
 
-      if (to.startsWith('http')) {
+      if (/\w+?:\/\//.test(to)) {
         linkProps.href = to;
         linkProps.target = target || '_blank';
       } else if (to.startsWith(window.Sonarr.UrlBase)) {

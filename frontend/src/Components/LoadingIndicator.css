@@ -1,76 +1,65 @@
 .container {
-  margin-top : 20px;
-  text-align : center;
+  margin-top: 20px;
+  text-align: center;
 }
 
 @-webkit-keyframes rippleContainer {
   0% {
-    -webkit-transform: scale(0.1);
+    opacity: 1;
     transform: scale(0.1);
-    opacity: 1; }
+  }
 
   70% {
-    -webkit-transform: scale(1);
+    opacity: 0.7;
     transform: scale(1);
-    opacity: 0.7; }
+  }
 
   100% {
-    opacity: 0.0; }
+    opacity: 0;
+  }
 }
 
 @keyframes rippleContainer {
   0% {
-    -webkit-transform: scale(0.1);
+    opacity: 1;
     transform: scale(0.1);
-    opacity: 1; }
+  }
 
   70% {
-    -webkit-transform: scale(1);
+    opacity: 0.7;
     transform: scale(1);
-    opacity: 0.7; }
+  }
 
   100% {
-    opacity: 0.0; }
+    opacity: 0;
+  }
 }
 
 .rippleContainer {
-  display : inline-block;
   position: relative;
-  -webkit-transform: translateY(-25px);
-  -ms-transform: translateY(-25px);
-  transform: translateY(-25px);
+  display: inline-block;
 }
 
 .ripple:nth-child(0) {
-  -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
 
 .ripple:nth-child(1) {
-  -webkit-animation-delay: -0.6s;
   animation-delay: -0.6s;
 }
 
 .ripple:nth-child(2) {
-  -webkit-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
 
 .ripple:nth-child(3) {
-  -webkit-animation-delay: -0.2s;
   animation-delay: -0.2s;
 }
 
 .ripple {
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
   position: absolute;
-  top: -2px;
-  left: -26px;
+  border: 2px solid #3a3f51;
   border-radius: 100%;
-  border: 2px solid #3A3F51;
-  -webkit-animation: rippleContainer 1.25s 0s infinite cubic-bezier(.21, .53, .56, .8);
-  animation: rippleContainer 1.25s 0s infinite cubic-bezier(.21, .53, .56, .8);
+  animation-fill-mode: both;
+  animation: rippleContainer 1.25s 0s infinite cubic-bezier(0.21, 0.53, 0.56, 0.8);
 }
-
-

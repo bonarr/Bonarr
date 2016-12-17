@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import calendar, { defaultState as defaultCalendarState } from './calendarReducers';
 import history, { defaultState as defaultHistoryState } from './historyReducers';
 import queue, { defaultState as defaultQueueState } from './queueReducers';
 import blacklist, { defaultState as defaultBlacklistState } from './blacklistReducers';
@@ -18,6 +19,7 @@ import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 import manualImport, { defaultState as defaultManualImportState } from './manualImportReducers';
 
 export const defaultState = {
+  calendar: defaultCalendarState,
   history: defaultHistoryState,
   queue: defaultQueueState,
   blacklist: defaultBlacklistState,
@@ -38,6 +40,7 @@ export const defaultState = {
 };
 
 export default combineReducers({
+  calendar,
   history,
   queue,
   blacklist,
