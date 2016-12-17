@@ -5,6 +5,7 @@ import IconButton from 'Components/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import Label from 'Components/Label';
 import QualityProfileNameConnector from 'Settings/Profile/Quality/QualityProfileNameConnector';
+import EpisodeQuality from 'Episode/EpisodeQuality';
 import EpisodeAiringConnector from './EpisodeAiringConnector';
 import styles from './EpisodeSummary.css';
 
@@ -48,7 +49,8 @@ class EpisodeSummary extends Component {
       airDateUtc,
       path,
       size,
-      quality
+      quality,
+      qualityCutoffNotMet
     } = this.props;
 
     const hasOverview = !!overview;
@@ -114,7 +116,10 @@ class EpisodeSummary extends Component {
                 </div>
 
                 <div className={styles.quality}>
-                  {quality.name}
+                  <EpisodeQuality
+                    quality={quality}
+                    isCutoffNotMet={qualityCutoffNotMet}
+                  />
                 </div>
 
                 <div className={styles.actions}>
@@ -150,6 +155,7 @@ EpisodeSummary.propTypes = {
   path: PropTypes.string,
   size: PropTypes.number,
   quality: PropTypes.object,
+  qualityCutoffNotMet: PropTypes.bool,
   onDeleteEpisodeFilePress: PropTypes.func.isRequired
 };
 

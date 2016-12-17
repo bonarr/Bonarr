@@ -25,7 +25,8 @@ function createMapStateToProps() {
       const {
         path,
         size,
-        quality
+        quality,
+        qualityCutoffNotMet
       } = episodeFile || {};
 
       return {
@@ -35,7 +36,8 @@ function createMapStateToProps() {
         overview,
         path,
         size,
-        quality
+        quality,
+        qualityCutoffNotMet
       };
     }
   );
