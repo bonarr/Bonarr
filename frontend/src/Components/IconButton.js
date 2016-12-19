@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react';
-import Button from './Button';
+import Link from './Link';
 import Icon from './Icon';
 import styles from './IconButton.css';
 
 function IconButton({ className, name, ...otherProps }) {
   return (
-    <Button
-      className={styles.button}
+    <Link
+      className={className}
       {...otherProps}
     >
       <Icon
         name={name}
       />
-    </Button>
+    </Link>
   );
 }
 

@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Icon from 'Components/Icon';
-import MenuItem from './MenuItem';
-import styles from './FilterMenuItem.css';
+import SelectedMenuItem from './SelectedMenuItem';
 
 class FilterMenuItem extends Component {
 
@@ -23,7 +21,6 @@ class FilterMenuItem extends Component {
 
   render() {
     const {
-      children,
       name,
       value,
       filterKey,
@@ -31,26 +28,19 @@ class FilterMenuItem extends Component {
       ...otherProps
     } = this.props;
 
-    const isActive = name === filterKey && value === filterValue;
+    const isSelected = name === filterKey && value === filterValue;
 
     return (
-      <MenuItem
+      <SelectedMenuItem
+        isSelected={isSelected}
         {...otherProps}
         onPress={this.onPress}
-      >
-        {children}
-
-        {
-          isActive &&
-            <Icon name="icon-sonarr-check" className={styles.activeIcon} />
-        }
-      </MenuItem>
+      />
     );
   }
 }
 
 FilterMenuItem.propTypes = {
-  children: PropTypes.node.isRequired,
   name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
   filterKey: PropTypes.string,

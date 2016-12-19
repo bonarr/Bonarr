@@ -93,6 +93,7 @@ module.exports = {
   // Toolbar
 
   toobarButtonHoverColor: '#35c5f4',
+  toobarButtonSelectedColor: '#35c5f4',
 
   //
   // Scroller
@@ -133,7 +134,7 @@ module.exports = {
   popoverArrowBorderColor: 'rgba(0, 0, 0, 0.25)',
 
   //
-  // calendar
+  // Calendar
 
   calendarTodayBackgroundColor: '#ddd',
 

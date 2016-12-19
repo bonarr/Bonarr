@@ -8,14 +8,11 @@
 
 @media (min-width: 768px) {
   .title {
-    float: left;
-    width: 160px;
-    clear: left;
-    text-align: right;
+    composes: truncate from 'Styles/Mixins/truncate.css';
 
-    /* Move to common location and use composes? */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    float: left;
+    clear: left;
+    width: 160px;
+    text-align: right;
   }
 }

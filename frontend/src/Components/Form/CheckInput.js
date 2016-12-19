@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './CheckInput.css';
@@ -81,12 +82,14 @@ class CheckInput extends Component {
       uncheckedValue,
       helpText,
       helpTextWarning,
-      isDisabled
+      isDisabled,
+      kind
     } = this.props;
 
     const isChecked = value === checkedValue;
     const isUnchecked = value === uncheckedValue;
     const isIndeterminate = !isChecked && !isUnchecked;
+    const isCheckClass = `${kind}IsChecked`;
 
     return (
       <div className={containerClassName}>
@@ -106,7 +109,7 @@ class CheckInput extends Component {
           <div
             className={classNames(
               className,
-              isChecked && styles.isChecked,
+              isChecked && styles[isCheckClass],
               isIndeterminate && styles.isIndeterminate,
               isDisabled && styles.isDisabled
             )}
@@ -154,6 +157,7 @@ CheckInput.propTypes = {
   helpText: PropTypes.string,
   helpTextWarning: PropTypes.string,
   isDisabled: PropTypes.bool,
+  kind: PropTypes.oneOf(kinds.all).isRequired,
   onChange: PropTypes.func.isRequired
 };
 
@@ -161,7 +165,8 @@ CheckInput.defaultProps = {
   className: styles.input,
   containerClassName: styles.container,
   checkedValue: true,
-  uncheckedValue: false
+  uncheckedValue: false,
+  kind: kinds.PRIMARY
 };
 
 export default CheckInput;

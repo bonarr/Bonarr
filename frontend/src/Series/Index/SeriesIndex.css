@@ -1,0 +1,6 @@
+.viewMenu,
+.sortMenu {
+  composes: menu from 'Components/Menu/Menu.css';
+
+  margin-right: 20px;
+}

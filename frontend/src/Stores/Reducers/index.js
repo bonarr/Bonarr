@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import series, { defaultState as defaultSeriesState } from './seriesReducers';
+import seriesIndex, { defaultState as defaultSeriesIndexState } from './seriesIndexReducers';
 import calendar, { defaultState as defaultCalendarState } from './calendarReducers';
 import history, { defaultState as defaultHistoryState } from './historyReducers';
 import queue, { defaultState as defaultQueueState } from './queueReducers';
@@ -19,6 +21,8 @@ import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 import manualImport, { defaultState as defaultManualImportState } from './manualImportReducers';
 
 export const defaultState = {
+  series: defaultSeriesState,
+  seriesIndex: defaultSeriesIndexState,
   calendar: defaultCalendarState,
   history: defaultHistoryState,
   queue: defaultQueueState,
@@ -40,6 +44,8 @@ export const defaultState = {
 };
 
 export default combineReducers({
+  series,
+  seriesIndex,
   calendar,
   history,
   queue,

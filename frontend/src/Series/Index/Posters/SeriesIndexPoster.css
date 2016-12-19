@@ -1,0 +1,90 @@
+$hoverScale: 1.05;
+
+.container {
+  position: relative;
+  margin: 10px;
+  background-color: #333;
+  transition: all 200ms ease-in;
+
+  &:hover {
+    z-index: 2;
+    box-shadow: 0 0 20px $black;
+    transition: all 200ms ease-in;
+    transform: scale($hoverScale);
+
+    .controls {
+      opacity: 0.9;
+      transition: opacity 200ms linear 150ms;
+    }
+
+    .title {
+      opacity: 0.7;
+      transition: opacity 200ms linear 150ms;
+    }
+  }
+}
+
+.poster {
+  width: calc(170px / $hoverScale);
+  height: calc(250px / $hoverScale);
+}
+
+.progress {
+  composes: container from 'Components/ProgressBar.css';
+
+  border-radius: 0;
+  transition: width 200ms ease;
+}
+
+.progressBar {
+  composes: progressBar from 'Components/ProgressBar.css';
+
+  transition: width 200ms ease;
+}
+
+.nextAiring {
+  color: $white;
+  text-align: center;
+  font-size: $smallFontSize;
+}
+
+.title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 5px;
+  background: $black;
+  color: $white;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0;
+}
+
+.ended {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  border-radius: 4px;
+  color: $white;
+}
+
+.controls {
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  border-radius: 4px;
+  background-color: #4f566f;
+  color: $white;
+  font-size: $smallFontSize;
+  opacity: 0;
+  transition: opacity 0;
+}
+
+.action {
+  composes: button from 'Components/IconButton.css';
+
+  &:hover {
+    color: #ccc;
+  }
+}

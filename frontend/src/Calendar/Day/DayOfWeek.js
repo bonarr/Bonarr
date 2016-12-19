@@ -1,34 +1,9 @@
 import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import isSameWeek from 'Utilities/Date/isSameWeek';
-import isToday from 'Utilities/Date/isToday';
-import isTomorrow from 'Utilities/Date/isTomorrow';
-import isYesterday from 'Utilities/Date/isYesterday';
+import getRelativeDate from 'Utilities/Date/getRelativeDate';
 import * as calendarViews from 'Calendar/calendarViews';
 import styles from './DayOfWeek.css';
-
-function getRelativeDate(date, shortDateFormat, showRelativeDates) {
-  if (!isSameWeek(date) || !showRelativeDates) {
-    return moment(date).format(shortDateFormat);
-  }
-
-  if (isYesterday(date)) {
-    return 'Yesterday';
-  }
-
-  if (isToday(date)) {
-    return 'Today';
-  }
-
-  if (isTomorrow(date)) {
-    return 'Tomorrow';
-  }
-
-  if (isSameWeek(date)) {
-    return moment(date).format('dddd');
-  }
-}
 
 class DayOfWeek extends Component {
 

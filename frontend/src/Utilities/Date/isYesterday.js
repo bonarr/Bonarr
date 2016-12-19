@@ -5,7 +5,7 @@ function isYesterday(date) {
     return false;
   }
 
-  return moment(date).subtract(1, 'day').isSame(moment(), 'day');
+  return moment(date).isSame(moment().subtract(1, 'day'), 'day');
 }
 
 export default isYesterday;

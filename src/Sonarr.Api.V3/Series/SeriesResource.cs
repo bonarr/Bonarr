@@ -52,7 +52,7 @@ namespace Sonarr.Api.V3.Series
 
         //View & Edit
         public string Path { get; set; }
-        public int ProfileId { get; set; }
+        public int QualityProfileId { get; set; }
 
         //Editing Only
         public bool SeasonFolder { get; set; }
@@ -80,14 +80,14 @@ namespace Sonarr.Api.V3.Series
         //TODO: Add series statistics as a property of the series (instead of individual properties)
 
         //Used to support legacy consumers
-        public int QualityProfileId
+        public int ProfileId
         {
-            get { return ProfileId; }
+            get { return QualityProfileId; }
             set
             {
-                if (value > 0 && ProfileId == 0)
+                if (value > 0 && QualityProfileId == 0)
                 {
-                    ProfileId = value;
+                    QualityProfileId = value;
                 }
             }
         }

@@ -5,7 +5,7 @@ function isTomrrow(date) {
     return false;
   }
 
-  return moment(date).add(1, 'day').isSame(moment(), 'day');
+  return moment(date).isSame(moment().add(1, 'day'), 'day');
 }
 
 export default isTomrrow;

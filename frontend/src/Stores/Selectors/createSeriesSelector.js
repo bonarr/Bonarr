@@ -1,13 +1,12 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
-
-// TODO: Add series to the state tree
-import SeriesCollection from 'Series/SeriesCollection';
 
 function createSeriesSelector() {
   return createSelector(
     (state, { seriesId }) => seriesId,
-    (seriesId) => {
-      return SeriesCollection.get(seriesId).toJSON();
+    (state) => state.series,
+    (seriesId, series) => {
+      return _.find(series.items, { id: seriesId });
     }
   );
 }

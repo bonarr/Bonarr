@@ -5,50 +5,85 @@ import styles from './ProgressBar.css';
 
 function ProgressBar(props) {
   const {
+    className,
+    containerClassName,
     title,
     progress,
     precision,
-    showValue,
+    showText,
+    text,
     kind,
-    size
+    size,
+    width
   } = props;
 
   const progressPercent = `${progress.toFixed(precision)}%`;
+  const progressText = text || progressPercent;
+  const actualWidth = width ? `${width}px` : '100%';
 
   return (
     <div
-      className={styles.progress}
+      className={classNames(
+        containerClassName,
+        styles[size]
+      )}
       title={title}
+      style={{ width: actualWidth }}
     >
+      {
+        showText && !!width &&
+          <div className={styles.backText}>
+            {progressText}
+          </div>
+      }
+
       <div
         className={classNames(
-          styles.progressBar,
-          styles[kind],
-          styles[size]
+          className,
+          styles[kind]
         )}
         aria-valuenow={progress}
         aria-valuemin="0"
         aria-valuemax="100"
         style={{ width: progressPercent }}
       >
-        {showValue && progressPercent}
+        {
+          showText &&
+            <div
+              className={styles.frontTextContainer}
+              style={{ width: progressPercent }}
+            >
+              <div
+                className={styles.frontText}
+                style={{ width: actualWidth }}
+              >
+                {progressText}
+              </div>
+            </div>
+        }
       </div>
     </div>
   );
 }
 
 ProgressBar.propTypes = {
+  className: PropTypes.string,
+  containerClassName: PropTypes.string,
   title: PropTypes.string,
   progress: PropTypes.number.isRequired,
   precision: PropTypes.number.isRequired,
-  showValue: PropTypes.bool.isRequired,
+  showText: PropTypes.bool.isRequired,
+  text: PropTypes.string,
   kind: PropTypes.oneOf(kinds.all).isRequired,
-  size: PropTypes.oneOf(sizes.all).isRequired
+  size: PropTypes.oneOf(sizes.all).isRequired,
+  width: PropTypes.number
 };
 
 ProgressBar.defaultProps = {
+  className: styles.progressBar,
+  containerClassName: styles.container,
   precision: 1,
-  showValue: false,
+  showText: false,
   kind: kinds.PRIMARY,
   size: sizes.MEDIUM
 };

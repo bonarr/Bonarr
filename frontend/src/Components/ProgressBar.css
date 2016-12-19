@@ -1,4 +1,5 @@
-.progress {
+.container {
+  position: relative;
   overflow: hidden;
   width: 100%;
   border-radius: 4px;
@@ -12,10 +13,35 @@
   height: 100%;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   color: #fff;
-  text-align: center;
-  font-size: 12px;
-  line-height: 20px;
   transition: width 0.6s ease;
+}
+
+.frontTextContainer {
+  position: absolute;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+}
+
+.backText {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: default;
+}
+
+.frontText {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: default;
 }
 
 .primary {
@@ -44,12 +70,30 @@
 
 .small {
   height: 10px;
+
+  .backText,
+  .frontText {
+    height: 10px;
+    line-height: 10px;
+  }
 }
 
 .medium {
   height: 15px;
+
+  .backText,
+  .frontText {
+    height: 15px;
+    line-height: 15px;
+  }
 }
 
 .large {
   height: 20px;
+
+  .backText,
+  .frontText {
+    height: 20px;
+    line-height: 20px;
+  }
 }

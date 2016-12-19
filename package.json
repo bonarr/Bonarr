@@ -57,6 +57,7 @@
     "react-dnd-html5-backend": "2.1.2",
     "react-dom": "15.3.1",
     "react-google-recaptcha": "0.5.4",
+    "react-lazyload": "2.2.0",
     "react-measure": "1.1.0",
     "react-portal": "2.2.1",
     "react-redux": "4.4.5",

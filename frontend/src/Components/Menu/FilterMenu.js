@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Icon from 'Components/Icon';
 import Menu from 'Components/Menu/Menu';
-import MenuButton from 'Components/Menu/MenuButton';
-import styles from './FilterMenu.css';
+import ToolbarMenuButton from 'Components/Menu/ToolbarMenuButton';
 
 class FilterMenu extends Component {
 
@@ -11,15 +9,16 @@ class FilterMenu extends Component {
 
   render() {
     const {
+      className,
       children
     } = this.props;
 
     return (
-      <Menu>
-        <MenuButton>
-          <Icon name="icon-sonarr-filter" className={styles.filterMenuButtonIcon} />
-          <span className={styles.filterMenuButtonText}>Filter</span>
-        </MenuButton>
+      <Menu className={className}>
+        <ToolbarMenuButton
+          iconName="icon-sonarr-filter"
+          text="Filter"
+        />
           {children}
       </Menu>
     );
@@ -27,6 +26,7 @@ class FilterMenu extends Component {
 }
 
 FilterMenu.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 

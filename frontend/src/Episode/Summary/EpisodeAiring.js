@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { PropTypes } from 'react';
 import formatTime from 'Utilities/Date/formatTime';
-import isSameWeek from 'Utilities/Date/isSameWeek';
+import isInNextWeek from 'Utilities/Date/isInNextWeek';
 import isToday from 'Utilities/Date/isToday';
 import isTomorrow from 'Utilities/Date/isTomorrow';
 import { kinds, sizes } from 'Helpers/Props';
@@ -59,7 +59,7 @@ function EpisodeAiring(props) {
     );
   }
 
-  if (isSameWeek(airDateUtc)) {
+  if (isInNextWeek(airDateUtc)) {
     return (
       <span>
         {moment(airDateUtc).format('dddd')} at {time} on {networkLabel}

@@ -1,6 +1,8 @@
 .menuContent {
   position: absolute;
-  display: block;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
   line-height: 20px;
 }
 

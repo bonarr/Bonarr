@@ -1,32 +1,9 @@
-import moment from 'moment';
 import React, { PropTypes } from 'react';
 import formatTime from 'Utilities/Date/formatTime';
-import isSameWeek from 'Utilities/Date/isSameWeek';
-import isToday from 'Utilities/Date/isToday';
-import isTomorrow from 'Utilities/Date/isTomorrow';
+import getRelativeDate from 'Utilities/Date/getRelativeDate';
 import formatBytes from 'Utilities/Number/formatBytes';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './TimeleftCell.css';
-
-function getDate(date, shortDateFormat, showRelativeDates) {
-  if (!showRelativeDates) {
-    return moment(date).format(shortDateFormat);
-  }
-
-  if (isToday(date)) {
-    return 'Today';
-  }
-
-  if (isTomorrow(date)) {
-    return 'Tomorrow';
-  }
-
-  if (isSameWeek(date)) {
-    return moment(date).format('dddd');
-  }
-
-  return moment(date).format(shortDateFormat);
-}
 
 function TimeleftCell(props) {
   const {
@@ -41,7 +18,7 @@ function TimeleftCell(props) {
   } = props;
 
   if (status === 'pending') {
-    const date = getDate(estimatedCompletionTime, shortDateFormat, showRelativeDates);
+    const date = getRelativeDate(estimatedCompletionTime, shortDateFormat, showRelativeDates);
     const time = formatTime(estimatedCompletionTime, timeFormat, { includeMinuteZero: true });
 
     return (

@@ -14,6 +14,18 @@ export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 //
+// Series
+
+export const FETCH_SERIES = 'FETCH_SERIES';
+export const SET_SERIES_VALUE = 'SET_SERIES_VALUE';
+export const SAVE_SERIES = 'SAVE_SERIES';
+export const DELETE_SERIES = 'DELETE_SERIES';
+
+export const SET_SERIES_SORT = 'SET_SERIES_SORT';
+export const SET_SERIES_FILTER = 'SET_SERIES_FILTER';
+export const SET_SERIES_VIEW = 'SET_SERIES_VIEW';
+
+//
 // Episodes
 
 export const FETCH_EPISODES = 'FETCH_EPISODES';

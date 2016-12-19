@@ -61,7 +61,7 @@ namespace Sonarr.Api.V3.Series
             UpdateResource = UpdateSeries;
             DeleteResource = DeleteSeries;
 
-            Http.Validation.RuleBuilderExtensions.ValidId(SharedValidator.RuleFor(s => s.ProfileId));
+            Http.Validation.RuleBuilderExtensions.ValidId(SharedValidator.RuleFor(s => s.QualityProfileId));
 
             SharedValidator.RuleFor(s => s.Path)
                            .Cascade(CascadeMode.StopOnFirstFailure)
@@ -72,7 +72,7 @@ namespace Sonarr.Api.V3.Series
                            .SetValidator(seriesAncestorValidator)
                            .When(s => !s.Path.IsNullOrWhiteSpace());
 
-            SharedValidator.RuleFor(s => s.ProfileId).SetValidator(profileExistsValidator);
+            SharedValidator.RuleFor(s => s.QualityProfileId).SetValidator(profileExistsValidator);
 
             PostValidator.RuleFor(s => s.Path).IsValidPath().When(s => s.RootFolderPath.IsNullOrWhiteSpace());
             PostValidator.RuleFor(s => s.RootFolderPath).IsValidPath().When(s => s.Path.IsNullOrWhiteSpace());

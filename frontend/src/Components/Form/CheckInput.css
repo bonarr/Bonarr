@@ -30,9 +30,19 @@
   line-height: 20px;
 }
 
-.isChecked {
+.dangerIsChecked {
+  border-color: $dangerColor;
+  background-color: $dangerColor;
+}
+
+.primaryIsChecked {
   border-color: $primaryColor;
   background-color: $primaryColor;
+}
+
+.warningIsChecked {
+  border-color: $warningColor;
+  background-color: $warningColor;
 }
 
 .isIndeterminate {

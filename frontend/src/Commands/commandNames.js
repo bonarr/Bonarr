@@ -9,7 +9,9 @@ export const DOWNLOADED_EPSIODES_SCAN = 'DownloadedEpisodesScan';
 export const EPISODE_SEARCH = 'EpisodeSearch';
 export const MANUAL_IMPORT = 'ManualImport';
 export const MISSING_EPISODE_SEARCH = 'MissingEpisodeSearch';
+export const REFRESH_SERIES = 'RefreshSeries';
 export const RESET_API_KEY = 'ResetApiKey';
+export const RSS_SYNC = 'RssSync';
 
 export default {
   APPLICATION_UPDATE,
@@ -22,5 +24,7 @@ export default {
   EPISODE_SEARCH,
   MANUAL_IMPORT,
   MISSING_EPISODE_SEARCH,
-  RESET_API_KEY
+  REFRESH_SERIES,
+  RESET_API_KEY,
+  RSS_SYNC
 };

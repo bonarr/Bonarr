@@ -1,0 +1,19 @@
+.status {
+  width: 60px;
+}
+
+.statusIcon {
+  width: 20px;
+}
+
+.seasonCount {
+  width: 100px;
+}
+
+.episodeProgress {
+  width: 150px;
+}
+
+.actions {
+  width: 70px;
+}

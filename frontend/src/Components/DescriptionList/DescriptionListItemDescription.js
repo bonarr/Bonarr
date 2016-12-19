@@ -12,13 +12,15 @@ class DescriptionListItemDescription extends Component {
     } = this.props;
 
     return (
-      <dd className={styles.description}>{children}</dd>
+      <dd className={styles.description}>
+        {children}
+      </dd>
     );
   }
 }
 
 DescriptionListItemDescription.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node])
 };
 
 export default DescriptionListItemDescription;
