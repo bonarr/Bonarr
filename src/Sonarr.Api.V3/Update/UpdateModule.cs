@@ -3,7 +3,6 @@ using System.Linq;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Core.Update;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Update
 {
@@ -21,7 +20,7 @@ namespace Sonarr.Api.V3.Update
         {
             var resources = _recentUpdateProvider.GetRecentUpdatePackages()
                                                  .OrderByDescending(u => u.Version)
-                                                 .InjectTo<List<UpdateResource>>();
+                                                 .ToResource();
 
             if (resources.Any())
             {

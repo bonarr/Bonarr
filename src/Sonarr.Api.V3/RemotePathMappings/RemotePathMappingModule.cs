@@ -2,9 +2,7 @@
 using FluentValidation;
 using NzbDrone.Core.RemotePathMappings;
 using NzbDrone.Core.Validation.Paths;
-using Omu.ValueInjecter;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.RemotePathMappings
 {
@@ -40,7 +38,7 @@ namespace Sonarr.Api.V3.RemotePathMappings
 
         private RemotePathMappingResource GetMappingById(int id)
         {
-            return _remotePathMappingService.Get(id).InjectTo<RemotePathMappingResource>();
+            return _remotePathMappingService.Get(id).ToResource();
         }
 
         private int CreateMapping(RemotePathMappingResource resource)
@@ -62,9 +60,7 @@ namespace Sonarr.Api.V3.RemotePathMappings
 
         private void UpdateMapping(RemotePathMappingResource resource)
         {
-            var mapping = _remotePathMappingService.Get(resource.Id);
-
-            mapping.InjectFrom(resource);
+            var mapping = resource.ToModel();
 
             _remotePathMappingService.Update(mapping);
         }

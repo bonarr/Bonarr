@@ -1,4 +1,5 @@
-﻿using NzbDrone.Core.MediaFiles;
+﻿using NzbDrone.Core.Configuration;
+using NzbDrone.Core.MediaFiles;
 using Sonarr.Http.REST;
 
 namespace Sonarr.Api.V3.Config
@@ -19,6 +20,33 @@ namespace Sonarr.Api.V3.Config
 
         public bool SkipFreeSpaceCheckWhenImporting { get; set; }
         public bool CopyUsingHardlinks { get; set; }
+        public string ExtraFileExtensions { get; set; }
         public bool EnableMediaInfo { get; set; }
+    }
+
+    public static class MediaManagementConfigResourceMapper
+    {
+        public static MediaManagementConfigResource ToResource(IConfigService model)
+        {
+            return new MediaManagementConfigResource
+            {
+                AutoUnmonitorPreviouslyDownloadedEpisodes = model.AutoUnmonitorPreviouslyDownloadedEpisodes,
+                RecycleBin = model.RecycleBin,
+                AutoDownloadPropers = model.AutoDownloadPropers,
+                CreateEmptySeriesFolders = model.CreateEmptySeriesFolders,
+                FileDate = model.FileDate,
+
+                SetPermissionsLinux = model.SetPermissionsLinux,
+                FileChmod = model.FileChmod,
+                FolderChmod = model.FolderChmod,
+                ChownUser = model.ChownUser,
+                ChownGroup = model.ChownGroup,
+
+                SkipFreeSpaceCheckWhenImporting = model.SkipFreeSpaceCheckWhenImporting,
+                CopyUsingHardlinks = model.CopyUsingHardlinks,
+                ExtraFileExtensions = model.ExtraFileExtensions,
+                EnableMediaInfo = model.EnableMediaInfo
+            };
+        }
     }
 }

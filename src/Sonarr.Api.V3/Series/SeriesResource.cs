@@ -226,5 +226,10 @@ namespace Sonarr.Api.V3.Series
         {
             return series.Select(ToResource).ToList();
         }
+
+        public static List<NzbDrone.Core.Tv.Series> ToModel(this IEnumerable<SeriesResource> resources)
+        {
+            return resources.Select(ToModel).ToList();
+        }
     }
 }

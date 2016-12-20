@@ -6,7 +6,6 @@ using Nancy.ModelBinding;
 using Nancy.Responses;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Organizer;
-using Omu.ValueInjecter;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
 using Sonarr.Http.Mapping;
@@ -46,7 +45,7 @@ namespace Sonarr.Api.V3.Config
 
         private void UpdateNamingConfig(NamingConfigResource resource)
         {
-            var nameSpec = resource.InjectTo<NamingConfig>();
+            var nameSpec = resource.ToModel();
             ValidateFormatResult(nameSpec);
 
             _namingConfigService.Save(nameSpec);
@@ -55,15 +54,13 @@ namespace Sonarr.Api.V3.Config
         private NamingConfigResource GetNamingConfig()
         {
             var nameSpec = _namingConfigService.GetConfig();
-            var resource = nameSpec.InjectTo<NamingConfigResource>();
+            var resource = nameSpec.ToResource();
 
-            if (string.IsNullOrWhiteSpace(resource.StandardEpisodeFormat))
+            if (resource.StandardEpisodeFormat.IsNotNullOrWhiteSpace())
             {
-                return resource;
+                var basicConfig = _filenameBuilder.GetBasicNamingConfig(nameSpec);
+                basicConfig.AddToResource(resource);
             }
-
-            var basicConfig = _filenameBuilder.GetBasicNamingConfig(nameSpec);
-            resource.InjectFrom(basicConfig);
 
             return resource;
         }
@@ -80,7 +77,7 @@ namespace Sonarr.Api.V3.Config
                 config = GetNamingConfig();
             }
 
-            var nameSpec = config.InjectTo<NamingConfig>();
+            var nameSpec = config.ToModel();
             var sampleResource = new NamingExampleResource();
             
             var singleEpisodeSampleResult = _filenameSampleService.GetStandardSample(nameSpec);

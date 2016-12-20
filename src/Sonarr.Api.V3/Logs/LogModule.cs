@@ -1,7 +1,5 @@
-﻿using NzbDrone.Core.Datastore;
-using NzbDrone.Core.Instrumentation;
+﻿using NzbDrone.Core.Instrumentation;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Logs
 {
@@ -17,7 +15,7 @@ namespace Sonarr.Api.V3.Logs
 
         private PagingResource<LogResource> GetLogs(PagingResource<LogResource> pagingResource)
         {
-            var pageSpec = pagingResource.InjectTo<PagingSpec<Log>>();
+            var pageSpec = pagingResource.MapToPagingSpec<LogResource, Log>();
 
             if (pageSpec.SortKey == "time")
             {

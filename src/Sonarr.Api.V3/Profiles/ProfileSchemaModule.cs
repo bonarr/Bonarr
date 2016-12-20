@@ -3,7 +3,6 @@ using NzbDrone.Core.Parser;
 using NzbDrone.Core.Profiles;
 using NzbDrone.Core.Qualities;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Profiles
 {
@@ -31,7 +30,7 @@ namespace Sonarr.Api.V3.Profiles
             profile.Items = items;
             profile.Language = Language.English;
 
-            return profile.InjectTo<ProfileResource>();
+            return profile.ToResource();
         }
     }
 }

@@ -2,7 +2,6 @@
 using Nancy;
 using NzbDrone.Core.Tv;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Series
 {
@@ -20,10 +19,10 @@ namespace Sonarr.Api.V3.Series
         private Response SaveAll()
         {
             //Read from request
-            var series = Request.Body.FromJson<List<SeriesResource>>().InjectTo<List<NzbDrone.Core.Tv.Series>>();
+            var series = Request.Body.FromJson<List<SeriesResource>>().ToModel();
 
             return _seriesService.UpdateSeries(series)
-                                 .InjectTo<List<SeriesResource>>()
+                                 .ToResource()
                                  .AsResponse(HttpStatusCode.Accepted);
         }
     }

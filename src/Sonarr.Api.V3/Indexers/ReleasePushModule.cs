@@ -8,7 +8,6 @@ using NzbDrone.Core.DecisionEngine;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.Parser.Model;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Indexers
 {
@@ -38,11 +37,12 @@ namespace Sonarr.Api.V3.Indexers
         {
             _logger.Info("Release pushed: {0} - {1}", release.Title, release.DownloadUrl);
 
-            var info = release.InjectTo<ReleaseInfo>();
+            var info = release.ToModel();
+
             info.Guid = "PUSH-" + info.DownloadUrl;
 
             var decisions = _downloadDecisionMaker.GetRssDecision(new List<ReleaseInfo> { info });
-            var processed = _downloadDecisionProcessor.ProcessDecisions(decisions);
+            _downloadDecisionProcessor.ProcessDecisions(decisions);
 
             return MapDecisions(decisions).First().AsResponse();
         }

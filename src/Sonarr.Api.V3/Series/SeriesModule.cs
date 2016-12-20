@@ -92,7 +92,7 @@ namespace Sonarr.Api.V3.Series
         {
             if (series == null) return null;
 
-            var resource = series.InjectTo<SeriesResource>();
+            var resource = series.ToResource();
             MapCoversToLocal(resource);
             FetchAndLinkSeriesStatistics(resource);
             PopulateAlternateTitles(resource);
@@ -114,7 +114,7 @@ namespace Sonarr.Api.V3.Series
 
         private int AddSeries(SeriesResource seriesResource)
         {
-            var series = _seriesService.AddSeries(seriesResource.InjectTo<NzbDrone.Core.Tv.Series>());
+            var series = _seriesService.AddSeries(seriesResource.ToModel());
 
             return series.Id;
         }
@@ -178,7 +178,7 @@ namespace Sonarr.Api.V3.Series
             {
                foreach (var season in resource.Seasons)
                 {
-                    season.Statistics = seriesStatistics.SeasonStatistics.SingleOrDefault(s => s.SeasonNumber == season.SeasonNumber).InjectTo<SeasonStatisticsResource>();
+                    season.Statistics = seriesStatistics.SeasonStatistics.SingleOrDefault(s => s.SeasonNumber == season.SeasonNumber).ToResource();
                 }
             }
         }
@@ -197,7 +197,7 @@ namespace Sonarr.Api.V3.Series
 
             if (mappings == null) return;
 
-            resource.AlternateTitles = mappings.InjectTo<List<AlternateTitleResource>>();
+            resource.AlternateTitles = mappings.Select(v => new AlternateTitleResource { Title = v.Title, SeasonNumber = v.SeasonNumber, SceneSeasonNumber = v.SceneSeasonNumber }).ToList();
         }
 
         public void Handle(EpisodeImportedEvent message)
@@ -224,7 +224,7 @@ namespace Sonarr.Api.V3.Series
 
         public void Handle(SeriesDeletedEvent message)
         {
-            BroadcastResourceChange(ModelAction.Deleted, message.Series.InjectTo<SeriesResource>());
+            BroadcastResourceChange(ModelAction.Deleted, message.Series.ToResource());
         }
 
         public void Handle(SeriesRenamedEvent message)

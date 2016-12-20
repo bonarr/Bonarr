@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using NzbDrone.Common.Reflection;
 using NzbDrone.Core.ThingiProvider;
 using NzbDrone.Core.Validation;
-using Omu.ValueInjecter;
 using Sonarr.Http;
 using Sonarr.Http.ClientSchema;
 using Sonarr.Http.Extensions;
@@ -159,19 +158,14 @@ namespace Sonarr.Api.V3
             foreach (var providerDefinition in defaultDefinitions)
             {
                 var providerResource = new TProviderResource();
-                providerResource.InjectFrom(providerDefinition);
-                providerResource.Fields = SchemaBuilder.ToSchema(providerDefinition.Settings);
-                providerResource.InfoLink = string.Format("https://github.com/NzbDrone/NzbDrone/wiki/Supported-{0}#{1}",
-                    typeof(TProviderResource).Name.Replace("Resource", "s"),
-                    providerDefinition.Implementation.ToLower());
+                MapToResource(providerResource, providerDefinition);
 
                 var presetDefinitions = _providerFactory.GetPresetDefinitions(providerDefinition);
 
                 providerResource.Presets = presetDefinitions.Select(v =>
                 {
                     var presetResource = new TProviderResource();
-                    presetResource.InjectFrom(v);
-                    presetResource.Fields = SchemaBuilder.ToSchema(v.Settings);
+                    MapToResource(presetResource, v);
 
                     return presetResource as ProviderResource;
                 }).ToList();

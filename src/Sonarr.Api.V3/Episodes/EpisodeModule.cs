@@ -71,10 +71,5 @@ namespace Sonarr.Api.V3.Episodes
 
             return MapToResource(_episodeService.GetEpisodes(resource.EpisodeIds), false, false).AsResponse(HttpStatusCode.Accepted);
         }
-
-        protected override List<EpisodeResource> LoadSeries(List<EpisodeResource> resources)
-        {
-            return resources;
-        }
     }
 }

@@ -3,7 +3,6 @@ using FluentValidation;
 using NzbDrone.Core.RemotePathMappings;
 using NzbDrone.Core.Validation.Paths;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace NzbDrone.Api.RemotePathMappings
 {

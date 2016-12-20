@@ -32,7 +32,7 @@ namespace Sonarr.Api.V3.Series
         {
             foreach (var currentSeries in series)
             {
-                var resource = currentSeries.InjectTo<SeriesResource>();
+                var resource = currentSeries.ToResource();
                 var poster = currentSeries.Images.FirstOrDefault(c => c.CoverType == MediaCoverTypes.Poster);
                 if (poster != null)
                 {

@@ -113,7 +113,7 @@ namespace Sonarr.Api.V3.Episodes
         {
             foreach (var episode in message.Episode.Episodes)
             {
-                var resource = episode.InjectTo<EpisodeResource>();
+                var resource = episode.ToResource();
                 resource.Grabbed = true;
 
                 BroadcastResourceChange(ModelAction.Updated, resource);
@@ -126,11 +126,6 @@ namespace Sonarr.Api.V3.Episodes
             {
                 BroadcastResourceChange(ModelAction.Updated, episode.Id);
             }
-        }
-
-        protected virtual List<EpisodeResource> LoadSeries(List<EpisodeResource> resources)
-        {
-            return resources.LoadSubtype<EpisodeResource, SeriesResource, NzbDrone.Core.Tv.Series>(e => e.SeriesId, _seriesService.GetSeries).ToList();
         }
     }
 }

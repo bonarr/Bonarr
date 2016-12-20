@@ -1,4 +1,5 @@
-﻿using Sonarr.Http.REST;
+﻿using NzbDrone.Core.Configuration;
+using Sonarr.Http.REST;
 
 namespace Sonarr.Api.V3.Config
 {
@@ -7,5 +8,18 @@ namespace Sonarr.Api.V3.Config
         public int MinimumAge { get; set; }
         public int Retention { get; set; }
         public int RssSyncInterval { get; set; }
+    }
+
+    public static class IndexerConfigResourceMapper
+    {
+        public static IndexerConfigResource ToResource(IConfigService model)
+        {
+            return new IndexerConfigResource
+            {
+                MinimumAge = model.MinimumAge,
+                Retention = model.Retention,
+                RssSyncInterval = model.RssSyncInterval,
+            };
+        }
     }
 }

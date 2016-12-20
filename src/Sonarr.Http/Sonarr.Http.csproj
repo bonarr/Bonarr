@@ -51,8 +51,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-    <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
-      <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
       <HintPath>..\packages\NLog.4.3.11\lib\net40\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -79,7 +77,6 @@
     <Compile Include="ErrorManagement\SonarrErrorPipeline.cs" />
     <Compile Include="Exceptions\InvalidApiKeyException.cs" />
     <Compile Include="Extensions\AccessControlHeaders.cs" />
-    <Compile Include="Extensions\LazyExtensions.cs" />
     <Compile Include="Extensions\NancyJsonSerializer.cs" />
     <Compile Include="Extensions\Pipelines\CacheHeaderPipeline.cs" />
     <Compile Include="Extensions\Pipelines\CorsPipeline.cs" />
@@ -104,10 +101,8 @@
     <Compile Include="Frontend\Mappers\StaticResourceMapperBase.cs" />
     <Compile Include="Frontend\Mappers\UpdateLogFileMapper.cs" />
     <Compile Include="Frontend\StaticResourceModule.cs" />
-    <Compile Include="Mapping\CloneInjection.cs" />
     <Compile Include="Mapping\MappingValidation.cs" />
     <Compile Include="Mapping\ResourceMappingException.cs" />
-    <Compile Include="Mapping\ValueInjectorExtensions.cs" />
     <Compile Include="PagingResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceChangeMessage.cs" />

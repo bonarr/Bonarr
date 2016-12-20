@@ -3,7 +3,6 @@ using FluentValidation.Results;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Restrictions;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Restrictions
 {
@@ -35,7 +34,7 @@ namespace Sonarr.Api.V3.Restrictions
 
         private RestrictionResource Get(int id)
         {
-            return _restrictionService.Get(id).InjectTo<RestrictionResource>();
+            return _restrictionService.Get(id).ToResource();
         }
 
         private List<RestrictionResource> GetAll()
@@ -45,12 +44,12 @@ namespace Sonarr.Api.V3.Restrictions
 
         private int Create(RestrictionResource resource)
         {
-            return _restrictionService.Add(resource.InjectTo<Restriction>()).Id;
+            return _restrictionService.Add(resource.ToModel()).Id;
         }
 
         private void Update(RestrictionResource resource)
         {
-            _restrictionService.Update(resource.InjectTo<Restriction>());
+            _restrictionService.Update(resource.ToModel());
         }
 
         private void Delete(int id)

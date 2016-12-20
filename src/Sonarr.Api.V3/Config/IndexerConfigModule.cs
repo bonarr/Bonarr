@@ -19,5 +19,10 @@ namespace Sonarr.Api.V3.Config
             SharedValidator.RuleFor(c => c.RssSyncInterval)
                            .IsValidRssSyncInterval();
         }
+
+        protected override IndexerConfigResource ToResource(IConfigService model)
+        {
+            return IndexerConfigResourceMapper.ToResource(model);
+        }
     }
 }

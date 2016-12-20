@@ -4,7 +4,6 @@ using NzbDrone.Core.RootFolders;
 using NzbDrone.Core.Validation.Paths;
 using NzbDrone.SignalR;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.RootFolders
 {
@@ -38,7 +37,7 @@ namespace Sonarr.Api.V3.RootFolders
 
         private RootFolderResource GetRootFolder(int id)
         {
-            return _rootFolderService.Get(id).InjectTo<RootFolderResource>();
+            return _rootFolderService.Get(id).ToResource();
         }
 
         private int CreateRootFolder(RootFolderResource rootFolderResource)

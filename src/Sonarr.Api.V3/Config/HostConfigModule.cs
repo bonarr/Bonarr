@@ -8,7 +8,6 @@ using NzbDrone.Core.Configuration;
 using NzbDrone.Core.Update;
 using NzbDrone.Core.Validation;
 using NzbDrone.Core.Validation.Paths;
-using Omu.ValueInjecter;
 using Sonarr.Http;
 
 namespace Sonarr.Api.V3.Config
@@ -16,12 +15,14 @@ namespace Sonarr.Api.V3.Config
     public class HostConfigModule : SonarrRestModule<HostConfigResource>
     {
         private readonly IConfigFileProvider _configFileProvider;
+        private readonly IConfigService _configService;
         private readonly IUserService _userService;
 
-        public HostConfigModule(IConfigFileProvider configFileProvider, IUserService userService)
+        public HostConfigModule(IConfigFileProvider configFileProvider, IConfigService configService, IUserService userService)
             : base("/config/host")
         {
             _configFileProvider = configFileProvider;
+            _configService = configService;
             _userService = userService;
 
             GetResourceSingle = GetHostConfig;
@@ -49,12 +50,10 @@ namespace Sonarr.Api.V3.Config
 
         private HostConfigResource GetHostConfig()
         {
-            var resource = new HostConfigResource();
-            resource.InjectFrom(_configFileProvider);
+            var resource = _configFileProvider.ToResource(_configService);
             resource.Id = 1;
 
             var user = _userService.FindUser();
-
             if (user != null)
             {
                 resource.Username = user.Username;

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using FluentValidation;
 using NzbDrone.Core.Profiles;
-using NzbDrone.Core.Qualities;
 using NzbDrone.Core.Validation;
 using Sonarr.Http;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Profiles
 {
@@ -29,7 +27,7 @@ namespace Sonarr.Api.V3.Profiles
 
         private int Create(ProfileResource resource)
         {
-            var model = resource.InjectTo<Profile>();
+            var model = resource.ToModel();
             model = _profileService.Add(model);
             return model.Id;
         }
@@ -41,26 +39,19 @@ namespace Sonarr.Api.V3.Profiles
 
         private void Update(ProfileResource resource)
         {
-            var model = _profileService.Get(resource.Id);
-            
-            model.Name = resource.Name;
-            model.Cutoff = (Quality)resource.Cutoff.Id;
-            model.Items = resource.Items.InjectTo<List<ProfileQualityItem>>();
-            model.Language = resource.Language;
+            var model = resource.ToModel();
 
             _profileService.Update(model);
         }
 
         private ProfileResource GetById(int id)
         {
-            return _profileService.Get(id).InjectTo<ProfileResource>();
+            return _profileService.Get(id).ToResource();
         }
 
         private List<ProfileResource> GetAll()
         {
-            var profiles = _profileService.All().InjectTo<List<ProfileResource>>();
-
-            return profiles;
+            return _profileService.All().ToResource();
         }
     }
 }

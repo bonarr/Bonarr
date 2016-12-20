@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
 using NzbDrone.Core.Configuration;
-using Omu.ValueInjecter;
 using Sonarr.Http;
 using Sonarr.Http.REST;
 
@@ -28,12 +27,13 @@ namespace Sonarr.Api.V3.Config
 
         private TResource GetConfig()
         {
-            var resource = new TResource();
-            resource.InjectFrom(_configService);
+            var resource = ToResource(_configService);
             resource.Id = 1;
 
             return resource;
         }
+
+        protected abstract TResource ToResource(IConfigService model);
 
         private TResource GetConfig(int id)
         {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Nancy;
 using NzbDrone.Core.Qualities;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Qualities
 {
@@ -23,13 +23,13 @@ namespace Sonarr.Api.V3.Qualities
 
         private void Update(QualityDefinitionResource resource)
         {
-            var model = resource.InjectTo<QualityDefinition>();
+            var model = resource.ToModel();
             _qualityDefinitionService.Update(model);
         }
 
         private QualityDefinitionResource GetById(int id)
         {
-            return _qualityDefinitionService.GetById(id).InjectTo<QualityDefinitionResource>();
+            return _qualityDefinitionService.GetById(id).ToResource();
         }
 
         private List<QualityDefinitionResource> GetAll()
@@ -40,12 +40,14 @@ namespace Sonarr.Api.V3.Qualities
         private Response UpdateMany()
         {
             //Read from request
-            var qualityDefinitions = Request.Body.FromJson<List<QualityDefinitionResource>>().InjectTo<List<QualityDefinition>>();
+            var qualityDefinitions = Request.Body.FromJson<List<QualityDefinitionResource>>()
+                                                 .ToModel()
+                                                 .ToList();
 
             _qualityDefinitionService.UpdateMany(qualityDefinitions);
 
             return _qualityDefinitionService.All()
-                                            .InjectTo<List<QualityDefinitionResource>>()
+                                            .ToResource()
                                             .AsResponse(HttpStatusCode.Accepted);
         }
     }

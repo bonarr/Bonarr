@@ -9,7 +9,6 @@ using NzbDrone.Core.ProgressMessaging;
 using NzbDrone.SignalR;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 using Sonarr.Http.Validation;
 
 namespace Sonarr.Api.V3.Commands
@@ -36,7 +35,7 @@ namespace Sonarr.Api.V3.Commands
 
         private CommandResource GetCommand(int id)
         {
-            return _commandQueueManager.Get(id).InjectTo<CommandResource>();
+            return _commandQueueManager.Get(id).ToResource();
         }
 
         private int StartCommand(CommandResource commandResource)
@@ -63,7 +62,7 @@ namespace Sonarr.Api.V3.Commands
         {
             if (message.Command.Body.SendUpdatesToClient)
             {
-                BroadcastResourceChange(ModelAction.Updated, message.Command.InjectTo<CommandResource>());
+                BroadcastResourceChange(ModelAction.Updated, message.Command.ToResource());
             }
         }
     }

@@ -27,7 +27,7 @@ namespace Sonarr.Api.V3.Tags
 
         private TagResource Get(int id)
         {
-            return _tagService.GetTag(id).InjectTo<TagResource>();
+            return _tagService.GetTag(id).ToResource();
         }
 
         private List<TagResource> GetAll()
@@ -37,12 +37,12 @@ namespace Sonarr.Api.V3.Tags
 
         private int Create(TagResource resource)
         {
-            return _tagService.Add(resource.InjectTo<Tag>()).Id;
+            return _tagService.Add(resource.ToModel()).Id;
         }
 
         private void Update(TagResource resource)
         {
-            _tagService.Update(resource.InjectTo<Tag>());
+            _tagService.Update(resource.ToModel());
         }
 
         private void Delete(int id)
