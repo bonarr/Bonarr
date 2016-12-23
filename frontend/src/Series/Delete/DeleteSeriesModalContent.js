@@ -65,7 +65,7 @@ class DeleteSeriesModalContent extends Component {
         onModalClose={onModalClose}
       >
         <ModalHeader>
-          Delete {title}
+          Delete - {title}
         </ModalHeader>
 
         <ModalBody>

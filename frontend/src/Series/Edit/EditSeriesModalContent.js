@@ -18,6 +18,7 @@ class EditSeriesModalContent extends Component {
 
   render() {
     const {
+      title,
       item,
       onInputChange,
       onSavePress,
@@ -27,7 +28,6 @@ class EditSeriesModalContent extends Component {
     } = this.props;
 
     const {
-      title,
       monitored,
       seasonFolder,
       qualityProfileId,
@@ -45,7 +45,7 @@ class EditSeriesModalContent extends Component {
     return (
       <ModalContent onModalClose={onModalClose}>
         <ModalHeader>
-          Edit {title}
+          Edit - {title}
         </ModalHeader>
 
         <ModalBody>
