@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import addSeries, { defaultState as defaultAddSeriesState } from './addSeriesReducers';
 import series, { defaultState as defaultSeriesState } from './seriesReducers';
 import seriesIndex, { defaultState as defaultSeriesIndexState } from './seriesIndexReducers';
 import calendar, { defaultState as defaultCalendarState } from './calendarReducers';
@@ -19,8 +20,10 @@ import tags, { defaultState as defaultTagsState } from './tagReducers';
 import captcha, { defaultState as defaultCaptchaState } from './captchaReducers';
 import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 import manualImport, { defaultState as defaultManualImportState } from './manualImportReducers';
+import rootFolders, { defaultState as defaultRootFoldersState } from './rootFolderReducers';
 
 export const defaultState = {
+  addSeries: defaultAddSeriesState,
   series: defaultSeriesState,
   seriesIndex: defaultSeriesIndexState,
   calendar: defaultCalendarState,
@@ -40,10 +43,12 @@ export const defaultState = {
   tags: defaultTagsState,
   captcha: defaultCaptchaState,
   oAuth: defaultOAuthState,
-  manualImport: defaultManualImportState
+  manualImport: defaultManualImportState,
+  rootFolders: defaultRootFoldersState
 };
 
 export default combineReducers({
+  addSeries,
   series,
   seriesIndex,
   calendar,
@@ -63,5 +68,6 @@ export default combineReducers({
   tags,
   captcha,
   oAuth,
-  manualImport
+  manualImport,
+  rootFolders
 });

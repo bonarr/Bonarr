@@ -1,0 +1,45 @@
+.searchResult {
+  display: flex;
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+  background-color: $white;
+  color: inherit;
+  transition: background 500ms;
+
+  &:hover {
+    background-color: #eaf2ff;
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+.poster {
+  margin-right: 20px;
+  width: 170px;
+  height: 250px;
+}
+
+.title {
+  font-weight: 300;
+  font-size: 36px;
+}
+
+.year {
+  margin-left: 10px;
+  color: $disabledColor;
+}
+
+.alreadyExistsIcon {
+  margin-left: 10px;
+  color: #37bc9b;
+}
+
+.heart {
+  margin-right: 5px;
+  color: $themeRed;
+}
+
+.overview {
+  margin-top: 20px;
+}

@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+}
+
+.year {
+  margin-left: 5px;
+  color: $disabledColor;
+}
+
+.poster {
+  margin-right: 20px;
+  width: 170px;
+  height: 250px;
+}
+
+.overview {
+  margin-bottom: 30px;
+}
+
+.monitorDetailsIcon {
+  margin-left: 8px;
+}
+
+.searchForMissingEpisodesLabelContainer {
+  display: flex;
+  margin-top: 5px;
+}
+
+.searchForMissingEpisodesLabel {
+  margin-right: 8px;
+  font-weight: normal;
+}
+
+.searchForMissingEpisodesContainer {
+  composes: container from 'Components/Form/CheckInput.css';
+
+  flex: 0 1 0;
+}
+
+.searchForMissingEpisodesInput {
+  composes: input from 'Components/Form/CheckInput.css';
+
+  margin-top: 0;
+}

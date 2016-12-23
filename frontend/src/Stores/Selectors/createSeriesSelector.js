@@ -1,12 +1,13 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import createAllSeriesSelector from './createAllSeriesSelector';
 
 function createSeriesSelector() {
   return createSelector(
     (state, { seriesId }) => seriesId,
-    (state) => state.series,
+    createAllSeriesSelector(),
     (seriesId, series) => {
-      return _.find(series.items, { id: seriesId });
+      return _.find(series, { id: seriesId });
     }
   );
 }

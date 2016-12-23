@@ -9,13 +9,19 @@ module.exports = {
   dangerColor: '#f05050',
   warningColor: '#ffa500',
   infoColor: '#35c5f4',
-  nzbdroneRed: '#c4273c',
   purple: '#7a43b6',
   nzbdronePurple: '#7932ea',
   nzbdronePink: '#f43565',
   sonarrBlue: '#35c5f4',
   helpTextColor: '#909293',
   gray: '#adadad',
+
+  // Theme Colors
+
+  themeBlue: '#35c5f4',
+  themeRed: '#c4273c',
+  themeDarkColor: '#4f566f',
+  themeLightColor: '#3a3f51',
 
   torrentColor: '#00853d',
   usenetColor: '#17b1d9',
@@ -28,7 +34,7 @@ module.exports = {
   // Sidebar
 
   sidebarColor: '#e1e2e3',
-  sidebarBackGroundColor: '#3a3f51',
+  sidebarBackgroundColor: '#3a3f51',
 
   // Toolbar
   toolbarColor: '#e1e2e3',
