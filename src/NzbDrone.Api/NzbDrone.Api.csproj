@@ -116,7 +116,6 @@
     <Compile Include="Frontend\Mappers\RobotsTxtMapper.cs" />
     <Compile Include="Indexers\ReleaseModuleBase.cs" />
     <Compile Include="Indexers\ReleasePushModule.cs" />
-    <Compile Include="Movies\MovieModule.cs" />
     <Compile Include="Movies\RenameMovieModule.cs" />
     <Compile Include="Movies\RenameMovieResource.cs" />
     <Compile Include="Movies\MovieEditorModule.cs" />
@@ -232,15 +231,15 @@
     <Compile Include="RootFolders\RootFolderResource.cs" />
     <Compile Include="SeasonPass\SeasonPassResource.cs" />
     <Compile Include="Series\AlternateTitleResource.cs" />
-    <Compile Include="Series\MovieFileResource.cs" />
+    <Compile Include="Movies\MovieFileResource.cs" />
     <Compile Include="Series\SeasonResource.cs" />
     <Compile Include="SeasonPass\SeasonPassModule.cs" />
     <Compile Include="Series\SeriesEditorModule.cs" />
-    <Compile Include="Series\MovieLookupModule.cs" />
+    <Compile Include="Movies\MovieLookupModule.cs" />
     <Compile Include="Series\SeriesLookupModule.cs" />
-    <Compile Include="Series\MovieModule.cs" />
+    <Compile Include="Movies\MovieModule.cs" />
     <Compile Include="Series\SeriesModule.cs" />
-    <Compile Include="Series\MovieResource.cs" />
+    <Compile Include="Movies\MovieResource.cs" />
     <Compile Include="Series\SeriesResource.cs" />
     <Compile Include="Series\SeasonStatisticsResource.cs" />
     <Compile Include="System\Backup\BackupModule.cs" />
