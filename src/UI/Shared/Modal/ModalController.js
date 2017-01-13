@@ -9,6 +9,7 @@ var HistoryDetailsLayout = require('../../Activity/History/Details/HistoryDetail
 var LogDetailsView = require('../../System/Logs/Table/Details/LogDetailsView');
 var RenamePreviewLayout = require('../../Rename/RenamePreviewLayout');
 var ManualImportLayout = require('../../ManualImport/ManualImportLayout');
+var BulkAddLayout = require('../../BulkAdd/BulkAddLayout');
 var FileBrowserLayout = require('../FileBrowser/FileBrowserLayout');
 var MoviesDetailsLayout = require('../../Movies/Details/MoviesDetailsLayout');
 
@@ -27,6 +28,7 @@ module.exports = Marionette.AppRouter.extend({
         vent.on(vent.Commands.ShowLogDetails, this._showLogDetails, this);
         vent.on(vent.Commands.ShowRenamePreview, this._showRenamePreview, this);
         vent.on(vent.Commands.ShowManualImport, this._showManualImport, this);
+        vent.on(vent.Commands.ShowBulkAdd, this._showBulkAdd, this);
         vent.on(vent.Commands.ShowFileBrowser, this._showFileBrowser, this);
         vent.on(vent.Commands.CloseFileBrowser, this._closeFileBrowser, this);
     },
@@ -97,6 +99,11 @@ module.exports = Marionette.AppRouter.extend({
 
     _showManualImport : function(options) {
         var view = new ManualImportLayout(options);
+        AppLayout.modalRegion.show(view);
+    },
+
+    _showBulkAdd : function(options) {
+        var view = new BulkAddLayout(options);
         AppLayout.modalRegion.show(view);
     },
 

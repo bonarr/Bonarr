@@ -138,11 +138,23 @@ namespace NzbDrone.Core.MediaFiles
             _mediaFileRepository.DeleteMany(files);
         }
 
-        public MovieFile Add(MovieFile episodeFile)
+        public MovieFile Add(MovieFile movieFile)
         {
-            var addedFile = _movieFileRepository.Insert(episodeFile);
+            var addedFile = _movieFileRepository.Insert(movieFile);
             _eventAggregator.PublishEvent(new MovieFileAddedEvent(addedFile));
             return addedFile;
+        }
+
+        public List<MovieFile> AddAll(List<MovieFile> movieFiles)
+        {
+            var addedFiles = new List<MovieFile>();
+
+            foreach(var movieFile in movieFiles)
+            {
+                addedFiles.Add(Add(movieFile));
+            }
+
+            return addedFiles;
         }
 
         public void Update(MovieFile episodeFile)

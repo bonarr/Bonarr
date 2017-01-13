@@ -16,6 +16,7 @@ module.exports = Marionette.Layout.extend({
     },
 
     events : {
+        'click .x-bulk-add': '_bulkAddMovies',
         'click .x-import'  : '_importMovies',
         'click .x-add-new' : '_addMovies'
     },
@@ -49,5 +50,9 @@ module.exports = Marionette.Layout.extend({
 
     _addMovies : function() {
         this.workspace.show(new AddMoviesView());
+    },
+
+    _bulkAddMovies : function() {
+        vent.trigger(vent.Commands.ShowBulkAdd);
     }
 });

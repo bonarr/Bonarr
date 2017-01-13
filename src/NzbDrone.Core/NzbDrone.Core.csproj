@@ -704,6 +704,7 @@
     <Compile Include="MediaCover\MediaCoverService.cs" />
     <Compile Include="MediaCover\MediaCoversUpdatedEvent.cs" />
     <Compile Include="MediaFiles\Commands\BackendCommandAttribute.cs" />
+    <Compile Include="MediaFiles\Commands\BulkImportMoviesCommand.cs" />
     <Compile Include="MediaFiles\Commands\CleanUpRecycleBinCommand.cs" />
     <Compile Include="MediaFiles\Commands\DownloadedEpisodesScanCommand.cs" />
     <Compile Include="MediaFiles\Commands\DownloadedMovieScanCommand.cs" />
