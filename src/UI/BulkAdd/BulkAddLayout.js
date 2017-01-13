@@ -6,13 +6,13 @@ var CommandController = require('../Commands/CommandController');
 var EmptyView = require('./EmptyView');
 var SelectFolderView = require('./Folder/SelectFolderView');
 var LoadingView = require('../Shared/LoadingView');
-var ManualImportRow = require('./BulkAddRow');
+var BulkAddRow = require('./BulkAddRow');
 var SelectAllCell = require('../Cells/SelectAllCell');
 var PathCell = require('./Cells/PathCell');
 var QualityCell = require('./Cells/QualityCell');
 var FileSizeCell = require('../Cells/FileSizeCell');
 var ApprovalStatusCell = require('../Cells/ApprovalStatusCell');
-var ManualImportCollection = require('./BulkAddCollection');
+var BulkAddCollection = require('./BulkAddCollection');
 var MovieCell = require('./Cells/MovieCell');
 var ImdbCell = require('./Cells/ImdbCell');
 var ProfileCell = require('./Cells/ProfileCell');
@@ -54,18 +54,18 @@ module.exports = Marionette.Layout.extend({
             cell       : MovieCell,
             sortable   : true
         },
-        {
-            name       : 'imdbid',
-            label      : 'IMDb ID',
-            cell       : ImdbCell,
-            sortable   : false
-        },
-        {
-            name       : 'profile',
-            label      : 'Profile',
-            cell       : ProfileCell,
-            sortable   : false
-        },
+        // {
+        //     name       : 'imdbid',
+        //     label      : 'IMDb ID',
+        //     cell       : ImdbCell,
+        //     sortable   : false
+        // },
+        // {
+        //     name       : 'profile',
+        //     label      : 'Profile',
+        //     cell       : ProfileCell,
+        //     sortable   : false
+        // },
         {
             name       : 'monitor',
             label      : 'Monitor',
@@ -77,7 +77,6 @@ module.exports = Marionette.Layout.extend({
             label      : 'Quality',
             cell       : QualityCell,
             sortable   : true
-
         },
         {
             name       : 'size',
@@ -101,9 +100,9 @@ module.exports = Marionette.Layout.extend({
 
     initialize : function(options) {
         this.folder = options.folder;
-        this.downloadId = options.downloadId;
+        //this.downloadId = options.downloadId;
         this.title = options.title;
-        this.importMode = options.importMode || 'Move';
+        //this.importMode = options.importMode || 'Move';
 
         this.templateHelpers = {
             title : this.title || this.folder
@@ -112,10 +111,10 @@ module.exports = Marionette.Layout.extend({
 
     onRender : function() {
 
-        if (this.folder || this.downloadId) {
+        if (this.folder/* || this.downloadId*/) {
             this._showLoading();
             this._loadCollection();
-            this.ui.importMode.val(this.importMode);
+            //this.ui.importMode.val(this.importMode);
         }
 
         else {
@@ -130,24 +129,24 @@ module.exports = Marionette.Layout.extend({
     },
 
     _loadCollection : function () {
-        this.manualImportCollection = new ManualImportCollection({ folder: this.folder, downloadId: this.downloadId });
-        this.manualImportCollection.fetch();
+        this.bulkAddCollection = new BulkAddCollection({ folder: this.folder, downloadId: this.downloadId });
+        this.bulkAddCollection.fetch();
 
-        this.listenTo(this.manualImportCollection, 'sync', this._showTable);
-        this.listenTo(this.manualImportCollection, 'backgrid:selected', this._updateButtons);
+        this.listenTo(this.bulkAddCollection, 'sync', this._showTable);
+        this.listenTo(this.bulkAddCollection, 'backgrid:selected', this._updateButtons);
     },
 
     _showTable : function () {
-        if (this.manualImportCollection.length === 0) {
+        if (this.bulkAddCollection.length === 0) {
             this.workspace.show(new EmptyView());
             return;
         }
 
         this.fileView = new Backgrid.Grid({
             columns    : this.columns,
-            collection : this.manualImportCollection,
+            collection : this.bulkAddCollection,
             className  : 'table table-hover',
-            row        : ManualImportRow
+            row        : BulkAddRow
         });
 
         this.workspace.show(this.fileView);
@@ -167,14 +166,14 @@ module.exports = Marionette.Layout.extend({
         this.render();
     },
 
-    _automaticImport : function (e) {
-        CommandController.Execute('downloadedMovieScan', {
-            name : 'downloadedMovieScan',
-            path : e.folder
-        });
+    // _automaticImport : function (e) {
+    //     CommandController.Execute('downloadedMovieScan', {
+    //         name : 'downloadedMovieScan',
+    //         path : e.folder
+    //     });
 
-        vent.trigger(vent.Commands.CloseModalCommand);
-    },
+    //     vent.trigger(vent.Commands.CloseModalCommand);
+    // },
 
     _import : function () {
         var selected = this.fileView.getSelectedModels();
@@ -216,19 +215,16 @@ module.exports = Marionette.Layout.extend({
 
         var importMode = this.ui.importMode.val();
 
-        CommandController.Execute('manualImport', {
-            name  : 'manualImport',
+        CommandController.Execute('bulkAdd', {
+            name  : 'bulkAdd',
             files : _.map(selected, function (file) {
                 return {
                     path       : file.get('path'),
                     movieId    : file.get('movie').id,
-                    // seriesId   : file.get('series').id,
-                    // episodeIds : _.map(file.get('episodes'), 'id'),
                     quality    : file.get('quality'),
                     downloadId : file.get('downloadId')
                 };
-            }),
-            importMode : importMode
+            })
         });
 
         vent.trigger(vent.Commands.CloseModalCommand);
