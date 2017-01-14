@@ -100,6 +100,8 @@
     <Compile Include="Authentication\NzbDroneUser.cs" />
     <Compile Include="Blacklist\BlacklistModule.cs" />
     <Compile Include="Blacklist\BlacklistResource.cs" />
+    <Compile Include="BulkAdd\BulkAddModule.cs" />
+    <Compile Include="BulkAdd\BulkAddResource.cs" />
     <Compile Include="Calendar\CalendarFeedModule.cs" />
     <Compile Include="Calendar\CalendarModule.cs" />
     <Compile Include="ClientSchema\Field.cs" />

@@ -703,8 +703,10 @@
     <Compile Include="MediaCover\ImageResizer.cs" />
     <Compile Include="MediaCover\MediaCoverService.cs" />
     <Compile Include="MediaCover\MediaCoversUpdatedEvent.cs" />
+    <Compile Include="MediaFiles\BulkAdd\BulkAddItem.cs" />
+    <Compile Include="MediaFiles\BulkAdd\BulkAddService.cs" />
     <Compile Include="MediaFiles\Commands\BackendCommandAttribute.cs" />
-    <Compile Include="MediaFiles\Commands\BulkImportMoviesCommand.cs" />
+    <Compile Include="MediaFiles\BulkAdd\BulkAddCommand.cs" />
     <Compile Include="MediaFiles\Commands\CleanUpRecycleBinCommand.cs" />
     <Compile Include="MediaFiles\Commands\DownloadedEpisodesScanCommand.cs" />
     <Compile Include="MediaFiles\Commands\DownloadedMovieScanCommand.cs" />
