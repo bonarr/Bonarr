@@ -6,19 +6,19 @@ using System.Text;
 
 namespace NzbDrone.Core.MediaFiles.Commands
 {
-    public class BulkImportMoviesCommand : Command
+    public class BulkAddCommand : Command
     {
         public List<int> MovieIds { get; set; }
         public List<int> Files { get; set; }
 
         public override bool SendUpdatesToClient => true;
 
-        public BulkImportMoviesCommand()
+        public BulkAddCommand()
         {
 
         }
 
-        public BulkImportMoviesCommand(List<int> movieIds, List<int> files)
+        public BulkAddCommand(List<int> movieIds, List<int> files)
         {
             MovieIds = movieIds;
             Files = files;
