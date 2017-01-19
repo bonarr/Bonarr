@@ -82,6 +82,39 @@ namespace NzbDrone.Core.Extras.Metadata
             return files;
         }
 
+        public override IEnumerable<ExtraFile> CreateAfterMovieScan(Movie movie, List<MovieFile> movieFiles)
+        {
+            var metadataFiles = _metadataFileService.GetFilesByMovie(movie.Id);
+            _cleanMetadataService.Clean(movie);
+
+            if (!_diskProvider.FolderExists(movie.Path))
+            {
+                _logger.Info("Movie folder does not exist, skipping metadata creation");
+                return Enumerable.Empty<MetadataFile>();
+            }
+
+            var files = new List<MetadataFile>();
+
+            foreach (var consumer in _metadataFactory.Enabled())
+            {
+                var consumerFiles = GetMetadataFilesForConsumer(consumer, metadataFiles);
+
+                files.AddIfNotNull(ProcessMovieMetadata(consumer, movie, consumerFiles));
+                files.AddRange(ProcessMovieImages(consumer, movie, consumerFiles));
+                //files.AddRange(ProcessSeasonImages(consumer, movie, consumerFiles));
+
+                foreach (var movieFile in movieFiles)
+                {
+                    files.AddIfNotNull(ProcessEpisodeMetadata(consumer, movie, movieFile, consumerFiles));
+                    files.AddRange(ProcessEpisodeImages(consumer, movie, movieFile, consumerFiles));
+                }
+            }
+
+            _metadataFileService.Upsert(files);
+
+            return files;
+        }
+
         public override IEnumerable<ExtraFile> CreateAfterEpisodeImport(Series series, EpisodeFile episodeFile)
         {
             var files = new List<MetadataFile>();

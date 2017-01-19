@@ -28,6 +28,7 @@ namespace NzbDrone.Core.Extras
     {
         private readonly IMediaFileService _mediaFileService;
         private readonly IEpisodeService _episodeService;
+        private readonly IMovieService _movieService;
         private readonly IDiskProvider _diskProvider;
         private readonly IConfigService _configService;
         private readonly List<IManageExtraFiles> _extraFileManagers;
@@ -35,6 +36,7 @@ namespace NzbDrone.Core.Extras
 
         public ExtraService(IMediaFileService mediaFileService,
                             IEpisodeService episodeService,
+                            IMovieService movieService,
                             IDiskProvider diskProvider,
                             IConfigService configService,
                             List<IManageExtraFiles> extraFileManagers,
@@ -42,6 +44,7 @@ namespace NzbDrone.Core.Extras
         {
             _mediaFileService = mediaFileService;
             _episodeService = episodeService;
+            _movieService = movieService;
             _diskProvider = diskProvider;
             _configService = configService;
             _extraFileManagers = extraFileManagers.OrderBy(e => e.Order).ToList();
@@ -100,28 +103,28 @@ namespace NzbDrone.Core.Extras
             }
         }
 
-        public void Handle(MediaCoversUpdatedEvent message)
-        {
-            var series = message.Series;
-            var episodeFiles = GetEpisodeFiles(series.Id);
-
-            foreach (var extraFileManager in _extraFileManagers)
-            {
-                extraFileManager.CreateAfterSeriesScan(series, episodeFiles);
-            }
-        }
-
-        //TODO: Implementing this will fix a lot of our warning exceptions
         //public void Handle(MediaCoversUpdatedEvent message)
         //{
-        //    var movie = message.Movie;
-        //    var movieFiles = GetMovieFiles(movie.Id);
+        //    var series = message.Series;
+        //    var episodeFiles = GetEpisodeFiles(series.Id);
 
         //    foreach (var extraFileManager in _extraFileManagers)
         //    {
-        //        extraFileManager.CreateAfterMovieScan(movie, movieFiles);
+        //        extraFileManager.CreateAfterSeriesScan(series, episodeFiles);
         //    }
         //}
+
+        //TODO: Implementing this will fix a lot of our warning exceptions
+        public void Handle(MediaCoversUpdatedEvent message)
+        {
+            var movie = message.Movie;
+            var movieFiles = GetMovieFiles(movie.Id);
+
+            foreach (var extraFileManager in _extraFileManagers)
+            {
+                extraFileManager.CreateAfterMovieScan(movie, movieFiles);
+            }
+        }
 
         public void Handle(EpisodeFolderCreatedEvent message)
         {
@@ -156,6 +159,19 @@ namespace NzbDrone.Core.Extras
             }
 
             return episodeFiles;
+        }
+
+        private List<MovieFile> GetMovieFiles(int movieId)
+        {
+            var movieFiles = _mediaFileService.GetFilesByMovie(movieId);
+            var movie = _movieService.GetMovie(movieId);
+
+            foreach (var movieFile in movieFiles)
+            {
+
+            }
+
+            return movieFiles;
         }
     }
 }
