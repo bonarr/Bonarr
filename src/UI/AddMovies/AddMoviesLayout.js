@@ -5,54 +5,77 @@ var RootFolderLayout = require('./RootFolders/RootFolderLayout');
 var ExistingMoviesCollectionView = require('./Existing/AddExistingMovieCollectionView');
 var AddMoviesView = require('./AddMoviesView');
 var ProfileCollection = require('../Profile/ProfileCollection');
+var AddFromListView = require("./List/AddFromListView");
 var RootFolderCollection = require('./RootFolders/RootFolderCollection');
 require('../Movies/MoviesCollection');
 
 module.exports = Marionette.Layout.extend({
-    template : 'AddMovies/AddMoviesLayoutTemplate',
+		template : 'AddMovies/AddMoviesLayoutTemplate',
 
-    regions : {
-        workspace : '#add-movies-workspace'
-    },
+		regions : {
+				workspace : '#add-movies-workspace',
+		},
 
-    events : {
-        'click .x-bulk-add': '_bulkAddMovies',
-        'click .x-import'  : '_importMovies',
-        'click .x-add-new' : '_addMovies'
-    },
+		ui : {
+			$existing : '#show-existing-movies-toggle'
+		},
 
-    attributes : {
-        id : 'add-movies-screen'
-    },
+		events : {
+				'click .x-import'  : '_importMovies',
+				"click .x-bulk-add" : "_bulkAddMovies",
+				'click .x-add-new' : '_addMovies',
+				"click .x-add-lists" : "_addFromList",
+				'click .x-show-existing' : '_toggleExisting'
+		},
 
-    initialize : function() {
-        ProfileCollection.fetch();
-        RootFolderCollection.fetch().done(function() {
-            RootFolderCollection.synced = true;
-        });
-    },
+		attributes : {
+				id : 'add-movies-screen'
+		},
 
-    onShow : function() {
-        this.workspace.show(new AddMoviesView());
-    },
+		initialize : function() {
+				ProfileCollection.fetch();
+				RootFolderCollection.fetch().done(function() {
+						RootFolderCollection.synced = true;
+				});
+		},
 
-    _folderSelected : function(options) {
-        vent.trigger(vent.Commands.CloseModalCommand);
-        //TODO: Fix this shit.
-        this.workspace.show(new ExistingMoviesCollectionView({ model : options.model }));
-    },
+		_toggleExisting : function(e) {
+			var showExisting = e.target.checked;
 
-    _importMovies : function() {
-        this.rootFolderLayout = new RootFolderLayout();
-        this.listenTo(this.rootFolderLayout, 'folderSelected', this._folderSelected);
-        AppLayout.modalRegion.show(this.rootFolderLayout);
-    },
+			vent.trigger(vent.Commands.ShowExistingCommand, {
+					showExisting: showExisting
+			});
+		},
 
-    _addMovies : function() {
-        this.workspace.show(new AddMoviesView());
-    },
+		onShow : function() {
 
-    _bulkAddMovies : function() {
+				this.workspace.show(new AddMoviesView());
+				this.ui.$existing.hide();
+		},
+
+
+		_folderSelected : function(options) {
+				vent.trigger(vent.Commands.CloseModalCommand);
+				//this.ui.$existing.show();
+				this.workspace.show(new ExistingMoviesCollectionView({ model : options.model }));
+		},
+
+		_importMovies : function() {
+				this.rootFolderLayout = new RootFolderLayout();
+				this.listenTo(this.rootFolderLayout, 'folderSelected', this._folderSelected);
+				AppLayout.modalRegion.show(this.rootFolderLayout);
+		},
+
+		_addMovies : function() {
+				this.workspace.show(new AddMoviesView());
+		},
+
+		_addFromList : function() {
+			//this.ui.$existing.hide();
+			this.workspace.show(new AddFromListView());
+		},
+		
+		    _bulkAddMovies : function() {
         vent.trigger(vent.Commands.ShowBulkAdd);
     }
 });

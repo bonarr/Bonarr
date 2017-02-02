@@ -42,6 +42,8 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public bool adult { get; set; }
         public string backdrop_path { get; set; }
         public Belongs_To_Collection belongs_to_collection { get; set; }
+        public int? status_code { get; set; }
+        public string status_message { get; set; }
         public int budget { get; set; }
         public Genre[] genres { get; set; }
         public string homepage { get; set; }
@@ -66,6 +68,7 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public int vote_count { get; set; }
         public AlternativeTitles alternative_titles { get; set; }
         public ReleaseDatesResource release_dates { get; set; }
+        public VideosResource videos { get; set; }
     }
 
     public class ReleaseDatesResource
@@ -129,5 +132,22 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
     {
         public string iso_3166_1 { get; set; }
         public string title { get; set; }
+    }
+
+    public class VideosResource
+    {
+        public List<Video> results { get; set; }
+    }
+
+    public class Video
+    {
+        public string id { get; set; }
+        public string iso_639_1 { get; set; }
+        public string iso_3166_1 { get; set; }
+        public string key { get; set; }
+        public string name { get; set; }
+        public string site { get; set; }
+        public string size { get; set; }
+        public string type { get; set; }
     }
 }
