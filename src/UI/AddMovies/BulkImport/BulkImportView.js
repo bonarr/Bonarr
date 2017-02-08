@@ -125,7 +125,8 @@ module.exports = Marionette.Layout.extend({
 						icon         : 'icon-sonarr-add',
 						callback     : this._addAll,
 						ownerContext : this,
-						className    : 'x-add-all'
+						className    : 'x-add-all',
+						tooltip			 : "Note: Add all only adds all the movies on pages you have already seen. Before you click this button, please go once through all existing pages to make sure everything is correct."
 					}
 				]
 			};
@@ -150,10 +151,17 @@ module.exports = Marionette.Layout.extend({
 			var selected = _.filter(this.bulkImportCollection.fullCollection.models, function(elem){
 				return elem.selected;
 			})
-			console.log(selected);
+			this._addModels(selected, this.ui.addSelectdBtn);
+		},
 
-			var promise = MoviesCollection.importFromList(selected);
-			this.ui.addSelectdBtn.spinForPromise(promise);
+		_addAll : function() {
+			this._addModels(this.bulkImportCollection.fullCollection.models, this.ui.addAllBtn);
+		},
+
+		_addModels : function(models, button) {
+
+			var promise = MoviesCollection.importFromList(models);
+			button.spinForPromise(promise);
 			this.ui.addSelectdBtn.addClass('disabled');
 			this.ui.addAllBtn.addClass('disabled');
 
@@ -166,7 +174,7 @@ module.exports = Marionette.Layout.extend({
 					}
 
 			Messenger.show({
-				message : "Importing {0} movies. This can take multiple minutes depending on how many movies should be imported. Don't close this browser window until it is finished!".format(selected.length),
+				message : "Importing {0} movies. This can take multiple minutes depending on how many movies should be imported. Don't close this browser window until it is finished!".format(models.length),
 				hideOnNavigate : false,
 				hideAfter : 30,
 				type : "error"
@@ -179,10 +187,6 @@ module.exports = Marionette.Layout.extend({
 							hideOnNavigate : true
 					});
 			});
-		},
-
-		_addAll : function() {
-			console.log("TODO");
 		},
 
 		_handleEvent : function(event_name, data) {
