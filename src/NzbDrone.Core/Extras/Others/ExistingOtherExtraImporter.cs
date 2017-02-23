@@ -27,41 +27,40 @@ namespace NzbDrone.Core.Extras.Others
 
         public override int Order => 2;
 
-        public override IEnumerable<ExtraFile> ProcessFiles(Series series, List<string> filesOnDisk, List<string> importedFiles)
+        public override IEnumerable<ExtraFile> ProcessFiles(Movie movie, List<string> filesOnDisk, List<string> importedFiles)
         {
-            _logger.Debug("Looking for existing extra files in {0}", series.Path);
+            _logger.Debug("Looking for existing extra files in {0}", movie.Path);
 
             var extraFiles = new List<OtherExtraFile>();
-            var filterResult = FilterAndClean(series, filesOnDisk, importedFiles);
+            var filterResult = FilterAndClean(movie, filesOnDisk, importedFiles);
 
             foreach (var possibleExtraFile in filterResult.FilesOnDisk)
             {
-                var localEpisode = _parsingService.GetLocalEpisode(possibleExtraFile, series);
+                var localMovie = _parsingService.GetLocalMovie(possibleExtraFile, movie);
 
-                if (localEpisode == null)
+                if (localMovie == null)
                 {
                     _logger.Debug("Unable to parse extra file: {0}", possibleExtraFile);
                     continue;
                 }
 
-                if (localEpisode.Episodes.Empty())
+                if (localMovie.Movie == null)
                 {
-                    _logger.Debug("Cannot find related episodes for: {0}", possibleExtraFile);
+                    _logger.Debug("Cannot find related movie for: {0}", possibleExtraFile);
                     continue;
                 }
 
-                if (localEpisode.Episodes.DistinctBy(e => e.EpisodeFileId).Count() > 1)
-                {
-                    _logger.Debug("Extra file: {0} does not match existing files.", possibleExtraFile);
-                    continue;
-                }
+                //if (localMovie.Episodes.DistinctBy(e => e.EpisodeFileId).Count() > 1)
+                //{
+                //    _logger.Debug("Extra file: {0} does not match existing files.", possibleExtraFile);
+                //    continue;
+                //}
 
                 var extraFile = new OtherExtraFile
                 {
-                    SeriesId = series.Id,
-                    SeasonNumber = localEpisode.SeasonNumber,
-                    EpisodeFileId = localEpisode.Episodes.First().EpisodeFileId,
-                    RelativePath = series.Path.GetRelativePath(possibleExtraFile),
+                    MovieId = movie.Id,
+                    MovieFileId = localMovie.Movie.MovieFileId,
+                    RelativePath = movie.Path.GetRelativePath(possibleExtraFile),
                     Extension = Path.GetExtension(possibleExtraFile)
                 };
 

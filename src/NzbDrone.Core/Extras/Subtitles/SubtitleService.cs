@@ -34,82 +34,87 @@ namespace NzbDrone.Core.Extras.Subtitles
 
         public override int Order => 1;
 
-        public override IEnumerable<ExtraFile> CreateAfterSeriesScan(Series series, List<EpisodeFile> episodeFiles)
+        public override IEnumerable<ExtraFile> CreateAfterMovieScan(Movie movie, MovieFile movieFile)
         {
             return Enumerable.Empty<SubtitleFile>();
         }
 
-        public override IEnumerable<ExtraFile> CreateAfterEpisodeImport(Series series, EpisodeFile episodeFile)
+        public override IEnumerable<ExtraFile> CreateAfterMovieImport(Movie movie, string movieFolder)
         {
             return Enumerable.Empty<SubtitleFile>();
         }
 
-        public override IEnumerable<ExtraFile> CreateAfterEpisodeImport(Series series, string seriesFolder, string seasonFolder)
+        public override IEnumerable<ExtraFile> CreateAfterMovieImport(Movie movie, MovieFile movieFile)
         {
             return Enumerable.Empty<SubtitleFile>();
         }
 
-        public override IEnumerable<ExtraFile> MoveFilesAfterRename(Series series, List<EpisodeFile> episodeFiles)
+        public override IEnumerable<ExtraFile> MoveFilesAfterRename(Movie movie, MovieFile movieFiles)
         {
+            return Enumerable.Empty<ExtraFile>();
+        }
+
+        //public override IEnumerable<ExtraFile> MoveFilesAfterRename(Series series, List<EpisodeFile> episodeFiles)
+        //{
             // TODO: Remove
             // We don't want to move files after rename yet.
 
-            return Enumerable.Empty<ExtraFile>();
+            //return Enumerable.Empty<ExtraFile>();
 
-            var subtitleFiles = _subtitleFileService.GetFilesBySeries(series.Id);
+            //var subtitleFiles = _subtitleFileService.GetFilesBySeries(series.Id);
 
-            var movedFiles = new List<SubtitleFile>();
+            //var movedFiles = new List<SubtitleFile>();
 
-            foreach (var episodeFile in episodeFiles)
-            {
-                var groupedExtraFilesForEpisodeFile = subtitleFiles.Where(m => m.EpisodeFileId == episodeFile.Id)
-                                                            .GroupBy(s => s.Language + s.Extension).ToList();
+            //foreach (var episodeFile in episodeFiles)
+            //{
+            //    var groupedExtraFilesForEpisodeFile = subtitleFiles.Where(m => m.EpisodeFileId == episodeFile.Id)
+            //                                                .GroupBy(s => s.Language + s.Extension).ToList();
 
-                foreach (var group in groupedExtraFilesForEpisodeFile)
-                {
-                    var groupCount = group.Count();
-                    var copy = 1;
+            //    foreach (var group in groupedExtraFilesForEpisodeFile)
+            //    {
+            //        var groupCount = group.Count();
+            //        var copy = 1;
 
-                    if (groupCount > 1)
-                    {
-                        _logger.Warn("Multiple subtitle files found with the same language and extension for {0}", Path.Combine(series.Path, episodeFile.RelativePath));
-                    }
+            //        if (groupCount > 1)
+            //        {
+            //            _logger.Warn("Multiple subtitle files found with the same language and extension for {0}", Path.Combine(series.Path, episodeFile.RelativePath));
+            //        }
 
-                    foreach (var extraFile in group)
-                    {
-                        var existingFileName = Path.Combine(series.Path, extraFile.RelativePath);
-                        var extension = GetExtension(extraFile, existingFileName, copy, groupCount > 1);
-                        var newFileName = Path.ChangeExtension(Path.Combine(series.Path, episodeFile.RelativePath), extension);
+            //        foreach (var extraFile in group)
+            //        {
+            //            var existingFileName = Path.Combine(series.Path, extraFile.RelativePath);
+            //            var extension = GetExtension(extraFile, existingFileName, copy, groupCount > 1);
+            //            var newFileName = Path.ChangeExtension(Path.Combine(series.Path, episodeFile.RelativePath), extension);
 
-                        if (newFileName.PathNotEquals(existingFileName))
-                        {
-                            try
-                            {
-                                _diskProvider.MoveFile(existingFileName, newFileName);
-                                extraFile.RelativePath = series.Path.GetRelativePath(newFileName);
-                                movedFiles.Add(extraFile);
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.Warn(ex, "Unable to move subtitle file: {0}", existingFileName);
-                            }
-                        }
+            //            if (newFileName.PathNotEquals(existingFileName))
+            //            {
+            //                try
+            //                {
+            //                    _diskProvider.MoveFile(existingFileName, newFileName);
+            //                    extraFile.RelativePath = series.Path.GetRelativePath(newFileName);
+            //                    movedFiles.Add(extraFile);
+            //                }
+            //                catch (Exception ex)
+            //                {
+            //                    _logger.Warn(ex, "Unable to move subtitle file: {0}", existingFileName);
+            //                }
+            //            }
 
-                        copy++;
-                    }
-                }
-            }
+            //            copy++;
+            //        }
+            //    }
+            //}
 
-            _subtitleFileService.Upsert(movedFiles);
+            //_subtitleFileService.Upsert(movedFiles);
 
-            return movedFiles;
-        }
+            //return movedFiles;
+        //}
 
-        public override ExtraFile Import(Series series, EpisodeFile episodeFile, string path, string extension, bool readOnly)
+        public override ExtraFile Import(Movie movie, MovieFile movieFile, string path, string extension, bool readOnly)
         {
             if (SubtitleFileExtensions.Extensions.Contains(Path.GetExtension(path)))
             {
-                var subtitleFile = ImportFile(series, episodeFile, path, extension, readOnly);
+                var subtitleFile = ImportFile(movie, movieFile, path, extension, readOnly);
                 subtitleFile.Language = LanguageParser.ParseSubtitleLanguage(path);
 
                 _subtitleFileService.Upsert(subtitleFile);

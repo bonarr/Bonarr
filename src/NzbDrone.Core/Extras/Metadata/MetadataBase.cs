@@ -51,5 +51,12 @@ namespace NzbDrone.Core.Extras.Metadata
         {
             return GetType().Name;
         }
+
+        public abstract List<ImageFileResult> MovieImages(Movie movie);
+        public abstract List<ImageFileResult> MovieImages(Movie movie, MovieFile movieFile);
+        public abstract MetadataFile FindMetadataFile(Movie movie, string path);
+        public abstract MetadataFileResult MovieMetadata(Movie movie);
+        public abstract MetadataFileResult MovieMetadata(Movie movie, MovieFile movieFile);
+        public abstract string GetFilenameAfterMove(Movie movie, MovieFile movieFile, MetadataFile metadataFile);
     }
 }
