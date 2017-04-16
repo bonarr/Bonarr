@@ -1,0 +1,76 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+    <!-- {{#if id}} -->
+    <h3>Edit</h3>
+    <!-- {{else}}
+    <h3>Add</h3>
+    {{/if}} -->
+</div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+          <div id="x-fields">
+            <div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Name</label>
+
+                <div class="col-sm-5">
+                    <input type="text" name="name" class="form-control" value="Surround">
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                            <label class="col-sm-3 control-label">Profiles</label>
+
+                            <div class="col-sm-5">
+                                <div class="controls qualities-controls">
+                                    <span id="x-qualities"><ul validation-name="items" class="qualities collection-list" tabindex="0">
+                                      <li data-model-cid="c4500"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+            <span class="quality-label"><input type="text" value="7.1"></input><input type="text" value="10"></input></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li>
+            <li data-model-cid="c4500"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+<span class="quality-label"><input type="text" value="Full Surround"></input><input type="text" value="10"></input></span>
+<i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+</div></li>
+<li data-model-cid="c4500"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+<span class="quality-label"><input type="text" value="5.1"></input><input type="text" value="5"></input></span>
+<i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+</div></li>
+<li data-model-cid="c4500"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+<span class="quality-label"><input type="text" value="Atmos"></input><input type="text" value="5"></input></span>
+<i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+</div></li>
+<li data-model-cid="c4500"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+<span class="quality-label"><input type="text" value="DD5.1"></input><input type="text" value="5"></input></span>
+<i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+</div></li>
+            </ul></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1 help-inline">
+                                <i class="icon-sonarr-form-info" title="Checking does nothing for the preferred words. Cutoff is set with cutoff score below."></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Cutoff Score</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" name="name" class="form-control" value="10">
+                            </div>
+                        </div>
+            </div>
+  </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        {{#if id}}
+        <button class="btn btn-danger pull-left x-delete">Delete</button>
+        {{/if}}
+        <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
+        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary x-save">Save</button>
+    </div>
+</div>

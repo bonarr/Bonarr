@@ -1,0 +1,91 @@
+<div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+    <!-- {{#if id}} -->
+    <h3>Edit</h3>
+    <!-- {{else}}
+    <h3>Add</h3>
+    {{/if}} -->
+</div>
+    <div class="modal-body">
+        <div class="form-horizontal">
+          <div id="x-fields">
+            <div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Name</label>
+
+                <div class="col-sm-5">
+                    <input type="text" name="name" class="form-control" value="Bluray large, Surround, English">
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                            <label class="col-sm-3 control-label">Profiles</label>
+
+                            <div class="col-sm-5">
+                                <div class="controls qualities-controls">
+                                    <span id="x-qualities"><ul validation-name="items" class="qualities collection-list ui-sortable" tabindex="0"><li data-model-cid="c4500" class="selected"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+            <span class="quality-label">Quality: <select>
+              <option value="volvo" selected="true">HD ALL</option>
+              <option value="saab">Ultra HD</option>
+              <option value="mercedes">SD</option>
+              <option value="audi">Bluray</option>
+            </select></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li>
+            <li data-model-cid="c4501" class="selected"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Preferred Words: <select>
+                <option value="volvo" selected="true">Surround (5.1, 7.1)</option>
+                <option value="saab">Sparks & Evo Preferred</option>
+                <option value="mercedes">Private HD rls-group</option>
+              </select></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li>
+            <li data-model-cid="c4502"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Language: <select>
+                <option value="volvo" selected="true">English Only</option>
+                <option value="saab">German & English Multi</option>
+                <option value="mercedes">German Only</option>
+              </select></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li>
+            <li data-model-cid="c4501" class="selected"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Indexer Flags: <select>
+                <option value="volvo" selected="true">PTP Golden Preferred</option>
+                <option value="saab">Freeleech preferred</option>
+              </select></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li><li data-model-cid="c4503"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Seeders (Torrents)</span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li><li data-model-cid="c4504"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Age (Usenet)</span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li><li data-model-cid="c4505"><div class="iv-settings-profile-edit-editprofileitemview"><i class="select-handle pull-left x-select"></i>
+              <span class="quality-label">Size:       <select>
+                <option value="volvo" selected="true">Bluray large, 720p small</option>
+                <option value="saab">Bluray small, 720p medium</option>
+              </select></span>
+            <i class="drag-handle pull-right icon-sonarr-reorder advanced-setting x-drag-handle"></i>
+            </div></li></ul></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1 help-inline">
+                                <i class="icon-sonarr-form-info" title="The higher a profile is, the more important it is when prioritizing releases. Checked profiles need to be met for the cutoff to be considered met."></i>
+                            </div>
+                        </div>
+            </div>
+  </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        {{#if id}}
+        <button class="btn btn-danger pull-left x-delete">Delete</button>
+        {{/if}}
+        <span class="indicator x-indicator"><i class="icon-sonarr-spinner fa-spin"></i></span>
+        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary x-save">Save</button>
+    </div>
+</div>
