@@ -40,6 +40,10 @@ namespace NzbDrone.Core.MetadataSource.SkyHook.Resource
         public string physical_release_note { get; set; }
     }
 
+    public class MapMovieResult : MovieResult
+    {
+        public string real_clean_title { get; set; }
+    }
 
     public class MovieResourceRoot
     {

@@ -238,7 +238,7 @@ PackageTests()
 CleanupWindowsPackage()
 {
     echo "Removing NzbDrone.Mono"
-    rm -f $outputFolder/NzbDrone.Mono.*
+    #rm -f $outputFolder/NzbDrone.Mono.*
 
     echo "Adding NzbDrone.Windows to UpdatePackage"
     cp $outputFolder/NzbDrone.Windows.* $updateFolder

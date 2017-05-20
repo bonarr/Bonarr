@@ -15,6 +15,8 @@ using NzbDrone.Core.MediaFiles.EpisodeImport;
 using NzbDrone.Core.RootFolders;
 using NzbDrone.Common.Cache;
 using NzbDrone.Core.Tv;
+using NLog;
+using NzbDrone.Common.Instrumentation.Extensions;
 
 namespace NzbDrone.Api.Movie
 {
@@ -30,22 +32,27 @@ namespace NzbDrone.Api.Movie
     public class MovieBulkImportModule : NzbDroneRestModule<MovieResource>
     {
         private readonly ISearchForNewMovie _searchProxy;
+        private readonly IMapCleanTitles _cleanTitlesMapper;
         private readonly IRootFolderService _rootFolderService;
         private readonly IMakeImportDecision _importDecisionMaker;
         private readonly IDiskScanService _diskScanService;
 		private readonly ICached<Core.Tv.Movie> _mappedMovies;
         private readonly IMovieService _movieService;
+        private readonly Logger _logger;
 
         public MovieBulkImportModule(ISearchForNewMovie searchProxy, IRootFolderService rootFolderService, IMakeImportDecision importDecisionMaker,
-		                             IDiskScanService diskScanService, ICacheManager cacheManager, IMovieService movieService)
+		                             IDiskScanService diskScanService, ICacheManager cacheManager, IMovieService movieService, IMapCleanTitles cleanTitlesMapper,
+                                    Logger logger)
             : base("/movies/bulkimport")
         {
             _searchProxy = searchProxy;
+            _cleanTitlesMapper = cleanTitlesMapper;
             _rootFolderService = rootFolderService;
             _importDecisionMaker = importDecisionMaker;
             _diskScanService = diskScanService;
 			_mappedMovies = cacheManager.GetCache<Core.Tv.Movie>(GetType(), "mappedMoviesCache");
             _movieService = movieService;
+            _logger = logger;
             Get["/"] = x => Search();
         }
 
@@ -79,7 +86,36 @@ namespace NzbDrone.Api.Movie
 
             var paged = unmapped.GetRange(min, max-min);
 
-            var mapped = paged.Select(f =>
+            var count = paged.Count();
+
+            var cleanTitles = paged.Select((f, index) =>
+            {
+                _logger.ProgressInfo("Parsing dir {0} ({1}/{2})", f.Name, index, count);
+
+                var parsedTitle = Parser.ParseMoviePath(f.Name);
+
+                if (parsedTitle == null)
+                {
+                    return new
+                    {
+                        Title = Parser.CleanSeriesTitle(f.Name.Replace(".", " ").Replace("-", " ")),
+                        Path = f.Path
+                    };
+                }
+                else
+                {
+                    return new
+                    {
+                        Title = Parser.CleanSeriesTitle(parsedTitle.MovieTitle),
+                        Path = f.Path
+                    };
+                }
+
+               
+
+            });
+
+            /*var mapped = paged.Select(f =>
 			{
 				Core.Tv.Movie m = null;
 
@@ -91,6 +127,7 @@ namespace NzbDrone.Api.Movie
 				}
 
 				var parsedTitle = Parser.ParseMoviePath(f.Name);
+
 				if (parsedTitle == null)
 				{
 					m = new Core.Tv.Movie
@@ -143,7 +180,20 @@ namespace NzbDrone.Api.Movie
 				}
 
 				return null;
-            });
+            });*/
+
+            var mapped = _cleanTitlesMapper.MapCleanTitles(cleanTitles.Select(t => t.Title).ToList());
+
+            var mappedMovies = mapped.Select(r =>
+            {
+                var cT = cleanTitles.Where(c => c.Title == r.Key).FirstOrDefault();
+                if (cT != null)
+                {
+                    r.Value.Path = cT.Path;
+                    return r.Value;
+                }
+                return null;
+            }).OrderBy(m => m.SortTitle);
             
             return new PagingResource<MovieResource>
             {
@@ -151,8 +201,8 @@ namespace NzbDrone.Api.Movie
                 PageSize = per_page,
                 SortDirection = SortDirection.Ascending,
                 SortKey = Request.Query.sort_by,
-                TotalRecords = total_count - mapped.Where(m => m == null).Count(),
-                Records = MapToResource(mapped.Where(m => m != null)).ToList()
+                TotalRecords = total_count - mappedMovies.Where(m => m == null).Count(),
+                Records = MapToResource(mappedMovies.Where(m => m != null)).ToList()
             }.AsResponse();
         }
 

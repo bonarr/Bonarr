@@ -20,7 +20,7 @@ using NzbDrone.Core.NetImport.ImportExclusions;
 
 namespace NzbDrone.Core.MetadataSource.SkyHook
 {
-    public class SkyHookProxy : IProvideSeriesInfo, ISearchForNewSeries, IProvideMovieInfo, ISearchForNewMovie, IDiscoverNewMovies
+    public class SkyHookProxy : IProvideSeriesInfo, ISearchForNewSeries, IProvideMovieInfo, ISearchForNewMovie, IDiscoverNewMovies, IMapCleanTitles
     {
         private readonly IHttpClient _httpClient;
         private readonly Logger _logger;
@@ -411,6 +411,42 @@ namespace NzbDrone.Core.MetadataSource.SkyHook
             results = results.Where(m => allMovies.None(mo => mo.TmdbId == m.id) && allExclusions.None(ex => ex.TmdbId == m.id)).ToList();
 
             return results.SelectList(MapMovie);
+        }
+
+
+        public Dictionary<string, Movie> MapCleanTitles(List<string> cleanTitles)
+        {
+            HttpRequest request = new HttpRequestBuilder("https://radarr.video/api/find_movie/").Build();
+
+            request.AllowAutoRedirect = true;
+            //request.Method = HttpMethod.POST;
+            request.Headers.ContentType = "application/json";
+            var jsonString = new
+            {
+                clean_titles = cleanTitles
+            }.ToJson();
+            request.SetContent(jsonString);
+
+            var response = _httpClient.Post(request);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new HttpException(request, response);
+            }
+
+            var results = Json.Deserialize<List<MapMovieResult>>(response.Content);
+
+            Dictionary<string, Movie> mapped = new Dictionary<string, Movie>();
+
+            foreach (var result in results)
+            {
+                if (!mapped.ContainsKey(result.real_clean_title))
+                {
+                    mapped.Add(result.real_clean_title, MapMovie(result));
+                }
+            }
+
+            return mapped;
         }
 
         private string StripTrailingTheFromTitle(string title)
