@@ -104,7 +104,7 @@ namespace NzbDrone.Api.ClientSchema
 
             foreach (var Setting in definition.Settings)
             {
-                var type = Setting.Type = definition.Type;
+                var type = Setting.Type;
                 if (type == "text")
                 {
                     type = "textbox";
