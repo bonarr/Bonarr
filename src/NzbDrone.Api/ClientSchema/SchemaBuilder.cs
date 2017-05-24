@@ -9,6 +9,10 @@ using NzbDrone.Common.Reflection;
 using NzbDrone.Core.Annotations;
 using NzbDrone.Core.Qualities;
 using NzbDrone.Core.Profiles;
+using NzbDrone.Core.Indexers.CardigannDefinitions;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.IO;
 
 namespace NzbDrone.Api.ClientSchema
 {
@@ -56,6 +60,69 @@ namespace NzbDrone.Api.ClientSchema
             }
 
             return result.OrderBy(r => r.Order).ToList();
+        }
+
+        public static List<Field> ToSchema(CardigannDefinitionsSettings settings)
+        {
+            var deserializer = new DeserializerBuilder()
+                .WithNamingConvention(new CamelCaseNamingConvention())
+                .IgnoreUnmatchedProperties()
+                .Build();
+            var definition = deserializer.Deserialize<CardigannIndexerDefinition>(File.ReadAllText(settings.DefinitionLocation));
+
+            // Add default data if necessary
+            if (definition.Settings == null)
+            {
+                definition.Settings = new List<settingsField>();
+                definition.Settings.Add(new settingsField { Name = "username", Label = "Username", Type = "text" });
+                definition.Settings.Add(new settingsField { Name = "password", Label = "Password", Type = "password" });
+            }
+
+            if (definition.Encoding == null)
+                definition.Encoding = "UTF-8";
+
+            if (definition.Login != null && definition.Login.Method == null)
+                definition.Login.Method = "form";
+
+            if (definition.Search.Paths == null)
+            {
+                definition.Search.Paths = new List<searchPathBlock>();
+            }
+
+            // convert definitions with a single search Path to a Paths entry
+            if (definition.Search.Path != null)
+            {
+                var legacySearchPath = new searchPathBlock();
+                legacySearchPath.Path = definition.Search.Path;
+                legacySearchPath.Inheritinputs = true;
+                definition.Search.Paths.Add(legacySearchPath);
+            }
+
+            var result = new List<Field>();
+
+            int order = 0;
+
+            foreach (var Setting in definition.Settings)
+            {
+                var type = Setting.Type = definition.Type;
+                if (type == "text")
+                {
+                    type = "textbox";
+                }
+                var field = new Field
+                {
+                    Name = Setting.Name,
+                    Label = Setting.Label,
+                    HelpText = "",
+                    HelpLink = "",
+                    Order = order,
+                    Advanced = false,
+                    Type = type
+                };
+                result.Add(field);
+            }
+
+            return result;
         }
 
         public static object ReadFromSchema(List<Field> fields, Type targetType)

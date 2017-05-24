@@ -1,0 +1,101 @@
+---
+  site: torrentz2
+  name: Torrentz2
+  language: en-us
+  type: public
+  encoding: UTF-8
+  links:
+    - https://torrentz2.eu/
+
+  caps:
+    categories:
+      "video tv": TV
+      "video": Movies
+      "video movie hd": Movies/HD
+      "adult": XXX
+      "ebook comics": Books/Comics
+      "ebook": Books/Ebook
+      "ebook tutorial": Books/Technical
+      "ebook magazine": Books/Magazines
+      "audio music mp3": Audio/MP3
+      "ebook audio book": Audio/Audiobook
+      "audio music lossless": Audio/Lossless
+      "application": PC/0day
+      "game": PC/Games
+      "game xbox": Console/Xbox
+      "adult milf": XXX
+      "adult hairy": XXX
+      "adult anal": XXX
+      "adult blowjobs": XXX
+      "game pc": PC/Games
+      "audio": Audio
+      
+
+    modes:
+      search: [q]
+      tv-search: [q, season, ep]
+      movie-search: [q]
+
+  settings:
+    - name: itorrents-links
+      type: checkbox
+      label: Add download links via itorrents.org
+
+  search:
+    path: searchA
+    inputs:
+       f: "{{ .Query.Keywords }}"
+    rows:
+      selector: "html body #wrap .results dl:has(a)"
+      filters:
+        - name: andmatch
+    fields:
+      title:
+        selector: dt a
+      details:
+        selector: dt a
+        attribute: href
+      download-itorrents:
+        selector: dt a
+        attribute: href
+        filters:
+          - name: regexp
+            args: "/(\\w+)"
+          - name: toupper
+          - name: prepend
+            args: http://itorrents.org/torrent/
+          - name: append
+            args: ".torrent"
+      download:
+        text: "{{if .Config.itorrents-links}}{{ .Result.download-itorrents }}{{else}}{{end}}"
+      magnet:
+        selector: dt a
+        attribute: href
+        filters:
+          - name: regexp
+            args: "/(\\w+)"
+          - name: prepend
+            args: "magnet:?xt=urn:btih:"
+          - name: append
+            args: "&dn={{ .Result.title }}.torrent"
+      category|optional:
+        selector: dt
+        remove: a
+        filters:
+          - name: trim
+            args: "»"
+          - name: trim
+            args: " "
+      date:
+        selector: dd span:nth-child(2)
+        attribute: title
+      size:
+        selector: dd span:nth-child(3)
+      seeders:
+        selector: dd span:nth-child(4)
+      leechers:
+        selector: dd span:nth-child(5)
+      downloadvolumefactor:
+        text: "0"
+      uploadvolumefactor:
+        text: "1"

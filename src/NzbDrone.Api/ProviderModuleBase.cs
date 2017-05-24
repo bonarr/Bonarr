@@ -9,6 +9,7 @@ using NzbDrone.Common.Reflection;
 using NzbDrone.Core.ThingiProvider;
 using NzbDrone.Core.Validation;
 using Newtonsoft.Json;
+using NzbDrone.Core.Indexers.CardigannDefinitions;
 
 namespace NzbDrone.Api
 {
@@ -117,7 +118,15 @@ namespace NzbDrone.Api
             resource.ConfigContract = definition.ConfigContract;
             resource.Message = definition.Message;
 
-            resource.Fields = SchemaBuilder.ToSchema(definition.Settings);
+            if (definition.Settings.GetType() == typeof(CardigannDefinitionsSettings))
+            {
+                resource.Fields = SchemaBuilder.ToSchema((CardigannDefinitionsSettings)definition.Settings);
+            }
+            else
+            {
+                resource.Fields = SchemaBuilder.ToSchema(definition.Settings);
+            }
+           
 
             resource.InfoLink = string.Format("https://github.com/Radarr/Radarr/wiki/Supported-{0}#{1}",
                 typeof(TProviderResource).Name.Replace("Resource", "s"),

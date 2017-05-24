@@ -1,0 +1,157 @@
+﻿---
+  site: theshinning
+  name: The Shinning
+  description: "A German gerneral tracker"
+  language: de-de
+  type: private
+  encoding: windows-1252
+  links:
+    - https://theshinning.org
+
+  caps:
+    categorymappings:
+      # Filme
+      - {id: 28, cat: Movies/SD, desc: "HORROR"}
+      - {id: 25, cat: Movies/DVD, desc: "SD|DVD"}
+      - {id: 99, cat: Movies/SD, desc: "SD|SPORT"}
+      - {id: 24, cat: Movies/SD, desc: "SD|x264"}
+      - {id: 22, cat: Movies/SD, desc: "SD|XVID"}
+      - {id: 26, cat: XXX, desc: "SD|XxX"}
+
+      # High Definition
+      - {id: 29, cat: Movies/BluRay, desc: "BLURAY"}
+      - {id: 19, cat: Movies/HD, desc: "HD|1080p"}
+      - {id: 21, cat: Movies/3D, desc: "HD|3D"}
+      - {id: 107, cat: Movies/HD, desc: "HD|4K"}
+      - {id: 20, cat: Movies/HD, desc: "HD|720p"}
+      - {id: 101, cat: Movies/HD, desc: "HD|REMUX"}
+      - {id: 100, cat: Movies/HD, desc: "HD|SPORT"}
+      - {id: 27, cat: XXX, desc: "HD|XxX"}
+      - {id: 102, cat: Movies/HD, desc: "SMALL|HD"}
+
+      # Musik
+      - {id: 13, cat: Audio, desc: "CHARTS"}
+      - {id: 31, cat: Audio/Lossless, desc: "FLAC"}
+      - {id: 97, cat: Audio/Audiobook, desc: "HOERSPIELE"}
+      - {id: 30, cat: Audio/MP3, desc: "MP3"}
+      - {id: 106, cat: Audio, desc: "SAMPLER"}
+
+      # Releaser
+      - {id: 18, cat: Movies, desc: "CR3WHD"}
+      - {id: 16, cat: Movies, desc: "ONKEL JENS"}
+      - {id: 17, cat: Movies, desc: "xTM|XviD"}
+
+      # Serie
+      - {id: 11, cat: TV/SD, desc: "DVD|SERIEN"}
+      - {id: 9, cat: TV/HD, desc: "HD|SERIEN"}
+      - {id: 32, cat: TV, desc: "MIXED|SERIEN"}
+      - {id: 10, cat: TV, desc: "PACK|SERIEN"}
+      - {id: 8, cat: TV/SD, desc: "SD|SERIEN"}
+      - {id: 105, cat: TV, desc: "SMALL|SERIE"}
+      - {id: 12, cat: TV, desc: "US|SERIEN"}
+
+      # Sonstige
+      - {id: 98, cat: PC, desc: "APPS"}
+      - {id: 90, cat: TV/Documentary, desc: "DOKUS"}
+      - {id: 91, cat: Books, desc: "EBOOKS"}
+      - {id: 14, cat: Movies, desc: "KINOHITS"}
+      - {id: 15, cat: Other, desc: "REQUEST"}
+      - {id: 23, cat: Other , desc: "SONSTIGES"}
+      - {id: 104, cat: XXX/Imageset, desc: "XXX|IMAGE"}
+
+      # Spiele
+      - {id: 96, cat: Console/NDS, desc: "GAMES|NDS"}
+      - {id: 92, cat: PC/Games, desc: "GAMES|PC"}
+      - {id: 94, cat: Console/PS4, desc: "GAMES|PS"}
+      - {id: 95, cat: Console/Wii, desc: "GAMES|WII"}
+      - {id: 93, cat: Console/Xbox, desc: "GAMES|XBOX"}
+
+      # Wrestling
+      - {id: 3, cat: TV/Sport, desc: "HD|RAW"}
+      - {id: 1, cat: TV/Sport, desc: "HD|SMACKD"}
+      - {id: 6, cat: TV/Sport, desc: "NXT"}
+      - {id: 7, cat: TV/Sport, desc: "PPV"}
+      - {id: 4, cat: TV/Sport, desc: "SD|RAW"}
+      - {id: 2, cat: TV/Sport, desc: "SD|SMACKD"}
+      - {id: 5, cat: TV/Sport, desc: "TNA"}
+
+
+    modes:
+      search: [q]
+      tv-search: [q, season, ep]
+
+  login:
+    path: /login.php
+    method: form
+    inputs:
+      username: "{{ .Config.username }}"
+      password: "{{ .Config.password }}"
+    error:
+      - selector: div.stderr_info_wrap
+    test:
+      path: /browse.php
+      selector: img[title="Ratio"] + i
+
+  ratio:
+    path: /browse.php
+    selector: img[title="Ratio"] + i
+
+  search:
+    path: /browse.php
+    inputs:
+      $raw: "{{range .Categories}}c{{.}}=1&{{end}}"
+      search: "{{ .Query.Keywords }}"
+      showsearch: "1"
+      incldead: "1"
+      orderby: "added"
+      sort: "desc"
+    rows:
+      selector: table.main > tbody > tr:contains("Alle Torrents") + tr > td > table.tableinborder > tbody > tr
+      filters:
+        - name: andmatch
+    fields:
+      download:
+        selector: a[href^="download-ssl.php?torrent="]
+        attribute: href
+      title:
+        selector: div.title_wrap
+        attribute: title
+        filters:
+          - name: replace
+            args: ["[TsH]", ""]
+      category:
+        selector: a[href^="browse.php?cat="]
+        attribute: href
+        filters:
+          - name: querystring
+            args: cat
+      details:
+        selector: div.title_wrap > a
+        attribute: href
+      size:
+        selector: div.bro_right_ad > b
+        filters:
+          - name: replace
+            args: [".", ""]
+          - name: replace
+            args: [",", "."]
+      grabs:
+        selector: div.bro_right_ae > b
+      seeders:
+        selector: div.bro_box1_aa > b
+      leechers:
+        selector: div.bro_box_aaa > b
+      date:
+        selector: div.bro_box_date > span
+        filters:
+          - name: replace
+            args: ["\u00a0", " "]
+          - name: dateparse
+            args: "02.01.2006 15:04:05"
+      downloadvolumefactor:
+        case:
+          span[title="OnlyUp"]: "0"
+          "*": "1"
+      uploadvolumefactor:
+        case:
+          "*": "1"

@@ -88,6 +88,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Sqlite\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\packages\YamlDotNet.4.2.1\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NzbDrone.Common\Properties\SharedAssemblyInfo.cs">

@@ -1,0 +1,106 @@
+﻿---
+  site: ilcorsaronero
+  name: Il Corsaro Nero
+  language: it-it
+  type: public
+  encoding: UTF-8
+  links:
+    - https://ilcorsaronero.info/
+
+  caps:
+    categorymappings:
+      - {id: 1, cat: Movies/HD, desc: "BDRiP"}
+      - {id: 5, cat: TV/Anime, desc: "Anime"}
+      - {id: 15, cat: TV, desc: "TV Series"}
+      - {id: 19, cat: Movies/SD, desc: "Screener"}
+      - {id: 20, cat: Movies/SD, desc: "Full DVD"}
+
+    modes:
+      search: [q]
+      tv-search: [q, season, ep]
+      movie-search: [q]
+
+  settings:
+    - name: itorrents-links
+      type: checkbox
+      label: Add download links via itorrents.org
+    - name: advanced-search
+      type: checkbox
+      label: Use the advanced search of IlCorsaroNero (experimental)
+
+  search:
+    ##### Are the "not" and "and" functions implemented? Or am I doing it wrong?
+    # path: "{{if and .Query.Keywords .advanced-search}}adv/{{ .Query.Keywords}}.html
+    #        {{else if and .Query.Keywords (not .advanced-search)}}argh.php?search={{ .Query.Keywords}}
+    #        {{else}}/recenti
+    #        {{end}}"
+    path: "{{if .Query.Keywords}}argh.php?search={{ .Query.Keywords}}
+           {{else}}/recenti
+           {{end}}"
+    rows:
+      selector: "tr.odd,tr.odd2"
+    fields:
+      title:
+        selector: td:nth-child(2) a.tab
+        attribute: href
+        filters:
+          - name: split
+            args: [ "/", -1 ]
+          - name: urldecode
+          - name: replace
+            args: [ "_", " "]
+          - name: replace
+            args: [ "  ", " "]
+          # normalize to SXXEYY format
+          - name: re_replace
+            args: ["(\\d{2})x(\\d{2})", "S$1E$2"]
+          - name: re_replace
+            args: ["(\\d{1})x(\\d{2})", "S0$1E$2"]
+      category:
+        selector: td:nth-child(1) a
+        attribute: href
+        filters:
+          - name: split
+            args: [ "/", -1 ]
+      details:
+        selector: td:nth-child(4) a
+        attribute: href
+      download-itorrents:
+        selector: input.downarrow
+        attribute: value
+        filters:
+          - name: prepend
+            args: "http://itorrents.org/torrent/"
+          - name: append
+            args: ".torrent"
+      download:
+        text: "{{if .Config.itorrents-links}}{{ .Result.download-itorrents }}{{else}}{{end}}"
+      magnet:
+        selector: input.downarrow
+        attribute: value
+        filters:
+          - name: prepend
+            args: "magnet:?xt=urn:btih:"
+          - name: append
+            args: "&dn={{ .Result.title }}.torrent"
+      size:
+        selector: td:nth-child(3) font
+      date:
+        selector: td:nth-child(5) font
+        filters:
+          - name: dateparse
+            args: "02.01.06"
+      seeders:
+        selector: td:nth-child(6) font
+        filters:
+          - name: replace
+            args: ["n/a", "0"]
+      leechers:
+        selector: td:nth-child(7) font
+        filters:
+          - name: replace
+            args: ["n/a", "0"]
+      downloadvolumefactor:
+        text: "0"
+      uploadvolumefactor:
+        text: "1"

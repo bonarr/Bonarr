@@ -1,0 +1,118 @@
+﻿---
+  site: xtremezone
+  name: Xtreme Zone
+  language: ro-ro
+  type: semi-private
+  encoding: UTF-8
+  links:
+    - https://www.myxz.org/
+
+  caps:
+    categorymappings:
+      - {id: 3, cat: TV/Anime, desc: "Anime/Hentai"}
+      - {id: 1, cat: PC/0day, desc: "Appz"}
+      - {id: 9, cat: TV/Documentary, desc: "Documentary"}
+      - {id: 6, cat: Books, desc: "eBooks"}
+      - {id: 52, cat: Console, desc: "Games-Console"}
+      - {id: 11, cat: PC/Games, desc: "Games-PC"}
+      - {id: 18, cat: Other, desc: "Images"}
+      - {id: 14, cat: PC, desc: "Linux"}
+      - {id: 37, cat: PC/Mac, desc: "Mac"}
+      - {id: 19, cat: PC/Phone-Other, desc: "Mobile"}
+      - {id: 17, cat: Movies/BluRay, desc: "Movies-BluRay"}
+      - {id: 24, cat: Movies/BluRay, desc: "Movies-BluRayRO"}
+      - {id: 7, cat: Movies/DVD, desc: "Movies-DVD"}
+      - {id: 2, cat: Movies/DVD, desc: "Movies-DVD-RO"}
+      - {id: 8, cat: Movies/HD, desc: "Movies-HD"}
+      - {id: 29, cat: Movies/HD, desc: "Movies-HD-RO"}
+      - {id: 38, cat: Movies, desc: "Movies-Packs"}
+      - {id: 10, cat: Movies/SD, desc: "Movies-SD"}
+      - {id: 35, cat: Movies/SD, desc: "Movies-SD-RO"}
+      - {id: 5, cat: Audio, desc: "Music"}
+      - {id: 22, cat: TV/Sport, desc: "Sport"}
+      - {id: 43, cat: TV/HD, desc: "TV-HD"}
+      - {id: 44, cat: TV/HD, desc: "TV-HD-RO"}
+      - {id: 41, cat: TV, desc: "TV-Packs"}
+      - {id: 45, cat: TV/SD, desc: "TV-SD"}
+      - {id: 46, cat: TV/SD, desc: "TV-SD-RO"}
+      - {id: 15, cat: XXX, desc: "XXX"}
+      - {id: 47, cat: XXX, desc: "XXX-DVD"}
+      - {id: 48, cat: XXX, desc: "XXX-HD"}
+      - {id: 49, cat: XXX/Imageset, desc: "XXX-IMGSet"}
+      - {id: 50, cat: XXX, desc: "XXX-Packs"}
+      - {id: 51, cat: XXX, desc: "XXX-SD"}
+
+    modes:
+      search: [q]
+      tv-search: [q, season, ep]
+
+  login:
+    path: /login.php
+    method: form
+    form: form
+    inputs:
+      username: "{{ .Config.username }}"
+      password: "{{ .Config.password }}"
+    error:
+      - selector: td.embedded:has(center > h2:contains(failed))
+    test:
+      path: /browse.php
+      
+  ratio:
+    path: /browse.php
+    selector: font:contains("Ratio:")+font
+
+  search:
+    path: /browse.php
+    inputs:
+      $raw: "{{range .Categories}}c{{.}}=1&{{end}}"
+      search: "{{ .Query.Keywords }}"
+      incldead: 1
+    rows:
+      selector: table.browser > tbody > tr.browse[style]
+    fields:
+      title:
+        selector: a[href^="details.php?id="]
+      details:
+        selector: a[href^="details.php?id="]
+        attribute: href
+      category:
+        selector: a[href^="browse.php?cat="]
+        attribute: href
+        filters:
+          - name: querystring
+            args: cat
+      download:
+        selector: a[href^="dwn.php"]
+        attribute: href
+      size:
+        selector: td:nth-child(6)
+      date:
+        selector: td:nth-child(5)
+        filters:
+          - name: append
+            args: " +00:00"
+          - name: dateparse
+            args: "02-01-200615:04:05 -07:00"
+      seeders:
+        selector: td:nth-child(7)
+      leechers:
+        selector: td:nth-child(8)
+      banner:
+        selector: a[onmouseover][href^="details.php?id="]
+        attribute: onmouseover
+        filters:
+          - name: regexp
+            args: src=([^\s]+)
+      downloadvolumefactor:
+        case:
+          "img[title^=\"FreeLech: \"]": "0"
+          "img[title^=\"HALF: \"]": "0.5"
+          "*": "1"
+      uploadvolumefactor:
+        case:
+          "img[title^=\"2xUP: \"]": "2"
+          "*": "1"
+      description:
+        selector: td:nth-child(2)
+        remove: a, img
