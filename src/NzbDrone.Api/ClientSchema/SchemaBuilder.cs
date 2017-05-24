@@ -120,6 +120,7 @@ namespace NzbDrone.Api.ClientSchema
                     Type = type
                 };
                 result.Add(field);
+                order += 1;
             }
 
             return result;
