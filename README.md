@@ -2,7 +2,7 @@
 Bonarr
 </p>
 
-Bodarr is an __independent__ fork of [Radarr](https://github.com/Radarr/Radarr) reworked for automatically downloading adult movies via Usenet and BitTorrent.
+Bonarr is an __independent__ fork of [Radarr](https://github.com/Radarr/Radarr) reworked for automatically downloading adult movies via Usenet and BitTorrent.
 
 
 
@@ -15,7 +15,6 @@ Bodarr is an __independent__ fork of [Radarr](https://github.com/Radarr/Radarr) 
 
 ## Support
 
-)
 
 ## Status
 
